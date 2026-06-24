@@ -25,11 +25,11 @@
   .app{ display:flex; min-height:100vh; }
 
   /* LNB */
-  .lnb{ width:250px; flex:0 0 250px; border-right:1px solid var(--line); padding:26px 14px; position:sticky; top:0; height:100vh; overflow-y:auto; }
-  .brand{ font-size:15px; font-weight:600; padding:0 10px; margin-bottom:4px; }
+  .lnb{ width:256px; flex:0 0 256px; border-right:1px solid var(--line); padding:28px 16px; position:sticky; top:0; height:100vh; overflow-y:auto; }
+  .brand{ font-size:15.5px; font-weight:600; padding:0 10px; margin-bottom:4px; }
   .brand .sub{ display:block; font-size:11.5px; color:var(--faint); font-weight:300; margin-top:2px; }
   .navsec{ font-size:11px; color:var(--faint); letter-spacing:.4px; text-transform:uppercase; padding:0 10px; margin:18px 0 5px; }
-  .navitem{ display:block; width:100%; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; font-size:13.5px; color:var(--muted); padding:7px 10px; border-radius:8px; transition:background .15s,color .15s; }
+  .navitem{ display:block; width:100%; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; font-size:14px; color:var(--muted); padding:7.5px 10px; border-radius:8px; transition:background .15s,color .15s; }
   .navitem:hover{ background:var(--row); color:var(--ink); } .navitem.on{ background:var(--row); color:var(--ink); font-weight:500; }
   .navitem .no{ color:var(--faint); font-variant-numeric:tabular-nums; margin-right:8px; font-size:12px; }
   .present-btn{ display:flex; align-items:center; justify-content:center; gap:7px; width:100%; background:var(--bg); border:1px solid var(--line2); color:var(--muted); font-size:12.5px; font-weight:500; padding:9px 10px; border-radius:8px; margin-bottom:16px; cursor:pointer; font-family:inherit; transition:background .15s,color .15s,border-color .15s; }
@@ -48,6 +48,10 @@
   @media (min-width:1280px){ .inner{ max-width:960px; } }
   @media (min-width:1500px){ .inner{ max-width:1040px; } }
   @media (min-width:1760px){ .inner{ max-width:1120px; } }
+  @media (min-width:2300px){ .inner{ max-width:1240px; } }
+  /* LNB scales up on large displays (sidebar best practice: 240–300px, larger on big screens) */
+  @media (min-width:1680px){ .lnb{ width:288px; flex-basis:288px; padding:32px 18px; } .navitem{ font-size:14.5px; padding:8px 11px; } .navsec{ font-size:11.5px; } .brand{ font-size:16px; } }
+  @media (min-width:2300px){ .lnb{ width:320px; flex-basis:320px; padding:36px 20px; } .navitem{ font-size:15px; padding:9px 12px; } }
   h1{ font-size:25px; font-weight:600; margin:0 0 8px; letter-spacing:-.3px; }
   .lead{ font-size:15px; color:var(--muted); margin:0 0 4px; font-weight:300; } .lead b{ color:var(--ink); font-weight:500; }
   .defs{ font-size:13px; color:var(--faint); margin:0 0 28px; font-weight:300; }
@@ -93,7 +97,7 @@
   .sitefoot .ft-main{ color:var(--muted); font-size:13.5px; margin-bottom:5px; } .sitefoot .ft-main b{ color:var(--ink); font-weight:600; }
   .sitefoot .ft-links{ margin-bottom:7px; } .sitefoot .ft-dm{ color:var(--faint); }
   .sitefoot a{ color:var(--accent); text-decoration:none; border-bottom:1px solid var(--line2); } .sitefoot a:hover{ color:var(--ink); }
-  .langsel{ width:100%; margin-top:8px; font-family:inherit; font-size:12.5px; padding:7px 9px; border-radius:8px; border:1px solid var(--line); background:var(--panel); color:var(--muted); cursor:pointer; outline:none; } .langsel:focus{ border-color:var(--accent); color:var(--ink); }
+  .langsel{ width:100%; margin:8px 0 20px; font-family:inherit; font-size:12.5px; padding:9px 28px 9px 11px; border-radius:8px; border:1px solid var(--line2); background-color:var(--bg); color:var(--muted); cursor:pointer; outline:none; appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; } .langsel:hover{ color:var(--ink); } .langsel:focus{ border-color:var(--accent); color:var(--ink); }
   .stack{ position:absolute; inset:0; padding:8px; display:flex; flex-direction:column-reverse; justify-content:flex-start; gap:4px; }
   .blk{ display:flex; align-items:center; gap:10px; padding:0 12px; border-radius:9px; overflow:hidden; flex:0 0 auto; border:1px solid var(--line); }
   .blk .dot{ width:9px; height:9px; border-radius:3px; flex:0 0 auto; }
@@ -219,7 +223,7 @@
 
   /* responsive nav */
   @media (max-width:860px){
-    .app{ flex-direction:column; } .lnb{ width:auto; flex:none; height:auto; position:sticky; top:0; z-index:5; border-right:none; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:4px; padding:12px 14px; overflow-x:auto; background:var(--bg); -webkit-overflow-scrolling:touch; } .brand{ padding:0; margin:0 8px 0 0; white-space:nowrap; } .brand .sub{ display:none; } .navsec{ display:none; } .navitem{ width:auto; white-space:nowrap; padding:7px 11px; } .navitem .no{ display:none; } .present-btn{ width:auto; flex:0 0 auto; white-space:nowrap; margin:0; padding:7px 11px; } .topctl{ flex:0 0 auto; margin:0 8px 0 0; gap:6px; } .navitem .nic{ display:none; } .navitem .no{ display:none; } .navitem .lbl{ flex:0 0 auto; } .main{ padding:28px 16px 60px; }
+    .app{ flex-direction:column; } .lnb{ width:auto; flex:none; height:auto; position:sticky; top:0; z-index:5; border-right:none; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:4px; padding:12px 14px; overflow-x:auto; background:var(--bg); -webkit-overflow-scrolling:touch; } .brand{ padding:0; margin:0 8px 0 0; white-space:nowrap; } .brand .sub{ display:none; } .navsec{ display:none; } .navitem{ width:auto; white-space:nowrap; padding:7px 11px; } .navitem .no{ display:none; } .present-btn{ width:auto; flex:0 0 auto; white-space:nowrap; margin:0; padding:7px 11px; } .topctl{ flex:0 0 auto; margin:0 8px 0 0; gap:6px; } .langsel{ width:auto; min-width:88px; margin:0 8px 0 0; flex:0 0 auto; padding:7px 26px 7px 10px; } .navitem .nic{ display:none; } .navitem .no{ display:none; } .navitem .lbl{ flex:0 0 auto; } .main{ padding:28px 16px 60px; }
   }
 </style>
 </head>
