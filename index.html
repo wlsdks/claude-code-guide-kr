@@ -868,7 +868,7 @@ description: 주간 보고서를 회사 양식으로 작성
         </div>
         <div><div class="pdetail" id="pdetail"></div><div class="btnrow" style="margin-top:12px;"><button class="btn solid" id="pm-sim">이 모드 동작 보기 ▶</button></div><div class="simbox" id="pm-simbox"></div></div>
       </div>
-      <p class="note">이 5가지는 메뉴에 보이는 모드예요. 자동화 전용으로 ‘사전 승인한 도구만 허용(dontAsk)’ 모드도 따로 있어요. 어떤 모드든 <b>시스템 전체 삭제(rm -rf /) 같은 극단적 파괴</b>는 안전장치로 막혀요. 마음에 안 들면 ‘되돌리기’(‘되돌리기’ 탭)로 복구할 수 있어요.</p>
+      <p class="note">이 5가지는 메뉴에 보이는 모드예요. 자동화 전용으로 ‘사전 승인한 도구만 허용(dontAsk)’ 모드도 따로 있어요. 어떤 모드든 <b>시스템 전체 삭제(rm -rf / · rm -rf ~) 같은 극단적 파괴</b>는 안전장치로 막혀요. 마음에 안 들면 ‘되돌리기’(‘되돌리기’ 탭)로 복구할 수 있어요.</p>
     </section>
 
     <!-- 17 REWIND -->
@@ -1302,7 +1302,7 @@ description: 주간 보고서를 회사 양식으로 작성
     {name:'편집 수락',safe:'대체로 안전',col:'#5aa56a',auto:'파일 편집, 안전한 파일 명령(폴더 만들기·이동·복사)',ask:'git 커밋 등 되돌리기 어려운 작업',use:'결과를 보며 빠르게 반복 수정할 때',sim:['auto','auto','ask','ask']},
     {name:'계획 모드',safe:'읽기 전용',col:'#b9792a',auto:'읽기·탐색만 (직접 고치지 않음)',ask:'계획을 승인하면 한꺼번에 실행',use:'큰 변경 전에 계획을 먼저 확인할 때',sim:['plan','plan','plan','plan']},
     {name:'자동 모드',safe:'주의',col:'#d8943f',auto:'대부분의 작업 (백그라운드 안전 검사)',ask:'위험한 작업만 확인·차단',use:'장시간 자동 작업으로 확인을 줄이고 싶을 때',note:'최신 버전·모델(Opus 4.6/Sonnet 4.6 이상) 필요',sim:['auto','auto','auto','ask']},
-    {name:'권한 건너뛰기',safe:'위험',col:'#d8453f',auto:'전부 — 확인 없이 진행',ask:'시스템 전체 삭제(rm -rf /) 같은 극단만 차단',use:'인터넷 차단된 격리 환경(컨테이너·VM)에서만',note:'프롬프트 인젝션에 취약 — 일반 PC에서 쓰지 마세요',sim:['auto','auto','auto','auto']} ];
+    {name:'권한 건너뛰기',safe:'위험',col:'#d8453f',auto:'전부 — 확인 없이 진행',ask:'시스템 전체 삭제(rm -rf / · rm -rf ~) 같은 극단만 차단',use:'인터넷 차단된 격리 환경(컨테이너·VM)에서만',note:'프롬프트 인젝션에 취약 — 일반 PC에서 쓰지 마세요',sim:['auto','auto','auto','auto']} ];
   var SIM_ACT=['파일 수정','폴더 만들기','git 커밋','파일 삭제 (rm)'],SIM_TXT={auto:'자동 실행',ask:'확인 요청',plan:'실행 안 함 (계획만)',block:'차단'},curPm=0;
   function pmShow(i){ curPm=i; var d=PM[i]; document.querySelectorAll('#pmenu .prow').forEach(function(r){ r.classList.toggle('on',+r.dataset.i===i); }); var badge='<span class="pbadge" style="background:'+rgba(d.col,.16)+';color:'+d.col+'">'+d.safe+'</span>'; document.getElementById('pdetail').innerHTML='<div class="pt">'+d.name+' '+badge+'</div><div class="pdrow"><b>알아서 하는 것</b>'+d.auto+'</div><div class="pdrow"><b>그래도 묻는 것</b>'+d.ask+'</div><div class="pdrow"><b>언제 쓰나</b>'+d.use+'</div>'+(d.note?'<div class="pdrow"><b>참고</b>'+d.note+'</div>':''); document.getElementById('pmark').style.left=((i+0.5)/PM.length*100)+'%'; document.getElementById('pm-simbox').innerHTML='<div class="simrow on" style="color:var(--faint);font-size:12.5px;">“이 모드 동작 보기”를 눌러보세요.</div>'; }
   var pmT=[]; document.getElementById('pm-sim').addEventListener('click',function(){ pmT.forEach(clearTimeout); pmT=[]; var d=PM[curPm],box=document.getElementById('pm-simbox'); box.innerHTML=''; SIM_ACT.forEach(function(a,idx){ var s=d.sim[idx],row=document.createElement('div'); row.className='simrow'; var cls=s==='auto'?'auto':(s==='ask'?'ask':(s==='plan'?'plan':'block')); row.innerHTML='<span class="sa">'+a+'</span><span class="sp '+cls+'">'+SIM_TXT[s]+'</span>'; box.appendChild(row); pmT.push(setTimeout(function(){ row.classList.add('on'); },220*idx)); }); });
