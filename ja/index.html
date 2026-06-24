@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code 入門 — 非エンジニアのためのガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --panel:#fafafa; --ink:#1a1a1a; --muted:#6b6b6b; --faint:#9a9a9a;
+    --line:#e8e8e8; --line2:#d6d6d6; --accent:#1a1a1a; --row:#f4f4f4; --over:#d8453f; --good:#1f9e76; --warn:#b9792a;
+    --blue:#3b7dd8; --purple:#6d5fd0; --orange:#d8662f; --teal:#1f9e76; --pink:#cf5184;
+    --shadow:0 1px 2px rgba(20,22,30,.05), 0 4px 16px rgba(20,22,30,.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#161616; --panel:#1d1d1d; --ink:#ededed; --muted:#a0a0a0; --faint:#6f6f6f;
+      --line:#2c2c2c; --line2:#3a3a3a; --accent:#ededed; --row:#242424; --over:#e5635d; --good:#37b890; --warn:#d8943f; --shadow:none; }
+  }
+  html.theme-light{ --bg:#ffffff; --panel:#fafafa; --ink:#1a1a1a; --muted:#6b6b6b; --faint:#9a9a9a; --line:#e8e8e8; --line2:#d6d6d6; --accent:#1a1a1a; --row:#f4f4f4; --over:#d8453f; --good:#1f9e76; --warn:#b9792a; --shadow:0 1px 2px rgba(20,22,30,.05), 0 4px 16px rgba(20,22,30,.05); }
+  html.theme-dark{ --bg:#161616; --panel:#1d1d1d; --ink:#ededed; --muted:#a0a0a0; --faint:#6f6f6f; --line:#2c2c2c; --line2:#3a3a3a; --accent:#ededed; --row:#242424; --over:#e5635d; --good:#37b890; --warn:#d8943f; --shadow:none; }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:"IBM Plex Sans KR",system-ui,sans-serif; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  .app{ display:flex; min-height:100vh; }
+
+  /* LNB */
+  .lnb{ width:256px; flex:0 0 256px; border-right:1px solid var(--line); padding:28px 16px; position:sticky; top:0; height:100vh; overflow-y:auto; }
+  .brand{ font-size:15.5px; font-weight:600; padding:0 10px; margin-bottom:4px; }
+  .brand .sub{ display:block; font-size:11.5px; color:var(--faint); font-weight:300; margin-top:2px; }
+  .navsec{ font-size:11px; color:var(--faint); letter-spacing:.4px; text-transform:uppercase; padding:0 10px; margin:18px 0 5px; }
+  .navitem{ display:block; width:100%; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; font-size:14px; color:var(--muted); padding:7.5px 10px; border-radius:8px; transition:background .15s,color .15s; }
+  .navitem:hover{ background:var(--row); color:var(--ink); } .navitem.on{ background:var(--row); color:var(--ink); font-weight:500; }
+  .navitem .no{ color:var(--faint); font-variant-numeric:tabular-nums; margin-right:8px; font-size:12px; }
+  .present-btn{ display:flex; align-items:center; justify-content:center; gap:7px; width:100%; background:var(--bg); border:1px solid var(--line2); color:var(--muted); font-size:12.5px; font-weight:500; padding:9px 10px; border-radius:8px; margin-bottom:16px; cursor:pointer; font-family:inherit; transition:background .15s,color .15s,border-color .15s; }
+  .present-btn:hover{ border-color:var(--accent); color:var(--ink); }
+  .present-btn.on{ background:var(--accent); color:var(--bg); border-color:var(--accent); }
+  .present-btn .pdot{ width:7px; height:7px; border-radius:50%; background:currentColor; opacity:.55; } .present-btn.on .pdot{ opacity:1; }
+  .topctl{ display:flex; gap:8px; margin-bottom:16px; } .topctl .present-btn{ flex:1; margin-bottom:0; padding:9px 8px; font-size:12px; }
+  .topctl .present-btn.theme-ic{ flex:0 0 42px; padding:9px 0; } .theme-ic svg{ width:18px; height:18px; }
+  .navitem{ display:flex; align-items:center; gap:9px; }
+  .navitem .nic{ width:16px; height:16px; flex:0 0 auto; color:var(--faint); transition:color .15s; } .navitem:hover .nic, .navitem.on .nic{ color:var(--ink); }
+  .navitem .lbl{ flex:1; } .navitem .no{ order:2; margin-right:0; margin-left:auto; opacity:.7; }
+
+  /* main */
+  .main{ flex:1; min-width:0; padding:48px clamp(18px,4.5vw,72px) 84px; }
+  .inner{ max-width:880px; margin:0 auto; }
+  @media (min-width:1280px){ .inner{ max-width:960px; } }
+  @media (min-width:1500px){ .inner{ max-width:1040px; } }
+  @media (min-width:1760px){ .inner{ max-width:1120px; } }
+  @media (min-width:2300px){ .inner{ max-width:1240px; } }
+  /* LNB scales up on large displays (sidebar best practice: 240–300px, larger on big screens) */
+  @media (min-width:1680px){ .lnb{ width:288px; flex-basis:288px; padding:32px 18px; } .navitem{ font-size:14.5px; padding:8px 11px; } .navsec{ font-size:11.5px; } .brand{ font-size:16px; } }
+  @media (min-width:2300px){ .lnb{ width:320px; flex-basis:320px; padding:36px 20px; } .navitem{ font-size:15px; padding:9px 12px; } }
+  h1{ font-size:25px; font-weight:600; margin:0 0 8px; letter-spacing:-.3px; }
+  .lead{ font-size:15px; color:var(--muted); margin:0 0 4px; font-weight:300; } .lead b{ color:var(--ink); font-weight:500; }
+  .defs{ font-size:13px; color:var(--faint); margin:0 0 28px; font-weight:300; }
+  .page{ display:none; } .page.on{ display:block; }
+  .page.on > *{ animation:pgrise .5s cubic-bezier(.22,1,.36,1) both; }
+  .page.on > *:nth-child(1){animation-delay:0s} .page.on > *:nth-child(2){animation-delay:.04s} .page.on > *:nth-child(3){animation-delay:.08s} .page.on > *:nth-child(4){animation-delay:.12s} .page.on > *:nth-child(5){animation-delay:.16s} .page.on > *:nth-child(6){animation-delay:.2s} .page.on > *:nth-child(7){animation-delay:.24s} .page.on > *:nth-child(8){animation-delay:.28s} .page.on > *:nth-child(9){animation-delay:.32s} .page.on > *:nth-child(n+10){animation-delay:.36s}
+  @keyframes pgrise{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;} }
+  .tank,.sesswin,.brainwrap,.svgwrap,.mainbox,.tmeter,.stageview,.pmenu,.pdetail,.folderscan,.usefeed{ box-shadow:var(--shadow); }
+  .label{ font-size:12px; color:var(--faint); font-weight:500; letter-spacing:.4px; text-transform:uppercase; margin:30px 0 14px; } .label:first-of-type{ margin-top:0; }
+  .label .hint{ text-transform:none; letter-spacing:0; color:var(--faint); font-weight:300; margin-left:6px; }
+  .note{ font-size:12.5px; color:var(--faint); font-weight:300; margin:14px 0 0; line-height:1.6; }
+  .note code,.inlinecode{ font-family:ui-monospace,Menlo,monospace; background:var(--row); padding:1px 6px; border-radius:4px; font-size:12px; }
+  .callout{ font-size:13.5px; line-height:1.65; background:var(--row); border-radius:12px; padding:14px 16px; margin:0 0 8px; } .callout b{ font-weight:500; } .callout.warn{ background:rgba(216,148,63,.12); }
+  .cols{ display:grid; grid-template-columns:330px 1fr; gap:40px; align-items:start; }
+  @media (max-width:900px){ .cols{ grid-template-columns:1fr; gap:26px; } }
+  button{ font-family:inherit; cursor:pointer; }
+  .btn{ background:var(--bg); border:1px solid var(--line2); color:var(--ink); font-size:13.5px; font-weight:500; padding:9px 15px; border-radius:8px; transition:border-color .2s,opacity .2s; } .btn:hover{ border-color:var(--accent); } .btn:disabled{ opacity:.45; cursor:default; } .btn.solid{ background:var(--accent); color:var(--bg); border-color:var(--accent); }
+  .btnrow{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+
+  /* tank */
+  .head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px; } .head .l{ font-size:13px; color:var(--muted); } .head .n{ font-size:13px; font-weight:500; font-variant-numeric:tabular-nums; } .head .n .max{ color:var(--faint); font-weight:300; } .head .n.over{ color:var(--over); }
+  .tank{ position:relative; height:460px; border:1px solid var(--line2); border-radius:12px; background:var(--panel); overflow:hidden; transition:box-shadow .3s; } .tank.flash{ box-shadow:0 0 0 2px var(--over); }
+  .stack.summarizing .blk.acc{ opacity:.28; filter:grayscale(.5); transition:opacity .5s, filter .5s; }
+  .acoverlay{ position:absolute; inset:0; z-index:3; display:none; align-items:center; justify-content:center; }
+  .acoverlay.on{ display:flex; } .acoverlay span{ background:var(--bg); border:1px solid var(--warn); color:var(--warn); font-size:13px; font-weight:500; padding:8px 16px; border-radius:999px; }
+  /* compact detail page */
+  .cxrow{ border:1px solid var(--line); border-radius:9px; background:var(--panel); padding:10px 13px; margin-bottom:8px; font-size:13px; line-height:1.55; transition:opacity .5s; }
+  .cxrow .cxt{ font-size:10.5px; color:var(--faint); border:1px solid var(--line2); border-radius:4px; padding:1px 6px; margin-right:8px; white-space:nowrap; }
+  .cxrow.drop{ opacity:.25; }
+  .cxbadge{ display:inline-block; font-size:12.5px; font-variant-numeric:tabular-nums; background:var(--row); border-radius:7px; padding:7px 12px; margin-bottom:12px; } .cxbadge b{ font-weight:600; } .cxbadge .ar{ color:var(--faint); margin:0 6px; }
+  .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
+  .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
+  /* collapsible code, one-line summary, example badge */
+  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; }
+  .tldr{ display:flex; gap:10px; align-items:flex-start; background:var(--row); border-radius:12px; padding:12px 15px; margin:0 0 26px; font-size:14px; line-height:1.6; } .tldr .tlb{ font-size:11px; font-weight:600; color:var(--accent); background:var(--bg); border:1px solid var(--line2); border-radius:6px; padding:2px 8px; white-space:nowrap; flex:0 0 auto; margin-top:1px; } .tldr .tlx{ flex:1; } .tldr b{ font-weight:600; }
+  .exb{ display:inline-block; font-size:11px; font-weight:500; color:var(--warn); background:rgba(216,148,63,.14); border-radius:5px; padding:1px 7px; vertical-align:middle; }
+  .gl{ border-bottom:1px dotted var(--line2); cursor:help; }
+  .gsearch{ width:100%; max-width:380px; font-family:inherit; font-size:14px; padding:10px 13px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; margin-bottom:14px; } .gsearch:focus{ border-color:var(--accent); } .gsearch::placeholder{ color:var(--faint); }
+  .gterm.hide{ display:none; }
+  .prow .psafe{ width:9px; height:9px; border-radius:3px; flex:0 0 auto; }
+  .bignote{ display:flex; gap:11px; align-items:flex-start; background:rgba(31,158,118,.1); border:1px solid rgba(31,158,118,.32); border-radius:12px; padding:14px 16px; margin:0 0 14px; font-size:14px; line-height:1.6; } .bignote .bx{ font-size:11px; font-weight:600; color:var(--good); background:var(--bg); border:1px solid rgba(31,158,118,.4); border-radius:6px; padding:2px 8px; white-space:nowrap; flex:0 0 auto; margin-top:1px; } .bignote b{ font-weight:600; }
+  .sitefoot{ margin-top:52px; padding:22px 0 6px; border-top:1px solid var(--line); color:var(--faint); font-size:12.5px; line-height:1.7; }
+  .sitefoot .ft-main{ color:var(--muted); font-size:13.5px; margin-bottom:5px; } .sitefoot .ft-main b{ color:var(--ink); font-weight:600; }
+  .sitefoot .ft-links{ margin-bottom:7px; } .sitefoot .ft-dm{ color:var(--faint); }
+  .sitefoot a{ color:var(--accent); text-decoration:none; border-bottom:1px solid var(--line2); } .sitefoot a:hover{ color:var(--ink); }
+  .langsel{ width:100%; margin:8px 0 20px; font-family:inherit; font-size:12.5px; padding:9px 28px 9px 11px; border-radius:8px; border:1px solid var(--line2); background-color:var(--bg); color:var(--muted); cursor:pointer; outline:none; appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; } .langsel:hover{ color:var(--ink); } .langsel:focus{ border-color:var(--accent); color:var(--ink); }
+  .stack{ position:absolute; inset:0; padding:8px; display:flex; flex-direction:column-reverse; justify-content:flex-start; gap:4px; }
+  .blk{ display:flex; align-items:center; gap:10px; padding:0 12px; border-radius:9px; overflow:hidden; flex:0 0 auto; border:1px solid var(--line); }
+  .blk .dot{ width:9px; height:9px; border-radius:3px; flex:0 0 auto; }
+  .blk .name{ flex:1; font-size:12.5px; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .blk .tag{ font-size:10px; color:var(--faint); border:1px solid var(--line2); padding:1px 6px; border-radius:5px; background:var(--bg); }
+  .blk .tk{ font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums; background:var(--bg); border:1px solid var(--line); border-radius:5px; padding:1px 7px; }
+  .blk.mini{ gap:0; } .blk.mini .name,.blk.mini .tag,.blk.mini .tk{ display:none; }
+  .limit{ position:absolute; left:0; right:0; border-top:1px dashed var(--line2); pointer-events:none; } .limit .cap{ position:absolute; right:8px; top:-9px; font-size:10.5px; color:var(--faint); background:var(--bg); padding:0 6px; } .limit.over{ border-top-color:var(--over); } .limit.over .cap{ color:var(--over); }
+  .free{ position:absolute; left:0; right:0; text-align:center; font-size:11.5px; color:var(--faint); pointer-events:none; transition:bottom .5s cubic-bezier(.22,1,.36,1); }
+  .capbox{ display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; } .capbox input{ width:108px; font-family:inherit; font-size:14px; padding:9px 11px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; text-align:right; font-variant-numeric:tabular-nums; } .capbox input:focus{ border-color:var(--accent); } .capbox .unit{ font-size:13px; color:var(--muted); }
+  .chips{ display:flex; gap:6px; margin-left:auto; flex-wrap:wrap; } .chip{ font-size:12px; color:var(--muted); background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:6px 10px; cursor:pointer; font-family:inherit; transition:border-color .2s,color .2s; } .chip:hover{ border-color:var(--line2); color:var(--ink); } .chip.on{ border-color:var(--accent); color:var(--ink); }
+  .capnote{ font-size:12px; color:var(--faint); margin:0 0 26px; font-weight:300; }
+  .field{ display:flex; gap:8px; margin-bottom:10px; } .field input{ flex:1; min-width:0; font-family:inherit; font-size:14px; padding:11px 13px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; transition:border-color .2s; } .field input:focus{ border-color:var(--accent); } .field input::placeholder{ color:var(--faint); }
+  .send{ background:var(--accent); color:var(--bg); font-weight:500; font-size:14px; border:none; padding:0 18px; border-radius:8px; transition:opacity .15s; } .send:hover{ opacity:.85; }
+  .tokprev{ border:1px solid var(--line); border-radius:8px; background:var(--panel); padding:13px 14px; min-height:80px; } .tokprev .empty{ font-size:12.5px; color:var(--faint); font-weight:300; line-height:1.6; } .tokprev .count{ font-size:12.5px; color:var(--muted); margin-bottom:9px; } .tokprev .count b{ color:var(--ink); font-weight:600; font-variant-numeric:tabular-nums; }
+  .toks{ display:flex; flex-wrap:wrap; gap:3px; } .tok{ font-size:12px; padding:2px 6px; border-radius:4px; background:var(--bg); border:1px solid var(--line2); white-space:pre; line-height:1.4; } .tok.kr{ background:rgba(109,95,208,.14); border-color:rgba(109,95,208,.32); } .tok.en{ background:rgba(59,125,216,.12); border-color:rgba(59,125,216,.3); } .tokprev .why{ font-size:11.5px; color:var(--faint); margin-top:10px; font-weight:300; }
+  .acts{ display:flex; flex-direction:column; gap:8px; } .act{ display:flex; align-items:center; gap:12px; text-align:left; background:var(--bg); border:1px solid var(--line); color:var(--ink); padding:12px 14px; border-radius:8px; transition:border-color .2s; width:100%; } .act:hover{ border-color:var(--line2); } .act .dot{ width:9px; height:9px; border-radius:3px; flex:0 0 auto; } .act .meta{ flex:1; } .act .meta .t{ font-size:14px; font-weight:500; } .act .meta .d{ font-size:12px; color:var(--faint); font-weight:300; } .act .add{ font-size:12px; color:var(--faint); font-variant-numeric:tabular-nums; }
+  .botrow{ display:flex; gap:10px; align-items:center; margin-top:18px; flex-wrap:wrap; } .ghost{ background:none; border:none; color:var(--muted); font-size:13px; padding:6px 2px; } .ghost:hover{ color:var(--ink); } .botrow .sep{ color:var(--faint); }
+  .status{ font-size:12.5px; color:var(--faint); margin:14px 0 0; font-weight:300; min-height:34px; line-height:1.55; }
+
+  /* compare cards / points / tables */
+  .compare{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:0 0 10px; } @media (max-width:560px){ .compare{ grid-template-columns:1fr; } }
+  .ccard{ border:1px solid var(--line); border-radius:12px; padding:16px; background:var(--panel); } .ccard .word{ font-size:18px; font-weight:500; margin-bottom:4px; } .ccard .cc{ font-size:12.5px; color:var(--muted); margin-bottom:10px; } .ccard .cc b{ color:var(--ink); font-weight:600; }
+  .points{ list-style:none; padding:0; margin:0; } .points li{ position:relative; padding:10px 0 10px 18px; border-top:1px solid var(--line); font-size:14px; color:var(--ink); } .points li:first-child{ border-top:none; } .points li::before{ content:""; position:absolute; left:0; top:18px; width:6px; height:6px; border-radius:50%; background:var(--line2); } .points li b{ font-weight:500; } .points li span{ display:block; font-size:12.5px; color:var(--faint); font-weight:300; margin-top:2px; }
+  .tablewrap{ overflow-x:auto; margin:0 0 14px; } table.t{ width:100%; border-collapse:collapse; min-width:420px; } table.t th{ text-align:left; font-size:11px; color:var(--faint); text-transform:uppercase; letter-spacing:.3px; font-weight:500; padding:0 12px 8px; border-bottom:1px solid var(--line2); } table.t td{ font-size:13.5px; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; } table.t td.cmd{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; white-space:nowrap; color:var(--ink); font-weight:500; }
+  .grp{ margin-bottom:30px; } .grp h3{ font-size:14px; font-weight:600; margin:0 0 14px; }
+  .fgrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; } .fcard{ border:1px solid var(--line); border-radius:12px; padding:15px 16px; background:var(--panel); } .fcard .ft{ font-size:14.5px; font-weight:500; margin-bottom:5px; } .fcard .fd{ font-size:13px; color:var(--muted); font-weight:300; line-height:1.55; } .fcard .fe{ font-size:12.5px; color:var(--faint); font-weight:300; margin-top:9px; padding-top:9px; border-top:1px solid var(--line); } .fcard .fe b{ color:var(--muted); font-weight:500; } .fcard code{ font-family:ui-monospace,Menlo,monospace; background:var(--row); padding:1px 5px; border-radius:4px; font-size:11.5px; }
+  .pre{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; background:var(--row); border:1px solid var(--line); border-radius:8px; padding:13px 15px; overflow-x:auto; white-space:pre; line-height:1.6; margin:0 0 22px; color:var(--ink); } .pre .c{ color:var(--faint); }
+  .cmp{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:0 0 8px; } @media (max-width:600px){ .cmp{ grid-template-columns:1fr; } }
+  .cmpcard{ border:1px solid var(--line); border-radius:12px; padding:16px 17px; background:var(--panel); } .cmpcard h4{ font-size:15px; margin:0 0 3px; font-weight:600; } .cmpcard .who{ font-size:12px; color:var(--faint); margin-bottom:12px; font-weight:300; } .cmprow{ font-size:13px; padding:9px 0; border-top:1px solid var(--line); } .cmprow:first-of-type{ border-top:none; } .cmprow b{ color:var(--muted); font-weight:500; display:block; font-size:11px; text-transform:uppercase; letter-spacing:.3px; margin-bottom:2px; }
+
+  /* token lifecycle */
+  .stages{ display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; } .stage{ flex:1; min-width:130px; background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:12px 14px; text-align:left; transition:border-color .2s; color:var(--ink); } .stage:hover{ border-color:var(--line2); } .stage.on{ border-color:var(--accent); } .stage .sn{ font-size:14px; font-weight:500; display:flex; align-items:center; gap:7px; } .stage .sn .d{ width:8px; height:8px; border-radius:50%; } .stage .scost{ font-size:11.5px; color:var(--faint); margin-top:3px; }
+  .lcgrid{ display:grid; grid-template-columns:1fr 240px; gap:18px; align-items:start; } @media (max-width:900px){ .lcgrid{ grid-template-columns:1fr; } }
+  .stageview{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:18px; min-height:120px; } .sv-title{ font-size:14px; font-weight:500; margin-bottom:10px; } .sv-bar{ height:10px; background:var(--row); border-radius:5px; overflow:hidden; } .sv-fill{ height:100%; width:0%; border-radius:5px; transition:width .6s cubic-bezier(.22,1,.36,1); }
+  .think-dots{ display:flex; gap:6px; align-items:center; color:var(--purple); font-size:14px; } .think-dots i{ width:8px; height:8px; border-radius:50%; background:var(--purple); display:inline-block; animation:blink 1s infinite; } .think-dots i:nth-child(2){ animation-delay:.2s; } .think-dots i:nth-child(3){ animation-delay:.4s; } @keyframes blink{ 0%,100%{opacity:.25;} 50%{opacity:1;} }
+  .sv-type{ font-size:14px; line-height:1.6; min-height:44px; } .sv-desc{ font-size:13px; color:var(--muted); margin-top:12px; font-weight:300; }
+  .tmeter{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:16px; } .tmeter .tt{ font-size:12px; color:var(--faint); } .tmeter .total{ font-size:30px; font-weight:600; font-variant-numeric:tabular-nums; margin-bottom:14px; } .tmrow{ margin-bottom:11px; } .tmrow .tl{ display:flex; justify-content:space-between; font-size:12.5px; color:var(--muted); margin-bottom:5px; } .tmrow .tl b{ font-variant-numeric:tabular-nums; color:var(--ink); font-weight:500; } .tmrow .tb{ height:7px; background:var(--row); border-radius:4px; overflow:hidden; } .tmrow .tf{ height:100%; width:0%; border-radius:4px; transition:width .2s linear; }
+
+  /* model */
+  .mtabs{ display:flex; gap:8px; margin-bottom:22px; flex-wrap:wrap; } .mtab{ flex:1; min-width:118px; background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:13px 14px; text-align:left; transition:border-color .2s; color:var(--ink); } .mtab:hover{ border-color:var(--line2); } .mtab.on{ border-color:var(--accent); } .mtab.locked{ opacity:.6; } .mtab.locked.on{ border-color:var(--line2); } .mtab .mn{ font-size:15px; font-weight:600; display:flex; align-items:center; gap:6px; } .mtab .mt{ font-size:12px; color:var(--faint); font-weight:300; margin-top:2px; } .lockpill{ font-size:10px; color:var(--faint); border:1px solid var(--line2); border-radius:4px; padding:0 5px; }
+  .bars{ display:flex; flex-direction:column; gap:14px; margin-bottom:22px; } .bar .bl{ display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:6px; } .bar .bl b{ color:var(--ink); font-weight:500; } .track2{ height:8px; background:var(--row); border-radius:4px; overflow:hidden; } .fill2{ height:100%; width:0%; border-radius:4px; transition:width .5s cubic-bezier(.22,1,.36,1), background .3s; }
+  .muse{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:16px 18px; } .muse.lock{ border-color:var(--line2); } .muse .lockbanner{ font-size:12.5px; color:var(--muted); background:var(--row); border-radius:7px; padding:8px 11px; margin-bottom:12px; } .muse .tagline{ font-size:15px; font-weight:500; margin-bottom:6px; } .muse .when{ font-size:13.5px; color:var(--muted); margin-bottom:10px; font-weight:300; } .muse .ctxline{ font-size:12.5px; color:var(--muted); margin-bottom:12px; } .muse .ctxline b{ color:var(--ink); font-weight:500; } .muse .exlbl{ font-size:11px; color:var(--faint); text-transform:uppercase; letter-spacing:.3px; margin-bottom:6px; } .muse ul{ margin:0; padding-left:18px; } .muse li{ font-size:13.5px; margin-bottom:4px; }
+  .unitcard{ display:grid; grid-template-columns:1fr 1fr; gap:14px; } @media (max-width:560px){ .unitcard{ grid-template-columns:1fr; } } .ucard{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:16px; } .ucard .uk{ font-size:22px; font-weight:600; } .ucard .ukd{ font-size:13px; color:var(--muted); margin-top:2px; } .ucard .ukx{ font-size:12px; color:var(--faint); margin-top:8px; font-weight:300; }
+
+  /* chat demo */
+  .chatdemo{ display:grid; grid-template-columns:1fr 1fr; gap:14px; } @media (max-width:620px){ .chatdemo{ grid-template-columns:1fr; } }
+  .chatcol{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:14px; } .chatcol h4{ font-size:13.5px; margin:0 0 10px; font-weight:600; display:flex; gap:7px; align-items:center; flex-wrap:wrap; } .chatcol h4 .badge{ font-size:11px; font-weight:400; padding:1px 8px; border-radius:5px; } .badge.no{ background:rgba(216,69,63,.13); color:var(--over); } .badge.yes{ background:rgba(31,158,118,.14); color:var(--good); }
+  .bubble{ font-size:13px; border-radius:9px; padding:9px 12px; margin-bottom:8px; max-width:96%; line-height:1.5; } .bubble.u{ background:var(--row); margin-left:auto; } .bubble.a{ border:1px solid var(--line2); min-height:38px; } .bubble .resu{ font-size:11.5px; color:var(--faint); margin-top:6px; font-weight:300; }
+
+  /* memory steps */
+  .memflow{ max-width:580px; } .memstep{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:13px 15px; opacity:.32; transition:opacity .35s, border-color .35s; } .memstep.on{ opacity:1; border-color:var(--line2); } .memstep .ms-t{ font-size:13.5px; font-weight:500; } .memstep .ms-d{ font-size:12.5px; color:var(--muted); font-weight:300; margin-top:3px; } .memstep .ms-d code{ font-family:ui-monospace,Menlo,monospace; background:var(--row); padding:1px 5px; border-radius:4px; font-size:11.5px; } .memarrow{ text-align:center; color:var(--faint); font-size:13px; margin:6px 0; }
+  .mdfile{ font-family:ui-monospace,Menlo,monospace; font-size:12px; background:var(--row); border:1px solid var(--line); border-radius:8px; padding:12px 14px; white-space:pre-wrap; line-height:1.6; min-height:80px; color:var(--ink); } .mdfile .c{ color:var(--faint); }
+
+  /* plugin box */
+  .plugbox{ border:2px solid var(--accent); border-radius:12px; padding:16px; background:var(--panel); margin:0 0 8px; } .plugbox .ph{ font-size:14px; font-weight:600; } .plugbox .psub{ font-size:12px; color:var(--faint); margin:2px 0 14px; font-weight:300; } .pluggrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; } .plugchip{ border:1px solid var(--line2); border-radius:8px; background:var(--bg); padding:11px 12px; } .plugchip .pc-t{ font-size:13px; font-weight:500; } .plugchip .pc-d{ font-size:11.5px; color:var(--faint); font-weight:300; margin-top:2px; }
+
+  /* mcp connect svg */
+  .svgwrap{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:8px; margin:0 0 14px; }
+  .mcp .spoke{ stroke:var(--blue); stroke-width:2; fill:none; opacity:.9; } .mcp .node{ opacity:.3; transition:opacity .4s; } .mcp .node.on{ opacity:1; } .mcp .node rect{ fill:var(--bg); stroke:var(--line2); } .mcp .node.on rect{ stroke:var(--blue); } .mcp .center rect{ fill:var(--accent); } .mcp text{ font-family:"IBM Plex Sans KR",sans-serif; fill:var(--ink); } .mcp .center text{ fill:var(--bg); font-weight:600; } .mcp .chk{ fill:var(--good); font-weight:600; opacity:0; transition:opacity .3s; } .mcp .node.on .chk{ opacity:1; }
+
+  /* subagent demo */
+  .mainbox{ border:1px solid var(--accent); border-radius:12px; background:var(--panel); padding:13px 15px; } .mainbox .mh{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; } .mainbox .mt2{ font-size:13.5px; font-weight:500; }
+  .subrow2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px 0; } @media (max-width:600px){ .subrow2{ grid-template-columns:1fr; } } .subcard{ border:1px solid var(--line2); border-radius:12px; background:var(--panel); padding:12px 14px; opacity:.38; transition:opacity .35s; } .subcard.on{ opacity:1; } .subcard .sh{ font-size:13px; font-weight:500; } .subcard .sd2{ font-size:11.5px; color:var(--faint); font-weight:300; margin:1px 0 9px; }
+  .ctxmini{ height:7px; background:var(--row); border-radius:4px; overflow:hidden; margin-bottom:5px; } .ctxmini i{ display:block; height:100%; width:0%; border-radius:4px; transition:width .25s linear; } .ctxnum{ font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums; } .retmsg{ font-size:11.5px; color:var(--good); margin-top:6px; opacity:0; transition:opacity .3s; } .retmsg.on{ opacity:1; }
+  .sagrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; } @media (max-width:760px){ .sagrid{ grid-template-columns:repeat(2,1fr); } } @media (max-width:440px){ .sagrid{ grid-template-columns:1fr; } }
+  .sabenef{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; } @media (max-width:680px){ .sabenef{ grid-template-columns:1fr; } }
+  .sabf{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:13px 15px; opacity:.4; transition:opacity .4s, border-color .4s; } .sabf.on{ opacity:1; border-color:var(--line2); }
+  .sabf .ft{ font-size:13.5px; font-weight:600; margin-bottom:4px; } .sabf .fd{ font-size:12.5px; color:var(--muted); font-weight:300; line-height:1.5; }
+
+  /* skills with/without */
+  .skgrid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; } @media (max-width:600px){ .skgrid{ grid-template-columns:1fr; } } .skcol{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:14px; } .skcol h4{ font-size:13.5px; margin:0 0 4px; font-weight:600; display:flex; gap:7px; align-items:center; } .skcol .skb{ display:flex; flex-direction:column; gap:6px; margin-top:8px; min-height:150px; } .skline{ font-size:12.5px; padding:8px 10px; border-radius:7px; background:var(--bg); border:1px solid var(--line); opacity:0; transform:translateY(-5px); transition:opacity .3s,transform .3s; } .skline.on{ opacity:1; transform:none; } .skline.long{ border-color:rgba(216,69,63,.3); } .skline.short{ border-color:rgba(31,158,118,.35); }
+
+  /* permissions */
+  .pmenu{ border:1px solid var(--line2); border-radius:12px; overflow:hidden; background:var(--panel); } .prow{ display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:none; border:none; border-bottom:1px solid var(--line); padding:13px 15px; cursor:pointer; transition:background .15s; color:var(--ink); } .prow:last-child{ border-bottom:none; } .prow:hover{ background:var(--row); } .prow.on{ background:var(--row); } .prow .pno{ width:20px; height:20px; border-radius:5px; background:var(--bg); border:1px solid var(--line2); font-size:11px; display:flex; align-items:center; justify-content:center; color:var(--muted); flex:0 0 auto; } .prow .pl{ flex:1; font-size:14px; font-weight:500; } .prow .pl span{ font-weight:300; color:var(--faint); font-size:12px; margin-left:6px; } .prow .pchk{ color:var(--good); font-size:14px; opacity:0; } .prow.on .pchk{ opacity:1; }
+  .pdetail{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:16px 18px; } .pdetail .pt{ font-size:15px; font-weight:600; margin-bottom:10px; display:flex; align-items:center; gap:8px; } .pbadge{ font-size:11px; padding:2px 8px; border-radius:5px; font-weight:500; } .pdrow{ font-size:13.5px; padding:8px 0; border-top:1px solid var(--line); } .pdrow:first-of-type{ border-top:none; } .pdrow b{ color:var(--muted); font-weight:500; font-size:11.5px; text-transform:uppercase; letter-spacing:.3px; display:block; margin-bottom:2px; }
+  .pspec{ position:relative; height:8px; background:linear-gradient(90deg, var(--good), #d8943f, var(--over)); border-radius:4px; margin:22px 2px 6px; } .pmark{ position:absolute; top:-5px; width:18px; height:18px; border-radius:50%; background:var(--bg); border:2px solid var(--accent); transform:translateX(-50%); transition:left .35s cubic-bezier(.22,1,.36,1); } .paxis{ display:flex; justify-content:space-between; font-size:11.5px; color:var(--faint); margin:0 2px; }
+  .simbox{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:7px; min-height:150px; margin-top:12px; } .simrow{ display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; font-size:13px; opacity:0; transform:translateY(-5px); transition:opacity .3s,transform .3s; } .simrow.on{ opacity:1; transform:none; } .simrow .sa{ flex:1; } .simrow .sp{ font-size:11.5px; font-weight:500; padding:2px 9px; border-radius:5px; white-space:nowrap; } .sp.auto{ background:rgba(31,158,118,.15); color:var(--good); } .sp.ask{ background:rgba(216,148,63,.18); color:var(--warn); } .sp.block{ background:rgba(216,69,63,.14); color:var(--over); } .sp.plan{ background:var(--row); color:var(--muted); }
+
+  /* sessions + brain */
+  .sessgrid{ display:grid; grid-template-columns:1fr 300px; gap:30px; align-items:start; } @media (max-width:900px){ .sessgrid{ grid-template-columns:1fr; gap:22px; } }
+  .sesswin{ border:1px solid var(--line2); border-radius:12px; background:var(--panel); overflow:hidden; } .sesshead{ display:flex; align-items:center; justify-content:space-between; padding:9px 13px; border-bottom:1px solid var(--line); font-size:12px; color:var(--muted); } .sesshead .dotrow span{ display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; background:var(--line2); }
+  .sessbody{ padding:11px; min-height:300px; display:flex; flex-direction:column; gap:6px; } .sessrow{ display:flex; align-items:center; gap:9px; padding:8px 11px; border-radius:8px; background:var(--bg); border:1px solid var(--line); font-size:12.5px; } .sessrow .tdot{ width:9px; height:9px; border-radius:3px; flex:0 0 auto; } .sessrow .sk{ font-size:10.5px; color:var(--faint); border:1px solid var(--line2); border-radius:4px; padding:0 5px; flex:0 0 auto; } .sessrow .sl{ flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } .sessrow.warn{ background:rgba(216,69,63,.1); border-color:rgba(216,69,63,.3); color:var(--over); font-weight:500; } .sessrow.muted{ color:var(--faint); justify-content:center; border-style:dashed; } .sessrow.done{ background:rgba(31,158,118,.1); border-color:rgba(31,158,118,.3); color:var(--good); }
+  .sessfoot{ padding:10px 13px; border-top:1px solid var(--line); } .sessbar{ height:7px; background:var(--row); border-radius:4px; overflow:hidden; margin-bottom:6px; } .sessbar i{ display:block; height:100%; width:0%; background:var(--good); border-radius:4px; transition:width .5s ease, background .3s; } .sessbar-l{ font-size:11.5px; color:var(--faint); }
+  .brainwrap{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:16px 14px; text-align:center; } .brainwrap .blbl{ font-size:12px; color:var(--faint); margin-bottom:8px; } .brain-stat{ font-size:12.5px; color:var(--muted); margin-top:10px; min-height:18px; } .brain-stat b{ color:var(--ink); font-weight:500; }
+  svg.brain{ transition:transform .1s; max-width:240px; width:100%; } svg.brain.overload{ animation:shake .35s infinite; } @keyframes shake{ 0%,100%{transform:translateX(0);} 25%{transform:translateX(-2px);} 75%{transform:translateX(2px);} }
+  .brain .bg{ fill:var(--row); } .brain .outline{ fill:none; stroke:var(--line2); stroke-width:3; } .brain.overload .outline{ stroke:var(--over); } .brain .fold{ fill:none; stroke:var(--line2); stroke-width:1.4; opacity:.55; stroke-linecap:round; } .brain .sheen{ fill:#ffffff; opacity:.10; }
+  .folderbox{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:14px; max-width:560px; } .foldopt{ display:flex; gap:10px; align-items:flex-start; padding:10px; border-radius:8px; border:1px solid var(--line); margin-bottom:8px; background:var(--bg); } .foldopt .fi{ font-size:11px; font-variant-numeric:tabular-nums; color:var(--faint); white-space:nowrap; } .foldopt.bad{ border-color:rgba(216,69,63,.3); } .foldopt.good{ border-color:rgba(31,158,118,.35); } .foldopt .fl{ font-size:13px; font-weight:500; } .foldopt .fz{ font-size:12px; color:var(--muted); font-weight:300; }
+
+  /* images */
+  .imggrid{ display:grid; grid-template-columns:300px 1fr; gap:26px; align-items:start; } @media (max-width:680px){ .imggrid{ grid-template-columns:1fr; gap:20px; } }
+  .shotframe{ background:var(--row); border-radius:12px; padding:16px; } .shot{ background:var(--bg); border:1px solid var(--line2); border-radius:12px; padding:20px 18px; } .shot .reg{ border-radius:6px; transition:box-shadow .25s; padding:2px; } .shot .reg.hl{ box-shadow:0 0 0 2px var(--blue); } .shot-title{ font-size:18px; font-weight:600; margin-bottom:14px; text-align:center; } .shot-input{ font-size:12px; color:var(--faint); border:1px solid var(--line2); border-radius:7px; padding:9px 11px; margin-bottom:8px; } .shot-btn{ background:var(--blue); color:#fff; text-align:center; font-size:13px; font-weight:500; border-radius:7px; padding:9px; margin-top:4px; } .shot-err{ color:var(--over); font-size:11.5px; margin-top:10px; text-align:center; }
+  .detlist{ list-style:none; padding:0; margin:0 0 14px; } .detlist li{ display:flex; gap:9px; align-items:flex-start; font-size:13.5px; padding:9px 0; border-top:1px solid var(--line); opacity:0; transform:translateX(8px); transition:opacity .3s, transform .3s; } .detlist li:first-child{ border-top:none; } .detlist li.on{ opacity:1; transform:none; } .detlist li .di{ color:var(--good); flex:0 0 auto; } .detsum{ font-size:13.5px; background:var(--row); border-radius:8px; padding:12px 14px; opacity:0; transition:opacity .3s; line-height:1.6; } .detsum.on{ opacity:1; }
+
+  /* plan/rewind steppers */
+  .steps{ display:flex; flex-direction:column; gap:0; max-width:560px; } .step{ display:flex; gap:12px; align-items:flex-start; padding:12px 0; border-top:1px solid var(--line); opacity:.35; transition:opacity .35s; } .step:first-child{ border-top:none; } .step.on{ opacity:1; } .step .sn2{ width:24px; height:24px; border-radius:50%; background:var(--row); border:1px solid var(--line2); font-size:12px; display:flex; align-items:center; justify-content:center; flex:0 0 auto; font-weight:500; } .step.on .sn2{ background:var(--accent); color:var(--bg); border-color:var(--accent); } .step .st2{ font-size:14px; font-weight:500; } .step .sd3{ font-size:12.5px; color:var(--muted); font-weight:300; margin-top:1px; }
+  .timeline{ display:flex; align-items:center; gap:0; margin:8px 0 16px; flex-wrap:wrap; } .tlpt{ display:flex; align-items:center; } .tlpt .dot2{ width:14px; height:14px; border-radius:50%; background:var(--row); border:2px solid var(--line2); cursor:pointer; transition:border-color .2s, background .2s; } .tlpt.cur .dot2{ background:var(--accent); border-color:var(--accent); } .tlpt.restored .dot2{ background:var(--good); border-color:var(--good); } .tlpt .tlbar{ width:40px; height:2px; background:var(--line2); } .tllabels{ display:flex; gap:8px; flex-wrap:wrap; font-size:11.5px; color:var(--faint); }
+
+  /* glossary */
+  .gloss{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:10px; } .gterm{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:13px 15px; } .gterm .gt{ font-size:13.5px; font-weight:600; } .gterm .gd{ font-size:12.5px; color:var(--muted); font-weight:300; margin-top:3px; line-height:1.5; }
+
+  /* chat-vs-code build + folder scan + ac line */
+  .ccbuild{ display:flex; flex-direction:column; gap:6px; } .cstep{ font-size:12.5px; padding:8px 11px; border-radius:8px; background:var(--bg); border:1px solid var(--line); display:flex; gap:8px; align-items:center; opacity:0; transform:translateY(-5px); transition:opacity .3s,transform .3s; } .cstep.on{ opacity:1; transform:none; } .cstep .ck{ color:var(--good); }
+  .ccresu{ font-size:12.5px; color:var(--muted); margin-top:10px; font-weight:300; line-height:1.55; } .ccresu b{ color:var(--ink); font-weight:500; }
+  .acline{ position:absolute; left:0; right:0; border-top:2px dashed var(--warn); pointer-events:none; } .acline .cap{ position:absolute; left:8px; top:-9px; font-size:10.5px; color:var(--warn); background:var(--bg); padding:0 6px; }
+  .folderscan{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:10px; min-height:140px; font-family:ui-monospace,Menlo,monospace; font-size:12px; }
+  .folderscan .fs{ padding:3px 4px; color:var(--muted); } .folderscan .fs.junk{ color:var(--faint); }
+  .folderscan .fsv{ margin-top:8px; font-family:"IBM Plex Sans KR",sans-serif; font-size:12.5px; padding:9px 11px; border-radius:7px; line-height:1.5; } .fsv.bad{ background:rgba(216,69,63,.1); color:var(--over); } .fsv.good{ background:rgba(31,158,118,.12); color:var(--good); } .fsv b{ font-weight:500; }
+
+  /* usage limits gauges */
+  .gauge{ margin-bottom:14px; } .gauge .gl{ display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:6px; } .gauge .gl b{ color:var(--ink); font-weight:500; font-variant-numeric:tabular-nums; }
+  .gtrack{ height:12px; background:var(--row); border-radius:6px; overflow:hidden; } .gtrack i{ display:block; height:100%; width:0%; border-radius:6px; background:var(--good); transition:width .4s ease, background .3s; }
+  .usefeed{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:8px; min-height:120px; display:flex; flex-direction:column; gap:5px; } .usefeed .uf{ font-size:12px; color:var(--muted); padding:6px 10px; background:var(--bg); border:1px solid var(--line); border-radius:6px; }
+  .lockmsg{ font-size:13px; font-weight:500; color:var(--over); margin-top:12px; min-height:20px; line-height:1.5; }
+
+  /* polish: micro-interactions & motion */
+  .fcard,.gterm,.ucard{ transition:border-color .18s ease, transform .18s ease; }
+  .fcard:hover,.gterm:hover,.ucard:hover{ border-color:var(--line2); transform:translateY(-1px); }
+  .mtab,.stage,.act,.chip,.btn,.send,.navitem,.present-btn,.prow{ transition:border-color .16s ease, background .16s ease, color .16s ease, transform .08s ease; }
+  .btn:active,.send:active,.chip:active,.act:active,.mtab:active{ transform:scale(.985); }
+  .bubble.a{ transition:border-color .2s ease; }
+  @media (prefers-reduced-motion: reduce){ *{ animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+
+  /* responsive nav */
+  @media (max-width:860px){
+    .app{ flex-direction:column; } .lnb{ width:auto; flex:none; height:auto; position:sticky; top:0; z-index:5; border-right:none; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:4px; padding:12px 14px; overflow-x:auto; background:var(--bg); -webkit-overflow-scrolling:touch; } .brand{ padding:0; margin:0 8px 0 0; white-space:nowrap; } .brand .sub{ display:none; } .navsec{ display:none; } .navitem{ width:auto; white-space:nowrap; padding:7px 11px; } .navitem .no{ display:none; } .present-btn{ width:auto; flex:0 0 auto; white-space:nowrap; margin:0; padding:7px 11px; } .topctl{ flex:0 0 auto; margin:0 8px 0 0; gap:6px; } .langsel{ width:auto; min-width:88px; margin:0 8px 0 0; flex:0 0 auto; padding:7px 26px 7px 10px; } .navitem .nic{ display:none; } .navitem .no{ display:none; } .navitem .lbl{ flex:0 0 auto; } .main{ padding:28px 16px 60px; }
+  }
+</style>
+</style>
+</head>
+<body>
+<div class="app">
+
+  <nav class="lnb">
+    <div class="topctl">
+      <button class="present-btn theme-ic" id="theme-toggle" aria-label="ライト/ダーク切り替え"></button>
+      <button class="present-btn" id="present-toggle" title="画面全体を大きく拡大します。プロジェクター・大型画面や細かく見たいときに便利です（シミュレーションも一緒に大きくなります）。もう一度押すと元に戻ります。"><span class="pdot"></span><span id="present-label">拡大モード</span></button>
+    </div>
+    <select class="langsel" id="lang-select" title="言語 / Language" aria-label="言語 / Language">
+      <option value="ko">한국어</option>
+      <option value="en">English</option>
+      <option value="zh">中文</option>
+      <option value="ja">日本語</option>
+    </select>
+    <div class="brand">Claude Code 入門<span class="sub">非エンジニアのためのガイド</span></div>
+    <div class="navsec">はじめに</div>
+    <button class="navitem on" data-page="intro"><span class="no">01</span>Claude Code とは?</button>
+    <button class="navitem" data-page="where"><span class="no">02</span>どこで使う</button>
+    <div class="navsec">基本の概念</div>
+    <button class="navitem" data-page="context"><span class="no">03</span>コンテキストウィンドウ</button>
+    <button class="navitem" data-page="sessions"><span class="no">04</span>セッション & フォルダ</button>
+    <button class="navitem" data-page="tokens"><span class="no">05</span>トークン</button>
+    <button class="navitem" data-page="models"><span class="no">06</span>モデルを選ぶ</button>
+    <div class="navsec">記憶とルール</div>
+    <button class="navitem" data-page="claudemd"><span class="no">07</span>CLAUDE.md</button>
+    <button class="navitem" data-page="memory"><span class="no">08</span>メモリ</button>
+    <button class="navitem" data-page="skills"><span class="no">09</span>スキル</button>
+    <div class="navsec">機能を広げる</div>
+    <button class="navitem" data-page="mcp"><span class="no">10</span>MCP (ツール連携)</button>
+    <button class="navitem" data-page="plugins"><span class="no">11</span>プラグイン</button>
+    <button class="navitem" data-page="agents"><span class="no">12</span>サブエージェント</button>
+    <button class="navitem" data-page="images"><span class="no">13</span>画像を貼り付け</button>
+    <button class="navitem" data-page="hooks"><span class="no">14</span>自動化 (フック)</button>
+    <div class="navsec">安全に使う</div>
+    <button class="navitem" data-page="planmode"><span class="no">15</span>プランモード</button>
+    <button class="navitem" data-page="permissions"><span class="no">16</span>権限モード</button>
+    <button class="navitem" data-page="rewind"><span class="no">17</span>巻き戻し</button>
+    <button class="navitem" data-page="privacy"><span class="no">18</span>データ & プライバシー</button>
+    <div class="navsec">実践</div>
+    <button class="navitem" data-page="commands"><span class="no">19</span>スラッシュコマンド</button>
+    <button class="navitem" data-page="plans"><span class="no">20</span>料金プラン</button>
+    <button class="navitem" data-page="limits"><span class="no">21</span>使用量の上限</button>
+    <button class="navitem" data-page="compact"><span class="no">22</span>圧縮をくわしく</button>
+    <button class="navitem" data-page="glossary"><span class="no">23</span>用語集</button>
+  </nav>
+
+  <main class="main"><div class="inner">
+
+    <!-- 01 INTRO + chat vs code -->
+    <section class="page on" id="intro">
+      <h1>Claude Code とは?</h1>
+      <p class="lead">コードを自分で書かなくても、<b>いつもの言葉でお願いすれば</b>ファイルを読んで直して実行してくれる AI ツールです。</p>
+      <p class="defs">ふだん使うチャット（ChatGPT・Claude チャット）と何が違うのか、まずは目で見て比べてみましょう。</p>
+
+      <p class="label">チャット vs Claude Code <span class="hint">同じお願い — 押してみてください</span></p>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="cc-go">違いを見る ▶</button></div>
+      <div class="chatdemo">
+        <div class="chatcol"><h4>Claude チャット <span class="badge no">アドバイス・コード片</span></h4>
+          <div class="bubble u">うちのホームページに予約機能を追加して</div>
+          <div class="bubble a" id="cc-chat"></div>
+          <div class="ccresu" id="cc-chat-r"></div>
+        </div>
+        <div class="chatcol"><h4>Claude Code <span class="badge yes">動く成果物</span></h4>
+          <div class="bubble u">うちのホームページに予約機能を追加して</div>
+          <div class="ccbuild" id="cc-code"></div>
+          <div class="ccresu" id="cc-code-r"></div>
+        </div>
+      </div>
+      <p class="note">大事なのは「答えてくれるか」ではなく、<b>自分のプロジェクトで実際に作って、動くところまでやってくれるか</b>です。最近のチャットも文章やコードを直してくれますが、それは「チャットの中で見せてくれるだけ」 — <b>複数のファイルを直接作り、つなぎ、実行して「動く成果物」を完成させる</b>のが Claude Code です。（どちらも同じ Claude モデルを使っています。）</p>
+
+      <div class="grp" style="margin-top:30px;">
+        <h3>Claude Code にできること</h3>
+        <div class="fgrid">
+          <div class="fcard"><div class="ft">言葉で指示する</div><div class="fd">コードを知らなくても、いつもの言葉でお願い。</div><div class="fe"><b>例</b> 「このボタンの色を青に」</div></div>
+          <div class="fcard"><div class="ft">ファイルを読んで直す</div><div class="fd">自分でファイルを開いて修正・保存。</div><div class="fe"><b>例</b> 「紹介ページの誤字を直して」</div></div>
+          <div class="fcard"><div class="ft">コマンドを代わりに実行</div><div class="fd">インストール・テスト・実行を代行。</div><div class="fe"><b>例</b> 「テストを走らせて知らせて」</div></div>
+          <div class="fcard"><div class="ft">外部ツールと連携</div><div class="fd">Jira・Figma などと連携 (MCP)。</div><div class="fe"><b>例</b> 「この Figma の通りに作って」</div></div>
+        </div>
+      </div>
+      <div class="grp" style="margin-top:24px;">
+        <h3>エンジニアだけのものじゃありません — こんな仕事にも</h3>
+        <div class="fgrid">
+          <div class="fcard"><div class="ft">エクセル・表の整理</div><div class="fd">ぐちゃぐちゃの表を見やすく整理・結合。</div><div class="fe"><b>例</b> 「このエクセルを日付順に整理して」</div></div>
+          <div class="fcard"><div class="ft">名簿から探す</div><div class="fd">条件に合う人・項目だけを抜き出す。</div><div class="fe"><b>例</b> 「顧客名簿から今月が満期の人だけ」</div></div>
+          <div class="fcard"><div class="ft">文書を整える</div><div class="fd">誤字・言い回し・翻訳をまとめて。</div><div class="fe"><b>例</b> 「この案内文の誤字を探して直して」</div></div>
+          <div class="fcard"><div class="ft">ファイルの整理</div><div class="fd">ファイル名・フォルダをルール通りに整頓。</div><div class="fe"><b>例</b> 「動画ファイルを日付_タイトルに改名して」</div></div>
+        </div>
+      </div>
+      <div class="bignote"><span class="bx">参考</span><span>このガイドは<b>概念を学ぶ場所</b>です — インストールや始め方は扱いません（それは公式ドキュメントで案内しています）。そして<b>非公式の学習資料</b>なので Anthropic とは無関係です。</span></div>
+      <p class="note">左のメニュー（狭い画面では上のタブ）から 23 個のトピックを押して移動してください。すべて<b>自分で触らなくても</b>ボタンや入力で理解できるように作りました。本文に<span class="gl" title="このように点線が引かれた単語は、マウスを乗せると意味が表示されます。スマホではカッコの説明を参考にしてください。">点線の付いた単語</span>は、乗せると意味が表示されます。</p>
+    </section>
+
+    <!-- 02 WHERE -->
+    <section class="page" id="where">
+      <h1>どこで使う</h1>
+      <p class="lead">Claude Code は<b>いろいろな環境</b>で同じように使えます。CLAUDE.md や設定はどこでも共有されます。</p>
+      <p class="defs">初めてなら「ターミナル」や「VS Code 拡張」から始めることが多いです。</p>
+      <div class="grp">
+        <h3>使える場所 (2026年6月時点)</h3>
+        <div class="fgrid">
+          <div class="fcard"><div class="ft"><span class="gl" title="コンピュータに文字（コマンド）で指示する黒い入力画面。「コマンドライン」とも呼びます。">ターミナル (CLI)</span></div><div class="fd">黒い入力画面に <code>claude</code> と打って開始。</div></div>
+          <div class="fcard"><div class="ft">VS Code 拡張</div><div class="fd">エディタの中で変更点をすぐ見ながら作業。</div></div>
+          <div class="fcard"><div class="ft">JetBrains プラグイン</div><div class="fd">IntelliJ・PyCharm など (CLI も一緒にインストールが必要)。</div></div>
+          <div class="fcard"><div class="ft">デスクトップアプリ</div><div class="fd">macOS・Windows 用の独立アプリ。</div></div>
+          <div class="fcard"><div class="ft">Web</div><div class="fd">インストール不要で claude.ai/code からすぐに。</div></div>
+        </div>
+      </div>
+      <p class="label">インストール (参考)</p>
+      <div class="pre"><span class="c"># macOS / Linux ターミナル</span>
+curl -fsSL https://claude.ai/install.sh | bash
+
+<span class="c"># Windows PowerShell</span>
+irm https://claude.ai/install.ps1 | iex</div>
+      <ul class="points">
+        <li><b>有料の Claude プランか API が必要です。</b><span>無料プランでは Claude Code は使えません。（料金プランは 20 番を参照）</span></li>
+        <li><b>最初の一歩</b><span>プロジェクトフォルダで <code>claude</code> → ログイン → 「このプロジェクトは何をするもの?」のように、まずは話しかけてみる。</span></li>
+      </ul>
+      <p class="note">正確なインストール方法・必要条件はバージョンによって変わるので、<code>code.claude.com/docs</code> で最新の案内を確認してください。</p>
+    </section>
+
+    <!-- 03 CONTEXT -->
+    <section class="page" id="context">
+      <h1>コンテキストウィンドウ</h1>
+      <p class="lead">Claude は<b>一つの空間（コンテキストウィンドウ）</b>に乗っているものだけを知っています。ここに無いものは Claude も知りません。</p>
+      <p class="defs">マスの高さ = それが占める量。実際に入力してボタンを押して埋めてみてください。</p>
+      <div class="cols">
+        <div>
+          <div class="head"><span class="l">使用量</span><span class="n" id="num"><span id="tok">0</span><span class="max"> / 40,000</span></span></div>
+          <div class="tank" id="tank"><div class="free" id="free"></div><div class="acline" id="acline"><span class="cap" id="accap">自動圧縮</span></div><div class="limit" id="limit"><span class="cap" id="cap">上限 40,000</span></div><div class="stack" id="stack"></div><div class="acoverlay" id="acoverlay"><span>要約中…</span></div></div>
+        </div>
+        <div>
+          <p class="label" style="margin-top:0;">ウィンドウのサイズ <span class="hint">変えて比べる</span></p>
+          <div class="capbox"><input id="capinp" type="number" value="40000" min="2000" step="1000"><span class="unit">トークン</span>
+            <div class="chips"><button class="chip" data-v="8000">8K</button><button class="chip on" data-v="40000">40K</button><button class="chip" data-v="200000">200K</button></div></div>
+          <p class="capnote">標準のコンテキストウィンドウは 200,000(200K) トークン。最新の Opus・Sonnet は最大 1,000,000(1M) まで — 06 番を参照。</p>
+          <p class="label">自分で入力する <span class="hint">直接打ってみてください</span></p>
+          <div class="field"><input id="inp" type="text" placeholder="例: ログインのバグを直して" maxlength="80"><button class="send" id="send">送信</button></div>
+          <div class="tokprev" id="tokprev" style="margin-bottom:20px;"></div>
+          <p class="label">Claude の作業 <span class="hint">いちばん場所を取ります</span></p>
+          <div class="acts">
+            <button class="act" data-k="file" data-t="8400"><span class="dot" style="background:#d8662f"></span><span class="meta"><div class="t">ファイル読み込み</div><div class="d">コードファイルをまるごと取り込む</div></span><span class="add">+8,400</span></button>
+            <button class="act" data-k="tool" data-t="3100"><span class="dot" style="background:#3b7dd8"></span><span class="meta"><div class="t">コマンド実行</div><div class="d">テスト・検索を走らせた結果</div></span><span class="add">+3,100</span></button>
+            <button class="act" data-k="reply" data-t="1800"><span class="dot" style="background:#cf5184"></span><span class="meta"><div class="t">Claude の返答</div><div class="d">説明とコードを書いた</div></span><span class="add">+1,800</span></button>
+          </div>
+          <div class="botrow"><button class="btn solid" id="autocompact">自動圧縮を見る ▶</button><button class="ghost" id="compact">手動で圧縮</button><span class="sep">·</span><button class="ghost" id="reset">リセット</button></div>
+          <p class="status" id="status">下の 3 つのマスは、会話を始める前からいつも入っています。Claude の「基本の準備物」です。</p>
+        </div>
+      </div>
+      <p class="label">自動圧縮 (auto-compact) とは?</p>
+      <p style="font-size:14px;margin:0 0 14px;">会話が長くなってコンテキストウィンドウが上限に近づくと、Claude が<b>自分でこれまでの会話を要約</b>して空間を作ります。上の「自動圧縮を見る」で、いっぱいになっていく途中で要約によって減る過程を見られます。</p>
+      <div class="cmp">
+        <div class="cmpcard"><h4>残るもの</h4><div class="who">要約に保存</div><div class="cmprow">自分の依頼と意図</div><div class="cmprow">読んだ・直したファイルの一覧と核心のコード</div><div class="cmprow">エラーと解決の過程、残りのやること</div></div>
+        <div class="cmpcard"><h4>消えるもの</h4><div class="who">空間の節約</div><div class="cmprow">長いコマンド実行の出力（ターミナルの結果）</div><div class="cmprow">途中段階の冗長な説明</div><div class="cmprow">重複した内容</div></div>
+      </div>
+      <p class="note"><b>いつ始まる?</b> コンテキストウィンドウが<b>ほぼ満杯になったとき（上限の近く）</b>に自動で始まります。正確な基準の % は公式には公開されていません（「上限に近づくと」とだけ案内）。圧縮の後もシステム指示・CLAUDE.md・メモリ・MCP ツールは自動で読み込み直されますが、最初に表示されていた<b>スキルの一覧</b>は補充されず、「すでに使ったスキル」だけが残ります。手動の <code>/compact</code> も同じ仕組みです。（出典: 公式ドキュメント、2026年6月時点）</p>
+    </section>
+
+    <!-- 04 SESSIONS -->
+    <section class="page" id="sessions">
+      <h1>セッション & フォルダ</h1>
+      <p class="lead"><b>セッション</b>は一度の連続した会話です。そのセッションのコンテキストウィンドウに、すべてが積み上がります。</p>
+      <p class="defs">コンピュータに詳しくなくても大丈夫です。順番に — <b>まずフォルダを決めて、その中でセッションを始め</b>ます。</p>
+
+      <p class="label">ステップ1 — まず作業フォルダを決める <span class="hint">セッションはフォルダの中で始まります</span></p>
+      <div class="folderbox" style="max-width:100%;">
+        <p style="font-size:14px;margin:0 0 4px;">Claude は<b>始めたフォルダの中</b>のファイルだけを見ます。だから「どのフォルダで始めるか」が先です。決めないとどうなるか、ボタンで見てみましょう。</p>
+        <div class="btnrow" style="margin:10px 0;"><button class="btn" id="fold-home">フォルダを決めずに開始 (ホーム全体) ▶</button><button class="btn solid" id="fold-proj">プロジェクトフォルダで開始 ▶</button></div>
+        <div class="folderscan" id="fold-scan"><div class="fs">ボタンを押すと、Claude が「どのファイルを見ることになるか」が表示されます。</div></div>
+      </div>
+
+      <p class="label">ステップ2 — そのフォルダでセッション開始 <span class="hint">一つのセッションに複数の仕事を混ぜると?</span></p>
+      <div class="botrow" style="margin:0 0 16px;"><button class="btn solid" id="sess-play">ごちゃごちゃになる過程を見る ▶</button><button class="btn" id="sess-clear">/clear で空にする</button></div>
+      <div class="sessgrid">
+        <div class="sesswin">
+          <div class="sesshead"><span class="dotrow"><span></span><span></span><span></span></span><span id="sess-mode">セッション 1 つ</span></div>
+          <div class="sessbody" id="sess-body"></div>
+          <div class="sessfoot"><div class="sessbar"><i id="sess-bar"></i></div><div class="sessbar-l" id="sess-barl">コンテキスト 0% 使用</div></div>
+        </div>
+        <div class="brainwrap">
+          <div class="blbl">Claude の頭の中 (このセッションのコンテキスト)</div>
+          <svg class="brain" id="brain" viewBox="0 0 220 200" role="img" aria-label="作業が積み上がるほど満ちていく脳の絵">
+            <defs><clipPath id="brainclip"><path d="M110 30 C92 18 72 20 66 38 C46 32 30 46 36 64 C20 66 16 88 30 98 C18 110 24 132 42 136 C44 154 66 164 84 156 C94 168 126 168 136 156 C154 164 176 154 178 136 C196 132 202 110 190 98 C204 88 200 66 184 64 C190 46 174 32 154 38 C148 20 128 18 110 30 Z"/></clipPath></defs>
+            <g clip-path="url(#brainclip)"><rect class="bg" x="0" y="0" width="220" height="200"></rect><g id="brainfill"></g><ellipse class="sheen" cx="80" cy="62" rx="28" ry="16"></ellipse></g>
+            <path class="fold" d="M110 34 C104 74 116 120 110 158"/><path class="fold" d="M72 54 C60 78 76 102 66 130"/><path class="fold" d="M148 54 C160 78 144 102 154 130"/><path class="fold" d="M42 86 C54 96 50 112 40 120"/><path class="fold" d="M178 86 C166 96 170 112 180 120"/>
+            <path class="outline" d="M110 30 C92 18 72 20 66 38 C46 32 30 46 36 64 C20 66 16 88 30 98 C18 110 24 132 42 136 C44 154 66 164 84 156 C94 168 126 168 136 156 C154 164 176 154 178 136 C196 132 202 110 190 98 C204 88 200 66 184 64 C190 46 174 32 154 38 C148 20 128 18 110 30 Z"/>
+          </svg>
+          <div class="brain-stat" id="brain-stat">まだ空っぽです</div>
+        </div>
+      </div>
+      <p class="status" id="sess-msg" style="margin-top:16px;">上のボタンを押して始めてみてください。</p>
+      <p class="label">整理の方法 3 つ — 混乱しないように</p>
+      <div class="tablewrap"><table class="t"><thead><tr><th style="width:120px;">方法</th><th>すること</th><th>いつ</th></tr></thead><tbody>
+        <tr><td class="cmd">/clear</td><td>会話を完全に空にして新しく開始 (CLAUDE.md・メモリは維持、<code>/resume</code> で復元可能)</td><td>別の仕事に移るとき</td></tr>
+        <tr><td class="cmd">/compact</td><td>これまでの会話を要約して空間を確保、作業は続行</td><td>同じ仕事が長くなったとき</td></tr>
+        <tr><td class="cmd">自動圧縮</td><td>満杯になると Claude が自動で要約 (/compact と同じ仕組み)</td><td>自分でやらなくても自動</td></tr>
+      </tbody></table></div>
+      <p class="note">参考: セッションは <code>/exit</code> ではなく、ターミナルを閉じるか <code>Ctrl</code>+<code>C</code> で終わります。一つのセッションには一つの仕事が、いちばんすっきりします。</p>
+    </section>
+
+    <!-- 05 TOKENS -->
+    <section class="page" id="tokens">
+      <h1>トークン</h1>
+      <p class="lead"><b>トークン</b>は AI が文章を読む、いちばん小さなかけらです。単語より小さいこともあります。</p>
+      <p class="defs">AI は文字をそのまま読むのではなく、トークン単位に分けて読みます。実際に入力してみてください。</p>
+      <p class="label">なんでもいいので文を入力 <span class="hint">直接打つか、例を押してみてください</span></p>
+      <div class="field" style="max-width:560px;"><input id="tinp" type="text" placeholder="例: こんにちは Claude!" maxlength="200"></div>
+      <div class="btnrow" style="max-width:560px; margin-bottom:10px;"><button class="btn" id="ex-kr">例: 日本語 (長い文)</button><button class="btn" id="ex-en">例: 英語 (同じ内容)</button><button class="btn" id="ex-clear">リセット</button></div>
+      <div class="tokprev" id="tprev" style="max-width:560px;"></div>
+      <p class="note" style="margin:8px 0 0; max-width:560px;">同じ意味なのに日本語のトークンのほうがずっと多いでしょう? 同じお願いでも、どの言語で書くかによってトークン（=空間・コスト）が変わります。</p>
+      <p class="label">日本語 vs 英語 — 同じあいさつなのに</p>
+      <div class="compare" id="compare"></div>
+      <p class="note"><span class="exb">例</span> トークン数は概念理解のための<b>おおよその値</b>です（日本語 ≈ 1.5/文字、英語 ≈ 4文字/トークン）。実際の値はモデルのトークナイザーによって少し変わります。</p>
+      <p class="label">1 回の返答でトークンはこう流れます <span class="hint">全体の流れを押してみてください</span></p>
+      <div class="stages">
+        <button class="stage on" data-st="input"><div class="sn"><span class="d" style="background:var(--blue)"></span>入力</div><div class="scost">読む · コスト基準 ×1</div></button>
+        <button class="stage" data-st="think"><div class="sn"><span class="d" style="background:var(--purple)"></span>思考</div><div class="scost">内部推論 · 出力と同じ価格</div></button>
+        <button class="stage" data-st="output"><div class="sn"><span class="d" style="background:var(--teal)"></span>出力</div><div class="scost">返答 · 入力より高い</div></button>
+      </div>
+      <div class="lcgrid">
+        <div class="stageview" id="stageview"></div>
+        <div class="tmeter"><div class="tt">累積トークン</div><div class="total" id="lc-total">0</div>
+          <div class="tmrow"><div class="tl"><span>入力</span><b id="lc-in">0</b></div><div class="tb"><div class="tf" id="lcb-in" style="background:var(--blue)"></div></div></div>
+          <div class="tmrow"><div class="tl"><span>思考</span><b id="lc-th">0</b></div><div class="tb"><div class="tf" id="lcb-th" style="background:var(--purple)"></div></div></div>
+          <div class="tmrow"><div class="tl"><span>出力</span><b id="lc-out">0</b></div><div class="tb"><div class="tf" id="lcb-out" style="background:var(--teal)"></div></div></div>
+        </div>
+      </div>
+      <div class="botrow" style="margin-top:14px;"><button class="btn solid" id="lc-all">全体の流れを見る ▶</button></div>
+      <p class="note"><b>思考 (thinking)</b> は答える前の、見えない内部推論です。オンにできる機能で、<b>出力トークンと同じ価格</b>で請求されます。画面を隠しても、使った分のコストはかかります。</p>
+    </section>
+
+    <!-- 06 MODELS -->
+    <section class="page" id="models">
+      <h1>モデルを選ぶ</h1>
+      <p class="lead">Claude にはいくつかのモデルがあります。<b>賢さ · 速さ · コスト</b>は互いにトレードオフの関係です。</p>
+      <p class="defs">賢いほど、たいてい遅くて高価です。仕事に合わせて選べば大丈夫。下で選んでみてください。</p>
+      <div class="mtabs" id="mtabs">
+        <button class="mtab" data-m="opus"><div class="mn">Opus 4.8</div><div class="mt">いちばん賢い</div></button>
+        <button class="mtab on" data-m="sonnet"><div class="mn">Sonnet 4.6</div><div class="mt">バランス · おすすめの基本</div></button>
+        <button class="mtab" data-m="haiku"><div class="mn">Haiku 4.5</div><div class="mt">いちばん速くて安い</div></button>
+        <button class="mtab locked" data-m="fable"><div class="mn">Fable 5 <span class="lockpill">ロック中</span></div><div class="mt">最上位 · 特殊作業</div></button>
+      </div>
+      <div class="bars">
+        <div class="bar"><div class="bl"><span>知能 (難しい問題を解く)</span><b id="v-iq"></b></div><div class="track2"><div class="fill2" id="f-iq"></div></div></div>
+        <div class="bar"><div class="bl"><span>速さ (答えが速く出る)</span><b id="v-sp"></b></div><div class="track2"><div class="fill2" id="f-sp"></div></div></div>
+        <div class="bar"><div class="bl"><span>コスト効率 (安い)</span><b id="v-cost"></b></div><div class="track2"><div class="fill2" id="f-cost"></div></div></div>
+      </div>
+      <div class="muse" id="muse"><div class="lockbanner" id="m-lock" style="display:none;"></div><div class="tagline" id="m-tag"></div><div class="when" id="m-when"></div><div class="ctxline" id="m-ctx"></div><div class="exlbl">こんなときに使う</div><ul id="m-ex"></ul></div>
+      <p class="note">Claude Code では <code>/model</code> で変えられます。迷ったらバランスの良い Sonnet で始めましょう。<span class="exb">例</span> バーは<b>相対比較</b>であって、正確な数値ではありません。</p>
+      <p class="label">K, M ってどんな単位?</p>
+      <div class="unitcard">
+        <div class="ucard"><div class="uk">K = 千</div><div class="ukd">1K = 1,000 トークン</div><div class="ukx">例: 200K = 200,000 トークン</div></div>
+        <div class="ucard"><div class="uk">M = 百万</div><div class="ukd">1M = 1,000,000 トークン</div><div class="ukx">だいたい本数冊分 — 日常の利用には実質たっぷり</div></div>
+      </div>
+      <p class="label">モデル別のコンテキストウィンドウ (2026年6月時点)</p>
+      <div class="tablewrap"><table class="t"><thead><tr><th>モデル</th><th>コンテキストウィンドウ</th><th>ひとこと</th></tr></thead><tbody>
+        <tr><td class="cmd">Opus 4.8</td><td>最大 1M (100万)</td><td>いちばん賢い</td></tr>
+        <tr><td class="cmd">Sonnet 4.6</td><td>最大 1M (100万)</td><td>バランス · おすすめの基本</td></tr>
+        <tr><td class="cmd">Haiku 4.5</td><td>200K (20万)</td><td>いちばん速くて安い</td></tr>
+      </tbody></table></div>
+      <ul class="points">
+        <li><b>有料プランで最新の Opus・Sonnet を選ぶと 1M コンテキストが使えます。</b><span>Haiku のような基本モデルは 200K です。</span></li>
+        <li><b>日常の業務なら 200K でも十分です。</b><span>1M は大きなプロジェクトや、とても長い作業で力を発揮します。</span></li>
+        <li><b>ウィンドウが大きいほど多く覚えますが、少し遅く、精度が落ちることがあります。</b><span>必要なものだけ乗せるのが、いちばん良い品質を出します。</span></li>
+      </ul>
+      <p class="note">正確な料金・使用量はプランや時期によって変わります — claude.com/pricing で確認してください。</p>
+    </section>
+
+    <!-- 07 CLAUDE.md -->
+    <section class="page" id="claudemd">
+      <h1>CLAUDE.md</h1>
+      <p class="lead"><b>CLAUDE.md</b> は「自分で書いておくメモ」です。Claude が会話を始めるたびに自動で読みます。</p>
+      <p class="defs">プロジェクトのルールや口調を一度書いておけば、毎回説明しなくて済みます。</p>
+      <p class="label">書いたとき vs 書かなかったとき <span class="hint">押して比較</span></p>
+      <div class="callout" style="margin-bottom:14px;">ルール: <b>「いつも日本語で、ていねいに答える」</b> を CLAUDE.md に書いておくと?</div>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="md-go">違いを見る ▶</button></div>
+      <div class="chatdemo">
+        <div class="chatcol"><h4>CLAUDE.md なし <span class="badge no">ルールなし</span></h4><div class="bubble u">この文書を要約して</div><div class="bubble a" id="md-no"></div></div>
+        <div class="chatcol"><h4>CLAUDE.md あり <span class="badge yes">ルール適用</span></h4><div class="bubble u">この文書を要約して</div><div class="bubble a" id="md-yes"></div></div>
+      </div>
+      <p class="label">CLAUDE.md の例</p>
+      <div class="pre"><span class="c"># 回答のルール</span>
+- いつも日本語で、ていねいに
+- コードより説明を先に
+
+<span class="c"># このプロジェクト</span>
+- 紹介ページは pages/about フォルダにあります
+- 色は青系で統一</div>
+      <ul class="points">
+        <li><b>200行以下で短く。</b><span>長すぎると、かえって守られにくくなります。</span></li>
+        <li><b>いくつかの場所に置けます。</b><span>自分のコンピュータ全体 (~/.claude/CLAUDE.md) + プロジェクトごと (./CLAUDE.md) が合わさって一緒に読み込まれます。</span></li>
+        <li><b>チームと共有されます。</b><span>プロジェクトの CLAUDE.md は一緒に使うルール。個人設定は CLAUDE.local.md。</span></li>
+      </ul>
+      <p class="note">作成: <code>/init</code> (プロジェクトを分析して自動生成) · 編集: <code>/memory</code>。「Claude が自分で書くメモ」は次の章 (08 メモリ) で。</p>
+    </section>
+
+    <!-- 08 MEMORY -->
+    <section class="page" id="memory">
+      <h1>メモリ</h1>
+      <p class="lead"><b>自動メモリ</b>は「Claude が自分で書くメモ」です。指示しなくても、学んだことを記録しておきます。</p>
+      <p class="defs">CLAUDE.md が自分の書くメモなら、これは Claude が書くメモです。どう保存され、また使われるのか再生してみましょう。</p>
+      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="mem-go">自動メモリの登録過程を見る ▶</button></div>
+      <div class="cols">
+        <div class="memflow">
+          <div class="memstep" id="mstep0"><div class="ms-t">1. 自分がひとこと言う</div><div class="ms-d">「これからレポートはいつも表で整理して」</div></div>
+          <div class="memarrow">↓</div>
+          <div class="memstep" id="mstep1"><div class="ms-t">2. Claude がメモファイル(.md)に記録</div><div class="ms-d">~/.claude/projects/…/memory/ に保存</div></div>
+          <div class="memarrow">↓</div>
+          <div class="memstep" id="mstep2"><div class="ms-t">3. 翌日、新しいセッションを開始</div><div class="ms-d">MEMORY.md を自動で読み込み直す (自分が言わなくても)</div></div>
+          <div class="memarrow">↓</div>
+          <div class="memstep" id="mstep3"><div class="ms-t">4. 自動で表に整理してくれる</div><div class="ms-d">「レポートを表にしました」 — もう一度伝えなくても覚えている</div></div>
+        </div>
+        <div>
+          <p class="label" style="margin-top:0;">実際にはこう記録されます</p>
+          <div class="mdfile" id="mem-md"><span class="c"># MEMORY.md (Claude が自動で作成)</span>
+(ボタンを押すと、記録されていく様子が表示されます)</div>
+          <p class="note">メモリはふつうのマークダウンファイルなので、<code>/memory</code> で直接見て直せます。（自動メモリは Claude Code v2.1.59 以上）</p>
+        </div>
+      </div>
+      <p class="label">「複数のセッションで以前の内容を参照できますか?」 — 非エンジニアの方がいちばん多く聞く質問</p>
+      <ul class="points">
+        <li><b>セッションは互いに独立しています。</b><span>新しいセッションは以前の会話の記録をそのまま持ってきません（きれいに開始）。</span></li>
+        <li><b>代わりにメモリ・CLAUDE.md が「橋」の役割をします。</b><span>セッションを始めるたびに自動で読み込み直すので、以前学んだ好みやルールは引き継がれます。</span></li>
+        <li><b>特定の古い会話をまるごと続けたいなら</b><span><code>/resume</code> (または <code>claude --continue</code>) でそのセッションをそのまま復活できます。</span></li>
+        <li><b>自分のコンピュータにだけ保存されます。</b><span>クラウドや他の端末・同僚と自動共有はされません。チームで分かち合うルールは CLAUDE.md に書いて共有します。</span></li>
+      </ul>
+      <p class="note">まとめ: <b>一つの会話をそのまま続ける = /resume</b>、<b>学んだ点を次の会話へ引き継ぐ = メモリ・CLAUDE.md</b>。（出典: 公式ドキュメント、2026年6月時点）</p>
+    </section>
+
+    <!-- 09 SKILLS -->
+    <section class="page" id="skills">
+      <h1>スキル (Skills)</h1>
+      <p class="lead"><b>スキル</b>は、よく使う作業の手順を書いておいた「コツの束」です。一度作れば、ずっと再利用できます。</p>
+      <p class="defs">毎回ゼロから説明するのと、スキルで一度決めておくのとの違いを再生してみましょう。</p>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="sk-go">違いを見る ▶</button></div>
+      <div class="skgrid">
+        <div class="skcol"><h4>スキルなし <span class="badge no">毎回くり返し</span></h4><div class="skb" id="sk-no"></div></div>
+        <div class="skcol"><h4>スキルあり <span class="badge yes">一度だけ定義</span></h4><div class="skb" id="sk-yes"></div></div>
+      </div>
+      <p class="note">スキルは<b>必要なときだけ展開される（段階的に開示）</b>方式なので、使わないときはコンテキストウィンドウをほとんど占めません。CLAUDE.md が「いつもオンのメモ」なら、スキルは「必要なときに開くマニュアル」です。</p>
+      <p class="label">どんな見た目?</p>
+      <div class="pre"><span class="c"># .claude/skills/週報/SKILL.md</span>
+---
+name: 週報
+description: 週次レポートを会社の様式で作成
+---
+# 手順
+1. 今週やったことを集める
+2. 会社の様式（見出し・表）に合わせる
+3. 要点のまとめを一番上に置く</div>
+      <p class="note">呼び出し: <code>/週報</code> のように直接呼ぶか、関連する作業なら Claude が自動で適用。あらかじめ作られたスキルは<b>プラグイン</b>としてインストールすることもできます (11番)。</p>
+    </section>
+
+    <!-- 10 MCP -->
+    <section class="page" id="mcp">
+      <h1>MCP (ツール連携)</h1>
+      <p class="lead"><b>MCP</b> は Claude を外部サービス（Jira・Figma・Google ドライブなど）に<b>つなぎ</b>、Claude がそのツールを直接使えるようにする「共通のルール」です。</p>
+      <p class="defs"><span class="gl" title="Model Context Protocol — Claude が外部のツール・データとやり取りする共通のルール（標準）">MCP = Model Context Protocol</span> (モデルが外部とつながる標準)。ボタンを押すと連携の過程を見られます。</p>
+      <div class="bignote"><span class="bx">かんたんに</span><span>あるアプリに「Google でログイン」をつなぐと、そのアプリが自分の Google を使えますよね? <b>MCP もそんな「連携」</b>です — Claude に Jira・Figma のようなツールをつないであげると、Claude がそれを直接開いて仕事します。自分でいちいちコピペしなくても済むんです。</span></div>
+      <div class="btnrow" style="margin-bottom:12px;"><button class="btn solid" id="mcp-go">ひとつずつ連携してみる ▶</button><button class="btn" id="mcp-reset">リセット</button></div>
+      <div class="svgwrap">
+        <svg class="mcp" id="mcpsvg" viewBox="0 0 460 280" role="img" aria-label="Claude Code が外部ツールとひとつずつつながっていく絵">
+          <g id="mcp-lines"></g>
+          <g class="center"><rect x="180" y="118" width="100" height="44" rx="12"></rect><text x="230" y="145" text-anchor="middle" font-size="13">Claude Code</text></g>
+          <g id="mcp-nodes"></g>
+        </svg>
+      </div>
+      <p class="status" id="mcp-msg" style="margin-top:0;">「ひとつずつ連携してみる」を押してみてください。</p>
+      <div class="grp" style="margin-top:20px;"><h3>こんなものを連携します (例)</h3>
+        <div class="fgrid">
+          <div class="fcard"><div class="ft">Jira</div><div class="fd">課題を読んで作って、状態を変えます。</div><div class="fe"><b>例</b> 「このバグを Jira チケットに」</div></div>
+          <div class="fcard"><div class="ft">Figma</div><div class="fd">デザイン案を読んでコードに。</div><div class="fe"><b>例</b> 「この Figma の通りに作って」</div></div>
+          <div class="fcard"><div class="ft">ブラウザ</div><div class="fd">実際の Web ページを開いて確認。</div><div class="fe"><b>例</b> 「このページがちゃんと開くか確認」</div></div>
+          <div class="fcard"><div class="ft">その他</div><div class="fd">GitHub・Slack・Notion・DB など。</div><div class="fe"><b>例</b> 社内ツールと連携</div></div>
+        </div>
+      </div>
+      <p class="note">連携したツールは <code>/mcp</code> で確認。ツールが多いほど、その説明もコンテキストを少しずつ占めるので、必要なものだけ連携してください。MCP を複数まとめて配布するのが「プラグイン」です (11番)。</p>
+    </section>
+
+    <!-- 11 PLUGINS -->
+    <section class="page" id="plugins">
+      <h1>プラグイン</h1>
+      <p class="lead"><b>プラグイン</b>は、いろいろな機能を<b>一度にインストールする束</b>です — スマホの「アプリ」のように。</p>
+      <p class="defs">スキル・ツール連携(MCP)・自動化(フック)などをひとつひとつ別々にそろえる代わりに、誰かがうまく作っておいた束をまるごと受け取って使うわけです。</p>
+      <div class="bignote"><span class="bx">かんたんに</span><span>スマホに「写真補正アプリ」を一つ入れると、フィルターやツールが一気についてきますよね? <b>プラグインもそうです。</b> これまで見たスキル・MCP・サブエージェント・フックを<b>一つの束としてインストール</b>するんです。（それぞれが何か全部わからなくても大丈夫 — ここでは「束」だということだけわかれば十分です。）</span></div>
+      <div class="plugbox">
+        <div class="ph">プラグイン (配布できるパッケージ)</div>
+        <div class="psub">下の機能を好きなように詰めて、一度にインストール・共有</div>
+        <div class="pluggrid">
+          <div class="plugchip"><div class="pc-t">スキル</div><div class="pc-d">作業のコツの束</div></div>
+          <div class="plugchip"><div class="pc-t">スラッシュコマンド</div><div class="pc-d">ショートカットコマンド</div></div>
+          <div class="plugchip"><div class="pc-t">サブエージェント</div><div class="pc-d">専門のお手伝い</div></div>
+          <div class="plugchip"><div class="pc-t">MCP サーバー</div><div class="pc-d">外部ツール連携</div></div>
+          <div class="plugchip"><div class="pc-t">フック(Hooks)</div><div class="pc-d">自動実行のルール</div></div>
+          <div class="plugchip"><div class="pc-t">その他</div><div class="pc-d">コード知能・モニターなど</div></div>
+        </div>
+      </div>
+      <p class="label">MCP · スキル · プラグインをひと目で</p>
+      <div class="fgrid">
+        <div class="fcard"><div class="ft">MCP</div><div class="fd">外部ツール・サービスに<b>つなぐ</b>通り道。</div></div>
+        <div class="fcard"><div class="ft">スキル</div><div class="fd">くり返す作業の<b>コツ・手順</b>の束。</div></div>
+        <div class="fcard"><div class="ft">プラグイン</div><div class="fd">上のものを<b>まとめて配布</b>するパッケージ。</div></div>
+      </div>
+      <p class="note">インストール: <code>/plugin install 名前@マーケットプレイス</code>。公式マーケットプレイス (claude-plugins-official) とコミュニティマーケットプレイス (claude-community) があります。信頼できる出所からだけインストールしてください。（出典: 公式ドキュメント code.claude.com/docs/plugins）</p>
+    </section>
+
+    <!-- 12 SUBAGENTS -->
+    <section class="page" id="agents">
+      <h1>サブエージェント</h1>
+      <p class="lead"><b>サブエージェント</b>は、特定の仕事を別に引き受ける「専門のお手伝い」です。自分専用の作業空間で働き、結果だけを報告します。</p>
+      <p class="defs">核心はシンプルです — 「仕事を分けて任せる」。</p>
+      <div class="callout"><b>わかりやすいたとえ</b> · 自分が<b>チームリーダー</b>だと思ってください。大きな仕事を一人で全部やらず、<b>専門のメンバー</b>に「これは君が調べてきて」「これは君が確認して」と分けて任せますよね。メンバーはそれぞれ自分の机で働き、<b>結果だけ報告</b>します。自分の机（メインの会話）はきれいに保たれます。</div>
+      <p class="label">実際に見る — 6 人に分けて任せる <span class="hint">押して再生</span></p>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="sa-go">動作を見る ▶</button><button class="btn" id="sa-self">もしメインが全部一人でやったら?</button></div>
+      <div class="mainbox"><div class="mh"><span class="mt2">メインの会話 (自分と Claude)</span><span class="ctxnum" id="sa-main-n">コンテキスト 8%</span></div><div class="ctxmini"><i id="sa-main-b" style="background:var(--good); width:8%;"></i></div><div class="sd2" style="margin:6px 0 0;">「うちのショッピングサイト全体を点検して改善して」</div></div>
+      <div class="arrowdown" style="max-width:none; margin:10px 0;">↓ 6 つに分けて同時に任せる</div>
+      <div class="sagrid" id="sa-grid"></div>
+      <p class="status" id="sa-msg" style="margin-top:10px;">「動作を見る」を押してみてください — 6 人がどう分けて働き、それが<b>なぜ良いのか</b>をお見せします。</p>
+      <div class="sabenef" id="sa-benef">
+        <div class="sabf" id="sa-bf0"><div class="ft">同時に (並列)</div><div class="fd">6 人がいっぺんに働きます — 一人で順番にやるより速いです。</div></div>
+        <div class="sabf" id="sa-bf1"><div class="ft">メインはきれい</div><div class="fd">それぞれ自分の空間で働き「要約」だけ報告 → メインの会話が散らかりません。</div></div>
+        <div class="sabf" id="sa-bf2"><div class="ft">それぞれ専門</div><div class="fd">一人が一つのことに集中 → より正確で安全です。</div></div>
+      </div>
+      <ul class="points">
+        <li><b>自分専用の作業空間（コンテキストウィンドウ）を持ちます。</b><span>お手伝いが長く調べても、メインの会話は散らかりません。</span></li>
+        <li><b>できることを制限できます。</b><span>例: 「コードレビュー」のお手伝いは読むだけで直せないように — より安全。</span></li>
+        <li><b>基本のお手伝いが 2 つあります: Explore(探索)・Plan(計画)。</b><span>それ以外は自分で作れます (<code>.claude/agents/</code>)。</span></li>
+      </ul>
+      <p class="note">複数のセッションを同時に動かして協力する「エージェントチーム (agent teams)」は、別の実験的機能です。（出典: 公式ドキュメント）</p>
+    </section>
+
+    <!-- 13 IMAGES -->
+    <section class="page" id="images">
+      <h1>Claude に画像を貼り付け</h1>
+      <p class="lead">Claude は<b>画像を見ることができます。</b> スクリーンショットを貼れば、言葉で説明するよりずっと速く正確です。</p>
+      <p class="defs">ボタンを押すと、Claude が画像をどう「読み取る」のかお見せします。</p>
+      <div class="btnrow" style="margin:0 0 16px;"><button class="btn solid" id="img-go">Claude が分析する ▶</button></div>
+      <div class="imggrid">
+        <div class="shotframe"><div class="shot">
+          <div class="reg" id="r-title"><div class="shot-title">ログイン</div></div>
+          <div class="reg" id="r-input"><div class="shot-input">メール</div><div class="shot-input">パスワード</div></div>
+          <div class="reg" id="r-btn"><div class="shot-btn">ログイン</div></div>
+          <div class="reg" id="r-err"><div class="shot-err">パスワードが違います</div></div>
+        </div></div>
+        <div>
+          <p class="label" style="margin-top:0;">Claude が認識したもの</p>
+          <ul class="detlist" id="detlist">
+            <li><span class="di">✓</span><span>文字を読む — タイトル「ログイン」</span></li>
+            <li><span class="di">✓</span><span>構造の把握 — メール・パスワードの入力欄 2 つ</span></li>
+            <li><span class="di">✓</span><span>色の検知 — 青いボタン「ログイン」</span></li>
+            <li><span class="di">✓</span><span>状態の認識 — 赤いエラー「パスワードが違います」</span></li>
+          </ul>
+          <div class="detsum" id="detsum">→ Claude: 「ログイン画面で、パスワードのエラー状態ですね。検証ロジックを確認して直してみます。」</div>
+        </div>
+      </div>
+      <p class="label" style="margin-top:30px;">なぜキャプチャを貼るの?</p>
+      <div class="fgrid">
+        <div class="fcard"><div class="ft">言葉より速い</div><div class="fd">画面を長々と説明しなくても、そのまま。</div></div>
+        <div class="fcard"><div class="ft">正確な状態</div><div class="fd">実際に見えているその姿を直接確認。</div></div>
+        <div class="fcard"><div class="ft">デザインの通り</div><div class="fd">デザイン案を渡せば、そのレイアウト・色で。</div></div>
+        <div class="fcard"><div class="ft">エラー画面</div><div class="fd">エラーのキャプチャを渡せば原因を早く。</div></div>
+      </div>
+      <ul class="points">
+        <li><b>画像を「クリック」はできません。</b><span>画面を分析するだけで、絵の中のボタンを直接押すことはしません。</span></li>
+        <li><b>とても小さい文字は間違えることがあります。</b><span>大事な数字・文字はテキストでも一緒に書いておくと安全です。</span></li>
+        <li><b>動く GIF は最初の場面だけ見ます。</b><span>JPG・PNG などのふつうの画像をおすすめします。</span></li>
+      </ul>
+      <p class="note">貼り方: キャプチャを入力欄にドラッグして置くか貼り付け (<code>Cmd/Ctrl</code>+<code>V</code>)、または画像ファイルのパスを書けば OK です。</p>
+    </section>
+
+    <!-- 14 HOOKS -->
+    <section class="page" id="hooks">
+      <h1>自動化 (フック · Hooks)</h1>
+      <p class="lead"><b>フック</b>は、特定の瞬間に<b>決まった動作が毎回自動で</b>実行されるようにする機能です。</p>
+      <p class="defs">「自動返信メール」のように、あることが起きると自動で動きます。</p>
+      <div class="bignote"><span class="bx">ご安心を</span><span><b>自分で作る必要はありません。</b> 設定方法は少し技術的ですが、非エンジニアは作り方を知らなくても大丈夫 — Claude に <b>「ファイルを直すたびに自動で整理するフックを作って」</b>のように言葉でお願いすれば、Claude が代わりに作ってくれます。このページは「こういうものがある」とわかれば十分です。</span></div>
+      <p class="label">どう動くか <span class="hint">いつ → 何を → どうやって</span></p>
+      <div class="steps">
+        <div class="step on"><div class="sn2">1</div><div><div class="st2">イベント (いつ)</div><div class="sd3">例: ファイルを保存した直後</div></div></div>
+        <div class="step on"><div class="sn2">2</div><div><div class="st2">フィルター (何を)</div><div class="sd3">例: それがコードファイルなら</div></div></div>
+        <div class="step on"><div class="sn2">3</div><div><div class="st2">作業 (どうやって)</div><div class="sd3">例: 自動でコードの整形・チェックを実行</div></div></div>
+      </div>
+      <div class="grp" style="margin-top:22px;"><h3>こんなときに便利</h3>
+        <div class="fgrid">
+          <div class="fcard"><div class="ft">自動の整理</div><div class="fd">直すたびに自動でコードを整形。</div></div>
+          <div class="fcard"><div class="ft">保護</div><div class="fd">危険なコマンド(rm など)をあらかじめ防ぐ。</div></div>
+          <div class="fcard"><div class="ft">通知</div><div class="fd">作業が終わったら通知を送る。</div></div>
+        </div>
+      </div>
+      <ul class="points">
+        <li><b>設定ファイル(settings.json)に書きます。</b><span>全プロジェクト用・このプロジェクト用・個人用など、いくつかの段階で置けます。</span></li>
+        <li><b>毎回保証されます。</b><span>CLAUDE.md が「お願い」なら、フックは「ルール」 — 忘れずにいつも実行されます。</span></li>
+        <li><b>26 種類を超える時点に対応します。</b><span>ファイル変更・ツール実行の前後・セッション開始など。<code>/hooks</code> で確認。</span></li>
+      </ul>
+      <p class="note">設定がやや技術的なので、Claude に「ファイルを直すたびに整形するフックを作って」のようにお願いすれば代わりに作ってくれます。（出典: 公式ドキュメント、2026年6月時点）</p>
+    </section>
+
+    <!-- 15 PLAN MODE -->
+    <section class="page" id="planmode">
+      <h1>プランモード</h1>
+      <p class="lead">すぐ直す前に、Claude が<b>「何をするか」計画を先に見せて</b>、自分の承認を受けます。</p>
+      <p class="defs">大きな変更や慣れない作業で、「見当違いの方向」を前もって防げます。流れを再生してみてください。</p>
+      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="plan-go">流れを見る ▶</button></div>
+      <div class="steps">
+        <div class="step" id="plan0"><div class="sn2">1</div><div><div class="st2">プランモードに切り替え</div><div class="sd3"><code>Shift</code>+<code>Tab</code> または <code>/plan</code> — これで読むだけで、直しません</div></div></div>
+        <div class="step" id="plan1"><div class="sn2">2</div><div><div class="st2">Claude が計画を提示</div><div class="sd3">「この 3 つのファイルをこう変えます」 — 影響と順序を前もって見せる</div></div></div>
+        <div class="step" id="plan2"><div class="sn2">3</div><div><div class="st2">自分が確認 · 修正</div><div class="sd3">「footer も抜けてるね」のようなフィードバックでもう一度整える</div></div></div>
+        <div class="step" id="plan3"><div class="sn2">4</div><div><div class="st2">承認したら実行</div><div class="sd3">「OK、実行して」 → そのとき一気にファイルを直します</div></div></div>
+      </div>
+      <p class="status" id="plan-msg" style="margin-top:8px;"></p>
+      <p class="note">プランモードは「読み取り専用」なので安全です。権限モード (16番) の一種です。（Windows の一部のターミナルでは <code>Shift</code>+<code>Tab</code> の代わりに <code>/plan</code> をおすすめ）</p>
+    </section>
+
+    <!-- 16 PERMISSIONS -->
+    <section class="page" id="permissions">
+      <h1>権限モード</h1>
+      <p class="lead">Claude が<b>どこまで自分で進めるか</b>を、自分で決めます。</p>
+      <div class="callout" style="margin:0 0 8px;"><b>かんたんに言うと</b> · Claude が自分のコンピュータで何か（ファイルを直す・コマンドを実行する）をするとき、<b>「これやっていいですか?」とどのくらい頻繁に聞くか</b>を決める設定です。最初は毎回聞くのが安全で、慣れてきたらよくやる仕事は自動でやらせるように緩められます。車の「マニュアル ↔ オートマ」のようなものです。</div>
+      <p class="defs">Claude Code では <code class="inlinecode">Shift</code>+<code class="inlinecode">Tab</code> でモードを変えます。モードを押して「動作を見る」で違いを確認してください。</p>
+      <div class="cols">
+        <div>
+          <div class="pmenu" id="pmenu">
+            <button class="prow on" data-i="0"><span class="pno">1</span><span class="pl">権限を確認<span>基本</span></span><span class="pchk">✓</span></button>
+            <button class="prow" data-i="1"><span class="pno">2</span><span class="pl">編集を承認</span><span class="pchk">✓</span></button>
+            <button class="prow" data-i="2"><span class="pno">3</span><span class="pl">プランモード</span><span class="pchk">✓</span></button>
+            <button class="prow" data-i="3"><span class="pno">4</span><span class="pl">自動モード</span><span class="pchk">✓</span></button>
+            <button class="prow" data-i="4"><span class="pno">5</span><span class="pl">権限をスキップ</span><span class="pchk">✓</span></button>
+          </div>
+          <div class="pspec"><div class="pmark" id="pmark"></div></div>
+          <div class="paxis"><span>← 安全 · 確認が多い</span><span>自律 · 確認が少ない →</span></div>
+        </div>
+        <div><div class="pdetail" id="pdetail"></div><div class="btnrow" style="margin-top:12px;"><button class="btn solid" id="pm-sim">このモードの動作を見る ▶</button></div><div class="simbox" id="pm-simbox"></div></div>
+      </div>
+      <p class="note">この 5 つはメニューに見えるモードです。自動化専用に「事前承認したツールだけ許可 (dontAsk)」モードも別にあります。どのモードでも<b>システム全体の削除 (rm -rf /) のような極端な破壊</b>は安全装置で防がれます。気に入らなければ「巻き戻し」(17番) で復元できます。</p>
+    </section>
+
+    <!-- 17 REWIND -->
+    <section class="page" id="rewind">
+      <h1>巻き戻し (チェックポイント)</h1>
+      <p class="lead">Claude は、自分が送った<b>リクエストごとに、その瞬間の状態を自動保存</b>しています。気に入らなければ巻き戻せます。</p>
+      <p class="defs">「タイムトラベル」のように、以前の時点へ行けます。点を押して巻き戻してみてください。</p>
+      <div class="callout" style="margin-bottom:14px;">状況: 「デザインをモダンに変えて」 → ファイルが 10 個変わったけど気に入りません。どう巻き戻しましょう?</div>
+      <div class="timeline" id="rw-timeline"></div>
+      <div class="tllabels" id="rw-labels"></div>
+      <div class="btnrow" style="margin:14px 0;"><button class="btn" id="rw-code">コードだけ復元</button><button class="btn" id="rw-both">コード+会話を復元</button><button class="btn" id="rw-reset">リセット</button></div>
+      <p class="status" id="rw-msg" style="margin-top:0;">上のタイムラインの点を押したあと、復元の方法を選んでください。</p>
+      <ul class="points">
+        <li><b>開き方</b><span><code>ESC</code> を 2 回押すか <code>/rewind</code> — これまで送ったリクエストの一覧が表示されます。</span></li>
+        <li><b>3 種類の復元</b><span>コード+会話を一緒に / 会話だけ(コードは維持) / コードだけ(会話は維持)。</span></li>
+        <li><b>限界</b><span><code>rm·mv</code> のようなターミナルコマンドで変わったもの、インストール(<code>npm install</code>)・外部の変更は巻き戻せません。</span></li>
+      </ul>
+      <p class="note">チェックポイントは「セッション内の素早い巻き戻し」(約30日保管)、git は「永続的なバージョン管理」 — 役割が違います。長く保管したいなら git にコミットしてください。（出典: 公式ドキュメント、2026年6月時点）</p>
+    </section>
+
+    <!-- 18 PRIVACY -->
+    <section class="page" id="privacy">
+      <h1>データ & プライバシー</h1>
+      <p class="lead">「自分のコード・データが AI の学習に使われますか?」 — いちばん多く心配される部分です。</p>
+      <p class="defs">アカウントの種類によって方針が大きく違います。正確には公式ページで必ず確認してください（下のリンク）。</p>
+      <div class="cmp">
+        <div class="cmpcard"><h4>個人用 (Free·Pro·Max)</h4><div class="who">claude.ai 個人アカウント</div>
+          <div class="cmprow"><b>学習への利用</b>ユーザーに<b>選択権</b>があります — 設定で確認・変更可能</div>
+          <div class="cmprow"><b>設定の場所</b>claude.ai/settings/data-privacy-controls</div></div>
+        <div class="cmpcard"><h4>業務用 (Team·Enterprise·API)</h4><div class="who">会社・開発者アカウント</div>
+          <div class="cmprow"><b>学習への利用</b>基本的に<b>学習には使われない</b></div>
+          <div class="cmprow"><b>API</b>入出力は基本 7 日後に削除、学習には未使用</div></div>
+      </div>
+      <ul class="points">
+        <li><b>Claude Code は自分のコンピュータで実行されます。</b><span>必要な内容だけ暗号化(TLS)して API に送ります — フォルダ全体をクラウドに上げるわけではありません。</span></li>
+        <li><b>例外: 安全レビューでフラグされた会話</b><span>学習をオフにしても、安全・ポリシーのレビュー目的では使用・保管されることがあります。</span></li>
+        <li><b>ローカルの記録</b><span>セッションの記録が自分のコンピュータ(~/.claude/projects)に平文で保存されます。保管期間は設定で調整可能。</span></li>
+      </ul>
+      <p class="note warn" style="margin-top:14px;"><b>重要</b> · ポリシーは変わり続け、アカウントの種類ごとに違います。慎重な判断の前には公式ページを必ず確認してください — <code>privacy.claude.com</code>、<code>anthropic.com/legal</code>、<code>code.claude.com/docs</code> (この内容は 2026年6月時点)。</p>
+    </section>
+
+    <!-- 19 COMMANDS -->
+    <section class="page" id="commands">
+      <h1>スラッシュコマンド</h1>
+      <p class="lead"><code class="inlinecode">/</code> で始まる<b>ショートカットコマンド</b>です。メッセージの先頭に入力します。</p>
+      <p class="defs">下のコマンドを押してみると、入力したときに何が起きるかお見せします。</p>
+      <div class="chips" style="margin:0 0 12px; margin-left:0;" id="cmdchips">
+        <button class="chip" data-c="init">/init</button><button class="chip" data-c="help">/help</button><button class="chip" data-c="clear">/clear</button><button class="chip" data-c="compact">/compact</button><button class="chip" data-c="model">/model</button>
+      </div>
+      <div class="pre" id="term" style="min-height:200px; white-space:pre-wrap;"></div>
+      <p class="note">このターミナルは理解を助けるための<b>概念用の例</b>です（実際の画面とは違うことがあります）。特に <code>/init</code> は、プロジェクトを分析して<b>CLAUDE.md を自動生成</b>するコマンドです。</p>
+      <p class="label">よく使うコマンド</p>
+      <div class="tablewrap"><table class="t"><thead><tr><th style="width:130px;">コマンド</th><th>すること</th></tr></thead><tbody>
+        <tr><td class="cmd">/help</td><td>使えるコマンドを表示します</td></tr>
+        <tr><td class="cmd">/init</td><td>プロジェクトを分析して CLAUDE.md の基本ファイルを作ります (07番)</td></tr>
+        <tr><td class="cmd">/clear</td><td>会話を空にして新しく開始 (04番)</td></tr>
+        <tr><td class="cmd">/compact</td><td>会話を要約して空間を空けます (03・04番)</td></tr>
+        <tr><td class="cmd">/model</td><td>モデルを変えます (06番)</td></tr>
+        <tr><td class="cmd">/memory</td><td>CLAUDE.md・メモリを見て編集 (07・08番)</td></tr>
+        <tr><td class="cmd">/mcp</td><td>連携した外部ツールの確認・管理 (10番)</td></tr>
+        <tr><td class="cmd">/plugin</td><td>プラグインのインストール・管理 (11番)</td></tr>
+        <tr><td class="cmd">/agents</td><td>サブエージェントの管理 (12番)</td></tr>
+        <tr><td class="cmd">/plan</td><td>プランモードに切り替え (15番)</td></tr>
+        <tr><td class="cmd">/rewind</td><td>以前の時点に巻き戻し (17番)</td></tr>
+        <tr><td class="cmd">/hooks</td><td>設定された自動化(フック)の確認 (14番)</td></tr>
+      </tbody></table></div>
+      <p class="note">いちばんよく使うのは <b>/clear</b> と <b>/compact</b> です。コンテキストが満杯になったときに使えば OK です。</p>
+    </section>
+
+    <!-- 20 PLANS -->
+    <section class="page" id="plans">
+      <h1>料金プラン</h1>
+      <p class="lead">Claude Code は<b>有料プランか API</b>で使えます。無料プランには含まれません。</p>
+      <p class="defs">正確な価格・使用量はよく変わるので、数字は公式ページで確認してください。</p>
+      <div class="grp"><h3>どのプランで使えるか (2026年6月時点)</h3>
+        <div class="fgrid">
+          <div class="fcard"><div class="ft">Free (無料)</div><div class="fd">Claude Code は<b>含まれません</b>。有料があって初めて使えます。</div></div>
+          <div class="fcard"><div class="ft">Pro</div><div class="fd">個人用。日常の利用に手ごろ。</div><div class="fe"><b>だいたい</b> 月 $20 <span class="exb">変動</span></div></div>
+          <div class="fcard"><div class="ft">Max</div><div class="fd">個人用。使用量がいちばんたっぷり。</div><div class="fe"><b>だいたい</b> 月 $100~200 <span class="exb">変動</span></div></div>
+          <div class="fcard"><div class="ft">Team · Enterprise</div><div class="fd">チーム・会社用。人数（シート）分。</div></div>
+          <div class="fcard"><div class="ft">API (従量制)</div><div class="fd">使った分だけトークン基準で課金。自動化・連携用。</div></div>
+        </div>
+      </div>
+      <ul class="points">
+        <li><b>使用量は時間単位でリセットされます。</b><span>一定時間が過ぎると再び満ちる「ローリング」方式。Max が上限がいちばん大きいです。</span></li>
+        <li><b>複数の場所で同じ使用量を分け合います。</b><span>claude.ai・Claude Code・デスクトップアプリが一つの使用量プールを共有。</span></li>
+        <li><b>迷ったら Pro から</b><span>足りなければ Max に上げれば OK です。</span></li>
+      </ul>
+      <p class="note">正確な価格・上限は <code>claude.com/pricing</code> と公式サポートページで確認してください。（料金ポリシーは随時変更）</p>
+    </section>
+
+    <!-- 21 USAGE LIMITS -->
+    <section class="page" id="limits">
+      <h1>使用量の上限</h1>
+      <p class="lead">サブスクは<b>月額に使用量の上限</b>があります。使い切ると<b>リセットまで待つ</b>必要があるので、管理が大切です。</p>
+      <p class="defs">ボタンを押すと、どんどん使うように上限が満ちていき、使い切るとロックされる様子を見られます。</p>
+      <p class="label">実際に使ってみる — 使い切ったらどうなる <span class="hint">押してみてください</span></p>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="lim-use">どんどん使ってみる ▶</button><button class="btn" id="lim-reset">5時間たってリセット</button></div>
+      <div class="cols">
+        <div>
+          <div class="gauge"><div class="gl"><span>5時間の上限 (直近5時間)</span><b id="g5n">0%</b></div><div class="gtrack"><i id="g5"></i></div></div>
+          <div class="gauge"><div class="gl"><span>週間の上限 (直近7日)</span><b id="gwn">18%</b></div><div class="gtrack"><i id="gw"></i></div></div>
+          <div class="lockmsg" id="lock-msg"></div>
+        </div>
+        <div>
+          <p class="label" style="margin-top:0;">使用の記録</p>
+          <div class="usefeed" id="use-feed"></div>
+          <p class="note" style="margin-top:8px;">ファイル読み込み・長い会話・画像のような重い作業ほど、上限が早く減ります。</p>
+        </div>
+      </div>
+      <p class="label">サブスク vs API — 何が違う</p>
+      <div class="cmp">
+        <div class="cmpcard"><h4>サブスク (Pro·Max·Team)</h4><div class="who">月額</div>
+          <div class="cmprow"><b>料金</b>毎月決まった金額</div>
+          <div class="cmprow"><b>上限</b>決まった使用量 — 使い切るとリセットまで待機</div>
+          <div class="cmprow"><b>向いているとき</b>こつこつ頻繁に使うとき (定額で安心)</div></div>
+        <div class="cmpcard"><h4>API (従量制)</h4><div class="who">使った分だけ課金</div>
+          <div class="cmprow"><b>料金</b>使ったトークン分だけ請求</div>
+          <div class="cmprow"><b>上限</b>月の上限なし — 使い続けられるが費用は増える</div>
+          <div class="cmprow"><b>向いているとき</b>たまに使うか、自動化・連携に</div></div>
+      </div>
+      <p class="label">2 つの上限が同時にあります</p>
+      <ul class="points">
+        <li><b>5時間の上限</b><span>「直近5時間」に使った量を見ます。時間が過ぎると自動で再び満ちます(ローリング方式)。</span></li>
+        <li><b>週間(7日)の上限</b><span>「直近7日」基準の、より大きい上限。5時間の上限さえ避ければ無限に使える、というわけではありません。</span></li>
+        <li><b>どちらか一方でも満杯になると止まります。</b><span>5時間・週間の 2 つの上限が一緒にかかっているので、先に満杯になるほうで止まります。その上限がリセットされれば再び使えます。</span></li>
+        <li><b>上限にかかっても作業は消えません。</b><span>やっていた内容が消えるのではなく「一時停止」です — リセットされたら続きをやれば OK。（急ぐなら上位プランへアップグレード）</span></li>
+        <li><b>一か所でまとめて差し引かれます。</b><span>claude.ai・Claude Code・デスクトップアプリが同じ使用量を分け合います。</span></li>
+      </ul>
+      <p class="label">上限を節約して使うコツ</p>
+      <div class="fgrid">
+        <div class="fcard"><div class="ft">安いモデルを使う</div><div class="fd">簡単な仕事は Haiku で。Opus は重くて高いです。(06番)</div></div>
+        <div class="fcard"><div class="ft">こまめに空にする</div><div class="fd"><code>/clear</code>・<code>/compact</code> でコンテキストを整理。(03・04番)</div></div>
+        <div class="fcard"><div class="ft">簡潔にお願い</div><div class="fd">必要なファイルだけ、要点だけ依頼。</div></div>
+      </div>
+      <p class="note">正確な時間・価格・上限の数値はプランや時期によって変わります — <code>claude.com/pricing</code> と <code>support.claude.com</code> で確認してください。（概念は 2026年6月の公式ドキュメント基準）</p>
+    </section>
+
+    <!-- 22 COMPACT DETAIL -->
+    <section class="page" id="compact">
+      <h1>圧縮をくわしく (compact)</h1>
+      <p class="lead">会話が長くなると「圧縮」が起こります。<b>長く積み上がった内容が、短い要約 1 つに</b>変わります。</p>
+      <p class="defs">下はある作業の会話の記録です。「圧縮する」を押して、内容が実際にどう減るのか見てみましょう。</p>
+      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="cx-go">圧縮する (/compact) ▶</button><button class="btn" id="cx-reset">もう一度見る</button></div>
+
+      <p class="label" id="cx-label">圧縮前 — 会話の記録 (長く積み上がる)</p>
+      <div id="cx-before">
+        <div class="cxrow"><span class="cxt">自分</span>「登録すると歓迎メールが届きません。原因を見つけて直して。」</div>
+        <div class="cxrow"><span class="cxt">ファイル</span>auth.js · mailer.js · config.js を読んだ (合わせて数百行)</div>
+        <div class="cxrow"><span class="cxt">ツール結果</span>テスト実行ログ 120行 — 失敗: SMTP 接続タイムアウト … (長いエラーログがずらり …)</div>
+        <div class="cxrow"><span class="cxt">Claude</span>「メールサーバーのアドレス設定が抜けていました。config.js に SMTP ホストを追加し、足りなかった送信者アドレスも埋めました。これこれの理由で … (長い説明が続く)」</div>
+        <div class="cxrow"><span class="cxt">ツール結果</span>テスト再実行ログ 80行 — 通過 ✓ (詳細ログ …)</div>
+        <div class="cxrow"><span class="cxt">Claude</span>「修正完了。これで歓迎メールが正常に送信されます。」</div>
+      </div>
+
+      <div id="cx-after" style="display:none;">
+        <div class="cxbadge">圧縮前 <b>約 12,000</b>トークン<span class="ar">→</span>圧縮後 <b>約 1,400</b>トークン <span style="color:var(--good);">約 88% 節約</span> <span class="exb">例の値</span></div>
+        <div class="cxsummary"><div class="cxh">要約 1 マスに</div>ユーザーが「登録時に歓迎メールが未送信」の解決を依頼。<b>auth.js・mailer.js・config.js</b> を確認 → <b>config.js のメールサーバー(SMTP)設定の抜け</b>が原因。SMTP ホスト・送信者アドレスを追加してテスト通過。<b>歓迎メールの正常送信を確認。</b></div>
+        <div class="cmp" style="margin-top:14px;">
+          <div class="cmpcard"><h4>残したもの</h4><div class="who">核心は保存</div><div class="cmprow">自分の依頼と意図</div><div class="cmprow">直したファイルの一覧</div><div class="cmprow">原因と解決方法</div><div class="cmprow">最終結果</div></div>
+          <div class="cmpcard"><h4>捨てたもの</h4><div class="who">空間の節約</div><div class="cmprow">長いテストログ(120・80行)</div><div class="cmprow">途中段階の冗長な説明</div><div class="cmprow">重複した内容</div></div>
+        </div>
+      </div>
+      <p class="note">このように核心だけ残して縮めるので、圧縮の後も「どんな作業をどうやったか」は引き継がれます。ただし<b>読んだコードの原文</b>のような、捨てられた詳細がまた必要になれば、Claude がそのファイルをもう一度読みます。トークンの数値は理解を助ける<b>例</b>です（実際の値は状況ごとに変わります）。コンテキストウィンドウで自動的に起こる圧縮は「コンテキストウィンドウ」タブで見られます。</p>
+    </section>
+
+    <!-- 23 GLOSSARY -->
+    <section class="page" id="glossary">
+      <h1>用語集</h1>
+      <p class="lead">このガイドに出てきた言葉を一行でまとめました。</p>
+      <p class="defs">迷ったときはここで素早く探してください。検索欄に単語を打つと、すぐ絞り込まれます。</p>
+      <input class="gsearch" id="gloss-search" type="text" placeholder="用語を検索… (例: ターミナル, API, トークン)">
+      <div class="gloss" id="gloss-list">
+        <div class="gterm"><div class="gt">コンテキストウィンドウ</div><div class="gd">Claude が一度に抱えている「作業空間」。ここにあるものだけを知っています。(03番)</div></div>
+        <div class="gterm"><div class="gt">トークン</div><div class="gd">AI が文章を読む、いちばん小さなかけら。コンテキスト・料金の単位。(05番)</div></div>
+        <div class="gterm"><div class="gt">セッション</div><div class="gd">一度の連続した会話。その中のコンテキストウィンドウに積み上がります。(04番)</div></div>
+        <div class="gterm"><div class="gt">CLAUDE.md</div><div class="gd">自分で書いておくルールのメモ。毎回の会話に自動で読み込み。(07番)</div></div>
+        <div class="gterm"><div class="gt">メモリ</div><div class="gd">Claude が自分で書く学習メモ。セッションをまたいで引き継がれます。(08番)</div></div>
+        <div class="gterm"><div class="gt">スキル</div><div class="gd">よく使う作業の手順の束。必要なときだけ展開。(09番)</div></div>
+        <div class="gterm"><div class="gt">MCP</div><div class="gd">外部ツール(Jira・Figma など)につなぐ標準。(10番)</div></div>
+        <div class="gterm"><div class="gt">プラグイン</div><div class="gd">スキル・MCP・コマンドなどをまとめて配布する一式。(11番)</div></div>
+        <div class="gterm"><div class="gt">サブエージェント</div><div class="gd">特定の仕事を別に引き受ける専門のお手伝い。(12番)</div></div>
+        <div class="gterm"><div class="gt">フック (Hooks)</div><div class="gd">特定の瞬間に自動で実行されるルール。(14番)</div></div>
+        <div class="gterm"><div class="gt">プランモード</div><div class="gd">直す前に計画を先に見せて承認を受けるモード。(15番)</div></div>
+        <div class="gterm"><div class="gt">権限モード</div><div class="gd">どのくらい頻繁に聞くかを決める設定。(16番)</div></div>
+        <div class="gterm"><div class="gt">チェックポイント · 巻き戻し</div><div class="gd">リクエストごとに自動保存、以前へ復元。(17番)</div></div>
+        <div class="gterm"><div class="gt">圧縮 (compact)</div><div class="gd">会話を要約してコンテキストの空間を空ける。(03番)</div></div>
+        <div class="gterm"><div class="gt">モデル (Opus·Sonnet·Haiku)</div><div class="gd">賢さ・速さ・コストが違う Claude たち。(06番)</div></div>
+        <div class="gterm"><div class="gt">ターミナル (CLI)</div><div class="gd">コンピュータに文字（コマンド）で指示する黒い入力画面。「コマンドライン」とも呼びます。CLI = Command Line Interface。</div></div>
+        <div class="gterm"><div class="gt">API</div><div class="gd">プログラム同士がやり取りする「つなぎ目」。ここでは使った分だけ払う「従量制」の使い方を指します。(20番)</div></div>
+        <div class="gterm"><div class="gt">サーバー</div><div class="gd">遠くで仕事を処理してくれるコンピュータ。MCP「サーバー」は外部ツールを Claude につなぐ小さなプログラムです。</div></div>
+        <div class="gterm"><div class="gt">.md (マークダウン)</div><div class="gd">簡単なルールで飾る「メモ用の文章ファイル」の形式。CLAUDE.md、SKILL.md の .md がこれです。</div></div>
+        <div class="gterm"><div class="gt">JSON</div><div class="gd">コンピュータが読む「設定を書く形式」。フックのような設定をここに書きます。(自分で書かなくても Claude が代わりにやってくれます)</div></div>
+        <div class="gterm"><div class="gt">git</div><div class="gd">ファイルの変更履歴を記録・巻き戻す「バージョン管理」ツール。巻き戻しの永続保管版。(17番)</div></div>
+        <div class="gterm"><div class="gt">従量制</div><div class="gd">月額ではなく「使った分」だけ払う方式 (API)。(20・21番)</div></div>
+        <div class="gterm"><div class="gt">ローリング上限</div><div class="gd">「直近5時間・直近7日」のように流れながら再び満ちる使用量の上限。(21番)</div></div>
+        <div class="gterm"><div class="gt">プロトコル</div><div class="gd">違うプログラム同士が話すための「共通のルール」。MCP の P がこれです。</div></div>
+      </div>
+      <p class="note" id="gloss-empty" style="display:none;">検索結果がありません。別の単語で探してください。</p>
+    </section>
+
+    <footer class="sitefoot">
+      <div class="ft-main">制作者 · <b>최진안 (stark)</b></div>
+      <div class="ft-links">
+        <a href="https://github.com/wlsdks" target="_blank" rel="noopener">GitHub</a> ·
+        <a href="https://www.linkedin.com/in/WriteDev" target="_blank" rel="noopener">LinkedIn</a> ·
+        <a href="https://curiousjinan.tistory.com/" target="_blank" rel="noopener">Blog</a> ·
+        <a href="mailto:dig04059@gmail.com">Email</a>
+        <span class="ft-dm">— お問い合わせはメールか LinkedIn の DM でお願いします</span>
+      </div>
+      <div>非公式の学習資料です — Anthropic とは無関係であり、「Claude・Claude Code・Anthropic」は Anthropic Inc. の商標です。</div>
+      <div>もっとも正確な情報は<a href="https://code.claude.com/docs" target="_blank" rel="noopener">公式ドキュメント</a>を確認してください。</div>
+    </footer>
+
+  </div></main>
+</div>
+<script>
+(function(){
+  function fmt(n){ return Math.round(n).toLocaleString('ja-JP'); }
+  function tokenize(text){ var chips=[],kr=0,other=0,re=/([ぁ-んァ-ヶ一-鿿])|([A-Za-z0-9]+)|(\s+)|([^\s])/g,m;
+    while((m=re.exec(text))){ if(m[1]){chips.push({t:m[1],c:'kr'});kr++;} else if(m[2]){var w=m[2];for(var j=0;j<w.length;j+=4)chips.push({t:w.slice(j,j+4),c:'en'});other+=w.length;} else if(m[3]){other+=m[3].length;if(chips.length)chips[chips.length-1].sp=true;} else if(m[4]){chips.push({t:m[4],c:''});other+=1;} }
+    return { count:Math.max(1,Math.round(kr*1.5+other/4)), chips:chips }; }
+  function esc(s){ return s==='<'?'&lt;':s==='>'?'&gt;':s==='&'?'&amp;':s; }
+  function renderPrev(el,text,withWhy){ if(!text){ el.innerHTML='<div class="empty">ここに文章を入力すると、トークンにどう分かれるか、何トークンかをお見せします。</div>'; return; }
+    var r=tokenize(text),shown=r.chips.slice(0,70),h='<div class="count">約 <b>'+r.count+'</b>トークン · '+shown.length+'かけら</div><div class="toks">';
+    shown.forEach(function(c){ h+='<span class="tok '+c.c+'">'+esc(c.t)+(c.sp?' ':'')+'</span>'; }); if(r.chips.length>70)h+='<span class="tok">…</span>'; h+='</div>';
+    if(withWhy)h+='<div class="why">紫 = 日本語、青 = 英語/数字。日本語のほうがトークンを多く使います。</div>'; el.innerHTML=h; }
+  function rgba(h,a){ var n=parseInt(h.slice(1),16); return 'rgba('+(n>>16&255)+','+(n>>8&255)+','+(n&255)+','+a+')'; }
+  function tw(el,text,sp,arr){ var i=0; el.textContent=''; (function st(){ el.textContent=text.slice(0,i); if(i++<=text.length) arr.push(setTimeout(st,sp)); })(); }
+
+  /* theme toggle (sun/moon, light <-> dark) */
+  var themeBtn=document.getElementById('theme-toggle'),htmlEl=document.documentElement;
+  var SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  var MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>';
+  function effTheme(){ if(htmlEl.classList.contains('theme-dark'))return 'dark'; if(htmlEl.classList.contains('theme-light'))return 'light'; return (window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'; }
+  function paintTheme(){ var e=effTheme(); themeBtn.innerHTML = e==='dark'?SUN:MOON; themeBtn.title = e==='dark'?'ライトモードに切り替え':'ダークモードに切り替え'; }
+  function setTheme(t){ htmlEl.classList.remove('theme-light','theme-dark'); htmlEl.classList.add('theme-'+t); paintTheme(); try{ localStorage.setItem('cc_theme',t); }catch(e){} }
+  themeBtn.addEventListener('click',function(){ setTheme(effTheme()==='dark'?'light':'dark'); });
+  (function(){ var t=null; try{ t=localStorage.getItem('cc_theme'); }catch(e){} if(t==='light'||t==='dark') htmlEl.classList.add('theme-'+t); paintTheme();
+    if(window.matchMedia){ try{ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){ if(!htmlEl.classList.contains('theme-light')&&!htmlEl.classList.contains('theme-dark')) paintTheme(); }); }catch(e){} } })();
+
+  /* presentation mode (big screen) */
+  var presentBtn=document.getElementById('present-toggle'),presentLabel=document.getElementById('present-label');
+  function setPresent(on){ document.documentElement.style.zoom = on?'1.3':''; presentBtn.classList.toggle('on',on); presentLabel.textContent = on?'拡大オフ':'拡大モード'; try{ localStorage.setItem('cc_present', on?'1':'0'); }catch(e){} }
+  presentBtn.addEventListener('click',function(){ setPresent(!presentBtn.classList.contains('on')); });
+  (function(){ var s=null; try{ s=localStorage.getItem('cc_present'); }catch(e){} if(s==='1') setPresent(true); })();
+
+  /* LNB icons (monoline) */
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
+
+  /* router */
+  var navs=document.querySelectorAll('.navitem'),pages=document.querySelectorAll('.page');
+  navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
+
+  /* per-page one-line summaries */
+  var TLDR={ intro:'チャットは「答え」をくれて、Claude Code は自分のプロジェクトで<b>直接作って動くところまで</b>やってくれます。', where:'ターミナル・VS Code・デスクトップ・Web — <b>どこでも同じ Claude Code</b>、設定も共有されます。', context:'ここに乗ったものだけを Claude が覚えています。満杯になったら<b>「圧縮」で整理</b>します。', sessions:'<b>一つのセッションに一つの仕事</b> — 混ぜると混乱します。作業フォルダは狭く。', tokens:'トークン = AI が文章を読む単位。<b>長いほど空間・コストが増え</b>、日本語のほうが重い。', models:'賢さ ↔ 速さ ↔ コストはトレードオフ。<b>迷ったら Sonnet</b> で始めましょう。', claudemd:'<b>自分で書いておくルールのメモ</b> — 毎回の会話の始めに自動で適用されます。', memory:'<b>Claude が自分で学んで覚える</b>メモ。セッションをまたいで引き継がれます。', skills:'よく使う作業の手順を<b>一度作ってずっと再利用</b>します。', mcp:'<b>外部ツール(Jira・Figma など)につないで</b> Claude が直接使えるようにします。', plugins:'スキル・ツール・コマンドなどを<b>まとめて一度にインストール</b>する一式です。', agents:'大きな仕事を<b>専門のお手伝いに分けて任せ</b>、結果だけ受け取ります。', images:'<b>スクリーンショットを貼れば</b> Claude が見て理解します — 言葉より速く正確。', hooks:'特定の瞬間に<b>決まった動作が毎回自動</b>で実行されるルールです。', planmode:'直す前に<b>計画を先に見せて承認</b>を受けます — 大きな変更に安全。', permissions:'Claude が<b>どのくらい頻繁に聞くか</b>を決める設定。最初は安全に。', rewind:'リクエストごとに<b>自動保存</b> — 気に入らなければ以前へ巻き戻します。', privacy:'<b>業務用(Team·Enterprise·API)は基本的に学習に使われません。</b> 個人用は設定で選択。', commands:'<code class="inlinecode">/</code> で始まるショートカットコマンド。いちばんよく使うのは <b>/clear · /compact</b>。', plans:'<b>無料プランにはありません。</b> 有料(Pro·Max·Team)または API(従量制)で使用。', limits:'<b>使い切るとリセットまで待つ</b>必要があります — だから管理が大切です。', compact:'長く積み上がった会話が<b>短い要約 1 マス</b>に縮みます。', glossary:'迷う用語を<b>一行で</b>素早く探す場所です。' };
+  pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">一行まとめ</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
+
+  /* collapse code blocks by default */
+  document.querySelectorAll('.pre').forEach(function(pre){ var det=document.createElement('details'); det.className='codedet'; var sum=document.createElement('summary'); sum.textContent='コード例を見る (開発者向け · 見なくても OK)'; pre.parentNode.insertBefore(det,pre); det.appendChild(sum); det.appendChild(pre); });
+  navs.forEach(function(b){ b.addEventListener('click',function(){ var id=b.dataset.page; navs.forEach(function(n){n.classList.toggle('on',n===b);}); pages.forEach(function(p){p.classList.toggle('on',p.id===id);}); window.scrollTo(0,0); }); });
+
+  /* intro: chat vs code */
+  var ccT=[]; function ccStep(box,text){ var d=document.createElement('div'); d.className='cstep'; d.innerHTML='<span class="ck">✓</span><span>'+text+'</span>'; box.appendChild(d); requestAnimationFrame(function(){ d.classList.add('on'); }); }
+  document.getElementById('cc-go').addEventListener('click',function(){ ccT.forEach(clearTimeout); ccT=[]; var code=document.getElementById('cc-code'); code.innerHTML=''; document.getElementById('cc-chat-r').textContent=''; document.getElementById('cc-code-r').textContent='';
+    tw(document.getElementById('cc-chat'),'こうすればできます: booking.html ファイルを作って下のコードを入れ、メインページにボタンをつないだあと、保存のコードを追加してください…',22,ccT);
+    ccT.push(setTimeout(function(){ document.getElementById('cc-chat-r').innerHTML='→ <b>説明とコード片</b>を受け取ります。複数のファイルに自分で貼り付けて、つなぎ・実行するのは<b>自分の役目</b>です。'; },4800));
+    var steps=['予約画面(booking.html)を新しく作成','メインページに「予約」ボタンをつなぐ','予約情報を保存するコードを追加','テスト実行 → 通過'];
+    steps.forEach(function(t,i){ ccT.push(setTimeout(function(){ ccStep(code,t); },800*(i+1))); });
+    ccT.push(setTimeout(function(){ document.getElementById('cc-code-r').innerHTML='→ <b>実際に動く予約機能</b>が完成しました。複数のファイルを自分で作り、つなぎ・実行までやったのです。'; },800*(steps.length+1)+200));
+  });
+  document.getElementById('cc-chat').textContent='ボタンを押すと答えが出ます。'; document.getElementById('cc-code').innerHTML='<div class="cstep on"><span>ボタンを押すと作る過程が出ます。</span></div>';
+
+  /* context tank */
+  var MAX=40000,LIMIT_PX=420,AC_RATIO=0.8,stack=document.getElementById('stack'),limit=document.getElementById('limit'),cap=document.getElementById('cap'),free=document.getElementById('free'),tokEl=document.getElementById('tok'),num=document.getElementById('num'),status=document.getElementById('status'),inp=document.getElementById('inp'),capinp=document.getElementById('capinp'),tokprev=document.getElementById('tokprev');
+  var labels={sys:'システムプロンプト · 基本の指示',tool:'ツール一覧 · 使える機能',mem:'プロジェクトのメモ · CLAUDE.md',user:'自分のメッセージ',file:'ファイルの内容 · 読み込んだコード',reply:'Claude の返答'};
+  var hex={sys:'#8a8a8a',tool:'#3b7dd8',mem:'#1f9e76',user:'#6d5fd0',file:'#d8662f',reply:'#cf5184'};
+  var base=[{k:'sys',t:3000},{k:'tool',t:11500},{k:'mem',t:2200}],items=[],curShown=0;
+  function makeBlk(it,fixed,h){ var d=document.createElement('div'); d.className='blk'+(h<18?' mini':'')+(fixed?'':' acc'); d.style.height=h+'px'; d.style.background=rgba(hex[it.k],0.14); d.style.borderColor=rgba(hex[it.k],0.30); d.title=labels[it.k]+(it.txt?(' — '+it.txt):'')+' · '+fmt(it.t)+'トークン'; var name=labels[it.k]; if(it.txt)name+=' — 「'+it.txt+'」'; d.innerHTML='<span class="dot" style="background:'+hex[it.k]+'"></span><span class="name">'+name+'</span>'+(fixed?'<span class="tag">基本</span>':'')+'<span class="tk">'+fmt(it.t)+'</span>'; return d; }
+  function ctxRender(animLast){ var scale=LIMIT_PX/MAX; stack.innerHTML=''; items.forEach(function(it,i){ var el=makeBlk(it,it._base,Math.max(8,Math.round(it.t*scale))); if(animLast&&i===items.length-1){ el.style.opacity='0'; el.style.transform='translateY(-8px)'; el.style.transition='opacity .35s ease, transform .35s cubic-bezier(.22,1,.36,1)'; stack.appendChild(el); requestAnimationFrame(function(){ el.style.opacity='1'; el.style.transform='none'; }); } else stack.appendChild(el); });
+    var total=items.reduce(function(a,b){return a+b.t;},0); ctxCount(total); limit.style.bottom=LIMIT_PX+'px'; cap.textContent='上限 '+fmt(MAX);
+    var acl=document.getElementById('acline'); if(acl){ acl.style.bottom=Math.round(LIMIT_PX*AC_RATIO)+'px'; document.getElementById('accap').textContent='自動圧縮の開始 ~'+fmt(MAX*AC_RATIO); }
+    var over=total>MAX; limit.classList.toggle('over',over); num.classList.toggle('over',over); var usedPx=Math.min(LIMIT_PX,total*scale); if(!over&&total/MAX<0.7&&(MAX-total)>MAX*0.04){ free.style.display='block'; free.style.bottom=(usedPx+(LIMIT_PX-usedPx)/2-8)+'px'; free.textContent='残り空間 '+fmt(MAX-total); } else free.style.display='none'; }
+  function ctxCount(target){ var start=curShown,t0=null,dur=480; function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur); tokEl.textContent=fmt(start+(target-start)*(1-Math.pow(1-p,3))); num.querySelector('.max').textContent=' / '+fmt(MAX); if(p<1)requestAnimationFrame(step); else curShown=target; } requestAnimationFrame(step); }
+  function ctxAdd(k,t,txt){ items.push({k:k,t:t,txt:txt}); ctxRender(true); }
+  function ctxBase(){ items=base.map(function(b){return {k:b.k,t:b.t,_base:true};}); curShown=0; ctxRender(false); }
+  function ctxMax(v){ v=Math.max(2000,Math.min(1000000,Math.round(v))); MAX=v; capinp.value=v; document.querySelectorAll('#context .chip').forEach(function(c){ c.classList.toggle('on',+c.dataset.v===v); }); ctxRender(false); }
+  capinp.addEventListener('change',function(){ ctxMax(+capinp.value||40000); });
+  document.querySelectorAll('#context .chip').forEach(function(c){ c.addEventListener('click',function(){ ctxMax(+c.dataset.v); }); });
+  inp.addEventListener('input',function(){ renderPrev(tokprev,inp.value.trim(),true); });
+  document.getElementById('send').addEventListener('click',function(){ var txt=(inp.value||'').trim(); if(!txt){inp.focus();return;} ctxAdd('user',tokenize(txt).count,txt.length>30?txt.slice(0,30)+'…':txt); inp.value=''; renderPrev(tokprev,'',true); inp.focus(); var total=items.reduce(function(a,b){return a+b.t;},0); if(total/MAX>.85)status.textContent='ほぼ満杯です。「自動圧縮を見る」か「手動で圧縮」を押してみてください。'; });
+  inp.addEventListener('keydown',function(e){ if(e.key==='Enter')document.getElementById('send').click(); });
+  document.querySelectorAll('#context .act').forEach(function(b){ b.addEventListener('click',function(){ ctxAdd(b.dataset.k,parseInt(b.dataset.t,10)); var total=items.reduce(function(a,b){return a+b.t;},0); if(total>MAX)status.textContent='上限を超えました — 自動圧縮が必要な状態です。'; }); });
+  function doCompact(){ ctxBase(); items.push({k:'mem',t:Math.round(MAX*0.10),txt:'ここまでの会話の要約'}); ctxRender(true); }
+  document.getElementById('compact').addEventListener('click',function(){ if(items.reduce(function(a,b){return a+b.t;},0)<=base.reduce(function(a,b){return a+b.t;},0)+1000){ status.textContent='まだ圧縮するほど積み上がっていません。'; return; } doCompact(); status.textContent='手動圧縮(/compact)完了 — 積み上がっていたメッセージ・ファイル・結果が要約 1 マスに縮みました。'; });
+  document.getElementById('reset').addEventListener('click',function(){ acStop(); ctxBase(); status.textContent='下の 3 つのマスは、会話を始める前からいつも入っています。'; });
+  var acT=[]; function acStop(){ acT.forEach(clearTimeout); acT=[]; document.getElementById('tank').classList.remove('flash'); stack.classList.remove('summarizing'); var ov=document.getElementById('acoverlay'); if(ov)ov.classList.remove('on'); }
+  document.getElementById('autocompact').addEventListener('click',function(){ acStop(); ctxMax(40000); ctxBase(); var seq=[['user',900,'ダッシュボードを作って'],['file',8400,null],['tool',3100,null],['reply',1800,null],['reply',1100,null]]; status.textContent='会話が積み上がる途中… (続いている一つの作業)'; var i=0;
+    (function step(){ if(i>=seq.length){ acTrigger(); return; } var s=seq[i++]; ctxAdd(s[0],s[1],s[2]); var total=items.reduce(function(a,b){return a+b.t;},0);
+      if(total>=MAX*AC_RATIO){ status.textContent='自動圧縮の開始線に達しました! ('+fmt(total)+' / 上限 '+fmt(MAX)+') — 上限まで行かず、ここで止まって圧縮します。'; acT.push(setTimeout(acTrigger,1100)); return; }
+      if(total/MAX>.6) status.textContent='だんだん満ちていく途中… もうすぐ自動圧縮線に達します。'; acT.push(setTimeout(step,1100)); })(); });
+  function acTrigger(){ var tank=document.getElementById('tank'),ov=document.getElementById('acoverlay'); status.textContent='⚠️ 自動圧縮線に到達 — ここで止まって要約を始めます。(要約の間は新しい作業が進みません)'; tank.classList.add('flash');
+    acT.push(setTimeout(function(){ stack.classList.add('summarizing'); if(ov)ov.classList.add('on'); status.textContent='停止 — これまでの会話・ファイル・ツール結果を短く要約中…'; },1300));
+    acT.push(setTimeout(function(){ stack.classList.remove('summarizing'); if(ov)ov.classList.remove('on'); tank.classList.remove('flash'); doCompact(); status.textContent='圧縮完了 — 古い会話・ツールの出力は「要約」1 マスに縮み、依頼・ファイル一覧・決定といった核心は保存されます。(内容が実際にどう変わるかは「圧縮をくわしく」タブで見られます)'; },3400)); }
+  renderPrev(tokprev,'',true); ctxMax(40000); ctxBase();
+
+  /* sessions + brain */
+  var sBody=document.getElementById('sess-body'),sBar=document.getElementById('sess-bar'),sBarL=document.getElementById('sess-barl'),sMode=document.getElementById('sess-mode'),sMsg=document.getElementById('sess-msg'),sTimers=[];
+  function sClear(){ sTimers.forEach(clearTimeout); sTimers=[]; sBody.innerHTML=''; }
+  function sRow(color,kind,label,cls){ var d=document.createElement('div'); d.className='sessrow'+(cls?(' '+cls):''); d.innerHTML=(cls==='warn'||cls==='muted'?'':'<span class="tdot" style="background:'+color+'"></span>')+(cls==='warn'||cls==='muted'?'':'<span class="sk">'+kind+'</span>')+'<span class="sl">'+label+'</span>'; d.style.opacity='0'; d.style.transform='translateY(-6px)'; d.style.transition='opacity .3s, transform .3s'; sBody.appendChild(d); requestAnimationFrame(function(){ d.style.opacity='1'; d.style.transform='none'; }); }
+  function sBarSet(p){ p=Math.min(100,p); sBar.style.width=p+'%'; sBar.style.background= p>85?'#d8453f':(p>60?'#d8943f':'var(--good)'); sBarL.textContent='コンテキスト '+Math.round(p)+'% 使用'; }
+  var brainFillEl=document.getElementById('brainfill'),brainEl=document.getElementById('brain'),brainStat=document.getElementById('brain-stat'),brainY=160;
+  function brainReset(){ if(brainFillEl)brainFillEl.innerHTML=''; brainY=160; if(brainEl)brainEl.classList.remove('overload'); if(brainStat)brainStat.textContent='まだ空っぽです'; }
+  function brainAdd(color,delta){ if(!brainFillEl)return; var h=delta/100*136,topY=brainY-h; var r=document.createElementNS('http://www.w3.org/2000/svg','rect'); r.setAttribute('x',0); r.setAttribute('width',220); r.setAttribute('fill',color); r.setAttribute('opacity','0.55'); r.style.y=brainY+'px'; r.style.height='0px'; r.style.transition='y .5s cubic-bezier(.22,1,.36,1), height .5s cubic-bezier(.22,1,.36,1)'; brainFillEl.appendChild(r); requestAnimationFrame(function(){ r.style.y=topY+'px'; r.style.height=(h+0.8)+'px'; }); brainY=topY; }
+  var MESSY=[ {c:'#3b7dd8',k:'作業 1',l:'「うちのカフェの予約ページを作って」',p:10},{c:'#3b7dd8',k:'進行',l:'予約画面 + 時間選択を作成中',p:20},{c:'#3b7dd8',k:'完了',l:'カフェ予約ページ完成 ✓',p:28,done:1},
+    {c:'#d8662f',k:'作業 2',l:'「次はうちのネットショップに割引バナーを入れて」(別の事業!)',p:40},{c:'#d8662f',k:'進行',l:'バナーのデザイン + 商品の連携中',p:54},
+    {c:'#1f9e76',k:'作業 3',l:'「ついでに塾の受講申込フォームも作って」(さらに別の事業!)',p:68},{c:'#1f9e76',k:'進行',l:'申込フォーム + 決済連携中',p:82},
+    {c:'#6d5fd0',k:'作業 4',l:'「ジムの会員管理も追加して」(またまた別!)',p:96} ];
+  document.getElementById('sess-play').addEventListener('click',function(){ sClear(); brainReset(); sMode.textContent='セッション 1 つ (複数の事業を混ぜる)'; sBarSet(0); sMsg.textContent='再生中 — カフェ・ネットショップ・塾・ジム… 別々の事業の作業を一つのセッションに積み続けている途中…'; var prev=0;
+    MESSY.forEach(function(s,i){ sTimers.push(setTimeout(function(){ sRow(s.c,s.k,s.l,s.done?'done':''); sBarSet(s.p); brainAdd(s.c,s.p-prev); prev=s.p; if(brainStat)brainStat.innerHTML='複雑度 <b>'+s.p+'%</b> — 事業が入り混じる途中';
+      if(i===MESSY.length-1){ sTimers.push(setTimeout(function(){ sRow(null,null,'⚠️ Claude: どの事業のどの画面か混乱します…','warn'); sBarSet(100); if(brainEl)brainEl.classList.add('overload'); if(brainStat)brainStat.innerHTML='<b style="color:var(--over)">過負荷</b> — 頭の中が混ざって混乱しています'; sMsg.textContent='完了したカフェの作業のあとも、ネットショップ・塾・ジムを同じセッションで続けてお願いしたので、4 つの事業の内容が頭の中（コンテキスト）で混ざって満杯になりました。→ 事業（作業）が変わるたびに /clear で空にするか、新しいセッションを使えばきれいになります。'; },1100)); } },950*i)); }); });
+  var fsT=[];
+  var HOME=['家族写真.jpg','旅行_2019.png','音楽_プレイリスト.mp3','税金領収書.xlsx','履歴書_最終_本当に最終.docx','ダウンロード/インストーラ.exe','メモ.txt','… そして数千個もっと'];
+  var PROJ=['index.html','style.css','about.html','script.js'];
+  function fsScan(list,verdict,vcls){ fsT.forEach(clearTimeout); fsT=[]; var box=document.getElementById('fold-scan'); box.innerHTML='<div class="fs" style="color:var(--ink)">探索中…</div>';
+    list.forEach(function(f,i){ fsT.push(setTimeout(function(){ var d=document.createElement('div'); d.className='fs'+(vcls==='bad'?' junk':''); d.textContent='· '+f; box.appendChild(d); },360*(i+1))); });
+    fsT.push(setTimeout(function(){ var v=document.createElement('div'); v.className='fsv '+vcls; v.innerHTML=verdict; box.appendChild(v); },360*(list.length+1)+200)); }
+  document.getElementById('fold-home').addEventListener('click',function(){ fsScan(HOME,'関係のない<b>数千個のファイル</b>まで探ります。遅いし、見当違いのファイルに触れることもあります。だからフォルダを決めないと困るのです。','bad'); });
+  document.getElementById('fold-proj').addEventListener('click',function(){ fsScan(PROJ,'必要な<b>数個のファイルだけ</b>を見ます。速くて正確です。こうやって作業するフォルダで始めるのが正解です。','good'); });
+  document.getElementById('sess-clear').addEventListener('click',function(){ sClear(); brainReset(); sMode.textContent='/clear 直後 (新しく開始)'; sRow(null,null,'会話を空にしました — 新しい作業の準備完了','muted'); sBarSet(8); if(brainStat)brainStat.textContent='きれいに空になりました'; sMsg.textContent='/clear は頭の中（会話）をきれいに空にします。ただし CLAUDE.md・メモリはそのまま残ります（読み込み直し）。以前の会話は /resume で復活できます。'; });
+  brainReset(); sBarSet(0);
+
+  /* tokens */
+  var tinp=document.getElementById('tinp'),tprev=document.getElementById('tprev'); tinp.addEventListener('input',function(){ renderPrev(tprev,tinp.value.trim(),true); }); renderPrev(tprev,'',true);
+  var EX_KR='こんにちは、弊社ホームページの紹介ページにある誤字を見つけて直し、連絡先の情報も最新に更新してください。';
+  var EX_EN='Hello, please find and fix the typos on the about page of our company website, and update the contact info.';
+  function setEx(v){ tinp.value=v; renderPrev(tprev, v.trim(), true); tinp.focus(); }
+  document.getElementById('ex-kr').addEventListener('click',function(){ setEx(EX_KR); });
+  document.getElementById('ex-en').addEventListener('click',function(){ setEx(EX_EN); });
+  document.getElementById('ex-clear').addEventListener('click',function(){ tinp.value=''; renderPrev(tprev,'',true); tinp.focus(); });
+  (function(){ var pairs=[['こんにちは','日本語'],['Hello','英語']],html=''; pairs.forEach(function(p){ var r=tokenize(p[0]); var chips=r.chips.map(function(c){return '<span class="tok '+c.c+'">'+esc(c.t)+'</span>';}).join(''); html+='<div class="ccard"><div class="word">'+p[0]+'</div><div class="cc">'+p[1]+' · 約 <b>'+r.count+'</b>トークン</div><div class="toks">'+chips+'</div></div>'; }); document.getElementById('compare').innerHTML=html; })();
+  var sv=document.getElementById('stageview'),lcT=[]; function lcClear(){ lcT.forEach(clearTimeout); lcT=[]; }
+  var counts={in:0,th:0,out:0};
+  function meter(){ document.getElementById('lc-in').textContent=fmt(counts.in); document.getElementById('lc-th').textContent=fmt(counts.th); document.getElementById('lc-out').textContent=fmt(counts.out); document.getElementById('lc-total').textContent=fmt(counts.in+counts.th+counts.out); document.getElementById('lcb-in').style.width=Math.min(100,counts.in/2000*100)+'%'; document.getElementById('lcb-th').style.width=Math.min(100,counts.th/2000*100)+'%'; document.getElementById('lcb-out').style.width=Math.min(100,counts.out/2000*100)+'%'; }
+  function mreset(){ counts={in:0,th:0,out:0}; meter(); }
+  function countTo(k,target,dur,done){ var start=counts[k],steps=Math.max(1,Math.round(dur/40)),i=0; (function st(){ i++; counts[k]=Math.round(start+(target-start)*(i/steps)); meter(); if(i<steps)lcT.push(setTimeout(st,40)); else if(done)done(); })(); }
+  function lcVisual(stage){ document.querySelectorAll('.stage').forEach(function(s){ s.classList.toggle('on',s.dataset.st===stage); });
+    if(stage==='input'){ sv.innerHTML='<div class="sv-title">入力 — 読む</div><div class="sv-bar"><div class="sv-fill" style="background:var(--blue)"></div></div><div class="sv-desc">自分の質問 + コンテキストウィンドウ全体をいっぺんに読みます。右側で入力トークンが上がります。</div>'; lcT.push(setTimeout(function(){ var f=sv.querySelector('.sv-fill'); if(f)f.style.width='100%'; },60)); }
+    else if(stage==='think'){ sv.innerHTML='<div class="sv-title">思考 — 内部推論 <span style="font-weight:300;color:var(--faint);font-size:12px;">(選択機能)</span></div><div class="think-dots"><i></i><i></i><i></i> &nbsp;<span id="lc-think">考え中…</span></div><div class="sv-desc">答える前に段階的に検討します。ふだんは隠れますが<b>出力と同じ価格</b>なので、右側の「思考」トークンがいちばん多く上がります。</div>'; var t='フランス… ヨーロッパの国… 首都は… パリ…',el=document.getElementById('lc-think'),i=0; (function ty(){ if(!el)return; el.textContent=t.slice(0,i)||'考え中…'; if(i++<=t.length)lcT.push(setTimeout(ty,55)); })(); }
+    else { sv.innerHTML='<div class="sv-title">出力 — 返答を書く</div><div class="sv-type" id="lc-type"></div><div class="sv-desc">実際に見える返答です。右側で出力トークンが上がります。</div>'; var msg='パリです。フランスの首都であり、最大の都市ですよ。',e2=document.getElementById('lc-type'),j=0; (function ty2(){ if(!e2)return; e2.textContent=msg.slice(0,j); if(j++<=msg.length)lcT.push(setTimeout(ty2,32)); })(); } }
+  var lcMap={input:'in',think:'th',output:'out'},lcTg={input:500,think:2000,output:50};
+  function lcSet(stage){ lcClear(); mreset(); lcVisual(stage); countTo(lcMap[stage],lcTg[stage],800); }
+  document.querySelectorAll('.stage').forEach(function(s){ s.addEventListener('click',function(){ lcSet(s.dataset.st); }); });
+  document.getElementById('lc-all').addEventListener('click',function(){ lcClear(); mreset(); lcVisual('input'); countTo('in',500,1500,function(){ lcT.push(setTimeout(function(){ lcVisual('think'); countTo('th',2000,2600,function(){ lcT.push(setTimeout(function(){ lcVisual('output'); countTo('out',50,1500); },400)); }); },400)); }); });
+  lcClear(); mreset(); lcVisual('input');
+
+  /* models */
+  var MODELS={ opus:{iq:5,sp:2,cost:1,ctx:'最大 1M (約 100万トークン)',tag:'いちばん賢いが、いちばん遅くて高い。',when:'精度が何より大事なとき。',ex:['複雑なコードの分析・設計','解くのが難しいバグ','長い推論が必要な作業']},
+    sonnet:{iq:4,sp:4,cost:3,ctx:'最大 1M (約 100万トークン)',tag:'賢さと速さのバランス。ほとんどの作業に無難。',when:'何を選ぶか迷ったらここから始める。',ex:['一般的なコーディング・修正','文書作成・要約','ほとんどの作業']},
+    haiku:{iq:3,sp:5,cost:5,ctx:'200K (約 20万トークン)',tag:'いちばん速くて、いちばん安い。',when:'速さ・コストが大事で作業が単純なとき。',ex:['簡単・くり返しの作業','速い応答','大量を軽く処理']},
+    fable:{iq:5,sp:1,cost:1,locked:true,ctx:'最大 1M (約 100万トークン)',lock:'今は一般利用がロックされている最上位の特殊モデルです。(選択不可 — 参考用)',tag:'いちばん強力だが、いちばん遅くて高い特殊モデル。',when:'とても難しく長くかかる自律作業用。',ex:['大規模なコードのマイグレーション','長時間の自律作業','最高難度の問題']} };
+  var barColor={iq:'#6d5fd0',sp:'#1f9e76',cost:'#3b7dd8'},rateTxt=['','とても低い','低い','普通','高い','とても高い'];
+  function showModel(m){ var d=MODELS[m]; ['iq','sp','cost'].forEach(function(k){ document.getElementById('f-'+k).style.width=(d[k]*20)+'%'; document.getElementById('f-'+k).style.background=d.locked?'var(--line2)':barColor[k]; document.getElementById('v-'+k).textContent=rateTxt[d[k]]; });
+    var lb=document.getElementById('m-lock'); if(d.locked){ lb.style.display='block'; lb.textContent='🔒 '+d.lock; document.getElementById('muse').classList.add('lock'); } else { lb.style.display='none'; document.getElementById('muse').classList.remove('lock'); }
+    document.getElementById('m-tag').textContent=d.tag; document.getElementById('m-when').textContent=d.when; document.getElementById('m-ctx').innerHTML='コンテキストウィンドウ: <b>'+d.ctx+'</b>'; document.getElementById('m-ex').innerHTML=d.ex.map(function(e){return '<li>'+e+'</li>';}).join(''); document.querySelectorAll('.mtab').forEach(function(t){ t.classList.toggle('on',t.dataset.m===m); }); }
+  document.querySelectorAll('.mtab').forEach(function(t){ t.addEventListener('click',function(){ showModel(t.dataset.m); }); }); showModel('sonnet');
+
+  /* claude.md diff */
+  var mdT=[]; document.getElementById('md-go').addEventListener('click',function(){ mdT.forEach(clearTimeout); mdT=[]; tw(document.getElementById('md-no'),'Sure! Here is a summary of the document in English: this file explains ...',22,mdT); tw(document.getElementById('md-yes'),'はい、日本語で要約しますね。この文書は○○を説明しており、要点は次のとおりです …',30,mdT); });
+  document.getElementById('md-no').textContent='ボタンを押すと答えが出ます。'; document.getElementById('md-yes').textContent='ボタンを押すと答えが出ます。';
+
+  /* memory demo */
+  var memT=[],memMd=document.getElementById('mem-md');
+  document.getElementById('mem-go').addEventListener('click',function(){ memT.forEach(clearTimeout); memT=[]; [0,1,2,3].forEach(function(n){ document.getElementById('mstep'+n).classList.remove('on'); }); memMd.innerHTML='<span class="c"># MEMORY.md (Claude が自動で作成)</span>\n';
+    [0,1,2,3].forEach(function(n,i){ memT.push(setTimeout(function(){ document.getElementById('mstep'+n).classList.add('on');
+      if(n===1){ tw(memMd,'# MEMORY.md (Claude が自動で作成)\n\n## レポート作成\n- レポートはいつも表形式で整理する',16,memT); }
+      if(n===2){ memMd.innerHTML='<span class="c"># 新しいセッション開始 — MEMORY.md が自動で読み込まれた</span>\n\n## レポート作成\n- レポートはいつも表形式で整理する'; }
+    },850*i)); }); });
+
+  /* skills with/without */
+  var skT=[]; function skLine(box,text,cls){ var d=document.createElement('div'); d.className='skline '+cls; d.textContent=text; box.appendChild(d); requestAnimationFrame(function(){ d.classList.add('on'); }); }
+  document.getElementById('sk-go').addEventListener('click',function(){ skT.forEach(clearTimeout); skT=[]; var no=document.getElementById('sk-no'),yes=document.getElementById('sk-yes'); no.innerHTML=''; yes.innerHTML='';
+    var noSteps=['1週目: 「レポートの様式って何でしたっけ?」 → 毎回説明','2週目: 「様式をもう一度教えて…」 → また説明','3週目: 「データはどこで見たんでしたっけ?」 → またまた説明','…毎週同じ説明のくり返し (疲れるし、ばらつく)'];
+    var yesSteps=['準備: /週報 スキルを一度だけ定義','1週目: 「週報を書いて」 → 自動で適用','2週目: 「週報」 → 同じように、説明なし','…毎週ひと押しで、いつも同じ品質'];
+    noSteps.forEach(function(t,i){ skT.push(setTimeout(function(){ skLine(no,t,'long'); },600*i)); });
+    yesSteps.forEach(function(t,i){ skT.push(setTimeout(function(){ skLine(yes,t,'short'); },600*i+300)); });
+  });
+
+  /* mcp connect */
+  var MCPN=[ {x:230,y:40,w:78,n:'GitHub'},{x:392,y:96,w:70,n:'Figma'},{x:360,y:228,w:84,n:'ブラウザ'},{x:100,y:228,w:64,n:'Jira'},{x:52,y:96,w:64,n:'Slack'} ];
+  (function(){ var ln=document.getElementById('mcp-lines'),nd=document.getElementById('mcp-nodes'); MCPN.forEach(function(o,i){ var cx=o.x+o.w/2, cy=o.y+15;
+    var line=document.createElementNS('http://www.w3.org/2000/svg','line'); line.setAttribute('class','spoke'); line.setAttribute('x1',230); line.setAttribute('y1',140); line.setAttribute('x2',cx); line.setAttribute('y2',cy); var len=Math.round(Math.hypot(cx-230,cy-140))+4; line.style.strokeDasharray=len; line.style.strokeDashoffset=len; line.style.transition='stroke-dashoffset .6s ease'; line.id='mcpl'+i; ln.appendChild(line);
+    var g=document.createElementNS('http://www.w3.org/2000/svg','g'); g.setAttribute('class','node'); g.id='mcpn'+i;
+    var rect=document.createElementNS('http://www.w3.org/2000/svg','rect'); rect.setAttribute('x',o.x); rect.setAttribute('y',o.y); rect.setAttribute('width',o.w); rect.setAttribute('height',30); rect.setAttribute('rx',8); g.appendChild(rect);
+    var tx=document.createElementNS('http://www.w3.org/2000/svg','text'); tx.setAttribute('x',cx); tx.setAttribute('y',o.y+19); tx.setAttribute('text-anchor','middle'); tx.setAttribute('font-size','12'); tx.textContent=o.n; g.appendChild(tx);
+    var ck=document.createElementNS('http://www.w3.org/2000/svg','text'); ck.setAttribute('class','chk'); ck.setAttribute('x',o.x+o.w-4); ck.setAttribute('y',o.y+2); ck.setAttribute('text-anchor','middle'); ck.setAttribute('font-size','13'); ck.textContent='✓'; g.appendChild(ck);
+    nd.appendChild(g); }); })();
+  var mcpT=[]; function mcpReset(){ mcpT.forEach(clearTimeout); mcpT=[]; MCPN.forEach(function(o,i){ document.getElementById('mcpn'+i).classList.remove('on'); var l=document.getElementById('mcpl'+i); l.style.strokeDashoffset=l.style.strokeDasharray; }); document.getElementById('mcp-msg').textContent='「ひとつずつ連携してみる」を押してみてください。'; }
+  document.getElementById('mcp-go').addEventListener('click',function(){ mcpReset(); document.getElementById('mcp-msg').textContent='ツールをひとつずつ連携している途中…'; MCPN.forEach(function(o,i){ mcpT.push(setTimeout(function(){ document.getElementById('mcpl'+i).style.strokeDashoffset='0'; document.getElementById('mcpn'+i).classList.add('on'); document.getElementById('mcp-msg').textContent=o.n+' に接続 ✓ — これで Claude が '+o.n+' を直接使えます。'; if(i===MCPN.length-1)mcpT.push(setTimeout(function(){ document.getElementById('mcp-msg').textContent='連携完了! これで Claude Code がこれらのツールを直接使えます。(/mcp で確認)'; },700)); },700*i)); }); });
+  document.getElementById('mcp-reset').addEventListener('click',mcpReset); mcpReset();
+
+  /* subagents (6 specialists) */
+  var saT=[]; function saClear(){ saT.forEach(clearTimeout); saT=[]; }
+  var SUBS=[ {name:'調査担当',work:'ファイル 40 個を見ている途中',c:'#3b7dd8',pct:84,tok:38000,sum:600},
+    {name:'セキュリティ点検',work:'脆弱性を確認中',c:'#d8662f',pct:70,tok:31000,sum:500},
+    {name:'デザイン点検',work:'画面・レイアウトを確認',c:'#1f9e76',pct:62,tok:27000,sum:450},
+    {name:'速度分析',work:'遅い部分を探している途中',c:'#6d5fd0',pct:76,tok:34000,sum:550},
+    {name:'文章レビュー',work:'誤字・表現を点検',c:'#cf5184',pct:48,tok:21000,sum:400},
+    {name:'テスト実行',work:'動作を確認中',c:'#b9792a',pct:67,tok:30000,sum:520} ];
+  (function(){ var g=document.getElementById('sa-grid'); if(g) g.innerHTML=SUBS.map(function(s,i){ return '<div class="subcard" id="sa-c'+i+'"><div class="sh">'+s.name+' <span style="font-weight:300;color:var(--faint);font-size:11px;">(サブエージェント)</span></div><div class="sd2">自分専用の新しいコンテキストウィンドウ</div><div class="ctxmini"><i id="sa-b'+i+'"></i></div><div class="ctxnum"><span id="sa-n'+i+'">0トークン</span> · '+s.work+'</div><div class="retmsg" id="sa-r'+i+'">→ 要約 '+s.sum+'トークンだけ報告</div></div>'; }).join(''); })();
+  function saFill(barId,numId,toPct,toTok,dur,col){ var bar=document.getElementById(barId),el=document.getElementById(numId); if(col&&bar)bar.style.background=col; var steps=Math.max(1,Math.round(dur/50)),i=0; (function st(){ i++; var f=i/steps; if(bar)bar.style.width=(toPct*f)+'%'; if(el)el.textContent=fmt(Math.round(toTok*f))+'トークン'; if(i<steps)saT.push(setTimeout(st,50)); })(); }
+  function saReset(){ saClear(); SUBS.forEach(function(s,i){ var c=document.getElementById('sa-c'+i); if(c)c.classList.remove('on'); var r=document.getElementById('sa-r'+i); if(r)r.classList.remove('on'); var b=document.getElementById('sa-b'+i); if(b)b.style.width='0%'; var n=document.getElementById('sa-n'+i); if(n)n.textContent='0トークン'; }); [0,1,2].forEach(function(i){ var bf=document.getElementById('sa-bf'+i); if(bf)bf.classList.remove('on'); }); var mb=document.getElementById('sa-main-b'); if(mb){ mb.style.background='var(--good)'; mb.style.width='8%'; } var mn=document.getElementById('sa-main-n'); if(mn)mn.textContent='コンテキスト 8%'; }
+  var saGo=document.getElementById('sa-go'); if(saGo) saGo.addEventListener('click',function(){ saReset(); var msg=document.getElementById('sa-msg'); msg.textContent='メインが 6 人にいっぺんに仕事を分けて任せました — 6 人がそれぞれ自分の空間で同時に働いている途中…';
+    SUBS.forEach(function(s,i){ saT.push(setTimeout(function(){ var c=document.getElementById('sa-c'+i); if(c)c.classList.add('on'); saFill('sa-b'+i,'sa-n'+i,s.pct,s.tok,1400,s.c); },150*i)); });
+    saT.push(setTimeout(function(){ SUBS.forEach(function(s,i){ var r=document.getElementById('sa-r'+i); if(r)r.classList.add('on'); }); saFill('sa-main-b','',24,0,800,'var(--good)'); var mn=document.getElementById('sa-main-n'); if(mn)mn.textContent='コンテキスト 24% · 要約だけ受け取り'; },2200));
+    saT.push(setTimeout(function(){ [0,1,2].forEach(function(i){ var bf=document.getElementById('sa-bf'+i); if(bf)bf.classList.add('on'); }); msg.innerHTML='6 人が<b>同時に</b>それぞれ大きな作業（数万トークンずつ）をしましたが — メインには<b>短い要約だけ</b>集まり、コンテキストがきれい(24%)で速いです。お手伝いの大きな作業空間は、終わると消えます。'; },3100)); });
+  var saSelf=document.getElementById('sa-self'); if(saSelf) saSelf.addEventListener('click',function(){ saReset(); var msg=document.getElementById('sa-msg'); var mb=document.getElementById('sa-main-b'),mn=document.getElementById('sa-main-n'); var seq=[28,46,62,76,90,100],i=0;
+    (function step(){ if(i>=seq.length){ if(mb)mb.style.background='#d8453f'; if(mn)mn.textContent='コンテキスト 100% — 満杯'; msg.innerHTML='一人で 6 つを<b>順番に</b>全部抱え込むと — コンテキストが満杯になって混乱し（過負荷）、一つずつやるので<b>遅い。</b>だから 6 人に分けて任せるのです。'; return; } if(mb){ mb.style.width=seq[i]+'%'; mb.style.background= seq[i]>85?'#d8453f':(seq[i]>60?'#d8943f':'var(--good)'); } if(mn)mn.textContent='一人で処理中… '+(i+1)+'/6'; i++; saT.push(setTimeout(step,650)); })(); });
+  saReset();
+
+  /* images */
+  var iT=[],IMG=[ {r:'r-title',i:0},{r:'r-input',i:1},{r:'r-btn',i:2},{r:'r-err',i:3} ];
+  document.getElementById('img-go').addEventListener('click',function(){ iT.forEach(clearTimeout); iT=[]; document.querySelectorAll('.shot .reg').forEach(function(r){ r.classList.remove('hl'); }); document.querySelectorAll('#detlist li').forEach(function(li){ li.classList.remove('on'); }); document.getElementById('detsum').classList.remove('on');
+    IMG.forEach(function(s,idx){ iT.push(setTimeout(function(){ var reg=document.getElementById(s.r); if(reg)reg.classList.add('hl'); var li=document.querySelectorAll('#detlist li')[s.i]; if(li)li.classList.add('on'); if(idx>0){ var pv=document.getElementById(IMG[idx-1].r); if(pv)pv.classList.remove('hl'); } if(idx===IMG.length-1)iT.push(setTimeout(function(){ if(reg)reg.classList.remove('hl'); document.getElementById('detsum').classList.add('on'); },650)); },600*idx)); }); });
+
+  /* permissions */
+  var PM=[ {name:'権限を確認',safe:'安全',col:'#1f9e76',auto:'なし — 編集・コマンドのたびに毎回確認',ask:'すべてのファイル編集とコマンド',use:'初めて使うとき、機密や重要な作業',sim:['ask','ask','ask','ask']},
+    {name:'編集を承認',safe:'おおむね安全',col:'#5aa56a',auto:'ファイル編集、安全なファイル操作(フォルダ作成・移動・コピー)',ask:'git コミットなど巻き戻しにくい作業',use:'結果を見ながら素早くくり返し修正するとき',sim:['auto','auto','ask','ask']},
+    {name:'プランモード',safe:'読み取り専用',col:'#b9792a',auto:'読み・探索だけ (直接は直さない)',ask:'計画を承認すると一気に実行',use:'大きな変更の前に計画を先に確認するとき',sim:['plan','plan','plan','plan']},
+    {name:'自動モード',safe:'注意',col:'#d8943f',auto:'ほとんどの作業 (バックグラウンドで安全チェック)',ask:'危険な作業だけ確認・ブロック',use:'長時間の自動作業で確認を減らしたいとき',note:'最新バージョン・モデル(Opus 4.6/Sonnet 4.6 以上)が必要',sim:['auto','auto','auto','ask']},
+    {name:'権限をスキップ',safe:'危険',col:'#d8453f',auto:'すべて — 確認なしで進める',ask:'システム全体の削除(rm -rf /)のような極端だけブロック',use:'インターネット遮断された隔離環境(コンテナ・VM)でだけ',note:'プロンプトインジェクションに弱い — ふつうの PC では使わないで',sim:['auto','auto','auto','auto']} ];
+  var SIM_ACT=['ファイル修正','フォルダ作成','git コミット','ファイル削除 (rm)'],SIM_TXT={auto:'自動で実行',ask:'確認を要求',plan:'実行しない (計画だけ)',block:'ブロック'},curPm=0;
+  function pmShow(i){ curPm=i; var d=PM[i]; document.querySelectorAll('#pmenu .prow').forEach(function(r){ r.classList.toggle('on',+r.dataset.i===i); }); var badge='<span class="pbadge" style="background:'+rgba(d.col,.16)+';color:'+d.col+'">'+d.safe+'</span>'; document.getElementById('pdetail').innerHTML='<div class="pt">'+d.name+' '+badge+'</div><div class="pdrow"><b>自動でやること</b>'+d.auto+'</div><div class="pdrow"><b>それでも聞くこと</b>'+d.ask+'</div><div class="pdrow"><b>いつ使う</b>'+d.use+'</div>'+(d.note?'<div class="pdrow"><b>参考</b>'+d.note+'</div>':''); document.getElementById('pmark').style.left=((i+0.5)/PM.length*100)+'%'; document.getElementById('pm-simbox').innerHTML='<div class="simrow on" style="color:var(--faint);font-size:12.5px;">「このモードの動作を見る」を押してみてください。</div>'; }
+  var pmT=[]; document.getElementById('pm-sim').addEventListener('click',function(){ pmT.forEach(clearTimeout); pmT=[]; var d=PM[curPm],box=document.getElementById('pm-simbox'); box.innerHTML=''; SIM_ACT.forEach(function(a,idx){ var s=d.sim[idx],row=document.createElement('div'); row.className='simrow'; var cls=s==='auto'?'auto':(s==='ask'?'ask':(s==='plan'?'plan':'block')); row.innerHTML='<span class="sa">'+a+'</span><span class="sp '+cls+'">'+SIM_TXT[s]+'</span>'; box.appendChild(row); pmT.push(setTimeout(function(){ row.classList.add('on'); },220*idx)); }); });
+  document.querySelectorAll('#pmenu .prow').forEach(function(r){ var i=+r.dataset.i; var dot=document.createElement('span'); dot.className='psafe'; dot.style.background=(PM[i]&&PM[i].col)||'var(--line2)'; dot.title=(PM[i]&&PM[i].safe)||''; r.insertBefore(dot, r.firstChild); r.addEventListener('click',function(){ pmShow(i); }); }); pmShow(0);
+
+  /* plan mode steps */
+  var planT=[]; document.getElementById('plan-go').addEventListener('click',function(){ planT.forEach(clearTimeout); planT=[]; [0,1,2,3].forEach(function(n){ document.getElementById('plan'+n).classList.remove('on'); }); document.getElementById('plan-msg').textContent=''; [0,1,2,3].forEach(function(n,i){ planT.push(setTimeout(function(){ document.getElementById('plan'+n).classList.add('on'); if(n===3)document.getElementById('plan-msg').textContent='核心: 計画を前もって見て承認したので、見当違いの方向に進むのを防げます。'; },800*i)); }); });
+  (function(){ [0,1,2,3].forEach(function(n){ document.getElementById('plan'+n).classList.add('on'); }); })();
+
+  /* rewind timeline */
+  var RW=['開始','下書き作成','デザインをモダンに','バグ修正 (現在)']; var rwTl=document.getElementById('rw-timeline'),rwLb=document.getElementById('rw-labels'),rwSel=2;
+  (function(){ var h=''; RW.forEach(function(t,i){ h+='<span class="tlpt'+(i===RW.length-1?' cur':'')+'" data-i="'+i+'"><span class="dot2"></span>'+(i<RW.length-1?'<span class="tlbar"></span>':'')+'</span>'; }); rwTl.innerHTML=h; rwLb.innerHTML=RW.map(function(t){return '<span>'+t+'</span>';}).join(''); rwMark(RW.length-1,false); rwTl.querySelectorAll('.tlpt').forEach(function(p){ p.addEventListener('click',function(){ rwSel=+p.dataset.i; rwMark(rwSel,false); document.getElementById('rw-msg').textContent='「'+RW[rwSel]+'」の時点を選びました。下で復元の方法を選んでください。'; }); }); })();
+  function rwMark(idx,restored){ rwTl.querySelectorAll('.tlpt').forEach(function(p){ var i=+p.dataset.i; p.classList.toggle('cur',i===idx&&!restored); p.classList.toggle('restored',restored&&i<=idx); }); }
+  document.getElementById('rw-code').addEventListener('click',function(){ rwMark(rwSel,true); document.getElementById('rw-msg').textContent='コードだけ復元 — 「'+RW[rwSel]+'」の時点のファイルに戻しました。会話の内容はそのまま残るので、別の方法でもう一度お願いできます。'; });
+  document.getElementById('rw-both').addEventListener('click',function(){ rwMark(rwSel,true); document.getElementById('rw-msg').textContent='コード+会話を復元 — 「'+RW[rwSel]+'」の時点に完全に戻りました。それ以降の会話も消えます。'; });
+  document.getElementById('rw-reset').addEventListener('click',function(){ rwSel=RW.length-1; rwMark(rwSel,false); document.getElementById('rw-msg').textContent='リセットしました。タイムラインの点を押して、巻き戻す時点を選んでください。'; });
+
+  /* usage limits demo */
+  var luT=[],l5=0,lw=18;
+  function gset(){ var g5=document.getElementById('g5'),gw=document.getElementById('gw'); if(!g5)return; g5.style.width=Math.min(100,l5)+'%'; g5.style.background=l5>=100?'#d8453f':(l5>70?'#d8943f':'var(--good)'); gw.style.width=Math.min(100,lw)+'%'; gw.style.background=lw>=100?'#d8453f':(lw>70?'#d8943f':'var(--good)'); document.getElementById('g5n').textContent=Math.min(100,Math.round(l5))+'%'; document.getElementById('gwn').textContent=Math.min(100,Math.round(lw))+'%'; }
+  function luFeed(t){ var f=document.getElementById('use-feed'); var d=document.createElement('div'); d.className='uf'; d.textContent=t; f.appendChild(d); while(f.children.length>5)f.removeChild(f.firstChild); }
+  var USES=['メッセージ送信 · 「ダッシュボードを作って」','ファイル 30 個を読んだ (トークンたくさん!)','テスト実行 + 長い結果','画像の分析','長い会話を続ける','また大きなファイルを読んだ'];
+  document.getElementById('lim-use').addEventListener('click',function(){ luT.forEach(clearTimeout); luT=[]; var btn=document.getElementById('lim-use'); btn.disabled=false; document.getElementById('lock-msg').textContent=''; var step=0;
+    (function go(){ if(l5>=100){ document.getElementById('lock-msg').textContent='🔒 5時間の上限に到達 — リセットまで新しい作業を送れません。しばらく待つか、上位プランに上げる必要があります。'; btn.disabled=true; return; } l5=Math.min(100,l5+18); lw=Math.min(100,lw+6); gset(); luFeed(USES[step%USES.length]); step++; luT.push(setTimeout(go,750)); })(); });
+  document.getElementById('lim-reset').addEventListener('click',function(){ luT.forEach(clearTimeout); luT=[]; l5=0; gset(); document.getElementById('lim-use').disabled=false; document.getElementById('lock-msg').textContent='5時間が過ぎて上限がリセットされました! また使えます。(ただし週間の上限はそのまま残っている点に注意)'; });
+  gset();
+
+  /* compact detail page */
+  var cxT=[];
+  document.getElementById('cx-go').addEventListener('click',function(){ cxT.forEach(clearTimeout); cxT=[]; var before=document.getElementById('cx-before'),after=document.getElementById('cx-after'),rows=before.querySelectorAll('.cxrow');
+    document.getElementById('cx-label').textContent='圧縮中 — 長く積み上がった内容を整理する途中…';
+    rows.forEach(function(r,i){ cxT.push(setTimeout(function(){ r.classList.add('drop'); },250*i)); });
+    cxT.push(setTimeout(function(){ before.style.display='none'; after.style.display='block'; after.style.opacity='0'; after.style.transition='opacity .5s'; requestAnimationFrame(function(){ after.style.opacity='1'; }); document.getElementById('cx-label').textContent='圧縮後 — 要約 1 マスに'; },250*rows.length+500)); });
+  document.getElementById('cx-reset').addEventListener('click',function(){ cxT.forEach(clearTimeout); cxT=[]; var before=document.getElementById('cx-before'),after=document.getElementById('cx-after'); after.style.display='none'; before.style.display='block'; before.querySelectorAll('.cxrow').forEach(function(r){ r.classList.remove('drop'); }); document.getElementById('cx-label').textContent='圧縮前 — 会話の記録 (長く積み上がる)'; });
+
+  /* commands terminal */
+  var term=document.getElementById('term'),tT=[];
+  var SCRIPTS={ init:[['c','> '],['','/init\n'],['c','プロジェクトを分析中… (設定ファイルを読んでいます)\n'],['c','  package.json, tsconfig.json を発見\n'],['c','  フォルダ構造を把握\n'],['','CLAUDE.md の生成完了 ✓\n\n'],['c','— プレビュー —\n'],['','# ビルド\n- インストール: npm install\n- テスト: npm test\n# 構造\n- src/ : ソースコード\n'],['c','\n/memory で開いて確認・修正してください。']],
+    help:[['c','> '],['','/help\n'],['c','使えるコマンド:\n'],['','/init  /clear  /compact  /model  /memory  /mcp  /plugin  /agents  /plan  /rewind  /hooks\n'],['c','\nくわしい説明は下の表を参考にしてください。']],
+    clear:[['c','> '],['','/clear\n'],['','会話を空にしました。新しく開始! ✓\n'],['c','(CLAUDE.md・メモリはそのまま維持。以前の会話は /resume で復元可能)']],
+    compact:[['c','> '],['','/compact\n'],['c','これまでの会話を要約している途中…\n'],['','要約完了 ✓ 空間が空きました。\n'],['c','大事な部分を残すには: /compact 残したい内容…']],
+    model:[['c','> '],['','/model\n'],['c','現在のモデル: Sonnet 4.6\n'],['','1) Opus 4.8   2) Sonnet 4.6 ✓   3) Haiku 4.5\n'],['c','番号を選んでモデルを変えられます。']] };
+  function termRun(cmd){ tT.forEach(clearTimeout); tT=[]; term.innerHTML=''; var parts=SCRIPTS[cmd]||[],idx=0; (function add(){ if(idx>=parts.length)return; var seg=document.createElement('span'); if(parts[idx][0]==='c')seg.className='c'; seg.textContent=parts[idx][1]; term.appendChild(seg); idx++; tT.push(setTimeout(add,420)); })(); }
+  document.querySelectorAll('#cmdchips .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#cmdchips .chip').forEach(function(x){ x.classList.toggle('on',x===c); }); termRun(c.dataset.c); }); });
+  document.querySelector('#cmdchips .chip').classList.add('on'); termRun('init');
+
+  /* language switcher (works in /, /en/, /zh/, /ja/) */
+  (function(){ var sel=document.getElementById('lang-select'); if(!sel) return;
+    var p=location.pathname, cur=/\/en\//.test(p)?'en':/\/zh\//.test(p)?'zh':/\/ja\//.test(p)?'ja':'ko';
+    sel.value=cur; var root=(cur==='ko')?'':'../';
+    sel.addEventListener('change',function(){ var c=sel.value; if(c===cur)return; location.href=(root+(c==='ko'?'':c+'/'))||'./'; });
+  })();
+
+  /* glossary search */
+  var gs=document.getElementById('gloss-search');
+  if(gs) gs.addEventListener('input',function(){ var q=gs.value.trim().toLowerCase(),terms=document.querySelectorAll('#gloss-list .gterm'),shown=0;
+    terms.forEach(function(t){ var hit=!q||t.textContent.toLowerCase().indexOf(q)>-1; t.classList.toggle('hide',!hit); if(hit)shown++; });
+    var emp=document.getElementById('gloss-empty'); if(emp) emp.style.display= shown?'none':'block'; });
+})();
+</script>
+</body>
+</html>
