@@ -84,6 +84,11 @@
   .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; }
   .tldr{ display:flex; gap:10px; align-items:flex-start; background:var(--row); border-radius:12px; padding:12px 15px; margin:0 0 26px; font-size:14px; line-height:1.6; } .tldr .tlb{ font-size:11px; font-weight:600; color:var(--accent); background:var(--bg); border:1px solid var(--line2); border-radius:6px; padding:2px 8px; white-space:nowrap; flex:0 0 auto; margin-top:1px; } .tldr .tlx{ flex:1; } .tldr b{ font-weight:600; }
   .exb{ display:inline-block; font-size:11px; font-weight:500; color:var(--warn); background:rgba(216,148,63,.14); border-radius:5px; padding:1px 7px; vertical-align:middle; }
+  .gl{ border-bottom:1px dotted var(--line2); cursor:help; }
+  .gsearch{ width:100%; max-width:380px; font-family:inherit; font-size:14px; padding:10px 13px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; margin-bottom:14px; } .gsearch:focus{ border-color:var(--accent); } .gsearch::placeholder{ color:var(--faint); }
+  .gterm.hide{ display:none; }
+  .prow .psafe{ width:9px; height:9px; border-radius:3px; flex:0 0 auto; }
+  .bignote{ display:flex; gap:11px; align-items:flex-start; background:rgba(31,158,118,.1); border:1px solid rgba(31,158,118,.32); border-radius:12px; padding:14px 16px; margin:0 0 14px; font-size:14px; line-height:1.6; } .bignote .bx{ font-size:11px; font-weight:600; color:var(--good); background:var(--bg); border:1px solid rgba(31,158,118,.4); border-radius:6px; padding:2px 8px; white-space:nowrap; flex:0 0 auto; margin-top:1px; } .bignote b{ font-weight:600; }
   .stack{ position:absolute; inset:0; padding:8px; display:flex; flex-direction:column-reverse; justify-content:flex-start; gap:4px; }
   .blk{ display:flex; align-items:center; gap:10px; padding:0 12px; border-radius:9px; overflow:hidden; flex:0 0 auto; border:1px solid var(--line); }
   .blk .dot{ width:9px; height:9px; border-radius:3px; flex:0 0 auto; }
@@ -219,7 +224,7 @@
   <nav class="lnb">
     <div class="topctl">
       <button class="present-btn theme-ic" id="theme-toggle" aria-label="라이트/다크 전환"></button>
-      <button class="present-btn" id="present-toggle"><span class="pdot"></span><span id="present-label">발표 모드</span></button>
+      <button class="present-btn" id="present-toggle" title="화면 전체를 크게 확대해요. 빔프로젝터·대형 화면 발표용 (시뮬레이션도 같이 커져요). 다시 누르면 원래대로."><span class="pdot"></span><span id="present-label">발표 모드</span></button>
     </div>
     <div class="brand">클로드 코드 기초<span class="sub">비개발자를 위한 안내</span></div>
     <div class="navsec">시작하기</div>
@@ -286,7 +291,17 @@
           <div class="fcard"><div class="ft">외부 도구 연결</div><div class="fd">지라·피그마 등과 연동 (MCP).</div><div class="fe"><b>예</b> “이 피그마대로 만들어”</div></div>
         </div>
       </div>
-      <p class="note">왼쪽 메뉴(좁은 화면에선 위쪽 탭)에서 21개 주제를 눌러 이동하세요. 전부 <b>직접 안 써봐도</b> 버튼·입력으로 이해되게 만들었어요.</p>
+      <div class="grp" style="margin-top:24px;">
+        <h3>꼭 개발자만 쓰는 게 아니에요 — 이런 일에도</h3>
+        <div class="fgrid">
+          <div class="fcard"><div class="ft">엑셀·표 정리</div><div class="fd">뒤죽박죽인 표를 보기 좋게 정리·합치기.</div><div class="fe"><b>예</b> “이 엑셀 날짜순으로 정리해줘”</div></div>
+          <div class="fcard"><div class="ft">명단에서 찾기</div><div class="fd">조건에 맞는 사람·항목만 뽑기.</div><div class="fe"><b>예</b> “고객 명단에서 이번 달 만기인 분만”</div></div>
+          <div class="fcard"><div class="ft">문서 다듬기</div><div class="fd">오타·문구·번역을 한 번에.</div><div class="fe"><b>예</b> “이 안내문 오타 찾아 고쳐줘”</div></div>
+          <div class="fcard"><div class="ft">파일 정리</div><div class="fd">파일 이름·폴더를 규칙대로 정돈.</div><div class="fe"><b>예</b> “영상 파일 날짜_제목으로 이름 바꿔줘”</div></div>
+        </div>
+      </div>
+      <div class="bignote"><span class="bx">참고</span><span>이 가이드는 <b>개념을 배우는 곳</b>이에요 — 설치·시작 방법은 다루지 않아요(그건 공식 문서에서 안내해요). 그리고 <b>비공식 학습 자료</b>라 Anthropic과는 무관해요.</span></div>
+      <p class="note">왼쪽 메뉴(좁은 화면에선 위쪽 탭)에서 23개 주제를 눌러 이동하세요. 전부 <b>직접 안 써봐도</b> 버튼·입력으로 이해되게 만들었어요. 본문에 <span class="gl" title="이렇게 점선이 그어진 단어는 마우스를 올리면 뜻이 떠요. 모바일에선 괄호 설명을 참고하세요.">점선 친 단어</span>는 올리면 뜻이 떠요.</p>
     </section>
 
     <!-- 02 WHERE -->
@@ -297,7 +312,7 @@
       <div class="grp">
         <h3>쓸 수 있는 곳 (2026년 6월 기준)</h3>
         <div class="fgrid">
-          <div class="fcard"><div class="ft">터미널 (CLI)</div><div class="fd">명령줄에서 폴더로 들어가 <code>claude</code> 입력.</div></div>
+          <div class="fcard"><div class="ft"><span class="gl" title="컴퓨터에 글자(명령어)로 지시하는 까만 입력 창. ‘명령줄’이라고도 해요.">터미널 (CLI)</span></div><div class="fd">까만 입력 창에 <code>claude</code> 라고 쳐서 시작.</div></div>
           <div class="fcard"><div class="ft">VS Code 확장</div><div class="fd">에디터 안에서 변경점을 바로 보며 작업.</div></div>
           <div class="fcard"><div class="ft">JetBrains 플러그인</div><div class="fd">IntelliJ·PyCharm 등 (CLI도 함께 설치 필요).</div></div>
           <div class="fcard"><div class="ft">데스크톱 앱</div><div class="fd">macOS·Windows용 독립 앱.</div></div>
@@ -552,8 +567,9 @@ description: 주간 보고서를 회사 양식으로 작성
     <!-- 10 MCP -->
     <section class="page" id="mcp">
       <h1>MCP (도구 연결)</h1>
-      <p class="lead"><b>MCP</b>는 클로드를 외부 서비스에 연결하는 표준 방식이에요. 기본 기능 너머로 손을 뻗게 해줘요.</p>
-      <p class="defs">버튼을 누르면 도구가 하나씩 연결되는 과정을 볼 수 있어요.</p>
+      <p class="lead"><b>MCP</b>는 클로드를 외부 서비스(지라·피그마·구글 드라이브 등)에 <b>연결</b>해, 클로드가 그 도구를 직접 쓰게 해주는 ‘공통 규칙’이에요.</p>
+      <p class="defs"><span class="gl" title="Model Context Protocol — 클로드가 외부 도구·데이터와 주고받는 공통 규칙(표준)">MCP = Model Context Protocol</span> (모델이 외부와 연결되는 표준). 버튼을 누르면 연결 과정을 볼 수 있어요.</p>
+      <div class="bignote"><span class="bx">쉽게</span><span>어떤 앱에 ‘구글로 로그인’을 연결하면 그 앱이 내 구글을 쓸 수 있죠? <b>MCP도 그런 ‘연결’</b>이에요 — 클로드에게 지라·피그마 같은 도구를 연결해주면, 클로드가 그걸 직접 열어 일해요. 내가 일일이 복사·붙여넣기 안 해도 되고요.</span></div>
       <div class="btnrow" style="margin-bottom:12px;"><button class="btn solid" id="mcp-go">하나씩 연결해보기 ▶</button><button class="btn" id="mcp-reset">초기화</button></div>
       <div class="svgwrap">
         <svg class="mcp" id="mcpsvg" viewBox="0 0 460 280" role="img" aria-label="클로드 코드가 외부 도구와 하나씩 연결되는 그림">
@@ -577,8 +593,9 @@ description: 주간 보고서를 회사 양식으로 작성
     <!-- 11 PLUGINS -->
     <section class="page" id="plugins">
       <h1>플러그인</h1>
-      <p class="lead"><b>플러그인</b>은 스킬·명령·MCP·서브에이전트·훅 등을 <b>한데 묶어 배포하는 꾸러미</b>예요.</p>
-      <p class="defs">하나하나 따로 설정하는 대신, 묶음을 한 번에 설치·공유할 수 있어요.</p>
+      <p class="lead"><b>플러그인</b>은 여러 기능을 <b>한 번에 설치하는 묶음</b>이에요 — 휴대폰 ‘앱’처럼요.</p>
+      <p class="defs">스킬·도구 연결(MCP)·자동화(훅) 같은 걸 하나하나 따로 챙기는 대신, 누군가 잘 만들어 둔 묶음을 통째로 받아 쓰는 거예요.</p>
+      <div class="bignote"><span class="bx">쉽게</span><span>휴대폰에 ‘사진 보정 앱’ 하나 깔면 필터·도구가 한꺼번에 따라오죠? <b>플러그인도 그래요.</b> 앞에서 본 스킬·MCP·서브에이전트·훅을 <b>한 묶음으로 설치</b>하는 거예요. (각각이 뭔지 다 몰라도 괜찮아요 — 여기선 ‘묶음’이라는 것만 알면 충분해요.)</span></div>
       <div class="plugbox">
         <div class="ph">플러그인 (배포 가능한 패키지)</div>
         <div class="psub">아래 기능들을 원하는 대로 담아 한 번에 설치·공유</div>
@@ -668,8 +685,9 @@ description: 주간 보고서를 회사 양식으로 작성
     <section class="page" id="hooks">
       <h1>자동화 (훅 · Hooks)</h1>
       <p class="lead"><b>훅</b>은 특정 순간에 <b>정해진 동작이 매번 자동으로</b> 실행되게 하는 기능이에요.</p>
-      <p class="defs">‘자동응답 메일’처럼, 어떤 일이 생기면 알아서 작동해요. 조금 기술적이라 ‘이런 게 있다’만 알아도 좋아요.</p>
-      <p class="label">작동 방식</p>
+      <p class="defs">‘자동응답 메일’처럼, 어떤 일이 생기면 알아서 작동해요.</p>
+      <div class="bignote"><span class="bx">안심</span><span><b>직접 만들 필요 없어요.</b> 설정 방법은 조금 기술적이지만, 비개발자는 만드는 법을 몰라도 돼요 — 클로드에게 <b>“파일 고칠 때마다 자동으로 정리하는 훅 만들어줘”</b>처럼 말로 부탁하면 클로드가 대신 만들어 줘요. 이 페이지는 ‘이런 게 있다’만 알면 충분해요.</span></div>
+      <p class="label">작동 방식 <span class="hint">언제 → 무엇을 → 어떻게</span></p>
       <div class="steps">
         <div class="step on"><div class="sn2">1</div><div><div class="st2">이벤트 (언제)</div><div class="sd3">예: 파일을 저장한 직후</div></div></div>
         <div class="step on"><div class="sn2">2</div><div><div class="st2">필터 (무엇을)</div><div class="sd3">예: 그게 코드 파일이면</div></div></div>
@@ -803,10 +821,10 @@ description: 주간 보고서를 회사 양식으로 작성
       <p class="defs">정확한 가격·사용량은 자주 바뀌니, 숫자는 공식 페이지에서 확인하세요.</p>
       <div class="grp"><h3>어떤 플랜에서 쓸 수 있나 (2026년 6월 기준)</h3>
         <div class="fgrid">
-          <div class="fcard"><div class="ft">Free</div><div class="fd">클로드 코드 <b>미포함</b>.</div></div>
-          <div class="fcard"><div class="ft">Pro</div><div class="fd">개인용. 일상 사용에 적당.</div></div>
-          <div class="fcard"><div class="ft">Max</div><div class="fd">개인용. 사용량이 가장 넉넉.</div></div>
-          <div class="fcard"><div class="ft">Team · Enterprise</div><div class="fd">팀·회사용. 좌석 단위.</div></div>
+          <div class="fcard"><div class="ft">Free (무료)</div><div class="fd">클로드 코드 <b>미포함</b>. 유료가 있어야 써요.</div></div>
+          <div class="fcard"><div class="ft">Pro</div><div class="fd">개인용. 일상 사용에 적당.</div><div class="fe"><b>대략</b> 월 $20 <span class="exb">변동</span></div></div>
+          <div class="fcard"><div class="ft">Max</div><div class="fd">개인용. 사용량이 가장 넉넉.</div><div class="fe"><b>대략</b> 월 $100~200 <span class="exb">변동</span></div></div>
+          <div class="fcard"><div class="ft">Team · Enterprise</div><div class="fd">팀·회사용. 사람(좌석) 수만큼.</div></div>
           <div class="fcard"><div class="ft">API (종량제)</div><div class="fd">쓴 만큼 토큰 기준 과금. 자동화·연동용.</div></div>
         </div>
       </div>
@@ -852,7 +870,8 @@ description: 주간 보고서를 회사 양식으로 작성
       <ul class="points">
         <li><b>5시간 한도</b><span>‘지난 5시간’ 동안 쓴 양을 봐요. 시간이 지나면 자동으로 다시 채워져요(롤링 방식).</span></li>
         <li><b>주간(7일) 한도</b><span>‘지난 7일’ 기준의 더 큰 한도. 5시간 한도만 피한다고 무한정 쓸 수 있는 건 아니에요.</span></li>
-        <li><b>다 쓰면?</b><span>리셋될 때까지 기다리거나, 상위 플랜으로 업그레이드하거나, API 크레딧으로 추가 사용.</span></li>
+        <li><b>둘 중 하나라도 다 차면 멈춰요.</b><span>5시간·주간 두 한도가 같이 걸려 있어서, 먼저 꽉 차는 쪽에서 막혀요. 그 한도가 리셋되면 다시 풀려요.</span></li>
+        <li><b>한도에 걸려도 작업은 안 사라져요.</b><span>하던 내용이 날아가는 게 아니라 ‘잠깐 멈춤’이에요 — 리셋되면 이어서 하면 돼요. (급하면 상위 플랜으로 업그레이드)</span></li>
         <li><b>한 곳에서 같이 차감돼요.</b><span>claude.ai·클로드 코드·데스크톱 앱이 같은 사용량을 나눠 써요.</span></li>
       </ul>
       <p class="label">한도를 아껴 쓰는 법</p>
@@ -896,8 +915,9 @@ description: 주간 보고서를 회사 양식으로 작성
     <section class="page" id="glossary">
       <h1>용어 사전</h1>
       <p class="lead">이 가이드에서 나온 말들을 한 줄로 정리했어요.</p>
-      <p class="defs">헷갈릴 때 여기서 빠르게 찾아보세요.</p>
-      <div class="gloss">
+      <p class="defs">헷갈릴 때 여기서 빠르게 찾아보세요. 검색창에 단어를 치면 바로 걸러져요.</p>
+      <input class="gsearch" id="gloss-search" type="text" placeholder="용어 검색… (예: 터미널, API, 토큰)">
+      <div class="gloss" id="gloss-list">
         <div class="gterm"><div class="gt">컨텍스트 창</div><div class="gd">클로드가 한 번에 들고 있는 ‘작업 공간’. 여기 있는 것만 알아요. (03번)</div></div>
         <div class="gterm"><div class="gt">토큰</div><div class="gd">AI가 글을 읽는 가장 작은 조각. 컨텍스트·요금의 단위. (05번)</div></div>
         <div class="gterm"><div class="gt">세션</div><div class="gd">한 번의 연속된 대화. 그 안의 컨텍스트 창에 쌓여요. (04번)</div></div>
@@ -913,7 +933,17 @@ description: 주간 보고서를 회사 양식으로 작성
         <div class="gterm"><div class="gt">체크포인트 · 되돌리기</div><div class="gd">요청마다 자동 저장, 이전으로 복구. (17번)</div></div>
         <div class="gterm"><div class="gt">압축 (compact)</div><div class="gd">대화를 요약해 컨텍스트 공간을 비움. (03번)</div></div>
         <div class="gterm"><div class="gt">모델 (Opus·Sonnet·Haiku)</div><div class="gd">똑똑함·속도·비용이 다른 클로드들. (06번)</div></div>
+        <div class="gterm"><div class="gt">터미널 (CLI)</div><div class="gd">컴퓨터에 글자(명령어)로 지시하는 까만 입력 창. ‘명령줄’이라고도 해요. CLI = Command Line Interface.</div></div>
+        <div class="gterm"><div class="gt">API</div><div class="gd">프로그램끼리 주고받는 ‘연결 통로’. 여기선 쓴 만큼 돈 내는 ‘종량제’ 사용 방식을 뜻해요. (20번)</div></div>
+        <div class="gterm"><div class="gt">서버</div><div class="gd">멀리서 일을 처리해 주는 컴퓨터. MCP ‘서버’는 외부 도구를 클로드에 연결해 주는 작은 프로그램이에요.</div></div>
+        <div class="gterm"><div class="gt">.md (마크다운)</div><div class="gd">간단한 규칙으로 꾸미는 ‘메모용 글 파일’ 형식. CLAUDE.md, SKILL.md의 .md가 이거예요.</div></div>
+        <div class="gterm"><div class="gt">JSON</div><div class="gd">컴퓨터가 읽는 ‘설정 적는 형식’. 훅 같은 설정을 여기에 적어요. (직접 안 적어도 클로드가 대신 해줘요)</div></div>
+        <div class="gterm"><div class="gt">git</div><div class="gd">파일 변경 내역을 기록·되돌리는 ‘버전 관리’ 도구. 되돌리기의 영구 보관판. (17번)</div></div>
+        <div class="gterm"><div class="gt">종량제</div><div class="gd">월정액이 아니라 ‘쓴 만큼’ 내는 방식 (API). (20·21번)</div></div>
+        <div class="gterm"><div class="gt">롤링 한도</div><div class="gd">‘지난 5시간·지난 7일’처럼 흘러가며 다시 채워지는 사용 한도. (21번)</div></div>
+        <div class="gterm"><div class="gt">프로토콜</div><div class="gd">서로 다른 프로그램이 대화하기 위한 ‘공통 규칙’. MCP의 P가 이거예요.</div></div>
       </div>
+      <p class="note" id="gloss-empty" style="display:none;">검색 결과가 없어요. 다른 단어로 찾아보세요.</p>
     </section>
 
   </div></main>
@@ -1138,7 +1168,7 @@ description: 주간 보고서를 회사 양식으로 작성
   var SIM_ACT=['파일 수정','폴더 만들기','git 커밋','파일 삭제 (rm)'],SIM_TXT={auto:'자동 실행',ask:'확인 요청',plan:'실행 안 함 (계획만)',block:'차단'},curPm=0;
   function pmShow(i){ curPm=i; var d=PM[i]; document.querySelectorAll('#pmenu .prow').forEach(function(r){ r.classList.toggle('on',+r.dataset.i===i); }); var badge='<span class="pbadge" style="background:'+rgba(d.col,.16)+';color:'+d.col+'">'+d.safe+'</span>'; document.getElementById('pdetail').innerHTML='<div class="pt">'+d.name+' '+badge+'</div><div class="pdrow"><b>알아서 하는 것</b>'+d.auto+'</div><div class="pdrow"><b>그래도 묻는 것</b>'+d.ask+'</div><div class="pdrow"><b>언제 쓰나</b>'+d.use+'</div>'+(d.note?'<div class="pdrow"><b>참고</b>'+d.note+'</div>':''); document.getElementById('pmark').style.left=((i+0.5)/PM.length*100)+'%'; document.getElementById('pm-simbox').innerHTML='<div class="simrow on" style="color:var(--faint);font-size:12.5px;">“이 모드 동작 보기”를 눌러보세요.</div>'; }
   var pmT=[]; document.getElementById('pm-sim').addEventListener('click',function(){ pmT.forEach(clearTimeout); pmT=[]; var d=PM[curPm],box=document.getElementById('pm-simbox'); box.innerHTML=''; SIM_ACT.forEach(function(a,idx){ var s=d.sim[idx],row=document.createElement('div'); row.className='simrow'; var cls=s==='auto'?'auto':(s==='ask'?'ask':(s==='plan'?'plan':'block')); row.innerHTML='<span class="sa">'+a+'</span><span class="sp '+cls+'">'+SIM_TXT[s]+'</span>'; box.appendChild(row); pmT.push(setTimeout(function(){ row.classList.add('on'); },220*idx)); }); });
-  document.querySelectorAll('#pmenu .prow').forEach(function(r){ r.addEventListener('click',function(){ pmShow(+r.dataset.i); }); }); pmShow(0);
+  document.querySelectorAll('#pmenu .prow').forEach(function(r){ var i=+r.dataset.i; var dot=document.createElement('span'); dot.className='psafe'; dot.style.background=(PM[i]&&PM[i].col)||'var(--line2)'; dot.title=(PM[i]&&PM[i].safe)||''; r.insertBefore(dot, r.firstChild); r.addEventListener('click',function(){ pmShow(i); }); }); pmShow(0);
 
   /* plan mode steps */
   var planT=[]; document.getElementById('plan-go').addEventListener('click',function(){ planT.forEach(clearTimeout); planT=[]; [0,1,2,3].forEach(function(n){ document.getElementById('plan'+n).classList.remove('on'); }); document.getElementById('plan-msg').textContent=''; [0,1,2,3].forEach(function(n,i){ planT.push(setTimeout(function(){ document.getElementById('plan'+n).classList.add('on'); if(n===3)document.getElementById('plan-msg').textContent='핵심: 계획을 미리 보고 승인했기 때문에, 엉뚱한 방향으로 가는 걸 막을 수 있어요.'; },800*i)); }); });
@@ -1180,6 +1210,12 @@ description: 주간 보고서를 회사 양식으로 작성
   function termRun(cmd){ tT.forEach(clearTimeout); tT=[]; term.innerHTML=''; var parts=SCRIPTS[cmd]||[],idx=0; (function add(){ if(idx>=parts.length)return; var seg=document.createElement('span'); if(parts[idx][0]==='c')seg.className='c'; seg.textContent=parts[idx][1]; term.appendChild(seg); idx++; tT.push(setTimeout(add,420)); })(); }
   document.querySelectorAll('#cmdchips .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#cmdchips .chip').forEach(function(x){ x.classList.toggle('on',x===c); }); termRun(c.dataset.c); }); });
   document.querySelector('#cmdchips .chip').classList.add('on'); termRun('init');
+
+  /* glossary search */
+  var gs=document.getElementById('gloss-search');
+  if(gs) gs.addEventListener('input',function(){ var q=gs.value.trim().toLowerCase(),terms=document.querySelectorAll('#gloss-list .gterm'),shown=0;
+    terms.forEach(function(t){ var hit=!q||t.textContent.toLowerCase().indexOf(q)>-1; t.classList.toggle('hide',!hit); if(hit)shown++; });
+    var emp=document.getElementById('gloss-empty'); if(emp) emp.style.display= shown?'none':'block'; });
 })();
 </script>
 </body>
