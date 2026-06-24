@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wlsdks.github.io/claude-code-guide/sitemap.xml

@@ -7,6 +7,34 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="코드를 몰라도 Claude Code(클로드 코드)의 핵심 개념을 직접 눌러보는 시뮬레이션으로 배우는 비개발자용 인터랙티브 가이드. 컨텍스트 창·토큰·MCP·서브에이전트·권한·요금까지 쉽게 이해해요.">
+<meta name="keywords" content="Claude Code, 클로드 코드, Anthropic, Claude, AI 코딩, 비개발자, 클로드 코드 사용법, 클로드 코드 가이드, 클로드 코드 튜토리얼, 컨텍스트 창, 토큰, MCP, 서브에이전트, 권한 모드">
+<meta name="author" content="최진안 (stark)">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161616" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://wlsdks.github.io/claude-code-guide/">
+<link rel="alternate" hreflang="ko" href="https://wlsdks.github.io/claude-code-guide/">
+<link rel="alternate" hreflang="en" href="https://wlsdks.github.io/claude-code-guide/en/">
+<link rel="alternate" hreflang="zh-Hans" href="https://wlsdks.github.io/claude-code-guide/zh/">
+<link rel="alternate" hreflang="ja" href="https://wlsdks.github.io/claude-code-guide/ja/">
+<link rel="alternate" hreflang="x-default" href="https://wlsdks.github.io/claude-code-guide/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a1a1a'/%3E%3Ctext x='32' y='45' font-family='sans-serif' font-size='38' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="클로드 코드 기초">
+<meta property="og:title" content="클로드 코드 기초 — 비개발자를 위한 안내">
+<meta property="og:description" content="코드를 몰라도 클릭 시뮬레이션으로 Claude Code 핵심 개념을 배우는 비개발자용 인터랙티브 가이드.">
+<meta property="og:url" content="https://wlsdks.github.io/claude-code-guide/">
+<meta property="og:image" content="https://wlsdks.github.io/claude-code-guide/og.svg">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="zh_CN">
+<meta property="og:locale:alternate" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="클로드 코드 기초 — 비개발자를 위한 안내">
+<meta name="twitter:description" content="코드를 몰라도 클릭 시뮬레이션으로 Claude Code 핵심 개념을 배우는 비개발자용 인터랙티브 가이드.">
+<meta name="twitter:image" content="https://wlsdks.github.io/claude-code-guide/og.svg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"클로드 코드 기초 — 비개발자를 위한 안내","description":"코드를 몰라도 Claude Code의 핵심 개념을 클릭 시뮬레이션으로 배우는 비개발자용 인터랙티브 가이드.","url":"https://wlsdks.github.io/claude-code-guide/","inLanguage":"ko","learningResourceType":"interactive simulation","educationalLevel":"beginner","teaches":"Claude Code fundamentals","isAccessibleForFree":true,"author":{"@type":"Person","name":"최진안 (stark)","url":"https://github.com/wlsdks"},"about":{"@type":"SoftwareApplication","name":"Claude Code","applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Windows, Linux"}}</script>
 <style>
   :root{
     --bg:#ffffff; --panel:#fafafa; --ink:#1a1a1a; --muted:#585858; --faint:#828282;

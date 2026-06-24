@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>컨텍스트 창과 토큰</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --panel:#fafafa; --ink:#1a1a1a; --muted:#6b6b6b; --faint:#9a9a9a;
+    --line:#e8e8e8; --line2:#d6d6d6; --accent:#1a1a1a; --row:#f4f4f4; --over:#d8453f;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#161616; --panel:#1d1d1d; --ink:#ededed; --muted:#a0a0a0; --faint:#6f6f6f;
+      --line:#2c2c2c; --line2:#3a3a3a; --accent:#ededed; --row:#242424; --over:#e5635d; }
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink);
+    font-family:"IBM Plex Sans KR",system-ui,sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; padding:44px 24px; }
+  .wrap{max-width:980px; margin:0 auto;}
+  h1{font-size:24px; font-weight:600; margin:0 0 8px; letter-spacing:-.3px;}
+  .lead{font-size:15px; color:var(--muted); margin:0 0 6px; font-weight:300;}
+  .lead b{color:var(--ink); font-weight:500;}
+  .defs{font-size:13px; color:var(--faint); margin:0 0 30px; font-weight:300;}
+
+  .grid{display:grid; grid-template-columns:340px 1fr; gap:40px; align-items:start;}
+  @media (max-width:760px){ .grid{grid-template-columns:1fr; gap:30px;} body{padding:30px 18px;} }
+
+  .label{font-size:12px; color:var(--faint); font-weight:500; letter-spacing:.4px; text-transform:uppercase; margin:0 0 14px;}
+  .label .hint{text-transform:none; letter-spacing:0; color:var(--faint); font-weight:300; margin-left:6px;}
+
+  /* meter + tank */
+  .head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px;}
+  .head .l{font-size:13px; color:var(--muted);}
+  .head .n{font-size:13px; font-weight:500; font-variant-numeric:tabular-nums;}
+  .head .n .max{color:var(--faint); font-weight:300;}
+  .head .n.over{color:var(--over);}
+  .tank{position:relative; height:460px; border:1px solid var(--line2); border-radius:10px; background:var(--panel); overflow:hidden;}
+  .stack{position:absolute; inset:0; padding:6px; display:flex; flex-direction:column-reverse; justify-content:flex-start; gap:2px;}
+  .blk{display:flex; align-items:center; gap:9px; padding:0 11px; border-radius:5px; overflow:hidden; flex:0 0 auto;}
+  .blk .dot{width:7px; height:7px; border-radius:50%; flex:0 0 auto;}
+  .blk .name{flex:1; font-size:12.5px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .blk .tag{font-size:10.5px; color:var(--faint); border:1px solid var(--line2); padding:0 5px; border-radius:3px; background:var(--bg);}
+  .blk .tk{font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums;}
+  .blk.mini .name,.blk.mini .tag,.blk.mini .tk{display:none;}
+  .limit{position:absolute; left:0; right:0; border-top:1px dashed var(--line2); pointer-events:none;}
+  .limit .cap{position:absolute; right:8px; top:-9px; font-size:10.5px; color:var(--faint); background:var(--bg); padding:0 6px;}
+  .limit.over{border-top-color:var(--over);} .limit.over .cap{color:var(--over);}
+  .free{position:absolute; left:0; right:0; text-align:center; font-size:11.5px; color:var(--faint); pointer-events:none; transition:bottom .5s cubic-bezier(.22,1,.36,1);}
+
+  /* capacity */
+  .capbox{display:flex; align-items:center; gap:8px; margin-bottom:8px;}
+  .capbox input{width:108px; font-family:inherit; font-size:14px; padding:9px 11px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; text-align:right; font-variant-numeric:tabular-nums;}
+  .capbox input:focus{border-color:var(--accent);}
+  .capbox .unit{font-size:13px; color:var(--muted);}
+  .chips{display:flex; gap:6px; margin-left:auto;}
+  .chip{font-size:12px; color:var(--muted); background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:6px 10px; cursor:pointer; transition:border-color .2s,color .2s;}
+  .chip:hover{border-color:var(--line2); color:var(--ink);} .chip.on{border-color:var(--accent); color:var(--ink);}
+  .capnote{font-size:12px; color:var(--faint); margin:0 0 26px; font-weight:300;}
+
+  /* input + token preview */
+  button{font-family:inherit; cursor:pointer;}
+  .field{display:flex; gap:8px; margin-bottom:10px;}
+  .field input{flex:1; font-family:inherit; font-size:14px; padding:11px 13px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; transition:border-color .2s;}
+  .field input:focus{border-color:var(--accent);} .field input::placeholder{color:var(--faint);}
+  .send{background:var(--accent); color:var(--bg); font-weight:500; font-size:14px; border:none; padding:0 18px; border-radius:8px; transition:opacity .15s;}
+  .send:hover{opacity:.85;}
+  .tokprev{border:1px solid var(--line); border-radius:8px; background:var(--panel); padding:12px 13px; margin-bottom:26px; min-height:78px;}
+  .tokprev .empty{font-size:12.5px; color:var(--faint); font-weight:300; line-height:1.6;}
+  .tokprev .count{font-size:12.5px; color:var(--muted); margin-bottom:9px;}
+  .tokprev .count b{color:var(--ink); font-weight:600; font-variant-numeric:tabular-nums;}
+  .toks{display:flex; flex-wrap:wrap; gap:3px;}
+  .tok{font-size:12px; padding:2px 6px; border-radius:4px; background:var(--bg); border:1px solid var(--line2); white-space:pre; line-height:1.4;}
+  .tok.kr{background:rgba(109,95,208,.14); border-color:rgba(109,95,208,.3);}
+  .tokprev .why{font-size:11.5px; color:var(--faint); margin-top:9px; font-weight:300;}
+
+  /* actions */
+  .acts{display:flex; flex-direction:column; gap:8px;}
+  .act{display:flex; align-items:center; gap:12px; text-align:left; background:var(--bg); border:1px solid var(--line); color:var(--ink); padding:12px 14px; border-radius:8px; transition:border-color .2s;}
+  .act:hover{border-color:var(--line2);}
+  .act .dot{width:7px; height:7px; border-radius:50%; flex:0 0 auto;}
+  .act .meta{flex:1;} .act .meta .t{font-size:14px; font-weight:500;} .act .meta .d{font-size:12px; color:var(--faint); font-weight:300;}
+  .act .add{font-size:12px; color:var(--faint); font-variant-numeric:tabular-nums;}
+  .botrow{display:flex; gap:10px; align-items:center; margin-top:26px;}
+  .ghost{background:none; border:none; color:var(--muted); font-size:13px; padding:6px 2px;} .ghost:hover{color:var(--ink);}
+  .botrow .sep{color:var(--line2);}
+  .status{font-size:12.5px; color:var(--faint); margin:16px 0 0; font-weight:300; min-height:34px; line-height:1.5;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>컨텍스트 창과 토큰</h1>
+  <p class="lead"><b>토큰</b>은 AI가 글을 읽는 가장 작은 조각이에요. <b>컨텍스트 창</b>은 클로드가 한 번에 들고 있을 수 있는 토큰의 총량이고요.</p>
+  <p class="defs">왼쪽 칸 = 컨텍스트 창. 칸의 높이 = 그게 차지하는 토큰 양. 직접 입력해서 채워보세요.</p>
+
+  <div class="grid">
+
+    <!-- LEFT: the tank -->
+    <div>
+      <p class="label">컨텍스트 창</p>
+      <div class="head">
+        <span class="l">사용량</span>
+        <span class="n" id="num"><span id="tok">0</span><span class="max"> / 40,000</span></span>
+      </div>
+      <div class="tank" id="tank">
+        <div class="free" id="free"></div>
+        <div class="limit" id="limit"><span class="cap" id="cap">한계 40,000</span></div>
+        <div class="stack" id="stack"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: controls -->
+    <div>
+      <p class="label">창 크기 <span class="hint">바꿔서 비교해 보세요</span></p>
+      <div class="capbox">
+        <input id="capinp" type="number" value="40000" min="2000" step="1000">
+        <span class="unit">토큰</span>
+        <div class="chips" id="chips">
+          <button class="chip" data-v="8000">8K</button>
+          <button class="chip on" data-v="40000">40K</button>
+          <button class="chip" data-v="200000">200K · 실제</button>
+        </div>
+      </div>
+      <p class="capnote">실제 클로드의 컨텍스트 창은 200,000 토큰이에요. (보기 쉽게 기본값은 작게 뒀어요)</p>
+
+      <p class="label">내가 입력하기 <span class="hint">글이 토큰으로 쪼개지는 걸 보세요</span></p>
+      <div class="field">
+        <input id="inp" type="text" placeholder="예: 로그인 버그 고쳐줘" maxlength="80">
+        <button class="send" id="send">보내기</button>
+      </div>
+      <div class="tokprev" id="tokprev"></div>
+
+      <p class="label">클로드의 작업 <span class="hint">이게 자리를 제일 많이 먹어요</span></p>
+      <div class="acts">
+        <button class="act" data-k="file" data-t="8400">
+          <span class="dot" style="background:#d8662f"></span>
+          <span class="meta"><div class="t">파일 읽기</div><div class="d">코드 파일을 통째로 가져옴</div></span>
+          <span class="add">+8,400</span>
+        </button>
+        <button class="act" data-k="tool" data-t="3100">
+          <span class="dot" style="background:#3b7dd8"></span>
+          <span class="meta"><div class="t">명령 실행</div><div class="d">테스트·검색을 돌린 결과</div></span>
+          <span class="add">+3,100</span>
+        </button>
+        <button class="act" data-k="reply" data-t="1800">
+          <span class="dot" style="background:#cf5184"></span>
+          <span class="meta"><div class="t">클로드 답변</div><div class="d">설명과 코드를 작성함</div></span>
+          <span class="add">+1,800</span>
+        </button>
+      </div>
+
+      <div class="botrow">
+        <button class="ghost" id="compact">압축</button>
+        <span class="sep">·</span>
+        <button class="ghost" id="reset">초기화</button>
+      </div>
+      <p class="status" id="status">아래 세 칸은 대화를 시작하기도 전부터 항상 들어 있어요. 클로드의 ‘기본 준비물’이에요.</p>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var MAX=40000, LIMIT_PX=370;
+  var stack=document.getElementById('stack'), limit=document.getElementById('limit'), cap=document.getElementById('cap'),
+      free=document.getElementById('free'), tokEl=document.getElementById('tok'), num=document.getElementById('num'),
+      status=document.getElementById('status'), inp=document.getElementById('inp'), capinp=document.getElementById('capinp'),
+      tokprev=document.getElementById('tokprev');
+
+  var labels={ sys:'시스템 프롬프트 · 클로드 기본 지침', tool:'도구 목록 · 클로드가 쓸 수 있는 기능',
+    mem:'프로젝트 메모 · CLAUDE.md', user:'내 메시지', file:'파일 내용 · 읽어온 코드', reply:'클로드 답변' };
+  var hex={ sys:'#8a8a8a', tool:'#3b7dd8', mem:'#1f9e76', user:'#6d5fd0', file:'#d8662f', reply:'#cf5184' };
+  function rgba(h,a){ var n=parseInt(h.slice(1),16); return 'rgba('+(n>>16&255)+','+(n>>8&255)+','+(n&255)+','+a+')'; }
+  function fmt(n){ return Math.round(n).toLocaleString('ko-KR'); }
+
+  // --- token estimator (approximate, real-ish): korean ~1.5/char, latin ~1/4char ---
+  function tokenize(text){
+    var chips=[], kr=0, other=0;
+    var re=/([가-힣])|([A-Za-z0-9]+)|(\s+)|([^\s])/g, m;
+    while((m=re.exec(text))){
+      if(m[1]){ chips.push({t:m[1],kr:true}); kr++; }
+      else if(m[2]){ var w=m[2]; for(var j=0;j<w.length;j+=4) chips.push({t:w.slice(j,j+4),kr:false}); other+=w.length; }
+      else if(m[3]){ other+=m[3].length; if(chips.length) chips[chips.length-1].sp=true; }
+      else if(m[4]){ chips.push({t:m[4],kr:false}); other+=1; }
+    }
+    return { count:Math.max(1,Math.round(kr*1.5+other/4)), chips:chips };
+  }
+
+  function showPreview(text){
+    if(!text){ tokprev.innerHTML='<div class="empty">여기에 글을 입력하면 토큰으로 어떻게 쪼개지는지, 몇 토큰인지 보여드려요. 토큰 수만큼 왼쪽 컨텍스트 창이 채워집니다.</div>'; return; }
+    var r=tokenize(text), shown=r.chips.slice(0,60);
+    var html='<div class="count">이 글은 약 <b>'+r.count+'</b>토큰</div><div class="toks">';
+    shown.forEach(function(c){ html+='<span class="tok'+(c.kr?' kr':'')+'">'+(c.t==='<'?'&lt;':c.t==='>'?'&gt;':c.t==='&'?'&amp;':c.t)+(c.sp?' ':'')+'</span>'; });
+    if(r.chips.length>60) html+='<span class="tok">…</span>';
+    html+='</div><div class="why">한글(보라색)은 영어보다 토큰을 더 씁니다 — 같은 길이라도 한글이 더 무거워요.</div>';
+    tokprev.innerHTML=html;
+  }
+
+  var base=[{k:'sys',t:3000},{k:'tool',t:11500},{k:'mem',t:2200}];
+  var items=[], curShown=0;
+
+  function makeBlk(it,fixed,h){
+    var d=document.createElement('div'); d.className='blk'+(h<18?' mini':'');
+    d.style.height=h+'px'; d.style.background=rgba(hex[it.k],0.16);
+    d.title=labels[it.k]+(it.txt?(' — '+it.txt):'')+' · '+fmt(it.t)+'토큰';
+    var name=labels[it.k]; if(it.txt) name+=' — “'+it.txt+'”';
+    d.innerHTML='<span class="dot" style="background:'+hex[it.k]+'"></span><span class="name">'+name+'</span>'+
+      (fixed?'<span class="tag">기본</span>':'')+'<span class="tk">'+fmt(it.t)+'</span>';
+    return d;
+  }
+
+  function render(animateLast){
+    var scale=LIMIT_PX/MAX; stack.innerHTML='';
+    items.forEach(function(it,i){
+      var el=makeBlk(it,it._base,Math.max(8,Math.round(it.t*scale)));
+      if(animateLast&&i===items.length-1){
+        el.style.opacity='0'; el.style.transform='translateY(-8px)';
+        el.style.transition='opacity .35s ease, transform .35s cubic-bezier(.22,1,.36,1)';
+        stack.appendChild(el); requestAnimationFrame(function(){ el.style.opacity='1'; el.style.transform='none'; });
+      } else stack.appendChild(el);
+    });
+    var total=items.reduce(function(a,b){return a+b.t;},0);
+    animateCount(total);
+    limit.style.bottom=LIMIT_PX+'px'; cap.textContent='한계 '+fmt(MAX);
+    var over=total>MAX; limit.classList.toggle('over',over); num.classList.toggle('over',over);
+    var usedPx=Math.min(LIMIT_PX,total*scale);
+    if(!over && (MAX-total)>MAX*0.04){
+      free.style.display='block'; free.style.bottom=(usedPx+(LIMIT_PX-usedPx)/2-8)+'px';
+      free.textContent='남은 공간 '+fmt(MAX-total);
+    } else free.style.display='none';
+  }
+
+  function animateCount(target){
+    var start=curShown,t0=null,dur=480;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur);
+      tokEl.textContent=fmt(start+(target-start)*(1-Math.pow(1-p,3)));
+      num.querySelector('.max').textContent=' / '+fmt(MAX);
+      if(p<1)requestAnimationFrame(step); else curShown=target; }
+    requestAnimationFrame(step);
+  }
+
+  function add(k,t,txt){ items.push({k:k,t:t,txt:txt}); render(true);
+    var total=items.reduce(function(a,b){return a+b.t;},0);
+    if(total>MAX) status.textContent='한계를 넘었어요. 이쯤 되면 클로드가 지난 내용을 요약해 자리를 만듭니다 — “압축”을 눌러보세요.';
+    else if(total/MAX>.8) status.textContent='거의 가득 찼어요. 곧 압축이 필요합니다.';
+  }
+
+  function initBase(){ items=base.map(function(b){return {k:b.k,t:b.t,_base:true};}); curShown=0; render(false); }
+
+  function setMax(v){ v=Math.max(2000,Math.min(1000000,Math.round(v))); MAX=v; capinp.value=v;
+    document.querySelectorAll('.chip').forEach(function(c){ c.classList.toggle('on',+c.dataset.v===v); }); render(false); }
+
+  capinp.addEventListener('change',function(){ setMax(+capinp.value||40000); });
+  document.querySelectorAll('.chip').forEach(function(c){ c.addEventListener('click',function(){ setMax(+c.dataset.v); }); });
+
+  inp.addEventListener('input',function(){ showPreview(inp.value.trim()); });
+  document.getElementById('send').addEventListener('click',function(){
+    var txt=(inp.value||'').trim(); if(!txt){inp.focus();return;}
+    var n=tokenize(txt).count, show=txt.length>30?txt.slice(0,30)+'…':txt;
+    add('user',n,show); inp.value=''; showPreview(''); inp.focus();
+  });
+  inp.addEventListener('keydown',function(e){ if(e.key==='Enter')document.getElementById('send').click(); });
+
+  document.querySelectorAll('.act').forEach(function(b){
+    b.addEventListener('click',function(){ add(b.dataset.k,parseInt(b.dataset.t,10)); });
+  });
+
+  document.getElementById('compact').addEventListener('click',function(){
+    if(items.reduce(function(a,b){return a+b.t;},0)<=base.reduce(function(a,b){return a+b.t;},0)+1000){
+      status.textContent='아직 압축할 만큼 쌓이지 않았어요. 메시지·작업을 더 추가해 보세요.'; return; }
+    initBase(); items.push({k:'mem',t:Math.round(MAX*0.12),txt:'여기까지의 대화 요약'}); render(true);
+    status.textContent='압축 완료 — 쌓였던 메시지·파일·결과가 짧은 요약 한 칸으로 줄었어요. 자리가 다시 넉넉해졌죠.';
+  });
+  document.getElementById('reset').addEventListener('click',function(){
+    initBase(); status.textContent='아래 세 칸은 대화를 시작하기도 전부터 항상 들어 있어요. 클로드의 ‘기본 준비물’이에요.';
+  });
+
+  showPreview(''); setMax(40000); initBase();
+})();
+</script>
+</body>
+</html>

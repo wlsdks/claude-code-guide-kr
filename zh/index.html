@@ -7,10 +7,38 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="description" content="无需编程，通过可点击的模拟动画学习 Claude Code 核心概念。面向非开发者的交互式入门指南，涵盖上下文窗口、Token、MCP、子代理、权限、价格等。">
+<meta name="keywords" content="Claude Code, Anthropic, Claude, AI 编程, 非开发者指南, Claude Code 教程, Claude Code 入门, 上下文窗口, Token, MCP, 子代理, 权限模式">
+<meta name="author" content="최진안 (stark)">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161616" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://wlsdks.github.io/claude-code-guide/zh/">
+<link rel="alternate" hreflang="ko" href="https://wlsdks.github.io/claude-code-guide/">
+<link rel="alternate" hreflang="en" href="https://wlsdks.github.io/claude-code-guide/en/">
+<link rel="alternate" hreflang="zh-Hans" href="https://wlsdks.github.io/claude-code-guide/zh/">
+<link rel="alternate" hreflang="ja" href="https://wlsdks.github.io/claude-code-guide/ja/">
+<link rel="alternate" hreflang="x-default" href="https://wlsdks.github.io/claude-code-guide/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a1a1a'/%3E%3Ctext x='32' y='45' font-family='sans-serif' font-size='38' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Claude Code 入门">
+<meta property="og:title" content="Claude Code 入门 — 写给非开发者的指南">
+<meta property="og:description" content="无需编程，通过可点击的模拟动画学习 Claude Code 核心概念。面向非开发者的交互式入门指南。">
+<meta property="og:url" content="https://wlsdks.github.io/claude-code-guide/zh/">
+<meta property="og:image" content="https://wlsdks.github.io/claude-code-guide/og.svg">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="ko_KR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Claude Code 入门 — 写给非开发者的指南">
+<meta name="twitter:description" content="无需编程，通过可点击的模拟动画学习 Claude Code 核心概念。面向非开发者的交互式入门指南。">
+<meta name="twitter:image" content="https://wlsdks.github.io/claude-code-guide/og.svg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LearningResource","name":"Claude Code 入门 — 写给非开发者的指南","description":"无需编程，通过可点击的模拟动画学习 Claude Code 核心概念。面向非开发者的交互式入门指南。","url":"https://wlsdks.github.io/claude-code-guide/zh/","inLanguage":"zh-Hans","learningResourceType":"interactive simulation","educationalLevel":"beginner","teaches":"Claude Code fundamentals","isAccessibleForFree":true,"author":{"@type":"Person","name":"최진안 (stark)","url":"https://github.com/wlsdks"},"about":{"@type":"SoftwareApplication","name":"Claude Code","applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Windows, Linux"}}</script>
 <style>
   :root{
-    --bg:#ffffff; --panel:#fafafa; --ink:#1a1a1a; --muted:#6b6b6b; --faint:#9a9a9a;
-    --line:#e8e8e8; --line2:#d6d6d6; --accent:#1a1a1a; --row:#f4f4f4; --over:#d8453f; --good:#1f9e76; --warn:#b9792a;
+    --bg:#ffffff; --panel:#fafafa; --ink:#1a1a1a; --muted:#585858; --faint:#828282;
+    --line:#dcdcdc; --line2:#c4c4c4; --accent:#1a1a1a; --row:#f4f4f4; --over:#d8453f; --good:#1f9e76; --warn:#b9792a;
     --blue:#3b7dd8; --purple:#6d5fd0; --orange:#d8662f; --teal:#1f9e76; --pink:#cf5184;
     --shadow:0 1px 2px rgba(20,22,30,.05), 0 4px 16px rgba(20,22,30,.05);
   }
@@ -18,7 +46,7 @@
     :root{ --bg:#161616; --panel:#1d1d1d; --ink:#ededed; --muted:#a0a0a0; --faint:#6f6f6f;
       --line:#2c2c2c; --line2:#3a3a3a; --accent:#ededed; --row:#242424; --over:#e5635d; --good:#37b890; --warn:#d8943f; --shadow:none; }
   }
-  html.theme-light{ --bg:#ffffff; --panel:#fafafa; --ink:#1a1a1a; --muted:#6b6b6b; --faint:#9a9a9a; --line:#e8e8e8; --line2:#d6d6d6; --accent:#1a1a1a; --row:#f4f4f4; --over:#d8453f; --good:#1f9e76; --warn:#b9792a; --shadow:0 1px 2px rgba(20,22,30,.05), 0 4px 16px rgba(20,22,30,.05); }
+  html.theme-light{ --bg:#ffffff; --panel:#fafafa; --ink:#1a1a1a; --muted:#585858; --faint:#828282; --line:#dcdcdc; --line2:#c4c4c4; --accent:#1a1a1a; --row:#f4f4f4; --over:#d8453f; --good:#1f9e76; --warn:#b9792a; --shadow:0 1px 2px rgba(20,22,30,.05), 0 4px 16px rgba(20,22,30,.05); }
   html.theme-dark{ --bg:#161616; --panel:#1d1d1d; --ink:#ededed; --muted:#a0a0a0; --faint:#6f6f6f; --line:#2c2c2c; --line2:#3a3a3a; --accent:#ededed; --row:#242424; --over:#e5635d; --good:#37b890; --warn:#d8943f; --shadow:none; }
   *{box-sizing:border-box;}
   body{ margin:0; background:var(--bg); color:var(--ink); font-family:"IBM Plex Sans KR",system-ui,sans-serif; line-height:1.65; -webkit-font-smoothing:antialiased; }
