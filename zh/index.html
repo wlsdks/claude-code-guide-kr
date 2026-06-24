@@ -667,14 +667,14 @@ irm https://claude.ai/install.ps1 | iex</div>
     <!-- 09 SKILLS -->
     <section class="page" id="skills">
       <h1>技能 (Skills)</h1>
-      <p class="lead"><b>技能</b>是把常用的操作方法写下来的‘窍门集合’。做一次，以后反复用。</p>
+      <p class="lead"><b>技能</b>一句话就是<b>‘自己的食谱’</b> —— 把常用的操作方法写下来，做一次以后反复用。</p>
       <p class="defs">来回放一下：每次从头解释，和用技能定义一次，差别有多大。</p>
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="sk-go">查看差异 ▶</button></div>
       <div class="skgrid">
         <div class="skcol"><h4>不用技能 <span class="badge no">每次重复</span></h4><div class="skb" id="sk-no"></div></div>
         <div class="skcol"><h4>使用技能 <span class="badge yes">定义一次</span></h4><div class="skb" id="sk-yes"></div></div>
       </div>
-      <p class="note">技能采用<b>只在需要时才展开（渐进式披露）</b>的方式，不用时几乎不占上下文窗口。如果说 CLAUDE.md 是‘始终开着的备忘’，那技能就是‘需要时才翻开的手册’。</p>
+      <p class="note">技能采用<b>只在需要时才展开</b>的方式，不用时几乎不占上下文窗口。如果说 CLAUDE.md 是‘始终开着的备忘’，那技能就是‘需要时才翻开的手册’。</p>
       <p class="label">它长什么样</p>
       <div class="pre"><span class="c"># .claude/skills/周报/SKILL.md</span>
 ---
@@ -717,7 +717,7 @@ description: 按公司格式撰写周报
     <!-- 11 PLUGINS -->
     <section class="page" id="plugins">
       <h1>插件</h1>
-      <p class="lead"><b>插件</b>是把多个功能<b>一次性装好的打包</b> —— 就像手机上的‘App’。</p>
+      <p class="lead"><b>插件</b>一句话就是<b>‘功能套装盒’</b> —— 把多个功能一次性装好的打包（就像手机上的‘App’）。</p>
       <p class="defs">不用一个个单独去张罗技能、工具连接（MCP）、自动化（Hook），而是把别人做好的整包拿来直接用。</p>
       <div class="bignote"><span class="bx">通俗讲</span><span>手机上装一个‘修图 App’，滤镜、工具就一并跟着来了吧？<b>插件也一样。</b> 把前面讲过的技能、MCP、子代理、Hook <b>打成一个包安装</b>。（每一个具体是什么不全懂也没关系 —— 这里只要知道它是‘一个打包’就够了。）</span></div>
       <div class="plugbox">
@@ -744,7 +744,7 @@ description: 按公司格式撰写周报
     <!-- 12 SUBAGENTS -->
     <section class="page" id="agents">
       <h1>子代理</h1>
-      <p class="lead"><b>子代理</b>是单独负责某项工作的‘专门助手’。它在自己的工作空间里干活，只把结果汇报回来。</p>
+      <p class="lead"><b>子代理</b>一句话就是<b>‘交给它干活的员工’</b> —— 派一项具体工作，它在自己的工作空间里做，只把结果汇报回来。</p>
       <p class="defs">核心很简单 —— ‘把活分出去’。</p>
       <div class="callout"><b>简单类比</b> · 想象你是<b>组长</b>。大事不全自己扛，而是分给<b>专业的组员</b>：“这个你去调查”、“这个你来审一下”。组员各自在自己的工位干活，<b>只汇报结果</b>。你的工位（主对话）保持清爽。</div>
       <p class="label">亲眼看看 —— 分给 6 个人 <span class="hint">点一下回放</span></p>
@@ -808,7 +808,7 @@ description: 按公司格式撰写周报
     <!-- 14 HOOKS -->
     <section class="page" id="hooks">
       <h1>自动化 (Hook)</h1>
-      <p class="lead"><b>Hook</b> 是让<b>某个时刻每次都自动执行一个固定动作</b>的功能。</p>
+      <p class="lead"><b>Hook</b> 一句话就是<b>‘自动规则’</b> —— 在某个时刻每次都自动执行一个固定动作。</p>
       <p class="defs">就像‘邮件自动回复’，一旦发生某件事，它就自动运作。</p>
       <div class="bignote"><span class="bx">放心</span><span><b>不用自己动手做。</b> 配置方法稍微有点技术性，但非开发者不懂怎么做也没关系 —— 你只要对 Claude <b>说“做一个 Hook，每次改文件就自动整理”</b>，Claude 就会替你做。这一页只要知道‘有这么个东西’就够了。</span></div>
       <p class="label">工作方式 <span class="hint">何时 → 对什么 → 怎么做</span></p>

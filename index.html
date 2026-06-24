@@ -667,14 +667,14 @@ irm https://claude.ai/install.ps1 | iex</div>
     <!-- 09 SKILLS -->
     <section class="page" id="skills">
       <h1>스킬 (Skills)</h1>
-      <p class="lead"><b>스킬</b>은 자주 쓰는 작업 방법을 적어둔 ‘요령 묶음’이에요. 한 번 만들면 계속 재사용해요.</p>
+      <p class="lead"><b>스킬</b>은 한마디로 <b>‘나만의 레시피’</b>예요 — 자주 쓰는 작업 방법을 적어두면 한 번 만들고 계속 재사용해요.</p>
       <p class="defs">매번 처음부터 설명하는 것과, 스킬로 한 번 정해두는 것의 차이를 재생해 볼게요.</p>
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="sk-go">차이 보기 ▶</button></div>
       <div class="skgrid">
         <div class="skcol"><h4>스킬 없이 <span class="badge no">매번 반복</span></h4><div class="skb" id="sk-no"></div></div>
         <div class="skcol"><h4>스킬 사용 <span class="badge yes">한 번 정의</span></h4><div class="skb" id="sk-yes"></div></div>
       </div>
-      <p class="note">스킬은 <b>필요할 때만 펼쳐지는(점진적 공개)</b> 방식이라, 안 쓸 땐 컨텍스트 창을 거의 차지하지 않아요. CLAUDE.md가 ‘항상 켜진 메모’라면 스킬은 ‘필요할 때 펴보는 매뉴얼’.</p>
+      <p class="note">스킬은 <b>필요할 때만 펴 보는</b> 방식이라, 안 쓸 땐 컨텍스트 창을 거의 차지하지 않아요. CLAUDE.md가 ‘항상 켜진 메모’라면 스킬은 ‘필요할 때 펴보는 매뉴얼’.</p>
       <p class="label">어떻게 생겼나</p>
       <div class="pre"><span class="c"># .claude/skills/주간보고/SKILL.md</span>
 ---
@@ -717,7 +717,7 @@ description: 주간 보고서를 회사 양식으로 작성
     <!-- 11 PLUGINS -->
     <section class="page" id="plugins">
       <h1>플러그인</h1>
-      <p class="lead"><b>플러그인</b>은 여러 기능을 <b>한 번에 설치하는 묶음</b>이에요 — 휴대폰 ‘앱’처럼요.</p>
+      <p class="lead"><b>플러그인</b>은 한마디로 <b>‘기능 세트 상자’</b>예요 — 여러 기능을 한 번에 설치하는 묶음(휴대폰 ‘앱’처럼).</p>
       <p class="defs">스킬·도구 연결(MCP)·자동화(훅) 같은 걸 하나하나 따로 챙기는 대신, 누군가 잘 만들어 둔 묶음을 통째로 받아 쓰는 거예요.</p>
       <div class="bignote"><span class="bx">쉽게</span><span>휴대폰에 ‘사진 보정 앱’ 하나 깔면 필터·도구가 한꺼번에 따라오죠? <b>플러그인도 그래요.</b> 앞에서 본 스킬·MCP·서브에이전트·훅을 <b>한 묶음으로 설치</b>하는 거예요. (각각이 뭔지 다 몰라도 괜찮아요 — 여기선 ‘묶음’이라는 것만 알면 충분해요.)</span></div>
       <div class="plugbox">
@@ -744,7 +744,7 @@ description: 주간 보고서를 회사 양식으로 작성
     <!-- 12 SUBAGENTS -->
     <section class="page" id="agents">
       <h1>서브에이전트</h1>
-      <p class="lead"><b>서브에이전트</b>는 특정 일을 따로 맡는 ‘전문 도우미’예요. 자기만의 작업 공간에서 일하고 결과만 보고해요.</p>
+      <p class="lead"><b>서브에이전트</b>는 한마디로 <b>‘따로 일 시키는 직원’</b>이에요 — 특정 일을 맡기면 자기 작업 공간에서 처리하고 결과만 보고해요.</p>
       <p class="defs">핵심은 단순해요 — ‘일을 나눠 맡기기’.</p>
       <div class="callout"><b>쉬운 비유</b> · 내가 <b>팀장</b>이라고 생각해 보세요. 큰 일을 혼자 다 하지 않고 <b>전문 팀원</b>에게 “이건 네가 조사해와”, “이건 네가 검토해줘” 하고 나눠 맡기죠. 팀원은 각자 자기 책상에서 일하고 <b>결과만 보고</b>해요. 내 책상(메인 대화)은 깨끗하게 유지되고요.</div>
       <p class="label">직접 보기 — 6명에게 나눠 맡기기 <span class="hint">눌러서 재생</span></p>
@@ -808,7 +808,7 @@ description: 주간 보고서를 회사 양식으로 작성
     <!-- 14 HOOKS -->
     <section class="page" id="hooks">
       <h1>자동화 (훅 · Hooks)</h1>
-      <p class="lead"><b>훅</b>은 특정 순간에 <b>정해진 동작이 매번 자동으로</b> 실행되게 하는 기능이에요.</p>
+      <p class="lead"><b>훅</b>은 한마디로 <b>‘자동 규칙’</b>이에요 — 특정 순간에 정해진 동작이 매번 자동으로 실행돼요.</p>
       <p class="defs">‘자동응답 메일’처럼, 어떤 일이 생기면 알아서 작동해요.</p>
       <div class="bignote"><span class="bx">안심</span><span><b>직접 만들 필요 없어요.</b> 설정 방법은 조금 기술적이지만, 비개발자는 만드는 법을 몰라도 돼요 — 클로드에게 <b>“파일 고칠 때마다 자동으로 정리하는 훅 만들어줘”</b>처럼 말로 부탁하면 클로드가 대신 만들어 줘요. 이 페이지는 ‘이런 게 있다’만 알면 충분해요.</span></div>
       <p class="label">작동 방식 <span class="hint">언제 → 무엇을 → 어떻게</span></p>

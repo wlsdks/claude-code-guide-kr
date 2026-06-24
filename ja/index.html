@@ -668,14 +668,14 @@ irm https://claude.ai/install.ps1 | iex</div>
     <!-- 09 SKILLS -->
     <section class="page" id="skills">
       <h1>スキル (Skills)</h1>
-      <p class="lead"><b>スキル</b>は、よく使う作業の手順を書いておいた「コツの束」です。一度作れば、ずっと再利用できます。</p>
+      <p class="lead"><b>スキル</b>はひとことで言うと<b>「自分のレシピ」</b>です — よく使う作業の手順を書いておき、一度作ればずっと再利用できます。</p>
       <p class="defs">毎回ゼロから説明するのと、スキルで一度決めておくのとの違いを再生してみましょう。</p>
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="sk-go">違いを見る ▶</button></div>
       <div class="skgrid">
         <div class="skcol"><h4>スキルなし <span class="badge no">毎回くり返し</span></h4><div class="skb" id="sk-no"></div></div>
         <div class="skcol"><h4>スキルあり <span class="badge yes">一度だけ定義</span></h4><div class="skb" id="sk-yes"></div></div>
       </div>
-      <p class="note">スキルは<b>必要なときだけ展開される（段階的に開示）</b>方式なので、使わないときはコンテキストウィンドウをほとんど占めません。CLAUDE.md が「いつもオンのメモ」なら、スキルは「必要なときに開くマニュアル」です。</p>
+      <p class="note">スキルは<b>必要なときだけ開く</b>方式なので、使わないときはコンテキストウィンドウをほとんど占めません。CLAUDE.md が「いつもオンのメモ」なら、スキルは「必要なときに開くマニュアル」です。</p>
       <p class="label">どんな見た目?</p>
       <div class="pre"><span class="c"># .claude/skills/週報/SKILL.md</span>
 ---
@@ -718,7 +718,7 @@ description: 週次レポートを会社の様式で作成
     <!-- 11 PLUGINS -->
     <section class="page" id="plugins">
       <h1>プラグイン</h1>
-      <p class="lead"><b>プラグイン</b>は、いろいろな機能を<b>一度にインストールする束</b>です — スマホの「アプリ」のように。</p>
+      <p class="lead"><b>プラグイン</b>はひとことで言うと<b>「機能のセット箱」</b>です — いろいろな機能を一度にインストールする束（スマホの「アプリ」のように）。</p>
       <p class="defs">スキル・ツール連携(MCP)・自動化(フック)などをひとつひとつ別々にそろえる代わりに、誰かがうまく作っておいた束をまるごと受け取って使うわけです。</p>
       <div class="bignote"><span class="bx">かんたんに</span><span>スマホに「写真補正アプリ」を一つ入れると、フィルターやツールが一気についてきますよね? <b>プラグインもそうです。</b> これまで見たスキル・MCP・サブエージェント・フックを<b>一つの束としてインストール</b>するんです。（それぞれが何か全部わからなくても大丈夫 — ここでは「束」だということだけわかれば十分です。）</span></div>
       <div class="plugbox">
@@ -745,7 +745,7 @@ description: 週次レポートを会社の様式で作成
     <!-- 12 SUBAGENTS -->
     <section class="page" id="agents">
       <h1>サブエージェント</h1>
-      <p class="lead"><b>サブエージェント</b>は、特定の仕事を別に引き受ける「専門のお手伝い」です。自分専用の作業空間で働き、結果だけを報告します。</p>
+      <p class="lead"><b>サブエージェント</b>はひとことで言うと<b>「仕事を任せる社員」</b>です — 特定の仕事を任せると自分専用の作業空間で処理し、結果だけを報告します。</p>
       <p class="defs">核心はシンプルです — 「仕事を分けて任せる」。</p>
       <div class="callout"><b>わかりやすいたとえ</b> · 自分が<b>チームリーダー</b>だと思ってください。大きな仕事を一人で全部やらず、<b>専門のメンバー</b>に「これは君が調べてきて」「これは君が確認して」と分けて任せますよね。メンバーはそれぞれ自分の机で働き、<b>結果だけ報告</b>します。自分の机（メインの会話）はきれいに保たれます。</div>
       <p class="label">実際に見る — 6 人に分けて任せる <span class="hint">押して再生</span></p>
@@ -809,7 +809,7 @@ description: 週次レポートを会社の様式で作成
     <!-- 14 HOOKS -->
     <section class="page" id="hooks">
       <h1>自動化 (フック · Hooks)</h1>
-      <p class="lead"><b>フック</b>は、特定の瞬間に<b>決まった動作が毎回自動で</b>実行されるようにする機能です。</p>
+      <p class="lead"><b>フック</b>はひとことで言うと<b>「自動ルール」</b>です — 特定の瞬間に決まった動作が毎回自動で実行されます。</p>
       <p class="defs">「自動返信メール」のように、あることが起きると自動で動きます。</p>
       <div class="bignote"><span class="bx">ご安心を</span><span><b>自分で作る必要はありません。</b> 設定方法は少し技術的ですが、非エンジニアは作り方を知らなくても大丈夫 — Claude に <b>「ファイルを直すたびに自動で整理するフックを作って」</b>のように言葉でお願いすれば、Claude が代わりに作ってくれます。このページは「こういうものがある」とわかれば十分です。</span></div>
       <p class="label">どう動くか <span class="hint">いつ → 何を → どうやって</span></p>
