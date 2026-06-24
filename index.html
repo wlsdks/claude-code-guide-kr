@@ -149,6 +149,10 @@
   .mainbox{ border:1px solid var(--accent); border-radius:12px; background:var(--panel); padding:13px 15px; } .mainbox .mh{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; } .mainbox .mt2{ font-size:13.5px; font-weight:500; }
   .subrow2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px 0; } @media (max-width:600px){ .subrow2{ grid-template-columns:1fr; } } .subcard{ border:1px solid var(--line2); border-radius:12px; background:var(--panel); padding:12px 14px; opacity:.38; transition:opacity .35s; } .subcard.on{ opacity:1; } .subcard .sh{ font-size:13px; font-weight:500; } .subcard .sd2{ font-size:11.5px; color:var(--faint); font-weight:300; margin:1px 0 9px; }
   .ctxmini{ height:7px; background:var(--row); border-radius:4px; overflow:hidden; margin-bottom:5px; } .ctxmini i{ display:block; height:100%; width:0%; border-radius:4px; transition:width .25s linear; } .ctxnum{ font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums; } .retmsg{ font-size:11.5px; color:var(--good); margin-top:6px; opacity:0; transition:opacity .3s; } .retmsg.on{ opacity:1; }
+  .sagrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; } @media (max-width:760px){ .sagrid{ grid-template-columns:repeat(2,1fr); } } @media (max-width:440px){ .sagrid{ grid-template-columns:1fr; } }
+  .sabenef{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; } @media (max-width:680px){ .sabenef{ grid-template-columns:1fr; } }
+  .sabf{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:13px 15px; opacity:.4; transition:opacity .4s, border-color .4s; } .sabf.on{ opacity:1; border-color:var(--line2); }
+  .sabf .ft{ font-size:13.5px; font-weight:600; margin-bottom:4px; } .sabf .fd{ font-size:12.5px; color:var(--muted); font-weight:300; line-height:1.5; }
 
   /* skills with/without */
   .skgrid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; } @media (max-width:600px){ .skgrid{ grid-template-columns:1fr; } } .skcol{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:14px; } .skcol h4{ font-size:13.5px; margin:0 0 4px; font-weight:600; display:flex; gap:7px; align-items:center; } .skcol .skb{ display:flex; flex-direction:column; gap:6px; margin-top:8px; min-height:150px; } .skline{ font-size:12.5px; padding:8px 10px; border-radius:7px; background:var(--bg); border:1px solid var(--line); opacity:0; transform:translateY(-5px); transition:opacity .3s,transform .3s; } .skline.on{ opacity:1; transform:none; } .skline.long{ border-color:rgba(216,69,63,.3); } .skline.short{ border-color:rgba(31,158,118,.35); }
@@ -602,14 +606,17 @@ description: 주간 보고서를 회사 양식으로 작성
       <p class="lead"><b>서브에이전트</b>는 특정 일을 따로 맡는 ‘전문 도우미’예요. 자기만의 작업 공간에서 일하고 결과만 보고해요.</p>
       <p class="defs">핵심은 단순해요 — ‘일을 나눠 맡기기’.</p>
       <div class="callout"><b>쉬운 비유</b> · 내가 <b>팀장</b>이라고 생각해 보세요. 큰 일을 혼자 다 하지 않고 <b>전문 팀원</b>에게 “이건 네가 조사해와”, “이건 네가 검토해줘” 하고 나눠 맡기죠. 팀원은 각자 자기 책상에서 일하고 <b>결과만 보고</b>해요. 내 책상(메인 대화)은 깨끗하게 유지되고요.</div>
-      <p class="label">직접 보기 — 메인 vs 서브에이전트 <span class="hint">눌러서 재생</span></p>
+      <p class="label">직접 보기 — 6명에게 나눠 맡기기 <span class="hint">눌러서 재생</span></p>
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="sa-go">동작 보기 ▶</button><button class="btn" id="sa-self">만약 메인이 직접 다 했다면?</button></div>
-      <div class="mainbox"><div class="mh"><span class="mt2">메인 대화 (나와 클로드)</span><span class="ctxnum" id="sa-main-n">컨텍스트 8%</span></div><div class="ctxmini"><i id="sa-main-b" style="background:var(--good); width:8%;"></i></div><div class="sd2" style="margin:6px 0 0;">“이 프로젝트 조사하고 보안 검토해줘”</div></div>
-      <div class="subrow2">
-        <div class="subcard" id="sa-c0"><div class="sh">조사 담당 (서브에이전트)</div><div class="sd2">자기만의 새 컨텍스트 창</div><div class="ctxmini"><i id="sa-b0" style="background:var(--blue)"></i></div><div class="ctxnum"><span id="sa-n0">0토큰</span> · 파일 30개 읽는 중</div><div class="retmsg" id="sa-r0">→ 요약 600토큰만 메인에 보고</div></div>
-        <div class="subcard" id="sa-c1"><div class="sh">보안 검토 (서브에이전트)</div><div class="sd2">자기만의 새 컨텍스트 창</div><div class="ctxmini"><i id="sa-b1" style="background:var(--orange)"></i></div><div class="ctxnum"><span id="sa-n1">0토큰</span> · 코드 점검 중</div><div class="retmsg" id="sa-r1">→ 요약 500토큰만 메인에 보고</div></div>
+      <div class="mainbox"><div class="mh"><span class="mt2">메인 대화 (나와 클로드)</span><span class="ctxnum" id="sa-main-n">컨텍스트 8%</span></div><div class="ctxmini"><i id="sa-main-b" style="background:var(--good); width:8%;"></i></div><div class="sd2" style="margin:6px 0 0;">“우리 쇼핑몰 전체를 점검하고 개선해줘”</div></div>
+      <div class="arrowdown" style="max-width:none; margin:10px 0;">↓ 6가지로 나눠서 동시에 맡김</div>
+      <div class="sagrid" id="sa-grid"></div>
+      <p class="status" id="sa-msg" style="margin-top:10px;">“동작 보기”를 눌러보세요 — 6명이 어떻게 나눠 일하고, 그게 <b>왜 좋은지</b> 보여드려요.</p>
+      <div class="sabenef" id="sa-benef">
+        <div class="sabf" id="sa-bf0"><div class="ft">동시에 (병렬)</div><div class="fd">6명이 한꺼번에 일해요 — 혼자 차례로 하는 것보다 빨라요.</div></div>
+        <div class="sabf" id="sa-bf1"><div class="ft">메인은 깨끗</div><div class="fd">각자 자기 공간에서 일하고 ‘요약’만 보고 → 본 대화가 안 지저분해요.</div></div>
+        <div class="sabf" id="sa-bf2"><div class="ft">각자 전문</div><div class="fd">한 명이 한 가지에만 집중 → 더 정확하고 안전해요.</div></div>
       </div>
-      <p class="status" id="sa-msg" style="margin-top:0;">“동작 보기”를 눌러보세요.</p>
       <ul class="points">
         <li><b>자기만의 작업 공간(컨텍스트 창)을 가져요.</b><span>도우미가 길게 뒤져도 본 대화는 안 지저분해져요.</span></li>
         <li><b>할 수 있는 일을 제한할 수 있어요.</b><span>예: ‘코드 검토’ 도우미는 읽기만 하고 못 고치게 — 더 안전.</span></li>
@@ -1098,16 +1105,23 @@ description: 주간 보고서를 회사 양식으로 작성
   document.getElementById('mcp-go').addEventListener('click',function(){ mcpReset(); document.getElementById('mcp-msg').textContent='도구를 하나씩 연결하는 중…'; MCPN.forEach(function(o,i){ mcpT.push(setTimeout(function(){ document.getElementById('mcpl'+i).style.strokeDashoffset='0'; document.getElementById('mcpn'+i).classList.add('on'); document.getElementById('mcp-msg').textContent=o.n+' 연결됨 ✓ — 이제 클로드가 '+o.n+'를 직접 쓸 수 있어요.'; if(i===MCPN.length-1)mcpT.push(setTimeout(function(){ document.getElementById('mcp-msg').textContent='연결 완료! 이제 클로드 코드가 이 도구들을 직접 사용할 수 있어요. (/mcp 로 확인)'; },700)); },700*i)); }); });
   document.getElementById('mcp-reset').addEventListener('click',mcpReset); mcpReset();
 
-  /* subagents */
+  /* subagents (6 specialists) */
   var saT=[]; function saClear(){ saT.forEach(clearTimeout); saT=[]; }
+  var SUBS=[ {name:'조사 담당',work:'파일 40개 훑는 중',c:'#3b7dd8',pct:84,tok:38000,sum:600},
+    {name:'보안 점검',work:'취약점 확인 중',c:'#d8662f',pct:70,tok:31000,sum:500},
+    {name:'디자인 점검',work:'화면·레이아웃 확인',c:'#1f9e76',pct:62,tok:27000,sum:450},
+    {name:'속도 분석',work:'느린 부분 찾는 중',c:'#6d5fd0',pct:76,tok:34000,sum:550},
+    {name:'문구 검토',work:'오타·표현 점검',c:'#cf5184',pct:48,tok:21000,sum:400},
+    {name:'테스트 실행',work:'작동 확인 중',c:'#b9792a',pct:67,tok:30000,sum:520} ];
+  (function(){ var g=document.getElementById('sa-grid'); if(g) g.innerHTML=SUBS.map(function(s,i){ return '<div class="subcard" id="sa-c'+i+'"><div class="sh">'+s.name+' <span style="font-weight:300;color:var(--faint);font-size:11px;">(서브에이전트)</span></div><div class="sd2">자기만의 새 컨텍스트 창</div><div class="ctxmini"><i id="sa-b'+i+'"></i></div><div class="ctxnum"><span id="sa-n'+i+'">0토큰</span> · '+s.work+'</div><div class="retmsg" id="sa-r'+i+'">→ 요약 '+s.sum+'토큰만 보고</div></div>'; }).join(''); })();
   function saFill(barId,numId,toPct,toTok,dur,col){ var bar=document.getElementById(barId),el=document.getElementById(numId); if(col&&bar)bar.style.background=col; var steps=Math.max(1,Math.round(dur/50)),i=0; (function st(){ i++; var f=i/steps; if(bar)bar.style.width=(toPct*f)+'%'; if(el)el.textContent=fmt(Math.round(toTok*f))+'토큰'; if(i<steps)saT.push(setTimeout(st,50)); })(); }
-  function saReset(){ saClear(); ['sa-c0','sa-c1','sa-r0','sa-r1'].forEach(function(id){ var e=document.getElementById(id); if(e)e.classList.remove('on'); }); var b0=document.getElementById('sa-b0'),b1=document.getElementById('sa-b1'); if(b0)b0.style.width='0%'; if(b1)b1.style.width='0%'; var n0=document.getElementById('sa-n0'),n1=document.getElementById('sa-n1'); if(n0)n0.textContent='0토큰'; if(n1)n1.textContent='0토큰'; var mb=document.getElementById('sa-main-b'); if(mb){ mb.style.background='var(--good)'; mb.style.width='8%'; } var mn=document.getElementById('sa-main-n'); if(mn)mn.textContent='컨텍스트 8%'; }
-  document.getElementById('sa-go').addEventListener('click',function(){ saReset(); var msg=document.getElementById('sa-msg'); msg.textContent='메인이 두 도우미에게 일을 나눠 맡겨요. 각자 자기만의 새 컨텍스트 창에서 일해요…';
-    saT.push(setTimeout(function(){ document.getElementById('sa-c0').classList.add('on'); saFill('sa-b0','sa-n0',85,42000,1300,'#3b7dd8'); },300));
-    saT.push(setTimeout(function(){ document.getElementById('sa-c1').classList.add('on'); saFill('sa-b1','sa-n1',70,35000,1300,'#d8662f'); },1000));
-    saT.push(setTimeout(function(){ document.getElementById('sa-r0').classList.add('on'); document.getElementById('sa-r1').classList.add('on'); saFill('sa-main-b','',22,0,700,'var(--good)'); var mn=document.getElementById('sa-main-n'); if(mn)mn.textContent='컨텍스트 22% · 요약만 받음'; },2500));
-    saT.push(setTimeout(function(){ msg.innerHTML='두 도우미는 각자 <b>따로(별도 컨텍스트 창)</b> 일하며 토큰을 많이 썼지만 — 메인엔 <b>짧은 요약만</b> 돌아와 깨끗해요. 도우미의 큰 작업 공간은 끝나면 사라져요.'; },3300)); });
-  document.getElementById('sa-self').addEventListener('click',function(){ saReset(); var msg=document.getElementById('sa-msg'); var c0=document.getElementById('sa-c0'),c1=document.getElementById('sa-c1'); if(c0)c0.classList.remove('on'); if(c1)c1.classList.remove('on'); saFill('sa-main-b','',100,0,1200,'#d8453f'); var mn=document.getElementById('sa-main-n'); if(mn)mn.textContent='컨텍스트 100% — 꽉 참'; msg.innerHTML='만약 메인이 직접 파일 수십 개를 다 읽었다면 — <b>컨텍스트가 꽉 차서 헷갈렸을</b> 거예요. 그래서 서브에이전트에 나눠 맡기는 거예요.'; });
+  function saReset(){ saClear(); SUBS.forEach(function(s,i){ var c=document.getElementById('sa-c'+i); if(c)c.classList.remove('on'); var r=document.getElementById('sa-r'+i); if(r)r.classList.remove('on'); var b=document.getElementById('sa-b'+i); if(b)b.style.width='0%'; var n=document.getElementById('sa-n'+i); if(n)n.textContent='0토큰'; }); [0,1,2].forEach(function(i){ var bf=document.getElementById('sa-bf'+i); if(bf)bf.classList.remove('on'); }); var mb=document.getElementById('sa-main-b'); if(mb){ mb.style.background='var(--good)'; mb.style.width='8%'; } var mn=document.getElementById('sa-main-n'); if(mn)mn.textContent='컨텍스트 8%'; }
+  var saGo=document.getElementById('sa-go'); if(saGo) saGo.addEventListener('click',function(){ saReset(); var msg=document.getElementById('sa-msg'); msg.textContent='메인이 6명에게 한꺼번에 일을 나눠 맡겼어요 — 6명이 각자 자기 공간에서 동시에 일하는 중…';
+    SUBS.forEach(function(s,i){ saT.push(setTimeout(function(){ var c=document.getElementById('sa-c'+i); if(c)c.classList.add('on'); saFill('sa-b'+i,'sa-n'+i,s.pct,s.tok,1400,s.c); },150*i)); });
+    saT.push(setTimeout(function(){ SUBS.forEach(function(s,i){ var r=document.getElementById('sa-r'+i); if(r)r.classList.add('on'); }); saFill('sa-main-b','',24,0,800,'var(--good)'); var mn=document.getElementById('sa-main-n'); if(mn)mn.textContent='컨텍스트 24% · 요약만 받음'; },2200));
+    saT.push(setTimeout(function(){ [0,1,2].forEach(function(i){ var bf=document.getElementById('sa-bf'+i); if(bf)bf.classList.add('on'); }); msg.innerHTML='6명이 <b>동시에</b> 각자 큰 작업(수만 토큰씩)을 했지만 — 메인엔 <b>짧은 요약만</b> 모여 컨텍스트가 깨끗하고(24%) 빨라요. 도우미들의 큰 작업 공간은 끝나면 사라져요.'; },3100)); });
+  var saSelf=document.getElementById('sa-self'); if(saSelf) saSelf.addEventListener('click',function(){ saReset(); var msg=document.getElementById('sa-msg'); var mb=document.getElementById('sa-main-b'),mn=document.getElementById('sa-main-n'); var seq=[28,46,62,76,90,100],i=0;
+    (function step(){ if(i>=seq.length){ if(mb)mb.style.background='#d8453f'; if(mn)mn.textContent='컨텍스트 100% — 꽉 참'; msg.innerHTML='혼자 6가지를 <b>차례로</b> 다 떠안으니 — 컨텍스트가 꽉 차서 헷갈리고(과부하), 하나씩 하느라 <b>느려요.</b> 그래서 6명에게 나눠 맡기는 거예요.'; return; } if(mb){ mb.style.width=seq[i]+'%'; mb.style.background= seq[i]>85?'#d8453f':(seq[i]>60?'#d8943f':'var(--good)'); } if(mn)mn.textContent='혼자 처리 중… '+(i+1)+'/6'; i++; saT.push(setTimeout(step,650)); })(); });
   saReset();
 
   /* images */
