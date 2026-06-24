@@ -92,6 +92,7 @@
   .sitefoot{ margin-top:52px; padding:22px 0 6px; border-top:1px solid var(--line); color:var(--faint); font-size:12.5px; line-height:1.7; }
   .sitefoot .ft-main{ color:var(--muted); font-size:13.5px; margin-bottom:5px; } .sitefoot .ft-main b{ color:var(--ink); font-weight:600; }
   .sitefoot a{ color:var(--accent); text-decoration:none; border-bottom:1px solid var(--line2); } .sitefoot a:hover{ color:var(--ink); }
+  .langsel{ width:100%; margin-top:8px; font-family:inherit; font-size:12.5px; padding:7px 9px; border-radius:8px; border:1px solid var(--line); background:var(--panel); color:var(--muted); cursor:pointer; outline:none; } .langsel:focus{ border-color:var(--accent); color:var(--ink); }
   .stack{ position:absolute; inset:0; padding:8px; display:flex; flex-direction:column-reverse; justify-content:flex-start; gap:4px; }
   .blk{ display:flex; align-items:center; gap:10px; padding:0 12px; border-radius:9px; overflow:hidden; flex:0 0 auto; border:1px solid var(--line); }
   .blk .dot{ width:9px; height:9px; border-radius:3px; flex:0 0 auto; }
@@ -229,6 +230,12 @@
       <button class="present-btn theme-ic" id="theme-toggle" aria-label="라이트/다크 전환"></button>
       <button class="present-btn" id="present-toggle" title="화면 전체를 크게 확대해요. 빔프로젝터·대형 화면 발표용 (시뮬레이션도 같이 커져요). 다시 누르면 원래대로."><span class="pdot"></span><span id="present-label">발표 모드</span></button>
     </div>
+    <select class="langsel" id="lang-select" title="언어 선택 / Language" aria-label="언어 선택 / Language">
+      <option value="ko">한국어</option>
+      <option value="en">English</option>
+      <option value="zh" disabled>中文 (준비 중)</option>
+      <option value="ja" disabled>日本語 (준비 중)</option>
+    </select>
     <div class="brand">클로드 코드 기초<span class="sub">비개발자를 위한 안내</span></div>
     <div class="navsec">시작하기</div>
     <button class="navitem on" data-page="intro"><span class="no">01</span>클로드 코드란?</button>
@@ -1219,6 +1226,13 @@ description: 주간 보고서를 회사 양식으로 작성
   function termRun(cmd){ tT.forEach(clearTimeout); tT=[]; term.innerHTML=''; var parts=SCRIPTS[cmd]||[],idx=0; (function add(){ if(idx>=parts.length)return; var seg=document.createElement('span'); if(parts[idx][0]==='c')seg.className='c'; seg.textContent=parts[idx][1]; term.appendChild(seg); idx++; tT.push(setTimeout(add,420)); })(); }
   document.querySelectorAll('#cmdchips .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#cmdchips .chip').forEach(function(x){ x.classList.toggle('on',x===c); }); termRun(c.dataset.c); }); });
   document.querySelector('#cmdchips .chip').classList.add('on'); termRun('init');
+
+  /* language switcher (works in /, /en/, /zh/, /ja/) */
+  (function(){ var sel=document.getElementById('lang-select'); if(!sel) return;
+    var p=location.pathname, cur=/\/en\//.test(p)?'en':/\/zh\//.test(p)?'zh':/\/ja\//.test(p)?'ja':'ko';
+    sel.value=cur; var root=(cur==='ko')?'':'../';
+    sel.addEventListener('change',function(){ var c=sel.value; if(c===cur)return; location.href=(root+(c==='ko'?'':c+'/'))||'./'; });
+  })();
 
   /* glossary search */
   var gs=document.getElementById('gloss-search');
