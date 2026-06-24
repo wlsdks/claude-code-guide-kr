@@ -9,8 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#ffffff; --panel:#fafafa; --ink:#1a1a1a; --muted:#6b6b6b; --faint:#9a9a9a;
-    --line:#e8e8e8; --line2:#d6d6d6; --accent:#1a1a1a; --row:#f4f4f4; --over:#d8453f; --good:#1f9e76; --warn:#b9792a;
+    --bg:#ffffff; --panel:#fafafa; --ink:#1a1a1a; --muted:#585858; --faint:#828282;
+    --line:#dcdcdc; --line2:#c4c4c4; --accent:#1a1a1a; --row:#f4f4f4; --over:#d8453f; --good:#1f9e76; --warn:#b9792a;
     --blue:#3b7dd8; --purple:#6d5fd0; --orange:#d8662f; --teal:#1f9e76; --pink:#cf5184;
     --shadow:0 1px 2px rgba(20,22,30,.05), 0 4px 16px rgba(20,22,30,.05);
   }
@@ -18,7 +18,7 @@
     :root{ --bg:#161616; --panel:#1d1d1d; --ink:#ededed; --muted:#a0a0a0; --faint:#6f6f6f;
       --line:#2c2c2c; --line2:#3a3a3a; --accent:#ededed; --row:#242424; --over:#e5635d; --good:#37b890; --warn:#d8943f; --shadow:none; }
   }
-  html.theme-light{ --bg:#ffffff; --panel:#fafafa; --ink:#1a1a1a; --muted:#6b6b6b; --faint:#9a9a9a; --line:#e8e8e8; --line2:#d6d6d6; --accent:#1a1a1a; --row:#f4f4f4; --over:#d8453f; --good:#1f9e76; --warn:#b9792a; --shadow:0 1px 2px rgba(20,22,30,.05), 0 4px 16px rgba(20,22,30,.05); }
+  html.theme-light{ --bg:#ffffff; --panel:#fafafa; --ink:#1a1a1a; --muted:#585858; --faint:#828282; --line:#dcdcdc; --line2:#c4c4c4; --accent:#1a1a1a; --row:#f4f4f4; --over:#d8453f; --good:#1f9e76; --warn:#b9792a; --shadow:0 1px 2px rgba(20,22,30,.05), 0 4px 16px rgba(20,22,30,.05); }
   html.theme-dark{ --bg:#161616; --panel:#1d1d1d; --ink:#ededed; --muted:#a0a0a0; --faint:#6f6f6f; --line:#2c2c2c; --line2:#3a3a3a; --accent:#ededed; --row:#242424; --over:#e5635d; --good:#37b890; --warn:#d8943f; --shadow:none; }
   *{box-sizing:border-box;}
   body{ margin:0; background:var(--bg); color:var(--ink); font-family:"IBM Plex Sans KR",system-ui,sans-serif; line-height:1.65; -webkit-font-smoothing:antialiased; }
@@ -105,6 +105,18 @@
   .blk .tag{ font-size:10px; color:var(--faint); border:1px solid var(--line2); padding:1px 6px; border-radius:5px; background:var(--bg); }
   .blk .tk{ font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums; background:var(--bg); border:1px solid var(--line); border-radius:5px; padding:1px 7px; }
   .blk.mini{ gap:0; } .blk.mini .name,.blk.mini .tag,.blk.mini .tk{ display:none; }
+  .blk.sumhl{ background:rgba(31,158,118,.2); border:1.5px solid var(--good); box-shadow:0 0 0 3px rgba(31,158,118,.16); }
+  .blk .sumbadge{ font-size:10px; font-weight:600; color:#fff; background:var(--good); border-radius:5px; padding:1px 7px; white-space:nowrap; }
+  .cwba{ display:none; margin:0 0 16px; }
+  .cwba-row{ display:flex; align-items:stretch; gap:12px; }
+  .cwba-card{ flex:1; border:1px solid var(--line2); border-radius:12px; background:var(--panel); padding:13px 15px; }
+  .cwba-card.hl{ border-color:var(--good); background:rgba(31,158,118,.08); }
+  .cwba-k{ font-size:12px; color:var(--faint); }
+  .cwba-v{ font-size:18px; font-weight:600; margin-top:2px; } .cwba-card.hl .cwba-v{ color:var(--good); }
+  .cwba-d{ font-size:12px; color:var(--muted); margin-top:3px; }
+  .cwba-arrow{ align-self:center; color:var(--faint); font-size:18px; flex:0 0 auto; }
+  .cwba-note{ font-size:12.5px; color:var(--muted); margin-top:9px; line-height:1.6; }
+  @media (max-width:560px){ .cwba-row{ flex-direction:column; } .cwba-arrow{ transform:rotate(90deg); } }
   .limit{ position:absolute; left:0; right:0; border-top:1px dashed var(--line2); pointer-events:none; } .limit .cap{ position:absolute; right:8px; top:-9px; font-size:10.5px; color:var(--faint); background:var(--bg); padding:0 6px; } .limit.over{ border-top-color:var(--over); } .limit.over .cap{ color:var(--over); }
   .free{ position:absolute; left:0; right:0; text-align:center; font-size:11.5px; color:var(--faint); pointer-events:none; transition:bottom .5s cubic-bezier(.22,1,.36,1); }
   .capbox{ display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; } .capbox input{ width:108px; font-family:inherit; font-size:14px; padding:9px 11px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; text-align:right; font-variant-numeric:tabular-nums; } .capbox input:focus{ border-color:var(--accent); } .capbox .unit{ font-size:13px; color:var(--muted); }
@@ -341,7 +353,7 @@ curl -fsSL https://claude.ai/install.sh | bash
 <span class="c"># Windows PowerShell</span>
 irm https://claude.ai/install.ps1 | iex</div>
       <ul class="points">
-        <li><b>유료 Claude 플랜이나 API가 필요해요.</b><span>무료 플랜으로는 클로드 코드를 쓸 수 없어요. (요금제는 20번 참고)</span></li>
+        <li><b>유료 Claude 플랜이나 API가 필요해요.</b><span>무료 플랜으로는 클로드 코드를 쓸 수 없어요. (‘요금제’ 탭 참고)</span></li>
         <li><b>첫 시작</b><span>프로젝트 폴더에서 <code>claude</code> → 로그인 → “이 프로젝트 뭐 하는 거야?” 같이 그냥 말 걸기.</span></li>
       </ul>
       <p class="note">정확한 설치 방법·요구사항은 버전에 따라 바뀌니 <code>code.claude.com/docs</code> 에서 최신 안내를 확인하세요.</p>
@@ -361,7 +373,7 @@ irm https://claude.ai/install.ps1 | iex</div>
           <p class="label" style="margin-top:0;">창 크기 <span class="hint">바꿔서 비교</span></p>
           <div class="capbox"><input id="capinp" type="number" value="40000" min="2000" step="1000"><span class="unit">토큰</span>
             <div class="chips"><button class="chip" data-v="8000">8K</button><button class="chip on" data-v="40000">40K</button><button class="chip" data-v="200000">200K</button></div></div>
-          <p class="capnote">기본 컨텍스트 창은 200,000(200K) 토큰. 최신 Opus·Sonnet은 최대 1,000,000(1M)까지 — 06번 참고.</p>
+          <p class="capnote">기본 컨텍스트 창은 200,000(200K) 토큰. 최신 Opus·Sonnet은 최대 1,000,000(1M)까지 — ‘모델 고르기’ 탭 참고.</p>
           <p class="label">내가 입력하기 <span class="hint">직접 쳐보세요</span></p>
           <div class="field"><input id="inp" type="text" placeholder="예: 로그인 버그 고쳐줘" maxlength="80"><button class="send" id="send">보내기</button></div>
           <div class="tokprev" id="tokprev" style="margin-bottom:20px;"></div>
@@ -376,7 +388,15 @@ irm https://claude.ai/install.ps1 | iex</div>
         </div>
       </div>
       <p class="label">자동 압축(auto-compact)이란?</p>
-      <p style="font-size:14px;margin:0 0 14px;">대화가 길어져 컨텍스트 창이 한계에 가까워지면, 클로드가 <b>스스로 지난 대화를 요약</b>해 공간을 만들어요. 위 “자동 압축 보기”로 차오르다 요약으로 줄어드는 과정을 볼 수 있어요.</p>
+      <p style="font-size:14px;margin:0 0 14px;">대화가 길어져 컨텍스트 창이 한계에 가까워지면, 클로드가 <b>스스로 지난 대화를 요약</b>해 공간을 만들어요. 위 “자동 압축 보기”로 차오르다 요약으로 줄어드는 과정을 볼 수 있어요. 압축이 일어나면 위 칸에 <b>초록색으로 강조된 ‘압축으로 요약된 정보’</b> 한 칸이 생기고, 아래에 줄어든 양을 보여드려요.</p>
+      <div class="cwba" id="cwba">
+        <div class="cwba-row">
+          <div class="cwba-card"><div class="cwba-k">압축 이전</div><div class="cwba-v" id="cwba-pre">—</div><div class="cwba-d">메시지·파일·결과가 가득</div></div>
+          <span class="cwba-arrow">→</span>
+          <div class="cwba-card hl"><div class="cwba-k">압축 이후</div><div class="cwba-v" id="cwba-post">—</div><div class="cwba-d">핵심만 ‘요약 한 칸’으로</div></div>
+        </div>
+        <div class="cwba-note" id="cwba-note"></div>
+      </div>
       <div class="cmp">
         <div class="cmpcard"><h4>남는 것</h4><div class="who">요약에 보존</div><div class="cmprow">내 요청과 의도</div><div class="cmprow">읽거나 고친 파일 목록과 핵심 코드</div><div class="cmprow">오류와 해결 과정, 남은 할 일</div></div>
         <div class="cmpcard"><h4>사라지는 것</h4><div class="who">공간 절약</div><div class="cmprow">긴 명령 실행 출력(터미널 결과)</div><div class="cmprow">중간 단계의 장황한 설명</div><div class="cmprow">중복된 내용</div></div>
@@ -1037,10 +1057,10 @@ description: 주간 보고서를 회사 양식으로 작성
 
   /* context tank */
   var MAX=40000,LIMIT_PX=420,AC_RATIO=0.8,stack=document.getElementById('stack'),limit=document.getElementById('limit'),cap=document.getElementById('cap'),free=document.getElementById('free'),tokEl=document.getElementById('tok'),num=document.getElementById('num'),status=document.getElementById('status'),inp=document.getElementById('inp'),capinp=document.getElementById('capinp'),tokprev=document.getElementById('tokprev');
-  var labels={sys:'시스템 프롬프트 · 기본 지침',tool:'도구 목록 · 쓸 수 있는 기능',mem:'프로젝트 메모 · CLAUDE.md',user:'내 메시지',file:'파일 내용 · 읽어온 코드',reply:'클로드 답변'};
-  var hex={sys:'#8a8a8a',tool:'#3b7dd8',mem:'#1f9e76',user:'#6d5fd0',file:'#d8662f',reply:'#cf5184'};
+  var labels={sys:'시스템 프롬프트 · 기본 지침',tool:'도구 목록 · 쓸 수 있는 기능',mem:'프로젝트 메모 · CLAUDE.md',user:'내 메시지',file:'파일 내용 · 읽어온 코드',reply:'클로드 답변',summary:'압축으로 요약된 정보'};
+  var hex={sys:'#8a8a8a',tool:'#3b7dd8',mem:'#1f9e76',user:'#6d5fd0',file:'#d8662f',reply:'#cf5184',summary:'#1f9e76'};
   var base=[{k:'sys',t:3000},{k:'tool',t:11500},{k:'mem',t:2200}],items=[],curShown=0;
-  function makeBlk(it,fixed,h){ var d=document.createElement('div'); d.className='blk'+(h<18?' mini':'')+(fixed?'':' acc'); d.style.height=h+'px'; d.style.background=rgba(hex[it.k],0.14); d.style.borderColor=rgba(hex[it.k],0.30); d.title=labels[it.k]+(it.txt?(' — '+it.txt):'')+' · '+fmt(it.t)+'토큰'; var name=labels[it.k]; if(it.txt)name+=' — “'+it.txt+'”'; d.innerHTML='<span class="dot" style="background:'+hex[it.k]+'"></span><span class="name">'+name+'</span>'+(fixed?'<span class="tag">기본</span>':'')+'<span class="tk">'+fmt(it.t)+'</span>'; return d; }
+  function makeBlk(it,fixed,h){ var d=document.createElement('div'); var isSum=it.k==='summary'; d.className='blk'+(h<18?' mini':'')+(fixed?'':' acc')+(isSum?' sumhl':''); d.style.height=h+'px'; if(!isSum){ d.style.background=rgba(hex[it.k],0.14); d.style.borderColor=rgba(hex[it.k],0.30); } d.title=labels[it.k]+(it.txt&&!isSum?(' — '+it.txt):'')+' · '+fmt(it.t)+'토큰'; var name=labels[it.k]; if(it.txt&&!isSum)name+=' — “'+it.txt+'”'; d.innerHTML='<span class="dot" style="background:'+hex[it.k]+'"></span><span class="name">'+(isSum?'<b>'+name+'</b>':name)+'</span>'+(isSum?'<span class="sumbadge">요약</span>':(fixed?'<span class="tag">기본</span>':''))+'<span class="tk">'+fmt(it.t)+'</span>'; return d; }
   function ctxRender(animLast){ var scale=LIMIT_PX/MAX; stack.innerHTML=''; items.forEach(function(it,i){ var el=makeBlk(it,it._base,Math.max(8,Math.round(it.t*scale))); if(animLast&&i===items.length-1){ el.style.opacity='0'; el.style.transform='translateY(-8px)'; el.style.transition='opacity .35s ease, transform .35s cubic-bezier(.22,1,.36,1)'; stack.appendChild(el); requestAnimationFrame(function(){ el.style.opacity='1'; el.style.transform='none'; }); } else stack.appendChild(el); });
     var total=items.reduce(function(a,b){return a+b.t;},0); ctxCount(total); limit.style.bottom=LIMIT_PX+'px'; cap.textContent='한계 '+fmt(MAX);
     var acl=document.getElementById('acline'); if(acl){ acl.style.bottom=Math.round(LIMIT_PX*AC_RATIO)+'px'; document.getElementById('accap').textContent='자동 압축 시작 ~'+fmt(MAX*AC_RATIO); }
@@ -1055,11 +1075,12 @@ description: 주간 보고서를 회사 양식으로 작성
   document.getElementById('send').addEventListener('click',function(){ var txt=(inp.value||'').trim(); if(!txt){inp.focus();return;} ctxAdd('user',tokenize(txt).count,txt.length>30?txt.slice(0,30)+'…':txt); inp.value=''; renderPrev(tokprev,'',true); inp.focus(); var total=items.reduce(function(a,b){return a+b.t;},0); if(total/MAX>.85)status.textContent='거의 가득 찼어요. “자동 압축 보기”나 “수동 압축”을 눌러보세요.'; });
   inp.addEventListener('keydown',function(e){ if(e.key==='Enter')document.getElementById('send').click(); });
   document.querySelectorAll('#context .act').forEach(function(b){ b.addEventListener('click',function(){ ctxAdd(b.dataset.k,parseInt(b.dataset.t,10)); var total=items.reduce(function(a,b){return a+b.t;},0); if(total>MAX)status.textContent='한계를 넘었어요 — 자동 압축이 필요한 상태예요.'; }); });
-  function doCompact(){ ctxBase(); items.push({k:'mem',t:Math.round(MAX*0.10),txt:'여기까지의 대화 요약'}); ctxRender(true); }
+  function doCompact(){ var pre=items.reduce(function(a,b){return a+b.t;},0); ctxBase(); items.push({k:'summary',t:Math.round(MAX*0.10),txt:'여기까지의 대화 요약'}); ctxRender(true); var post=items.reduce(function(a,b){return a+b.t;},0); showBA(pre,post); }
+  function showBA(pre,post){ var el=document.getElementById('cwba'); if(!el)return; document.getElementById('cwba-pre').textContent='약 '+fmt(pre)+' 토큰'; document.getElementById('cwba-post').textContent='약 '+fmt(post)+' 토큰'; var saved=pre>0?Math.max(0,Math.round((1-post/pre)*100)):0; document.getElementById('cwba-note').textContent='쌓였던 대화가 초록색 ‘압축으로 요약된 정보’ 한 칸으로 줄었어요 — 약 '+saved+'% 절약. 요청·파일 목록·결정 같은 핵심은 그대로 남고, 줄어든 만큼 다시 작업할 공간이 생겨요. (실제 내용이 어떻게 바뀌는지는 ‘압축(compact)’ 탭에서)'; el.style.display='block'; }
   document.getElementById('compact').addEventListener('click',function(){ if(items.reduce(function(a,b){return a+b.t;},0)<=base.reduce(function(a,b){return a+b.t;},0)+1000){ status.textContent='아직 압축할 만큼 쌓이지 않았어요.'; return; } doCompact(); status.textContent='수동 압축(/compact) 완료 — 쌓였던 메시지·파일·결과가 요약 한 칸으로 줄었어요.'; });
-  document.getElementById('reset').addEventListener('click',function(){ acStop(); ctxBase(); status.textContent='아래 세 칸은 대화를 시작하기도 전부터 항상 들어 있어요.'; });
+  document.getElementById('reset').addEventListener('click',function(){ acStop(); ctxBase(); var ba=document.getElementById('cwba'); if(ba)ba.style.display='none'; status.textContent='아래 세 칸은 대화를 시작하기도 전부터 항상 들어 있어요.'; });
   var acT=[]; function acStop(){ acT.forEach(clearTimeout); acT=[]; document.getElementById('tank').classList.remove('flash'); stack.classList.remove('summarizing'); var ov=document.getElementById('acoverlay'); if(ov)ov.classList.remove('on'); }
-  document.getElementById('autocompact').addEventListener('click',function(){ acStop(); ctxMax(40000); ctxBase(); var seq=[['user',900,'대시보드 만들어줘'],['file',8400,null],['tool',3100,null],['reply',1800,null],['reply',1100,null]]; status.textContent='대화가 쌓이는 중… (이어지는 한 작업)'; var i=0;
+  document.getElementById('autocompact').addEventListener('click',function(){ acStop(); ctxMax(40000); ctxBase(); var ba=document.getElementById('cwba'); if(ba)ba.style.display='none'; var seq=[['user',900,'대시보드 만들어줘'],['file',8400,null],['tool',3100,null],['reply',1800,null],['reply',1100,null]]; status.textContent='대화가 쌓이는 중… (이어지는 한 작업)'; var i=0;
     (function step(){ if(i>=seq.length){ acTrigger(); return; } var s=seq[i++]; ctxAdd(s[0],s[1],s[2]); var total=items.reduce(function(a,b){return a+b.t;},0);
       if(total>=MAX*AC_RATIO){ status.textContent='자동 압축 시작선에 닿았어요! ('+fmt(total)+' / 한계 '+fmt(MAX)+') — 한계까지 가지 않고 여기서 멈춰 압축해요.'; acT.push(setTimeout(acTrigger,1100)); return; }
       if(total/MAX>.6) status.textContent='점점 차오르는 중… 곧 자동 압축선에 닿아요.'; acT.push(setTimeout(step,1100)); })(); });
