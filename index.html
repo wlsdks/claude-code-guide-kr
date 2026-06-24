@@ -247,29 +247,29 @@
     <button class="navitem" data-page="where"><span class="no">02</span>어디서 쓰나</button>
     <div class="navsec">기초 개념</div>
     <button class="navitem" data-page="context"><span class="no">03</span>컨텍스트 창</button>
-    <button class="navitem" data-page="sessions"><span class="no">04</span>세션 & 폴더</button>
-    <button class="navitem" data-page="tokens"><span class="no">05</span>토큰</button>
-    <button class="navitem" data-page="models"><span class="no">06</span>모델 고르기</button>
+    <button class="navitem" data-page="compact"><span class="no">04</span>압축 (compact)</button>
+    <button class="navitem" data-page="sessions"><span class="no">05</span>세션 & 폴더</button>
+    <button class="navitem" data-page="tokens"><span class="no">06</span>토큰</button>
+    <button class="navitem" data-page="models"><span class="no">07</span>모델 고르기 (model)</button>
     <div class="navsec">기억과 규칙</div>
-    <button class="navitem" data-page="claudemd"><span class="no">07</span>CLAUDE.md</button>
-    <button class="navitem" data-page="memory"><span class="no">08</span>메모리</button>
-    <button class="navitem" data-page="skills"><span class="no">09</span>스킬</button>
+    <button class="navitem" data-page="claudemd"><span class="no">08</span>CLAUDE.md</button>
+    <button class="navitem" data-page="memory"><span class="no">09</span>메모리</button>
+    <button class="navitem" data-page="skills"><span class="no">10</span>스킬</button>
     <div class="navsec">능력 확장</div>
-    <button class="navitem" data-page="mcp"><span class="no">10</span>MCP (도구 연결)</button>
-    <button class="navitem" data-page="plugins"><span class="no">11</span>플러그인</button>
-    <button class="navitem" data-page="agents"><span class="no">12</span>서브에이전트</button>
-    <button class="navitem" data-page="images"><span class="no">13</span>이미지 붙여넣기</button>
-    <button class="navitem" data-page="hooks"><span class="no">14</span>자동화 (훅)</button>
+    <button class="navitem" data-page="mcp"><span class="no">11</span>MCP (도구 연결)</button>
+    <button class="navitem" data-page="plugins"><span class="no">12</span>플러그인</button>
+    <button class="navitem" data-page="agents"><span class="no">13</span>서브에이전트</button>
+    <button class="navitem" data-page="images"><span class="no">14</span>이미지 붙여넣기</button>
+    <button class="navitem" data-page="hooks"><span class="no">15</span>자동화 (훅)</button>
     <div class="navsec">안전하게</div>
-    <button class="navitem" data-page="planmode"><span class="no">15</span>계획 모드</button>
-    <button class="navitem" data-page="permissions"><span class="no">16</span>권한 모드</button>
-    <button class="navitem" data-page="rewind"><span class="no">17</span>되돌리기</button>
-    <button class="navitem" data-page="privacy"><span class="no">18</span>데이터 & 프라이버시</button>
+    <button class="navitem" data-page="planmode"><span class="no">16</span>계획 모드</button>
+    <button class="navitem" data-page="permissions"><span class="no">17</span>권한 모드</button>
+    <button class="navitem" data-page="rewind"><span class="no">18</span>되돌리기</button>
+    <button class="navitem" data-page="privacy"><span class="no">19</span>데이터 & 프라이버시</button>
     <div class="navsec">실전</div>
-    <button class="navitem" data-page="commands"><span class="no">19</span>슬래시 명령</button>
-    <button class="navitem" data-page="plans"><span class="no">20</span>요금제</button>
-    <button class="navitem" data-page="limits"><span class="no">21</span>사용 한도</button>
-    <button class="navitem" data-page="compact"><span class="no">22</span>압축 자세히</button>
+    <button class="navitem" data-page="commands"><span class="no">20</span>슬래시 명령</button>
+    <button class="navitem" data-page="plans"><span class="no">21</span>요금제</button>
+    <button class="navitem" data-page="limits"><span class="no">22</span>사용 한도</button>
     <button class="navitem" data-page="glossary"><span class="no">23</span>용어 사전</button>
   </nav>
 
@@ -459,7 +459,7 @@ irm https://claude.ai/install.ps1 | iex</div>
 
     <!-- 06 MODELS -->
     <section class="page" id="models">
-      <h1>모델 고르기</h1>
+      <h1>모델 고르기 (model)</h1>
       <p class="lead">클로드는 여러 모델이 있어요. <b>똑똑함 · 속도 · 비용</b>은 서로 맞바꾸는 관계예요.</p>
       <p class="defs">더 똑똑하면 보통 더 느리고 비싸요. 일에 맞게 고르면 됩니다. 아래에서 골라보세요.</p>
       <div class="mtabs" id="mtabs">
@@ -576,7 +576,7 @@ description: 주간 보고서를 회사 양식으로 작성
 1. 이번 주 한 일을 모은다
 2. 회사 양식(머리말·표)에 맞춘다
 3. 핵심 요약을 맨 위에 둔다</div>
-      <p class="note">호출: <code>/주간보고</code> 처럼 직접 부르거나, 관련 작업이면 클로드가 알아서 적용. 미리 만들어진 스킬은 <b>플러그인</b>으로 설치할 수도 있어요(11번).</p>
+      <p class="note">호출: <code>/주간보고</code> 처럼 직접 부르거나, 관련 작업이면 클로드가 알아서 적용. 미리 만들어진 스킬은 <b>플러그인</b>으로 설치할 수도 있어요(‘플러그인’ 탭).</p>
     </section>
 
     <!-- 10 MCP -->
@@ -602,7 +602,7 @@ description: 주간 보고서를 회사 양식으로 작성
           <div class="fcard"><div class="ft">그 외</div><div class="fd">GitHub·Slack·노션·DB 등.</div><div class="fe"><b>예</b> 사내 도구와 연결</div></div>
         </div>
       </div>
-      <p class="note">연결한 도구는 <code>/mcp</code> 로 확인. 도구가 많을수록 그 설명도 컨텍스트를 조금씩 차지하니 필요한 것만 연결하세요. MCP를 여러 개 묶어 배포하는 건 ‘플러그인’이에요(11번).</p>
+      <p class="note">연결한 도구는 <code>/mcp</code> 로 확인. 도구가 많을수록 그 설명도 컨텍스트를 조금씩 차지하니 필요한 것만 연결하세요. MCP를 여러 개 묶어 배포하는 건 ‘플러그인’이에요(‘플러그인’ 탭).</p>
     </section>
 
     <!-- 11 PLUGINS -->
@@ -736,7 +736,7 @@ description: 주간 보고서를 회사 양식으로 작성
         <div class="step" id="plan3"><div class="sn2">4</div><div><div class="st2">승인하면 실행</div><div class="sd3">“좋아, 실행해” → 그때 한꺼번에 파일을 고쳐요</div></div></div>
       </div>
       <p class="status" id="plan-msg" style="margin-top:8px;"></p>
-      <p class="note">계획 모드는 ‘읽기 전용’이라 안전해요. 권한 모드(16번)의 한 종류예요. (Windows 일부 터미널에선 <code>Shift</code>+<code>Tab</code> 대신 <code>/plan</code> 권장)</p>
+      <p class="note">계획 모드는 ‘읽기 전용’이라 안전해요. 권한 모드(‘권한 모드’ 탭)의 한 종류예요. (Windows 일부 터미널에선 <code>Shift</code>+<code>Tab</code> 대신 <code>/plan</code> 권장)</p>
     </section>
 
     <!-- 16 PERMISSIONS -->
@@ -759,7 +759,7 @@ description: 주간 보고서를 회사 양식으로 작성
         </div>
         <div><div class="pdetail" id="pdetail"></div><div class="btnrow" style="margin-top:12px;"><button class="btn solid" id="pm-sim">이 모드 동작 보기 ▶</button></div><div class="simbox" id="pm-simbox"></div></div>
       </div>
-      <p class="note">이 5가지는 메뉴에 보이는 모드예요. 자동화 전용으로 ‘사전 승인한 도구만 허용(dontAsk)’ 모드도 따로 있어요. 어떤 모드든 <b>시스템 전체 삭제(rm -rf /) 같은 극단적 파괴</b>는 안전장치로 막혀요. 마음에 안 들면 ‘되돌리기’(17번)로 복구할 수 있어요.</p>
+      <p class="note">이 5가지는 메뉴에 보이는 모드예요. 자동화 전용으로 ‘사전 승인한 도구만 허용(dontAsk)’ 모드도 따로 있어요. 어떤 모드든 <b>시스템 전체 삭제(rm -rf /) 같은 극단적 파괴</b>는 안전장치로 막혀요. 마음에 안 들면 ‘되돌리기’(‘되돌리기’ 탭)로 복구할 수 있어요.</p>
     </section>
 
     <!-- 17 REWIND -->
@@ -814,17 +814,17 @@ description: 주간 보고서를 회사 양식으로 작성
       <p class="label">자주 쓰는 명령</p>
       <div class="tablewrap"><table class="t"><thead><tr><th style="width:130px;">명령</th><th>하는 일</th></tr></thead><tbody>
         <tr><td class="cmd">/help</td><td>쓸 수 있는 명령들을 보여줘요</td></tr>
-        <tr><td class="cmd">/init</td><td>프로젝트를 분석해 CLAUDE.md 기본 파일을 만들어요 (07번)</td></tr>
-        <tr><td class="cmd">/clear</td><td>대화를 비우고 새로 시작 (04번)</td></tr>
-        <tr><td class="cmd">/compact</td><td>대화를 요약해 공간을 비워요 (03·04번)</td></tr>
-        <tr><td class="cmd">/model</td><td>모델을 바꿔요 (06번)</td></tr>
-        <tr><td class="cmd">/memory</td><td>CLAUDE.md·메모리를 보고 편집 (07·08번)</td></tr>
-        <tr><td class="cmd">/mcp</td><td>연결된 외부 도구 확인·관리 (10번)</td></tr>
-        <tr><td class="cmd">/plugin</td><td>플러그인 설치·관리 (11번)</td></tr>
-        <tr><td class="cmd">/agents</td><td>서브에이전트 관리 (12번)</td></tr>
-        <tr><td class="cmd">/plan</td><td>계획 모드로 전환 (15번)</td></tr>
-        <tr><td class="cmd">/rewind</td><td>이전 시점으로 되돌리기 (17번)</td></tr>
-        <tr><td class="cmd">/hooks</td><td>설정된 자동화(훅) 확인 (14번)</td></tr>
+        <tr><td class="cmd">/init</td><td>프로젝트를 분석해 CLAUDE.md 기본 파일을 만들어요 (‘CLAUDE.md’ 탭)</td></tr>
+        <tr><td class="cmd">/clear</td><td>대화를 비우고 새로 시작 (‘세션 & 폴더’ 탭)</td></tr>
+        <tr><td class="cmd">/compact</td><td>대화를 요약해 공간을 비워요 (‘컨텍스트 창’·‘세션’ 탭)</td></tr>
+        <tr><td class="cmd">/model</td><td>모델을 바꿔요 (‘모델 고르기’ 탭)</td></tr>
+        <tr><td class="cmd">/memory</td><td>CLAUDE.md·메모리를 보고 편집 (‘CLAUDE.md’·‘메모리’ 탭)</td></tr>
+        <tr><td class="cmd">/mcp</td><td>연결된 외부 도구 확인·관리 (‘MCP’ 탭)</td></tr>
+        <tr><td class="cmd">/plugin</td><td>플러그인 설치·관리 (‘플러그인’ 탭)</td></tr>
+        <tr><td class="cmd">/agents</td><td>서브에이전트 관리 (‘서브에이전트’ 탭)</td></tr>
+        <tr><td class="cmd">/plan</td><td>계획 모드로 전환 (‘계획 모드’ 탭)</td></tr>
+        <tr><td class="cmd">/rewind</td><td>이전 시점으로 되돌리기 (‘되돌리기’ 탭)</td></tr>
+        <tr><td class="cmd">/hooks</td><td>설정된 자동화(훅) 확인 (‘자동화(훅)’ 탭)</td></tr>
       </tbody></table></div>
       <p class="note">가장 자주 쓰는 건 <b>/clear</b> 와 <b>/compact</b> 예요. 컨텍스트가 꽉 찰 때 쓰면 돼요.</p>
     </section>
@@ -891,8 +891,8 @@ description: 주간 보고서를 회사 양식으로 작성
       </ul>
       <p class="label">한도를 아껴 쓰는 법</p>
       <div class="fgrid">
-        <div class="fcard"><div class="ft">싼 모델 쓰기</div><div class="fd">간단한 일은 Haiku로. Opus는 무겁고 비싸요. (06번)</div></div>
-        <div class="fcard"><div class="ft">자주 비우기</div><div class="fd"><code>/clear</code>·<code>/compact</code>로 컨텍스트 정리. (03·04번)</div></div>
+        <div class="fcard"><div class="ft">싼 모델 쓰기</div><div class="fd">간단한 일은 Haiku로. Opus는 무겁고 비싸요. (‘모델 고르기’ 탭)</div></div>
+        <div class="fcard"><div class="ft">자주 비우기</div><div class="fd"><code>/clear</code>·<code>/compact</code>로 컨텍스트 정리. (‘컨텍스트 창’·‘세션’ 탭)</div></div>
         <div class="fcard"><div class="ft">간결하게 부탁</div><div class="fd">필요한 파일만, 핵심만 요청.</div></div>
       </div>
       <p class="note">정확한 시간·가격·한도 수치는 플랜·시점에 따라 달라요 — <code>claude.com/pricing</code> 과 <code>support.claude.com</code> 에서 확인하세요. (개념은 2026년 6월 공식 문서 기준)</p>
@@ -900,30 +900,30 @@ description: 주간 보고서를 회사 양식으로 작성
 
     <!-- 22 COMPACT DETAIL -->
     <section class="page" id="compact">
-      <h1>압축 자세히 (compact)</h1>
-      <p class="lead">대화가 길어지면 ‘압축’이 일어나요. <b>길게 쌓인 내용이 짧은 요약 하나로</b> 바뀌죠.</p>
+      <h1>압축 (compact)</h1>
+      <p class="lead">대화가 길어지면 ‘압축’이 일어나요. <b>길게 쌓인 내용이 짧은 요약 하나로</b> 바뀌죠 — 책상 위 서류를 핵심만 한 장으로 정리하는 것과 비슷해요.</p>
       <p class="defs">아래는 한 작업의 대화 기록이에요. ‘압축하기’를 누르면 내용이 실제로 어떻게 줄어드는지 보세요.</p>
       <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="cx-go">압축하기 (/compact) ▶</button><button class="btn" id="cx-reset">다시 보기</button></div>
 
       <p class="label" id="cx-label">압축 전 — 대화 기록 (길게 쌓임)</p>
       <div id="cx-before">
-        <div class="cxrow"><span class="cxt">나</span>“가입하면 환영 메일이 안 가요. 원인 찾아서 고쳐줘.”</div>
-        <div class="cxrow"><span class="cxt">파일</span>auth.js · mailer.js · config.js 를 읽음 (합쳐서 수백 줄)</div>
-        <div class="cxrow"><span class="cxt">도구 결과</span>테스트 실행 로그 120줄 — 실패: SMTP 연결 타임아웃 … (긴 오류 로그가 주르륵 …)</div>
-        <div class="cxrow"><span class="cxt">클로드</span>“메일 서버 주소 설정이 빠져 있었네요. config.js 에 SMTP 호스트를 추가하고, 누락된 발신자 주소도 채웠습니다. 이러이러한 이유로 … (긴 설명이 이어짐)”</div>
-        <div class="cxrow"><span class="cxt">도구 결과</span>테스트 재실행 로그 80줄 — 통과 ✓ (상세 로그 …)</div>
-        <div class="cxrow"><span class="cxt">클로드</span>“수정 완료. 이제 환영 메일이 정상 발송됩니다.”</div>
+        <div class="cxrow"><span class="cxt">나</span>“행사 참가자 명단에서 중복을 빼고 날짜순으로 정리해줘.”</div>
+        <div class="cxrow"><span class="cxt">파일</span>참가자명단.xlsx 를 읽음 (참가자 800명)</div>
+        <div class="cxrow"><span class="cxt">중간 결과</span>중복 검사 결과 — 같은 사람 32건 발견 … (이름이 길게 주르륵 …)</div>
+        <div class="cxrow"><span class="cxt">클로드</span>“중복 32건을 하나로 합치고 신청 날짜순으로 정렬했어요. 이러이러한 항목이 … (긴 설명이 이어짐)”</div>
+        <div class="cxrow"><span class="cxt">중간 결과</span>정리된 표 미리보기 — 768행 (긴 표가 주르륵 …)</div>
+        <div class="cxrow"><span class="cxt">클로드</span>“정리 완료. 768명, 날짜순으로 맞춘 파일을 저장했어요.”</div>
       </div>
 
       <div id="cx-after" style="display:none;">
         <div class="cxbadge">압축 전 <b>약 12,000</b>토큰<span class="ar">→</span>압축 후 <b>약 1,400</b>토큰 <span style="color:var(--good);">약 88% 절약</span> <span class="exb">예시값</span></div>
-        <div class="cxsummary"><div class="cxh">요약 한 칸으로</div>사용자가 ‘가입 시 환영 메일 미발송’ 해결을 요청. <b>auth.js·mailer.js·config.js</b> 확인 → <b>config.js의 메일 서버(SMTP) 설정 누락</b>이 원인. SMTP 호스트·발신자 주소를 추가하고 테스트 통과. <b>환영 메일 정상 발송 확인.</b></div>
+        <div class="cxsummary"><div class="cxh">요약 한 칸으로</div>사용자가 ‘참가자 명단 중복 제거 + 날짜순 정렬’을 요청. <b>참가자명단.xlsx</b>(800명) 확인 → <b>중복 32건 발견</b> → 하나로 합치고 신청 날짜순으로 정렬. <b>768명으로 정리해 저장 완료.</b></div>
         <div class="cmp" style="margin-top:14px;">
-          <div class="cmpcard"><h4>남긴 것</h4><div class="who">핵심은 보존</div><div class="cmprow">내 요청과 의도</div><div class="cmprow">고친 파일 목록</div><div class="cmprow">원인과 해결 방법</div><div class="cmprow">최종 결과</div></div>
-          <div class="cmpcard"><h4>버린 것</h4><div class="who">공간 절약</div><div class="cmprow">긴 테스트 로그(120·80줄)</div><div class="cmprow">중간 단계의 장황한 설명</div><div class="cmprow">중복된 내용</div></div>
+          <div class="cmpcard"><h4>남긴 것</h4><div class="who">핵심은 보존</div><div class="cmprow">내 요청과 의도</div><div class="cmprow">처리한 파일</div><div class="cmprow">무엇을 어떻게 했는지</div><div class="cmprow">최종 결과</div></div>
+          <div class="cmpcard"><h4>버린 것</h4><div class="who">공간 절약</div><div class="cmprow">긴 중복 이름 목록</div><div class="cmprow">중간 단계의 장황한 설명</div><div class="cmprow">정리된 표 미리보기</div></div>
         </div>
       </div>
-      <p class="note">이렇게 핵심만 남기고 줄이기 때문에, 압축 뒤에도 ‘무슨 작업을 어떻게 했는지’는 이어가요. 다만 <b>읽었던 코드 원문</b>처럼 버려진 상세 내용이 다시 필요하면 클로드가 그 파일을 다시 읽어요. 토큰 수치는 이해를 돕는 <b>예시</b>예요(실제 값은 상황마다 달라요). 컨텍스트 창에서 자동으로 일어나는 압축은 ‘컨텍스트 창’ 탭에서 볼 수 있어요.</p>
+      <p class="note">이렇게 핵심만 남기고 줄이기 때문에, 압축 뒤에도 ‘무슨 작업을 어떻게 했는지’는 이어가요. 다만 <b>버려진 상세 목록</b>(예: 중복 이름 전체)이 다시 필요하면 클로드가 그 파일을 다시 읽어요. 토큰 수치는 이해를 돕는 <b>예시</b>예요(실제 값은 상황마다 달라요). 컨텍스트 창에서 <b>자동으로</b> 일어나는 압축은 ‘컨텍스트 창’ 탭에서 볼 수 있어요.</p>
     </section>
 
     <!-- 23 GLOSSARY -->
@@ -933,29 +933,29 @@ description: 주간 보고서를 회사 양식으로 작성
       <p class="defs">헷갈릴 때 여기서 빠르게 찾아보세요. 검색창에 단어를 치면 바로 걸러져요.</p>
       <input class="gsearch" id="gloss-search" type="text" placeholder="용어 검색… (예: 터미널, API, 토큰)">
       <div class="gloss" id="gloss-list">
-        <div class="gterm"><div class="gt">컨텍스트 창</div><div class="gd">클로드가 한 번에 들고 있는 ‘작업 공간’. 여기 있는 것만 알아요. (03번)</div></div>
-        <div class="gterm"><div class="gt">토큰</div><div class="gd">AI가 글을 읽는 가장 작은 조각. 컨텍스트·요금의 단위. (05번)</div></div>
-        <div class="gterm"><div class="gt">세션</div><div class="gd">한 번의 연속된 대화. 그 안의 컨텍스트 창에 쌓여요. (04번)</div></div>
-        <div class="gterm"><div class="gt">CLAUDE.md</div><div class="gd">내가 적어두는 규칙 메모. 매 대화에 자동 로드. (07번)</div></div>
-        <div class="gterm"><div class="gt">메모리</div><div class="gd">클로드가 스스로 적는 학습 메모. 세션을 넘어 이어져요. (08번)</div></div>
-        <div class="gterm"><div class="gt">스킬</div><div class="gd">자주 쓰는 작업 절차 묶음. 필요할 때만 펼쳐짐. (09번)</div></div>
-        <div class="gterm"><div class="gt">MCP</div><div class="gd">외부 도구(지라·피그마 등)에 연결하는 표준. (10번)</div></div>
-        <div class="gterm"><div class="gt">플러그인</div><div class="gd">스킬·MCP·명령 등을 묶어 배포하는 꾸러미. (11번)</div></div>
-        <div class="gterm"><div class="gt">서브에이전트</div><div class="gd">특정 일을 따로 맡는 전문 도우미. (12번)</div></div>
-        <div class="gterm"><div class="gt">훅 (Hooks)</div><div class="gd">특정 순간 자동 실행되는 규칙. (14번)</div></div>
-        <div class="gterm"><div class="gt">계획 모드</div><div class="gd">고치기 전 계획부터 보여주고 승인받는 모드. (15번)</div></div>
-        <div class="gterm"><div class="gt">권한 모드</div><div class="gd">얼마나 자주 물어볼지 정하는 설정. (16번)</div></div>
-        <div class="gterm"><div class="gt">체크포인트 · 되돌리기</div><div class="gd">요청마다 자동 저장, 이전으로 복구. (17번)</div></div>
-        <div class="gterm"><div class="gt">압축 (compact)</div><div class="gd">대화를 요약해 컨텍스트 공간을 비움. (03번)</div></div>
-        <div class="gterm"><div class="gt">모델 (Opus·Sonnet·Haiku)</div><div class="gd">똑똑함·속도·비용이 다른 클로드들. (06번)</div></div>
+        <div class="gterm"><div class="gt">컨텍스트 창</div><div class="gd">클로드가 한 번에 들고 있는 ‘작업 공간’. 여기 있는 것만 알아요. (‘컨텍스트 창’ 탭)</div></div>
+        <div class="gterm"><div class="gt">토큰</div><div class="gd">AI가 글을 읽는 가장 작은 조각. 컨텍스트·요금의 단위. (‘토큰’ 탭)</div></div>
+        <div class="gterm"><div class="gt">세션</div><div class="gd">한 번의 연속된 대화. 그 안의 컨텍스트 창에 쌓여요. (‘세션 & 폴더’ 탭)</div></div>
+        <div class="gterm"><div class="gt">CLAUDE.md</div><div class="gd">내가 적어두는 규칙 메모. 매 대화에 자동 로드. (‘CLAUDE.md’ 탭)</div></div>
+        <div class="gterm"><div class="gt">메모리</div><div class="gd">클로드가 스스로 적는 학습 메모. 세션을 넘어 이어져요. (‘메모리’ 탭)</div></div>
+        <div class="gterm"><div class="gt">스킬</div><div class="gd">자주 쓰는 작업 절차 묶음. 필요할 때만 펼쳐짐. (‘스킬’ 탭)</div></div>
+        <div class="gterm"><div class="gt">MCP</div><div class="gd">외부 도구(지라·피그마 등)에 연결하는 표준. (‘MCP’ 탭)</div></div>
+        <div class="gterm"><div class="gt">플러그인</div><div class="gd">스킬·MCP·명령 등을 묶어 배포하는 꾸러미. (‘플러그인’ 탭)</div></div>
+        <div class="gterm"><div class="gt">서브에이전트</div><div class="gd">특정 일을 따로 맡는 전문 도우미. (‘서브에이전트’ 탭)</div></div>
+        <div class="gterm"><div class="gt">훅 (Hooks)</div><div class="gd">특정 순간 자동 실행되는 규칙. (‘자동화(훅)’ 탭)</div></div>
+        <div class="gterm"><div class="gt">계획 모드</div><div class="gd">고치기 전 계획부터 보여주고 승인받는 모드. (‘계획 모드’ 탭)</div></div>
+        <div class="gterm"><div class="gt">권한 모드</div><div class="gd">얼마나 자주 물어볼지 정하는 설정. (‘권한 모드’ 탭)</div></div>
+        <div class="gterm"><div class="gt">체크포인트 · 되돌리기</div><div class="gd">요청마다 자동 저장, 이전으로 복구. (‘되돌리기’ 탭)</div></div>
+        <div class="gterm"><div class="gt">압축 (compact)</div><div class="gd">대화를 요약해 컨텍스트 공간을 비움. (‘컨텍스트 창’ 탭)</div></div>
+        <div class="gterm"><div class="gt">모델 (Opus·Sonnet·Haiku)</div><div class="gd">똑똑함·속도·비용이 다른 클로드들. (‘모델 고르기’ 탭)</div></div>
         <div class="gterm"><div class="gt">터미널 (CLI)</div><div class="gd">컴퓨터에 글자(명령어)로 지시하는 까만 입력 창. ‘명령줄’이라고도 해요. CLI = Command Line Interface.</div></div>
-        <div class="gterm"><div class="gt">API</div><div class="gd">프로그램끼리 주고받는 ‘연결 통로’. 여기선 쓴 만큼 돈 내는 ‘종량제’ 사용 방식을 뜻해요. (20번)</div></div>
+        <div class="gterm"><div class="gt">API</div><div class="gd">프로그램끼리 주고받는 ‘연결 통로’. 여기선 쓴 만큼 돈 내는 ‘종량제’ 사용 방식을 뜻해요. (‘요금제’ 탭)</div></div>
         <div class="gterm"><div class="gt">서버</div><div class="gd">멀리서 일을 처리해 주는 컴퓨터. MCP ‘서버’는 외부 도구를 클로드에 연결해 주는 작은 프로그램이에요.</div></div>
         <div class="gterm"><div class="gt">.md (마크다운)</div><div class="gd">간단한 규칙으로 꾸미는 ‘메모용 글 파일’ 형식. CLAUDE.md, SKILL.md의 .md가 이거예요.</div></div>
         <div class="gterm"><div class="gt">JSON</div><div class="gd">컴퓨터가 읽는 ‘설정 적는 형식’. 훅 같은 설정을 여기에 적어요. (직접 안 적어도 클로드가 대신 해줘요)</div></div>
-        <div class="gterm"><div class="gt">git</div><div class="gd">파일 변경 내역을 기록·되돌리는 ‘버전 관리’ 도구. 되돌리기의 영구 보관판. (17번)</div></div>
-        <div class="gterm"><div class="gt">종량제</div><div class="gd">월정액이 아니라 ‘쓴 만큼’ 내는 방식 (API). (20·21번)</div></div>
-        <div class="gterm"><div class="gt">롤링 한도</div><div class="gd">‘지난 5시간·지난 7일’처럼 흘러가며 다시 채워지는 사용 한도. (21번)</div></div>
+        <div class="gterm"><div class="gt">git</div><div class="gd">파일 변경 내역을 기록·되돌리는 ‘버전 관리’ 도구. 되돌리기의 영구 보관판. (‘되돌리기’ 탭)</div></div>
+        <div class="gterm"><div class="gt">종량제</div><div class="gd">월정액이 아니라 ‘쓴 만큼’ 내는 방식 (API). (‘요금제’·‘사용 한도’ 탭)</div></div>
+        <div class="gterm"><div class="gt">롤링 한도</div><div class="gd">‘지난 5시간·지난 7일’처럼 흘러가며 다시 채워지는 사용 한도. (‘사용 한도’ 탭)</div></div>
         <div class="gterm"><div class="gt">프로토콜</div><div class="gd">서로 다른 프로그램이 대화하기 위한 ‘공통 규칙’. MCP의 P가 이거예요.</div></div>
       </div>
       <p class="note" id="gloss-empty" style="display:none;">검색 결과가 없어요. 다른 단어로 찾아보세요.</p>
