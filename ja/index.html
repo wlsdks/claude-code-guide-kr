@@ -452,7 +452,7 @@ irm https://claude.ai/install.ps1 | iex</div>
     <!-- 03 CONTEXT -->
     <section class="page" id="context">
       <h1>コンテキストウィンドウ</h1>
-      <p class="lead">Claude は<b>一つの空間（コンテキストウィンドウ）</b>に乗っているものだけを知っています。ここに無いものは Claude も知りません。</p>
+      <p class="lead">Claude は<b>一つの作業空間（コンテキストウィンドウ）</b>に乗っているものだけを知っています — Claude の「<b>机</b>」だと思ってください。机の上に無いものは Claude も知りません。</p>
       <p class="defs">マスの高さ = それが占める量。実際に入力してボタンを押して埋めてみてください。</p>
       <div class="cols">
         <div>
@@ -692,7 +692,7 @@ description: 週次レポートを会社の様式で作成
     <!-- 10 MCP -->
     <section class="page" id="mcp">
       <h1>MCP (ツール連携)</h1>
-      <p class="lead"><b>MCP</b> は Claude を外部サービス（Jira・Figma・Google ドライブなど）に<b>つなぎ</b>、Claude がそのツールを直接使えるようにする「共通のルール」です。</p>
+      <p class="lead"><b>MCP</b> は Claude が<b>他のアプリやサービス（Jira・Google ドライブなど）を直接使える</b>ようにつなぐものです — アプリ同士でアカウントを連携するようなイメージです。</p>
       <p class="defs"><span class="gl" title="Model Context Protocol — Claude が外部のツール・データとやり取りする共通のルール（標準）">MCP = Model Context Protocol</span> (モデルが外部とつながる標準)。ボタンを押すと連携の過程を見られます。</p>
       <div class="bignote"><span class="bx">かんたんに</span><span>あるアプリに「Google でログイン」をつなぐと、そのアプリが自分の Google を使えますよね? <b>MCP もそんな「連携」</b>です — Claude に Jira・Figma のようなツールをつないであげると、Claude がそれを直接開いて仕事します。自分でいちいちコピペしなくても済むんです。</span></div>
       <div class="btnrow" style="margin-bottom:12px;"><button class="btn solid" id="mcp-go">ひとつずつ連携してみる ▶</button><button class="btn" id="mcp-reset">リセット</button></div>

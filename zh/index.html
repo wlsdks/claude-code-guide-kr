@@ -451,7 +451,7 @@ irm https://claude.ai/install.ps1 | iex</div>
     <!-- 03 CONTEXT -->
     <section class="page" id="context">
       <h1>上下文窗口</h1>
-      <p class="lead">Claude 只知道<b>放进同一个空间（上下文窗口）</b>里的东西。不在这里的，Claude 也不知道。</p>
+      <p class="lead">Claude 只知道<b>放进一个工作空间（上下文窗口）</b>里的东西——可以把它看作 Claude 的‘<b>桌面</b>’。不在桌面上的，Claude 也不知道。</p>
       <p class="defs">每一格的高度 = 它占用的量。亲自输入、点按钮来填满它看看。</p>
       <div class="cols">
         <div>
@@ -691,7 +691,7 @@ description: 按公司格式撰写周报
     <!-- 10 MCP -->
     <section class="page" id="mcp">
       <h1>MCP (连接工具)</h1>
-      <p class="lead"><b>MCP</b> 是把 Claude <b>连接</b>到外部服务（Jira、Figma、Google Drive 等）、让 Claude 直接使用那些工具的‘通用规则’。</p>
+      <p class="lead"><b>MCP</b> 让 Claude 能<b>直接使用其他应用和服务</b>（Jira、Google Drive 等）——通过连接，就像应用之间互相关联账号一样。</p>
       <p class="defs"><span class="gl" title="Model Context Protocol —— Claude 与外部工具、数据交互的通用规则（标准）">MCP = Model Context Protocol</span>（模型与外部连接的标准）。点按钮就能看到连接的过程。</p>
       <div class="bignote"><span class="bx">通俗讲</span><span>给某个 App 接上‘用 Google 登录’，它就能用你的 Google 账号了吧？<b>MCP 也是这样的‘连接’</b> —— 给 Claude 接上 Jira、Figma 这类工具，Claude 就能直接打开它们来干活。你也不用一项项地复制粘贴了。</span></div>
       <div class="btnrow" style="margin-bottom:12px;"><button class="btn solid" id="mcp-go">逐个连接试试 ▶</button><button class="btn" id="mcp-reset">重置</button></div>

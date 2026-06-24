@@ -451,7 +451,7 @@ irm https://claude.ai/install.ps1 | iex</div>
     <!-- 03 CONTEXT -->
     <section class="page" id="context">
       <h1>Context window</h1>
-      <p class="lead">Claude only knows what's loaded into <b>one space (the context window)</b>. Anything not in here, Claude doesn't know.</p>
+      <p class="lead">Claude only knows what's loaded into <b>one workspace (the context window)</b> — think of it as Claude's <b>'desk.'</b> If it's not on the desk, Claude doesn't know it.</p>
       <p class="defs">A block's height = how much room it takes up. Type something and press the buttons to fill it.</p>
       <div class="cols">
         <div>
@@ -691,7 +691,7 @@ description: Write the weekly report in the company format
     <!-- 10 MCP -->
     <section class="page" id="mcp">
       <h1>MCP (tool connections)</h1>
-      <p class="lead"><b>MCP</b> is a 'common standard' that <b>connects</b> Claude to outside services (Jira, Figma, Google Drive, etc.) so Claude can use those tools directly.</p>
+      <p class="lead"><b>MCP</b> lets Claude <b>use other apps and services directly</b> (Jira, Google Drive, etc.) by connecting to them — like linking accounts between apps.</p>
       <p class="defs"><span class="gl" title="Model Context Protocol — the common standard for how Claude exchanges with outside tools and data">MCP = Model Context Protocol</span> (the standard for connecting a model to the outside world). Press the button to watch the connection happen.</p>
       <div class="bignote"><span class="bx">In simple terms</span><span>When you set up 'Sign in with Google' on an app, that app can use your Google, right? <b>MCP is that kind of 'connection'</b> — connect tools like Jira or Figma to Claude, and Claude opens them itself to get work done. No more copying and pasting everything by hand.</span></div>
       <div class="btnrow" style="margin-bottom:12px;"><button class="btn solid" id="mcp-go">Connect them one by one ▶</button><button class="btn" id="mcp-reset">Reset</button></div>
