@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code Basics — A Guide for Non-Developers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --panel:#fafafa; --ink:#1a1a1a; --muted:#6b6b6b; --faint:#9a9a9a;
+    --line:#e8e8e8; --line2:#d6d6d6; --accent:#1a1a1a; --row:#f4f4f4; --over:#d8453f; --good:#1f9e76; --warn:#b9792a;
+    --blue:#3b7dd8; --purple:#6d5fd0; --orange:#d8662f; --teal:#1f9e76; --pink:#cf5184;
+    --shadow:0 1px 2px rgba(20,22,30,.05), 0 4px 16px rgba(20,22,30,.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#161616; --panel:#1d1d1d; --ink:#ededed; --muted:#a0a0a0; --faint:#6f6f6f;
+      --line:#2c2c2c; --line2:#3a3a3a; --accent:#ededed; --row:#242424; --over:#e5635d; --good:#37b890; --warn:#d8943f; --shadow:none; }
+  }
+  html.theme-light{ --bg:#ffffff; --panel:#fafafa; --ink:#1a1a1a; --muted:#6b6b6b; --faint:#9a9a9a; --line:#e8e8e8; --line2:#d6d6d6; --accent:#1a1a1a; --row:#f4f4f4; --over:#d8453f; --good:#1f9e76; --warn:#b9792a; --shadow:0 1px 2px rgba(20,22,30,.05), 0 4px 16px rgba(20,22,30,.05); }
+  html.theme-dark{ --bg:#161616; --panel:#1d1d1d; --ink:#ededed; --muted:#a0a0a0; --faint:#6f6f6f; --line:#2c2c2c; --line2:#3a3a3a; --accent:#ededed; --row:#242424; --over:#e5635d; --good:#37b890; --warn:#d8943f; --shadow:none; }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:"IBM Plex Sans KR",system-ui,sans-serif; line-height:1.65; -webkit-font-smoothing:antialiased; }
+  .app{ display:flex; min-height:100vh; }
+
+  /* LNB */
+  .lnb{ width:250px; flex:0 0 250px; border-right:1px solid var(--line); padding:26px 14px; position:sticky; top:0; height:100vh; overflow-y:auto; }
+  .brand{ font-size:15px; font-weight:600; padding:0 10px; margin-bottom:4px; }
+  .brand .sub{ display:block; font-size:11.5px; color:var(--faint); font-weight:300; margin-top:2px; }
+  .navsec{ font-size:11px; color:var(--faint); letter-spacing:.4px; text-transform:uppercase; padding:0 10px; margin:18px 0 5px; }
+  .navitem{ display:block; width:100%; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; font-size:13.5px; color:var(--muted); padding:7px 10px; border-radius:8px; transition:background .15s,color .15s; }
+  .navitem:hover{ background:var(--row); color:var(--ink); } .navitem.on{ background:var(--row); color:var(--ink); font-weight:500; }
+  .navitem .no{ color:var(--faint); font-variant-numeric:tabular-nums; margin-right:8px; font-size:12px; }
+  .present-btn{ display:flex; align-items:center; justify-content:center; gap:7px; width:100%; background:var(--bg); border:1px solid var(--line2); color:var(--muted); font-size:12.5px; font-weight:500; padding:9px 10px; border-radius:8px; margin-bottom:16px; cursor:pointer; font-family:inherit; transition:background .15s,color .15s,border-color .15s; }
+  .present-btn:hover{ border-color:var(--accent); color:var(--ink); }
+  .present-btn.on{ background:var(--accent); color:var(--bg); border-color:var(--accent); }
+  .present-btn .pdot{ width:7px; height:7px; border-radius:50%; background:currentColor; opacity:.55; } .present-btn.on .pdot{ opacity:1; }
+  .topctl{ display:flex; gap:8px; margin-bottom:16px; } .topctl .present-btn{ flex:1; margin-bottom:0; padding:9px 8px; font-size:12px; }
+  .topctl .present-btn.theme-ic{ flex:0 0 42px; padding:9px 0; } .theme-ic svg{ width:18px; height:18px; }
+  .navitem{ display:flex; align-items:center; gap:9px; }
+  .navitem .nic{ width:16px; height:16px; flex:0 0 auto; color:var(--faint); transition:color .15s; } .navitem:hover .nic, .navitem.on .nic{ color:var(--ink); }
+  .navitem .lbl{ flex:1; } .navitem .no{ order:2; margin-right:0; margin-left:auto; opacity:.7; }
+
+  /* main */
+  .main{ flex:1; min-width:0; padding:48px clamp(18px,4.5vw,72px) 84px; }
+  .inner{ max-width:880px; margin:0 auto; }
+  @media (min-width:1280px){ .inner{ max-width:960px; } }
+  @media (min-width:1500px){ .inner{ max-width:1040px; } }
+  @media (min-width:1760px){ .inner{ max-width:1120px; } }
+  h1{ font-size:25px; font-weight:600; margin:0 0 8px; letter-spacing:-.3px; }
+  .lead{ font-size:15px; color:var(--muted); margin:0 0 4px; font-weight:300; } .lead b{ color:var(--ink); font-weight:500; }
+  .defs{ font-size:13px; color:var(--faint); margin:0 0 28px; font-weight:300; }
+  .page{ display:none; } .page.on{ display:block; }
+  .page.on > *{ animation:pgrise .5s cubic-bezier(.22,1,.36,1) both; }
+  .page.on > *:nth-child(1){animation-delay:0s} .page.on > *:nth-child(2){animation-delay:.04s} .page.on > *:nth-child(3){animation-delay:.08s} .page.on > *:nth-child(4){animation-delay:.12s} .page.on > *:nth-child(5){animation-delay:.16s} .page.on > *:nth-child(6){animation-delay:.2s} .page.on > *:nth-child(7){animation-delay:.24s} .page.on > *:nth-child(8){animation-delay:.28s} .page.on > *:nth-child(9){animation-delay:.32s} .page.on > *:nth-child(n+10){animation-delay:.36s}
+  @keyframes pgrise{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;} }
+  .tank,.sesswin,.brainwrap,.svgwrap,.mainbox,.tmeter,.stageview,.pmenu,.pdetail,.folderscan,.usefeed{ box-shadow:var(--shadow); }
+  .label{ font-size:12px; color:var(--faint); font-weight:500; letter-spacing:.4px; text-transform:uppercase; margin:30px 0 14px; } .label:first-of-type{ margin-top:0; }
+  .label .hint{ text-transform:none; letter-spacing:0; color:var(--faint); font-weight:300; margin-left:6px; }
+  .note{ font-size:12.5px; color:var(--faint); font-weight:300; margin:14px 0 0; line-height:1.6; }
+  .note code,.inlinecode{ font-family:ui-monospace,Menlo,monospace; background:var(--row); padding:1px 6px; border-radius:4px; font-size:12px; }
+  .callout{ font-size:13.5px; line-height:1.65; background:var(--row); border-radius:12px; padding:14px 16px; margin:0 0 8px; } .callout b{ font-weight:500; } .callout.warn{ background:rgba(216,148,63,.12); }
+  .cols{ display:grid; grid-template-columns:330px 1fr; gap:40px; align-items:start; }
+  @media (max-width:900px){ .cols{ grid-template-columns:1fr; gap:26px; } }
+  button{ font-family:inherit; cursor:pointer; }
+  .btn{ background:var(--bg); border:1px solid var(--line2); color:var(--ink); font-size:13.5px; font-weight:500; padding:9px 15px; border-radius:8px; transition:border-color .2s,opacity .2s; } .btn:hover{ border-color:var(--accent); } .btn:disabled{ opacity:.45; cursor:default; } .btn.solid{ background:var(--accent); color:var(--bg); border-color:var(--accent); }
+  .btnrow{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+
+  /* tank */
+  .head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px; } .head .l{ font-size:13px; color:var(--muted); } .head .n{ font-size:13px; font-weight:500; font-variant-numeric:tabular-nums; } .head .n .max{ color:var(--faint); font-weight:300; } .head .n.over{ color:var(--over); }
+  .tank{ position:relative; height:460px; border:1px solid var(--line2); border-radius:12px; background:var(--panel); overflow:hidden; transition:box-shadow .3s; } .tank.flash{ box-shadow:0 0 0 2px var(--over); }
+  .stack.summarizing .blk.acc{ opacity:.28; filter:grayscale(.5); transition:opacity .5s, filter .5s; }
+  .acoverlay{ position:absolute; inset:0; z-index:3; display:none; align-items:center; justify-content:center; }
+  .acoverlay.on{ display:flex; } .acoverlay span{ background:var(--bg); border:1px solid var(--warn); color:var(--warn); font-size:13px; font-weight:500; padding:8px 16px; border-radius:999px; }
+  /* compact detail page */
+  .cxrow{ border:1px solid var(--line); border-radius:9px; background:var(--panel); padding:10px 13px; margin-bottom:8px; font-size:13px; line-height:1.55; transition:opacity .5s; }
+  .cxrow .cxt{ font-size:10.5px; color:var(--faint); border:1px solid var(--line2); border-radius:4px; padding:1px 6px; margin-right:8px; white-space:nowrap; }
+  .cxrow.drop{ opacity:.25; }
+  .cxbadge{ display:inline-block; font-size:12.5px; font-variant-numeric:tabular-nums; background:var(--row); border-radius:7px; padding:7px 12px; margin-bottom:12px; } .cxbadge b{ font-weight:600; } .cxbadge .ar{ color:var(--faint); margin:0 6px; }
+  .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
+  .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
+  /* collapsible code, one-line summary, example badge */
+  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; }
+  .tldr{ display:flex; gap:10px; align-items:flex-start; background:var(--row); border-radius:12px; padding:12px 15px; margin:0 0 26px; font-size:14px; line-height:1.6; } .tldr .tlb{ font-size:11px; font-weight:600; color:var(--accent); background:var(--bg); border:1px solid var(--line2); border-radius:6px; padding:2px 8px; white-space:nowrap; flex:0 0 auto; margin-top:1px; } .tldr .tlx{ flex:1; } .tldr b{ font-weight:600; }
+  .exb{ display:inline-block; font-size:11px; font-weight:500; color:var(--warn); background:rgba(216,148,63,.14); border-radius:5px; padding:1px 7px; vertical-align:middle; }
+  .gl{ border-bottom:1px dotted var(--line2); cursor:help; }
+  .gsearch{ width:100%; max-width:380px; font-family:inherit; font-size:14px; padding:10px 13px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; margin-bottom:14px; } .gsearch:focus{ border-color:var(--accent); } .gsearch::placeholder{ color:var(--faint); }
+  .gterm.hide{ display:none; }
+  .prow .psafe{ width:9px; height:9px; border-radius:3px; flex:0 0 auto; }
+  .bignote{ display:flex; gap:11px; align-items:flex-start; background:rgba(31,158,118,.1); border:1px solid rgba(31,158,118,.32); border-radius:12px; padding:14px 16px; margin:0 0 14px; font-size:14px; line-height:1.6; } .bignote .bx{ font-size:11px; font-weight:600; color:var(--good); background:var(--bg); border:1px solid rgba(31,158,118,.4); border-radius:6px; padding:2px 8px; white-space:nowrap; flex:0 0 auto; margin-top:1px; } .bignote b{ font-weight:600; }
+  .sitefoot{ margin-top:52px; padding:22px 0 6px; border-top:1px solid var(--line); color:var(--faint); font-size:12.5px; line-height:1.7; }
+  .sitefoot .ft-main{ color:var(--muted); font-size:13.5px; margin-bottom:5px; } .sitefoot .ft-main b{ color:var(--ink); font-weight:600; }
+  .sitefoot .ft-links{ margin-bottom:7px; } .sitefoot .ft-dm{ color:var(--faint); }
+  .sitefoot a{ color:var(--accent); text-decoration:none; border-bottom:1px solid var(--line2); } .sitefoot a:hover{ color:var(--ink); }
+  .langsel{ width:100%; margin-top:8px; font-family:inherit; font-size:12.5px; padding:7px 9px; border-radius:8px; border:1px solid var(--line); background:var(--panel); color:var(--muted); cursor:pointer; outline:none; } .langsel:focus{ border-color:var(--accent); color:var(--ink); }
+  .stack{ position:absolute; inset:0; padding:8px; display:flex; flex-direction:column-reverse; justify-content:flex-start; gap:4px; }
+  .blk{ display:flex; align-items:center; gap:10px; padding:0 12px; border-radius:9px; overflow:hidden; flex:0 0 auto; border:1px solid var(--line); }
+  .blk .dot{ width:9px; height:9px; border-radius:3px; flex:0 0 auto; }
+  .blk .name{ flex:1; font-size:12.5px; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .blk .tag{ font-size:10px; color:var(--faint); border:1px solid var(--line2); padding:1px 6px; border-radius:5px; background:var(--bg); }
+  .blk .tk{ font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums; background:var(--bg); border:1px solid var(--line); border-radius:5px; padding:1px 7px; }
+  .blk.mini{ gap:0; } .blk.mini .name,.blk.mini .tag,.blk.mini .tk{ display:none; }
+  .limit{ position:absolute; left:0; right:0; border-top:1px dashed var(--line2); pointer-events:none; } .limit .cap{ position:absolute; right:8px; top:-9px; font-size:10.5px; color:var(--faint); background:var(--bg); padding:0 6px; } .limit.over{ border-top-color:var(--over); } .limit.over .cap{ color:var(--over); }
+  .free{ position:absolute; left:0; right:0; text-align:center; font-size:11.5px; color:var(--faint); pointer-events:none; transition:bottom .5s cubic-bezier(.22,1,.36,1); }
+  .capbox{ display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; } .capbox input{ width:108px; font-family:inherit; font-size:14px; padding:9px 11px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; text-align:right; font-variant-numeric:tabular-nums; } .capbox input:focus{ border-color:var(--accent); } .capbox .unit{ font-size:13px; color:var(--muted); }
+  .chips{ display:flex; gap:6px; margin-left:auto; flex-wrap:wrap; } .chip{ font-size:12px; color:var(--muted); background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:6px 10px; cursor:pointer; font-family:inherit; transition:border-color .2s,color .2s; } .chip:hover{ border-color:var(--line2); color:var(--ink); } .chip.on{ border-color:var(--accent); color:var(--ink); }
+  .capnote{ font-size:12px; color:var(--faint); margin:0 0 26px; font-weight:300; }
+  .field{ display:flex; gap:8px; margin-bottom:10px; } .field input{ flex:1; min-width:0; font-family:inherit; font-size:14px; padding:11px 13px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; transition:border-color .2s; } .field input:focus{ border-color:var(--accent); } .field input::placeholder{ color:var(--faint); }
+  .send{ background:var(--accent); color:var(--bg); font-weight:500; font-size:14px; border:none; padding:0 18px; border-radius:8px; transition:opacity .15s; } .send:hover{ opacity:.85; }
+  .tokprev{ border:1px solid var(--line); border-radius:8px; background:var(--panel); padding:13px 14px; min-height:80px; } .tokprev .empty{ font-size:12.5px; color:var(--faint); font-weight:300; line-height:1.6; } .tokprev .count{ font-size:12.5px; color:var(--muted); margin-bottom:9px; } .tokprev .count b{ color:var(--ink); font-weight:600; font-variant-numeric:tabular-nums; }
+  .toks{ display:flex; flex-wrap:wrap; gap:3px; } .tok{ font-size:12px; padding:2px 6px; border-radius:4px; background:var(--bg); border:1px solid var(--line2); white-space:pre; line-height:1.4; } .tok.kr{ background:rgba(109,95,208,.14); border-color:rgba(109,95,208,.32); } .tok.en{ background:rgba(59,125,216,.12); border-color:rgba(59,125,216,.3); } .tokprev .why{ font-size:11.5px; color:var(--faint); margin-top:10px; font-weight:300; }
+  .acts{ display:flex; flex-direction:column; gap:8px; } .act{ display:flex; align-items:center; gap:12px; text-align:left; background:var(--bg); border:1px solid var(--line); color:var(--ink); padding:12px 14px; border-radius:8px; transition:border-color .2s; width:100%; } .act:hover{ border-color:var(--line2); } .act .dot{ width:9px; height:9px; border-radius:3px; flex:0 0 auto; } .act .meta{ flex:1; } .act .meta .t{ font-size:14px; font-weight:500; } .act .meta .d{ font-size:12px; color:var(--faint); font-weight:300; } .act .add{ font-size:12px; color:var(--faint); font-variant-numeric:tabular-nums; }
+  .botrow{ display:flex; gap:10px; align-items:center; margin-top:18px; flex-wrap:wrap; } .ghost{ background:none; border:none; color:var(--muted); font-size:13px; padding:6px 2px; } .ghost:hover{ color:var(--ink); } .botrow .sep{ color:var(--faint); }
+  .status{ font-size:12.5px; color:var(--faint); margin:14px 0 0; font-weight:300; min-height:34px; line-height:1.55; }
+
+  /* compare cards / points / tables */
+  .compare{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:0 0 10px; } @media (max-width:560px){ .compare{ grid-template-columns:1fr; } }
+  .ccard{ border:1px solid var(--line); border-radius:12px; padding:16px; background:var(--panel); } .ccard .word{ font-size:18px; font-weight:500; margin-bottom:4px; } .ccard .cc{ font-size:12.5px; color:var(--muted); margin-bottom:10px; } .ccard .cc b{ color:var(--ink); font-weight:600; }
+  .points{ list-style:none; padding:0; margin:0; } .points li{ position:relative; padding:10px 0 10px 18px; border-top:1px solid var(--line); font-size:14px; color:var(--ink); } .points li:first-child{ border-top:none; } .points li::before{ content:""; position:absolute; left:0; top:18px; width:6px; height:6px; border-radius:50%; background:var(--line2); } .points li b{ font-weight:500; } .points li span{ display:block; font-size:12.5px; color:var(--faint); font-weight:300; margin-top:2px; }
+  .tablewrap{ overflow-x:auto; margin:0 0 14px; } table.t{ width:100%; border-collapse:collapse; min-width:420px; } table.t th{ text-align:left; font-size:11px; color:var(--faint); text-transform:uppercase; letter-spacing:.3px; font-weight:500; padding:0 12px 8px; border-bottom:1px solid var(--line2); } table.t td{ font-size:13.5px; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; } table.t td.cmd{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; white-space:nowrap; color:var(--ink); font-weight:500; }
+  .grp{ margin-bottom:30px; } .grp h3{ font-size:14px; font-weight:600; margin:0 0 14px; }
+  .fgrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; } .fcard{ border:1px solid var(--line); border-radius:12px; padding:15px 16px; background:var(--panel); } .fcard .ft{ font-size:14.5px; font-weight:500; margin-bottom:5px; } .fcard .fd{ font-size:13px; color:var(--muted); font-weight:300; line-height:1.55; } .fcard .fe{ font-size:12.5px; color:var(--faint); font-weight:300; margin-top:9px; padding-top:9px; border-top:1px solid var(--line); } .fcard .fe b{ color:var(--muted); font-weight:500; } .fcard code{ font-family:ui-monospace,Menlo,monospace; background:var(--row); padding:1px 5px; border-radius:4px; font-size:11.5px; }
+  .pre{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; background:var(--row); border:1px solid var(--line); border-radius:8px; padding:13px 15px; overflow-x:auto; white-space:pre; line-height:1.6; margin:0 0 22px; color:var(--ink); } .pre .c{ color:var(--faint); }
+  .cmp{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:0 0 8px; } @media (max-width:600px){ .cmp{ grid-template-columns:1fr; } }
+  .cmpcard{ border:1px solid var(--line); border-radius:12px; padding:16px 17px; background:var(--panel); } .cmpcard h4{ font-size:15px; margin:0 0 3px; font-weight:600; } .cmpcard .who{ font-size:12px; color:var(--faint); margin-bottom:12px; font-weight:300; } .cmprow{ font-size:13px; padding:9px 0; border-top:1px solid var(--line); } .cmprow:first-of-type{ border-top:none; } .cmprow b{ color:var(--muted); font-weight:500; display:block; font-size:11px; text-transform:uppercase; letter-spacing:.3px; margin-bottom:2px; }
+
+  /* token lifecycle */
+  .stages{ display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; } .stage{ flex:1; min-width:130px; background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:12px 14px; text-align:left; transition:border-color .2s; color:var(--ink); } .stage:hover{ border-color:var(--line2); } .stage.on{ border-color:var(--accent); } .stage .sn{ font-size:14px; font-weight:500; display:flex; align-items:center; gap:7px; } .stage .sn .d{ width:8px; height:8px; border-radius:50%; } .stage .scost{ font-size:11.5px; color:var(--faint); margin-top:3px; }
+  .lcgrid{ display:grid; grid-template-columns:1fr 240px; gap:18px; align-items:start; } @media (max-width:900px){ .lcgrid{ grid-template-columns:1fr; } }
+  .stageview{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:18px; min-height:120px; } .sv-title{ font-size:14px; font-weight:500; margin-bottom:10px; } .sv-bar{ height:10px; background:var(--row); border-radius:5px; overflow:hidden; } .sv-fill{ height:100%; width:0%; border-radius:5px; transition:width .6s cubic-bezier(.22,1,.36,1); }
+  .think-dots{ display:flex; gap:6px; align-items:center; color:var(--purple); font-size:14px; } .think-dots i{ width:8px; height:8px; border-radius:50%; background:var(--purple); display:inline-block; animation:blink 1s infinite; } .think-dots i:nth-child(2){ animation-delay:.2s; } .think-dots i:nth-child(3){ animation-delay:.4s; } @keyframes blink{ 0%,100%{opacity:.25;} 50%{opacity:1;} }
+  .sv-type{ font-size:14px; line-height:1.6; min-height:44px; } .sv-desc{ font-size:13px; color:var(--muted); margin-top:12px; font-weight:300; }
+  .tmeter{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:16px; } .tmeter .tt{ font-size:12px; color:var(--faint); } .tmeter .total{ font-size:30px; font-weight:600; font-variant-numeric:tabular-nums; margin-bottom:14px; } .tmrow{ margin-bottom:11px; } .tmrow .tl{ display:flex; justify-content:space-between; font-size:12.5px; color:var(--muted); margin-bottom:5px; } .tmrow .tl b{ font-variant-numeric:tabular-nums; color:var(--ink); font-weight:500; } .tmrow .tb{ height:7px; background:var(--row); border-radius:4px; overflow:hidden; } .tmrow .tf{ height:100%; width:0%; border-radius:4px; transition:width .2s linear; }
+
+  /* model */
+  .mtabs{ display:flex; gap:8px; margin-bottom:22px; flex-wrap:wrap; } .mtab{ flex:1; min-width:118px; background:var(--bg); border:1px solid var(--line); border-radius:12px; padding:13px 14px; text-align:left; transition:border-color .2s; color:var(--ink); } .mtab:hover{ border-color:var(--line2); } .mtab.on{ border-color:var(--accent); } .mtab.locked{ opacity:.6; } .mtab.locked.on{ border-color:var(--line2); } .mtab .mn{ font-size:15px; font-weight:600; display:flex; align-items:center; gap:6px; } .mtab .mt{ font-size:12px; color:var(--faint); font-weight:300; margin-top:2px; } .lockpill{ font-size:10px; color:var(--faint); border:1px solid var(--line2); border-radius:4px; padding:0 5px; }
+  .bars{ display:flex; flex-direction:column; gap:14px; margin-bottom:22px; } .bar .bl{ display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:6px; } .bar .bl b{ color:var(--ink); font-weight:500; } .track2{ height:8px; background:var(--row); border-radius:4px; overflow:hidden; } .fill2{ height:100%; width:0%; border-radius:4px; transition:width .5s cubic-bezier(.22,1,.36,1), background .3s; }
+  .muse{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:16px 18px; } .muse.lock{ border-color:var(--line2); } .muse .lockbanner{ font-size:12.5px; color:var(--muted); background:var(--row); border-radius:7px; padding:8px 11px; margin-bottom:12px; } .muse .tagline{ font-size:15px; font-weight:500; margin-bottom:6px; } .muse .when{ font-size:13.5px; color:var(--muted); margin-bottom:10px; font-weight:300; } .muse .ctxline{ font-size:12.5px; color:var(--muted); margin-bottom:12px; } .muse .ctxline b{ color:var(--ink); font-weight:500; } .muse .exlbl{ font-size:11px; color:var(--faint); text-transform:uppercase; letter-spacing:.3px; margin-bottom:6px; } .muse ul{ margin:0; padding-left:18px; } .muse li{ font-size:13.5px; margin-bottom:4px; }
+  .unitcard{ display:grid; grid-template-columns:1fr 1fr; gap:14px; } @media (max-width:560px){ .unitcard{ grid-template-columns:1fr; } } .ucard{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:16px; } .ucard .uk{ font-size:22px; font-weight:600; } .ucard .ukd{ font-size:13px; color:var(--muted); margin-top:2px; } .ucard .ukx{ font-size:12px; color:var(--faint); margin-top:8px; font-weight:300; }
+
+  /* chat demo */
+  .chatdemo{ display:grid; grid-template-columns:1fr 1fr; gap:14px; } @media (max-width:620px){ .chatdemo{ grid-template-columns:1fr; } }
+  .chatcol{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:14px; } .chatcol h4{ font-size:13.5px; margin:0 0 10px; font-weight:600; display:flex; gap:7px; align-items:center; flex-wrap:wrap; } .chatcol h4 .badge{ font-size:11px; font-weight:400; padding:1px 8px; border-radius:5px; } .badge.no{ background:rgba(216,69,63,.13); color:var(--over); } .badge.yes{ background:rgba(31,158,118,.14); color:var(--good); }
+  .bubble{ font-size:13px; border-radius:9px; padding:9px 12px; margin-bottom:8px; max-width:96%; line-height:1.5; } .bubble.u{ background:var(--row); margin-left:auto; } .bubble.a{ border:1px solid var(--line2); min-height:38px; } .bubble .resu{ font-size:11.5px; color:var(--faint); margin-top:6px; font-weight:300; }
+
+  /* memory steps */
+  .memflow{ max-width:580px; } .memstep{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:13px 15px; opacity:.32; transition:opacity .35s, border-color .35s; } .memstep.on{ opacity:1; border-color:var(--line2); } .memstep .ms-t{ font-size:13.5px; font-weight:500; } .memstep .ms-d{ font-size:12.5px; color:var(--muted); font-weight:300; margin-top:3px; } .memstep .ms-d code{ font-family:ui-monospace,Menlo,monospace; background:var(--row); padding:1px 5px; border-radius:4px; font-size:11.5px; } .memarrow{ text-align:center; color:var(--faint); font-size:13px; margin:6px 0; }
+  .mdfile{ font-family:ui-monospace,Menlo,monospace; font-size:12px; background:var(--row); border:1px solid var(--line); border-radius:8px; padding:12px 14px; white-space:pre-wrap; line-height:1.6; min-height:80px; color:var(--ink); } .mdfile .c{ color:var(--faint); }
+
+  /* plugin box */
+  .plugbox{ border:2px solid var(--accent); border-radius:12px; padding:16px; background:var(--panel); margin:0 0 8px; } .plugbox .ph{ font-size:14px; font-weight:600; } .plugbox .psub{ font-size:12px; color:var(--faint); margin:2px 0 14px; font-weight:300; } .pluggrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; } .plugchip{ border:1px solid var(--line2); border-radius:8px; background:var(--bg); padding:11px 12px; } .plugchip .pc-t{ font-size:13px; font-weight:500; } .plugchip .pc-d{ font-size:11.5px; color:var(--faint); font-weight:300; margin-top:2px; }
+
+  /* mcp connect svg */
+  .svgwrap{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:8px; margin:0 0 14px; }
+  .mcp .spoke{ stroke:var(--blue); stroke-width:2; fill:none; opacity:.9; } .mcp .node{ opacity:.3; transition:opacity .4s; } .mcp .node.on{ opacity:1; } .mcp .node rect{ fill:var(--bg); stroke:var(--line2); } .mcp .node.on rect{ stroke:var(--blue); } .mcp .center rect{ fill:var(--accent); } .mcp text{ font-family:"IBM Plex Sans KR",sans-serif; fill:var(--ink); } .mcp .center text{ fill:var(--bg); font-weight:600; } .mcp .chk{ fill:var(--good); font-weight:600; opacity:0; transition:opacity .3s; } .mcp .node.on .chk{ opacity:1; }
+
+  /* subagent demo */
+  .mainbox{ border:1px solid var(--accent); border-radius:12px; background:var(--panel); padding:13px 15px; } .mainbox .mh{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; } .mainbox .mt2{ font-size:13.5px; font-weight:500; }
+  .subrow2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px 0; } @media (max-width:600px){ .subrow2{ grid-template-columns:1fr; } } .subcard{ border:1px solid var(--line2); border-radius:12px; background:var(--panel); padding:12px 14px; opacity:.38; transition:opacity .35s; } .subcard.on{ opacity:1; } .subcard .sh{ font-size:13px; font-weight:500; } .subcard .sd2{ font-size:11.5px; color:var(--faint); font-weight:300; margin:1px 0 9px; }
+  .ctxmini{ height:7px; background:var(--row); border-radius:4px; overflow:hidden; margin-bottom:5px; } .ctxmini i{ display:block; height:100%; width:0%; border-radius:4px; transition:width .25s linear; } .ctxnum{ font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums; } .retmsg{ font-size:11.5px; color:var(--good); margin-top:6px; opacity:0; transition:opacity .3s; } .retmsg.on{ opacity:1; }
+  .sagrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; } @media (max-width:760px){ .sagrid{ grid-template-columns:repeat(2,1fr); } } @media (max-width:440px){ .sagrid{ grid-template-columns:1fr; } }
+  .sabenef{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; } @media (max-width:680px){ .sabenef{ grid-template-columns:1fr; } }
+  .sabf{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:13px 15px; opacity:.4; transition:opacity .4s, border-color .4s; } .sabf.on{ opacity:1; border-color:var(--line2); }
+  .sabf .ft{ font-size:13.5px; font-weight:600; margin-bottom:4px; } .sabf .fd{ font-size:12.5px; color:var(--muted); font-weight:300; line-height:1.5; }
+
+  /* skills with/without */
+  .skgrid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; } @media (max-width:600px){ .skgrid{ grid-template-columns:1fr; } } .skcol{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:14px; } .skcol h4{ font-size:13.5px; margin:0 0 4px; font-weight:600; display:flex; gap:7px; align-items:center; } .skcol .skb{ display:flex; flex-direction:column; gap:6px; margin-top:8px; min-height:150px; } .skline{ font-size:12.5px; padding:8px 10px; border-radius:7px; background:var(--bg); border:1px solid var(--line); opacity:0; transform:translateY(-5px); transition:opacity .3s,transform .3s; } .skline.on{ opacity:1; transform:none; } .skline.long{ border-color:rgba(216,69,63,.3); } .skline.short{ border-color:rgba(31,158,118,.35); }
+
+  /* permissions */
+  .pmenu{ border:1px solid var(--line2); border-radius:12px; overflow:hidden; background:var(--panel); } .prow{ display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:none; border:none; border-bottom:1px solid var(--line); padding:13px 15px; cursor:pointer; transition:background .15s; color:var(--ink); } .prow:last-child{ border-bottom:none; } .prow:hover{ background:var(--row); } .prow.on{ background:var(--row); } .prow .pno{ width:20px; height:20px; border-radius:5px; background:var(--bg); border:1px solid var(--line2); font-size:11px; display:flex; align-items:center; justify-content:center; color:var(--muted); flex:0 0 auto; } .prow .pl{ flex:1; font-size:14px; font-weight:500; } .prow .pl span{ font-weight:300; color:var(--faint); font-size:12px; margin-left:6px; } .prow .pchk{ color:var(--good); font-size:14px; opacity:0; } .prow.on .pchk{ opacity:1; }
+  .pdetail{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:16px 18px; } .pdetail .pt{ font-size:15px; font-weight:600; margin-bottom:10px; display:flex; align-items:center; gap:8px; } .pbadge{ font-size:11px; padding:2px 8px; border-radius:5px; font-weight:500; } .pdrow{ font-size:13.5px; padding:8px 0; border-top:1px solid var(--line); } .pdrow:first-of-type{ border-top:none; } .pdrow b{ color:var(--muted); font-weight:500; font-size:11.5px; text-transform:uppercase; letter-spacing:.3px; display:block; margin-bottom:2px; }
+  .pspec{ position:relative; height:8px; background:linear-gradient(90deg, var(--good), #d8943f, var(--over)); border-radius:4px; margin:22px 2px 6px; } .pmark{ position:absolute; top:-5px; width:18px; height:18px; border-radius:50%; background:var(--bg); border:2px solid var(--accent); transform:translateX(-50%); transition:left .35s cubic-bezier(.22,1,.36,1); } .paxis{ display:flex; justify-content:space-between; font-size:11.5px; color:var(--faint); margin:0 2px; }
+  .simbox{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:7px; min-height:150px; margin-top:12px; } .simrow{ display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; font-size:13px; opacity:0; transform:translateY(-5px); transition:opacity .3s,transform .3s; } .simrow.on{ opacity:1; transform:none; } .simrow .sa{ flex:1; } .simrow .sp{ font-size:11.5px; font-weight:500; padding:2px 9px; border-radius:5px; white-space:nowrap; } .sp.auto{ background:rgba(31,158,118,.15); color:var(--good); } .sp.ask{ background:rgba(216,148,63,.18); color:var(--warn); } .sp.block{ background:rgba(216,69,63,.14); color:var(--over); } .sp.plan{ background:var(--row); color:var(--muted); }
+
+  /* sessions + brain */
+  .sessgrid{ display:grid; grid-template-columns:1fr 300px; gap:30px; align-items:start; } @media (max-width:900px){ .sessgrid{ grid-template-columns:1fr; gap:22px; } }
+  .sesswin{ border:1px solid var(--line2); border-radius:12px; background:var(--panel); overflow:hidden; } .sesshead{ display:flex; align-items:center; justify-content:space-between; padding:9px 13px; border-bottom:1px solid var(--line); font-size:12px; color:var(--muted); } .sesshead .dotrow span{ display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; background:var(--line2); }
+  .sessbody{ padding:11px; min-height:300px; display:flex; flex-direction:column; gap:6px; } .sessrow{ display:flex; align-items:center; gap:9px; padding:8px 11px; border-radius:8px; background:var(--bg); border:1px solid var(--line); font-size:12.5px; } .sessrow .tdot{ width:9px; height:9px; border-radius:3px; flex:0 0 auto; } .sessrow .sk{ font-size:10.5px; color:var(--faint); border:1px solid var(--line2); border-radius:4px; padding:0 5px; flex:0 0 auto; } .sessrow .sl{ flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; } .sessrow.warn{ background:rgba(216,69,63,.1); border-color:rgba(216,69,63,.3); color:var(--over); font-weight:500; } .sessrow.muted{ color:var(--faint); justify-content:center; border-style:dashed; } .sessrow.done{ background:rgba(31,158,118,.1); border-color:rgba(31,158,118,.3); color:var(--good); }
+  .sessfoot{ padding:10px 13px; border-top:1px solid var(--line); } .sessbar{ height:7px; background:var(--row); border-radius:4px; overflow:hidden; margin-bottom:6px; } .sessbar i{ display:block; height:100%; width:0%; background:var(--good); border-radius:4px; transition:width .5s ease, background .3s; } .sessbar-l{ font-size:11.5px; color:var(--faint); }
+  .brainwrap{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:16px 14px; text-align:center; } .brainwrap .blbl{ font-size:12px; color:var(--faint); margin-bottom:8px; } .brain-stat{ font-size:12.5px; color:var(--muted); margin-top:10px; min-height:18px; } .brain-stat b{ color:var(--ink); font-weight:500; }
+  svg.brain{ transition:transform .1s; max-width:240px; width:100%; } svg.brain.overload{ animation:shake .35s infinite; } @keyframes shake{ 0%,100%{transform:translateX(0);} 25%{transform:translateX(-2px);} 75%{transform:translateX(2px);} }
+  .brain .bg{ fill:var(--row); } .brain .outline{ fill:none; stroke:var(--line2); stroke-width:3; } .brain.overload .outline{ stroke:var(--over); } .brain .fold{ fill:none; stroke:var(--line2); stroke-width:1.4; opacity:.55; stroke-linecap:round; } .brain .sheen{ fill:#ffffff; opacity:.10; }
+  .folderbox{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:14px; max-width:560px; } .foldopt{ display:flex; gap:10px; align-items:flex-start; padding:10px; border-radius:8px; border:1px solid var(--line); margin-bottom:8px; background:var(--bg); } .foldopt .fi{ font-size:11px; font-variant-numeric:tabular-nums; color:var(--faint); white-space:nowrap; } .foldopt.bad{ border-color:rgba(216,69,63,.3); } .foldopt.good{ border-color:rgba(31,158,118,.35); } .foldopt .fl{ font-size:13px; font-weight:500; } .foldopt .fz{ font-size:12px; color:var(--muted); font-weight:300; }
+
+  /* images */
+  .imggrid{ display:grid; grid-template-columns:300px 1fr; gap:26px; align-items:start; } @media (max-width:680px){ .imggrid{ grid-template-columns:1fr; gap:20px; } }
+  .shotframe{ background:var(--row); border-radius:12px; padding:16px; } .shot{ background:var(--bg); border:1px solid var(--line2); border-radius:12px; padding:20px 18px; } .shot .reg{ border-radius:6px; transition:box-shadow .25s; padding:2px; } .shot .reg.hl{ box-shadow:0 0 0 2px var(--blue); } .shot-title{ font-size:18px; font-weight:600; margin-bottom:14px; text-align:center; } .shot-input{ font-size:12px; color:var(--faint); border:1px solid var(--line2); border-radius:7px; padding:9px 11px; margin-bottom:8px; } .shot-btn{ background:var(--blue); color:#fff; text-align:center; font-size:13px; font-weight:500; border-radius:7px; padding:9px; margin-top:4px; } .shot-err{ color:var(--over); font-size:11.5px; margin-top:10px; text-align:center; }
+  .detlist{ list-style:none; padding:0; margin:0 0 14px; } .detlist li{ display:flex; gap:9px; align-items:flex-start; font-size:13.5px; padding:9px 0; border-top:1px solid var(--line); opacity:0; transform:translateX(8px); transition:opacity .3s, transform .3s; } .detlist li:first-child{ border-top:none; } .detlist li.on{ opacity:1; transform:none; } .detlist li .di{ color:var(--good); flex:0 0 auto; } .detsum{ font-size:13.5px; background:var(--row); border-radius:8px; padding:12px 14px; opacity:0; transition:opacity .3s; line-height:1.6; } .detsum.on{ opacity:1; }
+
+  /* plan/rewind steppers */
+  .steps{ display:flex; flex-direction:column; gap:0; max-width:560px; } .step{ display:flex; gap:12px; align-items:flex-start; padding:12px 0; border-top:1px solid var(--line); opacity:.35; transition:opacity .35s; } .step:first-child{ border-top:none; } .step.on{ opacity:1; } .step .sn2{ width:24px; height:24px; border-radius:50%; background:var(--row); border:1px solid var(--line2); font-size:12px; display:flex; align-items:center; justify-content:center; flex:0 0 auto; font-weight:500; } .step.on .sn2{ background:var(--accent); color:var(--bg); border-color:var(--accent); } .step .st2{ font-size:14px; font-weight:500; } .step .sd3{ font-size:12.5px; color:var(--muted); font-weight:300; margin-top:1px; }
+  .timeline{ display:flex; align-items:center; gap:0; margin:8px 0 16px; flex-wrap:wrap; } .tlpt{ display:flex; align-items:center; } .tlpt .dot2{ width:14px; height:14px; border-radius:50%; background:var(--row); border:2px solid var(--line2); cursor:pointer; transition:border-color .2s, background .2s; } .tlpt.cur .dot2{ background:var(--accent); border-color:var(--accent); } .tlpt.restored .dot2{ background:var(--good); border-color:var(--good); } .tlpt .tlbar{ width:40px; height:2px; background:var(--line2); } .tllabels{ display:flex; gap:8px; flex-wrap:wrap; font-size:11.5px; color:var(--faint); }
+
+  /* glossary */
+  .gloss{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:10px; } .gterm{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:13px 15px; } .gterm .gt{ font-size:13.5px; font-weight:600; } .gterm .gd{ font-size:12.5px; color:var(--muted); font-weight:300; margin-top:3px; line-height:1.5; }
+
+  /* chat-vs-code build + folder scan + ac line */
+  .ccbuild{ display:flex; flex-direction:column; gap:6px; } .cstep{ font-size:12.5px; padding:8px 11px; border-radius:8px; background:var(--bg); border:1px solid var(--line); display:flex; gap:8px; align-items:center; opacity:0; transform:translateY(-5px); transition:opacity .3s,transform .3s; } .cstep.on{ opacity:1; transform:none; } .cstep .ck{ color:var(--good); }
+  .ccresu{ font-size:12.5px; color:var(--muted); margin-top:10px; font-weight:300; line-height:1.55; } .ccresu b{ color:var(--ink); font-weight:500; }
+  .acline{ position:absolute; left:0; right:0; border-top:2px dashed var(--warn); pointer-events:none; } .acline .cap{ position:absolute; left:8px; top:-9px; font-size:10.5px; color:var(--warn); background:var(--bg); padding:0 6px; }
+  .folderscan{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:10px; min-height:140px; font-family:ui-monospace,Menlo,monospace; font-size:12px; }
+  .folderscan .fs{ padding:3px 4px; color:var(--muted); } .folderscan .fs.junk{ color:var(--faint); }
+  .folderscan .fsv{ margin-top:8px; font-family:"IBM Plex Sans KR",sans-serif; font-size:12.5px; padding:9px 11px; border-radius:7px; line-height:1.5; } .fsv.bad{ background:rgba(216,69,63,.1); color:var(--over); } .fsv.good{ background:rgba(31,158,118,.12); color:var(--good); } .fsv b{ font-weight:500; }
+
+  /* usage limits gauges */
+  .gauge{ margin-bottom:14px; } .gauge .gl{ display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:6px; } .gauge .gl b{ color:var(--ink); font-weight:500; font-variant-numeric:tabular-nums; }
+  .gtrack{ height:12px; background:var(--row); border-radius:6px; overflow:hidden; } .gtrack i{ display:block; height:100%; width:0%; border-radius:6px; background:var(--good); transition:width .4s ease, background .3s; }
+  .usefeed{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:8px; min-height:120px; display:flex; flex-direction:column; gap:5px; } .usefeed .uf{ font-size:12px; color:var(--muted); padding:6px 10px; background:var(--bg); border:1px solid var(--line); border-radius:6px; }
+  .lockmsg{ font-size:13px; font-weight:500; color:var(--over); margin-top:12px; min-height:20px; line-height:1.5; }
+
+  /* polish: micro-interactions & motion */
+  .fcard,.gterm,.ucard{ transition:border-color .18s ease, transform .18s ease; }
+  .fcard:hover,.gterm:hover,.ucard:hover{ border-color:var(--line2); transform:translateY(-1px); }
+  .mtab,.stage,.act,.chip,.btn,.send,.navitem,.present-btn,.prow{ transition:border-color .16s ease, background .16s ease, color .16s ease, transform .08s ease; }
+  .btn:active,.send:active,.chip:active,.act:active,.mtab:active{ transform:scale(.985); }
+  .bubble.a{ transition:border-color .2s ease; }
+  @media (prefers-reduced-motion: reduce){ *{ animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+
+  /* responsive nav */
+  @media (max-width:860px){
+    .app{ flex-direction:column; } .lnb{ width:auto; flex:none; height:auto; position:sticky; top:0; z-index:5; border-right:none; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:4px; padding:12px 14px; overflow-x:auto; background:var(--bg); -webkit-overflow-scrolling:touch; } .brand{ padding:0; margin:0 8px 0 0; white-space:nowrap; } .brand .sub{ display:none; } .navsec{ display:none; } .navitem{ width:auto; white-space:nowrap; padding:7px 11px; } .navitem .no{ display:none; } .present-btn{ width:auto; flex:0 0 auto; white-space:nowrap; margin:0; padding:7px 11px; } .topctl{ flex:0 0 auto; margin:0 8px 0 0; gap:6px; } .navitem .nic{ display:none; } .navitem .no{ display:none; } .navitem .lbl{ flex:0 0 auto; } .main{ padding:28px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <nav class="lnb">
+    <div class="topctl">
+      <button class="present-btn theme-ic" id="theme-toggle" aria-label="Switch light/dark"></button>
+      <button class="present-btn" id="present-toggle" title="Zooms the whole screen up bigger — great for projectors, large screens, or just seeing details up close (the simulations grow too). Press again to go back."><span class="pdot"></span><span id="present-label">Expand mode</span></button>
+    </div>
+    <select class="langsel" id="lang-select" title="Language" aria-label="Language">
+      <option value="ko">한국어</option>
+      <option value="en">English</option>
+      <option value="zh" disabled>中文 (coming soon)</option>
+      <option value="ja" disabled>日本語 (coming soon)</option>
+    </select>
+    <div class="brand">Claude Code Basics<span class="sub">A guide for non-developers</span></div>
+    <div class="navsec">Getting started</div>
+    <button class="navitem on" data-page="intro"><span class="no">01</span>What is Claude Code?</button>
+    <button class="navitem" data-page="where"><span class="no">02</span>Where to use it</button>
+    <div class="navsec">Basic concepts</div>
+    <button class="navitem" data-page="context"><span class="no">03</span>Context window</button>
+    <button class="navitem" data-page="sessions"><span class="no">04</span>Sessions & folders</button>
+    <button class="navitem" data-page="tokens"><span class="no">05</span>Tokens</button>
+    <button class="navitem" data-page="models"><span class="no">06</span>Choosing a model</button>
+    <div class="navsec">Memory & rules</div>
+    <button class="navitem" data-page="claudemd"><span class="no">07</span>CLAUDE.md</button>
+    <button class="navitem" data-page="memory"><span class="no">08</span>Memory</button>
+    <button class="navitem" data-page="skills"><span class="no">09</span>Skills</button>
+    <div class="navsec">Expanding abilities</div>
+    <button class="navitem" data-page="mcp"><span class="no">10</span>MCP (tool connections)</button>
+    <button class="navitem" data-page="plugins"><span class="no">11</span>Plugins</button>
+    <button class="navitem" data-page="agents"><span class="no">12</span>Subagents</button>
+    <button class="navitem" data-page="images"><span class="no">13</span>Pasting images</button>
+    <button class="navitem" data-page="hooks"><span class="no">14</span>Automation (hooks)</button>
+    <div class="navsec">Staying safe</div>
+    <button class="navitem" data-page="planmode"><span class="no">15</span>Plan mode</button>
+    <button class="navitem" data-page="permissions"><span class="no">16</span>Permission modes</button>
+    <button class="navitem" data-page="rewind"><span class="no">17</span>Rewind</button>
+    <button class="navitem" data-page="privacy"><span class="no">18</span>Data & privacy</button>
+    <div class="navsec">In practice</div>
+    <button class="navitem" data-page="commands"><span class="no">19</span>Slash commands</button>
+    <button class="navitem" data-page="plans"><span class="no">20</span>Plans & pricing</button>
+    <button class="navitem" data-page="limits"><span class="no">21</span>Usage limits</button>
+    <button class="navitem" data-page="compact"><span class="no">22</span>Compaction in detail</button>
+    <button class="navitem" data-page="glossary"><span class="no">23</span>Glossary</button>
+  </nav>
+
+  <main class="main"><div class="inner">
+
+    <!-- 01 INTRO + chat vs code -->
+    <section class="page on" id="intro">
+      <h1>What is Claude Code?</h1>
+      <p class="lead">Even if you never write code yourself, <b>just ask in plain words</b> and it reads, edits, and runs your files for you. It's an AI tool.</p>
+      <p class="defs">Let's start by seeing how it differs from the chat you're used to (ChatGPT, the Claude chat app).</p>
+
+      <p class="label">Chat vs Claude Code <span class="hint">Same request — give it a click</span></p>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="cc-go">See the difference ▶</button></div>
+      <div class="chatdemo">
+        <div class="chatcol"><h4>Claude chat <span class="badge no">Advice & code snippets</span></h4>
+          <div class="bubble u">Add a booking feature to our website</div>
+          <div class="bubble a" id="cc-chat"></div>
+          <div class="ccresu" id="cc-chat-r"></div>
+        </div>
+        <div class="chatcol"><h4>Claude Code <span class="badge yes">A working result</span></h4>
+          <div class="bubble u">Add a booking feature to our website</div>
+          <div class="ccbuild" id="cc-code"></div>
+          <div class="ccresu" id="cc-code-r"></div>
+        </div>
+      </div>
+      <p class="note">The point isn't just 'does it give you an answer' — it's <b>does it actually build it in your project and make it work</b>. Today's chat tools can edit text and code too, but that's 'shown inside the chat.' Claude Code <b>creates several files itself, connects them, runs them, and finishes a 'working result.'</b> (Both use the same Claude model.)</p>
+
+      <div class="grp" style="margin-top:30px;">
+        <h3>What Claude Code can do</h3>
+        <div class="fgrid">
+          <div class="fcard"><div class="ft">Ask in plain words</div><div class="fd">No coding needed — just ask normally.</div><div class="fe"><b>e.g.</b> "Make this button blue"</div></div>
+          <div class="fcard"><div class="ft">Read and edit files</div><div class="fd">Opens files itself, edits and saves.</div><div class="fe"><b>e.g.</b> "Fix the typos on the About page"</div></div>
+          <div class="fcard"><div class="ft">Run commands for you</div><div class="fd">Handles installing, testing, running.</div><div class="fe"><b>e.g.</b> "Run the tests and tell me"</div></div>
+          <div class="fcard"><div class="ft">Connect outside tools</div><div class="fd">Works with Jira, Figma, and more (MCP).</div><div class="fe"><b>e.g.</b> "Build it to match this Figma"</div></div>
+        </div>
+      </div>
+      <div class="grp" style="margin-top:24px;">
+        <h3>It's not just for developers — it helps with things like this too</h3>
+        <div class="fgrid">
+          <div class="fcard"><div class="ft">Tidying spreadsheets</div><div class="fd">Clean up and merge messy tables.</div><div class="fe"><b>e.g.</b> "Sort this Excel sheet by date"</div></div>
+          <div class="fcard"><div class="ft">Searching a list</div><div class="fd">Pull out only the people or items that match.</div><div class="fe"><b>e.g.</b> "From the customer list, just those whose contract ends this month"</div></div>
+          <div class="fcard"><div class="ft">Polishing documents</div><div class="fd">Typos, wording, translation — all at once.</div><div class="fe"><b>e.g.</b> "Find and fix the typos in this notice"</div></div>
+          <div class="fcard"><div class="ft">Organizing files</div><div class="fd">Rename files and sort folders by a rule.</div><div class="fe"><b>e.g.</b> "Rename the video files as date_title"</div></div>
+        </div>
+      </div>
+      <div class="bignote"><span class="bx">Note</span><span>This guide is <b>a place to learn the concepts</b> — it doesn't cover how to install or get started (the official docs handle that). And it's <b>an unofficial learning resource</b>, not affiliated with Anthropic.</span></div>
+      <p class="note">Use the left menu (the top tabs on narrow screens) to jump between the 23 topics. Everything is built so you can understand it through buttons and inputs <b>without trying it yourself</b>. In the text, <span class="gl" title="Words underlined with a dotted line like this show their meaning when you hover over them. On mobile, see the explanation in parentheses.">words with a dotted underline</span> show their meaning when you hover.</p>
+    </section>
+
+    <!-- 02 WHERE -->
+    <section class="page" id="where">
+      <h1>Where to use it</h1>
+      <p class="lead">Claude Code works the same way across <b>several environments</b>. Your CLAUDE.md and settings are shared everywhere.</p>
+      <p class="defs">If you're new, most people start with the 'terminal' or the 'VS Code extension.'</p>
+      <div class="grp">
+        <h3>Where you can use it (as of June 2026)</h3>
+        <div class="fgrid">
+          <div class="fcard"><div class="ft"><span class="gl" title="The black input window where you instruct a computer with text (commands). Also called the 'command line.'">Terminal (CLI)</span></div><div class="fd">Type <code>claude</code> in the black input window to start.</div></div>
+          <div class="fcard"><div class="ft">VS Code extension</div><div class="fd">Work right inside the editor, seeing changes as they happen.</div></div>
+          <div class="fcard"><div class="ft">JetBrains plugin</div><div class="fd">IntelliJ, PyCharm, etc. (the CLI must be installed too).</div></div>
+          <div class="fcard"><div class="ft">Desktop app</div><div class="fd">A standalone app for macOS and Windows.</div></div>
+          <div class="fcard"><div class="ft">Web</div><div class="fd">Right in your browser at claude.ai/code, no install.</div></div>
+        </div>
+      </div>
+      <p class="label">Installing (for reference)</p>
+      <div class="pre"><span class="c"># macOS / Linux terminal</span>
+curl -fsSL https://claude.ai/install.sh | bash
+
+<span class="c"># Windows PowerShell</span>
+irm https://claude.ai/install.ps1 | iex</div>
+      <ul class="points">
+        <li><b>You need a paid Claude plan or the API.</b><span>You can't use Claude Code on the free plan. (See plans in section 20.)</span></li>
+        <li><b>First steps</b><span>In your project folder, type <code>claude</code> → log in → just start talking, like "What does this project do?"</span></li>
+      </ul>
+      <p class="note">Exact install steps and requirements change by version, so check the latest guidance at <code>code.claude.com/docs</code>.</p>
+    </section>
+
+    <!-- 03 CONTEXT -->
+    <section class="page" id="context">
+      <h1>Context window</h1>
+      <p class="lead">Claude only knows what's loaded into <b>one space (the context window)</b>. Anything not in here, Claude doesn't know.</p>
+      <p class="defs">A block's height = how much room it takes up. Type something and press the buttons to fill it.</p>
+      <div class="cols">
+        <div>
+          <div class="head"><span class="l">Usage</span><span class="n" id="num"><span id="tok">0</span><span class="max"> / 40,000</span></span></div>
+          <div class="tank" id="tank"><div class="free" id="free"></div><div class="acline" id="acline"><span class="cap" id="accap">Auto-compact</span></div><div class="limit" id="limit"><span class="cap" id="cap">Limit 40,000</span></div><div class="stack" id="stack"></div><div class="acoverlay" id="acoverlay"><span>Summarizing…</span></div></div>
+        </div>
+        <div>
+          <p class="label" style="margin-top:0;">Window size <span class="hint">Change it and compare</span></p>
+          <div class="capbox"><input id="capinp" type="number" value="40000" min="2000" step="1000"><span class="unit">tokens</span>
+            <div class="chips"><button class="chip" data-v="8000">8K</button><button class="chip on" data-v="40000">40K</button><button class="chip" data-v="200000">200K</button></div></div>
+          <p class="capnote">The default context window is 200,000 (200K) tokens. The latest Opus and Sonnet go up to 1,000,000 (1M) — see section 06.</p>
+          <p class="label">Type something <span class="hint">Try it yourself</span></p>
+          <div class="field"><input id="inp" type="text" placeholder="e.g. Fix the login bug" maxlength="80"><button class="send" id="send">Send</button></div>
+          <div class="tokprev" id="tokprev" style="margin-bottom:20px;"></div>
+          <p class="label">Claude's work <span class="hint">Takes up the most room</span></p>
+          <div class="acts">
+            <button class="act" data-k="file" data-t="8400"><span class="dot" style="background:#d8662f"></span><span class="meta"><div class="t">Reading files</div><div class="d">Pulls in whole code files</div></span><span class="add">+8,400</span></button>
+            <button class="act" data-k="tool" data-t="3100"><span class="dot" style="background:#3b7dd8"></span><span class="meta"><div class="t">Running commands</div><div class="d">Output from tests and searches</div></span><span class="add">+3,100</span></button>
+            <button class="act" data-k="reply" data-t="1800"><span class="dot" style="background:#cf5184"></span><span class="meta"><div class="t">Claude's reply</div><div class="d">Writes explanations and code</div></span><span class="add">+1,800</span></button>
+          </div>
+          <div class="botrow"><button class="btn solid" id="autocompact">See auto-compact ▶</button><button class="ghost" id="compact">Manual compact</button><span class="sep">·</span><button class="ghost" id="reset">Reset</button></div>
+          <p class="status" id="status">The three blocks below are always loaded, even before you start a conversation. They're Claude's 'basic supplies.'</p>
+        </div>
+      </div>
+      <p class="label">What is auto-compact?</p>
+      <p style="font-size:14px;margin:0 0 14px;">When a conversation gets long and the context window nears its limit, Claude <b>summarizes the earlier conversation on its own</b> to make room. Press "See auto-compact" above to watch it fill up and then shrink into a summary.</p>
+      <div class="cmp">
+        <div class="cmpcard"><h4>What stays</h4><div class="who">Kept in the summary</div><div class="cmprow">Your request and intent</div><div class="cmprow">The list of files read or edited, and the key code</div><div class="cmprow">Errors, how they were solved, and remaining to-dos</div></div>
+        <div class="cmpcard"><h4>What goes away</h4><div class="who">To save room</div><div class="cmprow">Long command output (terminal results)</div><div class="cmprow">Wordy explanations of intermediate steps</div><div class="cmprow">Repeated content</div></div>
+      </div>
+      <p class="note"><b>When does it start?</b> It kicks in automatically when the context window is <b>nearly full (close to the limit)</b>. The exact % threshold isn't officially published (it just says "as it nears the limit"). After compacting, system instructions, CLAUDE.md, memory, and MCP tools are reloaded automatically, but the <b>skill list</b> shown at first isn't refilled — only the 'skills already used' remain. Manual <code>/compact</code> works the same way. (Source: official docs, as of June 2026.)</p>
+    </section>
+
+    <!-- 04 SESSIONS -->
+    <section class="page" id="sessions">
+      <h1>Sessions & folders</h1>
+      <p class="lead">A <b>session</b> is one continuous conversation. Everything piles up in that session's context window.</p>
+      <p class="defs">It's fine if you're not great with computers. In order — <b>first pick a folder, then start a session inside it.</b></p>
+
+      <p class="label">Step 1 — Pick your working folder first <span class="hint">A session starts inside a folder</span></p>
+      <div class="folderbox" style="max-width:100%;">
+        <p style="font-size:14px;margin:0 0 4px;">Claude only sees the files <b>inside the folder you started in</b>. So 'which folder you start in' comes first. Use the buttons to see what happens if you don't pick one.</p>
+        <div class="btnrow" style="margin:10px 0;"><button class="btn" id="fold-home">Start without picking a folder (whole home) ▶</button><button class="btn solid" id="fold-proj">Start in the project folder ▶</button></div>
+        <div class="folderscan" id="fold-scan"><div class="fs">Press a button to see 'which files Claude ends up looking at.'</div></div>
+      </div>
+
+      <p class="label">Step 2 — Start a session in that folder <span class="hint">What if you mix many jobs in one session?</span></p>
+      <div class="botrow" style="margin:0 0 16px;"><button class="btn solid" id="sess-play">See it get messy ▶</button><button class="btn" id="sess-clear">Clear it with /clear</button></div>
+      <div class="sessgrid">
+        <div class="sesswin">
+          <div class="sesshead"><span class="dotrow"><span></span><span></span><span></span></span><span id="sess-mode">One session</span></div>
+          <div class="sessbody" id="sess-body"></div>
+          <div class="sessfoot"><div class="sessbar"><i id="sess-bar"></i></div><div class="sessbar-l" id="sess-barl">Context 0% used</div></div>
+        </div>
+        <div class="brainwrap">
+          <div class="blbl">Claude's mind (this session's context)</div>
+          <svg class="brain" id="brain" viewBox="0 0 220 200" role="img" aria-label="A brain that fills up as work piles on">
+            <defs><clipPath id="brainclip"><path d="M110 30 C92 18 72 20 66 38 C46 32 30 46 36 64 C20 66 16 88 30 98 C18 110 24 132 42 136 C44 154 66 164 84 156 C94 168 126 168 136 156 C154 164 176 154 178 136 C196 132 202 110 190 98 C204 88 200 66 184 64 C190 46 174 32 154 38 C148 20 128 18 110 30 Z"/></clipPath></defs>
+            <g clip-path="url(#brainclip)"><rect class="bg" x="0" y="0" width="220" height="200"></rect><g id="brainfill"></g><ellipse class="sheen" cx="80" cy="62" rx="28" ry="16"></ellipse></g>
+            <path class="fold" d="M110 34 C104 74 116 120 110 158"/><path class="fold" d="M72 54 C60 78 76 102 66 130"/><path class="fold" d="M148 54 C160 78 144 102 154 130"/><path class="fold" d="M42 86 C54 96 50 112 40 120"/><path class="fold" d="M178 86 C166 96 170 112 180 120"/>
+            <path class="outline" d="M110 30 C92 18 72 20 66 38 C46 32 30 46 36 64 C20 66 16 88 30 98 C18 110 24 132 42 136 C44 154 66 164 84 156 C94 168 126 168 136 156 C154 164 176 154 178 136 C196 132 202 110 190 98 C204 88 200 66 184 64 C190 46 174 32 154 38 C148 20 128 18 110 30 Z"/>
+          </svg>
+          <div class="brain-stat" id="brain-stat">Still empty</div>
+        </div>
+      </div>
+      <p class="status" id="sess-msg" style="margin-top:16px;">Press a button above to start.</p>
+      <p class="label">Three ways to tidy up — so you don't get confused</p>
+      <div class="tablewrap"><table class="t"><thead><tr><th style="width:120px;">Method</th><th>What it does</th><th>When</th></tr></thead><tbody>
+        <tr><td class="cmd">/clear</td><td>Wipes the conversation completely and starts fresh (CLAUDE.md and memory stay; recoverable with <code>/resume</code>)</td><td>When moving to a different job</td></tr>
+        <tr><td class="cmd">/compact</td><td>Summarizes the conversation so far to free up room; work continues</td><td>When the same job gets long</td></tr>
+        <tr><td class="cmd">Auto-compact</td><td>When it's full, Claude summarizes on its own (same idea as /compact)</td><td>Automatic, no action needed</td></tr>
+      </tbody></table></div>
+      <p class="note">Note: you end a session not with <code>/exit</code> but by closing the terminal or pressing <code>Ctrl</code>+<code>C</code>. One job per session is the cleanest.</p>
+    </section>
+
+    <!-- 05 TOKENS -->
+    <section class="page" id="tokens">
+      <h1>Tokens</h1>
+      <p class="lead">A <b>token</b> is the smallest piece an AI reads text in. It can be smaller than a word.</p>
+      <p class="defs">An AI doesn't read characters as-is — it splits text into tokens. Try typing something.</p>
+      <p class="label">Type any sentence <span class="hint">Type your own, or press an example</span></p>
+      <div class="field" style="max-width:560px;"><input id="tinp" type="text" placeholder="e.g. Hello Claude!" maxlength="200"></div>
+      <div class="btnrow" style="max-width:560px; margin-bottom:10px;"><button class="btn" id="ex-kr">Example: Korean (long sentence)</button><button class="btn" id="ex-en">Example: English (same content)</button><button class="btn" id="ex-clear">Reset</button></div>
+      <div class="tokprev" id="tprev" style="max-width:560px;"></div>
+      <p class="note" style="margin:8px 0 0; max-width:560px;">Same meaning, but Korean uses far more tokens, right? The very same request uses different amounts of tokens (= space and cost) depending on the language you write it in.</p>
+      <p class="label">Korean vs English — even for the same greeting</p>
+      <div class="compare" id="compare"></div>
+      <p class="note"><span class="exb">Example</span> The token counts are <b>rough approximations</b> for understanding the idea (Korean ≈ 1.5 per character, English ≈ 4 characters per token). The real values vary a bit depending on the model's tokenizer.</p>
+      <p class="label">Here's how tokens flow for one reply <span class="hint">Click through the whole flow</span></p>
+      <div class="stages">
+        <button class="stage on" data-st="input"><div class="sn"><span class="d" style="background:var(--blue)"></span>Input</div><div class="scost">Reading · baseline cost ×1</div></button>
+        <button class="stage" data-st="think"><div class="sn"><span class="d" style="background:var(--purple)"></span>Thinking</div><div class="scost">Internal reasoning · same price as output</div></button>
+        <button class="stage" data-st="output"><div class="sn"><span class="d" style="background:var(--teal)"></span>Output</div><div class="scost">The reply · pricier than input</div></button>
+      </div>
+      <div class="lcgrid">
+        <div class="stageview" id="stageview"></div>
+        <div class="tmeter"><div class="tt">Cumulative tokens</div><div class="total" id="lc-total">0</div>
+          <div class="tmrow"><div class="tl"><span>Input</span><b id="lc-in">0</b></div><div class="tb"><div class="tf" id="lcb-in" style="background:var(--blue)"></div></div></div>
+          <div class="tmrow"><div class="tl"><span>Thinking</span><b id="lc-th">0</b></div><div class="tb"><div class="tf" id="lcb-th" style="background:var(--purple)"></div></div></div>
+          <div class="tmrow"><div class="tl"><span>Output</span><b id="lc-out">0</b></div><div class="tb"><div class="tf" id="lcb-out" style="background:var(--teal)"></div></div></div>
+        </div>
+      </div>
+      <div class="botrow" style="margin-top:14px;"><button class="btn solid" id="lc-all">See the whole flow ▶</button></div>
+      <p class="note"><b>Thinking</b> is the invisible internal reasoning before Claude replies. It's a feature you can turn on, and it's billed at <b>the same price as output tokens</b>. Even though the screen hides it, you're charged for what's used.</p>
+    </section>
+
+    <!-- 06 MODELS -->
+    <section class="page" id="models">
+      <h1>Choosing a model</h1>
+      <p class="lead">Claude comes in several models. <b>Smartness, speed, and cost</b> are traded off against each other.</p>
+      <p class="defs">Smarter usually means slower and pricier. Just pick what fits the job. Try choosing below.</p>
+      <div class="mtabs" id="mtabs">
+        <button class="mtab" data-m="opus"><div class="mn">Opus 4.8</div><div class="mt">Smartest</div></button>
+        <button class="mtab on" data-m="sonnet"><div class="mn">Sonnet 4.6</div><div class="mt">Balanced · default pick</div></button>
+        <button class="mtab" data-m="haiku"><div class="mn">Haiku 4.5</div><div class="mt">Fastest and cheapest</div></button>
+        <button class="mtab locked" data-m="fable"><div class="mn">Fable 5 <span class="lockpill">Locked</span></div><div class="mt">Top tier · special tasks</div></button>
+      </div>
+      <div class="bars">
+        <div class="bar"><div class="bl"><span>Intelligence (solving hard problems)</span><b id="v-iq"></b></div><div class="track2"><div class="fill2" id="f-iq"></div></div></div>
+        <div class="bar"><div class="bl"><span>Speed (answers come fast)</span><b id="v-sp"></b></div><div class="track2"><div class="fill2" id="f-sp"></div></div></div>
+        <div class="bar"><div class="bl"><span>Cost efficiency (cheaper)</span><b id="v-cost"></b></div><div class="track2"><div class="fill2" id="f-cost"></div></div></div>
+      </div>
+      <div class="muse" id="muse"><div class="lockbanner" id="m-lock" style="display:none;"></div><div class="tagline" id="m-tag"></div><div class="when" id="m-when"></div><div class="ctxline" id="m-ctx"></div><div class="exlbl">Use it when</div><ul id="m-ex"></ul></div>
+      <p class="note">In Claude Code, switch with <code>/model</code>. If unsure, start with the balanced Sonnet. <span class="exb">Example</span> The bars are <b>relative comparisons</b> only, not exact numbers.</p>
+      <p class="label">K, M — what units are these?</p>
+      <div class="unitcard">
+        <div class="ucard"><div class="uk">K = thousand</div><div class="ukd">1K = 1,000 tokens</div><div class="ukx">e.g. 200K = 200,000 tokens</div></div>
+        <div class="ucard"><div class="uk">M = million</div><div class="ukd">1M = 1,000,000 tokens</div><div class="ukx">Roughly several books' worth — effectively plenty for everyday use</div></div>
+      </div>
+      <p class="label">Context window by model (as of June 2026)</p>
+      <div class="tablewrap"><table class="t"><thead><tr><th>Model</th><th>Context window</th><th>In a word</th></tr></thead><tbody>
+        <tr><td class="cmd">Opus 4.8</td><td>up to 1M (one million)</td><td>Smartest</td></tr>
+        <tr><td class="cmd">Sonnet 4.6</td><td>up to 1M (one million)</td><td>Balanced · default pick</td></tr>
+        <tr><td class="cmd">Haiku 4.5</td><td>200K (two hundred thousand)</td><td>Fastest and cheapest</td></tr>
+      </tbody></table></div>
+      <ul class="points">
+        <li><b>On a paid plan, choosing the latest Opus or Sonnet lets you use the 1M context.</b><span>Basic models like Haiku are 200K.</span></li>
+        <li><b>For everyday work, 200K is plenty.</b><span>1M shines on big projects and very long tasks.</span></li>
+        <li><b>A bigger window remembers more, but can be a touch slower and less accurate.</b><span>Loading only what's needed gives the best quality.</span></li>
+      </ul>
+      <p class="note">Exact pricing and usage vary by plan and time — check at claude.com/pricing.</p>
+    </section>
+
+    <!-- 07 CLAUDE.md -->
+    <section class="page" id="claudemd">
+      <h1>CLAUDE.md</h1>
+      <p class="lead"><b>CLAUDE.md</b> is 'a note you write yourself.' Claude reads it automatically at the start of every conversation.</p>
+      <p class="defs">Write down your project rules and tone once, and you won't have to explain them every time.</p>
+      <p class="label">With it vs without it <span class="hint">Click to compare</span></p>
+      <div class="callout" style="margin-bottom:14px;">Rule: what if you write <b>"Always reply in English, in a polite tone"</b> in CLAUDE.md?</div>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="md-go">See the difference ▶</button></div>
+      <div class="chatdemo">
+        <div class="chatcol"><h4>No CLAUDE.md <span class="badge no">No rules</span></h4><div class="bubble u">Summarize this document</div><div class="bubble a" id="md-no"></div></div>
+        <div class="chatcol"><h4>With CLAUDE.md <span class="badge yes">Rules applied</span></h4><div class="bubble u">Summarize this document</div><div class="bubble a" id="md-yes"></div></div>
+      </div>
+      <p class="label">CLAUDE.md example</p>
+      <div class="pre"><span class="c"># Reply rules</span>
+- Always in English, in a polite tone
+- Explanation before code
+
+<span class="c"># This project</span>
+- The About page is in the pages/about folder
+- Keep colors in the blue family</div>
+      <ul class="points">
+        <li><b>Keep it short, under 200 lines.</b><span>If it's too long, it actually gets followed less.</span></li>
+        <li><b>You can put it in several places.</b><span>One for your whole computer (~/.claude/CLAUDE.md) plus per-project (./CLAUDE.md) — they merge and load together.</span></li>
+        <li><b>It's shared with your team.</b><span>A project's CLAUDE.md is the shared rules. For personal settings, use CLAUDE.local.md.</span></li>
+      </ul>
+      <p class="note">Create it: <code>/init</code> (analyzes the project and generates it automatically) · Edit it: <code>/memory</code>. The 'notes Claude writes itself' come in the next chapter (08 Memory).</p>
+    </section>
+
+    <!-- 08 MEMORY -->
+    <section class="page" id="memory">
+      <h1>Memory</h1>
+      <p class="lead"><b>Automatic memory</b> is 'a note Claude writes itself.' It records what it learns even without being told to.</p>
+      <p class="defs">If CLAUDE.md is the note you write, this is the note Claude writes. Let's play through how it's saved and reused.</p>
+      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="mem-go">See how automatic memory gets saved ▶</button></div>
+      <div class="cols">
+        <div class="memflow">
+          <div class="memstep" id="mstep0"><div class="ms-t">1. You say something</div><div class="ms-d">"From now on, always lay reports out as tables"</div></div>
+          <div class="memarrow">↓</div>
+          <div class="memstep" id="mstep1"><div class="ms-t">2. Claude records it in a note file (.md)</div><div class="ms-d">Saved in ~/.claude/projects/…/memory/</div></div>
+          <div class="memarrow">↓</div>
+          <div class="memstep" id="mstep2"><div class="ms-t">3. The next day, a new session starts</div><div class="ms-d">MEMORY.md is reloaded automatically (without you saying so)</div></div>
+          <div class="memarrow">↓</div>
+          <div class="memstep" id="mstep3"><div class="ms-t">4. It lays it out as a table on its own</div><div class="ms-d">"I've made the report into a table" — remembered without being reminded</div></div>
+        </div>
+        <div>
+          <p class="label" style="margin-top:0;">Here's how it's actually recorded</p>
+          <div class="mdfile" id="mem-md"><span class="c"># MEMORY.md (written automatically by Claude)</span>
+(Press the button to see it being recorded)</div>
+          <p class="note">Memory is just a plain Markdown file, so you can view and edit it directly with <code>/memory</code>. (Automatic memory requires Claude Code v2.1.59 or later.)</p>
+        </div>
+      </div>
+      <p class="label">"Can it reference older content across multiple sessions?" — the question non-developers ask most</p>
+      <ul class="points">
+        <li><b>Sessions are independent of each other.</b><span>A new session doesn't carry over the previous conversation as-is (it starts clean).</span></li>
+        <li><b>Instead, memory and CLAUDE.md act as a 'bridge.'</b><span>They're reloaded automatically at the start of each session, so preferences and rules learned earlier carry forward.</span></li>
+        <li><b>To continue one specific old conversation in full</b><span>use <code>/resume</code> (or <code>claude --continue</code>) to revive that session exactly as it was.</span></li>
+        <li><b>It's saved only on your computer.</b><span>It's not auto-shared to the cloud, other devices, or coworkers. To share rules with your team, write them in CLAUDE.md.</span></li>
+      </ul>
+      <p class="note">In short: <b>continue one conversation as-is = /resume</b>, <b>carry what was learned into the next conversation = memory and CLAUDE.md</b>. (Source: official docs, as of June 2026.)</p>
+    </section>
+
+    <!-- 09 SKILLS -->
+    <section class="page" id="skills">
+      <h1>Skills</h1>
+      <p class="lead">A <b>skill</b> is a 'bundle of know-how' written down for a task you do often. Make it once and reuse it again and again.</p>
+      <p class="defs">Let's play through the difference between explaining from scratch each time and setting it once as a skill.</p>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="sk-go">See the difference ▶</button></div>
+      <div class="skgrid">
+        <div class="skcol"><h4>Without a skill <span class="badge no">Repeat every time</span></h4><div class="skb" id="sk-no"></div></div>
+        <div class="skcol"><h4>Using a skill <span class="badge yes">Define once</span></h4><div class="skb" id="sk-yes"></div></div>
+      </div>
+      <p class="note">A skill <b>unfolds only when needed (progressive disclosure)</b>, so when it's not in use it takes up almost no context window. If CLAUDE.md is an 'always-on note,' a skill is a 'manual you open when you need it.'</p>
+      <p class="label">What it looks like</p>
+      <div class="pre"><span class="c"># .claude/skills/weekly-report/SKILL.md</span>
+---
+name: weekly-report
+description: Write the weekly report in the company format
+---
+# Steps
+1. Gather what was done this week
+2. Fit it to the company format (header, tables)
+3. Put the key summary at the top</div>
+      <p class="note">Invoke it: call it directly like <code>/weekly-report</code>, or for related tasks Claude applies it on its own. Pre-made skills can also be installed as <b>plugins</b> (section 11).</p>
+    </section>
+
+    <!-- 10 MCP -->
+    <section class="page" id="mcp">
+      <h1>MCP (tool connections)</h1>
+      <p class="lead"><b>MCP</b> is a 'common standard' that <b>connects</b> Claude to outside services (Jira, Figma, Google Drive, etc.) so Claude can use those tools directly.</p>
+      <p class="defs"><span class="gl" title="Model Context Protocol — the common standard for how Claude exchanges with outside tools and data">MCP = Model Context Protocol</span> (the standard for connecting a model to the outside world). Press the button to watch the connection happen.</p>
+      <div class="bignote"><span class="bx">In simple terms</span><span>When you set up 'Sign in with Google' on an app, that app can use your Google, right? <b>MCP is that kind of 'connection'</b> — connect tools like Jira or Figma to Claude, and Claude opens them itself to get work done. No more copying and pasting everything by hand.</span></div>
+      <div class="btnrow" style="margin-bottom:12px;"><button class="btn solid" id="mcp-go">Connect them one by one ▶</button><button class="btn" id="mcp-reset">Reset</button></div>
+      <div class="svgwrap">
+        <svg class="mcp" id="mcpsvg" viewBox="0 0 460 280" role="img" aria-label="Claude Code connecting to outside tools one by one">
+          <g id="mcp-lines"></g>
+          <g class="center"><rect x="180" y="118" width="100" height="44" rx="12"></rect><text x="230" y="145" text-anchor="middle" font-size="13">Claude Code</text></g>
+          <g id="mcp-nodes"></g>
+        </svg>
+      </div>
+      <p class="status" id="mcp-msg" style="margin-top:0;">Press "Connect them one by one."</p>
+      <div class="grp" style="margin-top:20px;"><h3>Things you can connect (examples)</h3>
+        <div class="fgrid">
+          <div class="fcard"><div class="ft">Jira</div><div class="fd">Reads, creates, and updates the status of issues.</div><div class="fe"><b>e.g.</b> "Turn this bug into a Jira ticket"</div></div>
+          <div class="fcard"><div class="ft">Figma</div><div class="fd">Reads design mockups and turns them into code.</div><div class="fe"><b>e.g.</b> "Build it to match this Figma"</div></div>
+          <div class="fcard"><div class="ft">Browser</div><div class="fd">Opens a real web page to check it.</div><div class="fe"><b>e.g.</b> "Check that this page loads fine"</div></div>
+          <div class="fcard"><div class="ft">And more</div><div class="fd">GitHub, Slack, Notion, databases, etc.</div><div class="fe"><b>e.g.</b> Connect to in-house tools</div></div>
+        </div>
+      </div>
+      <p class="note">Check connected tools with <code>/mcp</code>. The more tools you have, the more their descriptions nibble at your context, so connect only what you need. Bundling several MCPs for distribution is called a 'plugin' (section 11).</p>
+    </section>
+
+    <!-- 11 PLUGINS -->
+    <section class="page" id="plugins">
+      <h1>Plugins</h1>
+      <p class="lead">A <b>plugin</b> is <b>a bundle you install all at once</b> — like an 'app' on your phone.</p>
+      <p class="defs">Instead of gathering skills, tool connections (MCP), and automation (hooks) one by one, you grab a whole bundle someone else built well.</p>
+      <div class="bignote"><span class="bx">In simple terms</span><span>Install one 'photo-editing app' on your phone and the filters and tools all come with it, right? <b>Plugins are like that.</b> They <b>install the skills, MCP, subagents, and hooks you saw earlier as one bundle.</b> (You don't have to know exactly what each one is — here, knowing it's a 'bundle' is enough.)</span></div>
+      <div class="plugbox">
+        <div class="ph">Plugin (a distributable package)</div>
+        <div class="psub">Pack the features below however you like, install and share in one go</div>
+        <div class="pluggrid">
+          <div class="plugchip"><div class="pc-t">Skills</div><div class="pc-d">Bundles of task know-how</div></div>
+          <div class="plugchip"><div class="pc-t">Slash commands</div><div class="pc-d">Shortcut commands</div></div>
+          <div class="plugchip"><div class="pc-t">Subagents</div><div class="pc-d">Specialist helpers</div></div>
+          <div class="plugchip"><div class="pc-t">MCP servers</div><div class="pc-d">Outside tool connections</div></div>
+          <div class="plugchip"><div class="pc-t">Hooks</div><div class="pc-d">Auto-run rules</div></div>
+          <div class="plugchip"><div class="pc-t">And more</div><div class="pc-d">Code intelligence, monitors, etc.</div></div>
+        </div>
+      </div>
+      <p class="label">MCP · Skills · Plugins at a glance</p>
+      <div class="fgrid">
+        <div class="fcard"><div class="ft">MCP</div><div class="fd">A pathway that <b>connects</b> to outside tools and services.</div></div>
+        <div class="fcard"><div class="ft">Skills</div><div class="fd">Bundles of <b>know-how and steps</b> for repeated tasks.</div></div>
+        <div class="fcard"><div class="ft">Plugins</div><div class="fd">A package that <b>bundles and distributes</b> the above.</div></div>
+      </div>
+      <p class="note">Install: <code>/plugin install name@marketplace</code>. There's an official marketplace (claude-plugins-official) and a community marketplace (claude-community). Only install from sources you trust. (Source: official docs, code.claude.com/docs/plugins)</p>
+    </section>
+
+    <!-- 12 SUBAGENTS -->
+    <section class="page" id="agents">
+      <h1>Subagents</h1>
+      <p class="lead">A <b>subagent</b> is a 'specialist helper' that takes on a specific job. It works in its own workspace and reports back only the result.</p>
+      <p class="defs">The idea is simple — 'divide the work and hand it off.'</p>
+      <div class="callout"><b>An easy analogy</b> · Picture yourself as a <b>team lead</b>. Instead of doing a big job alone, you hand pieces to <b>specialist teammates</b>: "You research this," "You review that." Each works at their own desk and <b>reports back only the result</b>. Your desk (the main conversation) stays clean.</div>
+      <p class="label">See it yourself — handing work to 6 helpers <span class="hint">Click to play</span></p>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="sa-go">See it work ▶</button><button class="btn" id="sa-self">What if the main did it all alone?</button></div>
+      <div class="mainbox"><div class="mh"><span class="mt2">Main conversation (you and Claude)</span><span class="ctxnum" id="sa-main-n">Context 8%</span></div><div class="ctxmini"><i id="sa-main-b" style="background:var(--good); width:8%;"></i></div><div class="sd2" style="margin:6px 0 0;">"Review and improve our whole online store"</div></div>
+      <div class="arrowdown" style="max-width:none; margin:10px 0;">↓ Split into 6 and handed off at the same time</div>
+      <div class="sagrid" id="sa-grid"></div>
+      <p class="status" id="sa-msg" style="margin-top:10px;">Press "See it work" — we'll show how 6 helpers split the work and <b>why that's good</b>.</p>
+      <div class="sabenef" id="sa-benef">
+        <div class="sabf" id="sa-bf0"><div class="ft">All at once (parallel)</div><div class="fd">6 helpers work at the same time — faster than doing it alone, one after another.</div></div>
+        <div class="sabf" id="sa-bf1"><div class="ft">The main stays clean</div><div class="fd">Each works in its own space and reports back only a 'summary' → the main conversation doesn't get cluttered.</div></div>
+        <div class="sabf" id="sa-bf2"><div class="ft">Each a specialist</div><div class="fd">One helper focuses on one thing → more accurate and safer.</div></div>
+      </div>
+      <ul class="points">
+        <li><b>Each has its own workspace (context window).</b><span>Even if a helper digs around a lot, the main conversation stays uncluttered.</span></li>
+        <li><b>You can limit what they're allowed to do.</b><span>e.g. a 'code review' helper can only read, not edit — safer.</span></li>
+        <li><b>There are two built-in helpers: Explore and Plan.</b><span>Beyond those, you can make your own (<code>.claude/agents/</code>).</span></li>
+      </ul>
+      <p class="note">'Agent teams' — running multiple sessions at once to collaborate — is a separate experimental feature. (Source: official docs.)</p>
+    </section>
+
+    <!-- 13 IMAGES -->
+    <section class="page" id="images">
+      <h1>Pasting images to Claude</h1>
+      <p class="lead">Claude <b>can see images.</b> Pasting a screenshot is far faster and more accurate than describing it in words.</p>
+      <p class="defs">Press the button to see how Claude 'reads' an image.</p>
+      <div class="btnrow" style="margin:0 0 16px;"><button class="btn solid" id="img-go">Have Claude analyze it ▶</button></div>
+      <div class="imggrid">
+        <div class="shotframe"><div class="shot">
+          <div class="reg" id="r-title"><div class="shot-title">Log in</div></div>
+          <div class="reg" id="r-input"><div class="shot-input">Email</div><div class="shot-input">Password</div></div>
+          <div class="reg" id="r-btn"><div class="shot-btn">Log in</div></div>
+          <div class="reg" id="r-err"><div class="shot-err">Incorrect password</div></div>
+        </div></div>
+        <div>
+          <p class="label" style="margin-top:0;">What Claude recognized</p>
+          <ul class="detlist" id="detlist">
+            <li><span class="di">✓</span><span>Reading text — title "Log in"</span></li>
+            <li><span class="di">✓</span><span>Understanding structure — 2 input fields, email and password</span></li>
+            <li><span class="di">✓</span><span>Detecting color — blue "Log in" button</span></li>
+            <li><span class="di">✓</span><span>Recognizing state — red error "Incorrect password"</span></li>
+          </ul>
+          <div class="detsum" id="detsum">→ Claude: "This is a login screen, in a wrong-password state. I'll check the validation logic and fix it."</div>
+        </div>
+      </div>
+      <p class="label" style="margin-top:30px;">Why paste a screenshot?</p>
+      <div class="fgrid">
+        <div class="fcard"><div class="ft">Faster than words</div><div class="fd">No need to describe the screen at length — just show it.</div></div>
+        <div class="fcard"><div class="ft">Exact state</div><div class="fd">It sees the actual on-screen state directly.</div></div>
+        <div class="fcard"><div class="ft">Design as-is</div><div class="fd">Give a mockup and it uses that layout and colors.</div></div>
+        <div class="fcard"><div class="ft">Error screens</div><div class="fd">Show an error screenshot and it finds the cause faster.</div></div>
+      </div>
+      <ul class="points">
+        <li><b>It can't 'click' an image.</b><span>It only analyzes the screen; it doesn't press the buttons inside the picture.</span></li>
+        <li><b>Very small text can be misread.</b><span>For important numbers or text, also write them out as text to be safe.</span></li>
+        <li><b>For animated GIFs, it sees only the first frame.</b><span>Plain images like JPG and PNG are recommended.</span></li>
+      </ul>
+      <p class="note">How to paste: drag a screenshot into the input box or paste it (<code>Cmd/Ctrl</code>+<code>V</code>), or write out the image file's path.</p>
+    </section>
+
+    <!-- 14 HOOKS -->
+    <section class="page" id="hooks">
+      <h1>Automation (hooks)</h1>
+      <p class="lead">A <b>hook</b> makes <b>a set action run automatically, every time</b>, at a specific moment.</p>
+      <p class="defs">Like an 'auto-reply email,' it kicks in on its own when something happens.</p>
+      <div class="bignote"><span class="bx">Relax</span><span><b>You don't need to build it yourself.</b> Setting it up is a little technical, but non-developers don't have to know how — just ask Claude in plain words, like <b>"Make a hook that auto-tidies every time I edit a file,"</b> and Claude builds it for you. For this page, knowing 'this exists' is enough.</span></div>
+      <p class="label">How it works <span class="hint">When → what → how</span></p>
+      <div class="steps">
+        <div class="step on"><div class="sn2">1</div><div><div class="st2">Event (when)</div><div class="sd3">e.g. right after a file is saved</div></div></div>
+        <div class="step on"><div class="sn2">2</div><div><div class="st2">Filter (what)</div><div class="sd3">e.g. if it's a code file</div></div></div>
+        <div class="step on"><div class="sn2">3</div><div><div class="st2">Action (how)</div><div class="sd3">e.g. auto-run code formatting and checks</div></div></div>
+      </div>
+      <div class="grp" style="margin-top:22px;"><h3>Great for things like</h3>
+        <div class="fgrid">
+          <div class="fcard"><div class="ft">Auto-tidy</div><div class="fd">Format code automatically every time you edit.</div></div>
+          <div class="fcard"><div class="ft">Protection</div><div class="fd">Block dangerous commands (like rm) in advance.</div></div>
+          <div class="fcard"><div class="ft">Notifications</div><div class="fd">Send an alert when a job finishes.</div></div>
+        </div>
+      </div>
+      <ul class="points">
+        <li><b>You write it in a settings file (settings.json).</b><span>You can set it at several levels: all projects, this project, or personal.</span></li>
+        <li><b>It's guaranteed every time.</b><span>If CLAUDE.md is a 'request,' a hook is a 'rule' — it never forgets and always runs.</span></li>
+        <li><b>It supports over 26 moments.</b><span>File changes, before/after tool runs, session start, and more. Check with <code>/hooks</code>.</span></li>
+      </ul>
+      <p class="note">Since the setup is a bit technical, just ask Claude something like "Make a hook that formats every time I edit a file" and it builds it for you. (Source: official docs, as of June 2026.)</p>
+    </section>
+
+    <!-- 15 PLAN MODE -->
+    <section class="page" id="planmode">
+      <h1>Plan mode</h1>
+      <p class="lead">Before making any changes, Claude <b>shows you 'what it plans to do' first</b> and gets your approval.</p>
+      <p class="defs">For big changes or unfamiliar work, this heads off going 'in the wrong direction.' Play through the flow.</p>
+      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="plan-go">See the flow ▶</button></div>
+      <div class="steps">
+        <div class="step" id="plan0"><div class="sn2">1</div><div><div class="st2">Switch to plan mode</div><div class="sd3"><code>Shift</code>+<code>Tab</code> or <code>/plan</code> — now it only reads and doesn't edit</div></div></div>
+        <div class="step" id="plan1"><div class="sn2">2</div><div><div class="st2">Claude presents a plan</div><div class="sd3">"I'll change these 3 files like this" — shows the impact and order up front</div></div></div>
+        <div class="step" id="plan2"><div class="sn2">3</div><div><div class="st2">You review and adjust</div><div class="sd3">Refine it with feedback like "You missed the footer too"</div></div></div>
+        <div class="step" id="plan3"><div class="sn2">4</div><div><div class="st2">Approve, then it runs</div><div class="sd3">"Okay, go" → then it edits the files all at once</div></div></div>
+      </div>
+      <p class="status" id="plan-msg" style="margin-top:8px;"></p>
+      <p class="note">Plan mode is 'read-only,' so it's safe. It's one of the permission modes (section 16). (On some Windows terminals, <code>/plan</code> is recommended instead of <code>Shift</code>+<code>Tab</code>.)</p>
+    </section>
+
+    <!-- 16 PERMISSIONS -->
+    <section class="page" id="permissions">
+      <h1>Permission modes</h1>
+      <p class="lead">You decide <b>how much Claude does on its own</b>.</p>
+      <div class="callout" style="margin:0 0 8px;"><b>In plain terms</b> · It's a setting for <b>how often Claude asks "May I do this?"</b> when it does something on your computer (editing files, running commands). At first it's safer to ask every time; once you're comfortable, you can let it handle frequent tasks on its own. It's like a car's 'manual ↔ automatic.'</div>
+      <p class="defs">In Claude Code, switch modes with <code class="inlinecode">Shift</code>+<code class="inlinecode">Tab</code>. Pick a mode and use "See it work" to check the difference.</p>
+      <div class="cols">
+        <div>
+          <div class="pmenu" id="pmenu">
+            <button class="prow on" data-i="0"><span class="pno">1</span><span class="pl">Ask permission<span>default</span></span><span class="pchk">✓</span></button>
+            <button class="prow" data-i="1"><span class="pno">2</span><span class="pl">Accept edits</span><span class="pchk">✓</span></button>
+            <button class="prow" data-i="2"><span class="pno">3</span><span class="pl">Plan mode</span><span class="pchk">✓</span></button>
+            <button class="prow" data-i="3"><span class="pno">4</span><span class="pl">Auto mode</span><span class="pchk">✓</span></button>
+            <button class="prow" data-i="4"><span class="pno">5</span><span class="pl">Skip permissions</span><span class="pchk">✓</span></button>
+          </div>
+          <div class="pspec"><div class="pmark" id="pmark"></div></div>
+          <div class="paxis"><span>← Safe · asks a lot</span><span>Autonomous · asks little →</span></div>
+        </div>
+        <div><div class="pdetail" id="pdetail"></div><div class="btnrow" style="margin-top:12px;"><button class="btn solid" id="pm-sim">See this mode work ▶</button></div><div class="simbox" id="pm-simbox"></div></div>
+      </div>
+      <p class="note">These 5 are the modes shown in the menu. There's also a separate automation-only mode that 'only allows pre-approved tools (dontAsk).' In any mode, <b>extreme destruction like wiping the whole system (rm -rf /)</b> is blocked by a safeguard. If you don't like a result, you can recover it with 'rewind' (section 17).</p>
+    </section>
+
+    <!-- 17 REWIND -->
+    <section class="page" id="rewind">
+      <h1>Rewind (checkpoints)</h1>
+      <p class="lead">Claude <b>auto-saves the state at the moment of every request</b> you send. If you don't like a result, you can roll back.</p>
+      <p class="defs">It's like 'time travel' — you can go to an earlier point. Click a dot to roll back.</p>
+      <div class="callout" style="margin-bottom:14px;">Scenario: "Make the design more modern" → 10 files changed, but you don't like it. How do you roll back?</div>
+      <div class="timeline" id="rw-timeline"></div>
+      <div class="tllabels" id="rw-labels"></div>
+      <div class="btnrow" style="margin:14px 0;"><button class="btn" id="rw-code">Restore code only</button><button class="btn" id="rw-both">Restore code + conversation</button><button class="btn" id="rw-reset">Reset</button></div>
+      <p class="status" id="rw-msg" style="margin-top:0;">Click a dot on the timeline above, then choose how to restore.</p>
+      <ul class="points">
+        <li><b>How to open it</b><span>Press <code>ESC</code> twice or <code>/rewind</code> — a list of the requests you've sent so far appears.</span></li>
+        <li><b>Three kinds of restore</b><span>Code + conversation together / conversation only (keep code) / code only (keep conversation).</span></li>
+        <li><b>Limits</b><span>Things changed by terminal commands like <code>rm·mv</code>, installs (<code>npm install</code>), and outside changes can't be rolled back.</span></li>
+      </ul>
+      <p class="note">Checkpoints are 'quick rollback within a session' (kept about 30 days); git is 'permanent version control' — they serve different roles. To keep something long-term, commit it to git. (Source: official docs, as of June 2026.)</p>
+    </section>
+
+    <!-- 18 PRIVACY -->
+    <section class="page" id="privacy">
+      <h1>Data & privacy</h1>
+      <p class="lead">"Is my code and data used to train the AI?" — the thing people worry about most.</p>
+      <p class="defs">The policy differs a lot by account type. For the exact details, be sure to check the official pages (links below).</p>
+      <div class="cmp">
+        <div class="cmpcard"><h4>Personal (Free, Pro, Max)</h4><div class="who">claude.ai personal account</div>
+          <div class="cmprow"><b>Training use</b>You get a <b>choice</b> — view and change it in settings</div>
+          <div class="cmprow"><b>Setting location</b>claude.ai/settings/data-privacy-controls</div></div>
+        <div class="cmpcard"><h4>Business (Team, Enterprise, API)</h4><div class="who">Company / developer account</div>
+          <div class="cmprow"><b>Training use</b>By default, <b>not used for training</b></div>
+          <div class="cmprow"><b>API</b>Inputs and outputs are deleted after 7 days by default, not used for training</div></div>
+      </div>
+      <ul class="points">
+        <li><b>Claude Code runs on your computer.</b><span>It encrypts (TLS) and sends only what's needed to the API — it doesn't upload your whole folder to the cloud.</span></li>
+        <li><b>Exception: conversations flagged by safety review</b><span>Even with training off, they may be used and kept for safety and policy review.</span></li>
+        <li><b>Local records</b><span>Session history is saved in plain text on your computer (~/.claude/projects). The retention period can be adjusted in settings.</span></li>
+      </ul>
+      <p class="note warn" style="margin-top:14px;"><b>Important</b> · Policies keep changing and differ by account type. Before any sensitive decision, be sure to check the official pages — <code>privacy.claude.com</code>, <code>anthropic.com/legal</code>, <code>code.claude.com/docs</code> (this content is as of June 2026).</p>
+    </section>
+
+    <!-- 19 COMMANDS -->
+    <section class="page" id="commands">
+      <h1>Slash commands</h1>
+      <p class="lead">These are <b>shortcut commands</b> that start with <code class="inlinecode">/</code>. Type them at the very start of a message.</p>
+      <p class="defs">Click a command below to see what happens when you enter it.</p>
+      <div class="chips" style="margin:0 0 12px; margin-left:0;" id="cmdchips">
+        <button class="chip" data-c="init">/init</button><button class="chip" data-c="help">/help</button><button class="chip" data-c="clear">/clear</button><button class="chip" data-c="compact">/compact</button><button class="chip" data-c="model">/model</button>
+      </div>
+      <div class="pre" id="term" style="min-height:200px; white-space:pre-wrap;"></div>
+      <p class="note">This terminal is a <b>conceptual example</b> to help you understand (it may differ from the real screen). In particular, <code>/init</code> analyzes your project and <b>generates CLAUDE.md automatically</b>.</p>
+      <p class="label">Commonly used commands</p>
+      <div class="tablewrap"><table class="t"><thead><tr><th style="width:130px;">Command</th><th>What it does</th></tr></thead><tbody>
+        <tr><td class="cmd">/help</td><td>Shows the commands you can use</td></tr>
+        <tr><td class="cmd">/init</td><td>Analyzes the project and creates a basic CLAUDE.md file (section 07)</td></tr>
+        <tr><td class="cmd">/clear</td><td>Wipes the conversation and starts fresh (section 04)</td></tr>
+        <tr><td class="cmd">/compact</td><td>Summarizes the conversation to free up room (sections 03, 04)</td></tr>
+        <tr><td class="cmd">/model</td><td>Switches the model (section 06)</td></tr>
+        <tr><td class="cmd">/memory</td><td>View and edit CLAUDE.md and memory (sections 07, 08)</td></tr>
+        <tr><td class="cmd">/mcp</td><td>Check and manage connected outside tools (section 10)</td></tr>
+        <tr><td class="cmd">/plugin</td><td>Install and manage plugins (section 11)</td></tr>
+        <tr><td class="cmd">/agents</td><td>Manage subagents (section 12)</td></tr>
+        <tr><td class="cmd">/plan</td><td>Switch to plan mode (section 15)</td></tr>
+        <tr><td class="cmd">/rewind</td><td>Roll back to an earlier point (section 17)</td></tr>
+        <tr><td class="cmd">/hooks</td><td>Check the automation (hooks) you've set up (section 14)</td></tr>
+      </tbody></table></div>
+      <p class="note">The most-used ones are <b>/clear</b> and <b>/compact</b>. Use them when the context fills up.</p>
+    </section>
+
+    <!-- 20 PLANS -->
+    <section class="page" id="plans">
+      <h1>Plans & pricing</h1>
+      <p class="lead">Claude Code is available with <b>a paid plan or the API</b>. It's not included in the free plan.</p>
+      <p class="defs">Exact prices and usage change often, so check the numbers on the official page.</p>
+      <div class="grp"><h3>Which plans can use it (as of June 2026)</h3>
+        <div class="fgrid">
+          <div class="fcard"><div class="ft">Free</div><div class="fd">Claude Code <b>not included</b>. You need a paid plan.</div></div>
+          <div class="fcard"><div class="ft">Pro</div><div class="fd">Personal. Good for everyday use.</div><div class="fe"><b>roughly</b> $20/month <span class="exb">varies</span></div></div>
+          <div class="fcard"><div class="ft">Max</div><div class="fd">Personal. The most generous usage.</div><div class="fe"><b>roughly</b> $100–200/month <span class="exb">varies</span></div></div>
+          <div class="fcard"><div class="ft">Team · Enterprise</div><div class="fd">For teams and companies. Per person (seat).</div></div>
+          <div class="fcard"><div class="ft">API (pay-as-you-go)</div><div class="fd">Billed by token, for what you use. For automation and integrations.</div></div>
+        </div>
+      </div>
+      <ul class="points">
+        <li><b>Usage resets on a time basis.</b><span>A 'rolling' approach that refills after a set time. Max has the largest limit.</span></li>
+        <li><b>The same usage is shared across places.</b><span>claude.ai, Claude Code, and the desktop app share one usage pool.</span></li>
+        <li><b>If unsure, start with Pro</b><span>If it's not enough, you can move up to Max.</span></li>
+      </ul>
+      <p class="note">Check exact prices and limits at <code>claude.com/pricing</code> and the official support pages. (Pricing policy changes from time to time.)</p>
+    </section>
+
+    <!-- 21 USAGE LIMITS -->
+    <section class="page" id="limits">
+      <h1>Usage limits</h1>
+      <p class="lead">A subscription has <b>a usage limit on top of the monthly fee</b>. Once you use it up, you <b>have to wait until it resets</b>, so managing it matters.</p>
+      <p class="defs">Press the button to watch the limit fill up as if you're using it heavily, and get blocked when it's used up.</p>
+      <p class="label">Try it yourself — what happens when you run out <span class="hint">Click it</span></p>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="lim-use">Use it heavily ▶</button><button class="btn" id="lim-reset">Reset after 5 hours pass</button></div>
+      <div class="cols">
+        <div>
+          <div class="gauge"><div class="gl"><span>5-hour limit (last 5 hours)</span><b id="g5n">0%</b></div><div class="gtrack"><i id="g5"></i></div></div>
+          <div class="gauge"><div class="gl"><span>Weekly limit (last 7 days)</span><b id="gwn">18%</b></div><div class="gtrack"><i id="gw"></i></div></div>
+          <div class="lockmsg" id="lock-msg"></div>
+        </div>
+        <div>
+          <p class="label" style="margin-top:0;">Usage log</p>
+          <div class="usefeed" id="use-feed"></div>
+          <p class="note" style="margin-top:8px;">The heavier the task — reading files, long conversations, images — the faster the limit drops.</p>
+        </div>
+      </div>
+      <p class="label">Subscription vs API — what's different</p>
+      <div class="cmp">
+        <div class="cmpcard"><h4>Subscription (Pro, Max, Team)</h4><div class="who">Monthly fee</div>
+          <div class="cmprow"><b>Cost</b>A set amount each month</div>
+          <div class="cmprow"><b>Limit</b>A fixed amount of usage — once used up, wait for the reset</div>
+          <div class="cmprow"><b>Good when</b>You use it steadily and often (a flat fee is reassuring)</div></div>
+        <div class="cmpcard"><h4>API (pay-as-you-go)</h4><div class="who">Billed for what you use</div>
+          <div class="cmprow"><b>Cost</b>Charged only for the tokens you use</div>
+          <div class="cmprow"><b>Limit</b>No monthly cap — you can keep using it, but the cost rises</div>
+          <div class="cmprow"><b>Good when</b>You use it occasionally, or for automation and integrations</div></div>
+      </div>
+      <p class="label">There are two limits at the same time</p>
+      <ul class="points">
+        <li><b>5-hour limit</b><span>Looks at how much you've used in 'the last 5 hours.' It refills automatically over time (rolling).</span></li>
+        <li><b>Weekly (7-day) limit</b><span>A larger limit based on 'the last 7 days.' Dodging only the 5-hour limit doesn't mean unlimited use.</span></li>
+        <li><b>If either one fills up, it stops.</b><span>Both the 5-hour and weekly limits apply, so whichever fills first blocks you. When that limit resets, it frees up again.</span></li>
+        <li><b>Hitting a limit doesn't lose your work.</b><span>What you were doing isn't wiped — it's just a 'brief pause.' When it resets, pick up where you left off. (In a hurry? Upgrade to a higher plan.)</span></li>
+        <li><b>It's deducted from one shared place.</b><span>claude.ai, Claude Code, and the desktop app share the same usage.</span></li>
+      </ul>
+      <p class="label">How to conserve your limit</p>
+      <div class="fgrid">
+        <div class="fcard"><div class="ft">Use a cheaper model</div><div class="fd">Use Haiku for simple jobs. Opus is heavy and pricey. (section 06)</div></div>
+        <div class="fcard"><div class="ft">Clear often</div><div class="fd">Tidy the context with <code>/clear</code> and <code>/compact</code>. (sections 03, 04)</div></div>
+        <div class="fcard"><div class="ft">Ask concisely</div><div class="fd">Request only the files and essentials you need.</div></div>
+      </div>
+      <p class="note">Exact times, prices, and limit figures vary by plan and time — check at <code>claude.com/pricing</code> and <code>support.claude.com</code>. (The concepts are based on the official docs as of June 2026.)</p>
+    </section>
+
+    <!-- 22 COMPACT DETAIL -->
+    <section class="page" id="compact">
+      <h1>Compaction in detail (compact)</h1>
+      <p class="lead">When a conversation gets long, 'compaction' happens. <b>A long pile of content turns into one short summary.</b></p>
+      <p class="defs">Below is the conversation log of one task. Press 'Compact' to see how the content actually shrinks.</p>
+      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="cx-go">Compact (/compact) ▶</button><button class="btn" id="cx-reset">Show again</button></div>
+
+      <p class="label" id="cx-label">Before compaction — conversation log (a long pile)</p>
+      <div id="cx-before">
+        <div class="cxrow"><span class="cxt">Me</span>"The welcome email doesn't go out when someone signs up. Find the cause and fix it."</div>
+        <div class="cxrow"><span class="cxt">Files</span>Read auth.js · mailer.js · config.js (hundreds of lines combined)</div>
+        <div class="cxrow"><span class="cxt">Tool output</span>120 lines of test-run log — failed: SMTP connection timeout … (a long error log streaming by …)</div>
+        <div class="cxrow"><span class="cxt">Claude</span>"The mail server address setting was missing. I added the SMTP host to config.js and filled in the missing sender address too. For these and those reasons … (a long explanation follows)"</div>
+        <div class="cxrow"><span class="cxt">Tool output</span>80 lines of re-run test log — passed ✓ (detailed log …)</div>
+        <div class="cxrow"><span class="cxt">Claude</span>"Fix complete. The welcome email now sends correctly."</div>
+      </div>
+
+      <div id="cx-after" style="display:none;">
+        <div class="cxbadge">Before <b>about 12,000</b> tokens<span class="ar">→</span>After <b>about 1,400</b> tokens <span style="color:var(--good);">about 88% saved</span> <span class="exb">example values</span></div>
+        <div class="cxsummary"><div class="cxh">Into one summary block</div>The user asked to fix 'the welcome email not sending on sign-up.' Checked <b>auth.js, mailer.js, config.js</b> → the cause was a <b>missing mail server (SMTP) setting in config.js</b>. Added the SMTP host and sender address, and the test passed. <b>Confirmed the welcome email now sends correctly.</b></div>
+        <div class="cmp" style="margin-top:14px;">
+          <div class="cmpcard"><h4>Kept</h4><div class="who">Essentials preserved</div><div class="cmprow">Your request and intent</div><div class="cmprow">The list of files edited</div><div class="cmprow">The cause and how it was solved</div><div class="cmprow">The final result</div></div>
+          <div class="cmpcard"><h4>Discarded</h4><div class="who">To save room</div><div class="cmprow">Long test logs (120 and 80 lines)</div><div class="cmprow">Wordy explanations of intermediate steps</div><div class="cmprow">Repeated content</div></div>
+        </div>
+      </div>
+      <p class="note">Because it keeps only the essentials and trims the rest, after compaction it still carries 'what was done and how.' But if discarded details — like the <b>original code that was read</b> — are needed again, Claude simply re-reads that file. The token figures are an <b>example</b> to help you understand (real values vary by situation). The compaction that happens automatically in the context window can be seen on the 'Context window' tab.</p>
+    </section>
+
+    <!-- 23 GLOSSARY -->
+    <section class="page" id="glossary">
+      <h1>Glossary</h1>
+      <p class="lead">A one-line summary of the terms that came up in this guide.</p>
+      <p class="defs">When you're confused, look it up quickly here. Type a word in the search box and it filters right away.</p>
+      <input class="gsearch" id="gloss-search" type="text" placeholder="Search terms… (e.g. terminal, API, token)">
+      <div class="gloss" id="gloss-list">
+        <div class="gterm"><div class="gt">Context window</div><div class="gd">The 'workspace' Claude holds at one time. It only knows what's in here. (section 03)</div></div>
+        <div class="gterm"><div class="gt">Token</div><div class="gd">The smallest piece an AI reads text in. The unit for context and cost. (section 05)</div></div>
+        <div class="gterm"><div class="gt">Session</div><div class="gd">One continuous conversation. Everything piles up in its context window. (section 04)</div></div>
+        <div class="gterm"><div class="gt">CLAUDE.md</div><div class="gd">A rules note you write. Loaded automatically in every conversation. (section 07)</div></div>
+        <div class="gterm"><div class="gt">Memory</div><div class="gd">A learning note Claude writes itself. Carries over across sessions. (section 08)</div></div>
+        <div class="gterm"><div class="gt">Skill</div><div class="gd">A bundle of steps for a frequent task. Unfolds only when needed. (section 09)</div></div>
+        <div class="gterm"><div class="gt">MCP</div><div class="gd">The standard for connecting to outside tools (Jira, Figma, etc.). (section 10)</div></div>
+        <div class="gterm"><div class="gt">Plugin</div><div class="gd">A bundle that packages skills, MCP, commands, and more for distribution. (section 11)</div></div>
+        <div class="gterm"><div class="gt">Subagent</div><div class="gd">A specialist helper that takes on a specific job. (section 12)</div></div>
+        <div class="gterm"><div class="gt">Hooks</div><div class="gd">Rules that run automatically at a specific moment. (section 14)</div></div>
+        <div class="gterm"><div class="gt">Plan mode</div><div class="gd">A mode that shows a plan and gets approval before editing. (section 15)</div></div>
+        <div class="gterm"><div class="gt">Permission modes</div><div class="gd">A setting for how often it asks. (section 16)</div></div>
+        <div class="gterm"><div class="gt">Checkpoint · Rewind</div><div class="gd">Auto-saves at every request; restore to an earlier point. (section 17)</div></div>
+        <div class="gterm"><div class="gt">Compaction (compact)</div><div class="gd">Summarizes the conversation to free up context room. (section 03)</div></div>
+        <div class="gterm"><div class="gt">Models (Opus, Sonnet, Haiku)</div><div class="gd">Claudes that differ in smartness, speed, and cost. (section 06)</div></div>
+        <div class="gterm"><div class="gt">Terminal (CLI)</div><div class="gd">The black input window where you instruct a computer with text (commands). Also called the 'command line.' CLI = Command Line Interface.</div></div>
+        <div class="gterm"><div class="gt">API</div><div class="gd">A 'connection pathway' that programs use to talk to each other. Here it means the 'pay-as-you-go' way of using it. (section 20)</div></div>
+        <div class="gterm"><div class="gt">Server</div><div class="gd">A computer that does work for you from afar. An MCP 'server' is a small program that connects an outside tool to Claude.</div></div>
+        <div class="gterm"><div class="gt">.md (Markdown)</div><div class="gd">A 'note-style text file' format styled with simple rules. The .md in CLAUDE.md and SKILL.md is this.</div></div>
+        <div class="gterm"><div class="gt">JSON</div><div class="gd">A computer-readable 'format for writing settings.' Settings like hooks go here. (You don't have to write it yourself — Claude does it for you.)</div></div>
+        <div class="gterm"><div class="gt">git</div><div class="gd">A 'version control' tool that records and reverts file changes. The permanent version of rewind. (section 17)</div></div>
+        <div class="gterm"><div class="gt">Pay-as-you-go</div><div class="gd">Paying 'for what you use' instead of a monthly fee (API). (sections 20, 21)</div></div>
+        <div class="gterm"><div class="gt">Rolling limit</div><div class="gd">A usage limit that flows along and refills, like 'the last 5 hours' or 'the last 7 days.' (section 21)</div></div>
+        <div class="gterm"><div class="gt">Protocol</div><div class="gd">A 'common standard' that lets different programs talk to each other. This is the P in MCP.</div></div>
+      </div>
+      <p class="note" id="gloss-empty" style="display:none;">No results. Try a different word.</p>
+    </section>
+
+    <footer class="sitefoot">
+      <div class="ft-main">Made by · <b>최진안 (stark)</b></div>
+      <div class="ft-links">
+        <a href="https://github.com/wlsdks" target="_blank" rel="noopener">GitHub</a> ·
+        <a href="https://www.linkedin.com/in/WriteDev" target="_blank" rel="noopener">LinkedIn</a> ·
+        <a href="https://curiousjinan.tistory.com/" target="_blank" rel="noopener">Blog</a> ·
+        <a href="mailto:dig04059@gmail.com">Email</a>
+        <span class="ft-dm">— questions or DM via email or LinkedIn</span>
+      </div>
+      <div>This is an unofficial learning resource — not affiliated with Anthropic. "Claude, Claude Code, Anthropic" are trademarks of Anthropic Inc.</div>
+      <div>For the most accurate information, check the <a href="https://code.claude.com/docs" target="_blank" rel="noopener">official docs</a>.</div>
+    </footer>
+
+  </div></main>
+</div>
+
+<script>
+(function(){
+  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+  function tokenize(text){ var chips=[],kr=0,other=0,re=/([가-힣])|([A-Za-z0-9]+)|(\s+)|([^\s])/g,m;
+    while((m=re.exec(text))){ if(m[1]){chips.push({t:m[1],c:'kr'});kr++;} else if(m[2]){var w=m[2];for(var j=0;j<w.length;j+=4)chips.push({t:w.slice(j,j+4),c:'en'});other+=w.length;} else if(m[3]){other+=m[3].length;if(chips.length)chips[chips.length-1].sp=true;} else if(m[4]){chips.push({t:m[4],c:''});other+=1;} }
+    return { count:Math.max(1,Math.round(kr*1.5+other/4)), chips:chips }; }
+  function esc(s){ return s==='<'?'&lt;':s==='>'?'&gt;':s==='&'?'&amp;':s; }
+  function renderPrev(el,text,withWhy){ if(!text){ el.innerHTML='<div class="empty">Type something here and we\'ll show how it splits into tokens and how many there are.</div>'; return; }
+    var r=tokenize(text),shown=r.chips.slice(0,70),h='<div class="count">about <b>'+r.count+'</b> tokens · '+shown.length+' pieces</div><div class="toks">';
+    shown.forEach(function(c){ h+='<span class="tok '+c.c+'">'+esc(c.t)+(c.sp?' ':'')+'</span>'; }); if(r.chips.length>70)h+='<span class="tok">…</span>'; h+='</div>';
+    if(withWhy)h+='<div class="why">Purple = Korean, blue = English/numbers. Korean uses more tokens.</div>'; el.innerHTML=h; }
+  function rgba(h,a){ var n=parseInt(h.slice(1),16); return 'rgba('+(n>>16&255)+','+(n>>8&255)+','+(n&255)+','+a+')'; }
+  function tw(el,text,sp,arr){ var i=0; el.textContent=''; (function st(){ el.textContent=text.slice(0,i); if(i++<=text.length) arr.push(setTimeout(st,sp)); })(); }
+
+  /* theme toggle (sun/moon, light <-> dark) */
+  var themeBtn=document.getElementById('theme-toggle'),htmlEl=document.documentElement;
+  var SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  var MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>';
+  function effTheme(){ if(htmlEl.classList.contains('theme-dark'))return 'dark'; if(htmlEl.classList.contains('theme-light'))return 'light'; return (window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'; }
+  function paintTheme(){ var e=effTheme(); themeBtn.innerHTML = e==='dark'?SUN:MOON; themeBtn.title = e==='dark'?'Switch to light mode':'Switch to dark mode'; }
+  function setTheme(t){ htmlEl.classList.remove('theme-light','theme-dark'); htmlEl.classList.add('theme-'+t); paintTheme(); try{ localStorage.setItem('cc_theme',t); }catch(e){} }
+  themeBtn.addEventListener('click',function(){ setTheme(effTheme()==='dark'?'light':'dark'); });
+  (function(){ var t=null; try{ t=localStorage.getItem('cc_theme'); }catch(e){} if(t==='light'||t==='dark') htmlEl.classList.add('theme-'+t); paintTheme();
+    if(window.matchMedia){ try{ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){ if(!htmlEl.classList.contains('theme-light')&&!htmlEl.classList.contains('theme-dark')) paintTheme(); }); }catch(e){} } })();
+
+  /* presentation mode (big screen) */
+  var presentBtn=document.getElementById('present-toggle'),presentLabel=document.getElementById('present-label');
+  function setPresent(on){ document.documentElement.style.zoom = on?'1.3':''; presentBtn.classList.toggle('on',on); presentLabel.textContent = on?'Exit expand':'Expand mode'; try{ localStorage.setItem('cc_present', on?'1':'0'); }catch(e){} }
+  presentBtn.addEventListener('click',function(){ setPresent(!presentBtn.classList.contains('on')); });
+  (function(){ var s=null; try{ s=localStorage.getItem('cc_present'); }catch(e){} if(s==='1') setPresent(true); })();
+
+  /* LNB icons (monoline) */
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
+
+  /* router */
+  var navs=document.querySelectorAll('.navitem'),pages=document.querySelectorAll('.page');
+  navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
+
+  /* per-page one-line summaries */
+  var TLDR={ intro:'Chat gives you an \'answer\'; Claude Code <b>actually builds it in your project and makes it work</b>.', where:'Terminal, VS Code, desktop, web — <b>the same Claude Code everywhere</b>, settings shared too.', context:'Claude only remembers what\'s loaded here. When it\'s full, it <b>tidies up with \'compaction.\'</b>', sessions:'<b>One job per session</b> — mixing causes confusion. Keep the working folder narrow.', tokens:'Token = the unit an AI reads text in. <b>Longer means more space and cost</b>, and Korean is heavier.', models:'Smartness ↔ speed ↔ cost are trade-offs. <b>If unsure, start with Sonnet</b>.', claudemd:'<b>A rules note you write</b> — applied automatically at the start of every conversation.', memory:'A note <b>Claude learns and remembers on its own</b>. Carries over across sessions.', skills:'<b>Make a frequent task\'s steps once and reuse them</b> again and again.', mcp:'<b>Connects to outside tools (Jira, Figma, etc.)</b> so Claude can use them directly.', plugins:'A bundle that <b>packages skills, tools, commands and installs them in one go</b>.', agents:'<b>Hand big jobs to specialist helpers</b> and just get the results back.', images:'<b>Paste a screenshot</b> and Claude sees and understands it — faster and more accurate than words.', hooks:'A rule where <b>a set action runs automatically every time</b> at a specific moment.', planmode:'<b>Shows a plan and gets approval</b> before editing — safe for big changes.', permissions:'A setting for <b>how often Claude asks</b>. Stay safe at first.', rewind:'<b>Auto-saves at every request</b> — if you don\'t like it, roll back to an earlier point.', privacy:'<b>Business (Team, Enterprise, API) isn\'t used for training by default.</b> Personal is a choice in settings.', commands:'Shortcut commands that start with <code class="inlinecode">/</code>. The most-used are <b>/clear · /compact</b>.', plans:'<b>Not on the free plan.</b> Use a paid plan (Pro, Max, Team) or the API (pay-as-you-go).', limits:'<b>Once used up, you wait until it resets</b> — that\'s why managing it matters.', compact:'A long pile of conversation shrinks into <b>one short summary block</b>.', glossary:'A place to quickly look up confusing terms <b>in one line</b>.' };
+  pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">In one line</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
+
+  /* collapse code blocks by default */
+  document.querySelectorAll('.pre').forEach(function(pre){ var det=document.createElement('details'); det.className='codedet'; var sum=document.createElement('summary'); sum.textContent='Show code example (for developers · you can skip it)'; pre.parentNode.insertBefore(det,pre); det.appendChild(sum); det.appendChild(pre); });
+  navs.forEach(function(b){ b.addEventListener('click',function(){ var id=b.dataset.page; navs.forEach(function(n){n.classList.toggle('on',n===b);}); pages.forEach(function(p){p.classList.toggle('on',p.id===id);}); window.scrollTo(0,0); }); });
+
+  /* intro: chat vs code */
+  var ccT=[]; function ccStep(box,text){ var d=document.createElement('div'); d.className='cstep'; d.innerHTML='<span class="ck">✓</span><span>'+text+'</span>'; box.appendChild(d); requestAnimationFrame(function(){ d.classList.add('on'); }); }
+  document.getElementById('cc-go').addEventListener('click',function(){ ccT.forEach(clearTimeout); ccT=[]; var code=document.getElementById('cc-code'); code.innerHTML=''; document.getElementById('cc-chat-r').textContent=''; document.getElementById('cc-code-r').textContent='';
+    tw(document.getElementById('cc-chat'),'Here\'s how to do it: create a booking.html file with the code below, link a button on the main page, then add the saving code…',22,ccT);
+    ccT.push(setTimeout(function(){ document.getElementById('cc-chat-r').innerHTML='→ You get <b>an explanation and code snippets</b>. Pasting them into several files and connecting and running them is <b>up to you</b>.'; },4800));
+    var steps=['Created a new booking screen (booking.html)','Linked a \'Book\' button on the main page','Added code to save booking info','Ran the tests → passed'];
+    steps.forEach(function(t,i){ ccT.push(setTimeout(function(){ ccStep(code,t); },800*(i+1))); });
+    ccT.push(setTimeout(function(){ document.getElementById('cc-code-r').innerHTML='→ <b>A working booking feature</b> is finished. It created several files itself and connected and ran them.'; },800*(steps.length+1)+200));
+  });
+  document.getElementById('cc-chat').textContent='Press the button to see the answer.'; document.getElementById('cc-code').innerHTML='<div class="cstep on"><span>Press the button to see the build process.</span></div>';
+
+  /* context tank */
+  var MAX=40000,LIMIT_PX=420,AC_RATIO=0.8,stack=document.getElementById('stack'),limit=document.getElementById('limit'),cap=document.getElementById('cap'),free=document.getElementById('free'),tokEl=document.getElementById('tok'),num=document.getElementById('num'),status=document.getElementById('status'),inp=document.getElementById('inp'),capinp=document.getElementById('capinp'),tokprev=document.getElementById('tokprev');
+  var labels={sys:'System prompt · base instructions',tool:'Tool list · available features',mem:'Project note · CLAUDE.md',user:'Your message',file:'File content · code that was read',reply:'Claude\'s reply'};
+  var hex={sys:'#8a8a8a',tool:'#3b7dd8',mem:'#1f9e76',user:'#6d5fd0',file:'#d8662f',reply:'#cf5184'};
+  var base=[{k:'sys',t:3000},{k:'tool',t:11500},{k:'mem',t:2200}],items=[],curShown=0;
+  function makeBlk(it,fixed,h){ var d=document.createElement('div'); d.className='blk'+(h<18?' mini':'')+(fixed?'':' acc'); d.style.height=h+'px'; d.style.background=rgba(hex[it.k],0.14); d.style.borderColor=rgba(hex[it.k],0.30); d.title=labels[it.k]+(it.txt?(' — '+it.txt):'')+' · '+fmt(it.t)+' tokens'; var name=labels[it.k]; if(it.txt)name+=' — "'+it.txt+'"'; d.innerHTML='<span class="dot" style="background:'+hex[it.k]+'"></span><span class="name">'+name+'</span>'+(fixed?'<span class="tag">base</span>':'')+'<span class="tk">'+fmt(it.t)+'</span>'; return d; }
+  function ctxRender(animLast){ var scale=LIMIT_PX/MAX; stack.innerHTML=''; items.forEach(function(it,i){ var el=makeBlk(it,it._base,Math.max(8,Math.round(it.t*scale))); if(animLast&&i===items.length-1){ el.style.opacity='0'; el.style.transform='translateY(-8px)'; el.style.transition='opacity .35s ease, transform .35s cubic-bezier(.22,1,.36,1)'; stack.appendChild(el); requestAnimationFrame(function(){ el.style.opacity='1'; el.style.transform='none'; }); } else stack.appendChild(el); });
+    var total=items.reduce(function(a,b){return a+b.t;},0); ctxCount(total); limit.style.bottom=LIMIT_PX+'px'; cap.textContent='Limit '+fmt(MAX);
+    var acl=document.getElementById('acline'); if(acl){ acl.style.bottom=Math.round(LIMIT_PX*AC_RATIO)+'px'; document.getElementById('accap').textContent='Auto-compact starts ~'+fmt(MAX*AC_RATIO); }
+    var over=total>MAX; limit.classList.toggle('over',over); num.classList.toggle('over',over); var usedPx=Math.min(LIMIT_PX,total*scale); if(!over&&total/MAX<0.7&&(MAX-total)>MAX*0.04){ free.style.display='block'; free.style.bottom=(usedPx+(LIMIT_PX-usedPx)/2-8)+'px'; free.textContent='Free space '+fmt(MAX-total); } else free.style.display='none'; }
+  function ctxCount(target){ var start=curShown,t0=null,dur=480; function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur); tokEl.textContent=fmt(start+(target-start)*(1-Math.pow(1-p,3))); num.querySelector('.max').textContent=' / '+fmt(MAX); if(p<1)requestAnimationFrame(step); else curShown=target; } requestAnimationFrame(step); }
+  function ctxAdd(k,t,txt){ items.push({k:k,t:t,txt:txt}); ctxRender(true); }
+  function ctxBase(){ items=base.map(function(b){return {k:b.k,t:b.t,_base:true};}); curShown=0; ctxRender(false); }
+  function ctxMax(v){ v=Math.max(2000,Math.min(1000000,Math.round(v))); MAX=v; capinp.value=v; document.querySelectorAll('#context .chip').forEach(function(c){ c.classList.toggle('on',+c.dataset.v===v); }); ctxRender(false); }
+  capinp.addEventListener('change',function(){ ctxMax(+capinp.value||40000); });
+  document.querySelectorAll('#context .chip').forEach(function(c){ c.addEventListener('click',function(){ ctxMax(+c.dataset.v); }); });
+  inp.addEventListener('input',function(){ renderPrev(tokprev,inp.value.trim(),true); });
+  document.getElementById('send').addEventListener('click',function(){ var txt=(inp.value||'').trim(); if(!txt){inp.focus();return;} ctxAdd('user',tokenize(txt).count,txt.length>30?txt.slice(0,30)+'…':txt); inp.value=''; renderPrev(tokprev,'',true); inp.focus(); var total=items.reduce(function(a,b){return a+b.t;},0); if(total/MAX>.85)status.textContent='Almost full. Try "See auto-compact" or "Manual compact".'; });
+  inp.addEventListener('keydown',function(e){ if(e.key==='Enter')document.getElementById('send').click(); });
+  document.querySelectorAll('#context .act').forEach(function(b){ b.addEventListener('click',function(){ ctxAdd(b.dataset.k,parseInt(b.dataset.t,10)); var total=items.reduce(function(a,b){return a+b.t;},0); if(total>MAX)status.textContent='Over the limit — auto-compact is now needed.'; }); });
+  function doCompact(){ ctxBase(); items.push({k:'mem',t:Math.round(MAX*0.10),txt:'Summary of the conversation so far'}); ctxRender(true); }
+  document.getElementById('compact').addEventListener('click',function(){ if(items.reduce(function(a,b){return a+b.t;},0)<=base.reduce(function(a,b){return a+b.t;},0)+1000){ status.textContent='Not enough has piled up to compact yet.'; return; } doCompact(); status.textContent='Manual compact (/compact) done — the piled-up messages, files, and results shrank into one summary block.'; });
+  document.getElementById('reset').addEventListener('click',function(){ acStop(); ctxBase(); status.textContent='The three blocks below are always loaded, even before you start a conversation.'; });
+  var acT=[]; function acStop(){ acT.forEach(clearTimeout); acT=[]; document.getElementById('tank').classList.remove('flash'); stack.classList.remove('summarizing'); var ov=document.getElementById('acoverlay'); if(ov)ov.classList.remove('on'); }
+  document.getElementById('autocompact').addEventListener('click',function(){ acStop(); ctxMax(40000); ctxBase(); var seq=[['user',900,'Build a dashboard'],['file',8400,null],['tool',3100,null],['reply',1800,null],['reply',1100,null]]; status.textContent='Conversation piling up… (one continuous task)'; var i=0;
+    (function step(){ if(i>=seq.length){ acTrigger(); return; } var s=seq[i++]; ctxAdd(s[0],s[1],s[2]); var total=items.reduce(function(a,b){return a+b.t;},0);
+      if(total>=MAX*AC_RATIO){ status.textContent='Reached the auto-compact start line! ('+fmt(total)+' / limit '+fmt(MAX)+') — it stops here, before the limit, and compacts.'; acT.push(setTimeout(acTrigger,1100)); return; }
+      if(total/MAX>.6) status.textContent='Filling up steadily… soon it\'ll reach the auto-compact line.'; acT.push(setTimeout(step,1100)); })(); });
+  function acTrigger(){ var tank=document.getElementById('tank'),ov=document.getElementById('acoverlay'); status.textContent='⚠️ Reached the auto-compact line — it stops here and starts summarizing. (No new work runs while it summarizes.)'; tank.classList.add('flash');
+    acT.push(setTimeout(function(){ stack.classList.add('summarizing'); if(ov)ov.classList.add('on'); status.textContent='Paused — briefly summarizing past conversation, files, and tool results…'; },1300));
+    acT.push(setTimeout(function(){ stack.classList.remove('summarizing'); if(ov)ov.classList.remove('on'); tank.classList.remove('flash'); doCompact(); status.textContent='Compaction done — old conversation and tool output shrink into one \'summary\' block, while essentials like your request, the file list, and decisions are preserved. (To see how the content actually changes, check the \'Compaction in detail\' tab.)'; },3400)); }
+  renderPrev(tokprev,'',true); ctxMax(40000); ctxBase();
+
+  /* sessions + brain */
+  var sBody=document.getElementById('sess-body'),sBar=document.getElementById('sess-bar'),sBarL=document.getElementById('sess-barl'),sMode=document.getElementById('sess-mode'),sMsg=document.getElementById('sess-msg'),sTimers=[];
+  function sClear(){ sTimers.forEach(clearTimeout); sTimers=[]; sBody.innerHTML=''; }
+  function sRow(color,kind,label,cls){ var d=document.createElement('div'); d.className='sessrow'+(cls?(' '+cls):''); d.innerHTML=(cls==='warn'||cls==='muted'?'':'<span class="tdot" style="background:'+color+'"></span>')+(cls==='warn'||cls==='muted'?'':'<span class="sk">'+kind+'</span>')+'<span class="sl">'+label+'</span>'; d.style.opacity='0'; d.style.transform='translateY(-6px)'; d.style.transition='opacity .3s, transform .3s'; sBody.appendChild(d); requestAnimationFrame(function(){ d.style.opacity='1'; d.style.transform='none'; }); }
+  function sBarSet(p){ p=Math.min(100,p); sBar.style.width=p+'%'; sBar.style.background= p>85?'#d8453f':(p>60?'#d8943f':'var(--good)'); sBarL.textContent='Context '+Math.round(p)+'% used'; }
+  var brainFillEl=document.getElementById('brainfill'),brainEl=document.getElementById('brain'),brainStat=document.getElementById('brain-stat'),brainY=160;
+  function brainReset(){ if(brainFillEl)brainFillEl.innerHTML=''; brainY=160; if(brainEl)brainEl.classList.remove('overload'); if(brainStat)brainStat.textContent='Still empty'; }
+  function brainAdd(color,delta){ if(!brainFillEl)return; var h=delta/100*136,topY=brainY-h; var r=document.createElementNS('http://www.w3.org/2000/svg','rect'); r.setAttribute('x',0); r.setAttribute('width',220); r.setAttribute('fill',color); r.setAttribute('opacity','0.55'); r.style.y=brainY+'px'; r.style.height='0px'; r.style.transition='y .5s cubic-bezier(.22,1,.36,1), height .5s cubic-bezier(.22,1,.36,1)'; brainFillEl.appendChild(r); requestAnimationFrame(function(){ r.style.y=topY+'px'; r.style.height=(h+0.8)+'px'; }); brainY=topY; }
+  var MESSY=[ {c:'#3b7dd8',k:'Job 1',l:'"Build a booking page for our cafe"',p:10},{c:'#3b7dd8',k:'In progress',l:'Building the booking screen + time picker',p:20},{c:'#3b7dd8',k:'Done',l:'Cafe booking page finished ✓',p:28,done:1},
+    {c:'#d8662f',k:'Job 2',l:'"Now add a sale banner to our online store" (a different business!)',p:40},{c:'#d8662f',k:'In progress',l:'Designing the banner + linking products',p:54},
+    {c:'#1f9e76',k:'Job 3',l:'"Oh, and make a class sign-up form for the academy too" (yet another business!)',p:68},{c:'#1f9e76',k:'In progress',l:'Building the sign-up form + payment integration',p:82},
+    {c:'#6d5fd0',k:'Job 4',l:'"Add gym membership management too" (yet another one!)',p:96} ];
+  document.getElementById('sess-play').addEventListener('click',function(){ sClear(); brainReset(); sMode.textContent='One session (mixing many businesses)'; sBarSet(0); sMsg.textContent='Playing — cafe, store, academy, gym… piling different businesses\' work into one session…'; var prev=0;
+    MESSY.forEach(function(s,i){ sTimers.push(setTimeout(function(){ sRow(s.c,s.k,s.l,s.done?'done':''); sBarSet(s.p); brainAdd(s.c,s.p-prev); prev=s.p; if(brainStat)brainStat.innerHTML='Complexity <b>'+s.p+'%</b> — the businesses are getting jumbled';
+      if(i===MESSY.length-1){ sTimers.push(setTimeout(function(){ sRow(null,null,'⚠️ Claude: I\'m confused about which screen belongs to which business…','warn'); sBarSet(100); if(brainEl)brainEl.classList.add('overload'); if(brainStat)brainStat.innerHTML='<b style="color:var(--over)">Overloaded</b> — the mind is jumbled and confused'; sMsg.textContent='Even after the cafe job was done, the store, academy, and gym were all asked for in the same session, so the 4 businesses got jumbled in the mind (context) and filled it up. → Each time the business (job) changes, clear it with /clear or use a new session to keep things clean.'; },1100)); } },950*i)); }); });
+  var fsT=[];
+  var HOME=['family_photo.jpg','trip_2019.png','music_playlist.mp3','tax_receipt.xlsx','resume_final_reallyfinal.docx','Downloads/installer.exe','notes.txt','… and thousands more'];
+  var PROJ=['index.html','style.css','about.html','script.js'];
+  function fsScan(list,verdict,vcls){ fsT.forEach(clearTimeout); fsT=[]; var box=document.getElementById('fold-scan'); box.innerHTML='<div class="fs" style="color:var(--ink)">Scanning…</div>';
+    list.forEach(function(f,i){ fsT.push(setTimeout(function(){ var d=document.createElement('div'); d.className='fs'+(vcls==='bad'?' junk':''); d.textContent='· '+f; box.appendChild(d); },360*(i+1))); });
+    fsT.push(setTimeout(function(){ var v=document.createElement('div'); v.className='fsv '+vcls; v.innerHTML=verdict; box.appendChild(v); },360*(list.length+1)+200)); }
+  document.getElementById('fold-home').addEventListener('click',function(){ fsScan(HOME,'It digs through <b>thousands of unrelated files</b>. Slow, and it might touch the wrong file. That\'s why not picking a folder is trouble.','bad'); });
+  document.getElementById('fold-proj').addEventListener('click',function(){ fsScan(PROJ,'It looks at <b>just the few files</b> you need. Fast and accurate. Starting in the folder you\'ll work in is the right way.','good'); });
+  document.getElementById('sess-clear').addEventListener('click',function(){ sClear(); brainReset(); sMode.textContent='Right after /clear (fresh start)'; sRow(null,null,'Conversation cleared — ready for a new job','muted'); sBarSet(8); if(brainStat)brainStat.textContent='Wiped clean'; sMsg.textContent='/clear wipes the mind (conversation) clean. However, CLAUDE.md and memory stay (they\'re reloaded). The previous conversation can be revived with /resume.'; });
+  brainReset(); sBarSet(0);
+
+  /* tokens */
+  var tinp=document.getElementById('tinp'),tprev=document.getElementById('tprev'); tinp.addEventListener('input',function(){ renderPrev(tprev,tinp.value.trim(),true); }); renderPrev(tprev,'',true);
+  var EX_KR='안녕하세요, 저희 회사 홈페이지의 소개 페이지에 있는 오타를 찾아서 고치고, 연락처 정보도 최신으로 업데이트해 주세요.';
+  var EX_EN='Hello, please find and fix the typos on the About page of our company website, and update the contact info too.';
+  function setEx(v){ tinp.value=v; renderPrev(tprev, v.trim(), true); tinp.focus(); }
+  document.getElementById('ex-kr').addEventListener('click',function(){ setEx(EX_KR); });
+  document.getElementById('ex-en').addEventListener('click',function(){ setEx(EX_EN); });
+  document.getElementById('ex-clear').addEventListener('click',function(){ tinp.value=''; renderPrev(tprev,'',true); tinp.focus(); });
+  (function(){ var pairs=[['안녕하세요','Korean'],['Hello','English']],html=''; pairs.forEach(function(p){ var r=tokenize(p[0]); var chips=r.chips.map(function(c){return '<span class="tok '+c.c+'">'+esc(c.t)+'</span>';}).join(''); html+='<div class="ccard"><div class="word">'+p[0]+'</div><div class="cc">'+p[1]+' · about <b>'+r.count+'</b> tokens</div><div class="toks">'+chips+'</div></div>'; }); document.getElementById('compare').innerHTML=html; })();
+  var sv=document.getElementById('stageview'),lcT=[]; function lcClear(){ lcT.forEach(clearTimeout); lcT=[]; }
+  var counts={in:0,th:0,out:0};
+  function meter(){ document.getElementById('lc-in').textContent=fmt(counts.in); document.getElementById('lc-th').textContent=fmt(counts.th); document.getElementById('lc-out').textContent=fmt(counts.out); document.getElementById('lc-total').textContent=fmt(counts.in+counts.th+counts.out); document.getElementById('lcb-in').style.width=Math.min(100,counts.in/2000*100)+'%'; document.getElementById('lcb-th').style.width=Math.min(100,counts.th/2000*100)+'%'; document.getElementById('lcb-out').style.width=Math.min(100,counts.out/2000*100)+'%'; }
+  function mreset(){ counts={in:0,th:0,out:0}; meter(); }
+  function countTo(k,target,dur,done){ var start=counts[k],steps=Math.max(1,Math.round(dur/40)),i=0; (function st(){ i++; counts[k]=Math.round(start+(target-start)*(i/steps)); meter(); if(i<steps)lcT.push(setTimeout(st,40)); else if(done)done(); })(); }
+  function lcVisual(stage){ document.querySelectorAll('.stage').forEach(function(s){ s.classList.toggle('on',s.dataset.st===stage); });
+    if(stage==='input'){ sv.innerHTML='<div class="sv-title">Input — reading</div><div class="sv-bar"><div class="sv-fill" style="background:var(--blue)"></div></div><div class="sv-desc">It reads your question + the whole context window all at once. The input tokens rise on the right.</div>'; lcT.push(setTimeout(function(){ var f=sv.querySelector('.sv-fill'); if(f)f.style.width='100%'; },60)); }
+    else if(stage==='think'){ sv.innerHTML='<div class="sv-title">Thinking — internal reasoning <span style="font-weight:300;color:var(--faint);font-size:12px;">(optional feature)</span></div><div class="think-dots"><i></i><i></i><i></i> &nbsp;<span id="lc-think">Thinking…</span></div><div class="sv-desc">It works through it step by step before replying. Usually hidden, but it\'s <b>the same price as output</b>, so the \'thinking\' tokens on the right rise the most.</div>'; var t='France… a country in Europe… the capital is… Paris…',el=document.getElementById('lc-think'),i=0; (function ty(){ if(!el)return; el.textContent=t.slice(0,i)||'Thinking…'; if(i++<=t.length)lcT.push(setTimeout(ty,55)); })(); }
+    else { sv.innerHTML='<div class="sv-title">Output — writing the reply</div><div class="sv-type" id="lc-type"></div><div class="sv-desc">This is the reply you actually see. The output tokens rise on the right.</div>'; var msg='It\'s Paris. It\'s the capital and largest city of France.',e2=document.getElementById('lc-type'),j=0; (function ty2(){ if(!e2)return; e2.textContent=msg.slice(0,j); if(j++<=msg.length)lcT.push(setTimeout(ty2,32)); })(); } }
+  var lcMap={input:'in',think:'th',output:'out'},lcTg={input:500,think:2000,output:50};
+  function lcSet(stage){ lcClear(); mreset(); lcVisual(stage); countTo(lcMap[stage],lcTg[stage],800); }
+  document.querySelectorAll('.stage').forEach(function(s){ s.addEventListener('click',function(){ lcSet(s.dataset.st); }); });
+  document.getElementById('lc-all').addEventListener('click',function(){ lcClear(); mreset(); lcVisual('input'); countTo('in',500,1500,function(){ lcT.push(setTimeout(function(){ lcVisual('think'); countTo('th',2000,2600,function(){ lcT.push(setTimeout(function(){ lcVisual('output'); countTo('out',50,1500); },400)); }); },400)); }); });
+  lcClear(); mreset(); lcVisual('input');
+
+  /* models */
+  var MODELS={ opus:{iq:5,sp:2,cost:1,ctx:'up to 1M (about one million tokens)',tag:'Smartest, but slowest and priciest.',when:'When accuracy matters above all.',ex:['Complex code analysis & design','Hard-to-solve bugs','Tasks needing long reasoning']},
+    sonnet:{iq:4,sp:4,cost:3,ctx:'up to 1M (about one million tokens)',tag:'A balance of smartness and speed. Fine for most tasks.',when:'If you don\'t know what to pick, start here.',ex:['General coding & edits','Writing & summarizing documents','Most tasks']},
+    haiku:{iq:3,sp:5,cost:5,ctx:'200K (about two hundred thousand tokens)',tag:'Fastest and cheapest.',when:'When speed and cost matter and the task is simple.',ex:['Simple, repetitive tasks','Quick responses','Lots of light processing']},
+    fable:{iq:5,sp:1,cost:1,locked:true,ctx:'up to 1M (about one million tokens)',lock:'A top-tier special model currently blocked for general use. (Not selectable — for reference.)',tag:'The most powerful, but slowest and priciest special model.',when:'For very hard, long-running autonomous tasks.',ex:['Large-scale code migrations','Long autonomous tasks','The hardest problems']} };
+  var barColor={iq:'#6d5fd0',sp:'#1f9e76',cost:'#3b7dd8'},rateTxt=['','Very low','Low','Medium','High','Very high'];
+  function showModel(m){ var d=MODELS[m]; ['iq','sp','cost'].forEach(function(k){ document.getElementById('f-'+k).style.width=(d[k]*20)+'%'; document.getElementById('f-'+k).style.background=d.locked?'var(--line2)':barColor[k]; document.getElementById('v-'+k).textContent=rateTxt[d[k]]; });
+    var lb=document.getElementById('m-lock'); if(d.locked){ lb.style.display='block'; lb.textContent='🔒 '+d.lock; document.getElementById('muse').classList.add('lock'); } else { lb.style.display='none'; document.getElementById('muse').classList.remove('lock'); }
+    document.getElementById('m-tag').textContent=d.tag; document.getElementById('m-when').textContent=d.when; document.getElementById('m-ctx').innerHTML='Context window: <b>'+d.ctx+'</b>'; document.getElementById('m-ex').innerHTML=d.ex.map(function(e){return '<li>'+e+'</li>';}).join(''); document.querySelectorAll('.mtab').forEach(function(t){ t.classList.toggle('on',t.dataset.m===m); }); }
+  document.querySelectorAll('.mtab').forEach(function(t){ t.addEventListener('click',function(){ showModel(t.dataset.m); }); }); showModel('sonnet');
+
+  /* claude.md diff */
+  var mdT=[]; document.getElementById('md-go').addEventListener('click',function(){ mdT.forEach(clearTimeout); mdT=[]; tw(document.getElementById('md-no'),'네, 이 문서를 요약해 드릴게요. 이 파일은 ○○를 설명하며 …',30,mdT); tw(document.getElementById('md-yes'),'Certainly. Here\'s a polite summary in English: this document explains ○○, and the key points are as follows …',22,mdT); });
+  document.getElementById('md-no').textContent='Press the button to see the answer.'; document.getElementById('md-yes').textContent='Press the button to see the answer.';
+
+  /* memory demo */
+  var memT=[],memMd=document.getElementById('mem-md');
+  document.getElementById('mem-go').addEventListener('click',function(){ memT.forEach(clearTimeout); memT=[]; [0,1,2,3].forEach(function(n){ document.getElementById('mstep'+n).classList.remove('on'); }); memMd.innerHTML='<span class="c"># MEMORY.md (written automatically by Claude)</span>\n';
+    [0,1,2,3].forEach(function(n,i){ memT.push(setTimeout(function(){ document.getElementById('mstep'+n).classList.add('on');
+      if(n===1){ tw(memMd,'# MEMORY.md (written automatically by Claude)\n\n## Writing reports\n- Always lay reports out as tables',16,memT); }
+      if(n===2){ memMd.innerHTML='<span class="c"># New session started — MEMORY.md auto-loaded</span>\n\n## Writing reports\n- Always lay reports out as tables'; }
+    },850*i)); }); });
+
+  /* skills with/without */
+  var skT=[]; function skLine(box,text,cls){ var d=document.createElement('div'); d.className='skline '+cls; d.textContent=text; box.appendChild(d); requestAnimationFrame(function(){ d.classList.add('on'); }); }
+  document.getElementById('sk-go').addEventListener('click',function(){ skT.forEach(clearTimeout); skT=[]; var no=document.getElementById('sk-no'),yes=document.getElementById('sk-yes'); no.innerHTML=''; yes.innerHTML='';
+    var noSteps=['Week 1: "What was the report format again?" → explain every time','Week 2: "Tell me the format again…" → explain again','Week 3: "Where do I find the data again?" → explain yet again','…the same explanation every week (tiring and inconsistent)'];
+    var yesSteps=['Setup: define the /weekly-report skill once','Week 1: "Write the weekly report" → applied automatically','Week 2: "Weekly report" → same as before, no re-explaining','…done in one go each week, always the same quality'];
+    noSteps.forEach(function(t,i){ skT.push(setTimeout(function(){ skLine(no,t,'long'); },600*i)); });
+    yesSteps.forEach(function(t,i){ skT.push(setTimeout(function(){ skLine(yes,t,'short'); },600*i+300)); });
+  });
+
+  /* mcp connect */
+  var MCPN=[ {x:230,y:40,w:78,n:'GitHub'},{x:392,y:96,w:70,n:'Figma'},{x:360,y:228,w:84,n:'Browser'},{x:100,y:228,w:64,n:'Jira'},{x:52,y:96,w:64,n:'Slack'} ];
+  (function(){ var ln=document.getElementById('mcp-lines'),nd=document.getElementById('mcp-nodes'); MCPN.forEach(function(o,i){ var cx=o.x+o.w/2, cy=o.y+15;
+    var line=document.createElementNS('http://www.w3.org/2000/svg','line'); line.setAttribute('class','spoke'); line.setAttribute('x1',230); line.setAttribute('y1',140); line.setAttribute('x2',cx); line.setAttribute('y2',cy); var len=Math.round(Math.hypot(cx-230,cy-140))+4; line.style.strokeDasharray=len; line.style.strokeDashoffset=len; line.style.transition='stroke-dashoffset .6s ease'; line.id='mcpl'+i; ln.appendChild(line);
+    var g=document.createElementNS('http://www.w3.org/2000/svg','g'); g.setAttribute('class','node'); g.id='mcpn'+i;
+    var rect=document.createElementNS('http://www.w3.org/2000/svg','rect'); rect.setAttribute('x',o.x); rect.setAttribute('y',o.y); rect.setAttribute('width',o.w); rect.setAttribute('height',30); rect.setAttribute('rx',8); g.appendChild(rect);
+    var tx=document.createElementNS('http://www.w3.org/2000/svg','text'); tx.setAttribute('x',cx); tx.setAttribute('y',o.y+19); tx.setAttribute('text-anchor','middle'); tx.setAttribute('font-size','12'); tx.textContent=o.n; g.appendChild(tx);
+    var ck=document.createElementNS('http://www.w3.org/2000/svg','text'); ck.setAttribute('class','chk'); ck.setAttribute('x',o.x+o.w-4); ck.setAttribute('y',o.y+2); ck.setAttribute('text-anchor','middle'); ck.setAttribute('font-size','13'); ck.textContent='✓'; g.appendChild(ck);
+    nd.appendChild(g); }); })();
+  var mcpT=[]; function mcpReset(){ mcpT.forEach(clearTimeout); mcpT=[]; MCPN.forEach(function(o,i){ document.getElementById('mcpn'+i).classList.remove('on'); var l=document.getElementById('mcpl'+i); l.style.strokeDashoffset=l.style.strokeDasharray; }); document.getElementById('mcp-msg').textContent='Press "Connect them one by one."'; }
+  document.getElementById('mcp-go').addEventListener('click',function(){ mcpReset(); document.getElementById('mcp-msg').textContent='Connecting the tools one by one…'; MCPN.forEach(function(o,i){ mcpT.push(setTimeout(function(){ document.getElementById('mcpl'+i).style.strokeDashoffset='0'; document.getElementById('mcpn'+i).classList.add('on'); document.getElementById('mcp-msg').textContent=o.n+' connected ✓ — now Claude can use '+o.n+' directly.'; if(i===MCPN.length-1)mcpT.push(setTimeout(function(){ document.getElementById('mcp-msg').textContent='All connected! Now Claude Code can use these tools directly. (Check with /mcp.)'; },700)); },700*i)); }); });
+  document.getElementById('mcp-reset').addEventListener('click',mcpReset); mcpReset();
+
+  /* subagents (6 specialists) */
+  var saT=[]; function saClear(){ saT.forEach(clearTimeout); saT=[]; }
+  var SUBS=[ {name:'Research',work:'Scanning 40 files',c:'#3b7dd8',pct:84,tok:38000,sum:600},
+    {name:'Security check',work:'Checking for vulnerabilities',c:'#d8662f',pct:70,tok:31000,sum:500},
+    {name:'Design check',work:'Reviewing screens & layout',c:'#1f9e76',pct:62,tok:27000,sum:450},
+    {name:'Speed analysis',work:'Finding the slow parts',c:'#6d5fd0',pct:76,tok:34000,sum:550},
+    {name:'Copy review',work:'Checking typos & wording',c:'#cf5184',pct:48,tok:21000,sum:400},
+    {name:'Test runner',work:'Verifying it works',c:'#b9792a',pct:67,tok:30000,sum:520} ];
+  (function(){ var g=document.getElementById('sa-grid'); if(g) g.innerHTML=SUBS.map(function(s,i){ return '<div class="subcard" id="sa-c'+i+'"><div class="sh">'+s.name+' <span style="font-weight:300;color:var(--faint);font-size:11px;">(subagent)</span></div><div class="sd2">Its own new context window</div><div class="ctxmini"><i id="sa-b'+i+'"></i></div><div class="ctxnum"><span id="sa-n'+i+'">0 tokens</span> · '+s.work+'</div><div class="retmsg" id="sa-r'+i+'">→ reports back only a '+s.sum+'-token summary</div></div>'; }).join(''); })();
+  function saFill(barId,numId,toPct,toTok,dur,col){ var bar=document.getElementById(barId),el=document.getElementById(numId); if(col&&bar)bar.style.background=col; var steps=Math.max(1,Math.round(dur/50)),i=0; (function st(){ i++; var f=i/steps; if(bar)bar.style.width=(toPct*f)+'%'; if(el)el.textContent=fmt(Math.round(toTok*f))+' tokens'; if(i<steps)saT.push(setTimeout(st,50)); })(); }
+  function saReset(){ saClear(); SUBS.forEach(function(s,i){ var c=document.getElementById('sa-c'+i); if(c)c.classList.remove('on'); var r=document.getElementById('sa-r'+i); if(r)r.classList.remove('on'); var b=document.getElementById('sa-b'+i); if(b)b.style.width='0%'; var n=document.getElementById('sa-n'+i); if(n)n.textContent='0 tokens'; }); [0,1,2].forEach(function(i){ var bf=document.getElementById('sa-bf'+i); if(bf)bf.classList.remove('on'); }); var mb=document.getElementById('sa-main-b'); if(mb){ mb.style.background='var(--good)'; mb.style.width='8%'; } var mn=document.getElementById('sa-main-n'); if(mn)mn.textContent='Context 8%'; }
+  var saGo=document.getElementById('sa-go'); if(saGo) saGo.addEventListener('click',function(){ saReset(); var msg=document.getElementById('sa-msg'); msg.textContent='The main handed work to 6 helpers all at once — the 6 are working at the same time, each in its own space…';
+    SUBS.forEach(function(s,i){ saT.push(setTimeout(function(){ var c=document.getElementById('sa-c'+i); if(c)c.classList.add('on'); saFill('sa-b'+i,'sa-n'+i,s.pct,s.tok,1400,s.c); },150*i)); });
+    saT.push(setTimeout(function(){ SUBS.forEach(function(s,i){ var r=document.getElementById('sa-r'+i); if(r)r.classList.add('on'); }); saFill('sa-main-b','',24,0,800,'var(--good)'); var mn=document.getElementById('sa-main-n'); if(mn)mn.textContent='Context 24% · received only summaries'; },2200));
+    saT.push(setTimeout(function(){ [0,1,2].forEach(function(i){ var bf=document.getElementById('sa-bf'+i); if(bf)bf.classList.add('on'); }); msg.innerHTML='The 6 each did big work (tens of thousands of tokens) <b>at the same time</b> — but the main collected <b>only short summaries</b>, so its context stays clean (24%) and fast. The helpers\' big workspaces disappear once they\'re done.'; },3100)); });
+  var saSelf=document.getElementById('sa-self'); if(saSelf) saSelf.addEventListener('click',function(){ saReset(); var msg=document.getElementById('sa-msg'); var mb=document.getElementById('sa-main-b'),mn=document.getElementById('sa-main-n'); var seq=[28,46,62,76,90,100],i=0;
+    (function step(){ if(i>=seq.length){ if(mb)mb.style.background='#d8453f'; if(mn)mn.textContent='Context 100% — full'; msg.innerHTML='Taking on all 6 jobs alone, <b>one after another</b> — the context fills up and gets confused (overloaded), and doing them one by one is <b>slow.</b> That\'s why you split the work among 6 helpers.'; return; } if(mb){ mb.style.width=seq[i]+'%'; mb.style.background= seq[i]>85?'#d8453f':(seq[i]>60?'#d8943f':'var(--good)'); } if(mn)mn.textContent='Handling it alone… '+(i+1)+'/6'; i++; saT.push(setTimeout(step,650)); })(); });
+  saReset();
+
+  /* images */
+  var iT=[],IMG=[ {r:'r-title',i:0},{r:'r-input',i:1},{r:'r-btn',i:2},{r:'r-err',i:3} ];
+  document.getElementById('img-go').addEventListener('click',function(){ iT.forEach(clearTimeout); iT=[]; document.querySelectorAll('.shot .reg').forEach(function(r){ r.classList.remove('hl'); }); document.querySelectorAll('#detlist li').forEach(function(li){ li.classList.remove('on'); }); document.getElementById('detsum').classList.remove('on');
+    IMG.forEach(function(s,idx){ iT.push(setTimeout(function(){ var reg=document.getElementById(s.r); if(reg)reg.classList.add('hl'); var li=document.querySelectorAll('#detlist li')[s.i]; if(li)li.classList.add('on'); if(idx>0){ var pv=document.getElementById(IMG[idx-1].r); if(pv)pv.classList.remove('hl'); } if(idx===IMG.length-1)iT.push(setTimeout(function(){ if(reg)reg.classList.remove('hl'); document.getElementById('detsum').classList.add('on'); },650)); },600*idx)); }); });
+
+  /* permissions */
+  var PM=[ {name:'Ask permission',safe:'Safe',col:'#1f9e76',auto:'Nothing — asks for every edit and command',ask:'Every file edit and command',use:'When first starting, or for sensitive or important work',sim:['ask','ask','ask','ask']},
+    {name:'Accept edits',safe:'Mostly safe',col:'#5aa56a',auto:'File edits, safe file commands (creating folders, moving, copying)',ask:'Hard-to-undo work like git commits',use:'When iterating quickly while watching the results',sim:['auto','auto','ask','ask']},
+    {name:'Plan mode',safe:'Read-only',col:'#b9792a',auto:'Reading and exploring only (no direct edits)',ask:'Once you approve the plan, it runs all at once',use:'When checking a plan first, before big changes',sim:['plan','plan','plan','plan']},
+    {name:'Auto mode',safe:'Caution',col:'#d8943f',auto:'Most tasks (with background safety checks)',ask:'Only confirms or blocks dangerous tasks',use:'When you want fewer prompts for long automated work',note:'Requires the latest version and model (Opus 4.6 / Sonnet 4.6 or later)',sim:['auto','auto','auto','ask']},
+    {name:'Skip permissions',safe:'Dangerous',col:'#d8453f',auto:'Everything — proceeds without asking',ask:'Blocks only extremes like wiping the whole system (rm -rf /)',use:'Only in an internet-isolated environment (container, VM)',note:'Vulnerable to prompt injection — don\'t use it on a normal PC',sim:['auto','auto','auto','auto']} ];
+  var SIM_ACT=['Edit a file','Create a folder','git commit','Delete a file (rm)'],SIM_TXT={auto:'Runs automatically',ask:'Asks for confirmation',plan:'Doesn\'t run (plan only)',block:'Blocked'},curPm=0;
+  function pmShow(i){ curPm=i; var d=PM[i]; document.querySelectorAll('#pmenu .prow').forEach(function(r){ r.classList.toggle('on',+r.dataset.i===i); }); var badge='<span class="pbadge" style="background:'+rgba(d.col,.16)+';color:'+d.col+'">'+d.safe+'</span>'; document.getElementById('pdetail').innerHTML='<div class="pt">'+d.name+' '+badge+'</div><div class="pdrow"><b>Does on its own</b>'+d.auto+'</div><div class="pdrow"><b>Still asks about</b>'+d.ask+'</div><div class="pdrow"><b>When to use</b>'+d.use+'</div>'+(d.note?'<div class="pdrow"><b>Note</b>'+d.note+'</div>':''); document.getElementById('pmark').style.left=((i+0.5)/PM.length*100)+'%'; document.getElementById('pm-simbox').innerHTML='<div class="simrow on" style="color:var(--faint);font-size:12.5px;">Press "See this mode work."</div>'; }
+  var pmT=[]; document.getElementById('pm-sim').addEventListener('click',function(){ pmT.forEach(clearTimeout); pmT=[]; var d=PM[curPm],box=document.getElementById('pm-simbox'); box.innerHTML=''; SIM_ACT.forEach(function(a,idx){ var s=d.sim[idx],row=document.createElement('div'); row.className='simrow'; var cls=s==='auto'?'auto':(s==='ask'?'ask':(s==='plan'?'plan':'block')); row.innerHTML='<span class="sa">'+a+'</span><span class="sp '+cls+'">'+SIM_TXT[s]+'</span>'; box.appendChild(row); pmT.push(setTimeout(function(){ row.classList.add('on'); },220*idx)); }); });
+  document.querySelectorAll('#pmenu .prow').forEach(function(r){ var i=+r.dataset.i; var dot=document.createElement('span'); dot.className='psafe'; dot.style.background=(PM[i]&&PM[i].col)||'var(--line2)'; dot.title=(PM[i]&&PM[i].safe)||''; r.insertBefore(dot, r.firstChild); r.addEventListener('click',function(){ pmShow(i); }); }); pmShow(0);
+
+  /* plan mode steps */
+  var planT=[]; document.getElementById('plan-go').addEventListener('click',function(){ planT.forEach(clearTimeout); planT=[]; [0,1,2,3].forEach(function(n){ document.getElementById('plan'+n).classList.remove('on'); }); document.getElementById('plan-msg').textContent=''; [0,1,2,3].forEach(function(n,i){ planT.push(setTimeout(function(){ document.getElementById('plan'+n).classList.add('on'); if(n===3)document.getElementById('plan-msg').textContent='The point: because you saw and approved the plan up front, you can prevent it from going in the wrong direction.'; },800*i)); }); });
+  (function(){ [0,1,2,3].forEach(function(n){ document.getElementById('plan'+n).classList.add('on'); }); })();
+
+  /* rewind timeline */
+  var RW=['Start','Wrote a draft','Made the design modern','Fixed a bug (now)']; var rwTl=document.getElementById('rw-timeline'),rwLb=document.getElementById('rw-labels'),rwSel=2;
+  (function(){ var h=''; RW.forEach(function(t,i){ h+='<span class="tlpt'+(i===RW.length-1?' cur':'')+'" data-i="'+i+'"><span class="dot2"></span>'+(i<RW.length-1?'<span class="tlbar"></span>':'')+'</span>'; }); rwTl.innerHTML=h; rwLb.innerHTML=RW.map(function(t){return '<span>'+t+'</span>';}).join(''); rwMark(RW.length-1,false); rwTl.querySelectorAll('.tlpt').forEach(function(p){ p.addEventListener('click',function(){ rwSel=+p.dataset.i; rwMark(rwSel,false); document.getElementById('rw-msg').textContent='You picked the "'+RW[rwSel]+'" point. Choose how to restore below.'; }); }); })();
+  function rwMark(idx,restored){ rwTl.querySelectorAll('.tlpt').forEach(function(p){ var i=+p.dataset.i; p.classList.toggle('cur',i===idx&&!restored); p.classList.toggle('restored',restored&&i<=idx); }); }
+  document.getElementById('rw-code').addEventListener('click',function(){ rwMark(rwSel,true); document.getElementById('rw-msg').textContent='Restore code only — rolled the files back to the "'+RW[rwSel]+'" point. The conversation stays, so you can ask again a different way.'; });
+  document.getElementById('rw-both').addEventListener('click',function(){ rwMark(rwSel,true); document.getElementById('rw-msg').textContent='Restore code + conversation — went fully back to the "'+RW[rwSel]+'" point. The conversation after it goes away too.'; });
+  document.getElementById('rw-reset').addEventListener('click',function(){ rwSel=RW.length-1; rwMark(rwSel,false); document.getElementById('rw-msg').textContent='Reset. Click a dot on the timeline to choose a point to roll back to.'; });
+
+  /* usage limits demo */
+  var luT=[],l5=0,lw=18;
+  function gset(){ var g5=document.getElementById('g5'),gw=document.getElementById('gw'); if(!g5)return; g5.style.width=Math.min(100,l5)+'%'; g5.style.background=l5>=100?'#d8453f':(l5>70?'#d8943f':'var(--good)'); gw.style.width=Math.min(100,lw)+'%'; gw.style.background=lw>=100?'#d8453f':(lw>70?'#d8943f':'var(--good)'); document.getElementById('g5n').textContent=Math.min(100,Math.round(l5))+'%'; document.getElementById('gwn').textContent=Math.min(100,Math.round(lw))+'%'; }
+  function luFeed(t){ var f=document.getElementById('use-feed'); var d=document.createElement('div'); d.className='uf'; d.textContent=t; f.appendChild(d); while(f.children.length>5)f.removeChild(f.firstChild); }
+  var USES=['Sent a message · "Build a dashboard"','Read 30 files (lots of tokens!)','Ran tests + long output','Image analysis','Continued a long conversation','Read another big file'];
+  document.getElementById('lim-use').addEventListener('click',function(){ luT.forEach(clearTimeout); luT=[]; var btn=document.getElementById('lim-use'); btn.disabled=false; document.getElementById('lock-msg').textContent=''; var step=0;
+    (function go(){ if(l5>=100){ document.getElementById('lock-msg').textContent='🔒 5-hour limit reached — you can\'t send new work until it resets. Wait a bit or move up to a higher plan.'; btn.disabled=true; return; } l5=Math.min(100,l5+18); lw=Math.min(100,lw+6); gset(); luFeed(USES[step%USES.length]); step++; luT.push(setTimeout(go,750)); })(); });
+  document.getElementById('lim-reset').addEventListener('click',function(){ luT.forEach(clearTimeout); luT=[]; l5=0; gset(); document.getElementById('lim-use').disabled=false; document.getElementById('lock-msg').textContent='5 hours passed and the limit reset! You can use it again. (Note: the weekly limit still remains.)'; });
+  gset();
+
+  /* compact detail page */
+  var cxT=[];
+  document.getElementById('cx-go').addEventListener('click',function(){ cxT.forEach(clearTimeout); cxT=[]; var before=document.getElementById('cx-before'),after=document.getElementById('cx-after'),rows=before.querySelectorAll('.cxrow');
+    document.getElementById('cx-label').textContent='Compacting — tidying up the long pile…';
+    rows.forEach(function(r,i){ cxT.push(setTimeout(function(){ r.classList.add('drop'); },250*i)); });
+    cxT.push(setTimeout(function(){ before.style.display='none'; after.style.display='block'; after.style.opacity='0'; after.style.transition='opacity .5s'; requestAnimationFrame(function(){ after.style.opacity='1'; }); document.getElementById('cx-label').textContent='After compaction — into one summary block'; },250*rows.length+500)); });
+  document.getElementById('cx-reset').addEventListener('click',function(){ cxT.forEach(clearTimeout); cxT=[]; var before=document.getElementById('cx-before'),after=document.getElementById('cx-after'); after.style.display='none'; before.style.display='block'; before.querySelectorAll('.cxrow').forEach(function(r){ r.classList.remove('drop'); }); document.getElementById('cx-label').textContent='Before compaction — conversation log (a long pile)'; });
+
+  /* commands terminal */
+  var term=document.getElementById('term'),tT=[];
+  var SCRIPTS={ init:[['c','> '],['','/init\n'],['c','Analyzing project… (reading config files)\n'],['c','  Found package.json, tsconfig.json\n'],['c','  Mapped the folder structure\n'],['','CLAUDE.md generated ✓\n\n'],['c','— preview —\n'],['','# Build\n- Install: npm install\n- Test: npm test\n# Structure\n- src/ : source code\n'],['c','\nOpen it with /memory to review and edit.']],
+    help:[['c','> '],['','/help\n'],['c','Available commands:\n'],['','/init  /clear  /compact  /model  /memory  /mcp  /plugin  /agents  /plan  /rewind  /hooks\n'],['c','\nSee the table below for details.']],
+    clear:[['c','> '],['','/clear\n'],['','Conversation cleared. Fresh start! ✓\n'],['c','(CLAUDE.md and memory stay. The previous conversation can be recovered with /resume.)']],
+    compact:[['c','> '],['','/compact\n'],['c','Summarizing the conversation so far…\n'],['','Summary done ✓ Room freed up.\n'],['c','To keep specific parts: /compact things to keep…']],
+    model:[['c','> '],['','/model\n'],['c','Current model: Sonnet 4.6\n'],['','1) Opus 4.8   2) Sonnet 4.6 ✓   3) Haiku 4.5\n'],['c','Pick a number to switch the model.']] };
+  function termRun(cmd){ tT.forEach(clearTimeout); tT=[]; term.innerHTML=''; var parts=SCRIPTS[cmd]||[],idx=0; (function add(){ if(idx>=parts.length)return; var seg=document.createElement('span'); if(parts[idx][0]==='c')seg.className='c'; seg.textContent=parts[idx][1]; term.appendChild(seg); idx++; tT.push(setTimeout(add,420)); })(); }
+  document.querySelectorAll('#cmdchips .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#cmdchips .chip').forEach(function(x){ x.classList.toggle('on',x===c); }); termRun(c.dataset.c); }); });
+  document.querySelector('#cmdchips .chip').classList.add('on'); termRun('init');
+
+  /* language switcher (works in /, /en/, /zh/, /ja/) */
+  (function(){ var sel=document.getElementById('lang-select'); if(!sel) return;
+    var p=location.pathname, cur=/\/en\//.test(p)?'en':/\/zh\//.test(p)?'zh':/\/ja\//.test(p)?'ja':'ko';
+    sel.value=cur; var root=(cur==='ko')?'':'../';
+    sel.addEventListener('change',function(){ var c=sel.value; if(c===cur)return; location.href=(root+(c==='ko'?'':c+'/'))||'./'; });
+  })();
+
+  /* glossary search */
+  var gs=document.getElementById('gloss-search');
+  if(gs) gs.addEventListener('input',function(){ var q=gs.value.trim().toLowerCase(),terms=document.querySelectorAll('#gloss-list .gterm'),shown=0;
+    terms.forEach(function(t){ var hit=!q||t.textContent.toLowerCase().indexOf(q)>-1; t.classList.toggle('hide',!hit); if(hit)shown++; });
+    var emp=document.getElementById('gloss-empty'); if(emp) emp.style.display= shown?'none':'block'; });
+})();
+</script>
+</body>
+</html>
