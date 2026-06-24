@@ -133,6 +133,50 @@
   .blk .tag{ font-size:10px; color:var(--faint); border:1px solid var(--line2); padding:1px 6px; border-radius:5px; background:var(--bg); }
   .blk .tk{ font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums; background:var(--bg); border:1px solid var(--line); border-radius:5px; padding:1px 7px; }
   .blk.mini{ gap:0; } .blk.mini .name,.blk.mini .tag,.blk.mini .tk{ display:none; }
+  .blk.sumhl{ background:rgba(31,158,118,.2); border:1.5px solid var(--good); box-shadow:0 0 0 3px rgba(31,158,118,.16); }
+  .blk .sumbadge{ font-size:10px; font-weight:600; color:#fff; background:var(--good); border-radius:5px; padding:1px 7px; white-space:nowrap; }
+  .cwba{ display:none; margin:0 0 16px; }
+  .cwba-row{ display:flex; align-items:stretch; gap:12px; }
+  .cwba-card{ flex:1; border:1px solid var(--line2); border-radius:12px; background:var(--panel); padding:13px 15px; }
+  .cwba-card.hl{ border-color:var(--good); background:rgba(31,158,118,.08); }
+  .cwba-k{ font-size:12px; color:var(--faint); }
+  .cwba-v{ font-size:18px; font-weight:600; margin-top:2px; } .cwba-card.hl .cwba-v{ color:var(--good); }
+  .cwba-d{ font-size:12px; color:var(--muted); margin-top:3px; }
+  .cwba-arrow{ align-self:center; color:var(--faint); font-size:18px; flex:0 0 auto; }
+  .cwba-note{ font-size:12.5px; color:var(--muted); margin-top:9px; line-height:1.6; }
+  @media (max-width:560px){ .cwba-row{ flex-direction:column; } .cwba-arrow{ transform:rotate(90deg); } }
+  /* cowork */
+  .cwapp{ border:1px solid var(--line2); border-radius:14px; background:var(--panel); overflow:hidden; box-shadow:var(--shadow); }
+  .cwbar{ display:flex; align-items:center; gap:8px; padding:10px 14px; border-bottom:1px solid var(--line); background:var(--row); }
+  .cwdots{ display:flex; gap:5px; } .cwdots i{ width:9px; height:9px; border-radius:50%; background:var(--line2); display:block; }
+  .cwtabs{ display:flex; gap:5px; margin-left:6px; }
+  .cwtab{ font-size:12px; color:var(--muted); padding:4px 11px; border-radius:7px; } .cwtab.on{ background:var(--bg); color:var(--ink); font-weight:600; border:1px solid var(--line2); }
+  .cwbody{ padding:16px; min-height:230px; }
+  .cwask{ display:flex; align-items:center; gap:9px; border:1px solid var(--line2); border-radius:10px; background:var(--bg); padding:11px 13px; font-size:13.5px; color:var(--ink); }
+  .cwask .ph{ color:var(--faint); } .cwask .cur{ display:inline-block; width:1px; }
+  .cwfolder{ display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--muted); margin-top:10px; }
+  .cwfolder svg{ width:14px; height:14px; }
+  .cwstage{ margin-top:14px; }
+  .cwcard{ border:1px solid var(--line2); border-radius:11px; background:var(--bg); padding:13px 15px; opacity:0; transform:translateY(6px); transition:opacity .35s, transform .35s; }
+  .cwcard.show{ opacity:1; transform:none; }
+  .cwcard.plan{ border-color:var(--blue); background:rgba(59,125,216,.06); }
+  .cwcard .cwh{ font-size:13px; font-weight:600; display:flex; align-items:center; gap:7px; margin-bottom:9px; }
+  .cwh .cwpill{ font-size:10px; font-weight:600; padding:1px 7px; border-radius:5px; }
+  .cwpill.b{ color:#fff; background:var(--blue); } .cwpill.g{ color:#fff; background:var(--good); }
+  .cwstep{ display:flex; align-items:center; gap:9px; font-size:13px; padding:5px 0; color:var(--muted); }
+  .cwstep .ck{ width:18px; height:18px; border-radius:50%; border:1.5px solid var(--line2); flex:0 0 auto; display:flex; align-items:center; justify-content:center; }
+  .cwstep .ck svg{ width:11px; height:11px; opacity:0; transition:opacity .25s; }
+  .cwstep.run .ck{ border-color:var(--blue); } .cwstep.run{ color:var(--ink); }
+  .cwstep.done .ck{ border-color:var(--good); background:var(--good); } .cwstep.done .ck svg{ opacity:1; } .cwstep.done{ color:var(--ink); }
+  .cwapprove{ margin-top:11px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .cwmode{ font-size:11.5px; color:var(--faint); }
+  .cwvm{ border:1px dashed var(--line2); border-radius:11px; padding:11px 14px 7px; background:var(--panel); position:relative; }
+  .cwvm .cwvmtag{ position:absolute; top:-9px; left:12px; background:var(--panel); padding:0 7px; font-size:10.5px; color:var(--faint); }
+  .cwresult{ display:flex; align-items:center; gap:12px; border:1.5px solid var(--good); background:rgba(31,158,118,.1); border-radius:11px; padding:13px 15px; }
+  .cwresult .fic{ width:38px; height:38px; border-radius:9px; background:var(--good); display:flex; align-items:center; justify-content:center; flex:0 0 auto; } .cwresult .fic svg{ width:20px; height:20px; }
+  .cwresult .rt{ font-size:14px; font-weight:600; } .cwresult .rd{ font-size:12.5px; color:var(--muted); margin-top:1px; }
+  .cwchips{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+  .cwchip{ font-size:12.5px; padding:7px 12px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--muted); cursor:pointer; font-family:inherit; } .cwchip:hover{ color:var(--ink); } .cwchip.on{ border-color:var(--accent); color:var(--ink); font-weight:500; }
   .limit{ position:absolute; left:0; right:0; border-top:1px dashed var(--line2); pointer-events:none; } .limit .cap{ position:absolute; right:8px; top:-9px; font-size:10.5px; color:var(--faint); background:var(--bg); padding:0 6px; } .limit.over{ border-top-color:var(--over); } .limit.over .cap{ color:var(--over); }
   .free{ position:absolute; left:0; right:0; text-align:center; font-size:11.5px; color:var(--faint); pointer-events:none; transition:bottom .5s cubic-bezier(.22,1,.36,1); }
   .capbox{ display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; } .capbox input{ width:108px; font-family:inherit; font-size:14px; padding:9px 11px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; text-align:right; font-variant-numeric:tabular-nums; } .capbox input:focus{ border-color:var(--accent); } .capbox .unit{ font-size:13px; color:var(--muted); }
@@ -273,33 +317,34 @@
     <div class="brand">Claude Code 入門<span class="sub">非エンジニアのためのガイド</span></div>
     <div class="navsec">はじめに</div>
     <button class="navitem on" data-page="intro"><span class="no">01</span>Claude Code とは?</button>
-    <button class="navitem" data-page="where"><span class="no">02</span>どこで使う</button>
+    <button class="navitem" data-page="cowork"><span class="no">02</span>Cowork とは？</button>
+    <button class="navitem" data-page="where"><span class="no">03</span>どこで使う</button>
     <div class="navsec">基本の概念</div>
-    <button class="navitem" data-page="context"><span class="no">03</span>コンテキストウィンドウ</button>
-    <button class="navitem" data-page="sessions"><span class="no">04</span>セッション & フォルダ</button>
-    <button class="navitem" data-page="tokens"><span class="no">05</span>トークン</button>
-    <button class="navitem" data-page="models"><span class="no">06</span>モデルを選ぶ</button>
+    <button class="navitem" data-page="context"><span class="no">04</span>コンテキストウィンドウ</button>
+    <button class="navitem" data-page="compact"><span class="no">05</span>圧縮 (compact)</button>
+    <button class="navitem" data-page="sessions"><span class="no">06</span>セッション & フォルダ</button>
+    <button class="navitem" data-page="tokens"><span class="no">07</span>トークン</button>
+    <button class="navitem" data-page="models"><span class="no">08</span>モデルを選ぶ (model)</button>
     <div class="navsec">記憶とルール</div>
-    <button class="navitem" data-page="claudemd"><span class="no">07</span>CLAUDE.md</button>
-    <button class="navitem" data-page="memory"><span class="no">08</span>メモリ</button>
-    <button class="navitem" data-page="skills"><span class="no">09</span>スキル</button>
+    <button class="navitem" data-page="claudemd"><span class="no">09</span>CLAUDE.md</button>
+    <button class="navitem" data-page="memory"><span class="no">10</span>メモリ</button>
+    <button class="navitem" data-page="skills"><span class="no">11</span>スキル</button>
     <div class="navsec">機能を広げる</div>
-    <button class="navitem" data-page="mcp"><span class="no">10</span>MCP (ツール連携)</button>
-    <button class="navitem" data-page="plugins"><span class="no">11</span>プラグイン</button>
-    <button class="navitem" data-page="agents"><span class="no">12</span>サブエージェント</button>
-    <button class="navitem" data-page="images"><span class="no">13</span>画像を貼り付け</button>
-    <button class="navitem" data-page="hooks"><span class="no">14</span>自動化 (フック)</button>
+    <button class="navitem" data-page="mcp"><span class="no">12</span>MCP (ツール連携)</button>
+    <button class="navitem" data-page="plugins"><span class="no">13</span>プラグイン</button>
+    <button class="navitem" data-page="agents"><span class="no">14</span>サブエージェント</button>
+    <button class="navitem" data-page="images"><span class="no">15</span>画像を貼り付け</button>
+    <button class="navitem" data-page="hooks"><span class="no">16</span>自動化 (フック)</button>
     <div class="navsec">安全に使う</div>
-    <button class="navitem" data-page="planmode"><span class="no">15</span>プランモード</button>
-    <button class="navitem" data-page="permissions"><span class="no">16</span>権限モード</button>
-    <button class="navitem" data-page="rewind"><span class="no">17</span>巻き戻し</button>
-    <button class="navitem" data-page="privacy"><span class="no">18</span>データ & プライバシー</button>
+    <button class="navitem" data-page="planmode"><span class="no">17</span>プランモード</button>
+    <button class="navitem" data-page="permissions"><span class="no">18</span>権限モード</button>
+    <button class="navitem" data-page="rewind"><span class="no">19</span>巻き戻し</button>
+    <button class="navitem" data-page="privacy"><span class="no">20</span>データ & プライバシー</button>
     <div class="navsec">実践</div>
-    <button class="navitem" data-page="commands"><span class="no">19</span>スラッシュコマンド</button>
-    <button class="navitem" data-page="plans"><span class="no">20</span>料金プラン</button>
-    <button class="navitem" data-page="limits"><span class="no">21</span>使用量の上限</button>
-    <button class="navitem" data-page="compact"><span class="no">22</span>圧縮をくわしく</button>
-    <button class="navitem" data-page="glossary"><span class="no">23</span>用語集</button>
+    <button class="navitem" data-page="commands"><span class="no">21</span>スラッシュコマンド</button>
+    <button class="navitem" data-page="plans"><span class="no">22</span>料金プラン</button>
+    <button class="navitem" data-page="limits"><span class="no">23</span>使用量の上限</button>
+    <button class="navitem" data-page="glossary"><span class="no">24</span>用語集</button>
   </nav>
 
   <main class="main"><div class="inner">
@@ -345,10 +390,38 @@
         </div>
       </div>
       <div class="bignote"><span class="bx">参考</span><span>このガイドは<b>概念を学ぶ場所</b>です — インストールや始め方は扱いません（それは公式ドキュメントで案内しています）。そして<b>非公式の学習資料</b>なので Anthropic とは無関係です。</span></div>
-      <p class="note">左のメニュー（狭い画面では上のタブ）から 23 個のトピックを押して移動してください。すべて<b>自分で触らなくても</b>ボタンや入力で理解できるように作りました。本文に<span class="gl" title="このように点線が引かれた単語は、マウスを乗せると意味が表示されます。スマホではカッコの説明を参考にしてください。">点線の付いた単語</span>は、乗せると意味が表示されます。</p>
+      <p class="note">左のメニュー（狭い画面では上のタブ）から 24 個のトピックを押して移動してください。すべて<b>自分で触らなくても</b>ボタンや入力で理解できるように作りました。本文に<span class="gl" title="このように点線が引かれた単語は、マウスを乗せると意味が表示されます。スマホではカッコの説明を参考にしてください。">点線の付いた単語</span>は、乗せると意味が表示されます。</p>
     </section>
 
-    <!-- 02 WHERE -->
+    <!-- 02 COWORK -->
+    <section class="page" id="cowork">
+      <h1>Cowork とは？</h1>
+      <p class="lead"><b>Cowork</b> は、コードではなく <b>「オフィス業務」を代わりにこなしてくれる</b> Claude です。目標を伝えるだけで、<b>自分のファイルを直接扱って完成した成果物</b>（Excel・文書など）を作ってくれます。</p>
+      <p class="defs">Claude Code と <b>同じエンジン</b>ですが、ターミナルではなく <b>デスクトップアプリ</b>で使う <b>非エンジニアの業務向け</b>です。下で実際の動きを見てみましょう。</p>
+
+      <p class="label">3 つの違い <span class="hint">ひと目で</span></p>
+      <div class="fgrid">
+        <div class="fcard"><div class="ft">Claude チャット</div><div class="fd">聞くと <b>答え・下書き</b>をくれます。自分のファイルは直接さわれません。</div><div class="fe"><b>例</b> 「レポートはどう書けばいい？」</div></div>
+        <div class="fcard" style="border-color:var(--good);background:rgba(31,158,118,.06);"><div class="ft">Cowork</div><div class="fd"><b>自分のファイルで業務を代わりに完成</b>させます。非エンジニア向け・デスクトップアプリ。</div><div class="fe"><b>例</b> 「この領収書を Excel に整理して」</div></div>
+        <div class="fcard"><div class="ft">Claude Code</div><div class="fd"><b>開発作業</b>を代わりにこなします。エンジニア向け・ターミナル。</div><div class="fe"><b>例</b> 「ログインのバグを直して」</div></div>
+      </div>
+
+      <p class="label">Cowork はこう働きます <span class="hint">例を選んで ▶</span></p>
+      <div class="cwchips" id="cw-chips"></div>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="cw-go">実行 ▶</button><button class="btn" id="cw-reset">リセット</button></div>
+      <div class="cwapp">
+        <div class="cwbar"><span class="cwdots"><i></i><i></i><i></i></span><span class="cwtabs"><span class="cwtab">Chat</span><span class="cwtab">Code</span><span class="cwtab on">Cowork</span></span></div>
+        <div class="cwbody">
+          <div class="cwask"><span id="cw-task" class="ph">何をお手伝いしましょうか？目標を書いてください…</span></div>
+          <div class="cwfolder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span id="cw-folder">接続中のフォルダ: —</span></div>
+          <div class="cwstage" id="cw-stage"></div>
+        </div>
+      </div>
+      <p class="status" id="cw-status">例を選んで「実行 ▶」を押してみてください。</p>
+      <p class="note">Cowork は <b>Claude デスクトップアプリ（macOS・Windows）</b>の 1 つのモードです（Chat・Code と並んで）。<b>自分が接続したフォルダだけ</b>を読み・直し・作ることができ、実行前に <b>計画を見せて承認</b>を受けます（「確認して進む」推奨）。ファイルを <b>完全に削除</b>するときは必ずもう一度確認します。Pro・Max・Team・Enterprise プランに含まれます。（出典: Anthropic 公式 — claude.com/product/cowork · 正確な画面・機能は公式アプリに準じます）</p>
+    </section>
+
+    <!-- 03 WHERE -->
     <section class="page" id="where">
       <h1>どこで使う</h1>
       <p class="lead">Claude Code は<b>いろいろな環境</b>で同じように使えます。CLAUDE.md や設定はどこでも共有されます。</p>
@@ -370,7 +443,7 @@ curl -fsSL https://claude.ai/install.sh | bash
 <span class="c"># Windows PowerShell</span>
 irm https://claude.ai/install.ps1 | iex</div>
       <ul class="points">
-        <li><b>有料の Claude プランか API が必要です。</b><span>無料プランでは Claude Code は使えません。（料金プランは 20 番を参照）</span></li>
+        <li><b>有料の Claude プランか API が必要です。</b><span>無料プランでは Claude Code は使えません。（「料金プラン」タブを参照）</span></li>
         <li><b>最初の一歩</b><span>プロジェクトフォルダで <code>claude</code> → ログイン → 「このプロジェクトは何をするもの?」のように、まずは話しかけてみる。</span></li>
       </ul>
       <p class="note">正確なインストール方法・必要条件はバージョンによって変わるので、<code>code.claude.com/docs</code> で最新の案内を確認してください。</p>
@@ -390,7 +463,7 @@ irm https://claude.ai/install.ps1 | iex</div>
           <p class="label" style="margin-top:0;">ウィンドウのサイズ <span class="hint">変えて比べる</span></p>
           <div class="capbox"><input id="capinp" type="number" value="40000" min="2000" step="1000"><span class="unit">トークン</span>
             <div class="chips"><button class="chip" data-v="8000">8K</button><button class="chip on" data-v="40000">40K</button><button class="chip" data-v="200000">200K</button></div></div>
-          <p class="capnote">標準のコンテキストウィンドウは 200,000(200K) トークン。最新の Opus・Sonnet は最大 1,000,000(1M) まで — 06 番を参照。</p>
+          <p class="capnote">標準のコンテキストウィンドウは 200,000(200K) トークン。最新の Opus・Sonnet は最大 1,000,000(1M) まで — 「モデルを選ぶ」タブを参照。</p>
           <p class="label">自分で入力する <span class="hint">直接打ってみてください</span></p>
           <div class="field"><input id="inp" type="text" placeholder="例: ログインのバグを直して" maxlength="80"><button class="send" id="send">送信</button></div>
           <div class="tokprev" id="tokprev" style="margin-bottom:20px;"></div>
@@ -405,7 +478,15 @@ irm https://claude.ai/install.ps1 | iex</div>
         </div>
       </div>
       <p class="label">自動圧縮 (auto-compact) とは?</p>
-      <p style="font-size:14px;margin:0 0 14px;">会話が長くなってコンテキストウィンドウが上限に近づくと、Claude が<b>自分でこれまでの会話を要約</b>して空間を作ります。上の「自動圧縮を見る」で、いっぱいになっていく途中で要約によって減る過程を見られます。</p>
+      <p style="font-size:14px;margin:0 0 14px;">会話が長くなってコンテキストウィンドウが上限に近づくと、Claude が<b>自分でこれまでの会話を要約</b>して空間を作ります。上の「自動圧縮を見る」で、いっぱいになっていく途中で要約によって減る過程を見られます。圧縮が起きると、上のマスに<b>緑色で強調された「圧縮で要約された情報」</b>が 1 マスでき、下に減った量を表示します。</p>
+      <div class="cwba" id="cwba">
+        <div class="cwba-row">
+          <div class="cwba-card"><div class="cwba-k">圧縮の前</div><div class="cwba-v" id="cwba-pre">—</div><div class="cwba-d">メッセージ・ファイル・結果でいっぱい</div></div>
+          <span class="cwba-arrow">→</span>
+          <div class="cwba-card hl"><div class="cwba-k">圧縮の後</div><div class="cwba-v" id="cwba-post">—</div><div class="cwba-d">要点だけを「要約 1 マス」に</div></div>
+        </div>
+        <div class="cwba-note" id="cwba-note"></div>
+      </div>
       <div class="cmp">
         <div class="cmpcard"><h4>残るもの</h4><div class="who">要約に保存</div><div class="cmprow">自分の依頼と意図</div><div class="cmprow">読んだ・直したファイルの一覧と核心のコード</div><div class="cmprow">エラーと解決の過程、残りのやること</div></div>
         <div class="cmpcard"><h4>消えるもの</h4><div class="who">空間の節約</div><div class="cmprow">長いコマンド実行の出力（ターミナルの結果）</div><div class="cmprow">途中段階の冗長な説明</div><div class="cmprow">重複した内容</div></div>
@@ -488,7 +569,7 @@ irm https://claude.ai/install.ps1 | iex</div>
 
     <!-- 06 MODELS -->
     <section class="page" id="models">
-      <h1>モデルを選ぶ</h1>
+      <h1>モデルを選ぶ (model)</h1>
       <p class="lead">Claude にはいくつかのモデルがあります。<b>賢さ · 速さ · コスト</b>は互いにトレードオフの関係です。</p>
       <p class="defs">賢いほど、たいてい遅くて高価です。仕事に合わせて選べば大丈夫。下で選んでみてください。</p>
       <div class="mtabs" id="mtabs">
@@ -605,7 +686,7 @@ description: 週次レポートを会社の様式で作成
 1. 今週やったことを集める
 2. 会社の様式（見出し・表）に合わせる
 3. 要点のまとめを一番上に置く</div>
-      <p class="note">呼び出し: <code>/週報</code> のように直接呼ぶか、関連する作業なら Claude が自動で適用。あらかじめ作られたスキルは<b>プラグイン</b>としてインストールすることもできます (11番)。</p>
+      <p class="note">呼び出し: <code>/週報</code> のように直接呼ぶか、関連する作業なら Claude が自動で適用。あらかじめ作られたスキルは<b>プラグイン</b>としてインストールすることもできます（「プラグイン」タブ）。</p>
     </section>
 
     <!-- 10 MCP -->
@@ -631,7 +712,7 @@ description: 週次レポートを会社の様式で作成
           <div class="fcard"><div class="ft">その他</div><div class="fd">GitHub・Slack・Notion・DB など。</div><div class="fe"><b>例</b> 社内ツールと連携</div></div>
         </div>
       </div>
-      <p class="note">連携したツールは <code>/mcp</code> で確認。ツールが多いほど、その説明もコンテキストを少しずつ占めるので、必要なものだけ連携してください。MCP を複数まとめて配布するのが「プラグイン」です (11番)。</p>
+      <p class="note">連携したツールは <code>/mcp</code> で確認。ツールが多いほど、その説明もコンテキストを少しずつ占めるので、必要なものだけ連携してください。MCP を複数まとめて配布するのが「プラグイン」です（「プラグイン」タブ）。</p>
     </section>
 
     <!-- 11 PLUGINS -->
@@ -765,7 +846,7 @@ description: 週次レポートを会社の様式で作成
         <div class="step" id="plan3"><div class="sn2">4</div><div><div class="st2">承認したら実行</div><div class="sd3">「OK、実行して」 → そのとき一気にファイルを直します</div></div></div>
       </div>
       <p class="status" id="plan-msg" style="margin-top:8px;"></p>
-      <p class="note">プランモードは「読み取り専用」なので安全です。権限モード (16番) の一種です。（Windows の一部のターミナルでは <code>Shift</code>+<code>Tab</code> の代わりに <code>/plan</code> をおすすめ）</p>
+      <p class="note">プランモードは「読み取り専用」なので安全です。権限モード（「権限モード」タブ）の一種です。（Windows の一部のターミナルでは <code>Shift</code>+<code>Tab</code> の代わりに <code>/plan</code> をおすすめ）</p>
     </section>
 
     <!-- 16 PERMISSIONS -->
@@ -788,7 +869,7 @@ description: 週次レポートを会社の様式で作成
         </div>
         <div><div class="pdetail" id="pdetail"></div><div class="btnrow" style="margin-top:12px;"><button class="btn solid" id="pm-sim">このモードの動作を見る ▶</button></div><div class="simbox" id="pm-simbox"></div></div>
       </div>
-      <p class="note">この 5 つはメニューに見えるモードです。自動化専用に「事前承認したツールだけ許可 (dontAsk)」モードも別にあります。どのモードでも<b>システム全体の削除 (rm -rf /) のような極端な破壊</b>は安全装置で防がれます。気に入らなければ「巻き戻し」(17番) で復元できます。</p>
+      <p class="note">この 5 つはメニューに見えるモードです。自動化専用に「事前承認したツールだけ許可 (dontAsk)」モードも別にあります。どのモードでも<b>システム全体の削除 (rm -rf /) のような極端な破壊</b>は安全装置で防がれます。気に入らなければ「巻き戻し」（「巻き戻し」タブ）で復元できます。</p>
     </section>
 
     <!-- 17 REWIND -->
@@ -843,17 +924,17 @@ description: 週次レポートを会社の様式で作成
       <p class="label">よく使うコマンド</p>
       <div class="tablewrap"><table class="t"><thead><tr><th style="width:130px;">コマンド</th><th>すること</th></tr></thead><tbody>
         <tr><td class="cmd">/help</td><td>使えるコマンドを表示します</td></tr>
-        <tr><td class="cmd">/init</td><td>プロジェクトを分析して CLAUDE.md の基本ファイルを作ります (07番)</td></tr>
-        <tr><td class="cmd">/clear</td><td>会話を空にして新しく開始 (04番)</td></tr>
-        <tr><td class="cmd">/compact</td><td>会話を要約して空間を空けます (03・04番)</td></tr>
-        <tr><td class="cmd">/model</td><td>モデルを変えます (06番)</td></tr>
-        <tr><td class="cmd">/memory</td><td>CLAUDE.md・メモリを見て編集 (07・08番)</td></tr>
-        <tr><td class="cmd">/mcp</td><td>連携した外部ツールの確認・管理 (10番)</td></tr>
-        <tr><td class="cmd">/plugin</td><td>プラグインのインストール・管理 (11番)</td></tr>
-        <tr><td class="cmd">/agents</td><td>サブエージェントの管理 (12番)</td></tr>
-        <tr><td class="cmd">/plan</td><td>プランモードに切り替え (15番)</td></tr>
-        <tr><td class="cmd">/rewind</td><td>以前の時点に巻き戻し (17番)</td></tr>
-        <tr><td class="cmd">/hooks</td><td>設定された自動化(フック)の確認 (14番)</td></tr>
+        <tr><td class="cmd">/init</td><td>プロジェクトを分析して CLAUDE.md の基本ファイルを作ります（「CLAUDE.md」タブ）</td></tr>
+        <tr><td class="cmd">/clear</td><td>会話を空にして新しく開始（「セッション & フォルダ」タブ）</td></tr>
+        <tr><td class="cmd">/compact</td><td>会話を要約して空間を空けます（「コンテキストウィンドウ」・「セッション」タブ）</td></tr>
+        <tr><td class="cmd">/model</td><td>モデルを変えます（「モデルを選ぶ」タブ）</td></tr>
+        <tr><td class="cmd">/memory</td><td>CLAUDE.md・メモリを見て編集（「CLAUDE.md」・「メモリ」タブ）</td></tr>
+        <tr><td class="cmd">/mcp</td><td>連携した外部ツールの確認・管理（「MCP」タブ）</td></tr>
+        <tr><td class="cmd">/plugin</td><td>プラグインのインストール・管理（「プラグイン」タブ）</td></tr>
+        <tr><td class="cmd">/agents</td><td>サブエージェントの管理（「サブエージェント」タブ）</td></tr>
+        <tr><td class="cmd">/plan</td><td>プランモードに切り替え（「プランモード」タブ）</td></tr>
+        <tr><td class="cmd">/rewind</td><td>以前の時点に巻き戻し（「巻き戻し」タブ）</td></tr>
+        <tr><td class="cmd">/hooks</td><td>設定された自動化(フック)の確認（「自動化(フック)」タブ）</td></tr>
       </tbody></table></div>
       <p class="note">いちばんよく使うのは <b>/clear</b> と <b>/compact</b> です。コンテキストが満杯になったときに使えば OK です。</p>
     </section>
@@ -920,8 +1001,8 @@ description: 週次レポートを会社の様式で作成
       </ul>
       <p class="label">上限を節約して使うコツ</p>
       <div class="fgrid">
-        <div class="fcard"><div class="ft">安いモデルを使う</div><div class="fd">簡単な仕事は Haiku で。Opus は重くて高いです。(06番)</div></div>
-        <div class="fcard"><div class="ft">こまめに空にする</div><div class="fd"><code>/clear</code>・<code>/compact</code> でコンテキストを整理。(03・04番)</div></div>
+        <div class="fcard"><div class="ft">安いモデルを使う</div><div class="fd">簡単な仕事は Haiku で。Opus は重くて高いです。（「モデルを選ぶ」タブ）</div></div>
+        <div class="fcard"><div class="ft">こまめに空にする</div><div class="fd"><code>/clear</code>・<code>/compact</code> でコンテキストを整理。（「コンテキストウィンドウ」・「セッション」タブ）</div></div>
         <div class="fcard"><div class="ft">簡潔にお願い</div><div class="fd">必要なファイルだけ、要点だけ依頼。</div></div>
       </div>
       <p class="note">正確な時間・価格・上限の数値はプランや時期によって変わります — <code>claude.com/pricing</code> と <code>support.claude.com</code> で確認してください。（概念は 2026年6月の公式ドキュメント基準）</p>
@@ -929,30 +1010,30 @@ description: 週次レポートを会社の様式で作成
 
     <!-- 22 COMPACT DETAIL -->
     <section class="page" id="compact">
-      <h1>圧縮をくわしく (compact)</h1>
-      <p class="lead">会話が長くなると「圧縮」が起こります。<b>長く積み上がった内容が、短い要約 1 つに</b>変わります。</p>
+      <h1>圧縮 (compact)</h1>
+      <p class="lead">会話が長くなると「圧縮」が起こります。<b>長く積み上がった内容が、短い要約 1 つに</b>変わります — 机の上の書類を、要点だけ 1 枚にまとめるのと似ています。</p>
       <p class="defs">下はある作業の会話の記録です。「圧縮する」を押して、内容が実際にどう減るのか見てみましょう。</p>
       <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="cx-go">圧縮する (/compact) ▶</button><button class="btn" id="cx-reset">もう一度見る</button></div>
 
       <p class="label" id="cx-label">圧縮前 — 会話の記録 (長く積み上がる)</p>
       <div id="cx-before">
-        <div class="cxrow"><span class="cxt">自分</span>「登録すると歓迎メールが届きません。原因を見つけて直して。」</div>
-        <div class="cxrow"><span class="cxt">ファイル</span>auth.js · mailer.js · config.js を読んだ (合わせて数百行)</div>
-        <div class="cxrow"><span class="cxt">ツール結果</span>テスト実行ログ 120行 — 失敗: SMTP 接続タイムアウト … (長いエラーログがずらり …)</div>
-        <div class="cxrow"><span class="cxt">Claude</span>「メールサーバーのアドレス設定が抜けていました。config.js に SMTP ホストを追加し、足りなかった送信者アドレスも埋めました。これこれの理由で … (長い説明が続く)」</div>
-        <div class="cxrow"><span class="cxt">ツール結果</span>テスト再実行ログ 80行 — 通過 ✓ (詳細ログ …)</div>
-        <div class="cxrow"><span class="cxt">Claude</span>「修正完了。これで歓迎メールが正常に送信されます。」</div>
+        <div class="cxrow"><span class="cxt">自分</span>「イベント参加者名簿から重複を除いて、日付順に整理して。」</div>
+        <div class="cxrow"><span class="cxt">ファイル</span>参加者名簿.xlsx を読んだ (参加者 800 名)</div>
+        <div class="cxrow"><span class="cxt">途中結果</span>重複チェックの結果 — 同じ人 32 件を発見 … (名前が長々とずらり …)</div>
+        <div class="cxrow"><span class="cxt">Claude</span>「重複 32 件を 1 つにまとめて、申込日順に並べ替えました。これこれの項目が … (長い説明が続く)」</div>
+        <div class="cxrow"><span class="cxt">途中結果</span>整理した表のプレビュー — 768 行 (長い表がずらり …)</div>
+        <div class="cxrow"><span class="cxt">Claude</span>「整理完了。768 名、日付順にそろえたファイルを保存しました。」</div>
       </div>
 
       <div id="cx-after" style="display:none;">
         <div class="cxbadge">圧縮前 <b>約 12,000</b>トークン<span class="ar">→</span>圧縮後 <b>約 1,400</b>トークン <span style="color:var(--good);">約 88% 節約</span> <span class="exb">例の値</span></div>
-        <div class="cxsummary"><div class="cxh">要約 1 マスに</div>ユーザーが「登録時に歓迎メールが未送信」の解決を依頼。<b>auth.js・mailer.js・config.js</b> を確認 → <b>config.js のメールサーバー(SMTP)設定の抜け</b>が原因。SMTP ホスト・送信者アドレスを追加してテスト通過。<b>歓迎メールの正常送信を確認。</b></div>
+        <div class="cxsummary"><div class="cxh">要約 1 マスに</div>ユーザーが「参加者名簿の重複削除＋日付順の並べ替え」を依頼。<b>参加者名簿.xlsx</b>（800 名）を確認 → <b>重複 32 件を発見</b> → 1 つにまとめて申込日順に並べ替え。<b>768 名に整理して保存完了。</b></div>
         <div class="cmp" style="margin-top:14px;">
-          <div class="cmpcard"><h4>残したもの</h4><div class="who">核心は保存</div><div class="cmprow">自分の依頼と意図</div><div class="cmprow">直したファイルの一覧</div><div class="cmprow">原因と解決方法</div><div class="cmprow">最終結果</div></div>
-          <div class="cmpcard"><h4>捨てたもの</h4><div class="who">空間の節約</div><div class="cmprow">長いテストログ(120・80行)</div><div class="cmprow">途中段階の冗長な説明</div><div class="cmprow">重複した内容</div></div>
+          <div class="cmpcard"><h4>残したもの</h4><div class="who">核心は保存</div><div class="cmprow">自分の依頼と意図</div><div class="cmprow">処理したファイル</div><div class="cmprow">何をどうやったか</div><div class="cmprow">最終結果</div></div>
+          <div class="cmpcard"><h4>捨てたもの</h4><div class="who">空間の節約</div><div class="cmprow">長い重複名の一覧</div><div class="cmprow">途中段階の冗長な説明</div><div class="cmprow">整理した表のプレビュー</div></div>
         </div>
       </div>
-      <p class="note">このように核心だけ残して縮めるので、圧縮の後も「どんな作業をどうやったか」は引き継がれます。ただし<b>読んだコードの原文</b>のような、捨てられた詳細がまた必要になれば、Claude がそのファイルをもう一度読みます。トークンの数値は理解を助ける<b>例</b>です（実際の値は状況ごとに変わります）。コンテキストウィンドウで自動的に起こる圧縮は「コンテキストウィンドウ」タブで見られます。</p>
+      <p class="note">このように核心だけ残して縮めるので、圧縮の後も「どんな作業をどうやったか」は引き継がれます。ただし<b>捨てられた詳細な一覧</b>（例: 重複した名前の全リスト）がまた必要になれば、Claude がそのファイルをもう一度読みます。トークンの数値は理解を助ける<b>例</b>です（実際の値は状況ごとに変わります）。コンテキストウィンドウで<b>自動的に</b>起こる圧縮は「コンテキストウィンドウ」タブで見られます。</p>
     </section>
 
     <!-- 23 GLOSSARY -->
@@ -962,29 +1043,29 @@ description: 週次レポートを会社の様式で作成
       <p class="defs">迷ったときはここで素早く探してください。検索欄に単語を打つと、すぐ絞り込まれます。</p>
       <input class="gsearch" id="gloss-search" type="text" placeholder="用語を検索… (例: ターミナル, API, トークン)">
       <div class="gloss" id="gloss-list">
-        <div class="gterm"><div class="gt">コンテキストウィンドウ</div><div class="gd">Claude が一度に抱えている「作業空間」。ここにあるものだけを知っています。(03番)</div></div>
-        <div class="gterm"><div class="gt">トークン</div><div class="gd">AI が文章を読む、いちばん小さなかけら。コンテキスト・料金の単位。(05番)</div></div>
-        <div class="gterm"><div class="gt">セッション</div><div class="gd">一度の連続した会話。その中のコンテキストウィンドウに積み上がります。(04番)</div></div>
-        <div class="gterm"><div class="gt">CLAUDE.md</div><div class="gd">自分で書いておくルールのメモ。毎回の会話に自動で読み込み。(07番)</div></div>
-        <div class="gterm"><div class="gt">メモリ</div><div class="gd">Claude が自分で書く学習メモ。セッションをまたいで引き継がれます。(08番)</div></div>
-        <div class="gterm"><div class="gt">スキル</div><div class="gd">よく使う作業の手順の束。必要なときだけ展開。(09番)</div></div>
-        <div class="gterm"><div class="gt">MCP</div><div class="gd">外部ツール(Jira・Figma など)につなぐ標準。(10番)</div></div>
-        <div class="gterm"><div class="gt">プラグイン</div><div class="gd">スキル・MCP・コマンドなどをまとめて配布する一式。(11番)</div></div>
-        <div class="gterm"><div class="gt">サブエージェント</div><div class="gd">特定の仕事を別に引き受ける専門のお手伝い。(12番)</div></div>
-        <div class="gterm"><div class="gt">フック (Hooks)</div><div class="gd">特定の瞬間に自動で実行されるルール。(14番)</div></div>
-        <div class="gterm"><div class="gt">プランモード</div><div class="gd">直す前に計画を先に見せて承認を受けるモード。(15番)</div></div>
-        <div class="gterm"><div class="gt">権限モード</div><div class="gd">どのくらい頻繁に聞くかを決める設定。(16番)</div></div>
-        <div class="gterm"><div class="gt">チェックポイント · 巻き戻し</div><div class="gd">リクエストごとに自動保存、以前へ復元。(17番)</div></div>
-        <div class="gterm"><div class="gt">圧縮 (compact)</div><div class="gd">会話を要約してコンテキストの空間を空ける。(03番)</div></div>
-        <div class="gterm"><div class="gt">モデル (Opus·Sonnet·Haiku)</div><div class="gd">賢さ・速さ・コストが違う Claude たち。(06番)</div></div>
+        <div class="gterm"><div class="gt">コンテキストウィンドウ</div><div class="gd">Claude が一度に抱えている「作業空間」。ここにあるものだけを知っています。（「コンテキストウィンドウ」タブ）</div></div>
+        <div class="gterm"><div class="gt">トークン</div><div class="gd">AI が文章を読む、いちばん小さなかけら。コンテキスト・料金の単位。（「トークン」タブ）</div></div>
+        <div class="gterm"><div class="gt">セッション</div><div class="gd">一度の連続した会話。その中のコンテキストウィンドウに積み上がります。（「セッション & フォルダ」タブ）</div></div>
+        <div class="gterm"><div class="gt">CLAUDE.md</div><div class="gd">自分で書いておくルールのメモ。毎回の会話に自動で読み込み。（「CLAUDE.md」タブ）</div></div>
+        <div class="gterm"><div class="gt">メモリ</div><div class="gd">Claude が自分で書く学習メモ。セッションをまたいで引き継がれます。（「メモリ」タブ）</div></div>
+        <div class="gterm"><div class="gt">スキル</div><div class="gd">よく使う作業の手順の束。必要なときだけ展開。（「スキル」タブ）</div></div>
+        <div class="gterm"><div class="gt">MCP</div><div class="gd">外部ツール(Jira・Figma など)につなぐ標準。（「MCP」タブ）</div></div>
+        <div class="gterm"><div class="gt">プラグイン</div><div class="gd">スキル・MCP・コマンドなどをまとめて配布する一式。（「プラグイン」タブ）</div></div>
+        <div class="gterm"><div class="gt">サブエージェント</div><div class="gd">特定の仕事を別に引き受ける専門のお手伝い。（「サブエージェント」タブ）</div></div>
+        <div class="gterm"><div class="gt">フック (Hooks)</div><div class="gd">特定の瞬間に自動で実行されるルール。（「自動化(フック)」タブ）</div></div>
+        <div class="gterm"><div class="gt">プランモード</div><div class="gd">直す前に計画を先に見せて承認を受けるモード。（「プランモード」タブ）</div></div>
+        <div class="gterm"><div class="gt">権限モード</div><div class="gd">どのくらい頻繁に聞くかを決める設定。（「権限モード」タブ）</div></div>
+        <div class="gterm"><div class="gt">チェックポイント · 巻き戻し</div><div class="gd">リクエストごとに自動保存、以前へ復元。（「巻き戻し」タブ）</div></div>
+        <div class="gterm"><div class="gt">圧縮 (compact)</div><div class="gd">会話を要約してコンテキストの空間を空ける。（「コンテキストウィンドウ」タブ）</div></div>
+        <div class="gterm"><div class="gt">モデル (Opus·Sonnet·Haiku)</div><div class="gd">賢さ・速さ・コストが違う Claude たち。（「モデルを選ぶ」タブ）</div></div>
         <div class="gterm"><div class="gt">ターミナル (CLI)</div><div class="gd">コンピュータに文字（コマンド）で指示する黒い入力画面。「コマンドライン」とも呼びます。CLI = Command Line Interface。</div></div>
-        <div class="gterm"><div class="gt">API</div><div class="gd">プログラム同士がやり取りする「つなぎ目」。ここでは使った分だけ払う「従量制」の使い方を指します。(20番)</div></div>
+        <div class="gterm"><div class="gt">API</div><div class="gd">プログラム同士がやり取りする「つなぎ目」。ここでは使った分だけ払う「従量制」の使い方を指します。（「料金プラン」タブ）</div></div>
         <div class="gterm"><div class="gt">サーバー</div><div class="gd">遠くで仕事を処理してくれるコンピュータ。MCP「サーバー」は外部ツールを Claude につなぐ小さなプログラムです。</div></div>
         <div class="gterm"><div class="gt">.md (マークダウン)</div><div class="gd">簡単なルールで飾る「メモ用の文章ファイル」の形式。CLAUDE.md、SKILL.md の .md がこれです。</div></div>
         <div class="gterm"><div class="gt">JSON</div><div class="gd">コンピュータが読む「設定を書く形式」。フックのような設定をここに書きます。(自分で書かなくても Claude が代わりにやってくれます)</div></div>
-        <div class="gterm"><div class="gt">git</div><div class="gd">ファイルの変更履歴を記録・巻き戻す「バージョン管理」ツール。巻き戻しの永続保管版。(17番)</div></div>
-        <div class="gterm"><div class="gt">従量制</div><div class="gd">月額ではなく「使った分」だけ払う方式 (API)。(20・21番)</div></div>
-        <div class="gterm"><div class="gt">ローリング上限</div><div class="gd">「直近5時間・直近7日」のように流れながら再び満ちる使用量の上限。(21番)</div></div>
+        <div class="gterm"><div class="gt">git</div><div class="gd">ファイルの変更履歴を記録・巻き戻す「バージョン管理」ツール。巻き戻しの永続保管版。（「巻き戻し」タブ）</div></div>
+        <div class="gterm"><div class="gt">従量制</div><div class="gd">月額ではなく「使った分」だけ払う方式 (API)。（「料金プラン」・「使用量の上限」タブ）</div></div>
+        <div class="gterm"><div class="gt">ローリング上限</div><div class="gd">「直近5時間・直近7日」のように流れながら再び満ちる使用量の上限。（「使用量の上限」タブ）</div></div>
         <div class="gterm"><div class="gt">プロトコル</div><div class="gd">違うプログラム同士が話すための「共通のルール」。MCP の P がこれです。</div></div>
       </div>
       <p class="note" id="gloss-empty" style="display:none;">検索結果がありません。別の単語で探してください。</p>
@@ -1037,7 +1118,7 @@ description: 週次レポートを会社の様式で作成
   (function(){ var s=null; try{ s=localStorage.getItem('cc_present'); }catch(e){} if(s==='1') setPresent(true); })();
 
   /* LNB icons (monoline) */
-  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
   function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
 
   /* router */
@@ -1045,7 +1126,7 @@ description: 週次レポートを会社の様式で作成
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'チャットは「答え」をくれて、Claude Code は自分のプロジェクトで<b>直接作って動くところまで</b>やってくれます。', where:'ターミナル・VS Code・デスクトップ・Web — <b>どこでも同じ Claude Code</b>、設定も共有されます。', context:'ここに乗ったものだけを Claude が覚えています。満杯になったら<b>「圧縮」で整理</b>します。', sessions:'<b>一つのセッションに一つの仕事</b> — 混ぜると混乱します。作業フォルダは狭く。', tokens:'トークン = AI が文章を読む単位。<b>長いほど空間・コストが増え</b>、日本語のほうが重い。', models:'賢さ ↔ 速さ ↔ コストはトレードオフ。<b>迷ったら Sonnet</b> で始めましょう。', claudemd:'<b>自分で書いておくルールのメモ</b> — 毎回の会話の始めに自動で適用されます。', memory:'<b>Claude が自分で学んで覚える</b>メモ。セッションをまたいで引き継がれます。', skills:'よく使う作業の手順を<b>一度作ってずっと再利用</b>します。', mcp:'<b>外部ツール(Jira・Figma など)につないで</b> Claude が直接使えるようにします。', plugins:'スキル・ツール・コマンドなどを<b>まとめて一度にインストール</b>する一式です。', agents:'大きな仕事を<b>専門のお手伝いに分けて任せ</b>、結果だけ受け取ります。', images:'<b>スクリーンショットを貼れば</b> Claude が見て理解します — 言葉より速く正確。', hooks:'特定の瞬間に<b>決まった動作が毎回自動</b>で実行されるルールです。', planmode:'直す前に<b>計画を先に見せて承認</b>を受けます — 大きな変更に安全。', permissions:'Claude が<b>どのくらい頻繁に聞くか</b>を決める設定。最初は安全に。', rewind:'リクエストごとに<b>自動保存</b> — 気に入らなければ以前へ巻き戻します。', privacy:'<b>業務用(Team·Enterprise·API)は基本的に学習に使われません。</b> 個人用は設定で選択。', commands:'<code class="inlinecode">/</code> で始まるショートカットコマンド。いちばんよく使うのは <b>/clear · /compact</b>。', plans:'<b>無料プランにはありません。</b> 有料(Pro·Max·Team)または API(従量制)で使用。', limits:'<b>使い切るとリセットまで待つ</b>必要があります — だから管理が大切です。', compact:'長く積み上がった会話が<b>短い要約 1 マス</b>に縮みます。', glossary:'迷う用語を<b>一行で</b>素早く探す場所です。' };
+  var TLDR={ intro:'チャットは「答え」をくれて、Claude Code は自分のプロジェクトで<b>直接作って動くところまで</b>やってくれます。', cowork:'コードではなく<b>オフィス業務を代わりに</b>こなす Claude — 目標を伝えるだけで<b>自分のファイルで成果物まで</b>作ります（非エンジニア・デスクトップアプリ）。', where:'ターミナル・VS Code・デスクトップ・Web — <b>どこでも同じ Claude Code</b>、設定も共有されます。', context:'ここに乗ったものだけを Claude が覚えています。満杯になったら<b>「圧縮」で整理</b>します。', sessions:'<b>一つのセッションに一つの仕事</b> — 混ぜると混乱します。作業フォルダは狭く。', tokens:'トークン = AI が文章を読む単位。<b>長いほど空間・コストが増え</b>、日本語のほうが重い。', models:'賢さ ↔ 速さ ↔ コストはトレードオフ。<b>迷ったら Sonnet</b> で始めましょう。', claudemd:'<b>自分で書いておくルールのメモ</b> — 毎回の会話の始めに自動で適用されます。', memory:'<b>Claude が自分で学んで覚える</b>メモ。セッションをまたいで引き継がれます。', skills:'よく使う作業の手順を<b>一度作ってずっと再利用</b>します。', mcp:'<b>外部ツール(Jira・Figma など)につないで</b> Claude が直接使えるようにします。', plugins:'スキル・ツール・コマンドなどを<b>まとめて一度にインストール</b>する一式です。', agents:'大きな仕事を<b>専門のお手伝いに分けて任せ</b>、結果だけ受け取ります。', images:'<b>スクリーンショットを貼れば</b> Claude が見て理解します — 言葉より速く正確。', hooks:'特定の瞬間に<b>決まった動作が毎回自動</b>で実行されるルールです。', planmode:'直す前に<b>計画を先に見せて承認</b>を受けます — 大きな変更に安全。', permissions:'Claude が<b>どのくらい頻繁に聞くか</b>を決める設定。最初は安全に。', rewind:'リクエストごとに<b>自動保存</b> — 気に入らなければ以前へ巻き戻します。', privacy:'<b>業務用(Team·Enterprise·API)は基本的に学習に使われません。</b> 個人用は設定で選択。', commands:'<code class="inlinecode">/</code> で始まるショートカットコマンド。いちばんよく使うのは <b>/clear · /compact</b>。', plans:'<b>無料プランにはありません。</b> 有料(Pro·Max·Team)または API(従量制)で使用。', limits:'<b>使い切るとリセットまで待つ</b>必要があります — だから管理が大切です。', compact:'長く積み上がった会話が<b>短い要約 1 マス</b>に縮みます。', glossary:'迷う用語を<b>一行で</b>素早く探す場所です。' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">一行まとめ</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -1065,10 +1146,10 @@ description: 週次レポートを会社の様式で作成
 
   /* context tank */
   var MAX=40000,LIMIT_PX=420,AC_RATIO=0.8,stack=document.getElementById('stack'),limit=document.getElementById('limit'),cap=document.getElementById('cap'),free=document.getElementById('free'),tokEl=document.getElementById('tok'),num=document.getElementById('num'),status=document.getElementById('status'),inp=document.getElementById('inp'),capinp=document.getElementById('capinp'),tokprev=document.getElementById('tokprev');
-  var labels={sys:'システムプロンプト · 基本の指示',tool:'ツール一覧 · 使える機能',mem:'プロジェクトのメモ · CLAUDE.md',user:'自分のメッセージ',file:'ファイルの内容 · 読み込んだコード',reply:'Claude の返答'};
-  var hex={sys:'#8a8a8a',tool:'#3b7dd8',mem:'#1f9e76',user:'#6d5fd0',file:'#d8662f',reply:'#cf5184'};
+  var labels={sys:'システムプロンプト · 基本の指示',tool:'ツール一覧 · 使える機能',mem:'プロジェクトのメモ · CLAUDE.md',user:'自分のメッセージ',file:'ファイルの内容 · 読み込んだコード',reply:'Claude の返答',summary:'圧縮で要約された情報'};
+  var hex={sys:'#8a8a8a',tool:'#3b7dd8',mem:'#1f9e76',user:'#6d5fd0',file:'#d8662f',reply:'#cf5184',summary:'#1f9e76'};
   var base=[{k:'sys',t:3000},{k:'tool',t:11500},{k:'mem',t:2200}],items=[],curShown=0;
-  function makeBlk(it,fixed,h){ var d=document.createElement('div'); d.className='blk'+(h<18?' mini':'')+(fixed?'':' acc'); d.style.height=h+'px'; d.style.background=rgba(hex[it.k],0.14); d.style.borderColor=rgba(hex[it.k],0.30); d.title=labels[it.k]+(it.txt?(' — '+it.txt):'')+' · '+fmt(it.t)+'トークン'; var name=labels[it.k]; if(it.txt)name+=' — 「'+it.txt+'」'; d.innerHTML='<span class="dot" style="background:'+hex[it.k]+'"></span><span class="name">'+name+'</span>'+(fixed?'<span class="tag">基本</span>':'')+'<span class="tk">'+fmt(it.t)+'</span>'; return d; }
+  function makeBlk(it,fixed,h){ var d=document.createElement('div'); var isSum=it.k==='summary'; d.className='blk'+(h<18?' mini':'')+(fixed?'':' acc')+(isSum?' sumhl':''); d.style.height=h+'px'; if(!isSum){ d.style.background=rgba(hex[it.k],0.14); d.style.borderColor=rgba(hex[it.k],0.30); } d.title=labels[it.k]+(it.txt&&!isSum?(' — '+it.txt):'')+' · '+fmt(it.t)+'トークン'; var name=labels[it.k]; if(it.txt&&!isSum)name+=' — 「'+it.txt+'」'; d.innerHTML='<span class="dot" style="background:'+hex[it.k]+'"></span><span class="name">'+(isSum?'<b>'+name+'</b>':name)+'</span>'+(isSum?'<span class="sumbadge">要約</span>':(fixed?'<span class="tag">基本</span>':''))+'<span class="tk">'+fmt(it.t)+'</span>'; return d; }
   function ctxRender(animLast){ var scale=LIMIT_PX/MAX; stack.innerHTML=''; items.forEach(function(it,i){ var el=makeBlk(it,it._base,Math.max(8,Math.round(it.t*scale))); if(animLast&&i===items.length-1){ el.style.opacity='0'; el.style.transform='translateY(-8px)'; el.style.transition='opacity .35s ease, transform .35s cubic-bezier(.22,1,.36,1)'; stack.appendChild(el); requestAnimationFrame(function(){ el.style.opacity='1'; el.style.transform='none'; }); } else stack.appendChild(el); });
     var total=items.reduce(function(a,b){return a+b.t;},0); ctxCount(total); limit.style.bottom=LIMIT_PX+'px'; cap.textContent='上限 '+fmt(MAX);
     var acl=document.getElementById('acline'); if(acl){ acl.style.bottom=Math.round(LIMIT_PX*AC_RATIO)+'px'; document.getElementById('accap').textContent='自動圧縮の開始 ~'+fmt(MAX*AC_RATIO); }
@@ -1083,7 +1164,8 @@ description: 週次レポートを会社の様式で作成
   document.getElementById('send').addEventListener('click',function(){ var txt=(inp.value||'').trim(); if(!txt){inp.focus();return;} ctxAdd('user',tokenize(txt).count,txt.length>30?txt.slice(0,30)+'…':txt); inp.value=''; renderPrev(tokprev,'',true); inp.focus(); var total=items.reduce(function(a,b){return a+b.t;},0); if(total/MAX>.85)status.textContent='ほぼ満杯です。「自動圧縮を見る」か「手動で圧縮」を押してみてください。'; });
   inp.addEventListener('keydown',function(e){ if(e.key==='Enter')document.getElementById('send').click(); });
   document.querySelectorAll('#context .act').forEach(function(b){ b.addEventListener('click',function(){ ctxAdd(b.dataset.k,parseInt(b.dataset.t,10)); var total=items.reduce(function(a,b){return a+b.t;},0); if(total>MAX)status.textContent='上限を超えました — 自動圧縮が必要な状態です。'; }); });
-  function doCompact(){ ctxBase(); items.push({k:'mem',t:Math.round(MAX*0.10),txt:'ここまでの会話の要約'}); ctxRender(true); }
+  function doCompact(){ var pre=items.reduce(function(a,b){return a+b.t;},0); ctxBase(); items.push({k:'summary',t:Math.round(MAX*0.10),txt:'ここまでの会話の要約'}); ctxRender(true); var post=items.reduce(function(a,b){return a+b.t;},0); showBA(pre,post); }
+  function showBA(pre,post){ var el=document.getElementById('cwba'); if(!el)return; document.getElementById('cwba-pre').textContent='約 '+fmt(pre)+' トークン'; document.getElementById('cwba-post').textContent='約 '+fmt(post)+' トークン'; var saved=pre>0?Math.max(0,Math.round((1-post/pre)*100)):0; document.getElementById('cwba-note').textContent='積み上がっていた会話が、緑色の「圧縮で要約された情報」1 マスに縮みました — 約 '+saved+'% 節約。依頼・ファイル一覧・決定といった核心はそのまま残り、減った分だけまた作業する空間が生まれます。(実際の内容がどう変わるかは「圧縮 (compact)」タブで)'; el.style.display='block'; }
   document.getElementById('compact').addEventListener('click',function(){ if(items.reduce(function(a,b){return a+b.t;},0)<=base.reduce(function(a,b){return a+b.t;},0)+1000){ status.textContent='まだ圧縮するほど積み上がっていません。'; return; } doCompact(); status.textContent='手動圧縮(/compact)完了 — 積み上がっていたメッセージ・ファイル・結果が要約 1 マスに縮みました。'; });
   document.getElementById('reset').addEventListener('click',function(){ acStop(); ctxBase(); status.textContent='下の 3 つのマスは、会話を始める前からいつも入っています。'; });
   var acT=[]; function acStop(){ acT.forEach(clearTimeout); acT=[]; document.getElementById('tank').classList.remove('flash'); stack.classList.remove('summarizing'); var ov=document.getElementById('acoverlay'); if(ov)ov.classList.remove('on'); }
@@ -1266,6 +1348,47 @@ description: 週次レポートを会社の様式で作成
   function termRun(cmd){ tT.forEach(clearTimeout); tT=[]; term.innerHTML=''; var parts=SCRIPTS[cmd]||[],idx=0; (function add(){ if(idx>=parts.length)return; var seg=document.createElement('span'); if(parts[idx][0]==='c')seg.className='c'; seg.textContent=parts[idx][1]; term.appendChild(seg); idx++; tT.push(setTimeout(add,420)); })(); }
   document.querySelectorAll('#cmdchips .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#cmdchips .chip').forEach(function(x){ x.classList.toggle('on',x===c); }); termRun(c.dataset.c); }); });
   document.querySelector('#cmdchips .chip').classList.add('on'); termRun('init');
+
+  /* cowork simulation */
+  (function(){
+    var stage=document.getElementById('cw-stage'); if(!stage) return;
+    var chipsEl=document.getElementById('cw-chips'),taskEl=document.getElementById('cw-task'),folderEl=document.getElementById('cw-folder'),cwst=document.getElementById('cw-status');
+    var CW=[
+      {label:'領収書 → Excel に整理',task:'領収書フォルダから金額・日付・項目を抜き出して Excel に整理して',folder:'領収書/ (32 ファイル)',
+       plan:['領収書ファイル 32 個を確認','各領収書から金額・日付・項目を読み取る','Excel 表に整理（合計の数式を含む）','支出整理.xlsx として保存'],
+       result:{t:'支出整理.xlsx',d:'領収書 32 件 → 合計の数式付き Excel に保存されました'}},
+      {label:'PDF 10 個 → 要約レポート',task:'部署レポートの PDF 10 個を読んで要点だけ 1 枚に要約して',folder:'レポート/ (PDF 10 個)',
+       plan:['PDF レポート 10 個を開く','共通の指標・要点を抽出','比較・要約を 1 枚に作成','要約レポート.docx として保存'],
+       result:{t:'要約レポート.docx',d:'レポート 10 個 → 要点をまとめた文書に保存されました'}},
+      {label:'ダウンロードフォルダを整理',task:'ダウンロードフォルダを内容ごとにフォルダ分けして整理して',folder:'ダウンロード/ (240 ファイル)',
+       plan:['ファイルの種類・内容を見る','内容ごとにカテゴリを決める','フォルダを作ってファイルを移動','整理結果を知らせる'],
+       result:{t:'整理完了',d:'240 個のファイル → 8 個のフォルダにきれいに分類されました'}}
+    ];
+    var CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg>';
+    var FILE='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>';
+    var cur=0,timers=[];
+    function clearT(){ timers.forEach(clearTimeout); timers=[]; }
+    function setTask(i){ cur=i; var t=CW[i]; [].forEach.call(chipsEl.children,function(c,j){ c.classList.toggle('on',j===i); }); taskEl.textContent=t.task; taskEl.classList.remove('ph'); folderEl.textContent='接続中のフォルダ: '+t.folder; stage.innerHTML=''; cwst.textContent='「実行 ▶」を押すと Cowork が計画から見せてくれます。'; }
+    CW.forEach(function(t,i){ var b=document.createElement('button'); b.className='cwchip'+(i===0?' on':''); b.textContent=t.label; b.addEventListener('click',function(){ clearT(); setTask(i); }); chipsEl.appendChild(b); });
+    setTask(0);
+    function go(){ clearT(); var t=CW[cur]; cwst.textContent='Cowork が計画を立てました — 確認して承認してください。';
+      var h='<div class="cwcard plan" id="cw-plan"><div class="cwh">計画 <span class="cwpill b">実行前に確認</span></div>';
+      t.plan.forEach(function(s){ h+='<div class="cwstep"><span class="ck"></span>'+s+'</div>'; });
+      h+='<div class="cwapprove"><button class="btn solid" id="cw-approve">計画を承認 ✓</button><span class="cwmode">デフォルトは「確認して進む」 — 各ステップで確認します</span></div></div>';
+      stage.innerHTML=h; requestAnimationFrame(function(){ var p=document.getElementById('cw-plan'); if(p)p.classList.add('show'); });
+      document.getElementById('cw-approve').addEventListener('click',run); }
+    function run(){ clearT(); var t=CW[cur]; cwst.textContent='隔離された作業スペースで自律的に進行中…';
+      stage.innerHTML='<div class="cwvm"><span class="cwvmtag">隔離された作業スペース（自分のパソコンの中）</span><div id="cw-run"></div></div>';
+      var box=document.getElementById('cw-run');
+      t.plan.forEach(function(s){ var d=document.createElement('div'); d.className='cwstep'; d.innerHTML='<span class="ck">'+CHECK+'</span>'+s; box.appendChild(d); });
+      var steps=box.querySelectorAll('.cwstep'),i=0;
+      function next(){ if(i>0){ steps[i-1].classList.remove('run'); steps[i-1].classList.add('done'); } if(i>=steps.length){ finish(); return; } steps[i].classList.add('run'); i++; timers.push(setTimeout(next,950)); }
+      next(); }
+    function finish(){ var t=CW[cur]; cwst.textContent='完了！成果物がフォルダに保存されました。';
+      timers.push(setTimeout(function(){ stage.insertAdjacentHTML('beforeend','<div class="cwcard show" style="margin-top:12px;"><div class="cwresult"><span class="fic">'+FILE+'</span><span><div class="rt">'+t.result.t+'</div><div class="rd">'+t.result.d+'</div></span></div></div>'); },450)); }
+    document.getElementById('cw-go').addEventListener('click',go);
+    document.getElementById('cw-reset').addEventListener('click',function(){ clearT(); setTask(cur); });
+  })();
 
   /* language switcher (works in /, /en/, /zh/, /ja/) */
   (function(){ var sel=document.getElementById('lang-select'); if(!sel) return;

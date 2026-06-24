@@ -133,6 +133,50 @@
   .blk .tag{ font-size:10px; color:var(--faint); border:1px solid var(--line2); padding:1px 6px; border-radius:5px; background:var(--bg); }
   .blk .tk{ font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums; background:var(--bg); border:1px solid var(--line); border-radius:5px; padding:1px 7px; }
   .blk.mini{ gap:0; } .blk.mini .name,.blk.mini .tag,.blk.mini .tk{ display:none; }
+  .blk.sumhl{ background:rgba(31,158,118,.2); border:1.5px solid var(--good); box-shadow:0 0 0 3px rgba(31,158,118,.16); }
+  .blk .sumbadge{ font-size:10px; font-weight:600; color:#fff; background:var(--good); border-radius:5px; padding:1px 7px; white-space:nowrap; }
+  .cwba{ display:none; margin:0 0 16px; }
+  .cwba-row{ display:flex; align-items:stretch; gap:12px; }
+  .cwba-card{ flex:1; border:1px solid var(--line2); border-radius:12px; background:var(--panel); padding:13px 15px; }
+  .cwba-card.hl{ border-color:var(--good); background:rgba(31,158,118,.08); }
+  .cwba-k{ font-size:12px; color:var(--faint); }
+  .cwba-v{ font-size:18px; font-weight:600; margin-top:2px; } .cwba-card.hl .cwba-v{ color:var(--good); }
+  .cwba-d{ font-size:12px; color:var(--muted); margin-top:3px; }
+  .cwba-arrow{ align-self:center; color:var(--faint); font-size:18px; flex:0 0 auto; }
+  .cwba-note{ font-size:12.5px; color:var(--muted); margin-top:9px; line-height:1.6; }
+  @media (max-width:560px){ .cwba-row{ flex-direction:column; } .cwba-arrow{ transform:rotate(90deg); } }
+  /* cowork */
+  .cwapp{ border:1px solid var(--line2); border-radius:14px; background:var(--panel); overflow:hidden; box-shadow:var(--shadow); }
+  .cwbar{ display:flex; align-items:center; gap:8px; padding:10px 14px; border-bottom:1px solid var(--line); background:var(--row); }
+  .cwdots{ display:flex; gap:5px; } .cwdots i{ width:9px; height:9px; border-radius:50%; background:var(--line2); display:block; }
+  .cwtabs{ display:flex; gap:5px; margin-left:6px; }
+  .cwtab{ font-size:12px; color:var(--muted); padding:4px 11px; border-radius:7px; } .cwtab.on{ background:var(--bg); color:var(--ink); font-weight:600; border:1px solid var(--line2); }
+  .cwbody{ padding:16px; min-height:230px; }
+  .cwask{ display:flex; align-items:center; gap:9px; border:1px solid var(--line2); border-radius:10px; background:var(--bg); padding:11px 13px; font-size:13.5px; color:var(--ink); }
+  .cwask .ph{ color:var(--faint); } .cwask .cur{ display:inline-block; width:1px; }
+  .cwfolder{ display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--muted); margin-top:10px; }
+  .cwfolder svg{ width:14px; height:14px; }
+  .cwstage{ margin-top:14px; }
+  .cwcard{ border:1px solid var(--line2); border-radius:11px; background:var(--bg); padding:13px 15px; opacity:0; transform:translateY(6px); transition:opacity .35s, transform .35s; }
+  .cwcard.show{ opacity:1; transform:none; }
+  .cwcard.plan{ border-color:var(--blue); background:rgba(59,125,216,.06); }
+  .cwcard .cwh{ font-size:13px; font-weight:600; display:flex; align-items:center; gap:7px; margin-bottom:9px; }
+  .cwh .cwpill{ font-size:10px; font-weight:600; padding:1px 7px; border-radius:5px; }
+  .cwpill.b{ color:#fff; background:var(--blue); } .cwpill.g{ color:#fff; background:var(--good); }
+  .cwstep{ display:flex; align-items:center; gap:9px; font-size:13px; padding:5px 0; color:var(--muted); }
+  .cwstep .ck{ width:18px; height:18px; border-radius:50%; border:1.5px solid var(--line2); flex:0 0 auto; display:flex; align-items:center; justify-content:center; }
+  .cwstep .ck svg{ width:11px; height:11px; opacity:0; transition:opacity .25s; }
+  .cwstep.run .ck{ border-color:var(--blue); } .cwstep.run{ color:var(--ink); }
+  .cwstep.done .ck{ border-color:var(--good); background:var(--good); } .cwstep.done .ck svg{ opacity:1; } .cwstep.done{ color:var(--ink); }
+  .cwapprove{ margin-top:11px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .cwmode{ font-size:11.5px; color:var(--faint); }
+  .cwvm{ border:1px dashed var(--line2); border-radius:11px; padding:11px 14px 7px; background:var(--panel); position:relative; }
+  .cwvm .cwvmtag{ position:absolute; top:-9px; left:12px; background:var(--panel); padding:0 7px; font-size:10.5px; color:var(--faint); }
+  .cwresult{ display:flex; align-items:center; gap:12px; border:1.5px solid var(--good); background:rgba(31,158,118,.1); border-radius:11px; padding:13px 15px; }
+  .cwresult .fic{ width:38px; height:38px; border-radius:9px; background:var(--good); display:flex; align-items:center; justify-content:center; flex:0 0 auto; } .cwresult .fic svg{ width:20px; height:20px; }
+  .cwresult .rt{ font-size:14px; font-weight:600; } .cwresult .rd{ font-size:12.5px; color:var(--muted); margin-top:1px; }
+  .cwchips{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+  .cwchip{ font-size:12.5px; padding:7px 12px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--muted); cursor:pointer; font-family:inherit; } .cwchip:hover{ color:var(--ink); } .cwchip.on{ border-color:var(--accent); color:var(--ink); font-weight:500; }
   .limit{ position:absolute; left:0; right:0; border-top:1px dashed var(--line2); pointer-events:none; } .limit .cap{ position:absolute; right:8px; top:-9px; font-size:10.5px; color:var(--faint); background:var(--bg); padding:0 6px; } .limit.over{ border-top-color:var(--over); } .limit.over .cap{ color:var(--over); }
   .free{ position:absolute; left:0; right:0; text-align:center; font-size:11.5px; color:var(--faint); pointer-events:none; transition:bottom .5s cubic-bezier(.22,1,.36,1); }
   .capbox{ display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; } .capbox input{ width:108px; font-family:inherit; font-size:14px; padding:9px 11px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; text-align:right; font-variant-numeric:tabular-nums; } .capbox input:focus{ border-color:var(--accent); } .capbox .unit{ font-size:13px; color:var(--muted); }
@@ -272,33 +316,34 @@
     <div class="brand">Claude Code Basics<span class="sub">A guide for non-developers</span></div>
     <div class="navsec">Getting started</div>
     <button class="navitem on" data-page="intro"><span class="no">01</span>What is Claude Code?</button>
-    <button class="navitem" data-page="where"><span class="no">02</span>Where to use it</button>
+    <button class="navitem" data-page="cowork"><span class="no">02</span>What is Cowork?</button>
+    <button class="navitem" data-page="where"><span class="no">03</span>Where to use it</button>
     <div class="navsec">Basic concepts</div>
-    <button class="navitem" data-page="context"><span class="no">03</span>Context window</button>
-    <button class="navitem" data-page="sessions"><span class="no">04</span>Sessions & folders</button>
-    <button class="navitem" data-page="tokens"><span class="no">05</span>Tokens</button>
-    <button class="navitem" data-page="models"><span class="no">06</span>Choosing a model</button>
+    <button class="navitem" data-page="context"><span class="no">04</span>Context window</button>
+    <button class="navitem" data-page="compact"><span class="no">05</span>Compacting</button>
+    <button class="navitem" data-page="sessions"><span class="no">06</span>Sessions & folders</button>
+    <button class="navitem" data-page="tokens"><span class="no">07</span>Tokens</button>
+    <button class="navitem" data-page="models"><span class="no">08</span>Choosing a model (model)</button>
     <div class="navsec">Memory & rules</div>
-    <button class="navitem" data-page="claudemd"><span class="no">07</span>CLAUDE.md</button>
-    <button class="navitem" data-page="memory"><span class="no">08</span>Memory</button>
-    <button class="navitem" data-page="skills"><span class="no">09</span>Skills</button>
+    <button class="navitem" data-page="claudemd"><span class="no">09</span>CLAUDE.md</button>
+    <button class="navitem" data-page="memory"><span class="no">10</span>Memory</button>
+    <button class="navitem" data-page="skills"><span class="no">11</span>Skills</button>
     <div class="navsec">Expanding abilities</div>
-    <button class="navitem" data-page="mcp"><span class="no">10</span>MCP (tool connections)</button>
-    <button class="navitem" data-page="plugins"><span class="no">11</span>Plugins</button>
-    <button class="navitem" data-page="agents"><span class="no">12</span>Subagents</button>
-    <button class="navitem" data-page="images"><span class="no">13</span>Pasting images</button>
-    <button class="navitem" data-page="hooks"><span class="no">14</span>Automation (hooks)</button>
+    <button class="navitem" data-page="mcp"><span class="no">12</span>MCP (tool connections)</button>
+    <button class="navitem" data-page="plugins"><span class="no">13</span>Plugins</button>
+    <button class="navitem" data-page="agents"><span class="no">14</span>Subagents</button>
+    <button class="navitem" data-page="images"><span class="no">15</span>Pasting images</button>
+    <button class="navitem" data-page="hooks"><span class="no">16</span>Automation (hooks)</button>
     <div class="navsec">Staying safe</div>
-    <button class="navitem" data-page="planmode"><span class="no">15</span>Plan mode</button>
-    <button class="navitem" data-page="permissions"><span class="no">16</span>Permission modes</button>
-    <button class="navitem" data-page="rewind"><span class="no">17</span>Rewind</button>
-    <button class="navitem" data-page="privacy"><span class="no">18</span>Data & privacy</button>
+    <button class="navitem" data-page="planmode"><span class="no">17</span>Plan mode</button>
+    <button class="navitem" data-page="permissions"><span class="no">18</span>Permission modes</button>
+    <button class="navitem" data-page="rewind"><span class="no">19</span>Rewind</button>
+    <button class="navitem" data-page="privacy"><span class="no">20</span>Data & privacy</button>
     <div class="navsec">In practice</div>
-    <button class="navitem" data-page="commands"><span class="no">19</span>Slash commands</button>
-    <button class="navitem" data-page="plans"><span class="no">20</span>Plans & pricing</button>
-    <button class="navitem" data-page="limits"><span class="no">21</span>Usage limits</button>
-    <button class="navitem" data-page="compact"><span class="no">22</span>Compaction in detail</button>
-    <button class="navitem" data-page="glossary"><span class="no">23</span>Glossary</button>
+    <button class="navitem" data-page="commands"><span class="no">21</span>Slash commands</button>
+    <button class="navitem" data-page="plans"><span class="no">22</span>Plans & pricing</button>
+    <button class="navitem" data-page="limits"><span class="no">23</span>Usage limits</button>
+    <button class="navitem" data-page="glossary"><span class="no">24</span>Glossary</button>
   </nav>
 
   <main class="main"><div class="inner">
@@ -344,10 +389,38 @@
         </div>
       </div>
       <div class="bignote"><span class="bx">Note</span><span>This guide is <b>a place to learn the concepts</b> — it doesn't cover how to install or get started (the official docs handle that). And it's <b>an unofficial learning resource</b>, not affiliated with Anthropic.</span></div>
-      <p class="note">Use the left menu (the top tabs on narrow screens) to jump between the 23 topics. Everything is built so you can understand it through buttons and inputs <b>without trying it yourself</b>. In the text, <span class="gl" title="Words underlined with a dotted line like this show their meaning when you hover over them. On mobile, see the explanation in parentheses.">words with a dotted underline</span> show their meaning when you hover.</p>
+      <p class="note">Use the left menu (the top tabs on narrow screens) to jump between the 24 topics. Everything is built so you can understand it through buttons and inputs <b>without trying it yourself</b>. In the text, <span class="gl" title="Words underlined with a dotted line like this show their meaning when you hover over them. On mobile, see the explanation in parentheses.">words with a dotted underline</span> show their meaning when you hover.</p>
     </section>
 
-    <!-- 02 WHERE -->
+    <!-- 02 COWORK -->
+    <section class="page" id="cowork">
+      <h1>What is Cowork?</h1>
+      <p class="lead"><b>Cowork</b> is Claude that handles your <b>office work</b> instead of code. Just give it a goal, and it <b>works directly with your files to produce finished results</b> (spreadsheets, documents, and more).</p>
+      <p class="defs">It runs on the <b>same engine</b> as Claude Code, but you use it in a <b>desktop app</b> rather than the terminal — it's <b>for non-developer work</b>. See it in action below.</p>
+
+      <p class="label">How the three differ <span class="hint">at a glance</span></p>
+      <div class="fgrid">
+        <div class="fcard"><div class="ft">Claude Chat</div><div class="fd">Ask it and it gives you <b>an answer or a draft</b>. It can't touch your files directly.</div><div class="fe"><b>e.g.</b> "How should I write this report?"</div></div>
+        <div class="fcard" style="border-color:var(--good);background:rgba(31,158,118,.06);"><div class="ft">Cowork</div><div class="fd"><b>Finishes the work using your own files.</b> For non-developers · desktop app.</div><div class="fe"><b>e.g.</b> "Organize these receipts into a spreadsheet"</div></div>
+        <div class="fcard"><div class="ft">Claude Code</div><div class="fd">Handles <b>development work</b> for you. For developers · terminal.</div><div class="fe"><b>e.g.</b> "Fix the login bug"</div></div>
+      </div>
+
+      <p class="label">This is how Cowork works <span class="hint">pick an example, then ▶</span></p>
+      <div class="cwchips" id="cw-chips"></div>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="cw-go">Run ▶</button><button class="btn" id="cw-reset">Reset</button></div>
+      <div class="cwapp">
+        <div class="cwbar"><span class="cwdots"><i></i><i></i><i></i></span><span class="cwtabs"><span class="cwtab">Chat</span><span class="cwtab">Code</span><span class="cwtab on">Cowork</span></span></div>
+        <div class="cwbody">
+          <div class="cwask"><span id="cw-task" class="ph">What can I help with? Write down your goal…</span></div>
+          <div class="cwfolder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span id="cw-folder">Connected folder: —</span></div>
+          <div class="cwstage" id="cw-stage"></div>
+        </div>
+      </div>
+      <p class="status" id="cw-status">Pick an example and press "Run ▶".</p>
+      <p class="note">Cowork is a mode in the <b>Claude desktop app (macOS · Windows)</b> (alongside Chat and Code). It can only read, edit, and create files in <b>folders you connect</b>, and before it acts it <b>shows you a plan and asks for approval</b> ("ask and proceed" is recommended). When it's about to <b>permanently delete</b> a file, it always double-checks first. It's included with the Pro, Max, Team, and Enterprise plans. (Source: Anthropic official — claude.com/product/cowork · for exact screens and features, refer to the official app)</p>
+    </section>
+
+    <!-- 03 WHERE -->
     <section class="page" id="where">
       <h1>Where to use it</h1>
       <p class="lead">Claude Code works the same way across <b>several environments</b>. Your CLAUDE.md and settings are shared everywhere.</p>
@@ -369,7 +442,7 @@ curl -fsSL https://claude.ai/install.sh | bash
 <span class="c"># Windows PowerShell</span>
 irm https://claude.ai/install.ps1 | iex</div>
       <ul class="points">
-        <li><b>You need a paid Claude plan or the API.</b><span>You can't use Claude Code on the free plan. (See plans in section 20.)</span></li>
+        <li><b>You need a paid Claude plan or the API.</b><span>You can't use Claude Code on the free plan. (See the 'Plans & pricing' tab.)</span></li>
         <li><b>First steps</b><span>In your project folder, type <code>claude</code> → log in → just start talking, like "What does this project do?"</span></li>
       </ul>
       <p class="note">Exact install steps and requirements change by version, so check the latest guidance at <code>code.claude.com/docs</code>.</p>
@@ -389,7 +462,7 @@ irm https://claude.ai/install.ps1 | iex</div>
           <p class="label" style="margin-top:0;">Window size <span class="hint">Change it and compare</span></p>
           <div class="capbox"><input id="capinp" type="number" value="40000" min="2000" step="1000"><span class="unit">tokens</span>
             <div class="chips"><button class="chip" data-v="8000">8K</button><button class="chip on" data-v="40000">40K</button><button class="chip" data-v="200000">200K</button></div></div>
-          <p class="capnote">The default context window is 200,000 (200K) tokens. The latest Opus and Sonnet go up to 1,000,000 (1M) — see section 06.</p>
+          <p class="capnote">The default context window is 200,000 (200K) tokens. The latest Opus and Sonnet go up to 1,000,000 (1M) — see the 'Choosing a model' tab.</p>
           <p class="label">Type something <span class="hint">Try it yourself</span></p>
           <div class="field"><input id="inp" type="text" placeholder="e.g. Fix the login bug" maxlength="80"><button class="send" id="send">Send</button></div>
           <div class="tokprev" id="tokprev" style="margin-bottom:20px;"></div>
@@ -404,7 +477,15 @@ irm https://claude.ai/install.ps1 | iex</div>
         </div>
       </div>
       <p class="label">What is auto-compact?</p>
-      <p style="font-size:14px;margin:0 0 14px;">When a conversation gets long and the context window nears its limit, Claude <b>summarizes the earlier conversation on its own</b> to make room. Press "See auto-compact" above to watch it fill up and then shrink into a summary.</p>
+      <p style="font-size:14px;margin:0 0 14px;">When a conversation gets long and the context window nears its limit, Claude <b>summarizes the earlier conversation on its own</b> to make room. Press "See auto-compact" above to watch it fill up and then shrink into a summary. When compaction happens, a single block <b>highlighted in green — 'Info summarized by compaction'</b> appears in the tank above, and the amount it shrank is shown below.</p>
+      <div class="cwba" id="cwba">
+        <div class="cwba-row">
+          <div class="cwba-card"><div class="cwba-k">Before compaction</div><div class="cwba-v" id="cwba-pre">—</div><div class="cwba-d">Full of messages, files, and results</div></div>
+          <span class="cwba-arrow">→</span>
+          <div class="cwba-card hl"><div class="cwba-k">After compaction</div><div class="cwba-v" id="cwba-post">—</div><div class="cwba-d">Just the essentials in 'one summary block'</div></div>
+        </div>
+        <div class="cwba-note" id="cwba-note"></div>
+      </div>
       <div class="cmp">
         <div class="cmpcard"><h4>What stays</h4><div class="who">Kept in the summary</div><div class="cmprow">Your request and intent</div><div class="cmprow">The list of files read or edited, and the key code</div><div class="cmprow">Errors, how they were solved, and remaining to-dos</div></div>
         <div class="cmpcard"><h4>What goes away</h4><div class="who">To save room</div><div class="cmprow">Long command output (terminal results)</div><div class="cmprow">Wordy explanations of intermediate steps</div><div class="cmprow">Repeated content</div></div>
@@ -487,7 +568,7 @@ irm https://claude.ai/install.ps1 | iex</div>
 
     <!-- 06 MODELS -->
     <section class="page" id="models">
-      <h1>Choosing a model</h1>
+      <h1>Choosing a model (model)</h1>
       <p class="lead">Claude comes in several models. <b>Smartness, speed, and cost</b> are traded off against each other.</p>
       <p class="defs">Smarter usually means slower and pricier. Just pick what fits the job. Try choosing below.</p>
       <div class="mtabs" id="mtabs">
@@ -604,7 +685,7 @@ description: Write the weekly report in the company format
 1. Gather what was done this week
 2. Fit it to the company format (header, tables)
 3. Put the key summary at the top</div>
-      <p class="note">Invoke it: call it directly like <code>/weekly-report</code>, or for related tasks Claude applies it on its own. Pre-made skills can also be installed as <b>plugins</b> (section 11).</p>
+      <p class="note">Invoke it: call it directly like <code>/weekly-report</code>, or for related tasks Claude applies it on its own. Pre-made skills can also be installed as <b>plugins</b> (the 'Plugins' tab).</p>
     </section>
 
     <!-- 10 MCP -->
@@ -630,7 +711,7 @@ description: Write the weekly report in the company format
           <div class="fcard"><div class="ft">And more</div><div class="fd">GitHub, Slack, Notion, databases, etc.</div><div class="fe"><b>e.g.</b> Connect to in-house tools</div></div>
         </div>
       </div>
-      <p class="note">Check connected tools with <code>/mcp</code>. The more tools you have, the more their descriptions nibble at your context, so connect only what you need. Bundling several MCPs for distribution is called a 'plugin' (section 11).</p>
+      <p class="note">Check connected tools with <code>/mcp</code>. The more tools you have, the more their descriptions nibble at your context, so connect only what you need. Bundling several MCPs for distribution is called a 'plugin' (the 'Plugins' tab).</p>
     </section>
 
     <!-- 11 PLUGINS -->
@@ -764,7 +845,7 @@ description: Write the weekly report in the company format
         <div class="step" id="plan3"><div class="sn2">4</div><div><div class="st2">Approve, then it runs</div><div class="sd3">"Okay, go" → then it edits the files all at once</div></div></div>
       </div>
       <p class="status" id="plan-msg" style="margin-top:8px;"></p>
-      <p class="note">Plan mode is 'read-only,' so it's safe. It's one of the permission modes (section 16). (On some Windows terminals, <code>/plan</code> is recommended instead of <code>Shift</code>+<code>Tab</code>.)</p>
+      <p class="note">Plan mode is 'read-only,' so it's safe. It's one of the permission modes (the 'Permission modes' tab). (On some Windows terminals, <code>/plan</code> is recommended instead of <code>Shift</code>+<code>Tab</code>.)</p>
     </section>
 
     <!-- 16 PERMISSIONS -->
@@ -787,7 +868,7 @@ description: Write the weekly report in the company format
         </div>
         <div><div class="pdetail" id="pdetail"></div><div class="btnrow" style="margin-top:12px;"><button class="btn solid" id="pm-sim">See this mode work ▶</button></div><div class="simbox" id="pm-simbox"></div></div>
       </div>
-      <p class="note">These 5 are the modes shown in the menu. There's also a separate automation-only mode that 'only allows pre-approved tools (dontAsk).' In any mode, <b>extreme destruction like wiping the whole system (rm -rf /)</b> is blocked by a safeguard. If you don't like a result, you can recover it with 'rewind' (section 17).</p>
+      <p class="note">These 5 are the modes shown in the menu. There's also a separate automation-only mode that 'only allows pre-approved tools (dontAsk).' In any mode, <b>extreme destruction like wiping the whole system (rm -rf /)</b> is blocked by a safeguard. If you don't like a result, you can recover it with 'rewind' (the 'Rewind' tab).</p>
     </section>
 
     <!-- 17 REWIND -->
@@ -842,17 +923,17 @@ description: Write the weekly report in the company format
       <p class="label">Commonly used commands</p>
       <div class="tablewrap"><table class="t"><thead><tr><th style="width:130px;">Command</th><th>What it does</th></tr></thead><tbody>
         <tr><td class="cmd">/help</td><td>Shows the commands you can use</td></tr>
-        <tr><td class="cmd">/init</td><td>Analyzes the project and creates a basic CLAUDE.md file (section 07)</td></tr>
-        <tr><td class="cmd">/clear</td><td>Wipes the conversation and starts fresh (section 04)</td></tr>
-        <tr><td class="cmd">/compact</td><td>Summarizes the conversation to free up room (sections 03, 04)</td></tr>
-        <tr><td class="cmd">/model</td><td>Switches the model (section 06)</td></tr>
-        <tr><td class="cmd">/memory</td><td>View and edit CLAUDE.md and memory (sections 07, 08)</td></tr>
-        <tr><td class="cmd">/mcp</td><td>Check and manage connected outside tools (section 10)</td></tr>
-        <tr><td class="cmd">/plugin</td><td>Install and manage plugins (section 11)</td></tr>
-        <tr><td class="cmd">/agents</td><td>Manage subagents (section 12)</td></tr>
-        <tr><td class="cmd">/plan</td><td>Switch to plan mode (section 15)</td></tr>
-        <tr><td class="cmd">/rewind</td><td>Roll back to an earlier point (section 17)</td></tr>
-        <tr><td class="cmd">/hooks</td><td>Check the automation (hooks) you've set up (section 14)</td></tr>
+        <tr><td class="cmd">/init</td><td>Analyzes the project and creates a basic CLAUDE.md file (the 'CLAUDE.md' tab)</td></tr>
+        <tr><td class="cmd">/clear</td><td>Wipes the conversation and starts fresh (the 'Sessions & folders' tab)</td></tr>
+        <tr><td class="cmd">/compact</td><td>Summarizes the conversation to free up room (the 'Context window' · 'Sessions' tabs)</td></tr>
+        <tr><td class="cmd">/model</td><td>Switches the model (the 'Choosing a model' tab)</td></tr>
+        <tr><td class="cmd">/memory</td><td>View and edit CLAUDE.md and memory (the 'CLAUDE.md' · 'Memory' tabs)</td></tr>
+        <tr><td class="cmd">/mcp</td><td>Check and manage connected outside tools (the 'MCP' tab)</td></tr>
+        <tr><td class="cmd">/plugin</td><td>Install and manage plugins (the 'Plugins' tab)</td></tr>
+        <tr><td class="cmd">/agents</td><td>Manage subagents (the 'Subagents' tab)</td></tr>
+        <tr><td class="cmd">/plan</td><td>Switch to plan mode (the 'Plan mode' tab)</td></tr>
+        <tr><td class="cmd">/rewind</td><td>Roll back to an earlier point (the 'Rewind' tab)</td></tr>
+        <tr><td class="cmd">/hooks</td><td>Check the automation (hooks) you've set up (the 'Automation (hooks)' tab)</td></tr>
       </tbody></table></div>
       <p class="note">The most-used ones are <b>/clear</b> and <b>/compact</b>. Use them when the context fills up.</p>
     </section>
@@ -919,8 +1000,8 @@ description: Write the weekly report in the company format
       </ul>
       <p class="label">How to conserve your limit</p>
       <div class="fgrid">
-        <div class="fcard"><div class="ft">Use a cheaper model</div><div class="fd">Use Haiku for simple jobs. Opus is heavy and pricey. (section 06)</div></div>
-        <div class="fcard"><div class="ft">Clear often</div><div class="fd">Tidy the context with <code>/clear</code> and <code>/compact</code>. (sections 03, 04)</div></div>
+        <div class="fcard"><div class="ft">Use a cheaper model</div><div class="fd">Use Haiku for simple jobs. Opus is heavy and pricey. (the 'Choosing a model' tab)</div></div>
+        <div class="fcard"><div class="ft">Clear often</div><div class="fd">Tidy the context with <code>/clear</code> and <code>/compact</code>. (the 'Context window' · 'Sessions' tabs)</div></div>
         <div class="fcard"><div class="ft">Ask concisely</div><div class="fd">Request only the files and essentials you need.</div></div>
       </div>
       <p class="note">Exact times, prices, and limit figures vary by plan and time — check at <code>claude.com/pricing</code> and <code>support.claude.com</code>. (The concepts are based on the official docs as of June 2026.)</p>
@@ -928,30 +1009,30 @@ description: Write the weekly report in the company format
 
     <!-- 22 COMPACT DETAIL -->
     <section class="page" id="compact">
-      <h1>Compaction in detail (compact)</h1>
-      <p class="lead">When a conversation gets long, 'compaction' happens. <b>A long pile of content turns into one short summary.</b></p>
+      <h1>Compacting (compact)</h1>
+      <p class="lead">When a conversation gets long, 'compaction' happens. <b>A long pile of content turns into one short summary</b> — much like tidying a desk full of papers down to a single key page.</p>
       <p class="defs">Below is the conversation log of one task. Press 'Compact' to see how the content actually shrinks.</p>
       <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="cx-go">Compact (/compact) ▶</button><button class="btn" id="cx-reset">Show again</button></div>
 
       <p class="label" id="cx-label">Before compaction — conversation log (a long pile)</p>
       <div id="cx-before">
-        <div class="cxrow"><span class="cxt">Me</span>"The welcome email doesn't go out when someone signs up. Find the cause and fix it."</div>
-        <div class="cxrow"><span class="cxt">Files</span>Read auth.js · mailer.js · config.js (hundreds of lines combined)</div>
-        <div class="cxrow"><span class="cxt">Tool output</span>120 lines of test-run log — failed: SMTP connection timeout … (a long error log streaming by …)</div>
-        <div class="cxrow"><span class="cxt">Claude</span>"The mail server address setting was missing. I added the SMTP host to config.js and filled in the missing sender address too. For these and those reasons … (a long explanation follows)"</div>
-        <div class="cxrow"><span class="cxt">Tool output</span>80 lines of re-run test log — passed ✓ (detailed log …)</div>
-        <div class="cxrow"><span class="cxt">Claude</span>"Fix complete. The welcome email now sends correctly."</div>
+        <div class="cxrow"><span class="cxt">Me</span>"Remove the duplicates from the event attendee list and sort it by date."</div>
+        <div class="cxrow"><span class="cxt">Files</span>Read attendees.xlsx (800 attendees)</div>
+        <div class="cxrow"><span class="cxt">Intermediate result</span>Duplicate-check result — found 32 same people … (a long list of names streaming by …)</div>
+        <div class="cxrow"><span class="cxt">Claude</span>"I merged the 32 duplicates into one each and sorted by sign-up date. These and those columns are … (a long explanation follows)"</div>
+        <div class="cxrow"><span class="cxt">Intermediate result</span>Preview of the cleaned-up table — 768 rows (a long table streaming by …)</div>
+        <div class="cxrow"><span class="cxt">Claude</span>"All done. Saved the file with 768 people, sorted by date."</div>
       </div>
 
       <div id="cx-after" style="display:none;">
         <div class="cxbadge">Before <b>about 12,000</b> tokens<span class="ar">→</span>After <b>about 1,400</b> tokens <span style="color:var(--good);">about 88% saved</span> <span class="exb">example values</span></div>
-        <div class="cxsummary"><div class="cxh">Into one summary block</div>The user asked to fix 'the welcome email not sending on sign-up.' Checked <b>auth.js, mailer.js, config.js</b> → the cause was a <b>missing mail server (SMTP) setting in config.js</b>. Added the SMTP host and sender address, and the test passed. <b>Confirmed the welcome email now sends correctly.</b></div>
+        <div class="cxsummary"><div class="cxh">Into one summary block</div>The user asked to 'remove duplicates from the attendee list and sort by date.' Checked <b>attendees.xlsx</b> (800 people) → <b>found 32 duplicates</b> → merged them into one each and sorted by sign-up date. <b>Cleaned up to 768 people and saved.</b></div>
         <div class="cmp" style="margin-top:14px;">
-          <div class="cmpcard"><h4>Kept</h4><div class="who">Essentials preserved</div><div class="cmprow">Your request and intent</div><div class="cmprow">The list of files edited</div><div class="cmprow">The cause and how it was solved</div><div class="cmprow">The final result</div></div>
-          <div class="cmpcard"><h4>Discarded</h4><div class="who">To save room</div><div class="cmprow">Long test logs (120 and 80 lines)</div><div class="cmprow">Wordy explanations of intermediate steps</div><div class="cmprow">Repeated content</div></div>
+          <div class="cmpcard"><h4>Kept</h4><div class="who">Essentials preserved</div><div class="cmprow">Your request and intent</div><div class="cmprow">The file that was processed</div><div class="cmprow">What was done and how</div><div class="cmprow">The final result</div></div>
+          <div class="cmpcard"><h4>Discarded</h4><div class="who">To save room</div><div class="cmprow">The long list of duplicate names</div><div class="cmprow">Wordy explanations of intermediate steps</div><div class="cmprow">The cleaned-up table preview</div></div>
         </div>
       </div>
-      <p class="note">Because it keeps only the essentials and trims the rest, after compaction it still carries 'what was done and how.' But if discarded details — like the <b>original code that was read</b> — are needed again, Claude simply re-reads that file. The token figures are an <b>example</b> to help you understand (real values vary by situation). The compaction that happens automatically in the context window can be seen on the 'Context window' tab.</p>
+      <p class="note">Because it keeps only the essentials and trims the rest, after compaction it still carries 'what was done and how.' But if <b>discarded details</b> (e.g. the full list of duplicate names) are needed again, Claude simply re-reads that file. The token figures are an <b>example</b> to help you understand (real values vary by situation). The compaction that happens <b>automatically</b> in the context window can be seen on the 'Context window' tab.</p>
     </section>
 
     <!-- 23 GLOSSARY -->
@@ -961,29 +1042,29 @@ description: Write the weekly report in the company format
       <p class="defs">When you're confused, look it up quickly here. Type a word in the search box and it filters right away.</p>
       <input class="gsearch" id="gloss-search" type="text" placeholder="Search terms… (e.g. terminal, API, token)">
       <div class="gloss" id="gloss-list">
-        <div class="gterm"><div class="gt">Context window</div><div class="gd">The 'workspace' Claude holds at one time. It only knows what's in here. (section 03)</div></div>
-        <div class="gterm"><div class="gt">Token</div><div class="gd">The smallest piece an AI reads text in. The unit for context and cost. (section 05)</div></div>
-        <div class="gterm"><div class="gt">Session</div><div class="gd">One continuous conversation. Everything piles up in its context window. (section 04)</div></div>
-        <div class="gterm"><div class="gt">CLAUDE.md</div><div class="gd">A rules note you write. Loaded automatically in every conversation. (section 07)</div></div>
-        <div class="gterm"><div class="gt">Memory</div><div class="gd">A learning note Claude writes itself. Carries over across sessions. (section 08)</div></div>
-        <div class="gterm"><div class="gt">Skill</div><div class="gd">A bundle of steps for a frequent task. Unfolds only when needed. (section 09)</div></div>
-        <div class="gterm"><div class="gt">MCP</div><div class="gd">The standard for connecting to outside tools (Jira, Figma, etc.). (section 10)</div></div>
-        <div class="gterm"><div class="gt">Plugin</div><div class="gd">A bundle that packages skills, MCP, commands, and more for distribution. (section 11)</div></div>
-        <div class="gterm"><div class="gt">Subagent</div><div class="gd">A specialist helper that takes on a specific job. (section 12)</div></div>
-        <div class="gterm"><div class="gt">Hooks</div><div class="gd">Rules that run automatically at a specific moment. (section 14)</div></div>
-        <div class="gterm"><div class="gt">Plan mode</div><div class="gd">A mode that shows a plan and gets approval before editing. (section 15)</div></div>
-        <div class="gterm"><div class="gt">Permission modes</div><div class="gd">A setting for how often it asks. (section 16)</div></div>
-        <div class="gterm"><div class="gt">Checkpoint · Rewind</div><div class="gd">Auto-saves at every request; restore to an earlier point. (section 17)</div></div>
-        <div class="gterm"><div class="gt">Compaction (compact)</div><div class="gd">Summarizes the conversation to free up context room. (section 03)</div></div>
-        <div class="gterm"><div class="gt">Models (Opus, Sonnet, Haiku)</div><div class="gd">Claudes that differ in smartness, speed, and cost. (section 06)</div></div>
+        <div class="gterm"><div class="gt">Context window</div><div class="gd">The 'workspace' Claude holds at one time. It only knows what's in here. (the 'Context window' tab)</div></div>
+        <div class="gterm"><div class="gt">Token</div><div class="gd">The smallest piece an AI reads text in. The unit for context and cost. (the 'Tokens' tab)</div></div>
+        <div class="gterm"><div class="gt">Session</div><div class="gd">One continuous conversation. Everything piles up in its context window. (the 'Sessions & folders' tab)</div></div>
+        <div class="gterm"><div class="gt">CLAUDE.md</div><div class="gd">A rules note you write. Loaded automatically in every conversation. (the 'CLAUDE.md' tab)</div></div>
+        <div class="gterm"><div class="gt">Memory</div><div class="gd">A learning note Claude writes itself. Carries over across sessions. (the 'Memory' tab)</div></div>
+        <div class="gterm"><div class="gt">Skill</div><div class="gd">A bundle of steps for a frequent task. Unfolds only when needed. (the 'Skills' tab)</div></div>
+        <div class="gterm"><div class="gt">MCP</div><div class="gd">The standard for connecting to outside tools (Jira, Figma, etc.). (the 'MCP' tab)</div></div>
+        <div class="gterm"><div class="gt">Plugin</div><div class="gd">A bundle that packages skills, MCP, commands, and more for distribution. (the 'Plugins' tab)</div></div>
+        <div class="gterm"><div class="gt">Subagent</div><div class="gd">A specialist helper that takes on a specific job. (the 'Subagents' tab)</div></div>
+        <div class="gterm"><div class="gt">Hooks</div><div class="gd">Rules that run automatically at a specific moment. (the 'Automation (hooks)' tab)</div></div>
+        <div class="gterm"><div class="gt">Plan mode</div><div class="gd">A mode that shows a plan and gets approval before editing. (the 'Plan mode' tab)</div></div>
+        <div class="gterm"><div class="gt">Permission modes</div><div class="gd">A setting for how often it asks. (the 'Permission modes' tab)</div></div>
+        <div class="gterm"><div class="gt">Checkpoint · Rewind</div><div class="gd">Auto-saves at every request; restore to an earlier point. (the 'Rewind' tab)</div></div>
+        <div class="gterm"><div class="gt">Compaction (compact)</div><div class="gd">Summarizes the conversation to free up context room. (the 'Context window' tab)</div></div>
+        <div class="gterm"><div class="gt">Models (Opus, Sonnet, Haiku)</div><div class="gd">Claudes that differ in smartness, speed, and cost. (the 'Choosing a model' tab)</div></div>
         <div class="gterm"><div class="gt">Terminal (CLI)</div><div class="gd">The black input window where you instruct a computer with text (commands). Also called the 'command line.' CLI = Command Line Interface.</div></div>
-        <div class="gterm"><div class="gt">API</div><div class="gd">A 'connection pathway' that programs use to talk to each other. Here it means the 'pay-as-you-go' way of using it. (section 20)</div></div>
+        <div class="gterm"><div class="gt">API</div><div class="gd">A 'connection pathway' that programs use to talk to each other. Here it means the 'pay-as-you-go' way of using it. (the 'Plans & pricing' tab)</div></div>
         <div class="gterm"><div class="gt">Server</div><div class="gd">A computer that does work for you from afar. An MCP 'server' is a small program that connects an outside tool to Claude.</div></div>
         <div class="gterm"><div class="gt">.md (Markdown)</div><div class="gd">A 'note-style text file' format styled with simple rules. The .md in CLAUDE.md and SKILL.md is this.</div></div>
         <div class="gterm"><div class="gt">JSON</div><div class="gd">A computer-readable 'format for writing settings.' Settings like hooks go here. (You don't have to write it yourself — Claude does it for you.)</div></div>
-        <div class="gterm"><div class="gt">git</div><div class="gd">A 'version control' tool that records and reverts file changes. The permanent version of rewind. (section 17)</div></div>
-        <div class="gterm"><div class="gt">Pay-as-you-go</div><div class="gd">Paying 'for what you use' instead of a monthly fee (API). (sections 20, 21)</div></div>
-        <div class="gterm"><div class="gt">Rolling limit</div><div class="gd">A usage limit that flows along and refills, like 'the last 5 hours' or 'the last 7 days.' (section 21)</div></div>
+        <div class="gterm"><div class="gt">git</div><div class="gd">A 'version control' tool that records and reverts file changes. The permanent version of rewind. (the 'Rewind' tab)</div></div>
+        <div class="gterm"><div class="gt">Pay-as-you-go</div><div class="gd">Paying 'for what you use' instead of a monthly fee (API). (the 'Plans & pricing' · 'Usage limits' tabs)</div></div>
+        <div class="gterm"><div class="gt">Rolling limit</div><div class="gd">A usage limit that flows along and refills, like 'the last 5 hours' or 'the last 7 days.' (the 'Usage limits' tab)</div></div>
         <div class="gterm"><div class="gt">Protocol</div><div class="gd">A 'common standard' that lets different programs talk to each other. This is the P in MCP.</div></div>
       </div>
       <p class="note" id="gloss-empty" style="display:none;">No results. Try a different word.</p>
@@ -1037,7 +1118,7 @@ description: Write the weekly report in the company format
   (function(){ var s=null; try{ s=localStorage.getItem('cc_present'); }catch(e){} if(s==='1') setPresent(true); })();
 
   /* LNB icons (monoline) */
-  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
   function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
 
   /* router */
@@ -1045,7 +1126,7 @@ description: Write the weekly report in the company format
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'Chat gives you an \'answer\'; Claude Code <b>actually builds it in your project and makes it work</b>.', where:'Terminal, VS Code, desktop, web — <b>the same Claude Code everywhere</b>, settings shared too.', context:'Claude only remembers what\'s loaded here. When it\'s full, it <b>tidies up with \'compaction.\'</b>', sessions:'<b>One job per session</b> — mixing causes confusion. Keep the working folder narrow.', tokens:'Token = the unit an AI reads text in. <b>Longer means more space and cost</b>, and Korean is heavier.', models:'Smartness ↔ speed ↔ cost are trade-offs. <b>If unsure, start with Sonnet</b>.', claudemd:'<b>A rules note you write</b> — applied automatically at the start of every conversation.', memory:'A note <b>Claude learns and remembers on its own</b>. Carries over across sessions.', skills:'<b>Make a frequent task\'s steps once and reuse them</b> again and again.', mcp:'<b>Connects to outside tools (Jira, Figma, etc.)</b> so Claude can use them directly.', plugins:'A bundle that <b>packages skills, tools, commands and installs them in one go</b>.', agents:'<b>Hand big jobs to specialist helpers</b> and just get the results back.', images:'<b>Paste a screenshot</b> and Claude sees and understands it — faster and more accurate than words.', hooks:'A rule where <b>a set action runs automatically every time</b> at a specific moment.', planmode:'<b>Shows a plan and gets approval</b> before editing — safe for big changes.', permissions:'A setting for <b>how often Claude asks</b>. Stay safe at first.', rewind:'<b>Auto-saves at every request</b> — if you don\'t like it, roll back to an earlier point.', privacy:'<b>Business (Team, Enterprise, API) isn\'t used for training by default.</b> Personal is a choice in settings.', commands:'Shortcut commands that start with <code class="inlinecode">/</code>. The most-used are <b>/clear · /compact</b>.', plans:'<b>Not on the free plan.</b> Use a paid plan (Pro, Max, Team) or the API (pay-as-you-go).', limits:'<b>Once used up, you wait until it resets</b> — that\'s why managing it matters.', compact:'A long pile of conversation shrinks into <b>one short summary block</b>.', glossary:'A place to quickly look up confusing terms <b>in one line</b>.' };
+  var TLDR={ intro:'Chat gives you an \'answer\'; Claude Code <b>actually builds it in your project and makes it work</b>.', cowork:'Claude that <b>does office work</b> instead of code — give it a goal and it <b>builds the finished result from your files</b> (for non-developers · desktop app).', where:'Terminal, VS Code, desktop, web — <b>the same Claude Code everywhere</b>, settings shared too.', context:'Claude only remembers what\'s loaded here. When it\'s full, it <b>tidies up with \'compaction.\'</b>', sessions:'<b>One job per session</b> — mixing causes confusion. Keep the working folder narrow.', tokens:'Token = the unit an AI reads text in. <b>Longer means more space and cost</b>, and Korean is heavier.', models:'Smartness ↔ speed ↔ cost are trade-offs. <b>If unsure, start with Sonnet</b>.', claudemd:'<b>A rules note you write</b> — applied automatically at the start of every conversation.', memory:'A note <b>Claude learns and remembers on its own</b>. Carries over across sessions.', skills:'<b>Make a frequent task\'s steps once and reuse them</b> again and again.', mcp:'<b>Connects to outside tools (Jira, Figma, etc.)</b> so Claude can use them directly.', plugins:'A bundle that <b>packages skills, tools, commands and installs them in one go</b>.', agents:'<b>Hand big jobs to specialist helpers</b> and just get the results back.', images:'<b>Paste a screenshot</b> and Claude sees and understands it — faster and more accurate than words.', hooks:'A rule where <b>a set action runs automatically every time</b> at a specific moment.', planmode:'<b>Shows a plan and gets approval</b> before editing — safe for big changes.', permissions:'A setting for <b>how often Claude asks</b>. Stay safe at first.', rewind:'<b>Auto-saves at every request</b> — if you don\'t like it, roll back to an earlier point.', privacy:'<b>Business (Team, Enterprise, API) isn\'t used for training by default.</b> Personal is a choice in settings.', commands:'Shortcut commands that start with <code class="inlinecode">/</code>. The most-used are <b>/clear · /compact</b>.', plans:'<b>Not on the free plan.</b> Use a paid plan (Pro, Max, Team) or the API (pay-as-you-go).', limits:'<b>Once used up, you wait until it resets</b> — that\'s why managing it matters.', compact:'A long pile of conversation shrinks into <b>one short summary block</b>.', glossary:'A place to quickly look up confusing terms <b>in one line</b>.' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">In one line</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -1065,10 +1146,10 @@ description: Write the weekly report in the company format
 
   /* context tank */
   var MAX=40000,LIMIT_PX=420,AC_RATIO=0.8,stack=document.getElementById('stack'),limit=document.getElementById('limit'),cap=document.getElementById('cap'),free=document.getElementById('free'),tokEl=document.getElementById('tok'),num=document.getElementById('num'),status=document.getElementById('status'),inp=document.getElementById('inp'),capinp=document.getElementById('capinp'),tokprev=document.getElementById('tokprev');
-  var labels={sys:'System prompt · base instructions',tool:'Tool list · available features',mem:'Project note · CLAUDE.md',user:'Your message',file:'File content · code that was read',reply:'Claude\'s reply'};
-  var hex={sys:'#8a8a8a',tool:'#3b7dd8',mem:'#1f9e76',user:'#6d5fd0',file:'#d8662f',reply:'#cf5184'};
+  var labels={sys:'System prompt · base instructions',tool:'Tool list · available features',mem:'Project note · CLAUDE.md',user:'Your message',file:'File content · code that was read',reply:'Claude\'s reply',summary:'Info summarized by compaction'};
+  var hex={sys:'#8a8a8a',tool:'#3b7dd8',mem:'#1f9e76',user:'#6d5fd0',file:'#d8662f',reply:'#cf5184',summary:'#1f9e76'};
   var base=[{k:'sys',t:3000},{k:'tool',t:11500},{k:'mem',t:2200}],items=[],curShown=0;
-  function makeBlk(it,fixed,h){ var d=document.createElement('div'); d.className='blk'+(h<18?' mini':'')+(fixed?'':' acc'); d.style.height=h+'px'; d.style.background=rgba(hex[it.k],0.14); d.style.borderColor=rgba(hex[it.k],0.30); d.title=labels[it.k]+(it.txt?(' — '+it.txt):'')+' · '+fmt(it.t)+' tokens'; var name=labels[it.k]; if(it.txt)name+=' — "'+it.txt+'"'; d.innerHTML='<span class="dot" style="background:'+hex[it.k]+'"></span><span class="name">'+name+'</span>'+(fixed?'<span class="tag">base</span>':'')+'<span class="tk">'+fmt(it.t)+'</span>'; return d; }
+  function makeBlk(it,fixed,h){ var d=document.createElement('div'); var isSum=it.k==='summary'; d.className='blk'+(h<18?' mini':'')+(fixed?'':' acc')+(isSum?' sumhl':''); d.style.height=h+'px'; if(!isSum){ d.style.background=rgba(hex[it.k],0.14); d.style.borderColor=rgba(hex[it.k],0.30); } d.title=labels[it.k]+(it.txt&&!isSum?(' — '+it.txt):'')+' · '+fmt(it.t)+' tokens'; var name=labels[it.k]; if(it.txt&&!isSum)name+=' — "'+it.txt+'"'; d.innerHTML='<span class="dot" style="background:'+hex[it.k]+'"></span><span class="name">'+(isSum?'<b>'+name+'</b>':name)+'</span>'+(isSum?'<span class="sumbadge">Summary</span>':(fixed?'<span class="tag">base</span>':''))+'<span class="tk">'+fmt(it.t)+'</span>'; return d; }
   function ctxRender(animLast){ var scale=LIMIT_PX/MAX; stack.innerHTML=''; items.forEach(function(it,i){ var el=makeBlk(it,it._base,Math.max(8,Math.round(it.t*scale))); if(animLast&&i===items.length-1){ el.style.opacity='0'; el.style.transform='translateY(-8px)'; el.style.transition='opacity .35s ease, transform .35s cubic-bezier(.22,1,.36,1)'; stack.appendChild(el); requestAnimationFrame(function(){ el.style.opacity='1'; el.style.transform='none'; }); } else stack.appendChild(el); });
     var total=items.reduce(function(a,b){return a+b.t;},0); ctxCount(total); limit.style.bottom=LIMIT_PX+'px'; cap.textContent='Limit '+fmt(MAX);
     var acl=document.getElementById('acline'); if(acl){ acl.style.bottom=Math.round(LIMIT_PX*AC_RATIO)+'px'; document.getElementById('accap').textContent='Auto-compact starts ~'+fmt(MAX*AC_RATIO); }
@@ -1083,11 +1164,12 @@ description: Write the weekly report in the company format
   document.getElementById('send').addEventListener('click',function(){ var txt=(inp.value||'').trim(); if(!txt){inp.focus();return;} ctxAdd('user',tokenize(txt).count,txt.length>30?txt.slice(0,30)+'…':txt); inp.value=''; renderPrev(tokprev,'',true); inp.focus(); var total=items.reduce(function(a,b){return a+b.t;},0); if(total/MAX>.85)status.textContent='Almost full. Try "See auto-compact" or "Manual compact".'; });
   inp.addEventListener('keydown',function(e){ if(e.key==='Enter')document.getElementById('send').click(); });
   document.querySelectorAll('#context .act').forEach(function(b){ b.addEventListener('click',function(){ ctxAdd(b.dataset.k,parseInt(b.dataset.t,10)); var total=items.reduce(function(a,b){return a+b.t;},0); if(total>MAX)status.textContent='Over the limit — auto-compact is now needed.'; }); });
-  function doCompact(){ ctxBase(); items.push({k:'mem',t:Math.round(MAX*0.10),txt:'Summary of the conversation so far'}); ctxRender(true); }
+  function doCompact(){ var pre=items.reduce(function(a,b){return a+b.t;},0); ctxBase(); items.push({k:'summary',t:Math.round(MAX*0.10),txt:'Summary of the conversation so far'}); ctxRender(true); var post=items.reduce(function(a,b){return a+b.t;},0); showBA(pre,post); }
+  function showBA(pre,post){ var el=document.getElementById('cwba'); if(!el)return; document.getElementById('cwba-pre').textContent='about '+fmt(pre)+' tokens'; document.getElementById('cwba-post').textContent='about '+fmt(post)+' tokens'; var saved=pre>0?Math.max(0,Math.round((1-post/pre)*100)):0; document.getElementById('cwba-note').textContent='The piled-up conversation shrank into one green \'Info summarized by compaction\' block — about '+saved+'% saved. Essentials like your request, the file list, and decisions stay intact, and the room it freed up is now available to keep working. (See how the actual content changes on the \'Compacting (compact)\' tab.)'; el.style.display='block'; }
   document.getElementById('compact').addEventListener('click',function(){ if(items.reduce(function(a,b){return a+b.t;},0)<=base.reduce(function(a,b){return a+b.t;},0)+1000){ status.textContent='Not enough has piled up to compact yet.'; return; } doCompact(); status.textContent='Manual compact (/compact) done — the piled-up messages, files, and results shrank into one summary block.'; });
-  document.getElementById('reset').addEventListener('click',function(){ acStop(); ctxBase(); status.textContent='The three blocks below are always loaded, even before you start a conversation.'; });
+  document.getElementById('reset').addEventListener('click',function(){ acStop(); ctxBase(); var ba=document.getElementById('cwba'); if(ba)ba.style.display='none'; status.textContent='The three blocks below are always loaded, even before you start a conversation.'; });
   var acT=[]; function acStop(){ acT.forEach(clearTimeout); acT=[]; document.getElementById('tank').classList.remove('flash'); stack.classList.remove('summarizing'); var ov=document.getElementById('acoverlay'); if(ov)ov.classList.remove('on'); }
-  document.getElementById('autocompact').addEventListener('click',function(){ acStop(); ctxMax(40000); ctxBase(); var seq=[['user',900,'Build a dashboard'],['file',8400,null],['tool',3100,null],['reply',1800,null],['reply',1100,null]]; status.textContent='Conversation piling up… (one continuous task)'; var i=0;
+  document.getElementById('autocompact').addEventListener('click',function(){ acStop(); ctxMax(40000); ctxBase(); var ba=document.getElementById('cwba'); if(ba)ba.style.display='none'; var seq=[['user',900,'Build a dashboard'],['file',8400,null],['tool',3100,null],['reply',1800,null],['reply',1100,null]]; status.textContent='Conversation piling up… (one continuous task)'; var i=0;
     (function step(){ if(i>=seq.length){ acTrigger(); return; } var s=seq[i++]; ctxAdd(s[0],s[1],s[2]); var total=items.reduce(function(a,b){return a+b.t;},0);
       if(total>=MAX*AC_RATIO){ status.textContent='Reached the auto-compact start line! ('+fmt(total)+' / limit '+fmt(MAX)+') — it stops here, before the limit, and compacts.'; acT.push(setTimeout(acTrigger,1100)); return; }
       if(total/MAX>.6) status.textContent='Filling up steadily… soon it\'ll reach the auto-compact line.'; acT.push(setTimeout(step,1100)); })(); });
@@ -1266,6 +1348,47 @@ description: Write the weekly report in the company format
   function termRun(cmd){ tT.forEach(clearTimeout); tT=[]; term.innerHTML=''; var parts=SCRIPTS[cmd]||[],idx=0; (function add(){ if(idx>=parts.length)return; var seg=document.createElement('span'); if(parts[idx][0]==='c')seg.className='c'; seg.textContent=parts[idx][1]; term.appendChild(seg); idx++; tT.push(setTimeout(add,420)); })(); }
   document.querySelectorAll('#cmdchips .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#cmdchips .chip').forEach(function(x){ x.classList.toggle('on',x===c); }); termRun(c.dataset.c); }); });
   document.querySelector('#cmdchips .chip').classList.add('on'); termRun('init');
+
+  /* cowork simulation */
+  (function(){
+    var stage=document.getElementById('cw-stage'); if(!stage) return;
+    var chipsEl=document.getElementById('cw-chips'),taskEl=document.getElementById('cw-task'),folderEl=document.getElementById('cw-folder'),cwst=document.getElementById('cw-status');
+    var CW=[
+      {label:'Receipts → spreadsheet',task:'Pull the amounts, dates, and items from the receipts folder and organize them into a spreadsheet',folder:'receipts/ (32 files)',
+       plan:['Check the 32 receipt files','Read the amount, date, and item from each receipt','Organize into a spreadsheet (with a total formula)','Save as expenses.xlsx'],
+       result:{t:'expenses.xlsx',d:'32 receipts → saved as a spreadsheet with a total formula'}},
+      {label:'10 PDFs → summary report',task:'Read 10 department report PDFs and summarize the essentials onto a single page',folder:'reports/ (10 PDFs)',
+       plan:['Open the 10 PDF reports','Extract the shared metrics and key points','Write a one-page comparison and summary','Save as summary_report.docx'],
+       result:{t:'summary_report.docx',d:'10 reports → saved as a key-points summary document'}},
+      {label:'Tidy the Downloads folder',task:'Organize the Downloads folder by sorting files into folders by content',folder:'Downloads/ (240 files)',
+       plan:['Look over the file types and contents','Decide categories by content','Create folders and move the files','Report the result of the cleanup'],
+       result:{t:'Cleanup complete',d:'240 files → neatly sorted into 8 folders'}}
+    ];
+    var CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg>';
+    var FILE='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>';
+    var cur=0,timers=[];
+    function clearT(){ timers.forEach(clearTimeout); timers=[]; }
+    function setTask(i){ cur=i; var t=CW[i]; [].forEach.call(chipsEl.children,function(c,j){ c.classList.toggle('on',j===i); }); taskEl.textContent=t.task; taskEl.classList.remove('ph'); folderEl.textContent='Connected folder: '+t.folder; stage.innerHTML=''; cwst.textContent='Press "Run ▶" and Cowork shows you the plan first.'; }
+    CW.forEach(function(t,i){ var b=document.createElement('button'); b.className='cwchip'+(i===0?' on':''); b.textContent=t.label; b.addEventListener('click',function(){ clearT(); setTask(i); }); chipsEl.appendChild(b); });
+    setTask(0);
+    function go(){ clearT(); var t=CW[cur]; cwst.textContent='Cowork has made a plan — review it and approve.';
+      var h='<div class="cwcard plan" id="cw-plan"><div class="cwh">Plan <span class="cwpill b">review before running</span></div>';
+      t.plan.forEach(function(s){ h+='<div class="cwstep"><span class="ck"></span>'+s+'</div>'; });
+      h+='<div class="cwapprove"><button class="btn solid" id="cw-approve">Approve plan ✓</button><span class="cwmode">The default is "ask and proceed" — it checks at each step</span></div></div>';
+      stage.innerHTML=h; requestAnimationFrame(function(){ var p=document.getElementById('cw-plan'); if(p)p.classList.add('show'); });
+      document.getElementById('cw-approve').addEventListener('click',run); }
+    function run(){ clearT(); var t=CW[cur]; cwst.textContent='Working autonomously in an isolated workspace…';
+      stage.innerHTML='<div class="cwvm"><span class="cwvmtag">Isolated workspace (on my computer)</span><div id="cw-run"></div></div>';
+      var box=document.getElementById('cw-run');
+      t.plan.forEach(function(s){ var d=document.createElement('div'); d.className='cwstep'; d.innerHTML='<span class="ck">'+CHECK+'</span>'+s; box.appendChild(d); });
+      var steps=box.querySelectorAll('.cwstep'),i=0;
+      function next(){ if(i>0){ steps[i-1].classList.remove('run'); steps[i-1].classList.add('done'); } if(i>=steps.length){ finish(); return; } steps[i].classList.add('run'); i++; timers.push(setTimeout(next,950)); }
+      next(); }
+    function finish(){ var t=CW[cur]; cwst.textContent='Done! The result has been saved to the folder.';
+      timers.push(setTimeout(function(){ stage.insertAdjacentHTML('beforeend','<div class="cwcard show" style="margin-top:12px;"><div class="cwresult"><span class="fic">'+FILE+'</span><span><div class="rt">'+t.result.t+'</div><div class="rd">'+t.result.d+'</div></span></div></div>'); },450)); }
+    document.getElementById('cw-go').addEventListener('click',go);
+    document.getElementById('cw-reset').addEventListener('click',function(){ clearT(); setTask(cur); });
+  })();
 
   /* language switcher (works in /, /en/, /zh/, /ja/) */
   (function(){ var sel=document.getElementById('lang-select'); if(!sel) return;
