@@ -57,6 +57,15 @@
   .head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px; } .head .l{ font-size:13px; color:var(--muted); } .head .n{ font-size:13px; font-weight:500; font-variant-numeric:tabular-nums; } .head .n .max{ color:var(--faint); font-weight:300; } .head .n.over{ color:var(--over); }
   .tank{ position:relative; height:460px; border:1px solid var(--line2); border-radius:12px; background:var(--panel); overflow:hidden; transition:box-shadow .3s; } .tank.flash{ box-shadow:0 0 0 2px var(--over); }
   .stack.summarizing .blk.acc{ opacity:.28; filter:grayscale(.5); transition:opacity .5s, filter .5s; }
+  .acoverlay{ position:absolute; inset:0; z-index:3; display:none; align-items:center; justify-content:center; }
+  .acoverlay.on{ display:flex; } .acoverlay span{ background:var(--bg); border:1px solid var(--warn); color:var(--warn); font-size:13px; font-weight:500; padding:8px 16px; border-radius:999px; }
+  /* compact detail page */
+  .cxrow{ border:1px solid var(--line); border-radius:9px; background:var(--panel); padding:10px 13px; margin-bottom:8px; font-size:13px; line-height:1.55; transition:opacity .5s; }
+  .cxrow .cxt{ font-size:10.5px; color:var(--faint); border:1px solid var(--line2); border-radius:4px; padding:1px 6px; margin-right:8px; white-space:nowrap; }
+  .cxrow.drop{ opacity:.25; }
+  .cxbadge{ display:inline-block; font-size:12.5px; font-variant-numeric:tabular-nums; background:var(--row); border-radius:7px; padding:7px 12px; margin-bottom:12px; } .cxbadge b{ font-weight:600; } .cxbadge .ar{ color:var(--faint); margin:0 6px; }
+  .cxsummary{ border:1px solid var(--good); border-radius:10px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
+  .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
   .stack{ position:absolute; inset:0; padding:8px; display:flex; flex-direction:column-reverse; justify-content:flex-start; gap:4px; }
   .blk{ display:flex; align-items:center; gap:10px; padding:0 12px; border-radius:9px; overflow:hidden; flex:0 0 auto; border:1px solid var(--line); }
   .blk .dot{ width:9px; height:9px; border-radius:3px; flex:0 0 auto; }
@@ -208,7 +217,8 @@
     <button class="navitem" data-page="commands"><span class="no">19</span>슬래시 명령</button>
     <button class="navitem" data-page="plans"><span class="no">20</span>요금제</button>
     <button class="navitem" data-page="limits"><span class="no">21</span>사용 한도</button>
-    <button class="navitem" data-page="glossary"><span class="no">22</span>용어 사전</button>
+    <button class="navitem" data-page="compact"><span class="no">22</span>압축 자세히</button>
+    <button class="navitem" data-page="glossary"><span class="no">23</span>용어 사전</button>
   </nav>
 
   <main class="main"><div class="inner">
@@ -283,7 +293,7 @@ irm https://claude.ai/install.ps1 | iex</div>
       <div class="cols">
         <div>
           <div class="head"><span class="l">사용량</span><span class="n" id="num"><span id="tok">0</span><span class="max"> / 40,000</span></span></div>
-          <div class="tank" id="tank"><div class="free" id="free"></div><div class="acline" id="acline"><span class="cap" id="accap">자동 압축</span></div><div class="limit" id="limit"><span class="cap" id="cap">한계 40,000</span></div><div class="stack" id="stack"></div></div>
+          <div class="tank" id="tank"><div class="free" id="free"></div><div class="acline" id="acline"><span class="cap" id="accap">자동 압축</span></div><div class="limit" id="limit"><span class="cap" id="cap">한계 40,000</span></div><div class="stack" id="stack"></div><div class="acoverlay" id="acoverlay"><span>요약 중…</span></div></div>
         </div>
         <div>
           <p class="label" style="margin-top:0;">창 크기 <span class="hint">바꿔서 비교</span></p>
@@ -819,7 +829,35 @@ description: 주간 보고서를 회사 양식으로 작성
       <p class="note">정확한 시간·가격·한도 수치는 플랜·시점에 따라 달라요 — <code>claude.com/pricing</code> 과 <code>support.claude.com</code> 에서 확인하세요. (개념은 2026년 6월 공식 문서 기준)</p>
     </section>
 
-    <!-- 22 GLOSSARY -->
+    <!-- 22 COMPACT DETAIL -->
+    <section class="page" id="compact">
+      <h1>압축 자세히 (compact)</h1>
+      <p class="lead">대화가 길어지면 ‘압축’이 일어나요. <b>길게 쌓인 내용이 짧은 요약 하나로</b> 바뀌죠.</p>
+      <p class="defs">아래는 한 작업의 대화 기록이에요. ‘압축하기’를 누르면 내용이 실제로 어떻게 줄어드는지 보세요.</p>
+      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="cx-go">압축하기 (/compact) ▶</button><button class="btn" id="cx-reset">다시 보기</button></div>
+
+      <p class="label" id="cx-label">압축 전 — 대화 기록 (길게 쌓임)</p>
+      <div id="cx-before">
+        <div class="cxrow"><span class="cxt">나</span>“가입하면 환영 메일이 안 가요. 원인 찾아서 고쳐줘.”</div>
+        <div class="cxrow"><span class="cxt">파일</span>auth.js · mailer.js · config.js 를 읽음 (합쳐서 수백 줄)</div>
+        <div class="cxrow"><span class="cxt">도구 결과</span>테스트 실행 로그 120줄 — 실패: SMTP 연결 타임아웃 … (긴 오류 로그가 주르륵 …)</div>
+        <div class="cxrow"><span class="cxt">클로드</span>“메일 서버 주소 설정이 빠져 있었네요. config.js 에 SMTP 호스트를 추가하고, 누락된 발신자 주소도 채웠습니다. 이러이러한 이유로 … (긴 설명이 이어짐)”</div>
+        <div class="cxrow"><span class="cxt">도구 결과</span>테스트 재실행 로그 80줄 — 통과 ✓ (상세 로그 …)</div>
+        <div class="cxrow"><span class="cxt">클로드</span>“수정 완료. 이제 환영 메일이 정상 발송됩니다.”</div>
+      </div>
+
+      <div id="cx-after" style="display:none;">
+        <div class="cxbadge">압축 전 <b>약 12,000</b>토큰<span class="ar">→</span>압축 후 <b>약 1,400</b>토큰 <span style="color:var(--good);">(약 88% 절약, 예시)</span></div>
+        <div class="cxsummary"><div class="cxh">요약 한 칸으로</div>사용자가 ‘가입 시 환영 메일 미발송’ 해결을 요청. <b>auth.js·mailer.js·config.js</b> 확인 → <b>config.js의 메일 서버(SMTP) 설정 누락</b>이 원인. SMTP 호스트·발신자 주소를 추가하고 테스트 통과. <b>환영 메일 정상 발송 확인.</b></div>
+        <div class="cmp" style="margin-top:14px;">
+          <div class="cmpcard"><h4>남긴 것</h4><div class="who">핵심은 보존</div><div class="cmprow">내 요청과 의도</div><div class="cmprow">고친 파일 목록</div><div class="cmprow">원인과 해결 방법</div><div class="cmprow">최종 결과</div></div>
+          <div class="cmpcard"><h4>버린 것</h4><div class="who">공간 절약</div><div class="cmprow">긴 테스트 로그(120·80줄)</div><div class="cmprow">중간 단계의 장황한 설명</div><div class="cmprow">중복된 내용</div></div>
+        </div>
+      </div>
+      <p class="note">이렇게 핵심만 남기고 줄이기 때문에, 압축 뒤에도 ‘무슨 작업을 어떻게 했는지’는 이어가요. 다만 <b>읽었던 코드 원문</b>처럼 버려진 상세 내용이 다시 필요하면 클로드가 그 파일을 다시 읽어요. 토큰 수치는 이해를 돕는 <b>예시</b>예요(실제 값은 상황마다 달라요). 컨텍스트 창에서 자동으로 일어나는 압축은 ‘컨텍스트 창’ 탭에서 볼 수 있어요.</p>
+    </section>
+
+    <!-- 23 GLOSSARY -->
     <section class="page" id="glossary">
       <h1>용어 사전</h1>
       <p class="lead">이 가이드에서 나온 말들을 한 줄로 정리했어요.</p>
@@ -882,7 +920,7 @@ description: 주간 보고서를 회사 양식으로 작성
   document.getElementById('cc-chat').textContent='버튼을 누르면 답이 나와요.'; document.getElementById('cc-code').innerHTML='<div class="cstep on"><span>버튼을 누르면 만드는 과정이 나와요.</span></div>';
 
   /* context tank */
-  var MAX=40000,LIMIT_PX=370,AC_RATIO=0.85,stack=document.getElementById('stack'),limit=document.getElementById('limit'),cap=document.getElementById('cap'),free=document.getElementById('free'),tokEl=document.getElementById('tok'),num=document.getElementById('num'),status=document.getElementById('status'),inp=document.getElementById('inp'),capinp=document.getElementById('capinp'),tokprev=document.getElementById('tokprev');
+  var MAX=40000,LIMIT_PX=420,AC_RATIO=0.8,stack=document.getElementById('stack'),limit=document.getElementById('limit'),cap=document.getElementById('cap'),free=document.getElementById('free'),tokEl=document.getElementById('tok'),num=document.getElementById('num'),status=document.getElementById('status'),inp=document.getElementById('inp'),capinp=document.getElementById('capinp'),tokprev=document.getElementById('tokprev');
   var labels={sys:'시스템 프롬프트 · 기본 지침',tool:'도구 목록 · 쓸 수 있는 기능',mem:'프로젝트 메모 · CLAUDE.md',user:'내 메시지',file:'파일 내용 · 읽어온 코드',reply:'클로드 답변'};
   var hex={sys:'#8a8a8a',tool:'#3b7dd8',mem:'#1f9e76',user:'#6d5fd0',file:'#d8662f',reply:'#cf5184'};
   var base=[{k:'sys',t:3000},{k:'tool',t:11500},{k:'mem',t:2200}],items=[],curShown=0;
@@ -890,7 +928,7 @@ description: 주간 보고서를 회사 양식으로 작성
   function ctxRender(animLast){ var scale=LIMIT_PX/MAX; stack.innerHTML=''; items.forEach(function(it,i){ var el=makeBlk(it,it._base,Math.max(8,Math.round(it.t*scale))); if(animLast&&i===items.length-1){ el.style.opacity='0'; el.style.transform='translateY(-8px)'; el.style.transition='opacity .35s ease, transform .35s cubic-bezier(.22,1,.36,1)'; stack.appendChild(el); requestAnimationFrame(function(){ el.style.opacity='1'; el.style.transform='none'; }); } else stack.appendChild(el); });
     var total=items.reduce(function(a,b){return a+b.t;},0); ctxCount(total); limit.style.bottom=LIMIT_PX+'px'; cap.textContent='한계 '+fmt(MAX);
     var acl=document.getElementById('acline'); if(acl){ acl.style.bottom=Math.round(LIMIT_PX*AC_RATIO)+'px'; document.getElementById('accap').textContent='자동 압축 시작 ~'+fmt(MAX*AC_RATIO); }
-    var over=total>MAX; limit.classList.toggle('over',over); num.classList.toggle('over',over); var usedPx=Math.min(LIMIT_PX,total*scale); if(!over&&(MAX-total)>MAX*0.04){ free.style.display='block'; free.style.bottom=(usedPx+(LIMIT_PX-usedPx)/2-8)+'px'; free.textContent='남은 공간 '+fmt(MAX-total); } else free.style.display='none'; }
+    var over=total>MAX; limit.classList.toggle('over',over); num.classList.toggle('over',over); var usedPx=Math.min(LIMIT_PX,total*scale); if(!over&&total/MAX<0.7&&(MAX-total)>MAX*0.04){ free.style.display='block'; free.style.bottom=(usedPx+(LIMIT_PX-usedPx)/2-8)+'px'; free.textContent='남은 공간 '+fmt(MAX-total); } else free.style.display='none'; }
   function ctxCount(target){ var start=curShown,t0=null,dur=480; function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur); tokEl.textContent=fmt(start+(target-start)*(1-Math.pow(1-p,3))); num.querySelector('.max').textContent=' / '+fmt(MAX); if(p<1)requestAnimationFrame(step); else curShown=target; } requestAnimationFrame(step); }
   function ctxAdd(k,t,txt){ items.push({k:k,t:t,txt:txt}); ctxRender(true); }
   function ctxBase(){ items=base.map(function(b){return {k:b.k,t:b.t,_base:true};}); curShown=0; ctxRender(false); }
@@ -904,14 +942,14 @@ description: 주간 보고서를 회사 양식으로 작성
   function doCompact(){ ctxBase(); items.push({k:'mem',t:Math.round(MAX*0.10),txt:'여기까지의 대화 요약'}); ctxRender(true); }
   document.getElementById('compact').addEventListener('click',function(){ if(items.reduce(function(a,b){return a+b.t;},0)<=base.reduce(function(a,b){return a+b.t;},0)+1000){ status.textContent='아직 압축할 만큼 쌓이지 않았어요.'; return; } doCompact(); status.textContent='수동 압축(/compact) 완료 — 쌓였던 메시지·파일·결과가 요약 한 칸으로 줄었어요.'; });
   document.getElementById('reset').addEventListener('click',function(){ acStop(); ctxBase(); status.textContent='아래 세 칸은 대화를 시작하기도 전부터 항상 들어 있어요.'; });
-  var acT=[]; function acStop(){ acT.forEach(clearTimeout); acT=[]; document.getElementById('tank').classList.remove('flash'); }
-  document.getElementById('autocompact').addEventListener('click',function(){ acStop(); ctxMax(40000); ctxBase(); var seq=[['user',300,'로그인 버그 고쳐줘'],['file',8400,null],['tool',3100,null],['reply',1800,null],['user',260,'테스트도 돌려줘'],['tool',3400,null],['reply',2000,null],['file',8200,null]]; status.textContent='대화가 쌓이는 중… (이어지는 한 작업)'; var i=0;
+  var acT=[]; function acStop(){ acT.forEach(clearTimeout); acT=[]; document.getElementById('tank').classList.remove('flash'); stack.classList.remove('summarizing'); var ov=document.getElementById('acoverlay'); if(ov)ov.classList.remove('on'); }
+  document.getElementById('autocompact').addEventListener('click',function(){ acStop(); ctxMax(40000); ctxBase(); var seq=[['user',900,'대시보드 만들어줘'],['file',8400,null],['tool',3100,null],['reply',1800,null],['reply',1100,null]]; status.textContent='대화가 쌓이는 중… (이어지는 한 작업)'; var i=0;
     (function step(){ if(i>=seq.length){ acTrigger(); return; } var s=seq[i++]; ctxAdd(s[0],s[1],s[2]); var total=items.reduce(function(a,b){return a+b.t;},0);
-      if(total>=MAX*AC_RATIO){ status.textContent='자동 압축 시작선에 닿았어요! ('+fmt(total)+' 토큰 / 한계 '+fmt(MAX)+') — 한계까지 가지 않고 바로 압축해요.'; acT.push(setTimeout(acTrigger,1100)); return; }
+      if(total>=MAX*AC_RATIO){ status.textContent='자동 압축 시작선에 닿았어요! ('+fmt(total)+' / 한계 '+fmt(MAX)+') — 한계까지 가지 않고 여기서 멈춰 압축해요.'; acT.push(setTimeout(acTrigger,1100)); return; }
       if(total/MAX>.6) status.textContent='점점 차오르는 중… 곧 자동 압축선에 닿아요.'; acT.push(setTimeout(step,1100)); })(); });
-  function acTrigger(){ var tank=document.getElementById('tank'); status.textContent='⚠️ 거의 꽉 찼어요 (한계 근처) — 자동 압축을 시작합니다…'; tank.classList.add('flash');
-    acT.push(setTimeout(function(){ stack.classList.add('summarizing'); status.textContent='지난 대화·파일·도구 결과를 짧게 요약하는 중… (핵심만 남기고 옛 내용을 정리해요)'; },1300));
-    acT.push(setTimeout(function(){ stack.classList.remove('summarizing'); tank.classList.remove('flash'); doCompact(); status.textContent='압축 완료 — 옛 대화·도구 출력은 ‘요약’ 한 칸으로 줄고, 요청·파일 목록·결정 같은 핵심은 보존돼요. 시스템 지침·CLAUDE.md·메모리는 다시 불러와 공간이 넉넉해졌어요.'; },3200)); }
+  function acTrigger(){ var tank=document.getElementById('tank'),ov=document.getElementById('acoverlay'); status.textContent='⚠️ 자동 압축선 도달 — 여기서 멈추고 요약을 시작해요. (요약 동안엔 새 작업이 진행되지 않아요)'; tank.classList.add('flash');
+    acT.push(setTimeout(function(){ stack.classList.add('summarizing'); if(ov)ov.classList.add('on'); status.textContent='멈춤 — 지난 대화·파일·도구 결과를 짧게 요약하는 중…'; },1300));
+    acT.push(setTimeout(function(){ stack.classList.remove('summarizing'); if(ov)ov.classList.remove('on'); tank.classList.remove('flash'); doCompact(); status.textContent='압축 완료 — 옛 대화·도구 출력은 ‘요약’ 한 칸으로 줄고, 요청·파일 목록·결정 같은 핵심은 보존돼요. (내용이 실제로 어떻게 바뀌는지는 ‘압축 자세히’ 탭에서 볼 수 있어요)'; },3400)); }
   renderPrev(tokprev,'',true); ctxMax(40000); ctxBase();
 
   /* sessions + brain */
@@ -1058,6 +1096,14 @@ description: 주간 보고서를 회사 양식으로 작성
     (function go(){ if(l5>=100){ document.getElementById('lock-msg').textContent='🔒 5시간 한도 도달 — 리셋될 때까지 새 작업을 못 보내요. 잠시 기다리거나 상위 플랜으로 올려야 해요.'; btn.disabled=true; return; } l5=Math.min(100,l5+18); lw=Math.min(100,lw+6); gset(); luFeed(USES[step%USES.length]); step++; luT.push(setTimeout(go,750)); })(); });
   document.getElementById('lim-reset').addEventListener('click',function(){ luT.forEach(clearTimeout); luT=[]; l5=0; gset(); document.getElementById('lim-use').disabled=false; document.getElementById('lock-msg').textContent='5시간이 지나 한도가 리셋됐어요! 다시 쓸 수 있어요. (단, 주간 한도는 그대로 남아있는 점 주의)'; });
   gset();
+
+  /* compact detail page */
+  var cxT=[];
+  document.getElementById('cx-go').addEventListener('click',function(){ cxT.forEach(clearTimeout); cxT=[]; var before=document.getElementById('cx-before'),after=document.getElementById('cx-after'),rows=before.querySelectorAll('.cxrow');
+    document.getElementById('cx-label').textContent='압축 중 — 길게 쌓인 내용을 정리하는 중…';
+    rows.forEach(function(r,i){ cxT.push(setTimeout(function(){ r.classList.add('drop'); },250*i)); });
+    cxT.push(setTimeout(function(){ before.style.display='none'; after.style.display='block'; after.style.opacity='0'; after.style.transition='opacity .5s'; requestAnimationFrame(function(){ after.style.opacity='1'; }); document.getElementById('cx-label').textContent='압축 후 — 요약 한 칸으로'; },250*rows.length+500)); });
+  document.getElementById('cx-reset').addEventListener('click',function(){ cxT.forEach(clearTimeout); cxT=[]; var before=document.getElementById('cx-before'),after=document.getElementById('cx-after'); after.style.display='none'; before.style.display='block'; before.querySelectorAll('.cxrow').forEach(function(r){ r.classList.remove('drop'); }); document.getElementById('cx-label').textContent='압축 전 — 대화 기록 (길게 쌓임)'; });
 
   /* commands terminal */
   var term=document.getElementById('term'),tT=[];
