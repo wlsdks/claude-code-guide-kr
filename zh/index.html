@@ -658,7 +658,7 @@ irm https://claude.ai/install.ps1 | iex</div>
       <ul class="points">
         <li><b>会话之间是相互独立的。</b><span>新会话不会原样带入之前的对话记录（干净地重新开始）。</span></li>
         <li><b>但记忆和 CLAUDE.md 起到‘桥梁’作用。</b><span>每次会话开始时自动重新加载，所以以前学到的偏好、规则会延续下来。</span></li>
-        <li><b>想原样接着某次旧对话</b><span>用 <code>/resume</code>（或 <code>claude --continue</code>）就能把那次会话原封不动地恢复。</span></li>
+        <li><b>想原样接着某次旧对话</b><span>用 <code>/resume</code> 从列表里选择恢复；<b>最近一次</b>对话可用 <code>claude --continue</code> 继续。</span></li>
         <li><b>只保存在我的电脑上。</b><span>不会自动同步到云端，也不会和其他设备、同事共享。要和团队共享的规则，写进 CLAUDE.md 来分享。</span></li>
       </ul>
       <p class="note">小结：<b>原样接着一次对话 = /resume</b>，<b>把学到的东西带到下次对话 = 记忆·CLAUDE.md</b>。（来源：官方文档，截至 2026 年 6 月）</p>

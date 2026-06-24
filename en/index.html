@@ -658,7 +658,7 @@ irm https://claude.ai/install.ps1 | iex</div>
       <ul class="points">
         <li><b>Sessions are independent of each other.</b><span>A new session doesn't carry over the previous conversation as-is (it starts clean).</span></li>
         <li><b>Instead, memory and CLAUDE.md act as a 'bridge.'</b><span>They're reloaded automatically at the start of each session, so preferences and rules learned earlier carry forward.</span></li>
-        <li><b>To continue one specific old conversation in full</b><span>use <code>/resume</code> (or <code>claude --continue</code>) to revive that session exactly as it was.</span></li>
+        <li><b>To continue one specific old conversation in full</b><span>use <code>/resume</code> to pick it from a list; for your <b>most recent</b> one, use <code>claude --continue</code>.</span></li>
         <li><b>It's saved only on your computer.</b><span>It's not auto-shared to the cloud, other devices, or coworkers. To share rules with your team, write them in CLAUDE.md.</span></li>
       </ul>
       <p class="note">In short: <b>continue one conversation as-is = /resume</b>, <b>carry what was learned into the next conversation = memory and CLAUDE.md</b>. (Source: official docs, as of June 2026.)</p>
