@@ -97,6 +97,8 @@
   @media (max-width:900px){ .cols{ grid-template-columns:1fr; gap:26px; } }
   button{ font-family:inherit; cursor:pointer; }
   .btn{ background:var(--bg); border:1px solid var(--line2); color:var(--ink); font-size:13.5px; font-weight:500; padding:9px 15px; border-radius:8px; transition:border-color .2s,opacity .2s; } .btn:hover{ border-color:var(--accent); } .btn:disabled{ opacity:.45; cursor:default; } .btn.solid{ background:var(--accent); color:var(--bg); border-color:var(--accent); }
+  .loopt{ display:inline-flex; align-items:center; gap:5px; } .loopt svg{ transform-origin:center; } .loopt.on{ background:#0c6f4d; border-color:#0c6f4d; color:#fff; } .loopt.on svg{ animation:loopspin 2.4s linear infinite; } @keyframes loopspin{ to{ transform:rotate(360deg); } }
+  .lvlsel{ display:flex; gap:4px; margin:4px 0 16px; } .lvlchip{ flex:1; font-size:12px; font-weight:500; padding:6px 4px; border-radius:7px; border:1px solid var(--line2); background:var(--bg); color:var(--muted); cursor:pointer; transition:background .15s,color .15s,border-color .15s; } .lvlchip:hover{ border-color:var(--accent); } .lvlchip.on{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
   .btnrow{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
 
   /* tank */
@@ -350,6 +352,7 @@
       <option value="ja">日本語</option>
     </select>
     <div class="brand">Claude Code 入门<span class="sub">写给非开发者的指南</span></div>
+    <div class="lvlsel" id="lvlsel" role="group" aria-label="难度"><button class="lvlchip on" data-lv="0">全部</button><button class="lvlchip" data-lv="1">初级</button><button class="lvlchip" data-lv="2">中级</button><button class="lvlchip" data-lv="3">高级</button></div>
     <div class="navsec">开始</div>
     <button class="navitem on" data-page="intro"><span class="no">01</span>什么是 Claude Code？</button>
     <button class="navitem" data-page="cowork"><span class="no">02</span>什么是 Cowork？</button>
@@ -1283,7 +1286,29 @@ description: 按公司格式撰写周报
 
   /* collapse code blocks by default */
   document.querySelectorAll('.pre').forEach(function(pre){ var det=document.createElement('details'); det.className='codedet'; var sum=document.createElement('summary'); sum.textContent='查看代码示例（开发者向 · 不看也行）'; pre.parentNode.insertBefore(det,pre); det.appendChild(sum); det.appendChild(pre); });
-  navs.forEach(function(b){ b.addEventListener('click',function(){ var id=b.dataset.page; navs.forEach(function(n){n.classList.toggle('on',n===b);}); pages.forEach(function(p){p.classList.toggle('on',p.id===id);}); window.scrollTo(0,0); }); });
+  navs.forEach(function(b){ b.addEventListener('click',function(){ var id=b.dataset.page; navs.forEach(function(n){n.classList.toggle('on',n===b);}); pages.forEach(function(p){p.classList.toggle('on',p.id===id);}); window.scrollTo(0,0); stopLoop(); }); });
+
+  /* auto-repeat (loop) toggle for simulations — lecture-friendly */
+  var LOOP_LABEL='循环';
+  var LOOP_SVG='<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11a8 8 0 0 1 13.7-5.7L20 8"/><path d="M20 4v4h-4"/><path d="M21 13a8 8 0 0 1-13.7 5.7L4 16"/><path d="M4 20v-4h4"/></svg>';
+  var currentLoop=null;
+  function stopLoop(){ if(currentLoop){ currentLoop.classList.remove('on'); currentLoop.setAttribute('aria-pressed','false'); if(currentLoop._t){ clearInterval(currentLoop._t); currentLoop._t=null; } currentLoop=null; } }
+  function autoLoop(playId, period, resetId){ var btn=document.getElementById(playId); if(!btn) return; var lb=document.createElement('button'); lb.type='button'; lb.className='btn loopt'; lb.setAttribute('aria-pressed','false'); lb.title='开启后自动循环播放（用于讲解）'; lb.innerHTML=LOOP_SVG+'<span class="ll">'+LOOP_LABEL+'</span>';
+    function fire(){ if(resetId){ var r=document.getElementById(resetId); if(r) r.click(); } btn.click(); }
+    lb.addEventListener('click',function(){ if(lb.classList.contains('on')){ stopLoop(); return; } stopLoop(); currentLoop=lb; lb.classList.add('on'); lb.setAttribute('aria-pressed','true'); fire(); lb._t=setInterval(fire, period); });
+    (btn.parentNode||btn).appendChild(lb); }
+  [['cc-go',5500],['cw3-go',5500],['uc-go',7000],['sess-play',9500],['lc-all',8200],['md-go',5500],['mem-go',5200],['sk-go',5200],['sa-go',5600],['pl-go',6200],['plan-go',4800],['goal-go',4200],['loop-go',4800],['wf-go',4500],['dr-go',4800],['cx-go',5500,'cx-reset'],['img-go',4800]].forEach(function(p){ autoLoop(p[0],p[1],p[2]); });
+
+  /* difficulty mode — 초급/중급/고급 filter */
+  var LV={ intro:1,cowork:1,usecases:1,where:1,context:1,sessions:1,models:1,commands:1,glossary:1,
+    tokens:2,compact:2,effort:2,claudemd:2,memory:2,skills:2,images:2,permissions:2,planmode:2,rewind:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
+    mcp:3,plugins:3,agents:3,hooks:3,goal:3,loop:3,workflows:3 };
+  (function(){ var chips=document.querySelectorAll('#lvlsel .lvlchip'); if(!chips.length) return; var origNo={}; navs.forEach(function(n){ var no=n.querySelector('.no'); if(no) origNo[n.dataset.page]=no.textContent; });
+    function setLevel(lv){ chips.forEach(function(c){ c.classList.toggle('on',+c.dataset.lv===lv); }); var k=0;
+      navs.forEach(function(n){ var show= lv===0 || LV[n.dataset.page]===lv; n.style.display=show?'':'none'; if(show){ var no=n.querySelector('.no'); if(no) no.textContent= lv===0 ? origNo[n.dataset.page] : ('0'+(++k)).slice(-2); } });
+      document.querySelectorAll('.lnb .navsec').forEach(function(s){ var any=false,el=s.nextElementSibling; while(el && !el.classList.contains('navsec')){ if(el.classList.contains('navitem') && el.style.display!=='none'){ any=true; break; } el=el.nextElementSibling; } s.style.display=any?'':'none'; });
+      var cur=document.querySelector('.navitem.on'); if(cur && cur.style.display==='none'){ var first=[].filter.call(navs,function(n){return n.style.display!=='none';})[0]; if(first) first.click(); } }
+    chips.forEach(function(c){ c.addEventListener('click',function(){ setLevel(+c.dataset.lv); }); }); })();
 
   /* intro: chat vs code */
   var ccT=[]; function ccStep(box,text){ var d=document.createElement('div'); d.className='cstep'; d.innerHTML='<span class="ck">✓</span><span>'+text+'</span>'; box.appendChild(d); requestAnimationFrame(function(){ d.classList.add('on'); }); }
