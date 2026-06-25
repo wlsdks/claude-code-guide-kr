@@ -199,6 +199,7 @@
   .cwstep .ck svg{ width:11px; height:11px; opacity:0; transition:opacity .25s; }
   .cwstep.run .ck{ border-color:var(--blue); } .cwstep.run{ color:var(--ink); }
   .cwstep.done .ck{ border-color:var(--good); background:var(--good); } .cwstep.done .ck svg{ opacity:1; } .cwstep.done{ color:var(--ink); }
+  .cwstep.warn{ color:var(--ink); align-items:flex-start; } .cwstep.warn .ck{ border-color:var(--over); background:var(--over); color:#fff; font-weight:700; font-size:12px; line-height:1; } .cwstep .drfix{ display:block; color:var(--good); font-weight:600; font-size:12px; margin-top:2px; }
   .cwapprove{ margin-top:11px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .cwmode{ font-size:11.5px; color:var(--faint); }
   .cwvm{ border:1px dashed var(--line2); border-radius:11px; padding:11px 14px 7px; background:var(--panel); position:relative; }
@@ -709,6 +710,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <div class="bar"><div class="bl"><span>비용 효율 (저렴함)</span><b id="v-cost"></b></div><div class="track2"><div class="fill2" id="f-cost"></div></div></div>
       </div>
       <div class="muse" id="muse"><div class="lockbanner" id="m-lock" style="display:none;"></div><div class="tagline" id="m-tag"></div><div class="when" id="m-when"></div><div class="ctxline" id="m-ctx"></div><div class="exlbl">이럴 때 쓰세요</div><ul id="m-ex"></ul></div>
+      <p class="simtake"><span class="stk">결론</span><span>똑똑함 ↔ 속도 ↔ 비용은 <b>서로 맞바꾸기</b> — 셋을 다 가질 순 없어요. <b>헷갈리면 균형 잡힌 Sonnet</b>으로 시작.</span></p>
       <p class="note">클로드 코드에서 <code>/model</code> 로 바꿀 수 있어요. 헷갈리면 균형 잡힌 Sonnet으로 시작. <span class="exb">예시</span> 막대는 <b>상대 비교</b>일 뿐 정확한 수치가 아니에요.</p>
       <p class="label">K, M 이게 무슨 단위예요?</p>
       <div class="unitcard">
@@ -968,6 +970,7 @@ description: 주간 보고서를 회사 양식으로 작성
         <li><b>매번 보장돼요.</b><span>CLAUDE.md가 ‘부탁’이라면 훅은 ‘규칙’ — 잊지 않고 항상 실행돼요.</span></li>
         <li><b>수십 가지 시점을 지원해요.</b><span>파일 변경·도구 실행 전후·세션 시작·압축 전후 등 다양한 순간. <code>/hooks</code> 로 확인.</span></li>
       </ul>
+      <p class="simtake"><span class="stk">결론</span><span>CLAUDE.md가 <b>‘부탁’</b>이라면 — 훅은 <b>‘규칙’</b>: 정한 순간에 <b>매번 자동으로</b> 실행돼요(잊지 않아요).</span></p>
       <p class="note">설정이 다소 기술적이라, 클로드에게 “파일 고칠 때마다 정렬하는 훅 만들어줘”처럼 부탁하면 대신 만들어줘요. (출처: 공식 문서, 2026년 6월 기준)</p>
     </section>
 
@@ -1008,6 +1011,7 @@ description: 주간 보고서를 회사 양식으로 작성
         </div>
         <div><div class="pdetail" id="pdetail"></div><div class="btnrow" style="margin-top:12px;"><button class="btn solid" id="pm-sim">이 모드 동작 보기 ▶</button></div><div class="simbox" id="pm-simbox"></div></div>
       </div>
+      <p class="simtake"><span class="stk">결론</span><span>모드마다 <b>클로드가 알아서 하는 범위가 달라요</b> — 처음엔 ‘권한 요청’으로 안전하게, 익숙해지면 자주 하는 일을 풀어줘요.</span></p>
       <p class="note">이 5가지는 메뉴에 보이는 모드예요. 자동화 전용으로 ‘사전 승인한 도구만 허용(dontAsk)’ 모드도 따로 있어요. 어떤 모드든 <b>시스템 전체 삭제(rm -rf / · rm -rf ~) 같은 극단적 파괴</b>는 한 번 더 확인을 받아요(‘회로 차단기’ — 자동 실행되지 않아요). 마음에 안 들면 ‘되돌리기’(‘되돌리기’ 탭)로 복구할 수 있어요.</p>
     </section>
 
@@ -1048,6 +1052,7 @@ description: 주간 보고서를 회사 양식으로 작성
         <li><b>예외: 안전 검토로 플래그된 대화</b><span>학습을 꺼도, 안전·정책 검토 목적으로는 사용·보관될 수 있어요.</span></li>
         <li><b>로컬 기록</b><span>세션 기록이 내 컴퓨터(~/.claude/projects)에 평문으로 저장돼요. 보관 기간은 설정으로 조절 가능.</span></li>
       </ul>
+      <p class="simtake"><span class="stk">결론</span><span><b>업무용(Team·Enterprise·API)</b>은 기본적으로 학습에 안 쓰여요. <b>개인용(Free·Pro·Max)</b>은 설정에서 학습 사용을 직접 켜고 끌 수 있어요.</span></p>
       <p class="note warn" style="margin-top:14px;"><b>중요</b> · 정책은 계속 바뀌고 계정 종류마다 달라요. 민감한 결정 전엔 공식 페이지를 꼭 확인하세요 — <code>privacy.claude.com</code>, <code>anthropic.com/legal</code>, <code>code.claude.com/docs</code> (이 내용은 2026년 6월 기준).</p>
     </section>
 
@@ -1060,6 +1065,7 @@ description: 주간 보고서를 회사 양식으로 작성
         <button class="chip" data-c="init">/init</button><button class="chip" data-c="help">/help</button><button class="chip" data-c="clear">/clear</button><button class="chip" data-c="compact">/compact</button><button class="chip" data-c="model">/model</button>
       </div>
       <div class="pre" id="term" style="min-height:200px; white-space:pre-wrap;"></div>
+      <p class="simtake"><span class="stk">결론</span><span><code>/</code> 명령 중 <b>제일 자주 쓰는 건 /clear·/compact</b> — 맥락이 꽉 찰 때 비우고 줄여요. 전체 목록은 <code>/help</code>.</span></p>
       <p class="note">이 터미널은 이해를 돕는 <b>개념용 예시</b>예요(실제 화면과 다를 수 있어요). 특히 <code>/init</code> 은 프로젝트를 분석해 <b>CLAUDE.md를 자동 생성</b>하는 명령이에요.</p>
       <p class="label">자주 쓰는 명령</p>
       <div class="tablewrap"><table class="t"><thead><tr><th style="width:130px;">명령</th><th>하는 일</th></tr></thead><tbody>
@@ -1098,6 +1104,7 @@ description: 주간 보고서를 회사 양식으로 작성
         <li><b>여러 곳에서 같은 사용량을 나눠 써요.</b><span>claude.ai·클로드 코드·데스크톱 앱이 한 사용량 풀을 공유.</span></li>
         <li><b>고민되면 Pro로 시작</b><span>부족하면 Max로 올리면 돼요.</span></li>
       </ul>
+      <p class="simtake"><span class="stk">결론</span><span><b>무료 플랜엔 없어요.</b> 고민되면 <b>Pro로 시작</b>, 사용량이 부족하면 Max로 올리면 돼요.</span></p>
       <p class="note">정확한 가격·한도는 <code>claude.com/pricing</code> 과 공식 지원 페이지에서 확인하세요. (요금 정책은 수시로 변경)</p>
     </section>
 
@@ -1227,6 +1234,7 @@ description: 주간 보고서를 회사 양식으로 작성
       </div>
       <p class="label">고른 만큼 ‘생각 과정’이 깊어져요 <span class="hint">눌러보면 길이가 달라요</span></p>
       <div class="efthink" id="ef-think"></div>
+      <p class="simtake"><span class="stk">결론</span><span><b>간단한 일은 ‘저’</b>(빠르고 쌈), <b>까다로운 추론은 ‘고/최고’</b>(정확하지만 느리고 비쌈) — 일에 맞게 깊이를 골라요.</span></p>
       <p class="note">간단한 일은 ‘저’로(빠르고 저렴), 까다로운 분석·추론은 ‘고/최고’로. 바꾸는 법: <code>/effort</code> 또는 설정(‘설정’ 탭). <span class="exb">예시</span> 막대는 상대 비교예요. (출처: Anthropic 공식 — support.claude.com 모델·effort 설정)</p>
       <p class="note"><b>고급 · ultracode</b> — <code>/effort</code> 메뉴엔 <b>ultracode</b>도 있어요. 최고 수준(초고) 추론에 더해, 어려운 일은 <b>여러 도우미를 자동으로 동원(워크플로)</b>해 처리하는 <b>세션 전용</b> 모드예요. 토큰을 많이 써서 평소엔 필요 없고, 아주 어려운 작업에만 골라 써요(Fable 5·Opus 4.8 등에서).</p>
     </section>
@@ -1277,6 +1285,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <p class="defs">“언어를 바꾸고 싶어요” 같은 건 다 여기서 해요. 값을 눌러 바꿔보세요(이해를 돕는 예시 패널).</p>
       <div class="cfgpanel" id="cfg-panel"></div>
       <p class="status" id="cfg-status" style="margin-top:12px;">오른쪽 값을 눌러 바꿔보세요.</p>
+      <p class="simtake"><span class="stk">결론</span><span>언어·테마·모델·권한 같은 설정을 <b>여기저기 찾을 필요 없이</b> — <b>한 곳(제어판)에서</b> 바꿔요.</span></p>
       <p class="note">여는 법: <code>/config</code>. 실제 설정 항목은 이보다 많아요. (출처: Anthropic 공식 — code.claude.com/docs settings)</p>
     </section>
 
@@ -1633,7 +1642,7 @@ description: 주간 보고서를 회사 양식으로 작성
     {name:'계획 모드',safe:'읽기 전용',col:'#b9792a',auto:'읽기·탐색만 (직접 고치지 않음)',ask:'계획을 승인하면 한꺼번에 실행',use:'큰 변경 전에 계획을 먼저 확인할 때',sim:['plan','plan','plan','plan']},
     {name:'자동 모드',safe:'주의',col:'#d8943f',auto:'대부분의 작업 (백그라운드 안전 검사)',ask:'위험한 작업만 확인·차단',use:'장시간 자동 작업으로 확인을 줄이고 싶을 때',note:'최신 버전·모델(Opus 4.6/Sonnet 4.6 이상) 필요',sim:['auto','auto','auto','ask']},
     {name:'권한 건너뛰기',safe:'위험',col:'#d8453f',auto:'전부 — 확인 없이 진행',ask:'시스템 전체 삭제(rm -rf / · rm -rf ~) 같은 극단은 한 번 더 확인',use:'인터넷 차단된 격리 환경(컨테이너·VM)에서만',note:'프롬프트 인젝션에 취약 — 일반 PC에서 쓰지 마세요',sim:['auto','auto','auto','auto']} ];
-  var SIM_ACT=['파일 수정','폴더 만들기','git 커밋','파일 삭제 (rm)'],SIM_TXT={auto:'자동 실행',ask:'확인 요청',plan:'실행 안 함 (계획만)',block:'차단'},curPm=0;
+  var SIM_ACT=['파일 수정','폴더 만들기','git 커밋','파일 삭제'],SIM_TXT={auto:'자동 실행',ask:'확인 요청',plan:'실행 안 함 (계획만)',block:'차단'},curPm=0;
   function pmShow(i){ curPm=i; var d=PM[i]; document.querySelectorAll('#pmenu .prow').forEach(function(r){ r.classList.toggle('on',+r.dataset.i===i); }); var badge='<span class="pbadge" style="background:'+rgba(d.col,.16)+';color:'+d.col+'">'+d.safe+'</span>'; document.getElementById('pdetail').innerHTML='<div class="pt">'+d.name+' '+badge+'</div><div class="pdrow"><b>알아서 하는 것</b>'+d.auto+'</div><div class="pdrow"><b>그래도 묻는 것</b>'+d.ask+'</div><div class="pdrow"><b>언제 쓰나</b>'+d.use+'</div>'+(d.note?'<div class="pdrow"><b>참고</b>'+d.note+'</div>':''); document.getElementById('pmark').style.left=((i+0.5)/PM.length*100)+'%'; document.getElementById('pm-simbox').innerHTML='<div class="simrow on" style="color:var(--faint);font-size:12.5px;">“이 모드 동작 보기”를 눌러보세요.</div>'; }
   var pmT=[]; document.getElementById('pm-sim').addEventListener('click',function(){ pmT.forEach(clearTimeout); pmT=[]; var d=PM[curPm],box=document.getElementById('pm-simbox'); box.innerHTML=''; SIM_ACT.forEach(function(a,idx){ var s=d.sim[idx],row=document.createElement('div'); row.className='simrow'; var cls=s==='auto'?'auto':(s==='ask'?'ask':(s==='plan'?'plan':'block')); row.innerHTML='<span class="sa">'+a+'</span><span class="sp '+cls+'">'+SIM_TXT[s]+'</span>'; box.appendChild(row); pmT.push(setTimeout(function(){ row.classList.add('on'); },220*idx)); }); });
   document.querySelectorAll('#pmenu .prow').forEach(function(r){ var i=+r.dataset.i; var dot=document.createElement('span'); dot.className='psafe'; dot.style.background=(PM[i]&&PM[i].col)||'var(--line2)'; dot.title=(PM[i]&&PM[i].safe)||''; r.insertBefore(dot, r.firstChild); r.addEventListener('click',function(){ pmShow(i); }); }); pmShow(0);
@@ -1643,7 +1652,7 @@ description: 주간 보고서를 회사 양식으로 작성
   (function(){ [0,1,2,3].forEach(function(n){ document.getElementById('plan'+n).classList.add('on'); }); })();
 
   /* rewind timeline */
-  var RW=['시작','초안 작성','디자인 모던하게','버그 수정 (현재)']; var rwTl=document.getElementById('rw-timeline'),rwLb=document.getElementById('rw-labels'),rwSel=2;
+  var RW=['시작','초안 작성','디자인 모던하게','버그 수정 (현재)']; var rwTl=document.getElementById('rw-timeline'),rwLb=document.getElementById('rw-labels'),rwSel=RW.length-1;
   (function(){ var h=''; RW.forEach(function(t,i){ h+='<span class="tlpt'+(i===RW.length-1?' cur':'')+'" data-i="'+i+'"><span class="dot2"></span>'+(i<RW.length-1?'<span class="tlbar"></span>':'')+'</span>'; }); rwTl.innerHTML=h; rwLb.innerHTML=RW.map(function(t){return '<span>'+t+'</span>';}).join(''); rwMark(RW.length-1,false); rwTl.querySelectorAll('.tlpt').forEach(function(p){ p.addEventListener('click',function(){ rwSel=+p.dataset.i; rwMark(rwSel,false); document.getElementById('rw-msg').textContent='“'+RW[rwSel]+'” 시점을 골랐어요. 아래에서 복구 방식을 선택하세요.'; }); }); })();
   function rwMark(idx,restored){ rwTl.querySelectorAll('.tlpt').forEach(function(p){ var i=+p.dataset.i; p.classList.toggle('cur',i===idx&&!restored); p.classList.toggle('restored',restored&&i<=idx); }); }
   document.getElementById('rw-code').addEventListener('click',function(){ rwMark(rwSel,true); document.getElementById('rw-msg').textContent='코드만 복구 — “'+RW[rwSel]+'” 시점의 파일로 되돌렸어요. 대화 내용은 그대로 남아서, 다른 방식으로 다시 요청할 수 있어요.'; });
@@ -1844,11 +1853,11 @@ description: 주간 보고서를 회사 양식으로 작성
     var cfgPanel=document.getElementById('cfg-panel');
     CFG.forEach(function(o){ var row=document.createElement('div'); row.className='cfgrow'; row.innerHTML='<div class="cfk">'+o.k+'<small>'+o.sub+'</small></div>'; var v=document.createElement('button'); v.className='cfgval'; v.textContent=o.vals[o.i]; v.addEventListener('click',function(){ o.i=(o.i+1)%o.vals.length; v.textContent=o.vals[o.i]; document.getElementById('cfg-status').textContent='‘'+o.k+'’을(를) ‘'+o.vals[o.i]+'’(으)로 바꿨어요.'; }); row.appendChild(v); cfgPanel.appendChild(row); });
     /* doctor */
-    var DR=['설치 상태','로그인(계정 연결)','인터넷 연결','MCP 도구 연결','설정 파일'];
+    var DR=[{t:'설치 상태'},{t:'로그인 (계정 연결)'},{t:'인터넷 연결'},{t:'MCP 도구 연결',fail:'지라 연결이 끊겼어요',fix:'→ /mcp 에서 다시 로그인하면 돼요'},{t:'설정 파일'}];
     var drList=document.getElementById('dr-list'),drT=[];
     document.getElementById('dr-go').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; var st=document.getElementById('dr-status'); st.textContent='점검 중…';
-      DR.forEach(function(t,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML='<span class="ck">'+CK+'</span>'+t; drList.appendChild(el);
-        drT.push(setTimeout(function(){ el.classList.add('done'); if(i===DR.length-1) st.textContent='✓ 모두 정상이에요. (문제가 있으면 해당 항목과 고치는 법을 알려줘요)'; },300+i*600)); }); });
+      DR.forEach(function(o,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML= o.fail ? '<span class="ck">!</span><span>'+o.t+' — <b>'+o.fail+'</b><span class="drfix">'+o.fix+'</span></span>' : '<span class="ck">'+CK+'</span><span>'+o.t+'</span>'; drList.appendChild(el);
+        drT.push(setTimeout(function(){ el.classList.add(o.fail?'warn':'done'); if(i===DR.length-1) st.textContent='점검 끝 — 4개 정상, 1개 문제 발견. /doctor는 어디가 문제인지 + 고치는 법까지 알려줘요.'; },300+i*600)); }); });
     document.getElementById('dr-reset').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; document.getElementById('dr-status').textContent='“진단 실행”을 눌러보세요.'; });
   })();
 
