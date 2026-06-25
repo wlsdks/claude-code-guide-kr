@@ -751,10 +751,10 @@ description: 週次レポートを会社の様式で作成
       <p class="status" id="mcp-msg" style="margin-top:0;">「ひとつずつ連携してみる」を押してみてください。</p>
       <div class="grp" style="margin-top:20px;"><h3>こんなものを連携します (例)</h3>
         <div class="fgrid">
-          <div class="fcard"><div class="ft">Jira</div><div class="fd">課題を読んで作って、状態を変えます。</div><div class="fe"><b>例</b> 「このバグを Jira チケットに」</div></div>
-          <div class="fcard"><div class="ft">Figma</div><div class="fd">デザイン案を読んでコードに。</div><div class="fe"><b>例</b> 「この Figma の通りに作って」</div></div>
-          <div class="fcard"><div class="ft">ブラウザ</div><div class="fd">実際の Web ページを開いて確認。</div><div class="fe"><b>例</b> 「このページがちゃんと開くか確認」</div></div>
-          <div class="fcard"><div class="ft">その他</div><div class="fd">GitHub・Slack・Notion・DB など。</div><div class="fe"><b>例</b> 社内ツールと連携</div></div>
+          <div class="fcard"><div class="ft">Google ドライブ・スプレッドシート</div><div class="fd">書類や表を直接読んで整理します。</div><div class="fe"><b>例</b> 「このシートの合計を出して」</div></div>
+          <div class="fcard"><div class="ft">Slack</div><div class="fd">メッセージを読んで送ります。</div><div class="fe"><b>例</b> 「このお知らせを Slack に投稿して」</div></div>
+          <div class="fcard"><div class="ft">Jira</div><div class="fd">共同作業の課題を読んで作ります。</div><div class="fe"><b>例</b> 「この件を Jira チケットに」</div></div>
+          <div class="fcard"><div class="ft">その他</div><div class="fd">Figma・ブラウザ・Notion・GitHub など。</div><div class="fe"><b>例</b> 社内ツールと連携</div></div>
         </div>
       </div>
       <p class="note">連携したツールは <code>/mcp</code> で確認。ツールが多いほど、その説明もコンテキストを少しずつ占めるので、必要なものだけ連携してください。MCP を複数まとめて配布するのが「プラグイン」です（「プラグイン」タブ）。</p>
@@ -860,13 +860,13 @@ description: 週次レポートを会社の様式で作成
       <p class="label">どう動くか <span class="hint">いつ → 何を → どうやって</span></p>
       <div class="steps">
         <div class="step on"><div class="sn2">1</div><div><div class="st2">イベント (いつ)</div><div class="sd3">例: ファイルを保存した直後</div></div></div>
-        <div class="step on"><div class="sn2">2</div><div><div class="st2">フィルター (何を)</div><div class="sd3">例: それがコードファイルなら</div></div></div>
-        <div class="step on"><div class="sn2">3</div><div><div class="st2">作業 (どうやって)</div><div class="sd3">例: 自動でコードの整形・チェックを実行</div></div></div>
+        <div class="step on"><div class="sn2">2</div><div><div class="st2">フィルター (何を)</div><div class="sd3">例: それが大切な書類なら</div></div></div>
+        <div class="step on"><div class="sn2">3</div><div><div class="st2">作業 (どうやって)</div><div class="sd3">例: 自動でバックアップを1つ作る</div></div></div>
       </div>
       <div class="grp" style="margin-top:22px;"><h3>こんなときに便利</h3>
         <div class="fgrid">
-          <div class="fcard"><div class="ft">自動の整理</div><div class="fd">直すたびに自動でコードを整形。</div></div>
-          <div class="fcard"><div class="ft">保護</div><div class="fd">危険なコマンド(rm など)をあらかじめ防ぐ。</div></div>
+          <div class="fcard"><div class="ft">自動バックアップ</div><div class="fd">大切なファイルを直すたびに、自動でバックアップを。</div></div>
+          <div class="fcard"><div class="ft">保護</div><div class="fd">うっかり大切なファイルを消してしまうのを、あらかじめ防ぐ。</div></div>
           <div class="fcard"><div class="ft">通知</div><div class="fd">作業が終わったら通知を送る。</div></div>
         </div>
       </div>
@@ -1112,14 +1112,14 @@ description: 週次レポートを会社の様式で作成
     <!-- LOOP -->
     <section class="page" id="loop">
       <h1>繰り返し実行 (loop)</h1>
-      <p class="lead"><b>繰り返し（loop）</b>は、<b>決めた間隔ごとに同じ作業を自動でもう一度実行する</b>機能です。例: 10 分ごとに「デプロイ状況を確認」。</p>
+      <p class="lead"><b>繰り返し（loop）</b>は、<b>決めた間隔ごとに同じ作業を自動でもう一度実行する</b>機能です。例: 10 分ごとに「新しい注文が入ったか確認して通知」。</p>
       <p class="defs">目標（goal）が「条件になるまで」なら、繰り返し（loop）は「<b>決めた時間間隔で</b>」です。間隔を選んでスタートしてみましょう。（シミュは時間を早送りして見せます。）</p>
       <div class="chips" id="loop-chips" style="margin-bottom:12px;"></div>
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="loop-go">繰り返しスタート ▶</button><button class="btn" id="loop-reset">停止・リセット</button></div>
       <p class="label">実行ログ</p>
       <div class="usefeed" id="loop-feed"></div>
       <p class="status" id="loop-status" style="margin-top:10px;">間隔を選んで「繰り返しスタート」を押してみてください。</p>
-      <p class="note">セッションが開いている間、繰り返されます。変え方: <code>/loop 10m "デプロイ確認"</code> のように。（出典: Anthropic 公式 — code.claude.com/docs scheduled-tasks）</p>
+      <p class="note">セッションが開いている間、繰り返されます。変え方: <code>/loop 10m "新しい注文を確認"</code> のように。（出典: Anthropic 公式 — code.claude.com/docs scheduled-tasks）</p>
     </section>
 
     <!-- WORKFLOWS -->
@@ -1566,7 +1566,7 @@ description: 週次レポートを会社の様式で作成
     /* loop */
     var loopChips=document.getElementById('loop-chips'),loopFeed=document.getElementById('loop-feed'),loopT=[],loopInt=10;
     [5,10].forEach(function(m){ var c=document.createElement('button'); c.className='chip'+(m===10?' on':''); c.textContent=m+'分ごと'; c.addEventListener('click',function(){ [].forEach.call(loopChips.children,function(x){x.classList.remove('on');}); c.classList.add('on'); loopInt=m; }); loopChips.appendChild(c); });
-    var loopRuns=[{t:'デプロイ確認 → 進行中… (20%)'},{t:'デプロイ確認 → 進行中… (70%)'},{t:'デプロイ確認 → 完了! ✓',done:true}];
+    var loopRuns=[{t:'新しい注文を確認 → まだなし'},{t:'新しい注文を確認 → まだなし'},{t:'新しい注文を確認 → 2件入りました! 通知を送信 ✓',done:true}];
     document.getElementById('loop-go').addEventListener('click',function(){ loopT.forEach(clearTimeout); loopT=[]; loopFeed.innerHTML=''; var st=document.getElementById('loop-status'); st.textContent=loopInt+'分間隔で繰り返している途中… (時間を早送りします)';
       loopRuns.forEach(function(r,i){ loopT.push(setTimeout(function(){ var d=document.createElement('div'); d.className='uf'; d.textContent=(i+1)+'回目 (+'+(i*loopInt)+'分): '+r.t; loopFeed.appendChild(d); if(r.done) st.textContent='完了を確認して繰り返しを止めました。(実際は止めるまでずっと回り続けます)'; },300+i*1000)); }); });
     document.getElementById('loop-reset').addEventListener('click',function(){ loopT.forEach(clearTimeout); loopT=[]; loopFeed.innerHTML=''; document.getElementById('loop-status').textContent='間隔を選んで「繰り返しスタート」を押してみてください。'; });

@@ -750,10 +750,10 @@ description: Write the weekly report in the company format
       <p class="status" id="mcp-msg" style="margin-top:0;">Press "Connect them one by one."</p>
       <div class="grp" style="margin-top:20px;"><h3>Things you can connect (examples)</h3>
         <div class="fgrid">
-          <div class="fcard"><div class="ft">Jira</div><div class="fd">Reads, creates, and updates the status of issues.</div><div class="fe"><b>e.g.</b> "Turn this bug into a Jira ticket"</div></div>
-          <div class="fcard"><div class="ft">Figma</div><div class="fd">Reads design mockups and turns them into code.</div><div class="fe"><b>e.g.</b> "Build it to match this Figma"</div></div>
-          <div class="fcard"><div class="ft">Browser</div><div class="fd">Opens a real web page to check it.</div><div class="fe"><b>e.g.</b> "Check that this page loads fine"</div></div>
-          <div class="fcard"><div class="ft">And more</div><div class="fd">GitHub, Slack, Notion, databases, etc.</div><div class="fe"><b>e.g.</b> Connect to in-house tools</div></div>
+          <div class="fcard"><div class="ft">Google Drive · Sheets</div><div class="fd">Reads and organizes documents and tables directly.</div><div class="fe"><b>e.g.</b> "Total up this sheet for me"</div></div>
+          <div class="fcard"><div class="ft">Slack</div><div class="fd">Reads and sends messages.</div><div class="fe"><b>e.g.</b> "Post this notice to Slack"</div></div>
+          <div class="fcard"><div class="ft">Jira</div><div class="fd">Reads and creates collaboration issues.</div><div class="fe"><b>e.g.</b> "Turn this into a Jira ticket"</div></div>
+          <div class="fcard"><div class="ft">And more</div><div class="fd">Figma, browser, Notion, GitHub, and more.</div><div class="fe"><b>e.g.</b> Connect to in-house tools</div></div>
         </div>
       </div>
       <p class="note">Check connected tools with <code>/mcp</code>. The more tools you have, the more their descriptions nibble at your context, so connect only what you need. Bundling several MCPs for distribution is called a 'plugin' (the 'Plugins' tab).</p>
@@ -859,13 +859,13 @@ description: Write the weekly report in the company format
       <p class="label">How it works <span class="hint">When → what → how</span></p>
       <div class="steps">
         <div class="step on"><div class="sn2">1</div><div><div class="st2">Event (when)</div><div class="sd3">e.g. right after a file is saved</div></div></div>
-        <div class="step on"><div class="sn2">2</div><div><div class="st2">Filter (what)</div><div class="sd3">e.g. if it's a code file</div></div></div>
-        <div class="step on"><div class="sn2">3</div><div><div class="st2">Action (how)</div><div class="sd3">e.g. auto-run code formatting and checks</div></div></div>
+        <div class="step on"><div class="sn2">2</div><div><div class="st2">Filter (what)</div><div class="sd3">e.g. if it's an important document</div></div></div>
+        <div class="step on"><div class="sn2">3</div><div><div class="st2">Action (how)</div><div class="sd3">e.g. automatically make a backup copy</div></div></div>
       </div>
       <div class="grp" style="margin-top:22px;"><h3>Great for things like</h3>
         <div class="fgrid">
-          <div class="fcard"><div class="ft">Auto-tidy</div><div class="fd">Format code automatically every time you edit.</div></div>
-          <div class="fcard"><div class="ft">Protection</div><div class="fd">Block dangerous commands (like rm) in advance.</div></div>
+          <div class="fcard"><div class="ft">Auto-backup</div><div class="fd">Automatically back up an important file every time it changes.</div></div>
+          <div class="fcard"><div class="ft">Protection</div><div class="fd">Prevent accidentally deleting an important file.</div></div>
           <div class="fcard"><div class="ft">Notifications</div><div class="fd">Send an alert when a job finishes.</div></div>
         </div>
       </div>
@@ -1110,14 +1110,14 @@ description: Write the weekly report in the company format
     <!-- LOOP -->
     <section class="page" id="loop">
       <h1>Repeat (loop)</h1>
-      <p class="lead"><b>Repeat (loop)</b> is a feature that <b>automatically re-runs the same task at a set interval</b>. Example: 'check deploy status' every 10 minutes.</p>
+      <p class="lead"><b>Repeat (loop)</b> is a feature that <b>automatically re-runs the same task at a set interval</b>. Example: every 10 minutes, "check for new orders and notify."</p>
       <p class="defs">If goals run 'until a condition is met,' repeat runs '<b>at a fixed time interval</b>.' Pick an interval and start. (The simulation fast-forwards time to show it.)</p>
       <div class="chips" id="loop-chips" style="margin-bottom:12px;"></div>
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="loop-go">Start repeat ▶</button><button class="btn" id="loop-reset">Stop & reset</button></div>
       <p class="label">Run history</p>
       <div class="usefeed" id="loop-feed"></div>
       <p class="status" id="loop-status" style="margin-top:10px;">Pick an interval and press "Start repeat".</p>
-      <p class="note">It repeats while the session stays open. How to change it: something like <code>/loop 10m "check deploy"</code>. (Source: Anthropic official — code.claude.com/docs scheduled-tasks)</p>
+      <p class="note">It repeats while the session stays open. How to change it: something like <code>/loop 10m "check new orders"</code>. (Source: Anthropic official — code.claude.com/docs scheduled-tasks)</p>
     </section>
 
     <!-- WORKFLOWS -->
@@ -1565,7 +1565,7 @@ description: Write the weekly report in the company format
     /* loop */
     var loopChips=document.getElementById('loop-chips'),loopFeed=document.getElementById('loop-feed'),loopT=[],loopInt=10;
     [5,10].forEach(function(m){ var c=document.createElement('button'); c.className='chip'+(m===10?' on':''); c.textContent='Every '+m+' min'; c.addEventListener('click',function(){ [].forEach.call(loopChips.children,function(x){x.classList.remove('on');}); c.classList.add('on'); loopInt=m; }); loopChips.appendChild(c); });
-    var loopRuns=[{t:'Check deploy → in progress… (20%)'},{t:'Check deploy → in progress… (70%)'},{t:'Check deploy → done! ✓',done:true}];
+    var loopRuns=[{t:'Check new orders → none yet'},{t:'Check new orders → none yet'},{t:'Check new orders → 2 came in! Sent a notification ✓',done:true}];
     document.getElementById('loop-go').addEventListener('click',function(){ loopT.forEach(clearTimeout); loopT=[]; loopFeed.innerHTML=''; var st=document.getElementById('loop-status'); st.textContent='Repeating every '+loopInt+' min… (fast-forwarding time)';
       loopRuns.forEach(function(r,i){ loopT.push(setTimeout(function(){ var d=document.createElement('div'); d.className='uf'; d.textContent='Run '+(i+1)+' (+'+(i*loopInt)+' min): '+r.t; loopFeed.appendChild(d); if(r.done) st.textContent='Confirmed it\'s done and stopped repeating. (In reality it keeps running until you stop it.)'; },300+i*1000)); }); });
     document.getElementById('loop-reset').addEventListener('click',function(){ loopT.forEach(clearTimeout); loopT=[]; loopFeed.innerHTML=''; document.getElementById('loop-status').textContent='Pick an interval and press "Start repeat".'; });

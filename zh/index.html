@@ -750,10 +750,10 @@ description: 按公司格式撰写周报
       <p class="status" id="mcp-msg" style="margin-top:0;">点一下“逐个连接试试”。</p>
       <div class="grp" style="margin-top:20px;"><h3>可以连接这些（示例）</h3>
         <div class="fgrid">
-          <div class="fcard"><div class="ft">Jira</div><div class="fd">读取、创建 issue，修改状态。</div><div class="fe"><b>例</b> “把这个 bug 建成 Jira 工单”</div></div>
-          <div class="fcard"><div class="ft">Figma</div><div class="fd">读取设计稿，转成代码。</div><div class="fe"><b>例</b> “照着这个 Figma 做出来”</div></div>
-          <div class="fcard"><div class="ft">浏览器</div><div class="fd">打开真实网页来确认。</div><div class="fe"><b>例</b> “看看这个页面能不能正常打开”</div></div>
-          <div class="fcard"><div class="ft">其他</div><div class="fd">GitHub、Slack、Notion、数据库等。</div><div class="fe"><b>例</b> 连接公司内部工具</div></div>
+          <div class="fcard"><div class="ft">Google 云端硬盘·表格</div><div class="fd">直接读取并整理文档、表格。</div><div class="fe"><b>例</b> “帮我算一下这张表格的合计”</div></div>
+          <div class="fcard"><div class="ft">Slack</div><div class="fd">读取并发送消息。</div><div class="fe"><b>例</b> “把这条通知发到 Slack”</div></div>
+          <div class="fcard"><div class="ft">Jira</div><div class="fd">读取并创建协作 issue。</div><div class="fe"><b>例</b> “把这件事建成 Jira 工单”</div></div>
+          <div class="fcard"><div class="ft">其他</div><div class="fd">Figma、浏览器、Notion、GitHub 等。</div><div class="fe"><b>例</b> 连接公司内部工具</div></div>
         </div>
       </div>
       <p class="note">连接好的工具可以用 <code>/mcp</code> 查看。工具越多，它们的说明也会一点点占用上下文，所以只连接需要的。把多个 MCP 打包发布的就是‘插件’（‘插件’标签页）。</p>
@@ -859,13 +859,13 @@ description: 按公司格式撰写周报
       <p class="label">工作方式 <span class="hint">何时 → 对什么 → 怎么做</span></p>
       <div class="steps">
         <div class="step on"><div class="sn2">1</div><div><div class="st2">事件（何时）</div><div class="sd3">例：保存文件之后</div></div></div>
-        <div class="step on"><div class="sn2">2</div><div><div class="st2">筛选（对什么）</div><div class="sd3">例：如果它是代码文件</div></div></div>
-        <div class="step on"><div class="sn2">3</div><div><div class="st2">动作（怎么做）</div><div class="sd3">例：自动运行代码格式化、检查</div></div></div>
+        <div class="step on"><div class="sn2">2</div><div><div class="st2">筛选（对什么）</div><div class="sd3">例：如果它是重要的文档</div></div></div>
+        <div class="step on"><div class="sn2">3</div><div><div class="st2">动作（怎么做）</div><div class="sd3">例：自动创建一个备份</div></div></div>
       </div>
       <div class="grp" style="margin-top:22px;"><h3>这些场景很好用</h3>
         <div class="fgrid">
-          <div class="fcard"><div class="ft">自动整理</div><div class="fd">每次修改就自动格式化代码。</div></div>
-          <div class="fcard"><div class="ft">保护</div><div class="fd">提前拦住危险命令（如 rm）。</div></div>
+          <div class="fcard"><div class="ft">自动备份</div><div class="fd">每次修改重要文件时，自动创建一个备份。</div></div>
+          <div class="fcard"><div class="ft">保护</div><div class="fd">提前防止误删重要文件。</div></div>
           <div class="fcard"><div class="ft">通知</div><div class="fd">工作完成后发出提醒。</div></div>
         </div>
       </div>
@@ -1111,14 +1111,14 @@ description: 按公司格式撰写周报
     <!-- LOOP -->
     <section class="page" id="loop">
       <h1>重复执行 (loop)</h1>
-      <p class="lead"><b>重复（loop）</b>是<b>每隔固定的间隔，自动再次执行同一件工作</b>的功能。例如：每 10 分钟‘确认一次部署状态’。</p>
+      <p class="lead"><b>重复（loop）</b>是<b>每隔固定的间隔，自动再次执行同一件工作</b>的功能。例如：每 10 分钟‘确认一下有没有新订单进来，并发出提醒’。</p>
       <p class="defs">如果说目标（goal）是‘直到满足条件为止’，那重复（loop）就是‘<b>按固定的时间间隔</b>’。选个间隔再开始看看。（模拟会把时间快进给你看。）</p>
       <div class="chips" id="loop-chips" style="margin-bottom:12px;"></div>
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="loop-go">开始重复 ▶</button><button class="btn" id="loop-reset">停止·重置</button></div>
       <p class="label">执行记录</p>
       <div class="usefeed" id="loop-feed"></div>
       <p class="status" id="loop-status" style="margin-top:10px;">选个间隔再点“开始重复”。</p>
-      <p class="note">会在会话开着的时候反复执行。改法：像 <code>/loop 10m "确认部署"</code> 这样。（出处：Anthropic 官方 —— code.claude.com/docs scheduled-tasks）</p>
+      <p class="note">会在会话开着的时候反复执行。改法：像 <code>/loop 10m "确认新订单"</code> 这样。（出处：Anthropic 官方 —— code.claude.com/docs scheduled-tasks）</p>
     </section>
 
     <!-- WORKFLOWS -->
@@ -1566,7 +1566,7 @@ description: 按公司格式撰写周报
     /* loop */
     var loopChips=document.getElementById('loop-chips'),loopFeed=document.getElementById('loop-feed'),loopT=[],loopInt=10;
     [5,10].forEach(function(m){ var c=document.createElement('button'); c.className='chip'+(m===10?' on':''); c.textContent='每 '+m+' 分钟'; c.addEventListener('click',function(){ [].forEach.call(loopChips.children,function(x){x.classList.remove('on');}); c.classList.add('on'); loopInt=m; }); loopChips.appendChild(c); });
-    var loopRuns=[{t:'确认部署 → 进行中…（20%）'},{t:'确认部署 → 进行中…（70%）'},{t:'确认部署 → 完成！✓',done:true}];
+    var loopRuns=[{t:'确认新订单 → 暂时还没有'},{t:'确认新订单 → 暂时还没有'},{t:'确认新订单 → 进来 2 笔！已发送提醒 ✓',done:true}];
     document.getElementById('loop-go').addEventListener('click',function(){ loopT.forEach(clearTimeout); loopT=[]; loopFeed.innerHTML=''; var st=document.getElementById('loop-status'); st.textContent='正在以每 '+loopInt+' 分钟的间隔反复…（把时间快进给你看）';
       loopRuns.forEach(function(r,i){ loopT.push(setTimeout(function(){ var d=document.createElement('div'); d.className='uf'; d.textContent='第 '+(i+1)+' 次（+'+(i*loopInt)+' 分钟）：'+r.t; loopFeed.appendChild(d); if(r.done) st.textContent='确认完成后就停止了重复。（实际上会一直跑到你让它停为止）'; },300+i*1000)); }); });
     document.getElementById('loop-reset').addEventListener('click',function(){ loopT.forEach(clearTimeout); loopT=[]; loopFeed.innerHTML=''; document.getElementById('loop-status').textContent='选个间隔再点“开始重复”。'; });
