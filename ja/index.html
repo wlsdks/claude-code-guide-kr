@@ -199,6 +199,7 @@
   .cwstep .ck svg{ width:11px; height:11px; opacity:0; transition:opacity .25s; }
   .cwstep.run .ck{ border-color:var(--blue); } .cwstep.run{ color:var(--ink); }
   .cwstep.done .ck{ border-color:var(--good); background:var(--good); } .cwstep.done .ck svg{ opacity:1; } .cwstep.done{ color:var(--ink); }
+  .cwstep.warn{ color:var(--ink); align-items:flex-start; } .cwstep.warn .ck{ border-color:var(--over); background:var(--over); color:#fff; font-weight:700; font-size:12px; line-height:1; } .cwstep .drfix{ display:block; color:var(--good); font-weight:600; font-size:12px; margin-top:2px; }
   .cwapprove{ margin-top:11px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .cwmode{ font-size:11.5px; color:var(--faint); }
   .cwvm{ border:1px dashed var(--line2); border-radius:11px; padding:11px 14px 7px; background:var(--panel); position:relative; }
@@ -469,6 +470,7 @@
           <div class="ccresu" id="cc-code-r"></div>
         </div>
       </div>
+      <p class="simtake"><span class="stk">結論</span><span>チャットは<b>方法・コード片</b>を見せ — Claude Code は<b>動く成果物</b>まで作ります。</span></p>
       <p class="note">大事なのは「答えてくれるか」ではなく、<b>自分のプロジェクトで実際に作って、動くところまでやってくれるか</b>です。最近のチャットも文章やコードを直してくれますが、それは「チャットの中で見せてくれるだけ」 — <b>複数のファイルを直接作り、つなぎ、実行して「動く成果物」を完成させる</b>のが Claude Code です。（どちらも同じ Claude モデルを使っています。）</p>
 
       <div class="grp" style="margin-top:30px;">
@@ -508,6 +510,7 @@
         <div class="cw3card"><div class="cw3h">Claude Code <span class="badge no">開発専用</span></div><div class="cw3body" id="cw3-code"></div></div>
       </div>
       <p class="status" id="cw3-status" style="margin-bottom:4px;">「3 つの反応を見る」を押してみてください — 同じお願いなのに結果がどう違うかをお見せします。</p>
+      <p class="simtake"><span class="stk">結論</span><span>チャット/Cowork/コードの違い = <b>自分のPCのフォルダを直接扱うか</b>。事務ファイルなら <b>Cowork</b>。</span></p>
 
       <p class="label">Cowork はこう働きます <span class="hint">例を選んで ▶</span></p>
       <div class="cwchips" id="cw-chips"></div>
@@ -539,6 +542,7 @@
       </div>
       <div class="ucsave" id="uc-save"></div>
       <p class="status" id="uc-status" style="margin-top:10px;">職業を選んで「ビフォー → アフターを見る」を押してみてください。</p>
+      <p class="simtake"><span class="stk">結論</span><span>同じ作業でも — 一人だと<b>遅く・ミスも</b>、Claude となら<b>ひと言で成果ファイルまで</b>。（時間は例）</span></p>
       <p class="note">開発者でないなら <b>Cowork デスクトップアプリ</b>が一番かんたんです — ふつうのアプリのように開いて、ファイルをドラッグして入れ、ふだんの言葉で頼むだけ(「Cowork とは？」タブ)。時間は理解を助ける<span class="exb">例</span>です(実際は仕事・環境によって変わります)。</p>
     </section>
 
@@ -706,6 +710,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <div class="bar"><div class="bl"><span>コスト効率 (安い)</span><b id="v-cost"></b></div><div class="track2"><div class="fill2" id="f-cost"></div></div></div>
       </div>
       <div class="muse" id="muse"><div class="lockbanner" id="m-lock" style="display:none;"></div><div class="tagline" id="m-tag"></div><div class="when" id="m-when"></div><div class="ctxline" id="m-ctx"></div><div class="exlbl">こんなときに使う</div><ul id="m-ex"></ul></div>
+      <p class="simtake"><span class="stk">結論</span><span>賢さ ↔ 速さ ↔ コストは<b>トレードオフ</b>、3つ全部は無理。<b>迷ったらバランスの良い Sonnet から。</b></span></p>
       <p class="note">Claude Code では <code>/model</code> で変えられます。迷ったらバランスの良い Sonnet で始めましょう。<span class="exb">例</span> バーは<b>相対比較</b>であって、正確な数値ではありません。</p>
       <p class="label">K, M ってどんな単位?</p>
       <div class="unitcard">
@@ -965,6 +970,7 @@ description: 週次レポートを会社の様式で作成
         <li><b>毎回保証されます。</b><span>CLAUDE.md が「お願い」なら、フックは「ルール」 — 忘れずにいつも実行されます。</span></li>
         <li><b>数十種類のタイミングに対応します。</b><span>ファイル変更・ツール実行の前後・セッション開始・圧縮の前後などさまざまな瞬間。<code>/hooks</code> で確認。</span></li>
       </ul>
+      <p class="simtake"><span class="stk">結論</span><span>CLAUDE.md が<b>『お願い』</b>なら — フックは<b>『ルール』</b>：決めた瞬間に<b>毎回自動で</b>実行されます。</span></p>
       <p class="note">設定がやや技術的なので、Claude に「ファイルを直すたびに整形するフックを作って」のようにお願いすれば代わりに作ってくれます。（出典: 公式ドキュメント、2026年6月時点）</p>
     </section>
 
@@ -1005,6 +1011,7 @@ description: 週次レポートを会社の様式で作成
         </div>
         <div><div class="pdetail" id="pdetail"></div><div class="btnrow" style="margin-top:12px;"><button class="btn solid" id="pm-sim">このモードの動作を見る ▶</button></div><div class="simbox" id="pm-simbox"></div></div>
       </div>
+      <p class="simtake"><span class="stk">結論</span><span>モードごとに<b>自動で実行する範囲が違います</b> — 最初は『権限リクエスト』で安全に、慣れたらよく使う操作を緩める。</span></p>
       <p class="note">この 5 つはメニューに見えるモードです。自動化専用に「事前承認したツールだけ許可 (dontAsk)」モードも別にあります。どのモードでも<b>システム全体の削除 (rm -rf / · rm -rf ~) のような極端な破壊</b>は、もう一度確認を取ります（「サーキットブレーカー」 — 自動では実行されません）。気に入らなければ「巻き戻し」（「巻き戻し」タブ）で復元できます。</p>
     </section>
 
@@ -1045,6 +1052,7 @@ description: 週次レポートを会社の様式で作成
         <li><b>例外: 安全レビューでフラグされた会話</b><span>学習をオフにしても、安全・ポリシーのレビュー目的では使用・保管されることがあります。</span></li>
         <li><b>ローカルの記録</b><span>セッションの記録が自分のコンピュータ(~/.claude/projects)に平文で保存されます。保管期間は設定で調整可能。</span></li>
       </ul>
+      <p class="simtake"><span class="stk">結論</span><span><b>業務用（Team·Enterprise·API）は既定で学習に使われません。</b> 個人用（Free·Pro·Max）は設定でオン/オフできます。</span></p>
       <p class="note warn" style="margin-top:14px;"><b>重要</b> · ポリシーは変わり続け、アカウントの種類ごとに違います。慎重な判断の前には公式ページを必ず確認してください — <code>privacy.claude.com</code>、<code>anthropic.com/legal</code>、<code>code.claude.com/docs</code> (この内容は 2026年6月時点)。</p>
     </section>
 
@@ -1057,6 +1065,7 @@ description: 週次レポートを会社の様式で作成
         <button class="chip" data-c="init">/init</button><button class="chip" data-c="help">/help</button><button class="chip" data-c="clear">/clear</button><button class="chip" data-c="compact">/compact</button><button class="chip" data-c="model">/model</button>
       </div>
       <div class="pre" id="term" style="min-height:200px; white-space:pre-wrap;"></div>
+      <p class="simtake"><span class="stk">結論</span><span><code>/</code> コマンドで一番よく使うのは <b>/clear · /compact</b> — コンテキストが満杯のとき空に/圧縮。一覧は <code>/help</code>。</span></p>
       <p class="note">このターミナルは理解を助けるための<b>概念用の例</b>です（実際の画面とは違うことがあります）。特に <code>/init</code> は、プロジェクトを分析して<b>CLAUDE.md を自動生成</b>するコマンドです。</p>
       <p class="label">よく使うコマンド</p>
       <div class="tablewrap"><table class="t"><thead><tr><th style="width:130px;">コマンド</th><th>すること</th></tr></thead><tbody>
@@ -1095,6 +1104,7 @@ description: 週次レポートを会社の様式で作成
         <li><b>複数の場所で同じ使用量を分け合います。</b><span>claude.ai・Claude Code・デスクトップアプリが一つの使用量プールを共有。</span></li>
         <li><b>迷ったら Pro から</b><span>足りなければ Max に上げれば OK です。</span></li>
       </ul>
+      <p class="simtake"><span class="stk">結論</span><span><b>無料プランにはありません。</b> 迷ったら<b>Pro から</b>、足りなければ Max へ。</span></p>
       <p class="note">正確な価格・上限は <code>claude.com/pricing</code> と公式サポートページで確認してください。（料金ポリシーは随時変更）</p>
     </section>
 
@@ -1223,6 +1233,7 @@ description: 週次レポートを会社の様式で作成
       </div>
       <p class="label">選んだぶんだけ「考える過程」が深まります <span class="hint">押すと長さが変わります</span></p>
       <div class="efthink" id="ef-think"></div>
+      <p class="simtake"><span class="stk">結論</span><span><b>簡単な作業は『低』</b>（速くて安い）、<b>難しい推論は『高/最高』</b>（正確だが遅くて高い）。</span></p>
       <p class="note">簡単な仕事は「低」で（速くて安い）、込み入った分析・推論は「高/最高」で。変え方: <code>/effort</code> または設定（「設定」タブ）。<span class="exb">例</span> のバーは相対的な比較です。（出典: Anthropic 公式 — support.claude.com モデル・effort 設定）</p>
       <p class="note"><b>上級 · ultracode</b> — <code>/effort</code> メニューには <b>ultracode</b> もあります。最高（xhigh）の推論に加えて、難しい作業では Claude が<b>複数のヘルパーを自動的に動員（ワークフロー）</b>して処理します。<b>そのセッション限定</b>のモードで、トークンを多く使うので普段は不要、とても難しい作業のときだけ選びます（Fable 5・Opus 4.8 など）。</p>
     </section>
@@ -1273,6 +1284,7 @@ description: 週次レポートを会社の様式で作成
       <p class="defs">「言語を変えたい」みたいなことは全部ここでやります。値を押して変えてみてください（理解を助ける例のパネル）。</p>
       <div class="cfgpanel" id="cfg-panel"></div>
       <p class="status" id="cfg-status" style="margin-top:12px;">右の値を押して変えてみてください。</p>
+      <p class="simtake"><span class="stk">結論</span><span>言語・テーマ・モデル・権限を<b>一か所（コントロールパネル）で</b>変えます — あちこち探さなくてOK。</span></p>
       <p class="note">開き方: <code>/config</code>。実際の設定項目はこれより多いです。（出典: Anthropic 公式 — code.claude.com/docs settings）</p>
     </section>
 
@@ -1465,7 +1477,7 @@ description: 週次レポートを会社の様式で作成
   function makeBlk(it,fixed,h){ var d=document.createElement('div'); var isSum=it.k==='summary'; d.className='blk'+(h<18?' mini':'')+(fixed?'':' acc')+(isSum?' sumhl':''); d.style.height=h+'px'; if(!isSum){ d.style.background=rgba(hex[it.k],0.14); d.style.borderColor=rgba(hex[it.k],0.30); } d.title=labels[it.k]+(it.txt&&!isSum?(' — '+it.txt):'')+' · '+fmt(it.t)+'トークン'; var name=labels[it.k]; if(it.txt&&!isSum)name+=' — 「'+it.txt+'」'; d.innerHTML='<span class="dot" style="background:'+hex[it.k]+'"></span><span class="name">'+(isSum?'<b>'+name+'</b>':name)+'</span>'+(isSum?'<span class="sumbadge">要約</span>':(fixed?'<span class="tag">基本</span>':''))+'<span class="tk">'+fmt(it.t)+'</span>'; return d; }
   function ctxRender(animLast){ var scale=LIMIT_PX/MAX; stack.innerHTML=''; items.forEach(function(it,i){ var el=makeBlk(it,it._base,Math.max(8,Math.round(it.t*scale))); if(animLast&&i===items.length-1){ el.style.opacity='0'; el.style.transform='translateY(-8px)'; el.style.transition='opacity .35s ease, transform .35s cubic-bezier(.22,1,.36,1)'; stack.appendChild(el); requestAnimationFrame(function(){ el.style.opacity='1'; el.style.transform='none'; }); } else stack.appendChild(el); });
     var total=items.reduce(function(a,b){return a+b.t;},0); ctxCount(total); limit.style.bottom=LIMIT_PX+'px'; cap.textContent='上限 '+fmt(MAX);
-    var acl=document.getElementById('acline'); if(acl){ acl.style.bottom=Math.round(LIMIT_PX*AC_RATIO)+'px'; document.getElementById('accap').textContent='自動圧縮の開始 ~'+fmt(MAX*AC_RATIO); }
+    var acl=document.getElementById('acline'); if(acl){ acl.style.bottom=Math.round(LIMIT_PX*AC_RATIO)+'px'; document.getElementById('accap').textContent='自動圧縮の開始 ~'+fmt(MAX*AC_RATIO)+'（例の基準線）'; }
     var over=total>MAX; limit.classList.toggle('over',over); num.classList.toggle('over',over); var usedPx=Math.min(LIMIT_PX,total*scale); if(!over&&total/MAX<0.7&&(MAX-total)>MAX*0.04){ free.style.display='block'; free.style.bottom=(usedPx+(LIMIT_PX-usedPx)/2-8)+'px'; free.textContent='残り空間 '+fmt(MAX-total); } else free.style.display='none'; }
   function ctxCount(target){ var start=curShown,t0=null,dur=480; function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur); tokEl.textContent=fmt(start+(target-start)*(1-Math.pow(1-p,3))); num.querySelector('.max').textContent=' / '+fmt(MAX); if(p<1)requestAnimationFrame(step); else curShown=target; } requestAnimationFrame(step); }
   function ctxAdd(k,t,txt){ items.push({k:k,t:t,txt:txt}); ctxRender(true); }
@@ -1628,7 +1640,7 @@ description: 週次レポートを会社の様式で作成
     {name:'プランモード',safe:'読み取り専用',col:'#b9792a',auto:'読み・探索だけ (直接は直さない)',ask:'計画を承認すると一気に実行',use:'大きな変更の前に計画を先に確認するとき',sim:['plan','plan','plan','plan']},
     {name:'自動モード',safe:'注意',col:'#d8943f',auto:'ほとんどの作業 (バックグラウンドで安全チェック)',ask:'危険な作業だけ確認・ブロック',use:'長時間の自動作業で確認を減らしたいとき',note:'最新バージョン・モデル(Opus 4.6/Sonnet 4.6 以上)が必要',sim:['auto','auto','auto','ask']},
     {name:'権限をスキップ',safe:'危険',col:'#d8453f',auto:'すべて — 確認なしで進める',ask:'システム全体の削除(rm -rf / · rm -rf ~)のような極端な操作はもう一度確認',use:'インターネット遮断された隔離環境(コンテナ・VM)でだけ',note:'プロンプトインジェクションに弱い — ふつうの PC では使わないで',sim:['auto','auto','auto','auto']} ];
-  var SIM_ACT=['ファイル修正','フォルダ作成','git コミット','ファイル削除 (rm)'],SIM_TXT={auto:'自動で実行',ask:'確認を要求',plan:'実行しない (計画だけ)',block:'ブロック'},curPm=0;
+  var SIM_ACT=['ファイル修正','フォルダ作成','git コミット','ファイル削除'],SIM_TXT={auto:'自動で実行',ask:'確認を要求',plan:'実行しない (計画だけ)',block:'ブロック'},curPm=0;
   function pmShow(i){ curPm=i; var d=PM[i]; document.querySelectorAll('#pmenu .prow').forEach(function(r){ r.classList.toggle('on',+r.dataset.i===i); }); var badge='<span class="pbadge" style="background:'+rgba(d.col,.16)+';color:'+d.col+'">'+d.safe+'</span>'; document.getElementById('pdetail').innerHTML='<div class="pt">'+d.name+' '+badge+'</div><div class="pdrow"><b>自動でやること</b>'+d.auto+'</div><div class="pdrow"><b>それでも聞くこと</b>'+d.ask+'</div><div class="pdrow"><b>いつ使う</b>'+d.use+'</div>'+(d.note?'<div class="pdrow"><b>参考</b>'+d.note+'</div>':''); document.getElementById('pmark').style.left=((i+0.5)/PM.length*100)+'%'; document.getElementById('pm-simbox').innerHTML='<div class="simrow on" style="color:var(--faint);font-size:12.5px;">「このモードの動作を見る」を押してみてください。</div>'; }
   var pmT=[]; document.getElementById('pm-sim').addEventListener('click',function(){ pmT.forEach(clearTimeout); pmT=[]; var d=PM[curPm],box=document.getElementById('pm-simbox'); box.innerHTML=''; SIM_ACT.forEach(function(a,idx){ var s=d.sim[idx],row=document.createElement('div'); row.className='simrow'; var cls=s==='auto'?'auto':(s==='ask'?'ask':(s==='plan'?'plan':'block')); row.innerHTML='<span class="sa">'+a+'</span><span class="sp '+cls+'">'+SIM_TXT[s]+'</span>'; box.appendChild(row); pmT.push(setTimeout(function(){ row.classList.add('on'); },220*idx)); }); });
   document.querySelectorAll('#pmenu .prow').forEach(function(r){ var i=+r.dataset.i; var dot=document.createElement('span'); dot.className='psafe'; dot.style.background=(PM[i]&&PM[i].col)||'var(--line2)'; dot.title=(PM[i]&&PM[i].safe)||''; r.insertBefore(dot, r.firstChild); r.addEventListener('click',function(){ pmShow(i); }); }); pmShow(0);
@@ -1638,7 +1650,7 @@ description: 週次レポートを会社の様式で作成
   (function(){ [0,1,2,3].forEach(function(n){ document.getElementById('plan'+n).classList.add('on'); }); })();
 
   /* rewind timeline */
-  var RW=['開始','下書き作成','デザインをモダンに','バグ修正 (現在)']; var rwTl=document.getElementById('rw-timeline'),rwLb=document.getElementById('rw-labels'),rwSel=2;
+  var RW=['開始','下書き作成','デザインをモダンに','バグ修正 (現在)']; var rwTl=document.getElementById('rw-timeline'),rwLb=document.getElementById('rw-labels'),rwSel=RW.length-1;
   (function(){ var h=''; RW.forEach(function(t,i){ h+='<span class="tlpt'+(i===RW.length-1?' cur':'')+'" data-i="'+i+'"><span class="dot2"></span>'+(i<RW.length-1?'<span class="tlbar"></span>':'')+'</span>'; }); rwTl.innerHTML=h; rwLb.innerHTML=RW.map(function(t){return '<span>'+t+'</span>';}).join(''); rwMark(RW.length-1,false); rwTl.querySelectorAll('.tlpt').forEach(function(p){ p.addEventListener('click',function(){ rwSel=+p.dataset.i; rwMark(rwSel,false); document.getElementById('rw-msg').textContent='「'+RW[rwSel]+'」の時点を選びました。下で復元の方法を選んでください。'; }); }); })();
   function rwMark(idx,restored){ rwTl.querySelectorAll('.tlpt').forEach(function(p){ var i=+p.dataset.i; p.classList.toggle('cur',i===idx&&!restored); p.classList.toggle('restored',restored&&i<=idx); }); }
   document.getElementById('rw-code').addEventListener('click',function(){ rwMark(rwSel,true); document.getElementById('rw-msg').textContent='コードだけ復元 — 「'+RW[rwSel]+'」の時点のファイルに戻しました。会話の内容はそのまま残るので、別の方法でもう一度お願いできます。'; });
@@ -1671,7 +1683,7 @@ description: 週次レポートを会社の様式で作成
     function reset(){ mgT.forEach(clearTimeout); mgT=[]; B.f=12; G.f=12; turn=0; B.chat.innerHTML=''; G.chat.innerHTML=''; setF(B); setF(G); st.textContent='「次の作業を送る」を押して — 同じ頼みを両方のセッションに送り、結果を比べてください。'; }
     go.addEventListener('click',function(){ if(B.f>=100) return; turn++; var task=TASKS[(turn-1)%TASKS.length];
       B.f=Math.min(100,B.f+15); setF(B); var br=badReply(B.f); add(B.chat,task,br);
-      G.f=12+(turn%3)*5; setF(G); add(G.chat,task,{cls:'ok',tag:'2秒',txt:'すぐ正確に。（作業ごとに空にしたので）'});
+      G.f=Math.min(36,12+turn*2.4); setF(G); add(G.chat,task,{cls:'ok',tag:'2秒',txt:'すぐ正確に。（作業ごとに空にしたので）'});
       st.innerHTML= '同じ作業 '+turn+' 回目 —— ' + (br.cls==='compact'?'放置セッションは <b style="color:var(--over)">自動圧縮で詳細まで失いました。</b> 管理セッションはいまも 2秒・正確!'
         : br.cls==='conf'?'放置セッションは <b style="color:var(--over)">混乱し始め。</b> 管理セッションはそのまま 2秒・正確。'
         : br.cls==='slow'?'放置セッションが <b style="color:#b9792a">遅くなり始め。</b> 管理セッションは変わらず速いです。'
@@ -1839,11 +1851,11 @@ description: 週次レポートを会社の様式で作成
     var cfgPanel=document.getElementById('cfg-panel');
     CFG.forEach(function(o){ var row=document.createElement('div'); row.className='cfgrow'; row.innerHTML='<div class="cfk">'+o.k+'<small>'+o.sub+'</small></div>'; var v=document.createElement('button'); v.className='cfgval'; v.textContent=o.vals[o.i]; v.addEventListener('click',function(){ o.i=(o.i+1)%o.vals.length; v.textContent=o.vals[o.i]; document.getElementById('cfg-status').textContent='「'+o.k+'」を「'+o.vals[o.i]+'」に変えました。'; }); row.appendChild(v); cfgPanel.appendChild(row); });
     /* doctor */
-    var DR=['インストール状態','ログイン(アカウント連携)','インターネット接続','MCP ツールの連携','設定ファイル'];
+    var DR=[{t:'インストール状態'},{t:'ログイン（アカウント連携）'},{t:'インターネット接続'},{t:'MCP ツール接続',fail:'Jira の接続が切れています',fix:'→ /mcp で再ログインすればOK'},{t:'設定ファイル'}];
     var drList=document.getElementById('dr-list'),drT=[];
     document.getElementById('dr-go').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; var st=document.getElementById('dr-status'); st.textContent='点検中…';
-      DR.forEach(function(t,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML='<span class="ck">'+CK+'</span>'+t; drList.appendChild(el);
-        drT.push(setTimeout(function(){ el.classList.add('done'); if(i===DR.length-1) st.textContent='✓ すべて正常です。(問題があれば、その項目と直し方を教えます)'; },300+i*600)); }); });
+      DR.forEach(function(o,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML= o.fail ? '<span class="ck">!</span><span>'+o.t+' — <b>'+o.fail+'</b><span class="drfix">'+o.fix+'</span></span>' : '<span class="ck">'+CK+'</span><span>'+o.t+'</span>'; drList.appendChild(el);
+        drT.push(setTimeout(function(){ el.classList.add(o.fail?'warn':'done'); if(i===DR.length-1) st.textContent='点検完了 — 4件OK、1件 問題を発見。/doctor はどこが問題か + 直し方まで教えてくれます。'; },300+i*600)); }); });
     document.getElementById('dr-reset').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; document.getElementById('dr-status').textContent='「診断を実行」を押してみてください。'; });
   })();
 

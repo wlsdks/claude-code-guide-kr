@@ -199,6 +199,7 @@
   .cwstep .ck svg{ width:11px; height:11px; opacity:0; transition:opacity .25s; }
   .cwstep.run .ck{ border-color:var(--blue); } .cwstep.run{ color:var(--ink); }
   .cwstep.done .ck{ border-color:var(--good); background:var(--good); } .cwstep.done .ck svg{ opacity:1; } .cwstep.done{ color:var(--ink); }
+  .cwstep.warn{ color:var(--ink); align-items:flex-start; } .cwstep.warn .ck{ border-color:var(--over); background:var(--over); color:#fff; font-weight:700; font-size:12px; line-height:1; } .cwstep .drfix{ display:block; color:var(--good); font-weight:600; font-size:12px; margin-top:2px; }
   .cwapprove{ margin-top:11px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .cwmode{ font-size:11.5px; color:var(--faint); }
   .cwvm{ border:1px dashed var(--line2); border-radius:11px; padding:11px 14px 7px; background:var(--panel); position:relative; }
@@ -469,6 +470,7 @@
           <div class="ccresu" id="cc-code-r"></div>
         </div>
       </div>
+      <p class="simtake"><span class="stk">结论</span><span>聊天给的是<b>方法 / 代码片段</b> —— Claude Code 直接<b>做出能运行的成果</b>。</span></p>
       <p class="note">关键不在于‘是否给你答案’，而在于<b>能不能在你的项目里真正做出来、并让它跑起来</b>。如今的聊天工具也能帮你改文字、改代码，但那只是‘在聊天里展示出来’ — 而 Claude Code 会<b>亲手创建多个文件、把它们连接起来、运行起来，最终完成一个‘能运行的成品’</b>。（两者用的是同一个 Claude 模型。）</p>
 
       <div class="grp" style="margin-top:30px;">
@@ -508,6 +510,7 @@
         <div class="cw3card"><div class="cw3h">Claude Code <span class="badge no">开发专用</span></div><div class="cw3body" id="cw3-code"></div></div>
       </div>
       <p class="status" id="cw3-status" style="margin-bottom:4px;">点一下“看看三者的反应”——同样的请求，结果有什么不同，给你看清楚。</p>
+      <p class="simtake"><span class="stk">结论</span><span>聊天/Cowork/代码的关键区别 = <b>是否直接操作你电脑里的文件夹</b>。办公文件就用 <b>Cowork</b>。</span></p>
 
       <p class="label">Cowork 是这样工作的 <span class="hint">选个示例再点 ▶</span></p>
       <div class="cwchips" id="cw-chips"></div>
@@ -538,6 +541,7 @@
       </div>
       <div class="ucsave" id="uc-save"></div>
       <p class="status" id="uc-status" style="margin-top:10px;">选一个职业，再按“看 之前 → 之后 对比”。</p>
+      <p class="simtake"><span class="stk">结论</span><span>同样的活 —— 自己做<b>慢且易错</b>，交给 Claude <b>一句话就出成品文件</b>。（时间为示例）</span></p>
       <p class="note">如果你不是开发者，用 <b>Cowork 桌面应用</b>最简单 —— 像普通软件一样打开，把文件拖进去，用大白话说一句就行（见‘什么是 Cowork？’标签）。时间只是帮助理解的<span class="exb">示例</span>（实际因工作和环境而异）。</p>
     </section>
 
@@ -705,6 +709,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <div class="bar"><div class="bl"><span>成本效益（便宜）</span><b id="v-cost"></b></div><div class="track2"><div class="fill2" id="f-cost"></div></div></div>
       </div>
       <div class="muse" id="muse"><div class="lockbanner" id="m-lock" style="display:none;"></div><div class="tagline" id="m-tag"></div><div class="when" id="m-when"></div><div class="ctxline" id="m-ctx"></div><div class="exlbl">这些时候用它</div><ul id="m-ex"></ul></div>
+      <p class="simtake"><span class="stk">结论</span><span>聪明 ↔ 速度 ↔ 成本 <b>互相取舍</b>，三者不可兼得。<b>拿不准就从均衡的 Sonnet 开始。</b></span></p>
       <p class="note">在 Claude Code 里可以用 <code>/model</code> 切换。拿不定主意就从均衡的 Sonnet 开始。<span class="exb">示例</span> 条形图只是<b>相对比较</b>，不是精确数值。</p>
       <p class="label">K、M 是什么单位？</p>
       <div class="unitcard">
@@ -964,6 +969,7 @@ description: 按公司格式撰写周报
         <li><b>每次都有保证。</b><span>如果说 CLAUDE.md 是‘请求’，那 Hook 就是‘规则’ —— 不会忘、每次都执行。</span></li>
         <li><b>支持数十种时机。</b><span>文件变更、工具执行前后、会话开始、压缩前后等多种时刻。用 <code>/hooks</code> 查看。</span></li>
       </ul>
+      <p class="simtake"><span class="stk">结论</span><span>如果 CLAUDE.md 是<b>‘请求’</b> —— 钩子就是<b>‘规则’</b>：在设定的时刻<b>每次自动执行</b>。</span></p>
       <p class="note">配置稍微有点技术性，所以你对 Claude 说“做一个 Hook，每次改文件就格式化”，它就会替你做。（来源：官方文档，截至 2026 年 6 月）</p>
     </section>
 
@@ -1004,6 +1010,7 @@ description: 按公司格式撰写周报
         </div>
         <div><div class="pdetail" id="pdetail"></div><div class="btnrow" style="margin-top:12px;"><button class="btn solid" id="pm-sim">查看此模式运行 ▶</button></div><div class="simbox" id="pm-simbox"></div></div>
       </div>
+      <p class="simtake"><span class="stk">结论</span><span>每种模式<b>自动执行的范围不同</b> —— 先用‘请求权限’稳妥，熟练后再放开常用操作。</span></p>
       <p class="note">这 5 种是菜单里能看到的模式。另外还有一个专供自动化的‘只允许预先批准的工具（dontAsk）’模式。无论哪种模式，<b>像删除整个系统（rm -rf / · rm -rf ~）这种极端破坏</b>都会再确认一次（‘断路器’——不会自动执行）。不满意的话可以用‘回退’（‘回退’标签页）恢复。</p>
     </section>
 
@@ -1044,6 +1051,7 @@ description: 按公司格式撰写周报
         <li><b>例外：被安全审查标记的对话</b><span>即使关掉训练，出于安全、政策审查的目的，仍可能被使用、保留。</span></li>
         <li><b>本地记录</b><span>会话记录以明文形式保存在我电脑上（~/.claude/projects）。保留时长可通过设置调整。</span></li>
       </ul>
+      <p class="simtake"><span class="stk">结论</span><span><b>企业用（Team·Enterprise·API）默认不用于训练。</b> 个人用（Free·Pro·Max）可在设置里自行开关。</span></p>
       <p class="note warn" style="margin-top:14px;"><b>重要</b> · 政策一直在变，且因账户类型而异。做敏感决定前，请务必查看官方页面 —— <code>privacy.claude.com</code>、<code>anthropic.com/legal</code>、<code>code.claude.com/docs</code>（本内容截至 2026 年 6 月）。</p>
     </section>
 
@@ -1056,6 +1064,7 @@ description: 按公司格式撰写周报
         <button class="chip" data-c="init">/init</button><button class="chip" data-c="help">/help</button><button class="chip" data-c="clear">/clear</button><button class="chip" data-c="compact">/compact</button><button class="chip" data-c="model">/model</button>
       </div>
       <div class="pre" id="term" style="min-height:200px; white-space:pre-wrap;"></div>
+      <p class="simtake"><span class="stk">结论</span><span><code>/</code> 命令里最常用的是 <b>/clear · /compact</b> —— 上下文满了就清空/压缩。完整列表用 <code>/help</code>。</span></p>
       <p class="note">这个终端是帮助理解的<b>概念示例</b>（和真实界面可能不同）。特别是 <code>/init</code>，它是分析项目并<b>自动生成 CLAUDE.md</b> 的命令。</p>
       <p class="label">常用命令</p>
       <div class="tablewrap"><table class="t"><thead><tr><th style="width:130px;">命令</th><th>做什么</th></tr></thead><tbody>
@@ -1094,6 +1103,7 @@ description: 按公司格式撰写周报
         <li><b>多处共享同一份用量。</b><span>claude.ai、Claude Code、桌面应用共用一个用量池。</span></li>
         <li><b>拿不定就从 Pro 开始</b><span>不够再升到 Max 就行。</span></li>
       </ul>
+      <p class="simtake"><span class="stk">结论</span><span><b>免费版没有。</b> 拿不准就<b>从 Pro 开始</b>，不够再升 Max。</span></p>
       <p class="note">准确的价格和上限请在 <code>claude.com/pricing</code> 和官方支持页面确认。（资费政策随时会变）</p>
     </section>
 
@@ -1222,6 +1232,7 @@ description: 按公司格式撰写周报
       </div>
       <p class="label">选得越深，‘思考过程’就越长 <span class="hint">点一点，长度会不一样</span></p>
       <div class="efthink" id="ef-think"></div>
+      <p class="simtake"><span class="stk">结论</span><span><b>简单的事用‘低’</b>（快又省）；<b>难的推理用‘高/最高’</b>（更准但更慢更贵）。</span></p>
       <p class="note">简单的事用‘低’（又快又便宜），棘手的分析·推理用‘高/最高’。改法：<code>/effort</code> 或在设置里（见‘设置’标签页）。<span class="exb">示例</span> 这些条形是相对比较。（出处：Anthropic 官方 —— support.claude.com 模型·effort 设置）</p>
       <p class="note"><b>进阶 · ultracode</b> —— <code>/effort</code> 菜单里还有 <b>ultracode</b>。它在最高（xhigh）推理之上，让 Claude 为困难任务<b>自动调动多个助手（工作流）</b>处理。这是<b>仅当前会话</b>的模式，很费 token，平时用不到，只在非常难的任务时选用（Fable 5、Opus 4.8 等）。</p>
     </section>
@@ -1272,6 +1283,7 @@ description: 按公司格式撰写周报
       <p class="defs">“我想换个语言”之类的，全都在这里做。点一下值来改改看（帮助理解的示例面板）。</p>
       <div class="cfgpanel" id="cfg-panel"></div>
       <p class="status" id="cfg-status" style="margin-top:12px;">点右边的值来改改看。</p>
+      <p class="simtake"><span class="stk">结论</span><span>语言·主题·模型·权限<b>在一个地方（控制台）改</b> —— 不用到处找。</span></p>
       <p class="note">打开方式：<code>/config</code>。实际的设置项比这里多。（出处：Anthropic 官方 —— code.claude.com/docs settings）</p>
     </section>
 
@@ -1465,7 +1477,7 @@ description: 按公司格式撰写周报
   function makeBlk(it,fixed,h){ var d=document.createElement('div'); var isSum=it.k==='summary'; d.className='blk'+(h<18?' mini':'')+(fixed?'':' acc')+(isSum?' sumhl':''); d.style.height=h+'px'; if(!isSum){ d.style.background=rgba(hex[it.k],0.14); d.style.borderColor=rgba(hex[it.k],0.30); } d.title=labels[it.k]+(it.txt&&!isSum?(' — '+it.txt):'')+' · '+fmt(it.t)+' token'; var name=labels[it.k]; if(it.txt&&!isSum)name+=' — “'+it.txt+'”'; d.innerHTML='<span class="dot" style="background:'+hex[it.k]+'"></span><span class="name">'+(isSum?'<b>'+name+'</b>':name)+'</span>'+(isSum?'<span class="sumbadge">摘要</span>':(fixed?'<span class="tag">基本</span>':''))+'<span class="tk">'+fmt(it.t)+'</span>'; return d; }
   function ctxRender(animLast){ var scale=LIMIT_PX/MAX; stack.innerHTML=''; items.forEach(function(it,i){ var el=makeBlk(it,it._base,Math.max(8,Math.round(it.t*scale))); if(animLast&&i===items.length-1){ el.style.opacity='0'; el.style.transform='translateY(-8px)'; el.style.transition='opacity .35s ease, transform .35s cubic-bezier(.22,1,.36,1)'; stack.appendChild(el); requestAnimationFrame(function(){ el.style.opacity='1'; el.style.transform='none'; }); } else stack.appendChild(el); });
     var total=items.reduce(function(a,b){return a+b.t;},0); ctxCount(total); limit.style.bottom=LIMIT_PX+'px'; cap.textContent='上限 '+fmt(MAX);
-    var acl=document.getElementById('acline'); if(acl){ acl.style.bottom=Math.round(LIMIT_PX*AC_RATIO)+'px'; document.getElementById('accap').textContent='自动压缩开始 ~'+fmt(MAX*AC_RATIO); }
+    var acl=document.getElementById('acline'); if(acl){ acl.style.bottom=Math.round(LIMIT_PX*AC_RATIO)+'px'; document.getElementById('accap').textContent='自动压缩开始 ~'+fmt(MAX*AC_RATIO)+'（示例基准线）'; }
     var over=total>MAX; limit.classList.toggle('over',over); num.classList.toggle('over',over); var usedPx=Math.min(LIMIT_PX,total*scale); if(!over&&total/MAX<0.7&&(MAX-total)>MAX*0.04){ free.style.display='block'; free.style.bottom=(usedPx+(LIMIT_PX-usedPx)/2-8)+'px'; free.textContent='剩余空间 '+fmt(MAX-total); } else free.style.display='none'; }
   function ctxCount(target){ var start=curShown,t0=null,dur=480; function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur); tokEl.textContent=fmt(start+(target-start)*(1-Math.pow(1-p,3))); num.querySelector('.max').textContent=' / '+fmt(MAX); if(p<1)requestAnimationFrame(step); else curShown=target; } requestAnimationFrame(step); }
   function ctxAdd(k,t,txt){ items.push({k:k,t:t,txt:txt}); ctxRender(true); }
@@ -1628,7 +1640,7 @@ description: 按公司格式撰写周报
     {name:'计划模式',safe:'只读',col:'#b9792a',auto:'只读取·探索（不直接修改）',ask:'批准计划后一次性执行',use:'大改动前想先确认计划时',sim:['plan','plan','plan','plan']},
     {name:'自动模式',safe:'注意',col:'#d8943f',auto:'大多数操作（后台做安全检查）',ask:'仅对危险操作确认·拦截',use:'想用长时间自动操作、减少确认时',note:'需要最新版本·模型（Opus 4.6 / Sonnet 4.6 及以上）',sim:['auto','auto','auto','ask']},
     {name:'跳过权限',safe:'危险',col:'#d8453f',auto:'全部 —— 不确认直接进行',ask:'像清空整个系统(rm -rf / · rm -rf ~)这类极端操作会再确认一次',use:'仅在断网的隔离环境（容器·虚拟机）中使用',note:'易受提示注入攻击 —— 不要在普通电脑上用',sim:['auto','auto','auto','auto']} ];
-  var SIM_ACT=['修改文件','创建文件夹','git 提交','删除文件 (rm)'],SIM_TXT={auto:'自动执行',ask:'请求确认',plan:'不执行（仅计划）',block:'拦截'},curPm=0;
+  var SIM_ACT=['修改文件','创建文件夹','git 提交','删除文件'],SIM_TXT={auto:'自动执行',ask:'请求确认',plan:'不执行（仅计划）',block:'拦截'},curPm=0;
   function pmShow(i){ curPm=i; var d=PM[i]; document.querySelectorAll('#pmenu .prow').forEach(function(r){ r.classList.toggle('on',+r.dataset.i===i); }); var badge='<span class="pbadge" style="background:'+rgba(d.col,.16)+';color:'+d.col+'">'+d.safe+'</span>'; document.getElementById('pdetail').innerHTML='<div class="pt">'+d.name+' '+badge+'</div><div class="pdrow"><b>自作主张做的</b>'+d.auto+'</div><div class="pdrow"><b>仍会询问的</b>'+d.ask+'</div><div class="pdrow"><b>何时用</b>'+d.use+'</div>'+(d.note?'<div class="pdrow"><b>提示</b>'+d.note+'</div>':''); document.getElementById('pmark').style.left=((i+0.5)/PM.length*100)+'%'; document.getElementById('pm-simbox').innerHTML='<div class="simrow on" style="color:var(--faint);font-size:12.5px;">点一下“查看此模式运行”。</div>'; }
   var pmT=[]; document.getElementById('pm-sim').addEventListener('click',function(){ pmT.forEach(clearTimeout); pmT=[]; var d=PM[curPm],box=document.getElementById('pm-simbox'); box.innerHTML=''; SIM_ACT.forEach(function(a,idx){ var s=d.sim[idx],row=document.createElement('div'); row.className='simrow'; var cls=s==='auto'?'auto':(s==='ask'?'ask':(s==='plan'?'plan':'block')); row.innerHTML='<span class="sa">'+a+'</span><span class="sp '+cls+'">'+SIM_TXT[s]+'</span>'; box.appendChild(row); pmT.push(setTimeout(function(){ row.classList.add('on'); },220*idx)); }); });
   document.querySelectorAll('#pmenu .prow').forEach(function(r){ var i=+r.dataset.i; var dot=document.createElement('span'); dot.className='psafe'; dot.style.background=(PM[i]&&PM[i].col)||'var(--line2)'; dot.title=(PM[i]&&PM[i].safe)||''; r.insertBefore(dot, r.firstChild); r.addEventListener('click',function(){ pmShow(i); }); }); pmShow(0);
@@ -1638,7 +1650,7 @@ description: 按公司格式撰写周报
   (function(){ [0,1,2,3].forEach(function(n){ document.getElementById('plan'+n).classList.add('on'); }); })();
 
   /* rewind timeline */
-  var RW=['开始','撰写初稿','把设计改现代','修复 bug（当前）']; var rwTl=document.getElementById('rw-timeline'),rwLb=document.getElementById('rw-labels'),rwSel=2;
+  var RW=['开始','撰写初稿','把设计改现代','修复 bug（当前）']; var rwTl=document.getElementById('rw-timeline'),rwLb=document.getElementById('rw-labels'),rwSel=RW.length-1;
   (function(){ var h=''; RW.forEach(function(t,i){ h+='<span class="tlpt'+(i===RW.length-1?' cur':'')+'" data-i="'+i+'"><span class="dot2"></span>'+(i<RW.length-1?'<span class="tlbar"></span>':'')+'</span>'; }); rwTl.innerHTML=h; rwLb.innerHTML=RW.map(function(t){return '<span>'+t+'</span>';}).join(''); rwMark(RW.length-1,false); rwTl.querySelectorAll('.tlpt').forEach(function(p){ p.addEventListener('click',function(){ rwSel=+p.dataset.i; rwMark(rwSel,false); document.getElementById('rw-msg').textContent='选了“'+RW[rwSel]+'”这个时刻。请在下面选择恢复方式。'; }); }); })();
   function rwMark(idx,restored){ rwTl.querySelectorAll('.tlpt').forEach(function(p){ var i=+p.dataset.i; p.classList.toggle('cur',i===idx&&!restored); p.classList.toggle('restored',restored&&i<=idx); }); }
   document.getElementById('rw-code').addEventListener('click',function(){ rwMark(rwSel,true); document.getElementById('rw-msg').textContent='只恢复代码 —— 已退回到“'+RW[rwSel]+'”时刻的文件。对话内容原样保留，可以换个方式重新提需求。'; });
@@ -1671,7 +1683,7 @@ description: 按公司格式撰写周报
     function reset(){ mgT.forEach(clearTimeout); mgT=[]; B.f=12; G.f=12; turn=0; B.chat.innerHTML=''; G.chat.innerHTML=''; setF(B); setF(G); st.textContent='点‘发送下一个任务’—— 把同一个请求发给两个会话，比较结果。'; }
     go.addEventListener('click',function(){ if(B.f>=100) return; turn++; var task=TASKS[(turn-1)%TASKS.length];
       B.f=Math.min(100,B.f+15); setF(B); var br=badReply(B.f); add(B.chat,task,br);
-      G.f=12+(turn%3)*5; setF(G); add(G.chat,task,{cls:'ok',tag:'2 秒',txt:'马上、准确。（每换一个任务就清空了）'});
+      G.f=Math.min(36,12+turn*2.4); setF(G); add(G.chat,task,{cls:'ok',tag:'2 秒',txt:'马上、准确。（每换一个任务就清空了）'});
       st.innerHTML= '第 '+turn+' 个任务 —— ' + (br.cls==='compact'?'放任会话 <b style="color:var(--over)">自动压缩连细节都丢了。</b> 管理会话 仍是 2 秒·准确!'
         : br.cls==='conf'?'放任会话 <b style="color:var(--over)">开始混乱。</b> 管理会话 仍是 2 秒·准确。'
         : br.cls==='slow'?'放任会话 <b style="color:#b9792a">开始变慢。</b> 管理会话 依旧很快。'
@@ -1839,11 +1851,11 @@ description: 按公司格式撰写周报
     var cfgPanel=document.getElementById('cfg-panel');
     CFG.forEach(function(o){ var row=document.createElement('div'); row.className='cfgrow'; row.innerHTML='<div class="cfk">'+o.k+'<small>'+o.sub+'</small></div>'; var v=document.createElement('button'); v.className='cfgval'; v.textContent=o.vals[o.i]; v.addEventListener('click',function(){ o.i=(o.i+1)%o.vals.length; v.textContent=o.vals[o.i]; document.getElementById('cfg-status').textContent='把‘'+o.k+'’改成了‘'+o.vals[o.i]+'’。'; }); row.appendChild(v); cfgPanel.appendChild(row); });
     /* doctor */
-    var DR=['安装状态','登录（账号连接）','网络连接','MCP 工具连接','设置文件'];
+    var DR=[{t:'安装状态'},{t:'登录（账号连接）'},{t:'网络连接'},{t:'MCP 工具连接',fail:'Jira 连接断开了',fix:'→ 在 /mcp 里重新登录即可'},{t:'配置文件'}];
     var drList=document.getElementById('dr-list'),drT=[];
     document.getElementById('dr-go').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; var st=document.getElementById('dr-status'); st.textContent='检查中…';
-      DR.forEach(function(t,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML='<span class="ck">'+CK+'</span>'+t; drList.appendChild(el);
-        drT.push(setTimeout(function(){ el.classList.add('done'); if(i===DR.length-1) st.textContent='✓ 全部正常。（如果有问题，会告诉你是哪一项以及怎么修）'; },300+i*600)); }); });
+      DR.forEach(function(o,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML= o.fail ? '<span class="ck">!</span><span>'+o.t+' — <b>'+o.fail+'</b><span class="drfix">'+o.fix+'</span></span>' : '<span class="ck">'+CK+'</span><span>'+o.t+'</span>'; drList.appendChild(el);
+        drT.push(setTimeout(function(){ el.classList.add(o.fail?'warn':'done'); if(i===DR.length-1) st.textContent='检查完成 —— 4 项正常，发现 1 个问题。/doctor 会告诉你哪里有问题 + 怎么修。'; },300+i*600)); }); });
     document.getElementById('dr-reset').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; document.getElementById('dr-status').textContent='点一下“运行诊断”。'; });
   })();
 

@@ -199,6 +199,7 @@
   .cwstep .ck svg{ width:11px; height:11px; opacity:0; transition:opacity .25s; }
   .cwstep.run .ck{ border-color:var(--blue); } .cwstep.run{ color:var(--ink); }
   .cwstep.done .ck{ border-color:var(--good); background:var(--good); } .cwstep.done .ck svg{ opacity:1; } .cwstep.done{ color:var(--ink); }
+  .cwstep.warn{ color:var(--ink); align-items:flex-start; } .cwstep.warn .ck{ border-color:var(--over); background:var(--over); color:#fff; font-weight:700; font-size:12px; line-height:1; } .cwstep .drfix{ display:block; color:var(--good); font-weight:600; font-size:12px; margin-top:2px; }
   .cwapprove{ margin-top:11px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .cwmode{ font-size:11.5px; color:var(--faint); }
   .cwvm{ border:1px dashed var(--line2); border-radius:11px; padding:11px 14px 7px; background:var(--panel); position:relative; }
@@ -469,6 +470,7 @@
           <div class="ccresu" id="cc-code-r"></div>
         </div>
       </div>
+      <p class="simtake"><span class="stk">Takeaway</span><span>Chat shows <b>methods / code snippets</b> — Claude Code actually <b>builds a working result</b>.</span></p>
       <p class="note">The point isn't just 'does it give you an answer' — it's <b>does it actually build it in your project and make it work</b>. Today's chat tools can edit text and code too, but that's 'shown inside the chat.' Claude Code <b>creates several files itself, connects them, runs them, and finishes a 'working result.'</b> (Both use the same Claude model.)</p>
 
       <div class="grp" style="margin-top:30px;">
@@ -508,6 +510,7 @@
         <div class="cw3card"><div class="cw3h">Claude Code <span class="badge no">development only</span></div><div class="cw3body" id="cw3-code"></div></div>
       </div>
       <p class="status" id="cw3-status" style="margin-bottom:4px;">Press "See all three react" — we'll show how the same request leads to different results.</p>
+      <p class="simtake"><span class="stk">Takeaway</span><span>The key difference between Chat/Cowork/Code = <b>whether it touches your computer's folders directly</b>. For office files, <b>Cowork</b> is the fit.</span></p>
 
       <p class="label">Here's how Cowork actually works <span class="hint">pick an example, then ▶</span></p>
       <div class="cwchips" id="cw-chips"></div>
@@ -538,6 +541,7 @@
       </div>
       <div class="ucsave" id="uc-save"></div>
       <p class="status" id="uc-status" style="margin-top:10px;">Pick a job and press "Compare before → after".</p>
+      <p class="simtake"><span class="stk">Takeaway</span><span>Same task — alone it's <b>slow and error-prone</b>; with Claude it's <b>one sentence to a finished file</b>. (times are examples)</span></p>
       <p class="note">If you're not a developer, the easiest way is the <b>Cowork desktop app</b> — open it like any normal program, drag your files in, and ask in plain words (see the "What is Cowork?" tab). The times are an <span class="exb">example</span> to help you understand (real results vary by task and setup).</p>
     </section>
 
@@ -705,6 +709,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <div class="bar"><div class="bl"><span>Cost efficiency (cheaper)</span><b id="v-cost"></b></div><div class="track2"><div class="fill2" id="f-cost"></div></div></div>
       </div>
       <div class="muse" id="muse"><div class="lockbanner" id="m-lock" style="display:none;"></div><div class="tagline" id="m-tag"></div><div class="when" id="m-when"></div><div class="ctxline" id="m-ctx"></div><div class="exlbl">Use it when</div><ul id="m-ex"></ul></div>
+      <p class="simtake"><span class="stk">Takeaway</span><span>Intelligence ↔ speed ↔ cost <b>trade off</b> — you can't max all three. <b>Unsure? Start with the balanced Sonnet.</b></span></p>
       <p class="note">In Claude Code, switch with <code>/model</code>. If unsure, start with the balanced Sonnet. <span class="exb">Example</span> The bars are <b>relative comparisons</b> only, not exact numbers.</p>
       <p class="label">K, M — what units are these?</p>
       <div class="unitcard">
@@ -964,6 +969,7 @@ description: Write the weekly report in the company format
         <li><b>It's guaranteed every time.</b><span>If CLAUDE.md is a 'request,' a hook is a 'rule' — it never forgets and always runs.</span></li>
         <li><b>Supports dozens of lifecycle points.</b><span>file changes, before/after tool runs, session start, before/after compaction, and more · check with <code>/hooks</code>.</span></li>
       </ul>
+      <p class="simtake"><span class="stk">Takeaway</span><span>If CLAUDE.md is a <b>'request'</b> — a hook is a <b>'rule'</b>: it runs <b>automatically every time</b> at the set moment.</span></p>
       <p class="note">Since the setup is a bit technical, just ask Claude something like "Make a hook that formats every time I edit a file" and it builds it for you. (Source: official docs, as of June 2026.)</p>
     </section>
 
@@ -1004,6 +1010,7 @@ description: Write the weekly report in the company format
         </div>
         <div><div class="pdetail" id="pdetail"></div><div class="btnrow" style="margin-top:12px;"><button class="btn solid" id="pm-sim">See this mode work ▶</button></div><div class="simbox" id="pm-simbox"></div></div>
       </div>
+      <p class="simtake"><span class="stk">Takeaway</span><span>Each mode changes <b>how much Claude does on its own</b> — start with 'ask permission' to be safe, loosen common actions once comfortable.</span></p>
       <p class="note">These 5 are the modes shown in the menu. There's also a separate automation-only mode that 'only allows pre-approved tools (dontAsk).' In any mode, <b>extreme destruction like wiping the whole system (rm -rf / · rm -rf ~)</b> still asks for one more confirmation (a 'circuit breaker' — they don't run automatically). If you don't like a result, you can recover it with 'rewind' (the 'Rewind' tab).</p>
     </section>
 
@@ -1044,6 +1051,7 @@ description: Write the weekly report in the company format
         <li><b>Exception: conversations flagged by safety review</b><span>Even with training off, they may be used and kept for safety and policy review.</span></li>
         <li><b>Local records</b><span>Session history is saved in plain text on your computer (~/.claude/projects). The retention period can be adjusted in settings.</span></li>
       </ul>
+      <p class="simtake"><span class="stk">Takeaway</span><span><b>Business (Team·Enterprise·API) isn't used for training by default.</b> Personal (Free·Pro·Max) lets you turn training use on/off in settings.</span></p>
       <p class="note warn" style="margin-top:14px;"><b>Important</b> · Policies keep changing and differ by account type. Before any sensitive decision, be sure to check the official pages — <code>privacy.claude.com</code>, <code>anthropic.com/legal</code>, <code>code.claude.com/docs</code> (this content is as of June 2026).</p>
     </section>
 
@@ -1056,6 +1064,7 @@ description: Write the weekly report in the company format
         <button class="chip" data-c="init">/init</button><button class="chip" data-c="help">/help</button><button class="chip" data-c="clear">/clear</button><button class="chip" data-c="compact">/compact</button><button class="chip" data-c="model">/model</button>
       </div>
       <div class="pre" id="term" style="min-height:200px; white-space:pre-wrap;"></div>
+      <p class="simtake"><span class="stk">Takeaway</span><span>Of the <code>/</code> commands, the ones you'll use most are <b>/clear · /compact</b> — to empty/shrink context when it's full. Full list: <code>/help</code>.</span></p>
       <p class="note">This terminal is a <b>conceptual example</b> to help you understand (it may differ from the real screen). In particular, <code>/init</code> analyzes your project and <b>generates CLAUDE.md automatically</b>.</p>
       <p class="label">Commonly used commands</p>
       <div class="tablewrap"><table class="t"><thead><tr><th style="width:130px;">Command</th><th>What it does</th></tr></thead><tbody>
@@ -1094,6 +1103,7 @@ description: Write the weekly report in the company format
         <li><b>The same usage is shared across places.</b><span>claude.ai, Claude Code, and the desktop app share one usage pool.</span></li>
         <li><b>If unsure, start with Pro</b><span>If it's not enough, you can move up to Max.</span></li>
       </ul>
+      <p class="simtake"><span class="stk">Takeaway</span><span><b>Not on the free plan.</b> Unsure? <b>Start with Pro</b>, move up to Max if you run low.</span></p>
       <p class="note">Check exact prices and limits at <code>claude.com/pricing</code> and the official support pages. (Pricing policy changes from time to time.)</p>
     </section>
 
@@ -1221,6 +1231,7 @@ description: Write the weekly report in the company format
       </div>
       <p class="label">The deeper you go, the longer the 'thinking process' <span class="hint">try it — the length changes</span></p>
       <div class="efthink" id="ef-think"></div>
+      <p class="simtake"><span class="stk">Takeaway</span><span><b>Simple tasks = 'low'</b> (fast, cheap); <b>hard reasoning = 'high/max'</b> (accurate but slower & pricier).</span></p>
       <p class="note">Use 'low' for simple tasks (fast and cheap), and 'high/max' for tricky analysis and reasoning. How to change it: <code>/effort</code> or settings (the 'Settings' tab). <span class="exb">example</span> The bars are a relative comparison. (Source: Anthropic official — support.claude.com model & effort settings)</p>
       <p class="note"><b>Advanced · ultracode</b> — The <code>/effort</code> menu also has <b>ultracode</b>. On top of maximum (xhigh) reasoning, it has Claude <b>automatically marshal multiple helpers (a workflow)</b> for hard tasks. It's <b>session-only</b>, uses a lot of tokens, so you don't need it day-to-day — pick it only for very hard tasks (on Fable 5, Opus 4.8, etc.).</p>
     </section>
@@ -1271,6 +1282,7 @@ description: Write the weekly report in the company format
       <p class="defs">Things like "I want to change the language" all happen here. Press a value to change it (an example panel to help you understand).</p>
       <div class="cfgpanel" id="cfg-panel"></div>
       <p class="status" id="cfg-status" style="margin-top:12px;">Press a value on the right to change it.</p>
+      <p class="simtake"><span class="stk">Takeaway</span><span>Change language·theme·model·permissions <b>in one place (a control panel)</b> — no hunting around.</span></p>
       <p class="note">How to open it: <code>/config</code>. There are actually more settings than this. (Source: Anthropic official — code.claude.com/docs settings)</p>
     </section>
 
@@ -1464,7 +1476,7 @@ description: Write the weekly report in the company format
   function makeBlk(it,fixed,h){ var d=document.createElement('div'); var isSum=it.k==='summary'; d.className='blk'+(h<18?' mini':'')+(fixed?'':' acc')+(isSum?' sumhl':''); d.style.height=h+'px'; if(!isSum){ d.style.background=rgba(hex[it.k],0.14); d.style.borderColor=rgba(hex[it.k],0.30); } d.title=labels[it.k]+(it.txt&&!isSum?(' — '+it.txt):'')+' · '+fmt(it.t)+' tokens'; var name=labels[it.k]; if(it.txt&&!isSum)name+=' — "'+it.txt+'"'; d.innerHTML='<span class="dot" style="background:'+hex[it.k]+'"></span><span class="name">'+(isSum?'<b>'+name+'</b>':name)+'</span>'+(isSum?'<span class="sumbadge">Summary</span>':(fixed?'<span class="tag">base</span>':''))+'<span class="tk">'+fmt(it.t)+'</span>'; return d; }
   function ctxRender(animLast){ var scale=LIMIT_PX/MAX; stack.innerHTML=''; items.forEach(function(it,i){ var el=makeBlk(it,it._base,Math.max(8,Math.round(it.t*scale))); if(animLast&&i===items.length-1){ el.style.opacity='0'; el.style.transform='translateY(-8px)'; el.style.transition='opacity .35s ease, transform .35s cubic-bezier(.22,1,.36,1)'; stack.appendChild(el); requestAnimationFrame(function(){ el.style.opacity='1'; el.style.transform='none'; }); } else stack.appendChild(el); });
     var total=items.reduce(function(a,b){return a+b.t;},0); ctxCount(total); limit.style.bottom=LIMIT_PX+'px'; cap.textContent='Limit '+fmt(MAX);
-    var acl=document.getElementById('acline'); if(acl){ acl.style.bottom=Math.round(LIMIT_PX*AC_RATIO)+'px'; document.getElementById('accap').textContent='Auto-compact starts ~'+fmt(MAX*AC_RATIO); }
+    var acl=document.getElementById('acline'); if(acl){ acl.style.bottom=Math.round(LIMIT_PX*AC_RATIO)+'px'; document.getElementById('accap').textContent='Auto-compact starts ~'+fmt(MAX*AC_RATIO)+' (example line)'; }
     var over=total>MAX; limit.classList.toggle('over',over); num.classList.toggle('over',over); var usedPx=Math.min(LIMIT_PX,total*scale); if(!over&&total/MAX<0.7&&(MAX-total)>MAX*0.04){ free.style.display='block'; free.style.bottom=(usedPx+(LIMIT_PX-usedPx)/2-8)+'px'; free.textContent='Free space '+fmt(MAX-total); } else free.style.display='none'; }
   function ctxCount(target){ var start=curShown,t0=null,dur=480; function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur); tokEl.textContent=fmt(start+(target-start)*(1-Math.pow(1-p,3))); num.querySelector('.max').textContent=' / '+fmt(MAX); if(p<1)requestAnimationFrame(step); else curShown=target; } requestAnimationFrame(step); }
   function ctxAdd(k,t,txt){ items.push({k:k,t:t,txt:txt}); ctxRender(true); }
@@ -1627,7 +1639,7 @@ description: Write the weekly report in the company format
     {name:'Plan mode',safe:'Read-only',col:'#b9792a',auto:'Reading and exploring only (no direct edits)',ask:'Once you approve the plan, it runs all at once',use:'When checking a plan first, before big changes',sim:['plan','plan','plan','plan']},
     {name:'Auto mode',safe:'Caution',col:'#d8943f',auto:'Most tasks (with background safety checks)',ask:'Only confirms or blocks dangerous tasks',use:'When you want fewer prompts for long automated work',note:'Requires the latest version and model (Opus 4.6 / Sonnet 4.6 or later)',sim:['auto','auto','auto','ask']},
     {name:'Skip permissions',safe:'Dangerous',col:'#d8453f',auto:'Everything — proceeds without asking',ask:'Extreme deletes like rm -rf / · rm -rf ~ still ask once more',use:'Only in an internet-isolated environment (container, VM)',note:'Vulnerable to prompt injection — don\'t use it on a normal PC',sim:['auto','auto','auto','auto']} ];
-  var SIM_ACT=['Edit a file','Create a folder','git commit','Delete a file (rm)'],SIM_TXT={auto:'Runs automatically',ask:'Asks for confirmation',plan:'Doesn\'t run (plan only)',block:'Blocked'},curPm=0;
+  var SIM_ACT=['Edit a file','Create a folder','git commit','Delete a file'],SIM_TXT={auto:'Runs automatically',ask:'Asks for confirmation',plan:'Doesn\'t run (plan only)',block:'Blocked'},curPm=0;
   function pmShow(i){ curPm=i; var d=PM[i]; document.querySelectorAll('#pmenu .prow').forEach(function(r){ r.classList.toggle('on',+r.dataset.i===i); }); var badge='<span class="pbadge" style="background:'+rgba(d.col,.16)+';color:'+d.col+'">'+d.safe+'</span>'; document.getElementById('pdetail').innerHTML='<div class="pt">'+d.name+' '+badge+'</div><div class="pdrow"><b>Does on its own</b>'+d.auto+'</div><div class="pdrow"><b>Still asks about</b>'+d.ask+'</div><div class="pdrow"><b>When to use</b>'+d.use+'</div>'+(d.note?'<div class="pdrow"><b>Note</b>'+d.note+'</div>':''); document.getElementById('pmark').style.left=((i+0.5)/PM.length*100)+'%'; document.getElementById('pm-simbox').innerHTML='<div class="simrow on" style="color:var(--faint);font-size:12.5px;">Press "See this mode work."</div>'; }
   var pmT=[]; document.getElementById('pm-sim').addEventListener('click',function(){ pmT.forEach(clearTimeout); pmT=[]; var d=PM[curPm],box=document.getElementById('pm-simbox'); box.innerHTML=''; SIM_ACT.forEach(function(a,idx){ var s=d.sim[idx],row=document.createElement('div'); row.className='simrow'; var cls=s==='auto'?'auto':(s==='ask'?'ask':(s==='plan'?'plan':'block')); row.innerHTML='<span class="sa">'+a+'</span><span class="sp '+cls+'">'+SIM_TXT[s]+'</span>'; box.appendChild(row); pmT.push(setTimeout(function(){ row.classList.add('on'); },220*idx)); }); });
   document.querySelectorAll('#pmenu .prow').forEach(function(r){ var i=+r.dataset.i; var dot=document.createElement('span'); dot.className='psafe'; dot.style.background=(PM[i]&&PM[i].col)||'var(--line2)'; dot.title=(PM[i]&&PM[i].safe)||''; r.insertBefore(dot, r.firstChild); r.addEventListener('click',function(){ pmShow(i); }); }); pmShow(0);
@@ -1637,7 +1649,7 @@ description: Write the weekly report in the company format
   (function(){ [0,1,2,3].forEach(function(n){ document.getElementById('plan'+n).classList.add('on'); }); })();
 
   /* rewind timeline */
-  var RW=['Start','Wrote a draft','Made the design modern','Fixed a bug (now)']; var rwTl=document.getElementById('rw-timeline'),rwLb=document.getElementById('rw-labels'),rwSel=2;
+  var RW=['Start','Wrote a draft','Made the design modern','Fixed a bug (now)']; var rwTl=document.getElementById('rw-timeline'),rwLb=document.getElementById('rw-labels'),rwSel=RW.length-1;
   (function(){ var h=''; RW.forEach(function(t,i){ h+='<span class="tlpt'+(i===RW.length-1?' cur':'')+'" data-i="'+i+'"><span class="dot2"></span>'+(i<RW.length-1?'<span class="tlbar"></span>':'')+'</span>'; }); rwTl.innerHTML=h; rwLb.innerHTML=RW.map(function(t){return '<span>'+t+'</span>';}).join(''); rwMark(RW.length-1,false); rwTl.querySelectorAll('.tlpt').forEach(function(p){ p.addEventListener('click',function(){ rwSel=+p.dataset.i; rwMark(rwSel,false); document.getElementById('rw-msg').textContent='You picked the "'+RW[rwSel]+'" point. Choose how to restore below.'; }); }); })();
   function rwMark(idx,restored){ rwTl.querySelectorAll('.tlpt').forEach(function(p){ var i=+p.dataset.i; p.classList.toggle('cur',i===idx&&!restored); p.classList.toggle('restored',restored&&i<=idx); }); }
   document.getElementById('rw-code').addEventListener('click',function(){ rwMark(rwSel,true); document.getElementById('rw-msg').textContent='Restore code only — rolled the files back to the "'+RW[rwSel]+'" point. The conversation stays, so you can ask again a different way.'; });
@@ -1670,7 +1682,7 @@ description: Write the weekly report in the company format
     function reset(){ mgT.forEach(clearTimeout); mgT=[]; B.f=12; G.f=12; turn=0; B.chat.innerHTML=''; G.chat.innerHTML=''; setF(B); setF(G); st.textContent='Press "Send next task" — send the same request to both sessions and compare the results.'; }
     go.addEventListener('click',function(){ if(B.f>=100) return; turn++; var task=TASKS[(turn-1)%TASKS.length];
       B.f=Math.min(100,B.f+15); setF(B); var br=badReply(B.f); add(B.chat,task,br);
-      G.f=12+(turn%3)*5; setF(G); add(G.chat,task,{cls:'ok',tag:'2s',txt:'Instant & correct. (cleared between each task)'});
+      G.f=Math.min(36,12+turn*2.4); setF(G); add(G.chat,task,{cls:'ok',tag:'2s',txt:'Instant & correct. (cleared between each task)'});
       st.innerHTML= 'Task '+turn+', same as ever — ' + (br.cls==='compact'?'The neglect session <b style="color:var(--over)">lost the details to auto-compact.</b> The managed session is still 2s and accurate!'
         : br.cls==='conf'?'The neglect session <b style="color:var(--over)">is starting to get confused.</b> The managed session stays 2s and accurate.'
         : br.cls==='slow'?'The neglect session <b style="color:#b9792a">is starting to slow down.</b> The managed session is as fast as ever.'
@@ -1838,11 +1850,11 @@ description: Write the weekly report in the company format
     var cfgPanel=document.getElementById('cfg-panel');
     CFG.forEach(function(o){ var row=document.createElement('div'); row.className='cfgrow'; row.innerHTML='<div class="cfk">'+o.k+'<small>'+o.sub+'</small></div>'; var v=document.createElement('button'); v.className='cfgval'; v.textContent=o.vals[o.i]; v.addEventListener('click',function(){ o.i=(o.i+1)%o.vals.length; v.textContent=o.vals[o.i]; document.getElementById('cfg-status').textContent='Changed \''+o.k+'\' to \''+o.vals[o.i]+'\'.'; }); row.appendChild(v); cfgPanel.appendChild(row); });
     /* doctor */
-    var DR=['Install status','Login (account connection)','Internet connection','MCP tool connections','Settings file'];
+    var DR=[{t:'Install status'},{t:'Login (account)'},{t:'Internet'},{t:'MCP tool connections',fail:'Jira connection dropped',fix:'→ log in again from /mcp'},{t:'Config file'}];
     var drList=document.getElementById('dr-list'),drT=[];
     document.getElementById('dr-go').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; var st=document.getElementById('dr-status'); st.textContent='Checking…';
-      DR.forEach(function(t,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML='<span class="ck">'+CK+'</span>'+t; drList.appendChild(el);
-        drT.push(setTimeout(function(){ el.classList.add('done'); if(i===DR.length-1) st.textContent='✓ Everything\'s fine. (If there\'s a problem, it tells you which item and how to fix it.)'; },300+i*600)); }); });
+      DR.forEach(function(o,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML= o.fail ? '<span class="ck">!</span><span>'+o.t+' — <b>'+o.fail+'</b><span class="drfix">'+o.fix+'</span></span>' : '<span class="ck">'+CK+'</span><span>'+o.t+'</span>'; drList.appendChild(el);
+        drT.push(setTimeout(function(){ el.classList.add(o.fail?'warn':'done'); if(i===DR.length-1) st.textContent='Done — 4 OK, 1 problem found. /doctor tells you what\'s wrong AND how to fix it.'; },300+i*600)); }); });
     document.getElementById('dr-reset').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; document.getElementById('dr-status').textContent='Press "Run diagnostics" to try it.'; });
   })();
 
