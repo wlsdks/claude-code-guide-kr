@@ -177,6 +177,23 @@
   .cwresult .rt{ font-size:14px; font-weight:600; } .cwresult .rd{ font-size:12.5px; color:var(--muted); margin-top:1px; }
   .cwchips{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
   .cwchip{ font-size:12.5px; padding:7px 12px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--muted); cursor:pointer; font-family:inherit; } .cwchip:hover{ color:var(--ink); } .cwchip.on{ border-color:var(--accent); color:var(--ink); font-weight:500; }
+  /* effort / goal / loop / workflows / config / doctor */
+  .efbtns{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+  .efbtn{ flex:1; min-width:78px; padding:11px 10px; border:1px solid var(--line2); border-radius:10px; background:var(--bg); color:var(--ink); font-family:inherit; font-size:13.5px; font-weight:500; cursor:pointer; text-align:center; transition:border-color .16s,background .16s; } .efbtn.on{ border-color:var(--accent); background:var(--row); } .efbtn .efd{ font-size:11px; color:var(--faint); font-weight:400; margin-top:2px; }
+  .efthink{ display:flex; flex-direction:column; gap:6px; margin-top:6px; min-height:78px; }
+  .efline{ font-size:12.5px; padding:7px 11px; border-radius:7px; background:var(--bg); border:1px solid var(--line); color:var(--muted); opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .3s; } .efline.on{ opacity:1; transform:none; color:var(--ink); }
+  .jbadge{ font-size:11px; font-weight:600; padding:1px 8px; border-radius:6px; white-space:nowrap; flex:0 0 auto; } .jbadge.no{ color:#fff; background:var(--warn); } .jbadge.yes{ color:#fff; background:var(--good); }
+  .gturn{ display:flex; align-items:center; gap:10px; font-size:13px; padding:7px 0; opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .3s; } .gturn.on{ opacity:1; transform:none; } .gturn .gt-n{ width:22px; height:22px; border-radius:50%; background:var(--row); border:1px solid var(--line2); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; flex:0 0 auto; } .gturn .gt-t{ flex:1; }
+  .cfgpanel{ border:1px solid var(--line2); border-radius:12px; background:var(--panel); overflow:hidden; }
+  .cfgrow{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 16px; border-bottom:1px solid var(--line); } .cfgrow:last-child{ border-bottom:none; }
+  .cfgrow .cfk{ font-size:13.5px; } .cfgrow .cfk small{ display:block; color:var(--faint); font-size:11.5px; }
+  .cfgval{ font-family:inherit; font-size:13px; font-weight:500; color:var(--ink); border:1px solid var(--line2); border-radius:8px; padding:6px 12px; background:var(--bg); cursor:pointer; min-width:104px; text-align:center; transition:border-color .16s; } .cfgval:hover{ border-color:var(--accent); }
+  .advbadge{ display:inline-block; font-size:11px; font-weight:600; color:#fff; background:var(--purple); border-radius:5px; padding:1px 8px; vertical-align:middle; }
+  .cw3grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; } @media (max-width:760px){ .cw3grid{ grid-template-columns:1fr; } }
+  .cw3card{ border:1px solid var(--line2); border-radius:12px; background:var(--panel); padding:13px 14px; } .cw3card.hl{ border-color:var(--good); background:rgba(31,158,118,.06); }
+  .cw3h{ font-size:13.5px; font-weight:600; display:flex; align-items:center; gap:7px; flex-wrap:wrap; margin-bottom:9px; }
+  .cw3body{ display:flex; flex-direction:column; gap:6px; min-height:120px; }
+  .cw3line{ font-size:12px; line-height:1.5; padding:7px 10px; border-radius:7px; background:var(--bg); border:1px solid var(--line); color:var(--muted); opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .3s; } .cw3line.on{ opacity:1; transform:none; } .cw3line.done{ color:var(--ink); background:rgba(31,158,118,.12); border-color:rgba(31,158,118,.34); font-weight:500; }
   .limit{ position:absolute; left:0; right:0; border-top:1px dashed var(--line2); pointer-events:none; } .limit .cap{ position:absolute; right:8px; top:-9px; font-size:10.5px; color:var(--faint); background:var(--bg); padding:0 6px; } .limit.over{ border-top-color:var(--over); } .limit.over .cap{ color:var(--over); }
   .free{ position:absolute; left:0; right:0; text-align:center; font-size:11.5px; color:var(--faint); pointer-events:none; transition:bottom .5s cubic-bezier(.22,1,.36,1); }
   .capbox{ display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; } .capbox input{ width:108px; font-family:inherit; font-size:14px; padding:9px 11px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; text-align:right; font-variant-numeric:tabular-nums; } .capbox input:focus{ border-color:var(--accent); } .capbox .unit{ font-size:13px; color:var(--muted); }
@@ -229,7 +246,17 @@
 
   /* mcp connect svg */
   .svgwrap{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:8px; margin:0 0 14px; }
-  .mcp .spoke{ stroke:var(--blue); stroke-width:2; fill:none; opacity:.9; } .mcp .node{ opacity:.3; transition:opacity .4s; } .mcp .node.on{ opacity:1; } .mcp .node rect{ fill:var(--bg); stroke:var(--line2); } .mcp .node.on rect{ stroke:var(--blue); } .mcp .center rect{ fill:var(--accent); } .mcp text{ font-family:"IBM Plex Sans KR",sans-serif; fill:var(--ink); } .mcp .center text{ fill:var(--bg); font-weight:600; } .mcp .chk{ fill:var(--good); font-weight:600; opacity:0; transition:opacity .3s; } .mcp .node.on .chk{ opacity:1; }
+  .mcp .spoke{ stroke:var(--line2); stroke-width:2; fill:none; } .mcp .node.on ~ .spoke{} .mcp .node{ opacity:.32; transition:opacity .45s; } .mcp .node.on{ opacity:1; } .mcp .node rect{ fill:var(--bg); stroke:var(--line2); } .mcp .node.on rect{ stroke:var(--blue); stroke-width:1.6; } .mcp .center rect{ fill:var(--accent); } .mcp text{ font-family:"IBM Plex Sans KR",sans-serif; fill:var(--ink); font-size:11.5px; } .mcp .center text{ fill:var(--bg); font-weight:600; } .mcp .chk{ fill:var(--good); font-weight:700; opacity:0; transition:opacity .3s; } .mcp .node.on .chk{ opacity:1; }
+  .mcpsim{ display:grid; grid-template-columns:280px 1fr; gap:18px; align-items:stretch; margin:0 0 14px; } @media (max-width:760px){ .mcpsim{ grid-template-columns:1fr; } }
+  .mcphub{ border:1px solid var(--line2); border-radius:14px; background:var(--panel); padding:10px; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow); } .mcphub svg{ width:100%; max-width:264px; height:auto; display:block; }
+  .mcppanel{ border:1px solid var(--line2); border-radius:14px; background:var(--panel); padding:16px 18px; min-height:210px; display:flex; flex-direction:column; box-shadow:var(--shadow); }
+  .mcp-empty{ margin:auto; text-align:center; color:var(--muted); font-size:13.5px; line-height:1.75; max-width:250px; }
+  .mcp-card{ opacity:0; transform:translateY(6px); transition:opacity .35s,transform .35s; } .mcp-card.show{ opacity:1; transform:none; }
+  .mcp-h{ display:flex; align-items:center; gap:8px; font-size:14.5px; font-weight:600; margin-bottom:13px; } .mcp-h .dot{ width:11px; height:11px; border-radius:3px; flex:0 0 auto; } .mcp-h .mcp-chk{ margin-left:auto; color:var(--good); font-weight:700; font-size:13px; }
+  .mcp-b,.mcp-a{ font-size:13px; border-radius:9px; padding:10px 12px; line-height:1.55; } .mcp-b{ color:var(--muted); background:var(--bg); border:1px solid var(--line); } .mcp-a{ color:var(--ink); background:rgba(31,158,118,.1); border:1px solid rgba(31,158,118,.32); }
+  .mcp-arrow{ text-align:center; color:var(--faint); font-size:15px; margin:5px 0; }
+  .mcp-t{ display:inline-block; font-size:10.5px; font-weight:600; padding:1px 7px; border-radius:5px; margin-right:6px; } .mcp-b .mcp-t{ color:var(--muted); background:var(--row); } .mcp-a .mcp-t{ color:#fff; background:var(--good); }
+  .mcp-count{ margin-top:auto; padding-top:13px; font-size:12px; color:var(--faint); }
 
   /* subagent demo */
   .mainbox{ border:1px solid var(--accent); border-radius:12px; background:var(--panel); padding:13px 15px; } .mainbox .mh{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; } .mainbox .mt2{ font-size:13.5px; font-weight:500; }
@@ -324,26 +351,33 @@
     <button class="navitem" data-page="sessions"><span class="no">06</span>会话 & 文件夹</button>
     <button class="navitem" data-page="tokens"><span class="no">07</span>Token</button>
     <button class="navitem" data-page="models"><span class="no">08</span>选择模型 (model)</button>
+    <button class="navitem" data-page="effort"><span class="no">09</span>思考深度 (effort)</button>
     <div class="navsec">记忆与规则</div>
-    <button class="navitem" data-page="claudemd"><span class="no">09</span>CLAUDE.md</button>
-    <button class="navitem" data-page="memory"><span class="no">10</span>记忆</button>
-    <button class="navitem" data-page="skills"><span class="no">11</span>技能</button>
+    <button class="navitem" data-page="claudemd"><span class="no">10</span>CLAUDE.md</button>
+    <button class="navitem" data-page="memory"><span class="no">11</span>记忆</button>
+    <button class="navitem" data-page="skills"><span class="no">12</span>技能</button>
     <div class="navsec">扩展能力</div>
-    <button class="navitem" data-page="mcp"><span class="no">12</span>MCP (连接工具)</button>
-    <button class="navitem" data-page="plugins"><span class="no">13</span>插件</button>
-    <button class="navitem" data-page="agents"><span class="no">14</span>子代理</button>
-    <button class="navitem" data-page="images"><span class="no">15</span>粘贴图片</button>
-    <button class="navitem" data-page="hooks"><span class="no">16</span>自动化 (Hook)</button>
+    <button class="navitem" data-page="mcp"><span class="no">13</span>MCP (连接工具)</button>
+    <button class="navitem" data-page="plugins"><span class="no">14</span>插件</button>
+    <button class="navitem" data-page="agents"><span class="no">15</span>子代理</button>
+    <button class="navitem" data-page="images"><span class="no">16</span>粘贴图片</button>
+    <button class="navitem" data-page="hooks"><span class="no">17</span>自动化 (Hook)</button>
+    <div class="navsec">自动·重复</div>
+    <button class="navitem" data-page="goal"><span class="no">18</span>目标 (goal)</button>
+    <button class="navitem" data-page="loop"><span class="no">19</span>重复执行 (loop)</button>
+    <button class="navitem" data-page="workflows"><span class="no">20</span>工作流 (workflows)</button>
     <div class="navsec">安全地用</div>
-    <button class="navitem" data-page="planmode"><span class="no">17</span>计划模式</button>
-    <button class="navitem" data-page="permissions"><span class="no">18</span>权限模式</button>
-    <button class="navitem" data-page="rewind"><span class="no">19</span>回退</button>
-    <button class="navitem" data-page="privacy"><span class="no">20</span>数据 & 隐私</button>
+    <button class="navitem" data-page="planmode"><span class="no">21</span>计划模式</button>
+    <button class="navitem" data-page="permissions"><span class="no">22</span>权限模式</button>
+    <button class="navitem" data-page="rewind"><span class="no">23</span>回退</button>
+    <button class="navitem" data-page="privacy"><span class="no">24</span>数据 & 隐私</button>
     <div class="navsec">实战</div>
-    <button class="navitem" data-page="commands"><span class="no">21</span>斜杠命令</button>
-    <button class="navitem" data-page="plans"><span class="no">22</span>订阅方案</button>
-    <button class="navitem" data-page="limits"><span class="no">23</span>用量上限</button>
-    <button class="navitem" data-page="glossary"><span class="no">24</span>术语表</button>
+    <button class="navitem" data-page="commands"><span class="no">25</span>斜杠命令</button>
+    <button class="navitem" data-page="config"><span class="no">26</span>设置 (config)</button>
+    <button class="navitem" data-page="doctor"><span class="no">27</span>诊断 (doctor)</button>
+    <button class="navitem" data-page="plans"><span class="no">28</span>订阅方案</button>
+    <button class="navitem" data-page="limits"><span class="no">29</span>用量上限</button>
+    <button class="navitem" data-page="glossary"><span class="no">30</span>术语表</button>
   </nav>
 
   <main class="main"><div class="inner">
@@ -389,7 +423,7 @@
         </div>
       </div>
       <div class="bignote"><span class="bx">提示</span><span>这份指南是<b>学习概念的地方</b> — 不讲安装和上手方法（那些请看官方文档）。而且这是<b>非官方学习资料</b>，与 Anthropic 无关。</span></div>
-      <p class="note">在左侧菜单（窄屏时是上方的标签）点击 24 个主题来切换。所有内容都做到了<b>不用亲自动手</b>，靠按钮和输入框就能理解。正文中<span class="gl" title="像这样画了虚线的词，把鼠标放上去就会显示意思。手机上请参考括号里的说明。">画了虚线的词</span>，把鼠标放上去就会显示意思。</p>
+      <p class="note">在左侧菜单（窄屏时是上方的标签）点击 30 个主题来切换。所有内容都做到了<b>不用亲自动手</b>，靠按钮和输入框就能理解。正文中<span class="gl" title="像这样画了虚线的词，把鼠标放上去就会显示意思。手机上请参考括号里的说明。">画了虚线的词</span>，把鼠标放上去就会显示意思。</p>
     </section>
 
     <!-- 02 COWORK -->
@@ -398,12 +432,15 @@
       <p class="lead"><b>Cowork</b> 不是写代码，而是<b>替你完成‘办公事务’</b>的 Claude。只要给它目标，它就会<b>亲手处理你的文件，做出完整的成品</b>（Excel、文档等）。</p>
       <p class="defs">它和 Claude Code 是<b>同一个引擎</b>，但不是在终端里，而是在<b>桌面应用</b>里使用，是<b>给非开发者办公用</b>的。下面来直接看它怎么运作。</p>
 
-      <p class="label">三者的区别 <span class="hint">一眼看懂</span></p>
-      <div class="fgrid">
-        <div class="fcard"><div class="ft">Claude 聊天</div><div class="fd">你问它就给<b>答案·草稿</b>。但碰不了你的文件。</div><div class="fe"><b>例</b> “报告该怎么写？”</div></div>
-        <div class="fcard" style="border-color:var(--good);background:rgba(31,158,118,.06);"><div class="ft">Cowork</div><div class="fd"><b>用你的文件替你把工作做完</b>。给非开发者用 · 桌面应用。</div><div class="fe"><b>例</b> “把这些收据整理成 Excel”</div></div>
-        <div class="fcard"><div class="ft">Claude Code</div><div class="fd">替你完成<b>开发工作</b>。给开发者用 · 终端。</div><div class="fe"><b>例</b> “修一下登录的 bug”</div></div>
+      <p class="label">同一个请求交给三者 — 有什么不同？ <span class="hint">点一下试试</span></p>
+      <div class="bignote"><span class="bx">同一请求</span><span>对三者都说“把这些<b>收据整理成 Excel</b>”，会怎样？</span></div>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="cw3-go">看看三者的反应 ▶</button><button class="btn" id="cw3-reset">重置</button></div>
+      <div class="cw3grid">
+        <div class="cw3card"><div class="cw3h">Claude 聊天 <span class="badge no">只给答案·方法</span></div><div class="cw3body" id="cw3-chat"></div></div>
+        <div class="cw3card hl"><div class="cw3h">Cowork <span class="badge yes">做出成品</span></div><div class="cw3body" id="cw3-cowork"></div></div>
+        <div class="cw3card"><div class="cw3h">Claude Code <span class="badge no">开发专用</span></div><div class="cw3body" id="cw3-code"></div></div>
       </div>
+      <p class="status" id="cw3-status" style="margin-bottom:4px;">点一下“看看三者的反应”——同样的请求，结果有什么不同，给你看清楚。</p>
 
       <p class="label">Cowork 是这样工作的 <span class="hint">选个示例再点 ▶</span></p>
       <div class="cwchips" id="cw-chips"></div>
@@ -461,8 +498,8 @@ irm https://claude.ai/install.ps1 | iex</div>
         </div>
         <div>
           <p class="label" style="margin-top:0;">窗口大小 <span class="hint">改一改对比</span></p>
-          <div class="capbox"><input id="capinp" type="number" value="40000" min="2000" step="1000"><span class="unit">Token</span>
-            <div class="chips"><button class="chip" data-v="8000">8K</button><button class="chip on" data-v="40000">40K</button><button class="chip" data-v="200000">200K</button></div></div>
+          <div class="capbox"><input id="capinp" type="number" value="200000" min="2000" step="1000"><span class="unit">Token</span>
+            <div class="chips"><button class="chip" data-v="8000">8K</button><button class="chip" data-v="40000">40K</button><button class="chip on" data-v="200000">200K</button></div></div>
           <p class="capnote">默认上下文窗口是 200,000（200K）token。最新的 Opus、Sonnet 最大可达 1,000,000（1M）— 参考‘选择模型’标签页。</p>
           <p class="label">我来输入 <span class="hint">亲自敲敲看</span></p>
           <div class="field"><input id="inp" type="text" placeholder="例：帮我修登录的 bug" maxlength="80"><button class="send" id="send">发送</button></div>
@@ -696,12 +733,19 @@ description: 按公司格式撰写周报
       <p class="defs"><span class="gl" title="Model Context Protocol —— Claude 与外部工具、数据交互的通用规则（标准）">MCP = Model Context Protocol</span>（模型与外部连接的标准）。点按钮就能看到连接的过程。</p>
       <div class="bignote"><span class="bx">通俗讲</span><span>给某个 App 接上‘用 Google 登录’，它就能用你的 Google 账号了吧？<b>MCP 也是这样的‘连接’</b> —— 给 Claude 接上 Jira、Figma 这类工具，Claude 就能直接打开它们来干活。你也不用一项项地复制粘贴了。</span></div>
       <div class="btnrow" style="margin-bottom:12px;"><button class="btn solid" id="mcp-go">逐个连接试试 ▶</button><button class="btn" id="mcp-reset">重置</button></div>
-      <div class="svgwrap">
-        <svg class="mcp" id="mcpsvg" viewBox="0 0 460 280" role="img" aria-label="Claude Code 逐个连接外部工具的示意图">
-          <g id="mcp-lines"></g>
-          <g class="center"><rect x="180" y="118" width="100" height="44" rx="12"></rect><text x="230" y="145" text-anchor="middle" font-size="13">Claude Code</text></g>
-          <g id="mcp-nodes"></g>
-        </svg>
+      <div class="mcpsim">
+        <div class="mcphub">
+          <svg class="mcp" id="mcpsvg" viewBox="0 0 280 280" role="img" aria-label="Claude Code 逐个连接外部工具的示意图">
+            <g id="mcp-lines"></g>
+            <g class="center"><rect x="95" y="124" width="90" height="32" rx="10"></rect><text x="140" y="144.5" text-anchor="middle" font-size="12.5">Claude Code</text></g>
+            <g id="mcp-nodes"></g>
+          </svg>
+        </div>
+        <div class="mcppanel">
+          <div class="mcp-empty" id="mcp-empty">在左侧连接一个工具，这里就会告诉你 Claude <b>因此能多做哪些事</b>。</div>
+          <div id="mcp-detail"></div>
+          <div class="mcp-count" id="mcp-count"></div>
+        </div>
       </div>
       <p class="status" id="mcp-msg" style="margin-top:0;">点一下“逐个连接试试”。</p>
       <div class="grp" style="margin-top:20px;"><h3>可以连接这些（示例）</h3>
@@ -1036,7 +1080,81 @@ description: 按公司格式撰写周报
       <p class="note">因为这样只留核心、缩短内容，所以压缩后‘做了什么、怎么做的’仍能接着进行。只是当像<b>被丢弃的详细清单</b>（例如全部重复名字）又需要时，Claude 会重新读那个文件。token 数值是帮助理解的<b>示例</b>（实际值因情况而异）。上下文窗口里<b>自动</b>发生的压缩，可以在‘上下文窗口’标签页看到。</p>
     </section>
 
-    <!-- 23 GLOSSARY -->
+    <!-- EFFORT -->
+    <section class="page" id="effort">
+      <h1>思考深度 (effort)</h1>
+      <p class="lead"><b>思考深度（effort）</b>是用来设定 Claude <b>在回答之前要思考多深</b>的选项。想得越深，遇到难题越准确，但也更慢、更贵。</p>
+      <p class="defs">有<b>低 · 中 · 高 · 最高</b>几档。想得越深，用的‘思考（thinking）token’就越多（见‘Token’标签页）。选一选看看差别。</p>
+      <div class="efbtns" id="ef-btns"></div>
+      <div class="bars">
+        <div class="bar"><div class="bl"><span>难题准确度</span><b id="ef-v-acc"></b></div><div class="track2"><div class="fill2" id="ef-f-acc"></div></div></div>
+        <div class="bar"><div class="bl"><span>响应速度</span><b id="ef-v-sp"></b></div><div class="track2"><div class="fill2" id="ef-f-sp"></div></div></div>
+        <div class="bar"><div class="bl"><span>token 成本</span><b id="ef-v-cost"></b></div><div class="track2"><div class="fill2" id="ef-f-cost"></div></div></div>
+      </div>
+      <p class="label">选得越深，‘思考过程’就越长 <span class="hint">点一点，长度会不一样</span></p>
+      <div class="efthink" id="ef-think"></div>
+      <p class="note">简单的事用‘低’（又快又便宜），棘手的分析·推理用‘高/最高’。改法：<code>/effort</code> 或在设置里（见‘设置’标签页）。<span class="exb">示例</span> 这些条形是相对比较。（出处：Anthropic 官方 —— support.claude.com 模型·effort 设置）</p>
+    </section>
+
+    <!-- GOAL -->
+    <section class="page" id="goal">
+      <h1>目标 (goal)</h1>
+      <p class="lead"><b>目标（goal）</b>是<b>只要给出‘完成条件’，Claude 就会自己反复做直到满足条件</b>的功能。不用每次都重新去叫它。</p>
+      <p class="defs">不是做一次就结束，而是<b>每一轮之后都自己判定‘有没有满足条件’</b>，没满足就再做。下面来看看。</p>
+      <div class="bignote"><span class="bx">示例目标</span><span>“把这份通知<b>改到错别字为 0 个为止</b>”</span></div>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="goal-go">开始目标 ▶</button><button class="btn" id="goal-reset">重置</button></div>
+      <div class="cwvm"><span class="cwvmtag">直到满足条件为止自动反复</span><div id="goal-turns"></div></div>
+      <p class="status" id="goal-status" style="margin-top:12px;">点一下“开始目标”。</p>
+      <p class="note">是否满足条件，会通过<b>单独的判定</b>在每一轮确认，满足后自动停止（也有防止无限循环的机制）。改法：<code>/goal</code>。（出处：Anthropic 官方 —— code.claude.com/docs goal）</p>
+    </section>
+
+    <!-- LOOP -->
+    <section class="page" id="loop">
+      <h1>重复执行 (loop)</h1>
+      <p class="lead"><b>重复（loop）</b>是<b>每隔固定的间隔，自动再次执行同一件工作</b>的功能。例如：每 10 分钟‘确认一次部署状态’。</p>
+      <p class="defs">如果说目标（goal）是‘直到满足条件为止’，那重复（loop）就是‘<b>按固定的时间间隔</b>’。选个间隔再开始看看。（模拟会把时间快进给你看。）</p>
+      <div class="chips" id="loop-chips" style="margin-bottom:12px;"></div>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="loop-go">开始重复 ▶</button><button class="btn" id="loop-reset">停止·重置</button></div>
+      <p class="label">执行记录</p>
+      <div class="usefeed" id="loop-feed"></div>
+      <p class="status" id="loop-status" style="margin-top:10px;">选个间隔再点“开始重复”。</p>
+      <p class="note">会在会话开着的时候反复执行。改法：像 <code>/loop 10m "确认部署"</code> 这样。（出处：Anthropic 官方 —— code.claude.com/docs scheduled-tasks）</p>
+    </section>
+
+    <!-- WORKFLOWS -->
+    <section class="page" id="workflows">
+      <h1>工作流 (workflows) <span class="advbadge">进阶</span></h1>
+      <p class="lead"><b>工作流（workflows）</b>是<b>面对非常大的工作时，Claude 自己排好‘作战计划’，同时调动多个助手（子代理）</b>一次性处理完的功能。</p>
+      <p class="defs">如果说子代理是‘交给一个人’，那工作流就是‘<b>同时协调多个人</b>’。擅长大型的检查·整理·调查（Max·Team 等更高方案）。</p>
+      <div class="bignote"><span class="bx">示例</span><span>“把<b>8 份合同按项目同时检查</b>” → Claude 排好作战计划，一次投入多名助手</span></div>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="wf-go">看看并行作业 ▶</button><button class="btn" id="wf-reset">重置</button></div>
+      <div class="sagrid" id="wf-grid"></div>
+      <p class="status" id="wf-status" style="margin-top:14px;">点一下“看看并行作业”。</p>
+      <p class="note">对非开发者来说算是比较进阶的功能 —— 知道‘还能这样’就足够了。一次用很多助手会消耗很多 token，所以只适合大型工作。（出处：Anthropic 官方 —— claude.com 动态工作流介绍）</p>
+    </section>
+
+    <!-- CONFIG -->
+    <section class="page" id="config">
+      <h1>设置 (config)</h1>
+      <p class="lead"><b>设置（config）</b>是<b>在一个地方修改语言·主题·模型·思考深度·权限这些的控制面板</b>。</p>
+      <p class="defs">“我想换个语言”之类的，全都在这里做。点一下值来改改看（帮助理解的示例面板）。</p>
+      <div class="cfgpanel" id="cfg-panel"></div>
+      <p class="status" id="cfg-status" style="margin-top:12px;">点右边的值来改改看。</p>
+      <p class="note">打开方式：<code>/config</code>。实际的设置项比这里多。（出处：Anthropic 官方 —— code.claude.com/docs settings）</p>
+    </section>
+
+    <!-- DOCTOR -->
+    <section class="page" id="doctor">
+      <h1>诊断 (doctor)</h1>
+      <p class="lead"><b>诊断（doctor）</b>是<b>在出了问题时，一次性检查安装·登录·连接·设置</b>的工具。‘不行的时候先试试它’。</p>
+      <p class="defs">就像汽车的检查指示灯，帮你指出哪里出了问题。亲自跑一次诊断看看。</p>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="dr-go">运行诊断 ▶</button><button class="btn" id="dr-reset">重置</button></div>
+      <div class="cwvm"><span class="cwvmtag">/doctor 检查中</span><div id="dr-list"></div></div>
+      <p class="status" id="dr-status" style="margin-top:12px;">点一下“运行诊断”。</p>
+      <p class="note">打开方式：<code>/doctor</code>（或 <code>claude doctor</code>）。如果有问题，还会告诉你该怎么修。（出处：Anthropic 官方 —— code.claude.com/docs CLI 参考）</p>
+    </section>
+
+    <!-- 30 GLOSSARY -->
     <section class="page" id="glossary">
       <h1>术语表</h1>
       <p class="lead">把这份指南里出现的词，用一句话整理了一下。</p>
@@ -1120,7 +1238,7 @@ description: 按公司格式撰写周报
   (function(){ var s=null; try{ s=localStorage.getItem('cc_present'); }catch(e){} if(s==='1') setPresent(true); })();
 
   /* LNB icons (monoline) */
-  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
   function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
 
   /* router */
@@ -1128,7 +1246,7 @@ description: 按公司格式撰写周报
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'聊天给你‘答案’，Claude Code 则在你的项目里<b>亲手做出来、还让它跑起来</b>。', cowork:'不写代码，而是<b>替你做办公事务</b>的 Claude —— 给个目标，就<b>用你的文件做出成品</b>（给非开发者·桌面应用）。', where:'终端·VS Code·桌面·网页 —— <b>哪里都是同一个 Claude Code</b>，设置也共享。', context:'只有放进来的东西 Claude 才记得。装满了就<b>用‘压缩’来整理</b>。', sessions:'<b>一个会话只做一件事</b> —— 混在一起会乱。工作文件夹要窄。', tokens:'Token = AI 读文字的单位。<b>越长越占空间、越费钱</b>，中文更重。', models:'聪明 ↔ 速度 ↔ 成本要取舍。<b>拿不定就用 Sonnet</b> 开始。', claudemd:'<b>我写下的规则备忘</b> —— 每次对话开始自动生效。', memory:'<b>Claude 自己学、自己记</b>的备忘。跨会话延续。', skills:'把常用工作步骤<b>做一次，反复使用</b>。', mcp:'<b>连接外部工具（Jira、Figma 等）</b>，让 Claude 直接使用。', plugins:'把技能·工具·命令等<b>打包一次性安装</b>的包。', agents:'把大事<b>分给专门助手</b>，只接收结果。', images:'<b>贴上截图</b>，Claude 就能看懂 —— 比说话快、还准。', hooks:'某个时刻<b>每次都自动执行固定动作</b>的规则。', planmode:'修改前<b>先展示计划、等批准</b> —— 大改动更安全。', permissions:'决定 Claude <b>要多频繁地问</b>的设置。一开始安全为上。', rewind:'每个请求<b>自动保存</b> —— 不满意就退回之前。', privacy:'<b>工作版（Team·Enterprise·API）默认不用于训练。</b> 个人版可在设置里选。', commands:'以 <code class="inlinecode">/</code> 开头的快捷命令。用得最多的是 <b>/clear · /compact</b>。', plans:'<b>免费版里没有。</b> 用付费版（Pro·Max·Team）或 API（按量计费）。', limits:'<b>用完就得等到重置</b> —— 所以管理很重要。', compact:'长长堆积的对话缩成<b>一格简短摘要</b>。', glossary:'<b>用一句话</b>快速查找容易搞混的术语的地方。' };
+  var TLDR={ intro:'聊天给你‘答案’，Claude Code 则在你的项目里<b>亲手做出来、还让它跑起来</b>。', cowork:'不写代码，而是<b>替你做办公事务</b>的 Claude —— 给个目标，就<b>用你的文件做出成品</b>（给非开发者·桌面应用）。', where:'终端·VS Code·桌面·网页 —— <b>哪里都是同一个 Claude Code</b>，设置也共享。', context:'只有放进来的东西 Claude 才记得。装满了就<b>用‘压缩’来整理</b>。', sessions:'<b>一个会话只做一件事</b> —— 混在一起会乱。工作文件夹要窄。', tokens:'Token = AI 读文字的单位。<b>越长越占空间、越费钱</b>，中文更重。', models:'聪明 ↔ 速度 ↔ 成本要取舍。<b>拿不定就用 Sonnet</b> 开始。', claudemd:'<b>我写下的规则备忘</b> —— 每次对话开始自动生效。', memory:'<b>Claude 自己学、自己记</b>的备忘。跨会话延续。', skills:'把常用工作步骤<b>做一次，反复使用</b>。', mcp:'<b>连接外部工具（Jira、Figma 等）</b>，让 Claude 直接使用。', plugins:'把技能·工具·命令等<b>打包一次性安装</b>的包。', agents:'把大事<b>分给专门助手</b>，只接收结果。', images:'<b>贴上截图</b>，Claude 就能看懂 —— 比说话快、还准。', hooks:'某个时刻<b>每次都自动执行固定动作</b>的规则。', planmode:'修改前<b>先展示计划、等批准</b> —— 大改动更安全。', permissions:'决定 Claude <b>要多频繁地问</b>的设置。一开始安全为上。', rewind:'每个请求<b>自动保存</b> —— 不满意就退回之前。', privacy:'<b>工作版（Team·Enterprise·API）默认不用于训练。</b> 个人版可在设置里选。', commands:'以 <code class="inlinecode">/</code> 开头的快捷命令。用得最多的是 <b>/clear · /compact</b>。', plans:'<b>免费版里没有。</b> 用付费版（Pro·Max·Team）或 API（按量计费）。', limits:'<b>用完就得等到重置</b> —— 所以管理很重要。', compact:'长长堆积的对话缩成<b>一格简短摘要</b>。', effort:'回答前<b>要想多深</b> —— 越深越准，但更慢更贵。', goal:'<b>只要给出‘完成条件’，Claude 就会反复做到满足为止</b>。', loop:'<b>每隔固定间隔</b>自动再次执行同一件工作。', workflows:'调度<b>多个助手同时</b>处理一件大事（进阶）。', config:'在一个地方修改<b>语言·主题·模型·权限</b>等设置。', doctor:'出问题时<b>一次性检查安装·连接·设置</b>。', glossary:'<b>用一句话</b>快速查找容易搞混的术语的地方。' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">一句话总结</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -1147,7 +1265,7 @@ description: 按公司格式撰写周报
   document.getElementById('cc-chat').textContent='点按钮就会出现答案。'; document.getElementById('cc-code').innerHTML='<div class="cstep on"><span>点按钮就会出现制作过程。</span></div>';
 
   /* context tank */
-  var MAX=40000,LIMIT_PX=420,AC_RATIO=0.8,stack=document.getElementById('stack'),limit=document.getElementById('limit'),cap=document.getElementById('cap'),free=document.getElementById('free'),tokEl=document.getElementById('tok'),num=document.getElementById('num'),status=document.getElementById('status'),inp=document.getElementById('inp'),capinp=document.getElementById('capinp'),tokprev=document.getElementById('tokprev');
+  var MAX=200000,LIMIT_PX=420,AC_RATIO=0.8,stack=document.getElementById('stack'),limit=document.getElementById('limit'),cap=document.getElementById('cap'),free=document.getElementById('free'),tokEl=document.getElementById('tok'),num=document.getElementById('num'),status=document.getElementById('status'),inp=document.getElementById('inp'),capinp=document.getElementById('capinp'),tokprev=document.getElementById('tokprev');
   var labels={sys:'系统提示词 · 基本指令',tool:'工具列表 · 可用的功能',mem:'项目备忘 · CLAUDE.md',user:'我的消息',file:'文件内容 · 读进来的代码',reply:'Claude 回复',summary:'压缩后浓缩的信息'};
   var hex={sys:'#8a8a8a',tool:'#3b7dd8',mem:'#1f9e76',user:'#6d5fd0',file:'#d8662f',reply:'#cf5184',summary:'#1f9e76'};
   var base=[{k:'sys',t:3000},{k:'tool',t:11500},{k:'mem',t:2200}],items=[],curShown=0;
@@ -1171,14 +1289,17 @@ description: 按公司格式撰写周报
   document.getElementById('compact').addEventListener('click',function(){ if(items.reduce(function(a,b){return a+b.t;},0)<=base.reduce(function(a,b){return a+b.t;},0)+1000){ status.textContent='还没堆到能压缩的程度。'; return; } doCompact(); status.textContent='手动压缩（/compact）完成 —— 堆积的消息、文件、结果缩成了一格摘要。'; });
   document.getElementById('reset').addEventListener('click',function(){ acStop(); ctxBase(); var ba=document.getElementById('cwba'); if(ba)ba.style.display='none'; status.textContent='下面这三格在对话还没开始时就一直在里面。'; });
   var acT=[]; function acStop(){ acT.forEach(clearTimeout); acT=[]; document.getElementById('tank').classList.remove('flash'); stack.classList.remove('summarizing'); var ov=document.getElementById('acoverlay'); if(ov)ov.classList.remove('on'); }
-  document.getElementById('autocompact').addEventListener('click',function(){ acStop(); ctxMax(40000); ctxBase(); var ba=document.getElementById('cwba'); if(ba)ba.style.display='none'; var seq=[['user',900,'帮我做一个仪表盘'],['file',8400,null],['tool',3100,null],['reply',1800,null],['reply',1100,null]]; status.textContent='对话正在堆积中…（连续的同一件工作）'; var i=0;
+  document.getElementById('autocompact').addEventListener('click',function(){ acStop(); ctxBase(); var ba=document.getElementById('cwba'); if(ba)ba.style.display='none';
+    var base0=items.reduce(function(a,b){return a+b.t;},0), chunk=Math.max(1500,Math.round(MAX*0.11)), labels=[['user','帮我做一个仪表盘'],['file',null],['tool',null],['reply',null]], seq=[], tot=base0;
+    for(var k=0; tot<MAX*AC_RATIO && k<14; k++){ var L=labels[k%4], amt=(k===0?900:Math.round(chunk*(0.8+0.4*((k%3)/2)))); seq.push([L[0],amt,L[1]]); tot+=amt; }
+    status.textContent='对话正在堆积中…（连续的同一件工作）'; var i=0;
     (function step(){ if(i>=seq.length){ acTrigger(); return; } var s=seq[i++]; ctxAdd(s[0],s[1],s[2]); var total=items.reduce(function(a,b){return a+b.t;},0);
       if(total>=MAX*AC_RATIO){ status.textContent='碰到自动压缩起始线了！（'+fmt(total)+' / 上限 '+fmt(MAX)+'）—— 不会一直走到上限，而是在这里停下来压缩。'; acT.push(setTimeout(acTrigger,1100)); return; }
       if(total/MAX>.6) status.textContent='正在一点点填满…马上就要碰到自动压缩线了。'; acT.push(setTimeout(step,1100)); })(); });
   function acTrigger(){ var tank=document.getElementById('tank'),ov=document.getElementById('acoverlay'); status.textContent='⚠️ 到达自动压缩线 —— 在这里停下，开始总结。（总结期间不会进行新工作）'; tank.classList.add('flash');
     acT.push(setTimeout(function(){ stack.classList.add('summarizing'); if(ov)ov.classList.add('on'); status.textContent='已暂停 —— 正在把之前的对话、文件、工具结果简短总结…'; },1300));
     acT.push(setTimeout(function(){ stack.classList.remove('summarizing'); if(ov)ov.classList.remove('on'); tank.classList.remove('flash'); doCompact(); status.textContent='压缩完成 —— 旧对话、工具输出缩成一格‘摘要’，而需求、文件清单、决定这些核心都保留下来。（内容实际怎么变，可在‘压缩 (compact)’标签页看到）'; },3400)); }
-  renderPrev(tokprev,'',true); ctxMax(40000); ctxBase();
+  renderPrev(tokprev,'',true); ctxMax(200000); ctxBase();
 
   /* sessions + brain */
   var sBody=document.getElementById('sess-body'),sBar=document.getElementById('sess-bar'),sBarL=document.getElementById('sess-barl'),sMode=document.getElementById('sess-mode'),sMsg=document.getElementById('sess-msg'),sTimers=[];
@@ -1262,17 +1383,26 @@ description: 按公司格式撰写周报
     yesSteps.forEach(function(t,i){ skT.push(setTimeout(function(){ skLine(yes,t,'short'); },600*i+300)); });
   });
 
-  /* mcp connect */
-  var MCPN=[ {x:230,y:40,w:78,n:'GitHub'},{x:392,y:96,w:70,n:'Figma'},{x:360,y:228,w:84,n:'浏览器'},{x:100,y:228,w:64,n:'Jira'},{x:52,y:96,w:64,n:'Slack'} ];
-  (function(){ var ln=document.getElementById('mcp-lines'),nd=document.getElementById('mcp-nodes'); MCPN.forEach(function(o,i){ var cx=o.x+o.w/2, cy=o.y+15;
-    var line=document.createElementNS('http://www.w3.org/2000/svg','line'); line.setAttribute('class','spoke'); line.setAttribute('x1',230); line.setAttribute('y1',140); line.setAttribute('x2',cx); line.setAttribute('y2',cy); var len=Math.round(Math.hypot(cx-230,cy-140))+4; line.style.strokeDasharray=len; line.style.strokeDashoffset=len; line.style.transition='stroke-dashoffset .6s ease'; line.id='mcpl'+i; ln.appendChild(line);
-    var g=document.createElementNS('http://www.w3.org/2000/svg','g'); g.setAttribute('class','node'); g.id='mcpn'+i;
-    var rect=document.createElementNS('http://www.w3.org/2000/svg','rect'); rect.setAttribute('x',o.x); rect.setAttribute('y',o.y); rect.setAttribute('width',o.w); rect.setAttribute('height',30); rect.setAttribute('rx',8); g.appendChild(rect);
-    var tx=document.createElementNS('http://www.w3.org/2000/svg','text'); tx.setAttribute('x',cx); tx.setAttribute('y',o.y+19); tx.setAttribute('text-anchor','middle'); tx.setAttribute('font-size','12'); tx.textContent=o.n; g.appendChild(tx);
-    var ck=document.createElementNS('http://www.w3.org/2000/svg','text'); ck.setAttribute('class','chk'); ck.setAttribute('x',o.x+o.w-4); ck.setAttribute('y',o.y+2); ck.setAttribute('text-anchor','middle'); ck.setAttribute('font-size','13'); ck.textContent='✓'; g.appendChild(ck);
+  /* mcp connect — compact hub + before/after panel */
+  var MCPN=[
+    {cx:140,cy:46,w:60,n:'Jira',c:'#3b7dd8',b:'要一个个打开 Jira 工单复制粘贴',a:'Claude 在 Jira 里<b>直接读取工单，还能新建工单</b>'},
+    {cx:227,cy:112,w:96,n:'Google 云端硬盘',c:'#1f9e76',b:'要把云端硬盘的文档下载下来再上传回去',a:'Claude <b>直接打开云端硬盘的文档来读取、整理</b>'},
+    {cx:194,cy:214,w:64,n:'浏览器',c:'#cf5184',b:'要一段段复制网页内容再粘贴',a:'Claude <b>直接打开真实网页来确认</b>'},
+    {cx:86,cy:214,w:54,n:'Slack',c:'#6d5fd0',b:'要把 Slack 消息复制过来',a:'Claude 在 Slack 里<b>直接读取，还能发消息</b>'},
+    {cx:53,cy:112,w:62,n:'Figma',c:'#d8662f',b:'要截图设计稿再一句句解释',a:'Claude <b>直接读取 Figma 设计稿，照着做出来</b>'}
+  ];
+  (function(){ var ln=document.getElementById('mcp-lines'),nd=document.getElementById('mcp-nodes'); if(!ln) return; MCPN.forEach(function(o,i){
+    var line=document.createElementNS('http://www.w3.org/2000/svg','line'); line.setAttribute('class','spoke'); line.setAttribute('x1',140); line.setAttribute('y1',140); line.setAttribute('x2',o.cx); line.setAttribute('y2',o.cy); var len=Math.round(Math.hypot(o.cx-140,o.cy-140))+4; line.style.strokeDasharray=len; line.style.strokeDashoffset=len; line.style.transition='stroke-dashoffset .7s ease'; line.id='mcpl'+i; ln.appendChild(line);
+    var g=document.createElementNS('http://www.w3.org/2000/svg','g'); g.setAttribute('class','node'); g.id='mcpn'+i; var x=o.cx-o.w/2, y=o.cy-13;
+    var rect=document.createElementNS('http://www.w3.org/2000/svg','rect'); rect.setAttribute('x',x); rect.setAttribute('y',y); rect.setAttribute('width',o.w); rect.setAttribute('height',26); rect.setAttribute('rx',8); g.appendChild(rect);
+    var tx=document.createElementNS('http://www.w3.org/2000/svg','text'); tx.setAttribute('x',o.cx); tx.setAttribute('y',o.cy+4); tx.setAttribute('text-anchor','middle'); tx.textContent=o.n; g.appendChild(tx);
+    var ck=document.createElementNS('http://www.w3.org/2000/svg','text'); ck.setAttribute('class','chk'); ck.setAttribute('x',x+o.w-3); ck.setAttribute('y',y-1); ck.setAttribute('text-anchor','middle'); ck.setAttribute('font-size','12'); ck.textContent='✓'; g.appendChild(ck);
     nd.appendChild(g); }); })();
-  var mcpT=[]; function mcpReset(){ mcpT.forEach(clearTimeout); mcpT=[]; MCPN.forEach(function(o,i){ document.getElementById('mcpn'+i).classList.remove('on'); var l=document.getElementById('mcpl'+i); l.style.strokeDashoffset=l.style.strokeDasharray; }); document.getElementById('mcp-msg').textContent='点一下“逐个连接试试”。'; }
-  document.getElementById('mcp-go').addEventListener('click',function(){ mcpReset(); document.getElementById('mcp-msg').textContent='正在逐个连接工具…'; MCPN.forEach(function(o,i){ mcpT.push(setTimeout(function(){ document.getElementById('mcpl'+i).style.strokeDashoffset='0'; document.getElementById('mcpn'+i).classList.add('on'); document.getElementById('mcp-msg').textContent=o.n+' 已连接 ✓ —— 现在 Claude 可以直接使用 '+o.n+' 了。'; if(i===MCPN.length-1)mcpT.push(setTimeout(function(){ document.getElementById('mcp-msg').textContent='连接完成！现在 Claude Code 可以直接使用这些工具了。（用 /mcp 查看）'; },700)); },700*i)); }); });
+  var mcpT=[],mcpCon=0,mcpEmpty=document.getElementById('mcp-empty'),mcpDetail=document.getElementById('mcp-detail'),mcpCount=document.getElementById('mcp-count');
+  function mcpReset(){ mcpT.forEach(clearTimeout); mcpT=[]; mcpCon=0; MCPN.forEach(function(o,i){ var n=document.getElementById('mcpn'+i); if(n)n.classList.remove('on'); var l=document.getElementById('mcpl'+i); if(l)l.style.strokeDashoffset=l.style.strokeDasharray; }); if(mcpDetail)mcpDetail.innerHTML=''; if(mcpEmpty)mcpEmpty.style.display='block'; if(mcpCount)mcpCount.textContent=''; document.getElementById('mcp-msg').textContent='点一下“逐个连接试试”。'; }
+  function mcpPanel(o){ if(mcpEmpty)mcpEmpty.style.display='none'; mcpDetail.innerHTML='<div class="mcp-card"><div class="mcp-h"><span class="dot" style="background:'+o.c+'"></span>'+o.n+' 已连接<span class="mcp-chk">✓</span></div><div class="mcp-b"><span class="mcp-t">连接前</span>'+o.b+'</div><div class="mcp-arrow">↓</div><div class="mcp-a"><span class="mcp-t">连接后</span>'+o.a+'</div></div>'; var card=mcpDetail.querySelector('.mcp-card'); mcpT.push(setTimeout(function(){ if(card)card.classList.add('show'); },30)); if(mcpCount)mcpCount.textContent='已连接的工具：'+mcpCon+' / '+MCPN.length; }
+  document.getElementById('mcp-go').addEventListener('click',function(){ mcpReset(); document.getElementById('mcp-msg').textContent='正在一个个慢慢连接工具…（不用复制粘贴就能直接用）';
+    MCPN.forEach(function(o,i){ mcpT.push(setTimeout(function(){ document.getElementById('mcpl'+i).style.strokeDashoffset='0'; document.getElementById('mcpn'+i).classList.add('on'); mcpCon=i+1; mcpPanel(o); if(i===MCPN.length-1)mcpT.push(setTimeout(function(){ document.getElementById('mcp-msg').textContent='连接完成！现在 Claude 直接使用这些工具 —— 再也不用复制粘贴了。（用 /mcp 查看）'; },900)); },1300*(i+1))); }); });
   document.getElementById('mcp-reset').addEventListener('click',mcpReset); mcpReset();
 
   /* subagents (6 specialists) */
@@ -1390,6 +1520,79 @@ description: 按公司格式撰写周报
       timers.push(setTimeout(function(){ stage.insertAdjacentHTML('beforeend','<div class="cwcard show" style="margin-top:12px;"><div class="cwresult"><span class="fic">'+FILE+'</span><span><div class="rt">'+t.result.t+'</div><div class="rd">'+t.result.d+'</div></span></div></div>'); },450)); }
     document.getElementById('cw-go').addEventListener('click',go);
     document.getElementById('cw-reset').addEventListener('click',function(){ clearT(); setTask(cur); });
+  })();
+
+  /* cowork 3-way comparison */
+  (function(){
+    var go=document.getElementById('cw3-go'); if(!go) return;
+    var DATA={
+      'cw3-chat':[{t:'“我来告诉你怎么整理成 Excel”'},{t:'① 先建好金额·日期的列'},{t:'② 再放上合计公式…'},{t:'（只是用话讲 —— 碰不了你的文件）'}],
+      'cw3-cowork':[{t:'直接读取收据文件夹（32 张）'},{t:'提取金额·日期·项目'},{t:'保存为 支出整理.xlsx',done:true},{t:'✅ 成品完成 —— 文件做出来了！',done:true}],
+      'cw3-code':[{t:'这是‘办公事务’，Cowork 更合适'},{t:'我负责在终端里写代码·搞开发'},{t:'（例如：“帮我修登录的 bug”）'}]
+    };
+    var cw3T=[];
+    function cw3Reset(){ cw3T.forEach(clearTimeout); cw3T=[]; ['cw3-chat','cw3-cowork','cw3-code'].forEach(function(id){ document.getElementById(id).innerHTML=''; }); document.getElementById('cw3-status').textContent='点一下“看看三者的反应”——同样的请求，结果有什么不同，给你看清楚。'; }
+    go.addEventListener('click',function(){ cw3Reset(); document.getElementById('cw3-status').textContent='同样的请求“把这些收据整理成 Excel” → 三者的反应就这么不同。';
+      Object.keys(DATA).forEach(function(id){ var box=document.getElementById(id); DATA[id].forEach(function(L,i){ var el=document.createElement('div'); el.className='cw3line'+(L.done?' done':''); el.textContent=L.t; box.appendChild(el); cw3T.push(setTimeout(function(){ el.classList.add('on'); },300+i*650)); }); }); });
+    document.getElementById('cw3-reset').addEventListener('click',cw3Reset); cw3Reset();
+  })();
+
+  /* effort / goal / loop / workflows / config / doctor sims */
+  (function(){
+    if(!document.getElementById('effort')) return;
+    var CK='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg>';
+    var RATE=['','很低','低','中等','高','很高'];
+    /* effort */
+    var EF=[{n:'低',d:'简单·快速',acc:2,sp:5,cost:1,steps:['直接回答']},
+      {n:'中',d:'一般',acc:3,sp:4,cost:2,steps:['核对一遍要点','整理答案']},
+      {n:'高',d:'深入',acc:4,sp:2,cost:4,steps:['比较多种方法','推敲依据','检查遗漏','整理答案']},
+      {n:'最高',d:'非常深入',acc:5,sp:1,cost:5,steps:['列出各种情况','逐一验证','寻找反例','再次核对','整理依据','给出最终答案']}];
+    var efBtns=document.getElementById('ef-btns'),efThink=document.getElementById('ef-think'),efT=[];
+    function efShow(i){ var d=EF[i]; [].forEach.call(efBtns.children,function(c,j){ c.classList.toggle('on',j===i); });
+      var set=function(k,v,col){ document.getElementById('ef-f-'+k).style.width=(v*20)+'%'; document.getElementById('ef-f-'+k).style.background=col; document.getElementById('ef-v-'+k).textContent=RATE[v]; };
+      set('acc',d.acc,'#1f9e76'); set('sp',d.sp,'#3b7dd8'); set('cost',d.cost,'#d8662f');
+      efT.forEach(clearTimeout); efT=[]; efThink.innerHTML='';
+      d.steps.forEach(function(s,k){ var el=document.createElement('div'); el.className='efline'; el.textContent=(k+1)+'. '+s; efThink.appendChild(el); efT.push(setTimeout(function(){ el.classList.add('on'); },120+k*200)); });
+    }
+    EF.forEach(function(d,i){ var b=document.createElement('button'); b.className='efbtn'+(i===1?' on':''); b.innerHTML=d.n+'<span class="efd">'+d.d+'</span>'; b.addEventListener('click',function(){ efShow(i); }); efBtns.appendChild(b); });
+    efShow(1);
+    /* goal */
+    var GTURNS=[{t:'第 1 轮 —— 5 个错别字改好 3 个（还剩 2 个）',ok:false},{t:'第 2 轮 —— 剩下的 2 个改好（还剩 0 个）',ok:true,last:true}];
+    var goalBox=document.getElementById('goal-turns'),goalT=[];
+    document.getElementById('goal-go').addEventListener('click',function(){ goalT.forEach(clearTimeout); goalT=[]; goalBox.innerHTML=''; var st=document.getElementById('goal-status'); st.textContent='正在反复做，直到满足条件…';
+      GTURNS.forEach(function(g,i){ var el=document.createElement('div'); el.className='gturn'; el.innerHTML='<span class="gt-n">'+(i+1)+'</span><span class="gt-t">'+g.t+'</span><span class="jbadge '+(g.ok?'yes':'no')+'">'+(g.ok?'满足条件 → 停止':'还没 → 继续')+'</span>'; goalBox.appendChild(el);
+        goalT.push(setTimeout(function(){ el.classList.add('on'); if(g.last) st.textContent='✓ 目标达成！错别字为 0 个，自动停止了。'; },300+i*1100)); }); });
+    document.getElementById('goal-reset').addEventListener('click',function(){ goalT.forEach(clearTimeout); goalT=[]; goalBox.innerHTML=''; document.getElementById('goal-status').textContent='点一下“开始目标”。'; });
+    /* loop */
+    var loopChips=document.getElementById('loop-chips'),loopFeed=document.getElementById('loop-feed'),loopT=[],loopInt=10;
+    [5,10].forEach(function(m){ var c=document.createElement('button'); c.className='chip'+(m===10?' on':''); c.textContent='每 '+m+' 分钟'; c.addEventListener('click',function(){ [].forEach.call(loopChips.children,function(x){x.classList.remove('on');}); c.classList.add('on'); loopInt=m; }); loopChips.appendChild(c); });
+    var loopRuns=[{t:'确认部署 → 进行中…（20%）'},{t:'确认部署 → 进行中…（70%）'},{t:'确认部署 → 完成！✓',done:true}];
+    document.getElementById('loop-go').addEventListener('click',function(){ loopT.forEach(clearTimeout); loopT=[]; loopFeed.innerHTML=''; var st=document.getElementById('loop-status'); st.textContent='正在以每 '+loopInt+' 分钟的间隔反复…（把时间快进给你看）';
+      loopRuns.forEach(function(r,i){ loopT.push(setTimeout(function(){ var d=document.createElement('div'); d.className='uf'; d.textContent='第 '+(i+1)+' 次（+'+(i*loopInt)+' 分钟）：'+r.t; loopFeed.appendChild(d); if(r.done) st.textContent='确认完成后就停止了重复。（实际上会一直跑到你让它停为止）'; },300+i*1000)); }); });
+    document.getElementById('loop-reset').addEventListener('click',function(){ loopT.forEach(clearTimeout); loopT=[]; loopFeed.innerHTML=''; document.getElementById('loop-status').textContent='选个间隔再点“开始重复”。'; });
+    /* workflows */
+    var WF=[{n:'合同 1·2',c:'#3b7dd8'},{n:'合同 3·4',c:'#1f9e76'},{n:'合同 5·6',c:'#6d5fd0'},{n:'合同 7·8',c:'#d8662f'}];
+    var wfGrid=document.getElementById('wf-grid'),wfT=[];
+    WF.forEach(function(w){ var d=document.createElement('div'); d.className='subcard'; d.innerHTML='<div class="sh"><span class="dot" style="background:'+w.c+'"></span> 助手 —— '+w.n+'</div><div class="sd2">等待中</div>'; wfGrid.appendChild(d); });
+    document.getElementById('wf-go').addEventListener('click',function(){ wfT.forEach(clearTimeout); wfT=[]; var cards=wfGrid.querySelectorAll('.subcard'); var st=document.getElementById('wf-status'); st.textContent='排好作战计划，同时投入了 4 名助手…';
+      cards.forEach(function(c,i){ c.classList.remove('on'); c.querySelector('.sd2').textContent='等待中'; wfT.push(setTimeout(function(){ c.classList.add('on'); c.querySelector('.sd2').textContent='检查中…'; },200+i*150)); wfT.push(setTimeout(function(){ c.querySelector('.sd2').textContent='完成 ✓'; },1500+i*150)); });
+      wfT.push(setTimeout(function(){ st.textContent='✓ 4 个人同时做完，把结果合成了一份。（一个人按顺序做会久得多）'; },2400)); });
+    document.getElementById('wf-reset').addEventListener('click',function(){ wfT.forEach(clearTimeout); wfT=[]; wfGrid.querySelectorAll('.subcard').forEach(function(c){ c.classList.remove('on'); c.querySelector('.sd2').textContent='等待中'; }); document.getElementById('wf-status').textContent='点一下“看看并行作业”。'; });
+    /* config */
+    var CFG=[{k:'语言',sub:'界面显示的语言',vals:['한국어','English','中文','日本語'],i:2},
+      {k:'主题',sub:'亮 / 暗',vals:['浅色','深色','跟随系统'],i:1},
+      {k:'模型',sub:'用哪个 Claude',vals:['Haiku','Sonnet','Opus'],i:1},
+      {k:'思考深度',sub:'effort',vals:['低','中','高','最高'],i:1},
+      {k:'权限',sub:'问得多不多',vals:['请求权限','接受编辑','自动'],i:0}];
+    var cfgPanel=document.getElementById('cfg-panel');
+    CFG.forEach(function(o){ var row=document.createElement('div'); row.className='cfgrow'; row.innerHTML='<div class="cfk">'+o.k+'<small>'+o.sub+'</small></div>'; var v=document.createElement('button'); v.className='cfgval'; v.textContent=o.vals[o.i]; v.addEventListener('click',function(){ o.i=(o.i+1)%o.vals.length; v.textContent=o.vals[o.i]; document.getElementById('cfg-status').textContent='把‘'+o.k+'’改成了‘'+o.vals[o.i]+'’。'; }); row.appendChild(v); cfgPanel.appendChild(row); });
+    /* doctor */
+    var DR=['安装状态','登录（账号连接）','网络连接','MCP 工具连接','设置文件'];
+    var drList=document.getElementById('dr-list'),drT=[];
+    document.getElementById('dr-go').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; var st=document.getElementById('dr-status'); st.textContent='检查中…';
+      DR.forEach(function(t,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML='<span class="ck">'+CK+'</span>'+t; drList.appendChild(el);
+        drT.push(setTimeout(function(){ el.classList.add('done'); if(i===DR.length-1) st.textContent='✓ 全部正常。（如果有问题，会告诉你是哪一项以及怎么修）'; },300+i*600)); }); });
+    document.getElementById('dr-reset').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; document.getElementById('dr-status').textContent='点一下“运行诊断”。'; });
   })();
 
   /* language switcher (works in /, /en/, /zh/, /ja/) */

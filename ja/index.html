@@ -177,6 +177,23 @@
   .cwresult .rt{ font-size:14px; font-weight:600; } .cwresult .rd{ font-size:12.5px; color:var(--muted); margin-top:1px; }
   .cwchips{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
   .cwchip{ font-size:12.5px; padding:7px 12px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--muted); cursor:pointer; font-family:inherit; } .cwchip:hover{ color:var(--ink); } .cwchip.on{ border-color:var(--accent); color:var(--ink); font-weight:500; }
+  /* effort / goal / loop / workflows / config / doctor */
+  .efbtns{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+  .efbtn{ flex:1; min-width:78px; padding:11px 10px; border:1px solid var(--line2); border-radius:10px; background:var(--bg); color:var(--ink); font-family:inherit; font-size:13.5px; font-weight:500; cursor:pointer; text-align:center; transition:border-color .16s,background .16s; } .efbtn.on{ border-color:var(--accent); background:var(--row); } .efbtn .efd{ font-size:11px; color:var(--faint); font-weight:400; margin-top:2px; }
+  .efthink{ display:flex; flex-direction:column; gap:6px; margin-top:6px; min-height:78px; }
+  .efline{ font-size:12.5px; padding:7px 11px; border-radius:7px; background:var(--bg); border:1px solid var(--line); color:var(--muted); opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .3s; } .efline.on{ opacity:1; transform:none; color:var(--ink); }
+  .jbadge{ font-size:11px; font-weight:600; padding:1px 8px; border-radius:6px; white-space:nowrap; flex:0 0 auto; } .jbadge.no{ color:#fff; background:var(--warn); } .jbadge.yes{ color:#fff; background:var(--good); }
+  .gturn{ display:flex; align-items:center; gap:10px; font-size:13px; padding:7px 0; opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .3s; } .gturn.on{ opacity:1; transform:none; } .gturn .gt-n{ width:22px; height:22px; border-radius:50%; background:var(--row); border:1px solid var(--line2); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; flex:0 0 auto; } .gturn .gt-t{ flex:1; }
+  .cfgpanel{ border:1px solid var(--line2); border-radius:12px; background:var(--panel); overflow:hidden; }
+  .cfgrow{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:13px 16px; border-bottom:1px solid var(--line); } .cfgrow:last-child{ border-bottom:none; }
+  .cfgrow .cfk{ font-size:13.5px; } .cfgrow .cfk small{ display:block; color:var(--faint); font-size:11.5px; }
+  .cfgval{ font-family:inherit; font-size:13px; font-weight:500; color:var(--ink); border:1px solid var(--line2); border-radius:8px; padding:6px 12px; background:var(--bg); cursor:pointer; min-width:104px; text-align:center; transition:border-color .16s; } .cfgval:hover{ border-color:var(--accent); }
+  .advbadge{ display:inline-block; font-size:11px; font-weight:600; color:#fff; background:var(--purple); border-radius:5px; padding:1px 8px; vertical-align:middle; }
+  .cw3grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; } @media (max-width:760px){ .cw3grid{ grid-template-columns:1fr; } }
+  .cw3card{ border:1px solid var(--line2); border-radius:12px; background:var(--panel); padding:13px 14px; } .cw3card.hl{ border-color:var(--good); background:rgba(31,158,118,.06); }
+  .cw3h{ font-size:13.5px; font-weight:600; display:flex; align-items:center; gap:7px; flex-wrap:wrap; margin-bottom:9px; }
+  .cw3body{ display:flex; flex-direction:column; gap:6px; min-height:120px; }
+  .cw3line{ font-size:12px; line-height:1.5; padding:7px 10px; border-radius:7px; background:var(--bg); border:1px solid var(--line); color:var(--muted); opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .3s; } .cw3line.on{ opacity:1; transform:none; } .cw3line.done{ color:var(--ink); background:rgba(31,158,118,.12); border-color:rgba(31,158,118,.34); font-weight:500; }
   .limit{ position:absolute; left:0; right:0; border-top:1px dashed var(--line2); pointer-events:none; } .limit .cap{ position:absolute; right:8px; top:-9px; font-size:10.5px; color:var(--faint); background:var(--bg); padding:0 6px; } .limit.over{ border-top-color:var(--over); } .limit.over .cap{ color:var(--over); }
   .free{ position:absolute; left:0; right:0; text-align:center; font-size:11.5px; color:var(--faint); pointer-events:none; transition:bottom .5s cubic-bezier(.22,1,.36,1); }
   .capbox{ display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; } .capbox input{ width:108px; font-family:inherit; font-size:14px; padding:9px 11px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; text-align:right; font-variant-numeric:tabular-nums; } .capbox input:focus{ border-color:var(--accent); } .capbox .unit{ font-size:13px; color:var(--muted); }
@@ -229,7 +246,17 @@
 
   /* mcp connect svg */
   .svgwrap{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:8px; margin:0 0 14px; }
-  .mcp .spoke{ stroke:var(--blue); stroke-width:2; fill:none; opacity:.9; } .mcp .node{ opacity:.3; transition:opacity .4s; } .mcp .node.on{ opacity:1; } .mcp .node rect{ fill:var(--bg); stroke:var(--line2); } .mcp .node.on rect{ stroke:var(--blue); } .mcp .center rect{ fill:var(--accent); } .mcp text{ font-family:"IBM Plex Sans KR",sans-serif; fill:var(--ink); } .mcp .center text{ fill:var(--bg); font-weight:600; } .mcp .chk{ fill:var(--good); font-weight:600; opacity:0; transition:opacity .3s; } .mcp .node.on .chk{ opacity:1; }
+  .mcp .spoke{ stroke:var(--line2); stroke-width:2; fill:none; } .mcp .node.on ~ .spoke{} .mcp .node{ opacity:.32; transition:opacity .45s; } .mcp .node.on{ opacity:1; } .mcp .node rect{ fill:var(--bg); stroke:var(--line2); } .mcp .node.on rect{ stroke:var(--blue); stroke-width:1.6; } .mcp .center rect{ fill:var(--accent); } .mcp text{ font-family:"IBM Plex Sans KR",sans-serif; fill:var(--ink); font-size:11.5px; } .mcp .center text{ fill:var(--bg); font-weight:600; } .mcp .chk{ fill:var(--good); font-weight:700; opacity:0; transition:opacity .3s; } .mcp .node.on .chk{ opacity:1; }
+  .mcpsim{ display:grid; grid-template-columns:280px 1fr; gap:18px; align-items:stretch; margin:0 0 14px; } @media (max-width:760px){ .mcpsim{ grid-template-columns:1fr; } }
+  .mcphub{ border:1px solid var(--line2); border-radius:14px; background:var(--panel); padding:10px; display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow); } .mcphub svg{ width:100%; max-width:264px; height:auto; display:block; }
+  .mcppanel{ border:1px solid var(--line2); border-radius:14px; background:var(--panel); padding:16px 18px; min-height:210px; display:flex; flex-direction:column; box-shadow:var(--shadow); }
+  .mcp-empty{ margin:auto; text-align:center; color:var(--muted); font-size:13.5px; line-height:1.75; max-width:250px; }
+  .mcp-card{ opacity:0; transform:translateY(6px); transition:opacity .35s,transform .35s; } .mcp-card.show{ opacity:1; transform:none; }
+  .mcp-h{ display:flex; align-items:center; gap:8px; font-size:14.5px; font-weight:600; margin-bottom:13px; } .mcp-h .dot{ width:11px; height:11px; border-radius:3px; flex:0 0 auto; } .mcp-h .mcp-chk{ margin-left:auto; color:var(--good); font-weight:700; font-size:13px; }
+  .mcp-b,.mcp-a{ font-size:13px; border-radius:9px; padding:10px 12px; line-height:1.55; } .mcp-b{ color:var(--muted); background:var(--bg); border:1px solid var(--line); } .mcp-a{ color:var(--ink); background:rgba(31,158,118,.1); border:1px solid rgba(31,158,118,.32); }
+  .mcp-arrow{ text-align:center; color:var(--faint); font-size:15px; margin:5px 0; }
+  .mcp-t{ display:inline-block; font-size:10.5px; font-weight:600; padding:1px 7px; border-radius:5px; margin-right:6px; } .mcp-b .mcp-t{ color:var(--muted); background:var(--row); } .mcp-a .mcp-t{ color:#fff; background:var(--good); }
+  .mcp-count{ margin-top:auto; padding-top:13px; font-size:12px; color:var(--faint); }
 
   /* subagent demo */
   .mainbox{ border:1px solid var(--accent); border-radius:12px; background:var(--panel); padding:13px 15px; } .mainbox .mh{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; } .mainbox .mt2{ font-size:13.5px; font-weight:500; }
@@ -325,26 +352,33 @@
     <button class="navitem" data-page="sessions"><span class="no">06</span>セッション & フォルダ</button>
     <button class="navitem" data-page="tokens"><span class="no">07</span>トークン</button>
     <button class="navitem" data-page="models"><span class="no">08</span>モデルを選ぶ (model)</button>
+    <button class="navitem" data-page="effort"><span class="no">09</span>考える深さ (effort)</button>
     <div class="navsec">記憶とルール</div>
-    <button class="navitem" data-page="claudemd"><span class="no">09</span>CLAUDE.md</button>
-    <button class="navitem" data-page="memory"><span class="no">10</span>メモリ</button>
-    <button class="navitem" data-page="skills"><span class="no">11</span>スキル</button>
+    <button class="navitem" data-page="claudemd"><span class="no">10</span>CLAUDE.md</button>
+    <button class="navitem" data-page="memory"><span class="no">11</span>メモリ</button>
+    <button class="navitem" data-page="skills"><span class="no">12</span>スキル</button>
     <div class="navsec">機能を広げる</div>
-    <button class="navitem" data-page="mcp"><span class="no">12</span>MCP (ツール連携)</button>
-    <button class="navitem" data-page="plugins"><span class="no">13</span>プラグイン</button>
-    <button class="navitem" data-page="agents"><span class="no">14</span>サブエージェント</button>
-    <button class="navitem" data-page="images"><span class="no">15</span>画像を貼り付け</button>
-    <button class="navitem" data-page="hooks"><span class="no">16</span>自動化 (フック)</button>
+    <button class="navitem" data-page="mcp"><span class="no">13</span>MCP (ツール連携)</button>
+    <button class="navitem" data-page="plugins"><span class="no">14</span>プラグイン</button>
+    <button class="navitem" data-page="agents"><span class="no">15</span>サブエージェント</button>
+    <button class="navitem" data-page="images"><span class="no">16</span>画像を貼り付け</button>
+    <button class="navitem" data-page="hooks"><span class="no">17</span>自動化 (フック)</button>
+    <div class="navsec">自動・繰り返し</div>
+    <button class="navitem" data-page="goal"><span class="no">18</span>目標達成 (goal)</button>
+    <button class="navitem" data-page="loop"><span class="no">19</span>繰り返し実行 (loop)</button>
+    <button class="navitem" data-page="workflows"><span class="no">20</span>ワークフロー (workflows)</button>
     <div class="navsec">安全に使う</div>
-    <button class="navitem" data-page="planmode"><span class="no">17</span>プランモード</button>
-    <button class="navitem" data-page="permissions"><span class="no">18</span>権限モード</button>
-    <button class="navitem" data-page="rewind"><span class="no">19</span>巻き戻し</button>
-    <button class="navitem" data-page="privacy"><span class="no">20</span>データ & プライバシー</button>
+    <button class="navitem" data-page="planmode"><span class="no">21</span>プランモード</button>
+    <button class="navitem" data-page="permissions"><span class="no">22</span>権限モード</button>
+    <button class="navitem" data-page="rewind"><span class="no">23</span>巻き戻し</button>
+    <button class="navitem" data-page="privacy"><span class="no">24</span>データ & プライバシー</button>
     <div class="navsec">実践</div>
-    <button class="navitem" data-page="commands"><span class="no">21</span>スラッシュコマンド</button>
-    <button class="navitem" data-page="plans"><span class="no">22</span>料金プラン</button>
-    <button class="navitem" data-page="limits"><span class="no">23</span>使用量の上限</button>
-    <button class="navitem" data-page="glossary"><span class="no">24</span>用語集</button>
+    <button class="navitem" data-page="commands"><span class="no">25</span>スラッシュコマンド</button>
+    <button class="navitem" data-page="config"><span class="no">26</span>設定 (config)</button>
+    <button class="navitem" data-page="doctor"><span class="no">27</span>診断 (doctor)</button>
+    <button class="navitem" data-page="plans"><span class="no">28</span>料金プラン</button>
+    <button class="navitem" data-page="limits"><span class="no">29</span>使用量の上限</button>
+    <button class="navitem" data-page="glossary"><span class="no">30</span>用語集</button>
   </nav>
 
   <main class="main"><div class="inner">
@@ -390,7 +424,7 @@
         </div>
       </div>
       <div class="bignote"><span class="bx">参考</span><span>このガイドは<b>概念を学ぶ場所</b>です — インストールや始め方は扱いません（それは公式ドキュメントで案内しています）。そして<b>非公式の学習資料</b>なので Anthropic とは無関係です。</span></div>
-      <p class="note">左のメニュー（狭い画面では上のタブ）から 24 個のトピックを押して移動してください。すべて<b>自分で触らなくても</b>ボタンや入力で理解できるように作りました。本文に<span class="gl" title="このように点線が引かれた単語は、マウスを乗せると意味が表示されます。スマホではカッコの説明を参考にしてください。">点線の付いた単語</span>は、乗せると意味が表示されます。</p>
+      <p class="note">左のメニュー（狭い画面では上のタブ）から 30 個のトピックを押して移動してください。すべて<b>自分で触らなくても</b>ボタンや入力で理解できるように作りました。本文に<span class="gl" title="このように点線が引かれた単語は、マウスを乗せると意味が表示されます。スマホではカッコの説明を参考にしてください。">点線の付いた単語</span>は、乗せると意味が表示されます。</p>
     </section>
 
     <!-- 02 COWORK -->
@@ -399,12 +433,15 @@
       <p class="lead"><b>Cowork</b> は、コードではなく <b>「オフィス業務」を代わりにこなしてくれる</b> Claude です。目標を伝えるだけで、<b>自分のファイルを直接扱って完成した成果物</b>（Excel・文書など）を作ってくれます。</p>
       <p class="defs">Claude Code と <b>同じエンジン</b>ですが、ターミナルではなく <b>デスクトップアプリ</b>で使う <b>非エンジニアの業務向け</b>です。下で実際の動きを見てみましょう。</p>
 
-      <p class="label">3 つの違い <span class="hint">ひと目で</span></p>
-      <div class="fgrid">
-        <div class="fcard"><div class="ft">Claude チャット</div><div class="fd">聞くと <b>答え・下書き</b>をくれます。自分のファイルは直接さわれません。</div><div class="fe"><b>例</b> 「レポートはどう書けばいい？」</div></div>
-        <div class="fcard" style="border-color:var(--good);background:rgba(31,158,118,.06);"><div class="ft">Cowork</div><div class="fd"><b>自分のファイルで業務を代わりに完成</b>させます。非エンジニア向け・デスクトップアプリ。</div><div class="fe"><b>例</b> 「この領収書を Excel に整理して」</div></div>
-        <div class="fcard"><div class="ft">Claude Code</div><div class="fd"><b>開発作業</b>を代わりにこなします。エンジニア向け・ターミナル。</div><div class="fe"><b>例</b> 「ログインのバグを直して」</div></div>
+      <p class="label">同じお願いを 3 つに — 何が違う？ <span class="hint">押してみてください</span></p>
+      <div class="bignote"><span class="bx">同じお願い</span><span>「この<b>領収書を Excel に整理</b>して」と 3 つに同じように頼んだら？</span></div>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="cw3-go">3 つの反応を見る ▶</button><button class="btn" id="cw3-reset">リセット</button></div>
+      <div class="cw3grid">
+        <div class="cw3card"><div class="cw3h">Claude チャット <span class="badge no">答え・方法だけ</span></div><div class="cw3body" id="cw3-chat"></div></div>
+        <div class="cw3card hl"><div class="cw3h">Cowork <span class="badge yes">成果物まで完成</span></div><div class="cw3body" id="cw3-cowork"></div></div>
+        <div class="cw3card"><div class="cw3h">Claude Code <span class="badge no">開発専用</span></div><div class="cw3body" id="cw3-code"></div></div>
       </div>
+      <p class="status" id="cw3-status" style="margin-bottom:4px;">「3 つの反応を見る」を押してみてください — 同じお願いなのに結果がどう違うかをお見せします。</p>
 
       <p class="label">Cowork はこう働きます <span class="hint">例を選んで ▶</span></p>
       <div class="cwchips" id="cw-chips"></div>
@@ -462,8 +499,8 @@ irm https://claude.ai/install.ps1 | iex</div>
         </div>
         <div>
           <p class="label" style="margin-top:0;">ウィンドウのサイズ <span class="hint">変えて比べる</span></p>
-          <div class="capbox"><input id="capinp" type="number" value="40000" min="2000" step="1000"><span class="unit">トークン</span>
-            <div class="chips"><button class="chip" data-v="8000">8K</button><button class="chip on" data-v="40000">40K</button><button class="chip" data-v="200000">200K</button></div></div>
+          <div class="capbox"><input id="capinp" type="number" value="200000" min="2000" step="1000"><span class="unit">トークン</span>
+            <div class="chips"><button class="chip" data-v="8000">8K</button><button class="chip" data-v="40000">40K</button><button class="chip on" data-v="200000">200K</button></div></div>
           <p class="capnote">標準のコンテキストウィンドウは 200,000(200K) トークン。最新の Opus・Sonnet は最大 1,000,000(1M) まで — 「モデルを選ぶ」タブを参照。</p>
           <p class="label">自分で入力する <span class="hint">直接打ってみてください</span></p>
           <div class="field"><input id="inp" type="text" placeholder="例: ログインのバグを直して" maxlength="80"><button class="send" id="send">送信</button></div>
@@ -697,12 +734,19 @@ description: 週次レポートを会社の様式で作成
       <p class="defs"><span class="gl" title="Model Context Protocol — Claude が外部のツール・データとやり取りする共通のルール（標準）">MCP = Model Context Protocol</span> (モデルが外部とつながる標準)。ボタンを押すと連携の過程を見られます。</p>
       <div class="bignote"><span class="bx">かんたんに</span><span>あるアプリに「Google でログイン」をつなぐと、そのアプリが自分の Google を使えますよね? <b>MCP もそんな「連携」</b>です — Claude に Jira・Figma のようなツールをつないであげると、Claude がそれを直接開いて仕事します。自分でいちいちコピペしなくても済むんです。</span></div>
       <div class="btnrow" style="margin-bottom:12px;"><button class="btn solid" id="mcp-go">ひとつずつ連携してみる ▶</button><button class="btn" id="mcp-reset">リセット</button></div>
-      <div class="svgwrap">
-        <svg class="mcp" id="mcpsvg" viewBox="0 0 460 280" role="img" aria-label="Claude Code が外部ツールとひとつずつつながっていく絵">
-          <g id="mcp-lines"></g>
-          <g class="center"><rect x="180" y="118" width="100" height="44" rx="12"></rect><text x="230" y="145" text-anchor="middle" font-size="13">Claude Code</text></g>
-          <g id="mcp-nodes"></g>
-        </svg>
+      <div class="mcpsim">
+        <div class="mcphub">
+          <svg class="mcp" id="mcpsvg" viewBox="0 0 280 280" role="img" aria-label="Claude Code が外部ツールとひとつずつつながっていく絵">
+            <g id="mcp-lines"></g>
+            <g class="center"><rect x="95" y="124" width="90" height="32" rx="10"></rect><text x="140" y="144.5" text-anchor="middle" font-size="12.5">Claude Code</text></g>
+            <g id="mcp-nodes"></g>
+          </svg>
+        </div>
+        <div class="mcppanel">
+          <div class="mcp-empty" id="mcp-empty">左でツールを連携すると、Claude が<b>何をもっとできるようになるか</b>をここでお見せします。</div>
+          <div id="mcp-detail"></div>
+          <div class="mcp-count" id="mcp-count"></div>
+        </div>
       </div>
       <p class="status" id="mcp-msg" style="margin-top:0;">「ひとつずつ連携してみる」を押してみてください。</p>
       <div class="grp" style="margin-top:20px;"><h3>こんなものを連携します (例)</h3>
@@ -1037,7 +1081,81 @@ description: 週次レポートを会社の様式で作成
       <p class="note">このように核心だけ残して縮めるので、圧縮の後も「どんな作業をどうやったか」は引き継がれます。ただし<b>捨てられた詳細な一覧</b>（例: 重複した名前の全リスト）がまた必要になれば、Claude がそのファイルをもう一度読みます。トークンの数値は理解を助ける<b>例</b>です（実際の値は状況ごとに変わります）。コンテキストウィンドウで<b>自動的に</b>起こる圧縮は「コンテキストウィンドウ」タブで見られます。</p>
     </section>
 
-    <!-- 23 GLOSSARY -->
+    <!-- EFFORT -->
+    <section class="page" id="effort">
+      <h1>考える深さ (effort)</h1>
+      <p class="lead"><b>考える深さ（effort）</b>は、Claude が<b>答える前にどれだけ深く考えるか</b>を決める設定です。深く考えるほど難しい問題により正確になりますが、より遅く高くつきます。</p>
+      <p class="defs"><b>低・中・高・最高</b>の段階があります。深く考えるほど「思考（thinking）トークン」を多く使います（「トークン」タブ）。選んで違いを見てみましょう。</p>
+      <div class="efbtns" id="ef-btns"></div>
+      <div class="bars">
+        <div class="bar"><div class="bl"><span>難しい問題の正確さ</span><b id="ef-v-acc"></b></div><div class="track2"><div class="fill2" id="ef-f-acc"></div></div></div>
+        <div class="bar"><div class="bl"><span>応答の速さ</span><b id="ef-v-sp"></b></div><div class="track2"><div class="fill2" id="ef-f-sp"></div></div></div>
+        <div class="bar"><div class="bl"><span>トークンのコスト</span><b id="ef-v-cost"></b></div><div class="track2"><div class="fill2" id="ef-f-cost"></div></div></div>
+      </div>
+      <p class="label">選んだぶんだけ「考える過程」が深まります <span class="hint">押すと長さが変わります</span></p>
+      <div class="efthink" id="ef-think"></div>
+      <p class="note">簡単な仕事は「低」で（速くて安い）、込み入った分析・推論は「高/最高」で。変え方: <code>/effort</code> または設定（「設定」タブ）。<span class="exb">例</span> のバーは相対的な比較です。（出典: Anthropic 公式 — support.claude.com モデル・effort 設定）</p>
+    </section>
+
+    <!-- GOAL -->
+    <section class="page" id="goal">
+      <h1>目標達成 (goal)</h1>
+      <p class="lead"><b>目標（goal）</b>は、<b>「完了条件」だけ与えれば、その条件になるまで Claude が自分で繰り返す</b>機能です。毎回もう一度頼む必要がありません。</p>
+      <p class="defs">一度やって終わりではなく、<b>毎ターンの後に「条件を満たしたか」を自分で判定</b>し、満たしていなければまたやります。下で見てみましょう。</p>
+      <div class="bignote"><span class="bx">目標の例</span><span>「この案内文の<b>誤字が 0 個になるまで</b>直して」</span></div>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="goal-go">目標スタート ▶</button><button class="btn" id="goal-reset">リセット</button></div>
+      <div class="cwvm"><span class="cwvmtag">条件になるまで自動で繰り返す</span><div id="goal-turns"></div></div>
+      <p class="status" id="goal-status" style="margin-top:12px;">「目標スタート」を押してみてください。</p>
+      <p class="note">条件の充足は<b>別の判定</b>で毎ターン確認し、満たされたら自動で止まります（無限ループ防止の仕組みもあります）。変え方: <code>/goal</code>。（出典: Anthropic 公式 — code.claude.com/docs goal）</p>
+    </section>
+
+    <!-- LOOP -->
+    <section class="page" id="loop">
+      <h1>繰り返し実行 (loop)</h1>
+      <p class="lead"><b>繰り返し（loop）</b>は、<b>決めた間隔ごとに同じ作業を自動でもう一度実行する</b>機能です。例: 10 分ごとに「デプロイ状況を確認」。</p>
+      <p class="defs">目標（goal）が「条件になるまで」なら、繰り返し（loop）は「<b>決めた時間間隔で</b>」です。間隔を選んでスタートしてみましょう。（シミュは時間を早送りして見せます。）</p>
+      <div class="chips" id="loop-chips" style="margin-bottom:12px;"></div>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="loop-go">繰り返しスタート ▶</button><button class="btn" id="loop-reset">停止・リセット</button></div>
+      <p class="label">実行ログ</p>
+      <div class="usefeed" id="loop-feed"></div>
+      <p class="status" id="loop-status" style="margin-top:10px;">間隔を選んで「繰り返しスタート」を押してみてください。</p>
+      <p class="note">セッションが開いている間、繰り返されます。変え方: <code>/loop 10m "デプロイ確認"</code> のように。（出典: Anthropic 公式 — code.claude.com/docs scheduled-tasks）</p>
+    </section>
+
+    <!-- WORKFLOWS -->
+    <section class="page" id="workflows">
+      <h1>ワークフロー (workflows) <span class="advbadge">上級</span></h1>
+      <p class="lead"><b>ワークフロー（workflows）</b>は、<b>とても大きな仕事を Claude が自分で「作戦」を立てて、複数のお手伝い（サブエージェント）を同時に動かし</b>、一気に処理する機能です。</p>
+      <p class="defs">サブエージェントが「一人に任せる」なら、ワークフローは「<b>複数人を同時に調整</b>」します。大きなレビュー・整理・調査に強いです（Max・Team などの上位プラン）。</p>
+      <div class="bignote"><span class="bx">例</span><span>「契約書<b>8 件を項目別に同時にレビュー</b>して」 → Claude が作戦を立てて、お手伝いを複数人いっぺんに投入</span></div>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="wf-go">同時作業を見る ▶</button><button class="btn" id="wf-reset">リセット</button></div>
+      <div class="sagrid" id="wf-grid"></div>
+      <p class="status" id="wf-status" style="margin-top:14px;">「同時作業を見る」を押してみてください。</p>
+      <p class="note">非エンジニアにはやや上級の機能です — 「こんなこともできる」とだけ知っておけば十分です。一度に多くのお手伝いを使うのでトークンを多く消費し、大きな仕事にだけ向いています。（出典: Anthropic 公式 — claude.com 動的ワークフロー紹介）</p>
+    </section>
+
+    <!-- CONFIG -->
+    <section class="page" id="config">
+      <h1>設定 (config)</h1>
+      <p class="lead"><b>設定（config）</b>は、<b>言語・テーマ・モデル・考える深さ・権限のようなものを一か所で変える管理パネル</b>です。</p>
+      <p class="defs">「言語を変えたい」みたいなことは全部ここでやります。値を押して変えてみてください（理解を助ける例のパネル）。</p>
+      <div class="cfgpanel" id="cfg-panel"></div>
+      <p class="status" id="cfg-status" style="margin-top:12px;">右の値を押して変えてみてください。</p>
+      <p class="note">開き方: <code>/config</code>。実際の設定項目はこれより多いです。（出典: Anthropic 公式 — code.claude.com/docs settings）</p>
+    </section>
+
+    <!-- DOCTOR -->
+    <section class="page" id="doctor">
+      <h1>診断 (doctor)</h1>
+      <p class="lead"><b>診断（doctor）</b>は、<b>何かうまくいかないときに、インストール・ログイン・連携・設定を一度に点検</b>してくれるツールです。「うまくいかないとき、まずやってみること」。</p>
+      <p class="defs">車の点検ランプのように、どこが問題かを指摘してくれます。診断を実際に走らせてみましょう。</p>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="dr-go">診断を実行 ▶</button><button class="btn" id="dr-reset">リセット</button></div>
+      <div class="cwvm"><span class="cwvmtag">/doctor 点検中</span><div id="dr-list"></div></div>
+      <p class="status" id="dr-status" style="margin-top:12px;">「診断を実行」を押してみてください。</p>
+      <p class="note">開き方: <code>/doctor</code>（または <code>claude doctor</code>）。問題があれば、どう直すかも教えてくれます。（出典: Anthropic 公式 — code.claude.com/docs CLI 参考）</p>
+    </section>
+
+    <!-- 30 GLOSSARY -->
     <section class="page" id="glossary">
       <h1>用語集</h1>
       <p class="lead">このガイドに出てきた言葉を一行でまとめました。</p>
@@ -1120,7 +1238,7 @@ description: 週次レポートを会社の様式で作成
   (function(){ var s=null; try{ s=localStorage.getItem('cc_present'); }catch(e){} if(s==='1') setPresent(true); })();
 
   /* LNB icons (monoline) */
-  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
   function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
 
   /* router */
@@ -1128,7 +1246,7 @@ description: 週次レポートを会社の様式で作成
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'チャットは「答え」をくれて、Claude Code は自分のプロジェクトで<b>直接作って動くところまで</b>やってくれます。', cowork:'コードではなく<b>オフィス業務を代わりに</b>こなす Claude — 目標を伝えるだけで<b>自分のファイルで成果物まで</b>作ります（非エンジニア・デスクトップアプリ）。', where:'ターミナル・VS Code・デスクトップ・Web — <b>どこでも同じ Claude Code</b>、設定も共有されます。', context:'ここに乗ったものだけを Claude が覚えています。満杯になったら<b>「圧縮」で整理</b>します。', sessions:'<b>一つのセッションに一つの仕事</b> — 混ぜると混乱します。作業フォルダは狭く。', tokens:'トークン = AI が文章を読む単位。<b>長いほど空間・コストが増え</b>、日本語のほうが重い。', models:'賢さ ↔ 速さ ↔ コストはトレードオフ。<b>迷ったら Sonnet</b> で始めましょう。', claudemd:'<b>自分で書いておくルールのメモ</b> — 毎回の会話の始めに自動で適用されます。', memory:'<b>Claude が自分で学んで覚える</b>メモ。セッションをまたいで引き継がれます。', skills:'よく使う作業の手順を<b>一度作ってずっと再利用</b>します。', mcp:'<b>外部ツール(Jira・Figma など)につないで</b> Claude が直接使えるようにします。', plugins:'スキル・ツール・コマンドなどを<b>まとめて一度にインストール</b>する一式です。', agents:'大きな仕事を<b>専門のお手伝いに分けて任せ</b>、結果だけ受け取ります。', images:'<b>スクリーンショットを貼れば</b> Claude が見て理解します — 言葉より速く正確。', hooks:'特定の瞬間に<b>決まった動作が毎回自動</b>で実行されるルールです。', planmode:'直す前に<b>計画を先に見せて承認</b>を受けます — 大きな変更に安全。', permissions:'Claude が<b>どのくらい頻繁に聞くか</b>を決める設定。最初は安全に。', rewind:'リクエストごとに<b>自動保存</b> — 気に入らなければ以前へ巻き戻します。', privacy:'<b>業務用(Team·Enterprise·API)は基本的に学習に使われません。</b> 個人用は設定で選択。', commands:'<code class="inlinecode">/</code> で始まるショートカットコマンド。いちばんよく使うのは <b>/clear · /compact</b>。', plans:'<b>無料プランにはありません。</b> 有料(Pro·Max·Team)または API(従量制)で使用。', limits:'<b>使い切るとリセットまで待つ</b>必要があります — だから管理が大切です。', compact:'長く積み上がった会話が<b>短い要約 1 マス</b>に縮みます。', glossary:'迷う用語を<b>一行で</b>素早く探す場所です。' };
+  var TLDR={ intro:'チャットは「答え」をくれて、Claude Code は自分のプロジェクトで<b>直接作って動くところまで</b>やってくれます。', cowork:'コードではなく<b>オフィス業務を代わりに</b>こなす Claude — 目標を伝えるだけで<b>自分のファイルで成果物まで</b>作ります（非エンジニア・デスクトップアプリ）。', where:'ターミナル・VS Code・デスクトップ・Web — <b>どこでも同じ Claude Code</b>、設定も共有されます。', context:'ここに乗ったものだけを Claude が覚えています。満杯になったら<b>「圧縮」で整理</b>します。', sessions:'<b>一つのセッションに一つの仕事</b> — 混ぜると混乱します。作業フォルダは狭く。', tokens:'トークン = AI が文章を読む単位。<b>長いほど空間・コストが増え</b>、日本語のほうが重い。', models:'賢さ ↔ 速さ ↔ コストはトレードオフ。<b>迷ったら Sonnet</b> で始めましょう。', claudemd:'<b>自分で書いておくルールのメモ</b> — 毎回の会話の始めに自動で適用されます。', memory:'<b>Claude が自分で学んで覚える</b>メモ。セッションをまたいで引き継がれます。', skills:'よく使う作業の手順を<b>一度作ってずっと再利用</b>します。', mcp:'<b>外部ツール(Jira・Figma など)につないで</b> Claude が直接使えるようにします。', plugins:'スキル・ツール・コマンドなどを<b>まとめて一度にインストール</b>する一式です。', agents:'大きな仕事を<b>専門のお手伝いに分けて任せ</b>、結果だけ受け取ります。', images:'<b>スクリーンショットを貼れば</b> Claude が見て理解します — 言葉より速く正確。', hooks:'特定の瞬間に<b>決まった動作が毎回自動</b>で実行されるルールです。', planmode:'直す前に<b>計画を先に見せて承認</b>を受けます — 大きな変更に安全。', permissions:'Claude が<b>どのくらい頻繁に聞くか</b>を決める設定。最初は安全に。', rewind:'リクエストごとに<b>自動保存</b> — 気に入らなければ以前へ巻き戻します。', privacy:'<b>業務用(Team·Enterprise·API)は基本的に学習に使われません。</b> 個人用は設定で選択。', commands:'<code class="inlinecode">/</code> で始まるショートカットコマンド。いちばんよく使うのは <b>/clear · /compact</b>。', plans:'<b>無料プランにはありません。</b> 有料(Pro·Max·Team)または API(従量制)で使用。', limits:'<b>使い切るとリセットまで待つ</b>必要があります — だから管理が大切です。', compact:'長く積み上がった会話が<b>短い要約 1 マス</b>に縮みます。', effort:'答える前に<b>どれだけ深く考えるか</b> — 深いほど正確ですが、遅く高くつきます。', goal:'<b>「完了条件」だけ与えれば、できるまで</b> Claude が自分で繰り返します。', loop:'<b>決めた間隔ごとに</b>同じ作業を自動でもう一度実行します。', workflows:'大きな仕事を<b>複数のお手伝いが同時に</b>処理するよう調整します（上級）。', config:'<b>言語・テーマ・モデル・権限</b>のような設定を一か所で変えます。', doctor:'うまくいかないとき<b>インストール・連携・設定を一度に点検</b>してくれます。', glossary:'迷う用語を<b>一行で</b>素早く探す場所です。' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">一行まとめ</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -1147,7 +1265,7 @@ description: 週次レポートを会社の様式で作成
   document.getElementById('cc-chat').textContent='ボタンを押すと答えが出ます。'; document.getElementById('cc-code').innerHTML='<div class="cstep on"><span>ボタンを押すと作る過程が出ます。</span></div>';
 
   /* context tank */
-  var MAX=40000,LIMIT_PX=420,AC_RATIO=0.8,stack=document.getElementById('stack'),limit=document.getElementById('limit'),cap=document.getElementById('cap'),free=document.getElementById('free'),tokEl=document.getElementById('tok'),num=document.getElementById('num'),status=document.getElementById('status'),inp=document.getElementById('inp'),capinp=document.getElementById('capinp'),tokprev=document.getElementById('tokprev');
+  var MAX=200000,LIMIT_PX=420,AC_RATIO=0.8,stack=document.getElementById('stack'),limit=document.getElementById('limit'),cap=document.getElementById('cap'),free=document.getElementById('free'),tokEl=document.getElementById('tok'),num=document.getElementById('num'),status=document.getElementById('status'),inp=document.getElementById('inp'),capinp=document.getElementById('capinp'),tokprev=document.getElementById('tokprev');
   var labels={sys:'システムプロンプト · 基本の指示',tool:'ツール一覧 · 使える機能',mem:'プロジェクトのメモ · CLAUDE.md',user:'自分のメッセージ',file:'ファイルの内容 · 読み込んだコード',reply:'Claude の返答',summary:'圧縮で要約された情報'};
   var hex={sys:'#8a8a8a',tool:'#3b7dd8',mem:'#1f9e76',user:'#6d5fd0',file:'#d8662f',reply:'#cf5184',summary:'#1f9e76'};
   var base=[{k:'sys',t:3000},{k:'tool',t:11500},{k:'mem',t:2200}],items=[],curShown=0;
@@ -1171,14 +1289,17 @@ description: 週次レポートを会社の様式で作成
   document.getElementById('compact').addEventListener('click',function(){ if(items.reduce(function(a,b){return a+b.t;},0)<=base.reduce(function(a,b){return a+b.t;},0)+1000){ status.textContent='まだ圧縮するほど積み上がっていません。'; return; } doCompact(); status.textContent='手動圧縮(/compact)完了 — 積み上がっていたメッセージ・ファイル・結果が要約 1 マスに縮みました。'; });
   document.getElementById('reset').addEventListener('click',function(){ acStop(); ctxBase(); status.textContent='下の 3 つのマスは、会話を始める前からいつも入っています。'; });
   var acT=[]; function acStop(){ acT.forEach(clearTimeout); acT=[]; document.getElementById('tank').classList.remove('flash'); stack.classList.remove('summarizing'); var ov=document.getElementById('acoverlay'); if(ov)ov.classList.remove('on'); }
-  document.getElementById('autocompact').addEventListener('click',function(){ acStop(); ctxMax(40000); ctxBase(); var seq=[['user',900,'ダッシュボードを作って'],['file',8400,null],['tool',3100,null],['reply',1800,null],['reply',1100,null]]; status.textContent='会話が積み上がる途中… (続いている一つの作業)'; var i=0;
+  document.getElementById('autocompact').addEventListener('click',function(){ acStop(); ctxBase(); var ba=document.getElementById('cwba'); if(ba)ba.style.display='none';
+    var base0=items.reduce(function(a,b){return a+b.t;},0), chunk=Math.max(1500,Math.round(MAX*0.11)), labels=[['user','ダッシュボードを作って'],['file',null],['tool',null],['reply',null]], seq=[], tot=base0;
+    for(var k=0; tot<MAX*AC_RATIO && k<14; k++){ var L=labels[k%4], amt=(k===0?900:Math.round(chunk*(0.8+0.4*((k%3)/2)))); seq.push([L[0],amt,L[1]]); tot+=amt; }
+    status.textContent='会話が積み上がる途中… (続いている一つの作業)'; var i=0;
     (function step(){ if(i>=seq.length){ acTrigger(); return; } var s=seq[i++]; ctxAdd(s[0],s[1],s[2]); var total=items.reduce(function(a,b){return a+b.t;},0);
       if(total>=MAX*AC_RATIO){ status.textContent='自動圧縮の開始線に達しました! ('+fmt(total)+' / 上限 '+fmt(MAX)+') — 上限まで行かず、ここで止まって圧縮します。'; acT.push(setTimeout(acTrigger,1100)); return; }
       if(total/MAX>.6) status.textContent='だんだん満ちていく途中… もうすぐ自動圧縮線に達します。'; acT.push(setTimeout(step,1100)); })(); });
   function acTrigger(){ var tank=document.getElementById('tank'),ov=document.getElementById('acoverlay'); status.textContent='⚠️ 自動圧縮線に到達 — ここで止まって要約を始めます。(要約の間は新しい作業が進みません)'; tank.classList.add('flash');
     acT.push(setTimeout(function(){ stack.classList.add('summarizing'); if(ov)ov.classList.add('on'); status.textContent='停止 — これまでの会話・ファイル・ツール結果を短く要約中…'; },1300));
     acT.push(setTimeout(function(){ stack.classList.remove('summarizing'); if(ov)ov.classList.remove('on'); tank.classList.remove('flash'); doCompact(); status.textContent='圧縮完了 — 古い会話・ツールの出力は「要約」1 マスに縮み、依頼・ファイル一覧・決定といった核心は保存されます。(内容が実際にどう変わるかは「圧縮をくわしく」タブで見られます)'; },3400)); }
-  renderPrev(tokprev,'',true); ctxMax(40000); ctxBase();
+  renderPrev(tokprev,'',true); ctxMax(200000); ctxBase();
 
   /* sessions + brain */
   var sBody=document.getElementById('sess-body'),sBar=document.getElementById('sess-bar'),sBarL=document.getElementById('sess-barl'),sMode=document.getElementById('sess-mode'),sMsg=document.getElementById('sess-msg'),sTimers=[];
@@ -1263,16 +1384,25 @@ description: 週次レポートを会社の様式で作成
   });
 
   /* mcp connect */
-  var MCPN=[ {x:230,y:40,w:78,n:'GitHub'},{x:392,y:96,w:70,n:'Figma'},{x:360,y:228,w:84,n:'ブラウザ'},{x:100,y:228,w:64,n:'Jira'},{x:52,y:96,w:64,n:'Slack'} ];
-  (function(){ var ln=document.getElementById('mcp-lines'),nd=document.getElementById('mcp-nodes'); MCPN.forEach(function(o,i){ var cx=o.x+o.w/2, cy=o.y+15;
-    var line=document.createElementNS('http://www.w3.org/2000/svg','line'); line.setAttribute('class','spoke'); line.setAttribute('x1',230); line.setAttribute('y1',140); line.setAttribute('x2',cx); line.setAttribute('y2',cy); var len=Math.round(Math.hypot(cx-230,cy-140))+4; line.style.strokeDasharray=len; line.style.strokeDashoffset=len; line.style.transition='stroke-dashoffset .6s ease'; line.id='mcpl'+i; ln.appendChild(line);
-    var g=document.createElementNS('http://www.w3.org/2000/svg','g'); g.setAttribute('class','node'); g.id='mcpn'+i;
-    var rect=document.createElementNS('http://www.w3.org/2000/svg','rect'); rect.setAttribute('x',o.x); rect.setAttribute('y',o.y); rect.setAttribute('width',o.w); rect.setAttribute('height',30); rect.setAttribute('rx',8); g.appendChild(rect);
-    var tx=document.createElementNS('http://www.w3.org/2000/svg','text'); tx.setAttribute('x',cx); tx.setAttribute('y',o.y+19); tx.setAttribute('text-anchor','middle'); tx.setAttribute('font-size','12'); tx.textContent=o.n; g.appendChild(tx);
-    var ck=document.createElementNS('http://www.w3.org/2000/svg','text'); ck.setAttribute('class','chk'); ck.setAttribute('x',o.x+o.w-4); ck.setAttribute('y',o.y+2); ck.setAttribute('text-anchor','middle'); ck.setAttribute('font-size','13'); ck.textContent='✓'; g.appendChild(ck);
+  var MCPN=[
+    {cx:140,cy:46,w:60,n:'Jira',c:'#3b7dd8',b:'Jira の課題をいちいち開いてコピペしていました',a:'Claude が Jira から<b>直接、課題を読んで新しいチケットも作ります</b>'},
+    {cx:227,cy:112,w:96,n:'Google ドライブ',c:'#1f9e76',b:'ドライブの文書をダウンロードして、また上げ直す必要がありました',a:'Claude がドライブの文書を<b>直接開いて読んで整理します</b>'},
+    {cx:194,cy:214,w:64,n:'ブラウザ',c:'#cf5184',b:'Web ページの内容をいちいちコピーして貼っていました',a:'Claude が<b>実際の Web ページを直接開いて確認します</b>'},
+    {cx:86,cy:214,w:54,n:'Slack',c:'#6d5fd0',b:'Slack のメッセージをコピーして持ってきていました',a:'Claude が Slack から<b>直接読んで、メッセージも送ります</b>'},
+    {cx:53,cy:112,w:62,n:'Figma',c:'#d8662f',b:'デザインをキャプチャしていちいち説明していました',a:'Claude が Figma のデザインを<b>直接読んでそのまま作ります</b>'}
+  ];
+  (function(){ var ln=document.getElementById('mcp-lines'),nd=document.getElementById('mcp-nodes'); if(!ln) return; MCPN.forEach(function(o,i){
+    var line=document.createElementNS('http://www.w3.org/2000/svg','line'); line.setAttribute('class','spoke'); line.setAttribute('x1',140); line.setAttribute('y1',140); line.setAttribute('x2',o.cx); line.setAttribute('y2',o.cy); var len=Math.round(Math.hypot(o.cx-140,o.cy-140))+4; line.style.strokeDasharray=len; line.style.strokeDashoffset=len; line.style.transition='stroke-dashoffset .7s ease'; line.id='mcpl'+i; ln.appendChild(line);
+    var g=document.createElementNS('http://www.w3.org/2000/svg','g'); g.setAttribute('class','node'); g.id='mcpn'+i; var x=o.cx-o.w/2, y=o.cy-13;
+    var rect=document.createElementNS('http://www.w3.org/2000/svg','rect'); rect.setAttribute('x',x); rect.setAttribute('y',y); rect.setAttribute('width',o.w); rect.setAttribute('height',26); rect.setAttribute('rx',8); g.appendChild(rect);
+    var tx=document.createElementNS('http://www.w3.org/2000/svg','text'); tx.setAttribute('x',o.cx); tx.setAttribute('y',o.cy+4); tx.setAttribute('text-anchor','middle'); tx.textContent=o.n; g.appendChild(tx);
+    var ck=document.createElementNS('http://www.w3.org/2000/svg','text'); ck.setAttribute('class','chk'); ck.setAttribute('x',x+o.w-3); ck.setAttribute('y',y-1); ck.setAttribute('text-anchor','middle'); ck.setAttribute('font-size','12'); ck.textContent='✓'; g.appendChild(ck);
     nd.appendChild(g); }); })();
-  var mcpT=[]; function mcpReset(){ mcpT.forEach(clearTimeout); mcpT=[]; MCPN.forEach(function(o,i){ document.getElementById('mcpn'+i).classList.remove('on'); var l=document.getElementById('mcpl'+i); l.style.strokeDashoffset=l.style.strokeDasharray; }); document.getElementById('mcp-msg').textContent='「ひとつずつ連携してみる」を押してみてください。'; }
-  document.getElementById('mcp-go').addEventListener('click',function(){ mcpReset(); document.getElementById('mcp-msg').textContent='ツールをひとつずつ連携している途中…'; MCPN.forEach(function(o,i){ mcpT.push(setTimeout(function(){ document.getElementById('mcpl'+i).style.strokeDashoffset='0'; document.getElementById('mcpn'+i).classList.add('on'); document.getElementById('mcp-msg').textContent=o.n+' に接続 ✓ — これで Claude が '+o.n+' を直接使えます。'; if(i===MCPN.length-1)mcpT.push(setTimeout(function(){ document.getElementById('mcp-msg').textContent='連携完了! これで Claude Code がこれらのツールを直接使えます。(/mcp で確認)'; },700)); },700*i)); }); });
+  var mcpT=[],mcpCon=0,mcpEmpty=document.getElementById('mcp-empty'),mcpDetail=document.getElementById('mcp-detail'),mcpCount=document.getElementById('mcp-count');
+  function mcpReset(){ mcpT.forEach(clearTimeout); mcpT=[]; mcpCon=0; MCPN.forEach(function(o,i){ var n=document.getElementById('mcpn'+i); if(n)n.classList.remove('on'); var l=document.getElementById('mcpl'+i); if(l)l.style.strokeDashoffset=l.style.strokeDasharray; }); if(mcpDetail)mcpDetail.innerHTML=''; if(mcpEmpty)mcpEmpty.style.display='block'; if(mcpCount)mcpCount.textContent=''; document.getElementById('mcp-msg').textContent='「ひとつずつ連携してみる」を押してみてください。'; }
+  function mcpPanel(o){ if(mcpEmpty)mcpEmpty.style.display='none'; mcpDetail.innerHTML='<div class="mcp-card"><div class="mcp-h"><span class="dot" style="background:'+o.c+'"></span>'+o.n+' 連携済み<span class="mcp-chk">✓</span></div><div class="mcp-b"><span class="mcp-t">連携前</span>'+o.b+'</div><div class="mcp-arrow">↓</div><div class="mcp-a"><span class="mcp-t">連携後</span>'+o.a+'</div></div>'; var card=mcpDetail.querySelector('.mcp-card'); mcpT.push(setTimeout(function(){ if(card)card.classList.add('show'); },30)); if(mcpCount)mcpCount.textContent='連携したツール: '+mcpCon+' / '+MCPN.length; }
+  document.getElementById('mcp-go').addEventListener('click',function(){ mcpReset(); document.getElementById('mcp-msg').textContent='ツールをひとつずつゆっくり連携している途中… (コピペなしですぐ使えるようになります)';
+    MCPN.forEach(function(o,i){ mcpT.push(setTimeout(function(){ document.getElementById('mcpl'+i).style.strokeDashoffset='0'; document.getElementById('mcpn'+i).classList.add('on'); mcpCon=i+1; mcpPanel(o); if(i===MCPN.length-1)mcpT.push(setTimeout(function(){ document.getElementById('mcp-msg').textContent='連携完了! これで Claude がこれらのツールを直接使えます — もうコピペは要りません。(/mcp で確認)'; },900)); },1300*(i+1))); }); });
   document.getElementById('mcp-reset').addEventListener('click',mcpReset); mcpReset();
 
   /* subagents (6 specialists) */
@@ -1390,6 +1520,79 @@ description: 週次レポートを会社の様式で作成
       timers.push(setTimeout(function(){ stage.insertAdjacentHTML('beforeend','<div class="cwcard show" style="margin-top:12px;"><div class="cwresult"><span class="fic">'+FILE+'</span><span><div class="rt">'+t.result.t+'</div><div class="rd">'+t.result.d+'</div></span></div></div>'); },450)); }
     document.getElementById('cw-go').addEventListener('click',go);
     document.getElementById('cw-reset').addEventListener('click',function(){ clearT(); setTask(cur); });
+  })();
+
+  /* cowork 3-way comparison */
+  (function(){
+    var go=document.getElementById('cw3-go'); if(!go) return;
+    var DATA={
+      'cw3-chat':[{t:'「Excel に整理する方法をお教えします」'},{t:'① 金額・日付の列を作って'},{t:'② 合計の数式を入れてください…'},{t:'(言葉で説明だけ — 自分のファイルは直接さわれません)'}],
+      'cw3-cowork':[{t:'領収書フォルダ（32 枚）を直接読んだ'},{t:'金額・日付・項目を抽出'},{t:'支出整理.xlsx として保存',done:true},{t:'✅ 成果物が完成 — ファイルができました！',done:true}],
+      'cw3-code':[{t:'これは「オフィス業務」なので Cowork がぴったりです'},{t:'私はコーディング・開発をターミナルで担当します'},{t:'(例: 「ログインのバグを直して」)'}]
+    };
+    var cw3T=[];
+    function cw3Reset(){ cw3T.forEach(clearTimeout); cw3T=[]; ['cw3-chat','cw3-cowork','cw3-code'].forEach(function(id){ document.getElementById(id).innerHTML=''; }); document.getElementById('cw3-status').textContent='「3 つの反応を見る」を押してみてください — 同じお願いなのに結果がどう違うかをお見せします。'; }
+    go.addEventListener('click',function(){ cw3Reset(); document.getElementById('cw3-status').textContent='同じお願い「領収書を Excel に整理して」 → 3 つの反応がこんなに違います。';
+      Object.keys(DATA).forEach(function(id){ var box=document.getElementById(id); DATA[id].forEach(function(L,i){ var el=document.createElement('div'); el.className='cw3line'+(L.done?' done':''); el.textContent=L.t; box.appendChild(el); cw3T.push(setTimeout(function(){ el.classList.add('on'); },300+i*650)); }); }); });
+    document.getElementById('cw3-reset').addEventListener('click',cw3Reset); cw3Reset();
+  })();
+
+  /* effort / goal / loop / workflows / config / doctor sims */
+  (function(){
+    if(!document.getElementById('effort')) return;
+    var CK='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg>';
+    var RATE=['','とても低い','低い','普通','高い','とても高い'];
+    /* effort */
+    var EF=[{n:'低',d:'簡単・速く',acc:2,sp:5,cost:1,steps:['すぐに答えます']},
+      {n:'中',d:'普通',acc:3,sp:4,cost:2,steps:['要点を一度点検','答えを整理']},
+      {n:'高',d:'深く',acc:4,sp:2,cost:4,steps:['いくつかの方法を比較','根拠を吟味','抜けを確認','答えを整理']},
+      {n:'最高',d:'とても深く',acc:5,sp:1,cost:5,steps:['場合の数を広げる','それぞれ検証','反例を探す','もう一度点検','根拠を整理','最終の答え']}];
+    var efBtns=document.getElementById('ef-btns'),efThink=document.getElementById('ef-think'),efT=[];
+    function efShow(i){ var d=EF[i]; [].forEach.call(efBtns.children,function(c,j){ c.classList.toggle('on',j===i); });
+      var set=function(k,v,col){ document.getElementById('ef-f-'+k).style.width=(v*20)+'%'; document.getElementById('ef-f-'+k).style.background=col; document.getElementById('ef-v-'+k).textContent=RATE[v]; };
+      set('acc',d.acc,'#1f9e76'); set('sp',d.sp,'#3b7dd8'); set('cost',d.cost,'#d8662f');
+      efT.forEach(clearTimeout); efT=[]; efThink.innerHTML='';
+      d.steps.forEach(function(s,k){ var el=document.createElement('div'); el.className='efline'; el.textContent=(k+1)+'. '+s; efThink.appendChild(el); efT.push(setTimeout(function(){ el.classList.add('on'); },120+k*200)); });
+    }
+    EF.forEach(function(d,i){ var b=document.createElement('button'); b.className='efbtn'+(i===1?' on':''); b.innerHTML=d.n+'<span class="efd">'+d.d+'</span>'; b.addEventListener('click',function(){ efShow(i); }); efBtns.appendChild(b); });
+    efShow(1);
+    /* goal */
+    var GTURNS=[{t:'1 ターン — 誤字 5 個のうち 3 個を修正 (残り誤字 2 個)',ok:false},{t:'2 ターン — 残り 2 個を修正 (残り誤字 0 個)',ok:true,last:true}];
+    var goalBox=document.getElementById('goal-turns'),goalT=[];
+    document.getElementById('goal-go').addEventListener('click',function(){ goalT.forEach(clearTimeout); goalT=[]; goalBox.innerHTML=''; var st=document.getElementById('goal-status'); st.textContent='条件になるまで繰り返している途中…';
+      GTURNS.forEach(function(g,i){ var el=document.createElement('div'); el.className='gturn'; el.innerHTML='<span class="gt-n">'+(i+1)+'</span><span class="gt-t">'+g.t+'</span><span class="jbadge '+(g.ok?'yes':'no')+'">'+(g.ok?'条件達成 → 停止':'まだ → 続行')+'</span>'; goalBox.appendChild(el);
+        goalT.push(setTimeout(function(){ el.classList.add('on'); if(g.last) st.textContent='✓ 目標達成! 誤字が 0 個になって自動で止まりました。'; },300+i*1100)); }); });
+    document.getElementById('goal-reset').addEventListener('click',function(){ goalT.forEach(clearTimeout); goalT=[]; goalBox.innerHTML=''; document.getElementById('goal-status').textContent='「目標スタート」を押してみてください。'; });
+    /* loop */
+    var loopChips=document.getElementById('loop-chips'),loopFeed=document.getElementById('loop-feed'),loopT=[],loopInt=10;
+    [5,10].forEach(function(m){ var c=document.createElement('button'); c.className='chip'+(m===10?' on':''); c.textContent=m+'分ごと'; c.addEventListener('click',function(){ [].forEach.call(loopChips.children,function(x){x.classList.remove('on');}); c.classList.add('on'); loopInt=m; }); loopChips.appendChild(c); });
+    var loopRuns=[{t:'デプロイ確認 → 進行中… (20%)'},{t:'デプロイ確認 → 進行中… (70%)'},{t:'デプロイ確認 → 完了! ✓',done:true}];
+    document.getElementById('loop-go').addEventListener('click',function(){ loopT.forEach(clearTimeout); loopT=[]; loopFeed.innerHTML=''; var st=document.getElementById('loop-status'); st.textContent=loopInt+'分間隔で繰り返している途中… (時間を早送りします)';
+      loopRuns.forEach(function(r,i){ loopT.push(setTimeout(function(){ var d=document.createElement('div'); d.className='uf'; d.textContent=(i+1)+'回目 (+'+(i*loopInt)+'分): '+r.t; loopFeed.appendChild(d); if(r.done) st.textContent='完了を確認して繰り返しを止めました。(実際は止めるまでずっと回り続けます)'; },300+i*1000)); }); });
+    document.getElementById('loop-reset').addEventListener('click',function(){ loopT.forEach(clearTimeout); loopT=[]; loopFeed.innerHTML=''; document.getElementById('loop-status').textContent='間隔を選んで「繰り返しスタート」を押してみてください。'; });
+    /* workflows */
+    var WF=[{n:'契約書 1・2',c:'#3b7dd8'},{n:'契約書 3・4',c:'#1f9e76'},{n:'契約書 5・6',c:'#6d5fd0'},{n:'契約書 7・8',c:'#d8662f'}];
+    var wfGrid=document.getElementById('wf-grid'),wfT=[];
+    WF.forEach(function(w){ var d=document.createElement('div'); d.className='subcard'; d.innerHTML='<div class="sh"><span class="dot" style="background:'+w.c+'"></span> お手伝い — '+w.n+'</div><div class="sd2">待機中</div>'; wfGrid.appendChild(d); });
+    document.getElementById('wf-go').addEventListener('click',function(){ wfT.forEach(clearTimeout); wfT=[]; var cards=wfGrid.querySelectorAll('.subcard'); var st=document.getElementById('wf-status'); st.textContent='作戦を立ててお手伝い 4 人を同時に投入しました…';
+      cards.forEach(function(c,i){ c.classList.remove('on'); c.querySelector('.sd2').textContent='待機中'; wfT.push(setTimeout(function(){ c.classList.add('on'); c.querySelector('.sd2').textContent='レビュー中…'; },200+i*150)); wfT.push(setTimeout(function(){ c.querySelector('.sd2').textContent='完了 ✓'; },1500+i*150)); });
+      wfT.push(setTimeout(function(){ st.textContent='✓ 4 人が同時に終えて、結果を 1 つにまとめました。(一人で順番にやったら、もっと長くかかります)'; },2400)); });
+    document.getElementById('wf-reset').addEventListener('click',function(){ wfT.forEach(clearTimeout); wfT=[]; wfGrid.querySelectorAll('.subcard').forEach(function(c){ c.classList.remove('on'); c.querySelector('.sd2').textContent='待機中'; }); document.getElementById('wf-status').textContent='「同時作業を見る」を押してみてください。'; });
+    /* config */
+    var CFG=[{k:'言語',sub:'画面に表示される言語',vals:['한국어','English','中文','日本語'],i:0},
+      {k:'テーマ',sub:'明るく / 暗く',vals:['ライト','ダーク','システム'],i:1},
+      {k:'モデル',sub:'どの Claude にするか',vals:['Haiku','Sonnet','Opus'],i:1},
+      {k:'考える深さ',sub:'effort',vals:['低','中','高','最高'],i:1},
+      {k:'権限',sub:'どのくらい聞くか',vals:['権限リクエスト','編集を許可','自動'],i:0}];
+    var cfgPanel=document.getElementById('cfg-panel');
+    CFG.forEach(function(o){ var row=document.createElement('div'); row.className='cfgrow'; row.innerHTML='<div class="cfk">'+o.k+'<small>'+o.sub+'</small></div>'; var v=document.createElement('button'); v.className='cfgval'; v.textContent=o.vals[o.i]; v.addEventListener('click',function(){ o.i=(o.i+1)%o.vals.length; v.textContent=o.vals[o.i]; document.getElementById('cfg-status').textContent='「'+o.k+'」を「'+o.vals[o.i]+'」に変えました。'; }); row.appendChild(v); cfgPanel.appendChild(row); });
+    /* doctor */
+    var DR=['インストール状態','ログイン(アカウント連携)','インターネット接続','MCP ツールの連携','設定ファイル'];
+    var drList=document.getElementById('dr-list'),drT=[];
+    document.getElementById('dr-go').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; var st=document.getElementById('dr-status'); st.textContent='点検中…';
+      DR.forEach(function(t,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML='<span class="ck">'+CK+'</span>'+t; drList.appendChild(el);
+        drT.push(setTimeout(function(){ el.classList.add('done'); if(i===DR.length-1) st.textContent='✓ すべて正常です。(問題があれば、その項目と直し方を教えます)'; },300+i*600)); }); });
+    document.getElementById('dr-reset').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; document.getElementById('dr-status').textContent='「診断を実行」を押してみてください。'; });
   })();
 
   /* language switcher (works in /, /en/, /zh/, /ja/) */
