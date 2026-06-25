@@ -960,7 +960,7 @@ irm https://claude.ai/install.ps1 | iex</div>
       </tbody></table></div>
       <ul class="points">
         <li><b>デフォルトのモデルはプランによって変わります。</b><span>Pro は Sonnet 4.6、Max・API は Opus 4.8 がデフォルトです。迷ったらバランスの良い Sonnet から始めると無難です。</span></li>
-        <li><b>1M コンテキストは Fable 5・Opus 4.6 以降・Sonnet 4.6 で使えます。</b><span>使えるかどうかはプラン・設定によります（自動ではありません）。Haiku は 200K です。</span></li>
+        <li><b>1M コンテキストは Fable 5・Opus 4.8・Sonnet 4.6 で使えます。</b><span>使えるかどうかはプラン・設定によります（自動ではありません）。Haiku は 200K です。</span></li>
         <li><b>日常の業務なら 200K でも十分です。</b><span>1M は大きなプロジェクトや、とても長い作業で力を発揮します。</span></li>
         <li><b>ウィンドウが大きいほど多く覚えますが、少し遅く、精度が落ちることがあります。</b><span>必要なものだけ乗せるのが、いちばん良い品質を出します。</span></li>
       </ul>
@@ -1807,7 +1807,7 @@ description: 週次レポートを会社の様式で作成
       if(total/MAX>.6) status.textContent='だんだん満ちていく途中… もうすぐ自動圧縮線に達します。'; acT.push(setTimeout(step,1100)); })(); });
   function acTrigger(){ var tank=document.getElementById('tank'),ov=document.getElementById('acoverlay'); status.textContent='自動圧縮線に到達 — ここで止まって要約を始めます。(要約の間は新しい作業が進みません)'; tank.classList.add('flash');
     acT.push(setTimeout(function(){ stack.classList.add('summarizing'); if(ov)ov.classList.add('on'); status.textContent='停止 — これまでの会話・ファイル・ツール結果を短く要約中…'; },1300));
-    acT.push(setTimeout(function(){ stack.classList.remove('summarizing'); if(ov)ov.classList.remove('on'); tank.classList.remove('flash'); doCompact(); status.textContent='圧縮完了 — 古い会話・ツールの出力は「要約」1 マスに縮み、依頼・ファイル一覧・決定といった核心は保存されます。(内容が実際にどう変わるかは「圧縮をくわしく」タブで見られます)'; },3400)); }
+    acT.push(setTimeout(function(){ stack.classList.remove('summarizing'); if(ov)ov.classList.remove('on'); tank.classList.remove('flash'); doCompact(); status.textContent='圧縮完了 — 古い会話・ツールの出力は「要約」1 マスに縮み、依頼・ファイル一覧・決定といった核心は保存されます。(内容が実際にどう変わるかは「圧縮 (compact)」タブで見られます)'; },3400)); }
   renderPrev(tokprev,'',true); ctxMax(200000); ctxBase();
 
   /* sessions + brain */
