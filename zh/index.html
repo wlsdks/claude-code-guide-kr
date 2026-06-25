@@ -130,6 +130,11 @@
   .mgc.slow{ border-color:rgba(216,148,63,.45); background:rgba(216,148,63,.08); } .mgc.slow .mgc-t{ color:#b9792a; background:rgba(216,148,63,.16); }
   .mgc.conf{ border-color:rgba(216,69,63,.4); background:rgba(216,69,63,.07); } .mgc.conf .mgc-t{ color:var(--over); background:rgba(216,69,63,.13); }
   .mgc.compact{ border-color:rgba(109,95,208,.42); background:rgba(109,95,208,.08); } .mgc.compact .mgc-t{ color:var(--purple); background:rgba(109,95,208,.15); }
+  .mg2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; } @media (max-width:680px){ .mg2{ grid-template-columns:1fr; } }
+  .mg2col{ border:1px solid var(--line2); border-radius:12px; padding:13px; } .mg2col.bad{ border-color:rgba(216,69,63,.3); background:rgba(216,69,63,.025); } .mg2col.good{ border-color:rgba(31,158,118,.36); background:rgba(31,158,118,.03); }
+  .mg2h{ font-size:13px; font-weight:600; display:flex; align-items:center; gap:7px; margin-bottom:10px; } .mg2tag{ font-size:10.5px; font-weight:700; border-radius:5px; padding:1px 7px; } .mg2tag.bad{ color:var(--over); background:rgba(216,69,63,.13); } .mg2tag.good{ color:var(--good); background:rgba(31,158,118,.14); }
+  .mg2pct{ display:flex; justify-content:space-between; font-size:11.5px; color:var(--muted); margin-bottom:4px; } .mg2pct b{ color:var(--ink); }
+  .mg2chat{ margin-top:11px; display:flex; flex-direction:column; gap:8px; min-height:96px; }
   .cxbadge{ display:inline-block; font-size:12.5px; font-variant-numeric:tabular-nums; background:var(--row); border-radius:7px; padding:7px 12px; margin-bottom:12px; } .cxbadge b{ font-weight:600; } .cxbadge .ar{ color:var(--faint); margin:0 6px; }
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
@@ -1136,14 +1141,23 @@ description: 按公司格式撰写周报
     <section class="page" id="manage">
       <h1>为什么要管理上下文？</h1>
       <p class="lead">上下文（脉络）就是 Claude 的 <b>“桌子”</b>。桌子乱了，工作就会 <b>更慢、更贵、更容易出错</b>。所以及时整理很重要。</p>
-      <p class="defs">每按一次‘再来一轮对话’，上下文就会堆积。看看同样的请求，Claude 的回应会怎样变化。</p>
-      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="mg-stack">再来一轮 ▶</button><button class="btn" id="mg-clean">整理 ↺</button></div>
-      <div class="mgwrap">
-        <div class="mgfl-h"><span>桌子（上下文）的占满程度</span><b id="mg-pct">12%</b></div>
-        <div class="mgfl-track" style="margin-bottom:6px;"><i id="mg-fill"></i></div>
-        <div class="mgchat" id="mg-chat"></div>
+      <p class="defs">把同一个任务同时发给‘放任不管’的会话和‘随手整理’的会话。看看上下文堆积时，两个会话的结果如何分道扬镳。</p>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="mg-go">发送下一个任务 ▶</button><button class="btn" id="mg-reset">从头开始 ↺</button></div>
+      <div class="mg2">
+        <div class="mg2col bad">
+          <div class="mg2h">只管堆积 <span class="mg2tag bad">放任</span></div>
+          <div class="mg2pct"><span>桌子（上下文）</span><b id="mgb-pct">12%</b></div>
+          <div class="mgfl-track"><i id="mgb-fill"></i></div>
+          <div class="mg2chat" id="mgb-chat"></div>
+        </div>
+        <div class="mg2col good">
+          <div class="mg2h">每个任务都整理 <span class="mg2tag good">管理</span></div>
+          <div class="mg2pct"><span>桌子（上下文）</span><b id="mgg-pct">12%</b></div>
+          <div class="mgfl-track"><i id="mgg-fill"></i></div>
+          <div class="mg2chat" id="mgg-chat"></div>
+        </div>
       </div>
-      <p class="status" id="mg-status" style="margin-top:12px;">一边按‘再来一轮’让上下文堆积，一边看看 Claude 会发生什么。</p>
+      <p class="status" id="mg-status" style="margin-top:12px;">点‘发送下一个任务’—— 把同一个请求发给两个会话，比较结果。</p>
 
       <p class="label">整理的方法 —— 这样来管理</p>
       <div class="fgrid">
@@ -1631,26 +1645,28 @@ description: 按公司格式撰写周报
   document.getElementById('lim-reset').addEventListener('click',function(){ luT.forEach(clearTimeout); luT=[]; l5=0; gset(); document.getElementById('lim-use').disabled=false; document.getElementById('lock-msg').textContent='过了 5 小时，上限重置了！又能用了。（不过要注意，每周上限还原样留着）'; });
   gset();
 
-  /* manage — why manage context (concrete conversation) */
-  (function(){ var stack=document.getElementById('mg-stack'); if(!stack) return;
-    var chat=document.getElementById('mg-chat'), pctEl=document.getElementById('mg-pct'), flEl=document.getElementById('mg-fill'), stEl=document.getElementById('mg-status'), mgT=[], fill=12, turn=0;
-    var TASKS=['改一下 logo 颜色','把标题放大','按钮圆角','间距小一点','换回刚才那个颜色','挪一下菜单','换个字体','把间距理一下'];
-    function fillColor(f){ return f<40?'var(--good)':(f<72?'#d8943f':'#d8453f'); }
-    function setFill(){ pctEl.textContent=Math.round(fill)+'%'; flEl.style.width=fill+'%'; flEl.style.background=fillColor(fill); }
-    function reply(f){ if(f>=92) return {cls:'compact',tag:'自动压缩',txt:'桌子满了，旧对话被摘要了 —— “刚才那个颜色”的细节没了，得重新看文件。'};
-      if(f>=70) return {cls:'conf',tag:'混乱',txt:'嗯…“刚才那个”是哪个来着？上下文太多，漏掉了重点。'};
-      if(f>=44) return {cls:'slow',tag:'回应 7 秒',txt:'处理好了 —— 但每次都要重读全部上下文，越来越慢、越来越贵。'};
-      return {cls:'ok',tag:'回应 2 秒',txt:'马上、准确地处理好了。桌子干净嘛。'}; }
-    function add(html){ var row=document.createElement('div'); row.className='mgturn'; row.innerHTML=html; chat.appendChild(row); while(chat.children.length>4) chat.removeChild(chat.firstChild); mgT.push(setTimeout(function(){ row.classList.add('on'); },20)); }
-    function reset(){ mgT.forEach(clearTimeout); mgT=[]; fill=12; turn=0; chat.innerHTML=''; setFill(); stEl.textContent='一边按‘再来一轮’让上下文堆积，一边看看 Claude 会发生什么。'; }
-    stack.addEventListener('click',function(){ if(fill>=100) return; fill=Math.min(100,fill+14); setFill(); turn++;
-      var task=TASKS[(turn-1)%TASKS.length], r=reply(fill);
-      add('<div class="mgu"><b>我：</b> “'+task+'”</div><div class="mgc '+r.cls+'"><span class="mgc-t">'+r.tag+'</span><span>'+r.txt+'</span></div>');
-      stEl.textContent= r.cls==='compact'?'桌子满了，触发了自动压缩 —— 要是早点‘整理’，就不会丢掉细节了。'
-        : r.cls==='conf'?'上下文太多，Claude 开始犯迷糊了。这时候整理一下正合适。'
-        : r.cls==='slow'?'堆得越多越慢、越贵 —— 每次都要把整张桌子重读一遍。'
-        : '现在还干净 —— 又快又准。'; });
-    document.getElementById('mg-clean').addEventListener('click',function(){ reset(); add('<div class="mgc ok"><span class="mgc-t">整理完成</span><span>桌子清空了 —— 又是 2 秒、准确、便宜。（任务切换时用 <code>/clear</code>，变长时用 <code>/compact</code>）</span></div>'); });
+  /* manage — neglect vs manage, side by side */
+  (function(){ var go=document.getElementById('mg-go'); if(!go) return;
+    var TASKS=['改一下 logo 颜色','把标题放大','按钮圆角','缩小间距','换回刚才那个颜色','挪一下菜单','换个字体','整理间距'];
+    var B={ pct:document.getElementById('mgb-pct'), fill:document.getElementById('mgb-fill'), chat:document.getElementById('mgb-chat'), f:12 };
+    var G={ pct:document.getElementById('mgg-pct'), fill:document.getElementById('mgg-fill'), chat:document.getElementById('mgg-chat'), f:12 };
+    var st=document.getElementById('mg-status'), turn=0, mgT=[];
+    function col(f){ return f<40?'var(--good)':(f<72?'#d8943f':'#d8453f'); }
+    function setF(o){ o.pct.textContent=Math.round(o.f)+'%'; o.fill.style.width=o.f+'%'; o.fill.style.background=col(o.f); }
+    function badReply(f){ if(f>=92) return {cls:'compact',tag:'自动压缩',txt:'旧对话被摘要了 ——“刚才那个颜色”的细节没了。'};
+      if(f>=70) return {cls:'conf',tag:'混乱',txt:'“刚才那个”是哪个? 上下文太多，漏了。'};
+      if(f>=44) return {cls:'slow',tag:'7 秒',txt:'处理了，但越来越慢、越来越贵。'};
+      return {cls:'ok',tag:'2 秒',txt:'马上、准确地处理好了。'}; }
+    function add(chat,task,r){ var d=document.createElement('div'); d.className='mgturn'; d.innerHTML='<div class="mgu"><b>我:</b> “'+task+'”</div><div class="mgc '+r.cls+'"><span class="mgc-t">'+r.tag+'</span><span>'+r.txt+'</span></div>'; chat.appendChild(d); while(chat.children.length>3) chat.removeChild(chat.firstChild); mgT.push(setTimeout(function(){ d.classList.add('on'); },20)); }
+    function reset(){ mgT.forEach(clearTimeout); mgT=[]; B.f=12; G.f=12; turn=0; B.chat.innerHTML=''; G.chat.innerHTML=''; setF(B); setF(G); st.textContent='点‘发送下一个任务’—— 把同一个请求发给两个会话，比较结果。'; }
+    go.addEventListener('click',function(){ if(B.f>=100) return; turn++; var task=TASKS[(turn-1)%TASKS.length];
+      B.f=Math.min(100,B.f+15); setF(B); var br=badReply(B.f); add(B.chat,task,br);
+      G.f=12+(turn%3)*5; setF(G); add(G.chat,task,{cls:'ok',tag:'2 秒',txt:'马上、准确。（每换一个任务就清空了）'});
+      st.innerHTML= '第 '+turn+' 个任务 —— ' + (br.cls==='compact'?'放任会话 <b style="color:var(--over)">自动压缩连细节都丢了。</b> 管理会话 仍是 2 秒·准确!'
+        : br.cls==='conf'?'放任会话 <b style="color:var(--over)">开始混乱。</b> 管理会话 仍是 2 秒·准确。'
+        : br.cls==='slow'?'放任会话 <b style="color:#b9792a">开始变慢。</b> 管理会话 依旧很快。'
+        : '两边都还快。继续发吗？'); });
+    document.getElementById('mg-reset').addEventListener('click',reset);
     reset(); })();
 
   /* compact detail page */
