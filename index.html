@@ -630,7 +630,7 @@ irm https://claude.ai/install.ps1 | iex</div>
           </div>
         </div>
         <p class="status" id="ask-status">버튼을 누르면 클로드가 어떻게 반응하는지 보여드려요.</p>
-        <p class="simtake"><span class="stk">결론</span><span><b>무엇을·어떻게·다 되면 무엇으로 확인</b>까지 적으면 — 클로드가 되묻지 않고 <b>한 번에</b> 끝내요.</span></p>
+        <p class="simtake"><span class="stk">결론</span><span><b>무엇을·어떻게·다 되면 무엇으로 확인</b>까지 적으면 — 클로드가 추측할 필요 없이 <b>한 번에</b> 끝내요.</span></p>
       </div>
       <div class="grp" style="margin-top:30px;">
         <h3>직접 써보기 — 내 요청은 몇 점?</h3>
@@ -645,14 +645,13 @@ irm https://claude.ai/install.ps1 | iex</div>
     <section class="page" id="mention">
       <h1>파일 가리키기 <span style="color:var(--accent);">@</span></h1>
       <p class="lead">고치고 싶은 파일이 정해져 있으면 — <b><code>@</code> 뒤에 파일 이름</b>으로 콕 집어줄 수 있어요. 클로드가 그 파일을 먼저 열어봐요.</p>
-      <p class="defs">아래에서 <code>@</code> 를 눌러 파일 목록을 띄우고, 하나 골라보세요. (실제로는 드래그&amp;드롭으로도 붙일 수 있어요)</p>
+      <p class="defs">아래에서 <code>@</code> 를 눌러 파일 목록을 띄우고, 하나 골라보세요. 이름 일부를 치면 목록이 좁혀져요.</p>
       <div class="grp">
         <h3>직접 해보기 — @ 로 파일 붙이기</h3>
         <div class="mline" id="mline"><span>예약 화면 고쳐줘 </span><span id="m-typed"></span><span class="mcaret">&nbsp;&nbsp;</span></div>
         <div class="atmenu" id="atmenu"></div>
         <div class="keys" style="margin-top:10px;">
           <button class="keycap" id="m-at">@ 입력</button>
-          <button class="keycap" id="m-drop">파일 드래그&amp;드롭</button>
           <button class="keycap" id="m-send">보내기</button>
           <button class="keycap" id="m-reset">처음으로</button>
         </div>
@@ -688,7 +687,7 @@ irm https://claude.ai/install.ps1 | iex</div>
           <button class="keycap" data-k="up">↑</button>
           <button class="keycap" data-k="tab">Tab</button>
           <button class="keycap" data-k="bang">!</button>
-          <button class="keycap" data-k="hash">#</button>
+          <button class="keycap" data-k="slash">/</button>
         </div>
         <p style="margin:2px 0 12px; font-size:13.5px; color:var(--muted);">지금 모드: <span class="modebadge" id="key-mode">기본 · 물어보고 실행</span></p>
         <div class="kterm" id="kterm">위의 키를 누르면 여기에 동작이 나타나요.</div>
@@ -701,11 +700,11 @@ irm https://claude.ai/install.ps1 | iex</div>
           <tbody>
             <tr><td><b>Esc</b></td><td>하던 일 멈춤</td><td>방향이 틀렸을 때 바로 끊기</td></tr>
             <tr><td><b>Esc Esc</b></td><td>이전 시점으로 되돌리기</td><td>“그거 전으로 돌려줘”</td></tr>
-            <tr><td><b>Shift+Tab</b></td><td>모드 바꾸기</td><td>기본 → 자동수락 → 계획</td></tr>
+            <tr><td><b>Shift+Tab</b></td><td>모드 바꾸기</td><td>기본 → 자동수락 → 계획 (설정 시 더)</td></tr>
             <tr><td><b>↑</b></td><td>이전에 보낸 말 불러오기</td><td>비슷한 요청 다시 보낼 때</td></tr>
             <tr><td><b>Tab</b></td><td>파일 이름 자동완성</td><td>긴 이름 다 안 쳐도 됨</td></tr>
             <tr><td><b>!</b></td><td>셸 명령 바로 실행</td><td><code>!npm test</code> 처럼</td></tr>
-            <tr><td><b>#</b></td><td>기억에 메모 저장</td><td>“항상 한국어로 답해” 같은 규칙</td></tr>
+            <tr><td><b>/</b></td><td>명령 메뉴 열기</td><td>무슨 명령 있는지 다 보여줌</td></tr>
           </tbody>
         </table>
         <p class="simtake"><span class="stk">결론</span><span>제일 중요한 둘만 기억해요 — <b>Esc</b>(멈춤)와 <b>Esc Esc</b>(되돌리기). 이게 초보의 <b>안전벨트</b>예요.</span></p>
@@ -1452,7 +1451,7 @@ description: 주간 보고서를 회사 양식으로 작성
     <!-- DOCTOR -->
     <section class="page" id="doctor">
       <h1>진단 (doctor)</h1>
-      <p class="lead"><b>진단(doctor)</b>은 <b>뭔가 잘 안 될 때 설치·로그인·연결·설정을 한 번에 점검</b>해 주는 도구예요. ‘안 될 때 먼저 해볼 것’.</p>
+      <p class="lead"><b>진단(doctor)</b>은 <b>뭔가 잘 안 될 때 설치 상태와 설정을 한 번에 점검</b>해 주는 도구예요. ‘안 될 때 먼저 해볼 것’.</p>
       <p class="defs">자동차 점검등처럼, 어디가 문제인지 짚어줘요. 진단을 직접 돌려보세요.</p>
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="dr-go">진단 실행 ▶</button><button class="btn" id="dr-reset">초기화</button></div>
       <div class="cwvm"><span class="cwvmtag">/doctor 점검 중</span><div id="dr-list"></div></div>
@@ -1559,7 +1558,7 @@ description: 주간 보고서를 회사 양식으로 작성
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'챗은 ‘답’을 주고, 클로드 코드는 내 프로젝트에서 <b>직접 만들어 작동까지</b> 시켜요.', cowork:'코드 말고 <b>사무 업무를 대신</b>하는 클로드 — 목표만 주면 <b>내 파일로 결과물까지</b> 만들어요 (비개발자·데스크톱 앱).', usecases:'직업별로 <b>늘 하던 일이 어떻게 바뀌는지</b> 전→후로 보여줘요.', where:'터미널·VS Code·데스크톱·웹 — <b>어디서나 같은 클로드 코드</b>, 설정도 공유돼요.', ask:'같은 일도 <b>구체적으로 부탁</b>하면 한 번에 — 직접 써서 점수도 받아봐요.', mention:'<code class="inlinecode">@</code> 로 <b>딱 그 파일</b>을 콕 집어주면 더 빠르고 정확해요.', keys:'<b>Esc</b>(멈춤)·<b>Esc Esc</b>(되돌리기) 등 키 몇 개로 다 돼요 — 눌러보며 익혀요.', steer:'잘못 가면 <b>Esc로 끊고</b> 바로잡기 — 끝까지 기다리지 않아요.', context:'여기 올라온 것만 클로드가 기억해요. 꽉 차면 <b>‘압축’으로 정리</b>해요.', manage:'맥락을 <b>방치하면 느려지고·비싸지고·헷갈려요</b> — 그래서 제때 정리해요.', sessions:'<b>한 세션엔 한 가지 일</b> — 섞이면 헷갈려요. 작업 폴더는 좁게.', tokens:'토큰 = AI가 글을 읽는 단위. <b>길수록 공간·비용이 늘고</b>, 한글이 더 무거워요.', models:'똑똑함 ↔ 속도 ↔ 비용은 맞바꾸기. <b>헷갈리면 Sonnet</b>으로 시작.', claudemd:'<b>내가 적어두는 규칙 메모</b> — 매 대화 시작에 자동으로 적용돼요.', memory:'<b>클로드가 스스로 배워 기억</b>하는 메모. 세션을 넘어 이어져요.', skills:'자주 쓰는 작업 절차를 <b>한 번 만들어 계속 재사용</b>해요.', mcp:'<b>외부 도구(지라·피그마 등)에 연결</b>해 클로드가 직접 쓰게 해줘요.', plugins:'스킬·도구·명령 등을 <b>묶어 한 번에 설치</b>하는 꾸러미예요.', agents:'큰 일을 <b>전문 도우미에게 나눠 맡기고</b> 결과만 받아요.', images:'<b>스크린샷을 붙이면</b> 클로드가 보고 이해해요 — 말보다 빠르고 정확.', hooks:'특정 순간에 <b>정해진 동작이 매번 자동</b>으로 실행되는 규칙이에요.', planmode:'고치기 전에 <b>계획부터 보여주고 승인</b>받아요 — 큰 변경에 안전.', permissions:'클로드가 <b>얼마나 자주 물어볼지</b> 정하는 설정. 처음엔 안전하게.', rewind:'요청마다 <b>자동 저장</b> — 마음에 안 들면 이전으로 되돌려요.', privacy:'<b>업무용(Team·Enterprise·API)은 기본적으로 학습에 안 쓰여요.</b> 개인용은 설정에서 선택.', commands:'<code class="inlinecode">/</code> 로 시작하는 단축 명령. 제일 자주 쓰는 건 <b>/clear · /compact</b>.', plans:'<b>무료 플랜엔 없어요.</b> 유료(Pro·Max·Team) 또는 API(종량제)로 사용.', limits:'<b>다 쓰면 리셋될 때까지 기다려야</b> 해요 — 그래서 관리가 중요해요.', compact:'길게 쌓인 대화가 <b>짧은 요약 한 칸</b>으로 줄어들어요.', effort:'답하기 전에 <b>얼마나 깊이 생각할지</b> — 깊을수록 정확하지만 느리고 비싸요.', goal:'<b>‘완료 조건’만 주면 될 때까지</b> 클로드가 알아서 반복해요.', loop:'<b>정해진 간격마다</b> 같은 작업을 자동으로 다시 실행해요.', workflows:'큰 일을 <b>여러 도우미가 동시에</b> 처리하도록 조율해요 (고급).', config:'<b>언어·테마·모델·권한</b> 같은 설정을 한 곳에서 바꿔요.', doctor:'안 될 때 <b>설치·연결·설정을 한 번에 점검</b>해 줘요.', glossary:'헷갈리는 용어를 <b>한 줄로</b> 빠르게 찾는 곳이에요.' };
+  var TLDR={ intro:'챗은 ‘답’을 주고, 클로드 코드는 내 프로젝트에서 <b>직접 만들어 작동까지</b> 시켜요.', cowork:'코드 말고 <b>사무 업무를 대신</b>하는 클로드 — 목표만 주면 <b>내 파일로 결과물까지</b> 만들어요 (비개발자·데스크톱 앱).', usecases:'직업별로 <b>늘 하던 일이 어떻게 바뀌는지</b> 전→후로 보여줘요.', where:'터미널·VS Code·데스크톱·웹 — <b>어디서나 같은 클로드 코드</b>, 설정도 공유돼요.', ask:'같은 일도 <b>구체적으로 부탁</b>하면 한 번에 — 직접 써서 점수도 받아봐요.', mention:'<code class="inlinecode">@</code> 로 <b>딱 그 파일</b>을 콕 집어주면 더 빠르고 정확해요.', keys:'<b>Esc</b>(멈춤)·<b>Esc Esc</b>(되돌리기) 등 키 몇 개로 다 돼요 — 눌러보며 익혀요.', steer:'잘못 가면 <b>Esc로 끊고</b> 바로잡기 — 끝까지 기다리지 않아요.', context:'여기 올라온 것만 클로드가 기억해요. 꽉 차면 <b>‘압축’으로 정리</b>해요.', manage:'맥락을 <b>방치하면 느려지고·비싸지고·헷갈려요</b> — 그래서 제때 정리해요.', sessions:'<b>한 세션엔 한 가지 일</b> — 섞이면 헷갈려요. 작업 폴더는 좁게.', tokens:'토큰 = AI가 글을 읽는 단위. <b>길수록 공간·비용이 늘고</b>, 한글이 더 무거워요.', models:'똑똑함 ↔ 속도 ↔ 비용은 맞바꾸기. <b>헷갈리면 Sonnet</b>으로 시작.', claudemd:'<b>내가 적어두는 규칙 메모</b> — 매 대화 시작에 자동으로 적용돼요.', memory:'<b>클로드가 스스로 배워 기억</b>하는 메모. 세션을 넘어 이어져요.', skills:'자주 쓰는 작업 절차를 <b>한 번 만들어 계속 재사용</b>해요.', mcp:'<b>외부 도구(지라·피그마 등)에 연결</b>해 클로드가 직접 쓰게 해줘요.', plugins:'스킬·도구·명령 등을 <b>묶어 한 번에 설치</b>하는 꾸러미예요.', agents:'큰 일을 <b>전문 도우미에게 나눠 맡기고</b> 결과만 받아요.', images:'<b>스크린샷을 붙이면</b> 클로드가 보고 이해해요 — 말보다 빠르고 정확.', hooks:'특정 순간에 <b>정해진 동작이 매번 자동</b>으로 실행되는 규칙이에요.', planmode:'고치기 전에 <b>계획부터 보여주고 승인</b>받아요 — 큰 변경에 안전.', permissions:'클로드가 <b>얼마나 자주 물어볼지</b> 정하는 설정. 처음엔 안전하게.', rewind:'요청마다 <b>자동 저장</b> — 마음에 안 들면 이전으로 되돌려요.', privacy:'<b>업무용(Team·Enterprise·API)은 기본적으로 학습에 안 쓰여요.</b> 개인용은 설정에서 선택.', commands:'<code class="inlinecode">/</code> 로 시작하는 단축 명령. 제일 자주 쓰는 건 <b>/clear · /compact</b>.', plans:'<b>무료 플랜엔 없어요.</b> 유료(Pro·Max·Team) 또는 API(종량제)로 사용.', limits:'<b>다 쓰면 리셋될 때까지 기다려야</b> 해요 — 그래서 관리가 중요해요.', compact:'길게 쌓인 대화가 <b>짧은 요약 한 칸</b>으로 줄어들어요.', effort:'답하기 전에 <b>얼마나 깊이 생각할지</b> — 깊을수록 정확하지만 느리고 비싸요.', goal:'<b>‘완료 조건’만 주면 될 때까지</b> 클로드가 알아서 반복해요.', loop:'<b>정해진 간격마다</b> 같은 작업을 자동으로 다시 실행해요.', workflows:'큰 일을 <b>여러 도우미가 동시에</b> 처리하도록 조율해요 (고급).', config:'<b>언어·테마·모델·권한</b> 같은 설정을 한 곳에서 바꿔요.', doctor:'안 될 때 <b>설치·설정을 한 번에 점검</b>하고 고칠 곳을 짚어줘요.', glossary:'헷갈리는 용어를 <b>한 줄로</b> 빠르게 찾는 곳이에요.' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">한 줄 요약</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -2013,7 +2012,7 @@ description: 주간 보고서를 회사 양식으로 작성
     var cfgPanel=document.getElementById('cfg-panel');
     CFG.forEach(function(o){ var row=document.createElement('div'); row.className='cfgrow'; row.innerHTML='<div class="cfk">'+o.k+'<small>'+o.sub+'</small></div>'; var v=document.createElement('button'); v.className='cfgval'; v.textContent=o.vals[o.i]; v.addEventListener('click',function(){ o.i=(o.i+1)%o.vals.length; v.textContent=o.vals[o.i]; document.getElementById('cfg-status').textContent='‘'+o.k+'’을(를) ‘'+o.vals[o.i]+'’(으)로 바꿨어요.'; }); row.appendChild(v); cfgPanel.appendChild(row); });
     /* doctor */
-    var DR=[{t:'설치 상태'},{t:'로그인 (계정 연결)'},{t:'인터넷 연결'},{t:'MCP 도구 연결',fail:'지라 연결이 끊겼어요',fix:'→ /mcp 에서 다시 로그인하면 돼요'},{t:'설정 파일'}];
+    var DR=[{t:'설치 상태'},{t:'설치 경로·권한'},{t:'자동 업데이트'},{t:'설정 파일 형식'},{t:'설정 항목 이름',fail:'알 수 없는 항목이 하나 있어요 (오타로 보여요)',fix:'→ 어느 줄인지 짚어줘요 — 그 줄만 고치면 끝'}];
     var drList=document.getElementById('dr-list'),drT=[];
     document.getElementById('dr-go').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; var st=document.getElementById('dr-status'); st.textContent='점검 중…';
       DR.forEach(function(o,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML= o.fail ? '<span class="ck">!</span><span>'+o.t+' — <b>'+o.fail+'</b><span class="drfix">'+o.fix+'</span></span>' : '<span class="ck">'+CK+'</span><span>'+o.t+'</span>'; drList.appendChild(el);
@@ -2026,9 +2025,9 @@ description: 주간 보고서를 회사 양식으로 작성
     var U=document.getElementById('ask-u'),A=document.getElementById('ask-a'),TAG=document.getElementById('ask-tag'),STEPS=document.getElementById('ask-steps'),ST=document.getElementById('ask-status'),T=[];
     if(!U) return;
     var DATA={
-      vague:{ tag:'두루뭉술', cls:'no', u:'예약 기능 만들어줘', a:'음… 어디에 넣을까요? 날짜는 어떤 형식이죠? 어떤 화면을 말하는 거예요?',
-        steps:[['?','되물어봄: 어디에 넣죠? 형식은?'],['←','대충 추측해서 만듦'],['←','‘이게 아닌데’ → 다시 설명'],['←','고쳐서 다시 만듦 (3번째)']],
-        done:'결국 세 번 오갔어요. 두루뭉술하면 클로드가 되물어요.' },
+      vague:{ tag:'두루뭉술', cls:'no', u:'예약 기능 만들어줘', a:'일단 예약 화면을 추측해서 만들어 볼게요…',
+        steps:[['←','어느 화면인지 몰라 추측'],['←','엉뚱한 곳을 새로 만듦'],['←','‘이게 아닌데’ → 다시 설명'],['←','고쳐서 다시 만듦 (3번째)']],
+        done:'두루뭉술하면 클로드가 추측해서 진행해요 → 빗나가면 다시. 결국 여러 번 오가요.' },
       clear:{ tag:'구체적', cls:'yes', u:'예약 화면에 날짜·시간 칸 추가, 빈 칸이면 경고, 되면 테스트도', a:'알겠어요. 바로 만들게요.',
         steps:[['✓','요구사항 이해'],['✓','날짜·시간 칸 추가'],['✓','빈 칸 경고 추가'],['✓','테스트 실행 → 통과']],
         done:'한 번에 끝났어요. 구체적이면 되묻지 않아요.' }
@@ -2060,7 +2059,6 @@ description: 주간 보고서를 회사 양식으로 작성
       MENU.querySelectorAll('.ai').forEach(function(a){ a.addEventListener('click',function(){ pick(+a.dataset.i); }); }); }
     function pick(i){ var f=FILES[i]; attached=f; TY.innerHTML='<span class="fchip">@'+f[0]+'</span> '; MENU.className='atmenu'; ST.textContent='붙였어요: @'+f[0]+' — 이제 ‘보내기’를 눌러보세요.'; }
     document.getElementById('m-at').addEventListener('click',openMenu);
-    document.getElementById('m-drop').addEventListener('click',function(){ pick(0); ST.textContent='드래그&드롭으로 @'+FILES[0][0]+' 을(를) 붙였어요 — @ 입력과 똑같아요.'; });
     document.getElementById('m-send').addEventListener('click',function(){ if(!attached){ ST.textContent='먼저 @로 파일을 붙여보세요.'; return; } ST.textContent='클로드가 @'+attached[0]+' 을(를) 열어보는 중… ✓ 바로 그 파일을 찾았어요.'; });
     document.getElementById('m-reset').addEventListener('click',function(){ attached=null; TY.innerHTML=''; MENU.className='atmenu'; ST.textContent='‘@ 입력’을 눌러보세요.'; });
   })();
@@ -2077,7 +2075,7 @@ description: 주간 보고서를 회사 양식으로 작성
       up:function(){ show('↑  이전에 보낸 요청을 다시 불러왔어요:\n\n   > 예약 화면 고쳐줘','비슷한 걸 또 보낼 때 다시 안 쳐도 돼요.'); },
       tab:function(){ show('Tab  자동완성:\n\n   @예약화…  →  @예약화면.html','파일 이름을 다 안 쳐도 Tab이 완성해줘요.'); },
       bang:function(){ show('!  셸(명령) 모드\n\n   ! npm test\n   → 클로드를 거치지 않고 명령을 직접 실행','결과만 빠르게 보고 싶을 때.'); },
-      hash:function(){ show('#  기억에 저장\n\n   # 항상 한국어로 답해\n   → 다음부터 이 규칙을 기억해요','매번 말 안 해도 되는 규칙을 남겨요. (CLAUDE.md)'); }
+      slash:function(){ show('/  명령 메뉴 열기\n\n   /help   /clear   /compact   /model …\n   → 글자를 더 치면 좁혀져요','무슨 명령이 있는지 외울 필요 없이 / 만 누르면 다 나와요.'); }
     };
     document.querySelectorAll('#keyrow .keycap').forEach(function(c){ c.addEventListener('click',function(){ c.classList.add('hit'); setTimeout(function(){c.classList.remove('hit');},120); (ACT[c.dataset.k]||function(){})(); }); });
   })();
