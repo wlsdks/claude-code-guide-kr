@@ -629,7 +629,7 @@ irm https://claude.ai/install.ps1 | iex</div>
           </div>
         </div>
         <p class="status" id="ask-status">点按钮，看 Claude 会怎么反应。</p>
-        <p class="simtake"><span class="stk">结论</span><span>把<b>做什么·怎么做·做完拿什么验收</b>都写上 —— Claude 就不用反问，<b>一次</b>搞定。</span></p>
+        <p class="simtake"><span class="stk">结论</span><span>把<b>做什么·怎么做·做完拿什么验收</b>都写上 —— Claude 不用猜，<b>一次</b>就完成。</span></p>
       </div>
       <div class="grp" style="margin-top:30px;">
         <h3>自己写写看 —— 我的需求几分？</h3>
@@ -644,14 +644,13 @@ irm https://claude.ai/install.ps1 | iex</div>
     <section class="page" id="mention">
       <h1>指定文件 <span style="color:var(--accent);">@</span></h1>
       <p class="lead">要改的文件已经确定的话 —— 用 <b><code>@</code> 加文件名</b>就能直接点名。Claude 会先打开那个文件。</p>
-      <p class="defs">在下面点 <code>@</code> 弹出文件列表，选一个试试。（实际还能用拖放来附加）</p>
+      <p class="defs">在下面点 <code>@</code> 弹出文件列表，选一个试试。（输入名称的一部分即可缩小列表）</p>
       <div class="grp">
         <h3>动手试 —— 用 @ 附加文件</h3>
         <div class="mline" id="mline"><span>改一下预约页面 </span><span id="m-typed"></span><span class="mcaret">&nbsp;&nbsp;</span></div>
         <div class="atmenu" id="atmenu"></div>
         <div class="keys" style="margin-top:10px;">
           <button class="keycap" id="m-at">输入 @</button>
-          <button class="keycap" id="m-drop">拖放文件</button>
           <button class="keycap" id="m-send">发送</button>
           <button class="keycap" id="m-reset">重来</button>
         </div>
@@ -687,7 +686,7 @@ irm https://claude.ai/install.ps1 | iex</div>
           <button class="keycap" data-k="up">↑</button>
           <button class="keycap" data-k="tab">Tab</button>
           <button class="keycap" data-k="bang">!</button>
-          <button class="keycap" data-k="hash">#</button>
+          <button class="keycap" data-k="slash">/</button>
         </div>
         <p style="margin:2px 0 12px; font-size:13.5px; color:var(--muted);">当前模式：<span class="modebadge" id="key-mode">默认 · 先问再执行</span></p>
         <div class="kterm" id="kterm">按上面的键，这里会显示动作。</div>
@@ -700,11 +699,11 @@ irm https://claude.ai/install.ps1 | iex</div>
           <tbody>
             <tr><td><b>Esc</b></td><td>停下正在做的事</td><td>方向不对时立刻打断</td></tr>
             <tr><td><b>Esc Esc</b></td><td>回退到之前的状态</td><td>“退回那之前”</td></tr>
-            <tr><td><b>Shift+Tab</b></td><td>切换模式</td><td>默认 → 自动接受 → 计划</td></tr>
+            <tr><td><b>Shift+Tab</b></td><td>切换模式</td><td>默认 → 自动接受 → 计划（设置后更多）</td></tr>
             <tr><td><b>↑</b></td><td>调出上一条发过的话</td><td>再发类似需求时</td></tr>
             <tr><td><b>Tab</b></td><td>文件名自动补全</td><td>不用敲完长名字</td></tr>
             <tr><td><b>!</b></td><td>直接执行 shell 命令</td><td>像 <code>!npm test</code> 那样</td></tr>
-            <tr><td><b>#</b></td><td>存一条记忆备忘</td><td>“一直用中文回答”这类规则</td></tr>
+            <tr><td><b>/</b></td><td>打开命令菜单</td><td>列出你能用的所有命令</td></tr>
           </tbody>
         </table>
         <p class="simtake"><span class="stk">结论</span><span>只记最重要的两个 —— <b>Esc</b>（叫停）和 <b>Esc Esc</b>（回退）。这就是新手的<b>安全带</b>。</span></p>
@@ -1450,7 +1449,7 @@ description: 按公司格式撰写周报
     <!-- DOCTOR -->
     <section class="page" id="doctor">
       <h1>诊断 (doctor)</h1>
-      <p class="lead"><b>诊断（doctor）</b>是<b>在出了问题时，一次性检查安装·登录·连接·设置</b>的工具。‘不行的时候先试试它’。</p>
+      <p class="lead"><b>诊断（doctor）</b>是<b>在出了问题时，一次性检查安装状态和设置</b>的工具。‘不行的时候先试试它’。</p>
       <p class="defs">就像汽车的检查指示灯，帮你指出哪里出了问题。亲自跑一次诊断看看。</p>
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="dr-go">运行诊断 ▶</button><button class="btn" id="dr-reset">重置</button></div>
       <div class="cwvm"><span class="cwvmtag">/doctor 检查中</span><div id="dr-list"></div></div>
@@ -1557,7 +1556,7 @@ description: 按公司格式撰写周报
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'聊天给你‘答案’，Claude Code 则在你的项目里<b>亲手做出来、还让它跑起来</b>。', cowork:'不写代码，而是<b>替你做办公事务</b>的 Claude —— 给个目标，就<b>用你的文件做出成品</b>（给非开发者·桌面应用）。', usecases:'按职业<b>展示平时做的事会怎样改变</b>，从之前到之后。', where:'终端·VS Code·桌面·网页 —— <b>哪里都是同一个 Claude Code</b>，设置也共享。', ask:'同样的活，<b>说得越具体</b>越能一次到位 —— 动手写写还能拿分。', mention:'用 <code class="inlinecode">@</code> <b>把那个文件直接点名</b>，更快也更准。', keys:'<b>Esc</b>（叫停）·<b>Esc Esc</b>（回退）等几个键就够用 —— 边按边记。', steer:'走偏了就 <b>用 Esc 打断</b>再纠正 —— 不用等它跑完。', context:'只有放进来的东西 Claude 才记得。装满了就<b>用‘压缩’来整理</b>。', manage:'上下文<b>放着不管就会变慢·变贵·变乱</b> —— 所以要及时整理。', sessions:'<b>一个会话只做一件事</b> —— 混在一起会乱。工作文件夹要窄。', tokens:'Token = AI 读文字的单位。<b>越长越占空间、越费钱</b>，中文更重。', models:'聪明 ↔ 速度 ↔ 成本要取舍。<b>拿不定就用 Sonnet</b> 开始。', claudemd:'<b>我写下的规则备忘</b> —— 每次对话开始自动生效。', memory:'<b>Claude 自己学、自己记</b>的备忘。跨会话延续。', skills:'把常用工作步骤<b>做一次，反复使用</b>。', mcp:'<b>连接外部工具（Jira、Figma 等）</b>，让 Claude 直接使用。', plugins:'把技能·工具·命令等<b>打包一次性安装</b>的包。', agents:'把大事<b>分给专门助手</b>，只接收结果。', images:'<b>贴上截图</b>，Claude 就能看懂 —— 比说话快、还准。', hooks:'某个时刻<b>每次都自动执行固定动作</b>的规则。', planmode:'修改前<b>先展示计划、等批准</b> —— 大改动更安全。', permissions:'决定 Claude <b>要多频繁地问</b>的设置。一开始安全为上。', rewind:'每个请求<b>自动保存</b> —— 不满意就退回之前。', privacy:'<b>工作版（Team·Enterprise·API）默认不用于训练。</b> 个人版可在设置里选。', commands:'以 <code class="inlinecode">/</code> 开头的快捷命令。用得最多的是 <b>/clear · /compact</b>。', plans:'<b>免费版里没有。</b> 用付费版（Pro·Max·Team）或 API（按量计费）。', limits:'<b>用完就得等到重置</b> —— 所以管理很重要。', compact:'长长堆积的对话缩成<b>一格简短摘要</b>。', effort:'回答前<b>要想多深</b> —— 越深越准，但更慢更贵。', goal:'<b>只要给出‘完成条件’，Claude 就会反复做到满足为止</b>。', loop:'<b>每隔固定间隔</b>自动再次执行同一件工作。', workflows:'调度<b>多个助手同时</b>处理一件大事（进阶）。', config:'在一个地方修改<b>语言·主题·模型·权限</b>等设置。', doctor:'出问题时<b>一次性检查安装·连接·设置</b>。', glossary:'<b>用一句话</b>快速查找容易搞混的术语的地方。' };
+  var TLDR={ intro:'聊天给你‘答案’，Claude Code 则在你的项目里<b>亲手做出来、还让它跑起来</b>。', cowork:'不写代码，而是<b>替你做办公事务</b>的 Claude —— 给个目标，就<b>用你的文件做出成品</b>（给非开发者·桌面应用）。', usecases:'按职业<b>展示平时做的事会怎样改变</b>，从之前到之后。', where:'终端·VS Code·桌面·网页 —— <b>哪里都是同一个 Claude Code</b>，设置也共享。', ask:'同样的活，<b>说得越具体</b>越能一次到位 —— 动手写写还能拿分。', mention:'用 <code class="inlinecode">@</code> <b>把那个文件直接点名</b>，更快也更准。', keys:'<b>Esc</b>（叫停）·<b>Esc Esc</b>（回退）等几个键就够用 —— 边按边记。', steer:'走偏了就 <b>用 Esc 打断</b>再纠正 —— 不用等它跑完。', context:'只有放进来的东西 Claude 才记得。装满了就<b>用‘压缩’来整理</b>。', manage:'上下文<b>放着不管就会变慢·变贵·变乱</b> —— 所以要及时整理。', sessions:'<b>一个会话只做一件事</b> —— 混在一起会乱。工作文件夹要窄。', tokens:'Token = AI 读文字的单位。<b>越长越占空间、越费钱</b>，中文更重。', models:'聪明 ↔ 速度 ↔ 成本要取舍。<b>拿不定就用 Sonnet</b> 开始。', claudemd:'<b>我写下的规则备忘</b> —— 每次对话开始自动生效。', memory:'<b>Claude 自己学、自己记</b>的备忘。跨会话延续。', skills:'把常用工作步骤<b>做一次，反复使用</b>。', mcp:'<b>连接外部工具（Jira、Figma 等）</b>，让 Claude 直接使用。', plugins:'把技能·工具·命令等<b>打包一次性安装</b>的包。', agents:'把大事<b>分给专门助手</b>，只接收结果。', images:'<b>贴上截图</b>，Claude 就能看懂 —— 比说话快、还准。', hooks:'某个时刻<b>每次都自动执行固定动作</b>的规则。', planmode:'修改前<b>先展示计划、等批准</b> —— 大改动更安全。', permissions:'决定 Claude <b>要多频繁地问</b>的设置。一开始安全为上。', rewind:'每个请求<b>自动保存</b> —— 不满意就退回之前。', privacy:'<b>工作版（Team·Enterprise·API）默认不用于训练。</b> 个人版可在设置里选。', commands:'以 <code class="inlinecode">/</code> 开头的快捷命令。用得最多的是 <b>/clear · /compact</b>。', plans:'<b>免费版里没有。</b> 用付费版（Pro·Max·Team）或 API（按量计费）。', limits:'<b>用完就得等到重置</b> —— 所以管理很重要。', compact:'长长堆积的对话缩成<b>一格简短摘要</b>。', effort:'回答前<b>要想多深</b> —— 越深越准，但更慢更贵。', goal:'<b>只要给出‘完成条件’，Claude 就会反复做到满足为止</b>。', loop:'<b>每隔固定间隔</b>自动再次执行同一件工作。', workflows:'调度<b>多个助手同时</b>处理一件大事（进阶）。', config:'在一个地方修改<b>语言·主题·模型·权限</b>等设置。', doctor:'出问题时<b>检查安装·设置并指出该改哪里</b>。', glossary:'<b>用一句话</b>快速查找容易搞混的术语的地方。' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">一句话总结</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -2011,7 +2010,7 @@ description: 按公司格式撰写周报
     var cfgPanel=document.getElementById('cfg-panel');
     CFG.forEach(function(o){ var row=document.createElement('div'); row.className='cfgrow'; row.innerHTML='<div class="cfk">'+o.k+'<small>'+o.sub+'</small></div>'; var v=document.createElement('button'); v.className='cfgval'; v.textContent=o.vals[o.i]; v.addEventListener('click',function(){ o.i=(o.i+1)%o.vals.length; v.textContent=o.vals[o.i]; document.getElementById('cfg-status').textContent='把‘'+o.k+'’改成了‘'+o.vals[o.i]+'’。'; }); row.appendChild(v); cfgPanel.appendChild(row); });
     /* doctor */
-    var DR=[{t:'安装状态'},{t:'登录（账号连接）'},{t:'网络连接'},{t:'MCP 工具连接',fail:'Jira 连接断开了',fix:'→ 在 /mcp 里重新登录即可'},{t:'配置文件'}];
+    var DR=[{t:'安装状态'},{t:'安装路径·权限'},{t:'自动更新'},{t:'配置文件格式'},{t:'配置项名称',fail:'有一个无法识别的项（看起来像拼写错误）',fix:'→ 会指出在哪一行——改那一行就行'}];
     var drList=document.getElementById('dr-list'),drT=[];
     document.getElementById('dr-go').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; var st=document.getElementById('dr-status'); st.textContent='检查中…';
       DR.forEach(function(o,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML= o.fail ? '<span class="ck">!</span><span>'+o.t+' — <b>'+o.fail+'</b><span class="drfix">'+o.fix+'</span></span>' : '<span class="ck">'+CK+'</span><span>'+o.t+'</span>'; drList.appendChild(el);
@@ -2024,9 +2023,9 @@ description: 按公司格式撰写周报
     var U=document.getElementById('ask-u'),A=document.getElementById('ask-a'),TAG=document.getElementById('ask-tag'),STEPS=document.getElementById('ask-steps'),ST=document.getElementById('ask-status'),T=[];
     if(!U) return;
     var DATA={
-      vague:{ tag:'笼统', cls:'no', u:'做个预约功能', a:'嗯…放在哪里呢？日期用什么格式？你说的是哪个页面？',
-        steps:[['?','反问：放哪？格式呢？'],['←','大概猜着做了一版'],['←','‘不是这个’ → 重新解释'],['←','改了再做（第 3 次）']],
-        done:'结果来回了三趟。一笼统，Claude 就会反问。' },
+      vague:{ tag:'笼统', cls:'no', u:'做个预约功能', a:'我先猜一个预约页面来做做看…',
+        steps:[['←','不知道是哪个页面，先猜'],['←','在错的地方新建'],['←','‘不是这个’ → 再说明一次'],['←','改了重做（第3次）']],
+        done:'太笼统时 Claude 会猜着做 → 偏了就重来。来回好几次。' },
       clear:{ tag:'具体', cls:'yes', u:'在预约页面加日期·时间输入框，留空就提示，能用就顺手测一下', a:'明白了，这就开始做。',
         steps:[['✓','理解需求'],['✓','加日期·时间输入框'],['✓','加留空提示'],['✓','运行测试 → 通过']],
         done:'一次就搞定。说得具体，就不反问。' }
@@ -2058,7 +2057,6 @@ description: 按公司格式撰写周报
       MENU.querySelectorAll('.ai').forEach(function(a){ a.addEventListener('click',function(){ pick(+a.dataset.i); }); }); }
     function pick(i){ var f=FILES[i]; attached=f; TY.innerHTML='<span class="fchip">@'+f[0]+'</span> '; MENU.className='atmenu'; ST.textContent='已附加：@'+f[0]+' —— 现在点“发送”试试。'; }
     document.getElementById('m-at').addEventListener('click',openMenu);
-    document.getElementById('m-drop').addEventListener('click',function(){ pick(0); ST.textContent='用拖放附加了 @'+FILES[0][0]+' —— 和输入 @ 一样。'; });
     document.getElementById('m-send').addEventListener('click',function(){ if(!attached){ ST.textContent='先用 @ 附加一个文件吧。'; return; } ST.textContent='Claude 正在打开 @'+attached[0]+'… ✓ 直接找到了那个文件。'; });
     document.getElementById('m-reset').addEventListener('click',function(){ attached=null; TY.innerHTML=''; MENU.className='atmenu'; ST.textContent='点“输入 @”试试。'; });
   })();
@@ -2075,7 +2073,7 @@ description: 按公司格式撰写周报
       up:function(){ show('↑  调出了上一条发过的需求：\n\n   > 改一下预约页面','再发类似的时候不用重新敲。'); },
       tab:function(){ show('Tab  自动补全：\n\n   @预约页…  →  @预约页面.html','文件名不用敲完，Tab 帮你补全。'); },
       bang:function(){ show('!  shell（命令）模式\n\n   ! npm test\n   → 不经过 Claude，直接执行命令','只想快速看结果的时候。'); },
-      hash:function(){ show('#  存入记忆\n\n   # 一直用中文回答\n   → 从下次起记住这条规则','省得每次都说的规则，留在这里。（CLAUDE.md）'); }
+      slash:function(){ show('/  打开命令菜单\n\n   /help   /clear   /compact   /model …\n   → 多打几个字就会缩小范围','不用记命令——按 / 就全列出来。'); }
     };
     document.querySelectorAll('#keyrow .keycap').forEach(function(c){ c.addEventListener('click',function(){ c.classList.add('hit'); setTimeout(function(){c.classList.remove('hit');},120); (ACT[c.dataset.k]||function(){})(); }); });
   })();

@@ -630,7 +630,7 @@ irm https://claude.ai/install.ps1 | iex</div>
           </div>
         </div>
         <p class="status" id="ask-status">ボタンを押すと、Claude がどう反応するか見せます。</p>
-        <p class="simtake"><span class="stk">結論</span><span><b>何を・どう・できたら何で確認するか</b>まで書けば — Claude は聞き返さず<b>一度で</b>終えます。</span></p>
+        <p class="simtake"><span class="stk">結論</span><span><b>何を・どう・できたら何で確認するか</b>まで書けば — Claude は推測せず<b>一度で</b>終わります。</span></p>
       </div>
       <div class="grp" style="margin-top:30px;">
         <h3>やってみる — 私のリクエストは何点?</h3>
@@ -645,14 +645,13 @@ irm https://claude.ai/install.ps1 | iex</div>
     <section class="page" id="mention">
       <h1>ファイル指定 <span style="color:var(--accent);">@</span></h1>
       <p class="lead">直したいファイルが決まっているなら — <b><code>@</code> のあとにファイル名</b>でピンポイントに指定できます。Claude はそのファイルを先に開きます。</p>
-      <p class="defs">下で <code>@</code> を押してファイル一覧を出し、一つ選んでみてください。（実際はドラッグ&amp;ドロップでも添付できます）</p>
+      <p class="defs">下で <code>@</code> を押してファイル一覧を出し、一つ選んでみてください。名前の一部を入力すると一覧が絞られます。</p>
       <div class="grp">
         <h3>やってみる — @ でファイルを添付</h3>
         <div class="mline" id="mline"><span>予約画面を直して </span><span id="m-typed"></span><span class="mcaret">&nbsp;&nbsp;</span></div>
         <div class="atmenu" id="atmenu"></div>
         <div class="keys" style="margin-top:10px;">
           <button class="keycap" id="m-at">@ 入力</button>
-          <button class="keycap" id="m-drop">ファイルをドラッグ&amp;ドロップ</button>
           <button class="keycap" id="m-send">送信</button>
           <button class="keycap" id="m-reset">最初に戻す</button>
         </div>
@@ -688,7 +687,7 @@ irm https://claude.ai/install.ps1 | iex</div>
           <button class="keycap" data-k="up">↑</button>
           <button class="keycap" data-k="tab">Tab</button>
           <button class="keycap" data-k="bang">!</button>
-          <button class="keycap" data-k="hash">#</button>
+          <button class="keycap" data-k="slash">/</button>
         </div>
         <p style="margin:2px 0 12px; font-size:13.5px; color:var(--muted);">いまのモード: <span class="modebadge" id="key-mode">基本 · 確認してから実行</span></p>
         <div class="kterm" id="kterm">上のキーを押すと、ここに動作が表示されます。</div>
@@ -701,11 +700,11 @@ irm https://claude.ai/install.ps1 | iex</div>
           <tbody>
             <tr><td><b>Esc</b></td><td>やっていることを止める</td><td>方向が違うときすぐ切る</td></tr>
             <tr><td><b>Esc Esc</b></td><td>前の時点へ巻き戻す</td><td>「それの前に戻して」</td></tr>
-            <tr><td><b>Shift+Tab</b></td><td>モードを変える</td><td>基本 → 自動承認 → 計画</td></tr>
+            <tr><td><b>Shift+Tab</b></td><td>モードを変える</td><td>基本 → 自動承認 → 計画（設定でさらに）</td></tr>
             <tr><td><b>↑</b></td><td>前に送った言葉を呼び出す</td><td>似たリクエストをまた送るとき</td></tr>
             <tr><td><b>Tab</b></td><td>ファイル名を自動補完</td><td>長い名前を全部打たなくていい</td></tr>
             <tr><td><b>!</b></td><td>シェルコマンドをすぐ実行</td><td><code>!npm test</code> のように</td></tr>
-            <tr><td><b>#</b></td><td>記憶にメモを保存</td><td>「いつも日本語で答えて」のようなルール</td></tr>
+            <tr><td><b>/</b></td><td>コマンドメニューを開く</td><td>使えるコマンドを全部表示</td></tr>
           </tbody>
         </table>
         <p class="simtake"><span class="stk">結論</span><span>いちばん大事な二つだけ覚えましょう — <b>Esc</b>(止める)と <b>Esc Esc</b>(巻き戻し)。これが初心者の<b>シートベルト</b>です。</span></p>
@@ -1451,7 +1450,7 @@ description: 週次レポートを会社の様式で作成
     <!-- DOCTOR -->
     <section class="page" id="doctor">
       <h1>診断 (doctor)</h1>
-      <p class="lead"><b>診断（doctor）</b>は、<b>何かうまくいかないときに、インストール・ログイン・連携・設定を一度に点検</b>してくれるツールです。「うまくいかないとき、まずやってみること」。</p>
+      <p class="lead"><b>診断（doctor）</b>は、<b>何かうまくいかないときに、インストール状態と設定を一度に点検</b>してくれるツールです。「うまくいかないとき、まずやってみること」。</p>
       <p class="defs">車の点検ランプのように、どこが問題かを指摘してくれます。診断を実際に走らせてみましょう。</p>
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="dr-go">診断を実行 ▶</button><button class="btn" id="dr-reset">リセット</button></div>
       <div class="cwvm"><span class="cwvmtag">/doctor 点検中</span><div id="dr-list"></div></div>
@@ -1557,7 +1556,7 @@ description: 週次レポートを会社の様式で作成
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'チャットは「答え」をくれて、Claude Code は自分のプロジェクトで<b>直接作って動くところまで</b>やってくれます。', cowork:'コードではなく<b>オフィス業務を代わりに</b>こなす Claude — 目標を伝えるだけで<b>自分のファイルで成果物まで</b>作ります（非エンジニア・デスクトップアプリ）。', usecases:'職業ごとに<b>いつもの仕事がどう変わるか</b>をビフォー→アフターで見せます。', where:'ターミナル・VS Code・デスクトップ・Web — <b>どこでも同じ Claude Code</b>、設定も共有されます。', ask:'同じ作業でも<b>具体的に頼めば</b>一度で — 自分で書いて点数ももらえます。', mention:'<code class="inlinecode">@</code> で<b>まさにそのファイル</b>をピンポイント指定すると速く正確。', keys:'<b>Esc</b>(止める)・<b>Esc Esc</b>(巻き戻し)など、キーいくつかで全部できます — 押して覚えましょう。', steer:'間違ったら<b>Esc で切って</b>直す — 最後まで待ちません。', context:'ここに乗ったものだけを Claude が覚えています。満杯になったら<b>「圧縮」で整理</b>します。', manage:'コンテキストを<b>放置すると遅く・高く・混乱します</b> — だからこまめに片づけます。', sessions:'<b>一つのセッションに一つの仕事</b> — 混ぜると混乱します。作業フォルダは狭く。', tokens:'トークン = AI が文章を読む単位。<b>長いほど空間・コストが増え</b>、日本語のほうが重い。', models:'賢さ ↔ 速さ ↔ コストはトレードオフ。<b>迷ったら Sonnet</b> で始めましょう。', claudemd:'<b>自分で書いておくルールのメモ</b> — 毎回の会話の始めに自動で適用されます。', memory:'<b>Claude が自分で学んで覚える</b>メモ。セッションをまたいで引き継がれます。', skills:'よく使う作業の手順を<b>一度作ってずっと再利用</b>します。', mcp:'<b>外部ツール(Jira・Figma など)につないで</b> Claude が直接使えるようにします。', plugins:'スキル・ツール・コマンドなどを<b>まとめて一度にインストール</b>する一式です。', agents:'大きな仕事を<b>専門のお手伝いに分けて任せ</b>、結果だけ受け取ります。', images:'<b>スクリーンショットを貼れば</b> Claude が見て理解します — 言葉より速く正確。', hooks:'特定の瞬間に<b>決まった動作が毎回自動</b>で実行されるルールです。', planmode:'直す前に<b>計画を先に見せて承認</b>を受けます — 大きな変更に安全。', permissions:'Claude が<b>どのくらい頻繁に聞くか</b>を決める設定。最初は安全に。', rewind:'リクエストごとに<b>自動保存</b> — 気に入らなければ以前へ巻き戻します。', privacy:'<b>業務用(Team·Enterprise·API)は基本的に学習に使われません。</b> 個人用は設定で選択。', commands:'<code class="inlinecode">/</code> で始まるショートカットコマンド。いちばんよく使うのは <b>/clear · /compact</b>。', plans:'<b>無料プランにはありません。</b> 有料(Pro·Max·Team)または API(従量制)で使用。', limits:'<b>使い切るとリセットまで待つ</b>必要があります — だから管理が大切です。', compact:'長く積み上がった会話が<b>短い要約 1 マス</b>に縮みます。', effort:'答える前に<b>どれだけ深く考えるか</b> — 深いほど正確ですが、遅く高くつきます。', goal:'<b>「完了条件」だけ与えれば、できるまで</b> Claude が自分で繰り返します。', loop:'<b>決めた間隔ごとに</b>同じ作業を自動でもう一度実行します。', workflows:'大きな仕事を<b>複数のお手伝いが同時に</b>処理するよう調整します（上級）。', config:'<b>言語・テーマ・モデル・権限</b>のような設定を一か所で変えます。', doctor:'うまくいかないとき<b>インストール・連携・設定を一度に点検</b>してくれます。', glossary:'迷う用語を<b>一行で</b>素早く探す場所です。' };
+  var TLDR={ intro:'チャットは「答え」をくれて、Claude Code は自分のプロジェクトで<b>直接作って動くところまで</b>やってくれます。', cowork:'コードではなく<b>オフィス業務を代わりに</b>こなす Claude — 目標を伝えるだけで<b>自分のファイルで成果物まで</b>作ります（非エンジニア・デスクトップアプリ）。', usecases:'職業ごとに<b>いつもの仕事がどう変わるか</b>をビフォー→アフターで見せます。', where:'ターミナル・VS Code・デスクトップ・Web — <b>どこでも同じ Claude Code</b>、設定も共有されます。', ask:'同じ作業でも<b>具体的に頼めば</b>一度で — 自分で書いて点数ももらえます。', mention:'<code class="inlinecode">@</code> で<b>まさにそのファイル</b>をピンポイント指定すると速く正確。', keys:'<b>Esc</b>(止める)・<b>Esc Esc</b>(巻き戻し)など、キーいくつかで全部できます — 押して覚えましょう。', steer:'間違ったら<b>Esc で切って</b>直す — 最後まで待ちません。', context:'ここに乗ったものだけを Claude が覚えています。満杯になったら<b>「圧縮」で整理</b>します。', manage:'コンテキストを<b>放置すると遅く・高く・混乱します</b> — だからこまめに片づけます。', sessions:'<b>一つのセッションに一つの仕事</b> — 混ぜると混乱します。作業フォルダは狭く。', tokens:'トークン = AI が文章を読む単位。<b>長いほど空間・コストが増え</b>、日本語のほうが重い。', models:'賢さ ↔ 速さ ↔ コストはトレードオフ。<b>迷ったら Sonnet</b> で始めましょう。', claudemd:'<b>自分で書いておくルールのメモ</b> — 毎回の会話の始めに自動で適用されます。', memory:'<b>Claude が自分で学んで覚える</b>メモ。セッションをまたいで引き継がれます。', skills:'よく使う作業の手順を<b>一度作ってずっと再利用</b>します。', mcp:'<b>外部ツール(Jira・Figma など)につないで</b> Claude が直接使えるようにします。', plugins:'スキル・ツール・コマンドなどを<b>まとめて一度にインストール</b>する一式です。', agents:'大きな仕事を<b>専門のお手伝いに分けて任せ</b>、結果だけ受け取ります。', images:'<b>スクリーンショットを貼れば</b> Claude が見て理解します — 言葉より速く正確。', hooks:'特定の瞬間に<b>決まった動作が毎回自動</b>で実行されるルールです。', planmode:'直す前に<b>計画を先に見せて承認</b>を受けます — 大きな変更に安全。', permissions:'Claude が<b>どのくらい頻繁に聞くか</b>を決める設定。最初は安全に。', rewind:'リクエストごとに<b>自動保存</b> — 気に入らなければ以前へ巻き戻します。', privacy:'<b>業務用(Team·Enterprise·API)は基本的に学習に使われません。</b> 個人用は設定で選択。', commands:'<code class="inlinecode">/</code> で始まるショートカットコマンド。いちばんよく使うのは <b>/clear · /compact</b>。', plans:'<b>無料プランにはありません。</b> 有料(Pro·Max·Team)または API(従量制)で使用。', limits:'<b>使い切るとリセットまで待つ</b>必要があります — だから管理が大切です。', compact:'長く積み上がった会話が<b>短い要約 1 マス</b>に縮みます。', effort:'答える前に<b>どれだけ深く考えるか</b> — 深いほど正確ですが、遅く高くつきます。', goal:'<b>「完了条件」だけ与えれば、できるまで</b> Claude が自分で繰り返します。', loop:'<b>決めた間隔ごとに</b>同じ作業を自動でもう一度実行します。', workflows:'大きな仕事を<b>複数のお手伝いが同時に</b>処理するよう調整します（上級）。', config:'<b>言語・テーマ・モデル・権限</b>のような設定を一か所で変えます。', doctor:'うまくいかないとき<b>インストール・設定を点検</b>して直す場所を教えてくれます。', glossary:'迷う用語を<b>一行で</b>素早く探す場所です。' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">一行まとめ</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -2011,7 +2010,7 @@ description: 週次レポートを会社の様式で作成
     var cfgPanel=document.getElementById('cfg-panel');
     CFG.forEach(function(o){ var row=document.createElement('div'); row.className='cfgrow'; row.innerHTML='<div class="cfk">'+o.k+'<small>'+o.sub+'</small></div>'; var v=document.createElement('button'); v.className='cfgval'; v.textContent=o.vals[o.i]; v.addEventListener('click',function(){ o.i=(o.i+1)%o.vals.length; v.textContent=o.vals[o.i]; document.getElementById('cfg-status').textContent='「'+o.k+'」を「'+o.vals[o.i]+'」に変えました。'; }); row.appendChild(v); cfgPanel.appendChild(row); });
     /* doctor */
-    var DR=[{t:'インストール状態'},{t:'ログイン（アカウント連携）'},{t:'インターネット接続'},{t:'MCP ツール接続',fail:'Jira の接続が切れています',fix:'→ /mcp で再ログインすればOK'},{t:'設定ファイル'}];
+    var DR=[{t:'インストール状態'},{t:'インストール先・権限'},{t:'自動アップデート'},{t:'設定ファイルの形式'},{t:'設定項目の名前',fail:'不明な項目が1つあります（誤字のようです）',fix:'→ どの行か教えてくれます — その行を直すだけ'}];
     var drList=document.getElementById('dr-list'),drT=[];
     document.getElementById('dr-go').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; var st=document.getElementById('dr-status'); st.textContent='点検中…';
       DR.forEach(function(o,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML= o.fail ? '<span class="ck">!</span><span>'+o.t+' — <b>'+o.fail+'</b><span class="drfix">'+o.fix+'</span></span>' : '<span class="ck">'+CK+'</span><span>'+o.t+'</span>'; drList.appendChild(el);
@@ -2024,9 +2023,9 @@ description: 週次レポートを会社の様式で作成
     var U=document.getElementById('ask-u'),A=document.getElementById('ask-a'),TAG=document.getElementById('ask-tag'),STEPS=document.getElementById('ask-steps'),ST=document.getElementById('ask-status'),T=[];
     if(!U) return;
     var DATA={
-      vague:{ tag:'ざっくり', cls:'no', u:'予約機能つくって', a:'うーん… どこに入れますか? 日付はどんな形式ですか? どの画面のことですか?',
-        steps:[['?','聞き返す: どこに入れる? 形式は?'],['←','適当に推測して作る'],['←','「これじゃない」 → もう一度説明'],['←','直してまた作る (3回目)']],
-        done:'結局3回もやり取り。ざっくりだと Claude が聞き返します。' },
+      vague:{ tag:'ざっくり', cls:'no', u:'予約機能つくって', a:'とりあえず予約画面を推測して作ってみます…',
+        steps:[['←','どの画面か分からず推測'],['←','違う場所に新規作成'],['←','「これじゃない」→ もう一度説明'],['←','直して作り直し（3回目）']],
+        done:'曖昧だと Claude は推測で進めます → 外れたらやり直し。結局何度も往復します。' },
       clear:{ tag:'具体的', cls:'yes', u:'予約画面に日付・時間欄を追加、空欄なら警告、できたらテストも', a:'わかりました。すぐ作ります。',
         steps:[['✓','要件を理解'],['✓','日付・時間欄を追加'],['✓','空欄の警告を追加'],['✓','テスト実行 → 合格']],
         done:'一度で終わりました。具体的だと聞き返しません。' }
@@ -2058,7 +2057,6 @@ description: 週次レポートを会社の様式で作成
       MENU.querySelectorAll('.ai').forEach(function(a){ a.addEventListener('click',function(){ pick(+a.dataset.i); }); }); }
     function pick(i){ var f=FILES[i]; attached=f; TY.innerHTML='<span class="fchip">@'+f[0]+'</span> '; MENU.className='atmenu'; ST.textContent='添付しました: @'+f[0]+' — では「送信」を押してみてください。'; }
     document.getElementById('m-at').addEventListener('click',openMenu);
-    document.getElementById('m-drop').addEventListener('click',function(){ pick(0); ST.textContent='ドラッグ&ドロップで @'+FILES[0][0]+' を添付しました — @ 入力と同じです。'; });
     document.getElementById('m-send').addEventListener('click',function(){ if(!attached){ ST.textContent='先に @ でファイルを添付してください。'; return; } ST.textContent='Claude が @'+attached[0]+' を開いています… ✓ まさにそのファイルを見つけました。'; });
     document.getElementById('m-reset').addEventListener('click',function(){ attached=null; TY.innerHTML=''; MENU.className='atmenu'; ST.textContent='「@ 入力」を押してみてください。'; });
   })();
@@ -2075,7 +2073,7 @@ description: 週次レポートを会社の様式で作成
       up:function(){ show('↑  前に送ったリクエストを呼び出しました:\n\n   > 予約画面を直して','似たものをまた送るとき、打ち直さなくていい。'); },
       tab:function(){ show('Tab  自動補完:\n\n   @予約が…  →  @予約画面.html','ファイル名を全部打たなくても Tab が補完してくれます。'); },
       bang:function(){ show('!  シェル(コマンド)モード\n\n   ! npm test\n   → Claude を通さずコマンドを直接実行','結果だけ早く見たいとき。'); },
-      hash:function(){ show('#  記憶に保存\n\n   # いつも日本語で答えて\n   → 次からこのルールを覚えます','毎回言わなくていいルールを残せます。(CLAUDE.md)'); }
+      slash:function(){ show('/  コマンドメニューを開く\n\n   /help   /clear   /compact   /model …\n   → さらに入力すると絞り込めます','コマンドを覚えなくてOK — / を押せば全部出ます。'); }
     };
     document.querySelectorAll('#keyrow .keycap').forEach(function(c){ c.addEventListener('click',function(){ c.classList.add('hit'); setTimeout(function(){c.classList.remove('hit');},120); (ACT[c.dataset.k]||function(){})(); }); });
   })();
