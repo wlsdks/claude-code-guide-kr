@@ -194,6 +194,15 @@
   .cw3h{ font-size:13.5px; font-weight:600; display:flex; align-items:center; gap:7px; flex-wrap:wrap; margin-bottom:9px; }
   .cw3body{ display:flex; flex-direction:column; gap:6px; min-height:120px; }
   .cw3line{ font-size:12px; line-height:1.5; padding:7px 10px; border-radius:7px; background:var(--bg); border:1px solid var(--line); color:var(--muted); opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .3s; } .cw3line.on{ opacity:1; transform:none; } .cw3line.done{ color:var(--ink); background:rgba(31,158,118,.12); border-color:rgba(31,158,118,.34); font-weight:500; }
+  /* usecases (job before/after) */
+  .uctask{ display:flex; align-items:flex-start; gap:10px; font-size:14px; border:1px solid var(--line2); border-radius:11px; background:var(--panel); padding:13px 15px; } .uctask .uc-tag{ font-size:11px; font-weight:600; color:var(--muted); background:var(--bg); border:1px solid var(--line2); border-radius:6px; padding:2px 8px; white-space:nowrap; flex:0 0 auto; margin-top:1px; }
+  .ucba{ display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:stretch; } @media (max-width:680px){ .ucba{ grid-template-columns:1fr; } .ucarrow{ transform:rotate(90deg); justify-self:center; } }
+  .uccard{ border:1px solid var(--line2); border-radius:12px; padding:14px; } .uccard.ucbefore{ background:rgba(216,69,63,.05); border-color:rgba(216,69,63,.28); } .uccard.ucafter{ background:rgba(31,158,118,.07); border-color:rgba(31,158,118,.34); }
+  .uch{ font-size:13px; font-weight:600; margin-bottom:10px; } .ucbefore .uch{ color:var(--over); } .ucafter .uch{ color:var(--good); }
+  .ucbody{ display:flex; flex-direction:column; gap:7px; min-height:150px; }
+  .ucline{ font-size:12.5px; line-height:1.5; padding:8px 11px; border-radius:8px; background:var(--bg); border:1px solid var(--line); color:var(--muted); opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .3s; } .ucline.on{ opacity:1; transform:none; color:var(--ink); } .ucline.ask{ background:var(--row); font-weight:500; } .ucline.result{ background:rgba(31,158,118,.14); border-color:rgba(31,158,118,.4); color:var(--ink); font-weight:600; }
+  .ucarrow{ align-self:center; color:var(--faint); font-size:20px; flex:0 0 auto; }
+  .ucsave{ display:none; margin-top:13px; text-align:center; font-size:14px; font-weight:600; color:var(--good); background:rgba(31,158,118,.1); border:1px solid rgba(31,158,118,.32); border-radius:11px; padding:11px; } .ucsave.show{ display:block; }
   .limit{ position:absolute; left:0; right:0; border-top:1px dashed var(--line2); pointer-events:none; } .limit .cap{ position:absolute; right:8px; top:-9px; font-size:10.5px; color:var(--faint); background:var(--bg); padding:0 6px; } .limit.over{ border-top-color:var(--over); } .limit.over .cap{ color:var(--over); }
   .free{ position:absolute; left:0; right:0; text-align:center; font-size:11.5px; color:var(--faint); pointer-events:none; transition:bottom .5s cubic-bezier(.22,1,.36,1); }
   .capbox{ display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; } .capbox input{ width:108px; font-family:inherit; font-size:14px; padding:9px 11px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; text-align:right; font-variant-numeric:tabular-nums; } .capbox input:focus{ border-color:var(--accent); } .capbox .unit{ font-size:13px; color:var(--muted); }
@@ -344,40 +353,41 @@
     <div class="navsec">Getting started</div>
     <button class="navitem on" data-page="intro"><span class="no">01</span>What is Claude Code?</button>
     <button class="navitem" data-page="cowork"><span class="no">02</span>What is Cowork?</button>
-    <button class="navitem" data-page="where"><span class="no">03</span>Where to use it</button>
+    <button class="navitem" data-page="usecases"><span class="no">03</span>Real examples</button>
+    <button class="navitem" data-page="where"><span class="no">04</span>Where to use it</button>
     <div class="navsec">Basic concepts</div>
-    <button class="navitem" data-page="context"><span class="no">04</span>Context window</button>
-    <button class="navitem" data-page="compact"><span class="no">05</span>Compacting</button>
-    <button class="navitem" data-page="sessions"><span class="no">06</span>Sessions & folders</button>
-    <button class="navitem" data-page="tokens"><span class="no">07</span>Tokens</button>
-    <button class="navitem" data-page="models"><span class="no">08</span>Choosing a model (model)</button>
-    <button class="navitem" data-page="effort"><span class="no">09</span>Thinking depth (effort)</button>
+    <button class="navitem" data-page="context"><span class="no">05</span>Context window</button>
+    <button class="navitem" data-page="compact"><span class="no">06</span>Compacting</button>
+    <button class="navitem" data-page="sessions"><span class="no">07</span>Sessions & folders</button>
+    <button class="navitem" data-page="tokens"><span class="no">08</span>Tokens</button>
+    <button class="navitem" data-page="models"><span class="no">09</span>Choosing a model (model)</button>
+    <button class="navitem" data-page="effort"><span class="no">10</span>Thinking depth (effort)</button>
     <div class="navsec">Memory & rules</div>
-    <button class="navitem" data-page="claudemd"><span class="no">10</span>CLAUDE.md</button>
-    <button class="navitem" data-page="memory"><span class="no">11</span>Memory</button>
-    <button class="navitem" data-page="skills"><span class="no">12</span>Skills</button>
+    <button class="navitem" data-page="claudemd"><span class="no">11</span>CLAUDE.md</button>
+    <button class="navitem" data-page="memory"><span class="no">12</span>Memory</button>
+    <button class="navitem" data-page="skills"><span class="no">13</span>Skills</button>
     <div class="navsec">Expanding abilities</div>
-    <button class="navitem" data-page="mcp"><span class="no">13</span>MCP (tool connections)</button>
-    <button class="navitem" data-page="plugins"><span class="no">14</span>Plugins</button>
-    <button class="navitem" data-page="agents"><span class="no">15</span>Subagents</button>
-    <button class="navitem" data-page="images"><span class="no">16</span>Pasting images</button>
-    <button class="navitem" data-page="hooks"><span class="no">17</span>Automation (hooks)</button>
+    <button class="navitem" data-page="mcp"><span class="no">14</span>MCP (tool connections)</button>
+    <button class="navitem" data-page="plugins"><span class="no">15</span>Plugins</button>
+    <button class="navitem" data-page="agents"><span class="no">16</span>Subagents</button>
+    <button class="navitem" data-page="images"><span class="no">17</span>Pasting images</button>
+    <button class="navitem" data-page="hooks"><span class="no">18</span>Automation (hooks)</button>
     <div class="navsec">Automate & repeat</div>
-    <button class="navitem" data-page="goal"><span class="no">18</span>Goals (goal)</button>
-    <button class="navitem" data-page="loop"><span class="no">19</span>Repeat (loop)</button>
-    <button class="navitem" data-page="workflows"><span class="no">20</span>Workflows</button>
+    <button class="navitem" data-page="goal"><span class="no">19</span>Goals (goal)</button>
+    <button class="navitem" data-page="loop"><span class="no">20</span>Repeat (loop)</button>
+    <button class="navitem" data-page="workflows"><span class="no">21</span>Workflows</button>
     <div class="navsec">Staying safe</div>
-    <button class="navitem" data-page="planmode"><span class="no">21</span>Plan mode</button>
-    <button class="navitem" data-page="permissions"><span class="no">22</span>Permission modes</button>
-    <button class="navitem" data-page="rewind"><span class="no">23</span>Rewind</button>
-    <button class="navitem" data-page="privacy"><span class="no">24</span>Data & privacy</button>
+    <button class="navitem" data-page="planmode"><span class="no">22</span>Plan mode</button>
+    <button class="navitem" data-page="permissions"><span class="no">23</span>Permission modes</button>
+    <button class="navitem" data-page="rewind"><span class="no">24</span>Rewind</button>
+    <button class="navitem" data-page="privacy"><span class="no">25</span>Data & privacy</button>
     <div class="navsec">In practice</div>
-    <button class="navitem" data-page="commands"><span class="no">25</span>Slash commands</button>
-    <button class="navitem" data-page="config"><span class="no">26</span>Settings (config)</button>
-    <button class="navitem" data-page="doctor"><span class="no">27</span>Diagnostics (doctor)</button>
-    <button class="navitem" data-page="plans"><span class="no">28</span>Plans & pricing</button>
-    <button class="navitem" data-page="limits"><span class="no">29</span>Usage limits</button>
-    <button class="navitem" data-page="glossary"><span class="no">30</span>Glossary</button>
+    <button class="navitem" data-page="commands"><span class="no">26</span>Slash commands</button>
+    <button class="navitem" data-page="config"><span class="no">27</span>Settings (config)</button>
+    <button class="navitem" data-page="doctor"><span class="no">28</span>Diagnostics (doctor)</button>
+    <button class="navitem" data-page="plans"><span class="no">29</span>Plans & pricing</button>
+    <button class="navitem" data-page="limits"><span class="no">30</span>Usage limits</button>
+    <button class="navitem" data-page="glossary"><span class="no">31</span>Glossary</button>
   </nav>
 
   <main class="main"><div class="inner">
@@ -423,7 +433,7 @@
         </div>
       </div>
       <div class="bignote"><span class="bx">Note</span><span>This guide is <b>a place to learn the concepts</b> — it doesn't cover how to install or get started (the official docs handle that). And it's <b>an unofficial learning resource</b>, not affiliated with Anthropic.</span></div>
-      <p class="note">Use the left menu (the top tabs on narrow screens) to jump between the 30 topics. Everything is built so you can understand it through buttons and inputs <b>without trying it yourself</b>. In the text, <span class="gl" title="Words underlined with a dotted line like this show their meaning when you hover over them. On mobile, see the explanation in parentheses.">words with a dotted underline</span> show their meaning when you hover.</p>
+      <p class="note">Use the left menu (the top tabs on narrow screens) to jump between the 31 topics. Everything is built so you can understand it through buttons and inputs <b>without trying it yourself</b>. In the text, <span class="gl" title="Words underlined with a dotted line like this show their meaning when you hover over them. On mobile, see the explanation in parentheses.">words with a dotted underline</span> show their meaning when you hover.</p>
     </section>
 
     <!-- 02 COWORK -->
@@ -457,7 +467,24 @@
       <p class="note">Cowork is a mode in the <b>Claude desktop app (macOS · Windows)</b> (alongside Chat and Code). It can only read, edit, and create files in <b>folders you connect</b>, and before it acts it <b>shows you a plan and asks for approval</b> ("ask and proceed" is recommended). When it's about to <b>permanently delete</b> a file, it always double-checks first. It's included with the Pro, Max, Team, and Enterprise plans. (Source: Anthropic official — claude.com/product/cowork · for exact screens and features, refer to the official app)</p>
     </section>
 
-    <!-- 03 WHERE -->
+    <section class="page" id="usecases">
+      <h1>Real examples (by job)</h1>
+      <p class="lead"><b>"Does this really work for my job?"</b> — pick a job and see <b>how your everyday work changes</b>, from start to finish.</p>
+      <p class="defs">Compare <b>Before (now)</b> on the left with <b>After (with Claude)</b> on the right, side by side. Pick a job and press the button.</p>
+      <div class="cwchips" id="uc-chips"></div>
+      <div class="uctask"><span class="uc-tag">The task</span><span id="uc-task"></span></div>
+      <div class="btnrow" style="margin:12px 0 14px;"><button class="btn solid" id="uc-go">Compare before → after ▶</button><button class="btn" id="uc-reset">Reset</button></div>
+      <div class="ucba">
+        <div class="uccard ucbefore"><div class="uch">Before — now (on your own)</div><div class="ucbody" id="uc-before"></div></div>
+        <span class="ucarrow">→</span>
+        <div class="uccard ucafter"><div class="uch">After — with Claude</div><div class="ucbody" id="uc-after"></div></div>
+      </div>
+      <div class="ucsave" id="uc-save"></div>
+      <p class="status" id="uc-status" style="margin-top:10px;">Pick a job and press "Compare before → after".</p>
+      <p class="note">If you're not a developer, the easiest way is the <b>Cowork desktop app</b> — open it like any normal program, drag your files in, and ask in plain words (see the "What is Cowork?" tab). The times are an <span class="exb">example</span> to help you understand (real results vary by task and setup).</p>
+    </section>
+
+    <!-- 04 WHERE -->
     <section class="page" id="where">
       <h1>Where to use it</h1>
       <p class="lead">Claude Code works the same way across <b>several environments</b>. Your CLAUDE.md and settings are shared everywhere.</p>
@@ -1237,7 +1264,7 @@ description: Write the weekly report in the company format
   (function(){ var s=null; try{ s=localStorage.getItem('cc_present'); }catch(e){} if(s==='1') setPresent(true); })();
 
   /* LNB icons (monoline) */
-  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
   function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
 
   /* router */
@@ -1245,7 +1272,7 @@ description: Write the weekly report in the company format
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'Chat gives you an \'answer\'; Claude Code <b>actually builds it in your project and makes it work</b>.', cowork:'Claude that <b>does office work</b> instead of code — give it a goal and it <b>builds the finished result from your files</b> (for non-developers · desktop app).', where:'Terminal, VS Code, desktop, web — <b>the same Claude Code everywhere</b>, settings shared too.', context:'Claude only remembers what\'s loaded here. When it\'s full, it <b>tidies up with \'compaction.\'</b>', sessions:'<b>One job per session</b> — mixing causes confusion. Keep the working folder narrow.', tokens:'Token = the unit an AI reads text in. <b>Longer means more space and cost</b>, and Korean is heavier.', models:'Smartness ↔ speed ↔ cost are trade-offs. <b>If unsure, start with Sonnet</b>.', claudemd:'<b>A rules note you write</b> — applied automatically at the start of every conversation.', memory:'A note <b>Claude learns and remembers on its own</b>. Carries over across sessions.', skills:'<b>Make a frequent task\'s steps once and reuse them</b> again and again.', mcp:'<b>Connects to outside tools (Jira, Figma, etc.)</b> so Claude can use them directly.', plugins:'A bundle that <b>packages skills, tools, commands and installs them in one go</b>.', agents:'<b>Hand big jobs to specialist helpers</b> and just get the results back.', images:'<b>Paste a screenshot</b> and Claude sees and understands it — faster and more accurate than words.', hooks:'A rule where <b>a set action runs automatically every time</b> at a specific moment.', planmode:'<b>Shows a plan and gets approval</b> before editing — safe for big changes.', permissions:'A setting for <b>how often Claude asks</b>. Stay safe at first.', rewind:'<b>Auto-saves at every request</b> — if you don\'t like it, roll back to an earlier point.', privacy:'<b>Business (Team, Enterprise, API) isn\'t used for training by default.</b> Personal is a choice in settings.', commands:'Shortcut commands that start with <code class="inlinecode">/</code>. The most-used are <b>/clear · /compact</b>.', plans:'<b>Not on the free plan.</b> Use a paid plan (Pro, Max, Team) or the API (pay-as-you-go).', limits:'<b>Once used up, you wait until it resets</b> — that\'s why managing it matters.', compact:'A long pile of conversation shrinks into <b>one short summary block</b>.', effort:'<b>How deeply it thinks</b> before answering — deeper is more accurate, but slower and pricier.', goal:'<b>Give only a \'completion condition\' and Claude repeats on its own until it\'s met</b>.', loop:'<b>Re-runs the same task automatically at a set interval</b>.', workflows:'Coordinates <b>several helpers working at once</b> on a big job (advanced).', config:'Change settings like <b>language, theme, model, and permissions</b> in one place.', doctor:'<b>Checks your install, connections, and settings all at once</b> when something\'s wrong.', glossary:'A place to quickly look up confusing terms <b>in one line</b>.' };
+  var TLDR={ intro:'Chat gives you an \'answer\'; Claude Code <b>actually builds it in your project and makes it work</b>.', cowork:'Claude that <b>does office work</b> instead of code — give it a goal and it <b>builds the finished result from your files</b> (for non-developers · desktop app).', usecases:'Shows <b>how your everyday work changes</b>, before → after, for each job.', where:'Terminal, VS Code, desktop, web — <b>the same Claude Code everywhere</b>, settings shared too.', context:'Claude only remembers what\'s loaded here. When it\'s full, it <b>tidies up with \'compaction.\'</b>', sessions:'<b>One job per session</b> — mixing causes confusion. Keep the working folder narrow.', tokens:'Token = the unit an AI reads text in. <b>Longer means more space and cost</b>, and Korean is heavier.', models:'Smartness ↔ speed ↔ cost are trade-offs. <b>If unsure, start with Sonnet</b>.', claudemd:'<b>A rules note you write</b> — applied automatically at the start of every conversation.', memory:'A note <b>Claude learns and remembers on its own</b>. Carries over across sessions.', skills:'<b>Make a frequent task\'s steps once and reuse them</b> again and again.', mcp:'<b>Connects to outside tools (Jira, Figma, etc.)</b> so Claude can use them directly.', plugins:'A bundle that <b>packages skills, tools, commands and installs them in one go</b>.', agents:'<b>Hand big jobs to specialist helpers</b> and just get the results back.', images:'<b>Paste a screenshot</b> and Claude sees and understands it — faster and more accurate than words.', hooks:'A rule where <b>a set action runs automatically every time</b> at a specific moment.', planmode:'<b>Shows a plan and gets approval</b> before editing — safe for big changes.', permissions:'A setting for <b>how often Claude asks</b>. Stay safe at first.', rewind:'<b>Auto-saves at every request</b> — if you don\'t like it, roll back to an earlier point.', privacy:'<b>Business (Team, Enterprise, API) isn\'t used for training by default.</b> Personal is a choice in settings.', commands:'Shortcut commands that start with <code class="inlinecode">/</code>. The most-used are <b>/clear · /compact</b>.', plans:'<b>Not on the free plan.</b> Use a paid plan (Pro, Max, Team) or the API (pay-as-you-go).', limits:'<b>Once used up, you wait until it resets</b> — that\'s why managing it matters.', compact:'A long pile of conversation shrinks into <b>one short summary block</b>.', effort:'<b>How deeply it thinks</b> before answering — deeper is more accurate, but slower and pricier.', goal:'<b>Give only a \'completion condition\' and Claude repeats on its own until it\'s met</b>.', loop:'<b>Re-runs the same task automatically at a set interval</b>.', workflows:'Coordinates <b>several helpers working at once</b> on a big job (advanced).', config:'Change settings like <b>language, theme, model, and permissions</b> in one place.', doctor:'<b>Checks your install, connections, and settings all at once</b> when something\'s wrong.', glossary:'A place to quickly look up confusing terms <b>in one line</b>.' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">In one line</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -1519,6 +1546,39 @@ description: Write the weekly report in the company format
       timers.push(setTimeout(function(){ stage.insertAdjacentHTML('beforeend','<div class="cwcard show" style="margin-top:12px;"><div class="cwresult"><span class="fic">'+FILE+'</span><span><div class="rt">'+t.result.t+'</div><div class="rd">'+t.result.d+'</div></span></div></div>'); },450)); }
     document.getElementById('cw-go').addEventListener('click',go);
     document.getElementById('cw-reset').addEventListener('click',function(){ clearT(); setTask(cur); });
+  })();
+
+  /* usecases — job before/after */
+  (function(){
+    var chips=document.getElementById('uc-chips'); if(!chips) return;
+    var UC=[
+      {job:'Cafe owner',task:'Organize 32 receipts from a month into an Excel ledger',
+       before:['Lay out and read each receipt one by one','Type in amounts and dates by hand','…repeat 32 times','Total it up by hand too'],
+       after:[{t:'"Pull the amounts and dates from these receipts and organize them into Excel"',cls:'ask'},{t:'Claude reads all 32 directly'},{t:'Lays them out in a table + adds the sum formula'},{t:'expenses.xlsx done ✓',cls:'result'}],t1:'about 30 min',t2:'about 1 min'},
+      {job:'Teacher',task:'Sort 80 students’ scores by class and by score',
+       before:['Split the roster by class','Sort by score one by one','Calculate averages and ranks by hand','…review several times'],
+       after:[{t:'"Split this score sheet by class, sort by score, and give me the averages too"',cls:'ask'},{t:'Claude sorts and calculates in one go'},{t:'grades.xlsx done ✓',cls:'result'}],t1:'about 40 min',t2:'about 1 min'},
+      {job:'Sales rep',task:'Write a quote (items, unit prices, total on a template)',
+       before:['Open a blank quote template','Enter items, unit prices, quantities','Calculate the total and VAT','Check for typos'],
+       after:[{t:'"Make a quote with these items (keep the template as is)"',cls:'ask'},{t:'Claude fills in the template and calculates'},{t:'quote.xlsx done ✓',cls:'result'}],t1:'about 15 min',t2:'about 1 min'},
+      {job:'Marketer',task:'Summarize 10 competitor PDFs into a single one-pager',
+       before:['Read the 10 documents one by one','Pick out and note just the key points','Compare and condense into one page'],
+       after:[{t:'"Summarize the key points of these 10 documents into one page"',cls:'ask'},{t:'Claude reads them all and compares'},{t:'summary.docx done ✓',cls:'result'}],t1:'about 1 hour',t2:'about 2 min'},
+      {job:'Homemaker',task:'Organize card statements and receipts into a household ledger',
+       before:['Gather statements and receipts','Sort by category by hand','Enter into Excel and total'],
+       after:[{t:'"Organize these statements into a household ledger by category"',cls:'ask'},{t:'Claude sorts and totals'},{t:'ledger.xlsx done ✓',cls:'result'}],t1:'about 30 min',t2:'about 1 min'}
+    ];
+    var cur=0,ucT=[],taskEl=document.getElementById('uc-task'),bEl=document.getElementById('uc-before'),aEl=document.getElementById('uc-after'),saveEl=document.getElementById('uc-save'),ust=document.getElementById('uc-status');
+    function pick(i){ cur=i; var u=UC[i]; [].forEach.call(chips.children,function(c,j){c.classList.toggle('on',j===i);}); taskEl.textContent=u.task; bEl.innerHTML=''; aEl.innerHTML=''; saveEl.classList.remove('show'); ust.textContent='Press "Compare before → after" to see how it changes.'; }
+    function line(box,text,cls){ var d=document.createElement('div'); d.className='ucline'+(cls?(' '+cls):''); d.textContent=text; box.appendChild(d); return d; }
+    UC.forEach(function(u,i){ var b=document.createElement('button'); b.className='cwchip'+(i===0?' on':''); b.textContent=u.job; b.addEventListener('click',function(){ pick(i); run(); }); chips.appendChild(b); });
+    pick(0);
+    function run(){ ucT.forEach(clearTimeout); ucT=[]; var u=UC[cur]; bEl.innerHTML=''; aEl.innerHTML=''; saveEl.classList.remove('show'); ust.textContent='Comparing before (now) and after (with Claude)…';
+      u.before.forEach(function(t){ line(bEl,t); }); u.after.forEach(function(o){ line(aEl,o.t,o.cls); });
+      var seq=[].concat([].map.call(bEl.children,function(e){return e;}),[].map.call(aEl.children,function(e){return e;}));
+      seq.forEach(function(el,k){ ucT.push(setTimeout(function(){ el.classList.add('on'); if(k===seq.length-1){ saveEl.innerHTML='Before '+u.t1+' &nbsp;→&nbsp; After '+u.t2+' — almost entirely automatic'; saveEl.classList.add('show'); ust.textContent='Same task, but with Claude what took '+u.t1+' shrinks to '+u.t2+'.'; } },300+k*600)); }); }
+    document.getElementById('uc-go').addEventListener('click',run);
+    document.getElementById('uc-reset').addEventListener('click',function(){ ucT.forEach(clearTimeout); ucT=[]; pick(cur); });
   })();
 
   /* cowork 3-way comparison */

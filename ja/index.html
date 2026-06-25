@@ -194,6 +194,15 @@
   .cw3h{ font-size:13.5px; font-weight:600; display:flex; align-items:center; gap:7px; flex-wrap:wrap; margin-bottom:9px; }
   .cw3body{ display:flex; flex-direction:column; gap:6px; min-height:120px; }
   .cw3line{ font-size:12px; line-height:1.5; padding:7px 10px; border-radius:7px; background:var(--bg); border:1px solid var(--line); color:var(--muted); opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .3s; } .cw3line.on{ opacity:1; transform:none; } .cw3line.done{ color:var(--ink); background:rgba(31,158,118,.12); border-color:rgba(31,158,118,.34); font-weight:500; }
+  /* usecases (job before/after) */
+  .uctask{ display:flex; align-items:flex-start; gap:10px; font-size:14px; border:1px solid var(--line2); border-radius:11px; background:var(--panel); padding:13px 15px; } .uctask .uc-tag{ font-size:11px; font-weight:600; color:var(--muted); background:var(--bg); border:1px solid var(--line2); border-radius:6px; padding:2px 8px; white-space:nowrap; flex:0 0 auto; margin-top:1px; }
+  .ucba{ display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:stretch; } @media (max-width:680px){ .ucba{ grid-template-columns:1fr; } .ucarrow{ transform:rotate(90deg); justify-self:center; } }
+  .uccard{ border:1px solid var(--line2); border-radius:12px; padding:14px; } .uccard.ucbefore{ background:rgba(216,69,63,.05); border-color:rgba(216,69,63,.28); } .uccard.ucafter{ background:rgba(31,158,118,.07); border-color:rgba(31,158,118,.34); }
+  .uch{ font-size:13px; font-weight:600; margin-bottom:10px; } .ucbefore .uch{ color:var(--over); } .ucafter .uch{ color:var(--good); }
+  .ucbody{ display:flex; flex-direction:column; gap:7px; min-height:150px; }
+  .ucline{ font-size:12.5px; line-height:1.5; padding:8px 11px; border-radius:8px; background:var(--bg); border:1px solid var(--line); color:var(--muted); opacity:0; transform:translateY(-4px); transition:opacity .3s,transform .3s; } .ucline.on{ opacity:1; transform:none; color:var(--ink); } .ucline.ask{ background:var(--row); font-weight:500; } .ucline.result{ background:rgba(31,158,118,.14); border-color:rgba(31,158,118,.4); color:var(--ink); font-weight:600; }
+  .ucarrow{ align-self:center; color:var(--faint); font-size:20px; flex:0 0 auto; }
+  .ucsave{ display:none; margin-top:13px; text-align:center; font-size:14px; font-weight:600; color:var(--good); background:rgba(31,158,118,.1); border:1px solid rgba(31,158,118,.32); border-radius:11px; padding:11px; } .ucsave.show{ display:block; }
   .limit{ position:absolute; left:0; right:0; border-top:1px dashed var(--line2); pointer-events:none; } .limit .cap{ position:absolute; right:8px; top:-9px; font-size:10.5px; color:var(--faint); background:var(--bg); padding:0 6px; } .limit.over{ border-top-color:var(--over); } .limit.over .cap{ color:var(--over); }
   .free{ position:absolute; left:0; right:0; text-align:center; font-size:11.5px; color:var(--faint); pointer-events:none; transition:bottom .5s cubic-bezier(.22,1,.36,1); }
   .capbox{ display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; } .capbox input{ width:108px; font-family:inherit; font-size:14px; padding:9px 11px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; text-align:right; font-variant-numeric:tabular-nums; } .capbox input:focus{ border-color:var(--accent); } .capbox .unit{ font-size:13px; color:var(--muted); }
@@ -345,40 +354,41 @@
     <div class="navsec">はじめに</div>
     <button class="navitem on" data-page="intro"><span class="no">01</span>Claude Code とは?</button>
     <button class="navitem" data-page="cowork"><span class="no">02</span>Cowork とは？</button>
-    <button class="navitem" data-page="where"><span class="no">03</span>どこで使う</button>
+    <button class="navitem" data-page="usecases"><span class="no">03</span>こう使う</button>
+    <button class="navitem" data-page="where"><span class="no">04</span>どこで使う</button>
     <div class="navsec">基本の概念</div>
-    <button class="navitem" data-page="context"><span class="no">04</span>コンテキストウィンドウ</button>
-    <button class="navitem" data-page="compact"><span class="no">05</span>圧縮 (compact)</button>
-    <button class="navitem" data-page="sessions"><span class="no">06</span>セッション & フォルダ</button>
-    <button class="navitem" data-page="tokens"><span class="no">07</span>トークン</button>
-    <button class="navitem" data-page="models"><span class="no">08</span>モデルを選ぶ (model)</button>
-    <button class="navitem" data-page="effort"><span class="no">09</span>考える深さ (effort)</button>
+    <button class="navitem" data-page="context"><span class="no">05</span>コンテキストウィンドウ</button>
+    <button class="navitem" data-page="compact"><span class="no">06</span>圧縮 (compact)</button>
+    <button class="navitem" data-page="sessions"><span class="no">07</span>セッション & フォルダ</button>
+    <button class="navitem" data-page="tokens"><span class="no">08</span>トークン</button>
+    <button class="navitem" data-page="models"><span class="no">09</span>モデルを選ぶ (model)</button>
+    <button class="navitem" data-page="effort"><span class="no">10</span>考える深さ (effort)</button>
     <div class="navsec">記憶とルール</div>
-    <button class="navitem" data-page="claudemd"><span class="no">10</span>CLAUDE.md</button>
-    <button class="navitem" data-page="memory"><span class="no">11</span>メモリ</button>
-    <button class="navitem" data-page="skills"><span class="no">12</span>スキル</button>
+    <button class="navitem" data-page="claudemd"><span class="no">11</span>CLAUDE.md</button>
+    <button class="navitem" data-page="memory"><span class="no">12</span>メモリ</button>
+    <button class="navitem" data-page="skills"><span class="no">13</span>スキル</button>
     <div class="navsec">機能を広げる</div>
-    <button class="navitem" data-page="mcp"><span class="no">13</span>MCP (ツール連携)</button>
-    <button class="navitem" data-page="plugins"><span class="no">14</span>プラグイン</button>
-    <button class="navitem" data-page="agents"><span class="no">15</span>サブエージェント</button>
-    <button class="navitem" data-page="images"><span class="no">16</span>画像を貼り付け</button>
-    <button class="navitem" data-page="hooks"><span class="no">17</span>自動化 (フック)</button>
+    <button class="navitem" data-page="mcp"><span class="no">14</span>MCP (ツール連携)</button>
+    <button class="navitem" data-page="plugins"><span class="no">15</span>プラグイン</button>
+    <button class="navitem" data-page="agents"><span class="no">16</span>サブエージェント</button>
+    <button class="navitem" data-page="images"><span class="no">17</span>画像を貼り付け</button>
+    <button class="navitem" data-page="hooks"><span class="no">18</span>自動化 (フック)</button>
     <div class="navsec">自動・繰り返し</div>
-    <button class="navitem" data-page="goal"><span class="no">18</span>目標達成 (goal)</button>
-    <button class="navitem" data-page="loop"><span class="no">19</span>繰り返し実行 (loop)</button>
-    <button class="navitem" data-page="workflows"><span class="no">20</span>ワークフロー (workflows)</button>
+    <button class="navitem" data-page="goal"><span class="no">19</span>目標達成 (goal)</button>
+    <button class="navitem" data-page="loop"><span class="no">20</span>繰り返し実行 (loop)</button>
+    <button class="navitem" data-page="workflows"><span class="no">21</span>ワークフロー (workflows)</button>
     <div class="navsec">安全に使う</div>
-    <button class="navitem" data-page="planmode"><span class="no">21</span>プランモード</button>
-    <button class="navitem" data-page="permissions"><span class="no">22</span>権限モード</button>
-    <button class="navitem" data-page="rewind"><span class="no">23</span>巻き戻し</button>
-    <button class="navitem" data-page="privacy"><span class="no">24</span>データ & プライバシー</button>
+    <button class="navitem" data-page="planmode"><span class="no">22</span>プランモード</button>
+    <button class="navitem" data-page="permissions"><span class="no">23</span>権限モード</button>
+    <button class="navitem" data-page="rewind"><span class="no">24</span>巻き戻し</button>
+    <button class="navitem" data-page="privacy"><span class="no">25</span>データ & プライバシー</button>
     <div class="navsec">実践</div>
-    <button class="navitem" data-page="commands"><span class="no">25</span>スラッシュコマンド</button>
-    <button class="navitem" data-page="config"><span class="no">26</span>設定 (config)</button>
-    <button class="navitem" data-page="doctor"><span class="no">27</span>診断 (doctor)</button>
-    <button class="navitem" data-page="plans"><span class="no">28</span>料金プラン</button>
-    <button class="navitem" data-page="limits"><span class="no">29</span>使用量の上限</button>
-    <button class="navitem" data-page="glossary"><span class="no">30</span>用語集</button>
+    <button class="navitem" data-page="commands"><span class="no">26</span>スラッシュコマンド</button>
+    <button class="navitem" data-page="config"><span class="no">27</span>設定 (config)</button>
+    <button class="navitem" data-page="doctor"><span class="no">28</span>診断 (doctor)</button>
+    <button class="navitem" data-page="plans"><span class="no">29</span>料金プラン</button>
+    <button class="navitem" data-page="limits"><span class="no">30</span>使用量の上限</button>
+    <button class="navitem" data-page="glossary"><span class="no">31</span>用語集</button>
   </nav>
 
   <main class="main"><div class="inner">
@@ -424,7 +434,7 @@
         </div>
       </div>
       <div class="bignote"><span class="bx">参考</span><span>このガイドは<b>概念を学ぶ場所</b>です — インストールや始め方は扱いません（それは公式ドキュメントで案内しています）。そして<b>非公式の学習資料</b>なので Anthropic とは無関係です。</span></div>
-      <p class="note">左のメニュー（狭い画面では上のタブ）から 30 個のトピックを押して移動してください。すべて<b>自分で触らなくても</b>ボタンや入力で理解できるように作りました。本文に<span class="gl" title="このように点線が引かれた単語は、マウスを乗せると意味が表示されます。スマホではカッコの説明を参考にしてください。">点線の付いた単語</span>は、乗せると意味が表示されます。</p>
+      <p class="note">左のメニュー（狭い画面では上のタブ）から 31 個のトピックを押して移動してください。すべて<b>自分で触らなくても</b>ボタンや入力で理解できるように作りました。本文に<span class="gl" title="このように点線が引かれた単語は、マウスを乗せると意味が表示されます。スマホではカッコの説明を参考にしてください。">点線の付いた単語</span>は、乗せると意味が表示されます。</p>
     </section>
 
     <!-- 02 COWORK -->
@@ -458,7 +468,25 @@
       <p class="note">Cowork は <b>Claude デスクトップアプリ（macOS・Windows）</b>の 1 つのモードです（Chat・Code と並んで）。<b>自分が接続したフォルダだけ</b>を読み・直し・作ることができ、実行前に <b>計画を見せて承認</b>を受けます（「確認して進む」推奨）。ファイルを <b>完全に削除</b>するときは必ずもう一度確認します。Pro・Max・Team・Enterprise プランに含まれます。（出典: Anthropic 公式 — claude.com/product/cowork · 正確な画面・機能は公式アプリに準じます）</p>
     </section>
 
-    <!-- 03 WHERE -->
+    <!-- 03 USECASES -->
+    <section class="page" id="usecases">
+      <h1>こう使う (職業別)</h1>
+      <p class="lead"><b>「自分の仕事に本当に効くの?」</b> — 職業を選んで、<b>いつもの仕事がどう変わるか</b>を最初から最後まで見てください。</p>
+      <p class="defs">左の<b>ビフォー(いま)</b>と右の<b>アフター(Claude と)</b>を並べて比べます。職業を選んでボタンを押してみてください。</p>
+      <div class="cwchips" id="uc-chips"></div>
+      <div class="uctask"><span class="uc-tag">していた仕事</span><span id="uc-task"></span></div>
+      <div class="btnrow" style="margin:12px 0 14px;"><button class="btn solid" id="uc-go">ビフォー → アフターを見る ▶</button><button class="btn" id="uc-reset">リセット</button></div>
+      <div class="ucba">
+        <div class="uccard ucbefore"><div class="uch">ビフォー — いま (一人で)</div><div class="ucbody" id="uc-before"></div></div>
+        <span class="ucarrow">→</span>
+        <div class="uccard ucafter"><div class="uch">アフター — Claude と</div><div class="ucbody" id="uc-after"></div></div>
+      </div>
+      <div class="ucsave" id="uc-save"></div>
+      <p class="status" id="uc-status" style="margin-top:10px;">職業を選んで「ビフォー → アフターを見る」を押してみてください。</p>
+      <p class="note">開発者でないなら <b>Cowork デスクトップアプリ</b>が一番かんたんです — ふつうのアプリのように開いて、ファイルをドラッグして入れ、ふだんの言葉で頼むだけ(「Cowork とは？」タブ)。時間は理解を助ける<span class="exb">例</span>です(実際は仕事・環境によって変わります)。</p>
+    </section>
+
+    <!-- 04 WHERE -->
     <section class="page" id="where">
       <h1>どこで使う</h1>
       <p class="lead">Claude Code は<b>いろいろな環境</b>で同じように使えます。CLAUDE.md や設定はどこでも共有されます。</p>
@@ -1238,7 +1266,7 @@ description: 週次レポートを会社の様式で作成
   (function(){ var s=null; try{ s=localStorage.getItem('cc_present'); }catch(e){} if(s==='1') setPresent(true); })();
 
   /* LNB icons (monoline) */
-  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
   function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
 
   /* router */
@@ -1246,7 +1274,7 @@ description: 週次レポートを会社の様式で作成
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'チャットは「答え」をくれて、Claude Code は自分のプロジェクトで<b>直接作って動くところまで</b>やってくれます。', cowork:'コードではなく<b>オフィス業務を代わりに</b>こなす Claude — 目標を伝えるだけで<b>自分のファイルで成果物まで</b>作ります（非エンジニア・デスクトップアプリ）。', where:'ターミナル・VS Code・デスクトップ・Web — <b>どこでも同じ Claude Code</b>、設定も共有されます。', context:'ここに乗ったものだけを Claude が覚えています。満杯になったら<b>「圧縮」で整理</b>します。', sessions:'<b>一つのセッションに一つの仕事</b> — 混ぜると混乱します。作業フォルダは狭く。', tokens:'トークン = AI が文章を読む単位。<b>長いほど空間・コストが増え</b>、日本語のほうが重い。', models:'賢さ ↔ 速さ ↔ コストはトレードオフ。<b>迷ったら Sonnet</b> で始めましょう。', claudemd:'<b>自分で書いておくルールのメモ</b> — 毎回の会話の始めに自動で適用されます。', memory:'<b>Claude が自分で学んで覚える</b>メモ。セッションをまたいで引き継がれます。', skills:'よく使う作業の手順を<b>一度作ってずっと再利用</b>します。', mcp:'<b>外部ツール(Jira・Figma など)につないで</b> Claude が直接使えるようにします。', plugins:'スキル・ツール・コマンドなどを<b>まとめて一度にインストール</b>する一式です。', agents:'大きな仕事を<b>専門のお手伝いに分けて任せ</b>、結果だけ受け取ります。', images:'<b>スクリーンショットを貼れば</b> Claude が見て理解します — 言葉より速く正確。', hooks:'特定の瞬間に<b>決まった動作が毎回自動</b>で実行されるルールです。', planmode:'直す前に<b>計画を先に見せて承認</b>を受けます — 大きな変更に安全。', permissions:'Claude が<b>どのくらい頻繁に聞くか</b>を決める設定。最初は安全に。', rewind:'リクエストごとに<b>自動保存</b> — 気に入らなければ以前へ巻き戻します。', privacy:'<b>業務用(Team·Enterprise·API)は基本的に学習に使われません。</b> 個人用は設定で選択。', commands:'<code class="inlinecode">/</code> で始まるショートカットコマンド。いちばんよく使うのは <b>/clear · /compact</b>。', plans:'<b>無料プランにはありません。</b> 有料(Pro·Max·Team)または API(従量制)で使用。', limits:'<b>使い切るとリセットまで待つ</b>必要があります — だから管理が大切です。', compact:'長く積み上がった会話が<b>短い要約 1 マス</b>に縮みます。', effort:'答える前に<b>どれだけ深く考えるか</b> — 深いほど正確ですが、遅く高くつきます。', goal:'<b>「完了条件」だけ与えれば、できるまで</b> Claude が自分で繰り返します。', loop:'<b>決めた間隔ごとに</b>同じ作業を自動でもう一度実行します。', workflows:'大きな仕事を<b>複数のお手伝いが同時に</b>処理するよう調整します（上級）。', config:'<b>言語・テーマ・モデル・権限</b>のような設定を一か所で変えます。', doctor:'うまくいかないとき<b>インストール・連携・設定を一度に点検</b>してくれます。', glossary:'迷う用語を<b>一行で</b>素早く探す場所です。' };
+  var TLDR={ intro:'チャットは「答え」をくれて、Claude Code は自分のプロジェクトで<b>直接作って動くところまで</b>やってくれます。', cowork:'コードではなく<b>オフィス業務を代わりに</b>こなす Claude — 目標を伝えるだけで<b>自分のファイルで成果物まで</b>作ります（非エンジニア・デスクトップアプリ）。', usecases:'職業ごとに<b>いつもの仕事がどう変わるか</b>をビフォー→アフターで見せます。', where:'ターミナル・VS Code・デスクトップ・Web — <b>どこでも同じ Claude Code</b>、設定も共有されます。', context:'ここに乗ったものだけを Claude が覚えています。満杯になったら<b>「圧縮」で整理</b>します。', sessions:'<b>一つのセッションに一つの仕事</b> — 混ぜると混乱します。作業フォルダは狭く。', tokens:'トークン = AI が文章を読む単位。<b>長いほど空間・コストが増え</b>、日本語のほうが重い。', models:'賢さ ↔ 速さ ↔ コストはトレードオフ。<b>迷ったら Sonnet</b> で始めましょう。', claudemd:'<b>自分で書いておくルールのメモ</b> — 毎回の会話の始めに自動で適用されます。', memory:'<b>Claude が自分で学んで覚える</b>メモ。セッションをまたいで引き継がれます。', skills:'よく使う作業の手順を<b>一度作ってずっと再利用</b>します。', mcp:'<b>外部ツール(Jira・Figma など)につないで</b> Claude が直接使えるようにします。', plugins:'スキル・ツール・コマンドなどを<b>まとめて一度にインストール</b>する一式です。', agents:'大きな仕事を<b>専門のお手伝いに分けて任せ</b>、結果だけ受け取ります。', images:'<b>スクリーンショットを貼れば</b> Claude が見て理解します — 言葉より速く正確。', hooks:'特定の瞬間に<b>決まった動作が毎回自動</b>で実行されるルールです。', planmode:'直す前に<b>計画を先に見せて承認</b>を受けます — 大きな変更に安全。', permissions:'Claude が<b>どのくらい頻繁に聞くか</b>を決める設定。最初は安全に。', rewind:'リクエストごとに<b>自動保存</b> — 気に入らなければ以前へ巻き戻します。', privacy:'<b>業務用(Team·Enterprise·API)は基本的に学習に使われません。</b> 個人用は設定で選択。', commands:'<code class="inlinecode">/</code> で始まるショートカットコマンド。いちばんよく使うのは <b>/clear · /compact</b>。', plans:'<b>無料プランにはありません。</b> 有料(Pro·Max·Team)または API(従量制)で使用。', limits:'<b>使い切るとリセットまで待つ</b>必要があります — だから管理が大切です。', compact:'長く積み上がった会話が<b>短い要約 1 マス</b>に縮みます。', effort:'答える前に<b>どれだけ深く考えるか</b> — 深いほど正確ですが、遅く高くつきます。', goal:'<b>「完了条件」だけ与えれば、できるまで</b> Claude が自分で繰り返します。', loop:'<b>決めた間隔ごとに</b>同じ作業を自動でもう一度実行します。', workflows:'大きな仕事を<b>複数のお手伝いが同時に</b>処理するよう調整します（上級）。', config:'<b>言語・テーマ・モデル・権限</b>のような設定を一か所で変えます。', doctor:'うまくいかないとき<b>インストール・連携・設定を一度に点検</b>してくれます。', glossary:'迷う用語を<b>一行で</b>素早く探す場所です。' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">一行まとめ</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -1520,6 +1548,39 @@ description: 週次レポートを会社の様式で作成
       timers.push(setTimeout(function(){ stage.insertAdjacentHTML('beforeend','<div class="cwcard show" style="margin-top:12px;"><div class="cwresult"><span class="fic">'+FILE+'</span><span><div class="rt">'+t.result.t+'</div><div class="rd">'+t.result.d+'</div></span></div></div>'); },450)); }
     document.getElementById('cw-go').addEventListener('click',go);
     document.getElementById('cw-reset').addEventListener('click',function(){ clearT(); setTask(cur); });
+  })();
+
+  /* usecases — job before/after */
+  (function(){
+    var chips=document.getElementById('uc-chips'); if(!chips) return;
+    var UC=[
+      {job:'カフェ店長',task:'1か月分のレシート 32 枚を Excel 家計簿に整理',
+       before:['レシートを 1 枚ずつ広げて見て','金額・日付を手で入力','…32 回繰り返す','合計も手で計算'],
+       after:[{t:'「このレシートの金額・日付を抜き出して Excel に整理して」',cls:'ask'},{t:'Claude が 32 枚を直接読んで'},{t:'表に整理 + 合計の数式まで'},{t:'支出整理.xlsx 完成 ✓',cls:'result'}],t1:'約 30 分',t2:'約 1 分'},
+      {job:'先生',task:'生徒 80 名の点数をクラス別・点数順に整理',
+       before:['名簿をクラス別に分けて','点数順に一つずつ並べ替え','平均・順位を手で計算','…何度も確認'],
+       after:[{t:'「この点数表をクラス別に分けて点数順に並べ替え、平均も出して」',cls:'ask'},{t:'Claude が一度に並べ替え・計算'},{t:'成績整理.xlsx 完成 ✓',cls:'result'}],t1:'約 40 分',t2:'約 1 分'},
+      {job:'営業',task:'見積書の作成 (様式に品目・単価・合計)',
+       before:['空の見積書様式を開く','品目・単価・数量を入力','合計・消費税を計算','誤字がないか確認'],
+       after:[{t:'「この品目で見積書を作って (様式そのままで)」',cls:'ask'},{t:'Claude が様式を埋めて計算'},{t:'見積書.xlsx 完成 ✓',cls:'result'}],t1:'約 15 分',t2:'約 1 分'},
+      {job:'マーケター',task:'競合資料の PDF 10 個から要点だけを 1 枚に要約',
+       before:['資料 10 個を一つずつ読んで','要点だけ選んでメモ','比べて 1 枚に整理'],
+       after:[{t:'「この資料 10 個の要点だけを 1 枚に要約して」',cls:'ask'},{t:'Claude が全部読んで比較'},{t:'要約.docx 完成 ✓',cls:'result'}],t1:'約 1 時間',t2:'約 2 分'},
+      {job:'主婦',task:'カード明細・レシートを家計簿に整理',
+       before:['明細・レシートを集める','項目別に手で分類','Excel に入力・合算'],
+       after:[{t:'「この明細を項目別に家計簿として整理して」',cls:'ask'},{t:'Claude が分類・合計'},{t:'家計簿.xlsx 完成 ✓',cls:'result'}],t1:'約 30 分',t2:'約 1 分'}
+    ];
+    var cur=0,ucT=[],taskEl=document.getElementById('uc-task'),bEl=document.getElementById('uc-before'),aEl=document.getElementById('uc-after'),saveEl=document.getElementById('uc-save'),ust=document.getElementById('uc-status');
+    function pick(i){ cur=i; var u=UC[i]; [].forEach.call(chips.children,function(c,j){c.classList.toggle('on',j===i);}); taskEl.textContent=u.task; bEl.innerHTML=''; aEl.innerHTML=''; saveEl.classList.remove('show'); ust.textContent='「ビフォー → アフターを見る」を押すと、どう変わるかをお見せします。'; }
+    function line(box,text,cls){ var d=document.createElement('div'); d.className='ucline'+(cls?(' '+cls):''); d.textContent=text; box.appendChild(d); return d; }
+    UC.forEach(function(u,i){ var b=document.createElement('button'); b.className='cwchip'+(i===0?' on':''); b.textContent=u.job; b.addEventListener('click',function(){ pick(i); run(); }); chips.appendChild(b); });
+    pick(0);
+    function run(){ ucT.forEach(clearTimeout); ucT=[]; var u=UC[cur]; bEl.innerHTML=''; aEl.innerHTML=''; saveEl.classList.remove('show'); ust.textContent='ビフォー(いま)とアフター(Claude と)を比べています…';
+      u.before.forEach(function(t){ line(bEl,t); }); u.after.forEach(function(o){ line(aEl,o.t,o.cls); });
+      var seq=[].concat([].map.call(bEl.children,function(e){return e;}),[].map.call(aEl.children,function(e){return e;}));
+      seq.forEach(function(el,k){ ucT.push(setTimeout(function(){ el.classList.add('on'); if(k===seq.length-1){ saveEl.innerHTML='ビフォー '+u.t1+' &nbsp;→&nbsp; アフター '+u.t2+' — ほぼ自動で終わります'; saveEl.classList.add('show'); ust.textContent='同じ仕事でも、Claude と行えば '+u.t1+' かかっていたものが '+u.t2+' に縮みます。'; } },300+k*600)); }); }
+    document.getElementById('uc-go').addEventListener('click',run);
+    document.getElementById('uc-reset').addEventListener('click',function(){ ucT.forEach(clearTimeout); ucT=[]; pick(cur); });
   })();
 
   /* cowork 3-way comparison */
