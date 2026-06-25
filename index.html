@@ -135,6 +135,8 @@
   .mg2h{ font-size:13px; font-weight:600; display:flex; align-items:center; gap:7px; margin-bottom:10px; } .mg2tag{ font-size:10.5px; font-weight:700; border-radius:5px; padding:1px 7px; } .mg2tag.bad{ color:var(--over); background:rgba(216,69,63,.13); } .mg2tag.good{ color:var(--good); background:rgba(31,158,118,.14); }
   .mg2pct{ display:flex; justify-content:space-between; font-size:11.5px; color:var(--muted); margin-bottom:4px; } .mg2pct b{ color:var(--ink); }
   .mg2chat{ margin-top:11px; display:flex; flex-direction:column; gap:8px; min-height:96px; }
+  /* sim takeaway (결론) — what you learn after watching */
+  .simtake{ margin-top:14px; display:flex; gap:9px; align-items:baseline; font-size:13px; line-height:1.55; background:rgba(31,158,118,.07); border:1px solid rgba(31,158,118,.26); border-radius:9px; padding:10px 13px; } .simtake .stk{ flex:0 0 auto; font-size:11px; font-weight:700; color:var(--good); border:1px solid rgba(31,158,118,.34); border-radius:5px; padding:1px 7px; }
   .cxbadge{ display:inline-block; font-size:12.5px; font-variant-numeric:tabular-nums; background:var(--row); border-radius:7px; padding:7px 12px; margin-bottom:12px; } .cxbadge b{ font-weight:600; } .cxbadge .ar{ color:var(--faint); margin:0 6px; }
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
@@ -864,6 +866,7 @@ description: 주간 보고서를 회사 양식으로 작성
         </div>
       </div>
       <p class="status" id="pl-status" style="margin-top:12px;">‘묶음 설치 데모’를 누르면, 이 한 묶음으로 여러 기능이 한 번에 설치되는 걸 보여드려요.</p>
+      <p class="simtake"><span class="stk">결론</span><span>스킬·도구·명령을 <b>하나하나 찾아 설치하는 대신</b> — 플러그인은 <b>묶음 하나로 한 번에</b> 깔아요.</span></p>
       <p class="label">MCP · 스킬 · 플러그인 한눈에</p>
       <div class="fgrid">
         <div class="fcard"><div class="ft">MCP</div><div class="fd">외부 도구·서비스에 <b>연결</b>하는 통로.</div></div>
@@ -922,6 +925,7 @@ description: 주간 보고서를 회사 양식으로 작성
           <div class="detsum" id="detsum">→ 클로드: “로그인 화면이고, 비밀번호 오류 상태군요. 검증 로직을 확인해 고쳐볼게요.”</div>
         </div>
       </div>
+      <p class="simtake"><span class="stk">결론</span><span>화면을 <b>말로 길게 설명하는 대신</b> — <b>스크린샷 한 장</b>이 더 빠르고 정확해요.</span></p>
       <p class="label" style="margin-top:30px;">왜 캡처를 붙일까요?</p>
       <div class="fgrid">
         <div class="fcard"><div class="ft">말보다 빠름</div><div class="fd">화면을 길게 설명할 필요 없이 그대로.</div></div>
@@ -977,6 +981,7 @@ description: 주간 보고서를 회사 양식으로 작성
         <div class="step" id="plan3"><div class="sn2">4</div><div><div class="st2">승인하면 실행</div><div class="sd3">“좋아, 실행해” → 그때 한꺼번에 파일을 고쳐요</div></div></div>
       </div>
       <p class="status" id="plan-msg" style="margin-top:8px;"></p>
+      <p class="simtake"><span class="stk">결론</span><span><b>바로 고쳐서 엉뚱해지는 대신</b> — 계획을 <b>먼저 보고 승인</b>하면 큰 변경도 안전해요.</span></p>
       <p class="note">계획 모드는 ‘읽기 전용’이라 안전해요. 권한 모드(‘권한 모드’ 탭)의 한 종류예요. (Windows 일부 터미널에선 <code>Shift</code>+<code>Tab</code> 대신 <code>/plan</code> 권장)</p>
     </section>
 
@@ -1013,6 +1018,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <div class="tllabels" id="rw-labels"></div>
       <div class="btnrow" style="margin:14px 0;"><button class="btn" id="rw-code">코드만 복구</button><button class="btn" id="rw-both">코드+대화 복구</button><button class="btn" id="rw-reset">초기화</button></div>
       <p class="status" id="rw-msg" style="margin-top:0;">위 타임라인의 점을 누른 뒤, 복구 방식을 골라보세요.</p>
+      <p class="simtake"><span class="stk">결론</span><span><b>git을 몰라도</b> — 마음에 안 들면 <b>이전 시점으로 한 번에</b> 되돌려요. (코드만/대화만/둘 다 골라서)</span></p>
       <ul class="points">
         <li><b>여는 법</b><span><code>/rewind</code> 또는 입력창이 <b>비어 있을 때</b> <code>ESC</code> 를 두 번 — 지금까지 보낸 요청 목록이 떠요. (입력창에 글이 있으면 두 번 누르면 글부터 지워져요.)</span></li>
         <li><b>세 가지 복구</b><span>코드+대화 함께 / 대화만(코드 유지) / 코드만(대화 유지).</span></li>
@@ -1111,6 +1117,7 @@ description: 주간 보고서를 회사 양식으로 작성
           <p class="note" style="margin-top:8px;">파일 읽기·긴 대화·이미지처럼 무거운 작업일수록 한도가 빨리 줄어요.</p>
         </div>
       </div>
+      <p class="simtake"><span class="stk">결론</span><span>다 쓰면 <b>리셋될 때까지 멈춰요</b> — 그래서 <b>싼 모델·자주 정리</b>로 평소에 아껴 쓰는 관리가 중요해요.</span></p>
       <p class="label">구독 vs API — 뭐가 다를까</p>
       <div class="cmp">
         <div class="cmpcard"><h4>구독 (Pro·Max·Team)</h4><div class="who">월정액</div>
@@ -1230,6 +1237,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="goal-go">목표 시작 ▶</button><button class="btn" id="goal-reset">초기화</button></div>
       <div class="cwvm"><span class="cwvmtag">조건이 될 때까지 자동 반복</span><div id="goal-turns"></div></div>
       <p class="status" id="goal-status" style="margin-top:12px;">“목표 시작”을 눌러보세요.</p>
+      <p class="simtake"><span class="stk">결론</span><span>매 턴 <b>‘또 해줘’를 직접 누르는 대신</b> — goal은 <b>조건이 될 때까지</b> 알아서 반복해요.</span></p>
       <p class="note">조건 충족은 <b>별도 판정</b>으로 매 턴 확인하고, 충족되면 자동으로 멈춰요(무한 반복 방지 장치도 있어요). 바꾸는 법: <code>/goal</code>. (출처: Anthropic 공식 — code.claude.com/docs goal)</p>
     </section>
 
@@ -1243,6 +1251,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <p class="label">실행 기록</p>
       <div class="usefeed" id="loop-feed"></div>
       <p class="status" id="loop-status" style="margin-top:10px;">간격을 고르고 “반복 시작”을 눌러보세요.</p>
+      <p class="simtake"><span class="stk">결론</span><span>사람이 <b>10분마다 직접 들여다볼 일을</b> — loop는 <b>자는 동안에도 알아서</b> 반복해요. (goal은 ‘될 때까지’, loop는 ‘정해진 간격마다’)</span></p>
       <p class="note">세션이 열려 있는 동안 반복돼요. 바꾸는 법: <code>/loop 10m "새 주문 확인"</code> 같은 식(간격은 10분·1시간·하루 등 자유). (출처: Anthropic 공식 — code.claude.com/docs scheduled-tasks)</p>
     </section>
 
@@ -1276,6 +1285,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="dr-go">진단 실행 ▶</button><button class="btn" id="dr-reset">초기화</button></div>
       <div class="cwvm"><span class="cwvmtag">/doctor 점검 중</span><div id="dr-list"></div></div>
       <p class="status" id="dr-status" style="margin-top:12px;">“진단 실행”을 눌러보세요.</p>
+      <p class="simtake"><span class="stk">결론</span><span>혼자 <b>‘왜 안 되지?’ 헤매는 대신</b> — /doctor가 <b>어디가 문제인지 한 번에</b> 짚어줘요.</span></p>
       <p class="note">여는 법: <code>/doctor</code> (또는 <code>claude doctor</code>). 문제가 있으면 어떻게 고칠지도 알려줘요. (출처: Anthropic 공식 — code.claude.com/docs CLI 참고)</p>
     </section>
 
