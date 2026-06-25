@@ -121,6 +121,15 @@
   .mgbars{ display:flex; flex-direction:column; gap:12px; }
   .mgbar .mgb-l{ display:flex; justify-content:space-between; gap:10px; font-size:12.5px; color:var(--muted); margin-bottom:4px; } .mgbar .mgb-l b{ flex:0 0 auto; font-weight:600; }
   .mgb-track{ height:9px; border-radius:6px; background:var(--bg); border:1px solid var(--line); overflow:hidden; } .mgb-track i{ display:block; height:100%; width:12%; border-radius:6px; background:var(--good); transition:width .5s cubic-bezier(.4,0,.2,1), background .5s; }
+  .mgchat{ margin-top:12px; display:flex; flex-direction:column; gap:10px; min-height:118px; }
+  .mgturn{ opacity:0; transform:translateY(-5px); transition:opacity .35s, transform .35s; } .mgturn.on{ opacity:1; transform:none; }
+  .mgu{ font-size:12.5px; color:var(--muted); margin-bottom:4px; } .mgu b{ color:var(--ink); }
+  .mgc{ font-size:13px; line-height:1.5; padding:9px 12px; border-radius:9px; border:1px solid var(--line); background:var(--bg); display:flex; gap:9px; align-items:baseline; }
+  .mgc .mgc-t{ font-size:11px; font-weight:700; border-radius:5px; padding:2px 7px; flex:0 0 auto; white-space:nowrap; }
+  .mgc.ok{ border-color:rgba(31,158,118,.4); background:rgba(31,158,118,.07); } .mgc.ok .mgc-t{ color:var(--good); background:rgba(31,158,118,.15); }
+  .mgc.slow{ border-color:rgba(216,148,63,.45); background:rgba(216,148,63,.08); } .mgc.slow .mgc-t{ color:#b9792a; background:rgba(216,148,63,.16); }
+  .mgc.conf{ border-color:rgba(216,69,63,.4); background:rgba(216,69,63,.07); } .mgc.conf .mgc-t{ color:var(--over); background:rgba(216,69,63,.13); }
+  .mgc.compact{ border-color:rgba(109,95,208,.42); background:rgba(109,95,208,.08); } .mgc.compact .mgc-t{ color:var(--purple); background:rgba(109,95,208,.15); }
   .cxbadge{ display:inline-block; font-size:12.5px; font-variant-numeric:tabular-nums; background:var(--row); border-radius:7px; padding:7px 12px; margin-bottom:12px; } .cxbadge b{ font-weight:600; } .cxbadge .ar{ color:var(--faint); margin:0 6px; }
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
@@ -1127,17 +1136,14 @@ description: Write the weekly report in the company format
     <section class="page" id="manage">
       <h1>Why manage context?</h1>
       <p class="lead">Context is Claude's <b>"desk."</b> When the desk gets cluttered, work gets <b>slower, pricier, and more error-prone</b>. That's why tidying up at the right time matters.</p>
-      <p class="defs">See for yourself: how things get worse if you "keep stacking the conversation," and how they get better when you press "tidy up."</p>
-      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="mg-stack">Keep stacking the conversation ▶</button><button class="btn" id="mg-clean">Tidy up ↺</button></div>
+      <p class="defs">Each time you press "one more turn," context piles up. <b>Watch how Claude's reply changes even for the same kind of request.</b></p>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="mg-stack">One more turn ▶</button><button class="btn" id="mg-clean">Tidy up ↺</button></div>
       <div class="mgwrap">
-        <div class="mgfill"><div class="mgfl-h"><span>How full the context is</span><b id="mg-pct">12%</b></div><div class="mgfl-track"><i id="mg-fill"></i></div></div>
-        <div class="mgbars">
-          <div class="mgbar"><div class="mgb-l"><span>Slowdown — it re-reads everything each time</span><b id="mg-v-slow">Low</b></div><div class="mgb-track"><i id="mg-slow"></i></div></div>
-          <div class="mgbar"><div class="mgb-l"><span>Token cost — the more there is, the pricier</span><b id="mg-v-cost">Low</b></div><div class="mgb-track"><i id="mg-cost"></i></div></div>
-          <div class="mgbar"><div class="mgb-l"><span>Confusion — important things get missed among the clutter</span><b id="mg-v-conf">Low</b></div><div class="mgb-track"><i id="mg-conf"></i></div></div>
-        </div>
+        <div class="mgfl-h"><span>How full the desk (context) is</span><b id="mg-pct">12%</b></div>
+        <div class="mgfl-track" style="margin-bottom:6px;"><i id="mg-fill"></i></div>
+        <div class="mgchat" id="mg-chat"></div>
       </div>
-      <p class="status" id="mg-status" style="margin-top:12px;">Right now the desk is clean — fast, cheap, and accurate.</p>
+      <p class="status" id="mg-status" style="margin-top:12px;">As you press "one more turn" and context piles up, watch what happens to Claude.</p>
 
       <p class="label">How to manage — tidy up like this</p>
       <div class="fgrid">
@@ -1624,22 +1630,27 @@ description: Write the weekly report in the company format
   document.getElementById('lim-reset').addEventListener('click',function(){ luT.forEach(clearTimeout); luT=[]; l5=0; gset(); document.getElementById('lim-use').disabled=false; document.getElementById('lock-msg').textContent='5 hours passed and the limit reset! You can use it again. (Note: the weekly limit still remains.)'; });
   gset();
 
-  /* manage — why manage context */
-  (function(){ var stack=document.getElementById('mg-stack'); if(!stack) return; var fill=10;
-    var E={ pct:document.getElementById('mg-pct'), fl:document.getElementById('mg-fill'), slow:document.getElementById('mg-slow'), cost:document.getElementById('mg-cost'), conf:document.getElementById('mg-conf'), vslow:document.getElementById('mg-v-slow'), vcost:document.getElementById('mg-v-cost'), vconf:document.getElementById('mg-v-conf'), st:document.getElementById('mg-status') };
-    function color(v){ return v<40?'var(--good)':(v<72?'#d8943f':'#d8453f'); }
-    function rate(v){ return v<30?'Low':(v<58?'Medium':(v<80?'High':'Very high')); }
-    function render(){ var f=Math.min(100,fill); E.pct.textContent=Math.round(f)+'%'; E.fl.style.width=f+'%'; E.fl.style.background= color(f);
-      var slow=Math.min(100,f), cost=Math.min(100,f*0.95+4), conf=Math.min(100,f*0.88);
-      E.slow.style.width=slow+'%'; E.slow.style.background=color(slow); E.vslow.textContent=rate(slow);
-      E.cost.style.width=cost+'%'; E.cost.style.background=color(cost); E.vcost.textContent=rate(cost);
-      E.conf.style.width=conf+'%'; E.conf.style.background=color(conf); E.vconf.textContent=rate(conf); }
-    stack.addEventListener('click',function(){ fill=Math.min(100,fill+19);
-      if(fill>=100) E.st.textContent='The desk is full — slow, pricey, and confusing. Auto-compact is coming soon and details may disappear. Try pressing "Tidy up."';
-      else if(fill>60) E.st.textContent='Getting heavier — re-reading everything each time makes it slow and pricey, and important things are easy to miss.';
-      else E.st.textContent='Stacking up little by little… keep neglecting it and it gets slower, pricier, and more confusing.'; render(); });
-    document.getElementById('mg-clean').addEventListener('click',function(){ fill=10; E.st.textContent='Tidied up! The desk is clean again — fast, cheap, and accurate. (Use /clear when the task changes, /compact when it gets long.)'; render(); });
-    render(); })();
+  /* manage — why manage context (concrete conversation) */
+  (function(){ var stack=document.getElementById('mg-stack'); if(!stack) return;
+    var chat=document.getElementById('mg-chat'), pctEl=document.getElementById('mg-pct'), flEl=document.getElementById('mg-fill'), stEl=document.getElementById('mg-status'), mgT=[], fill=12, turn=0;
+    var TASKS=['Change the logo color','Make the title bigger','Round the button corners','Reduce the spacing a bit','Back to that earlier color','Move the menu','Change the font','Tidy the spacing'];
+    function fillColor(f){ return f<40?'var(--good)':(f<72?'#d8943f':'#d8453f'); }
+    function setFill(){ pctEl.textContent=Math.round(fill)+'%'; flEl.style.width=fill+'%'; flEl.style.background=fillColor(fill); }
+    function reply(f){ if(f>=92) return {cls:'compact',tag:'Auto-compact',txt:'The desk filled up, so it summarized old turns — the detail of "that earlier color" is gone. It has to re-read the files.'};
+      if(f>=70) return {cls:'conf',tag:'Confused',txt:'Hmm… which "that earlier" did you mean? There\'s so much context it missed the important bit.'};
+      if(f>=44) return {cls:'slow',tag:'7s reply',txt:'Done — but it\'s getting slower and pricier, re-reading the whole context every time.'};
+      return {cls:'ok',tag:'2s reply',txt:'Handled it instantly and correctly — the desk is clean.'}; }
+    function add(html){ var row=document.createElement('div'); row.className='mgturn'; row.innerHTML=html; chat.appendChild(row); while(chat.children.length>4) chat.removeChild(chat.firstChild); mgT.push(setTimeout(function(){ row.classList.add('on'); },20)); }
+    function reset(){ mgT.forEach(clearTimeout); mgT=[]; fill=12; turn=0; chat.innerHTML=''; setFill(); stEl.textContent='As you press "one more turn" and context piles up, watch what happens to Claude.'; }
+    stack.addEventListener('click',function(){ if(fill>=100) return; fill=Math.min(100,fill+14); setFill(); turn++;
+      var task=TASKS[(turn-1)%TASKS.length], r=reply(fill);
+      add('<div class="mgu"><b>Me:</b> "'+task+'"</div><div class="mgc '+r.cls+'"><span class="mgc-t">'+r.tag+'</span><span>'+r.txt+'</span></div>');
+      stEl.textContent= r.cls==='compact'?'It filled up and auto-compact kicked in — if you had tidied up earlier, you wouldn\'t have lost the detail.'
+        : r.cls==='conf'?'There\'s so much context that Claude is starting to get confused. A good moment to tidy up.'
+        : r.cls==='slow'?'The more it piles up, the slower and pricier it gets — it re-reads the whole desk every time.'
+        : 'Still clean — fast and accurate.'; });
+    document.getElementById('mg-clean').addEventListener('click',function(){ reset(); add('<div class="mgc ok"><span class="mgc-t">Tidied up</span><span>Cleared the desk — back to 2s, accurate, and cheap. (Use <code>/clear</code> when the task changes, <code>/compact</code> when it gets long.)</span></div>'); });
+    reset(); })();
 
   /* compact detail page */
   var cxT=[], cxKeep={0:1,1:1,5:1};
