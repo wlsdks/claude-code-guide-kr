@@ -200,6 +200,35 @@
   .cwstep.run .ck{ border-color:var(--blue); } .cwstep.run{ color:var(--ink); }
   .cwstep.done .ck{ border-color:var(--good); background:var(--good); } .cwstep.done .ck svg{ opacity:1; } .cwstep.done{ color:var(--ink); }
   .cwstep.warn{ color:var(--ink); align-items:flex-start; } .cwstep.warn .ck{ border-color:var(--over); background:var(--over); color:#fff; font-weight:700; font-size:12px; line-height:1; } .cwstep .drfix{ display:block; color:var(--good); font-weight:600; font-size:12px; margin-top:2px; }
+  /* basic-usage hands-on sims (ask / mention / keys / steer) */
+  .exrow{ display:flex; gap:8px; flex-wrap:wrap; margin:4px 0 14px; }
+  .scorebox{ margin:12px 0 0; border:1px solid var(--line2); border-radius:10px; padding:13px 15px; background:var(--row); display:none; }
+  .scorebox.on{ display:block; }
+  .scorebox .schead{ font-weight:600; font-size:14px; margin-bottom:9px; }
+  .chk{ display:flex; align-items:flex-start; gap:8px; font-size:13px; color:var(--muted); padding:3px 0; }
+  .chk .cx{ flex:0 0 auto; width:17px; height:17px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; border:1.5px solid var(--line2); }
+  .chk.y .cx{ border-color:var(--good); background:var(--good); color:#fff; } .chk.y{ color:var(--ink); }
+  .chk.n .cx{ border-color:var(--over); color:var(--over); }
+  .mline{ font-family:ui-monospace,Menlo,monospace; font-size:13.5px; background:var(--row); border:1px solid var(--line2); border-radius:9px; padding:13px 15px; min-height:48px; cursor:text; line-height:1.8; }
+  .mcaret{ display:inline-block; width:1px; background:var(--accent); animation:cblink 1s steps(1) infinite; }
+  @keyframes cblink{ 50%{opacity:0;} }
+  .fchip{ display:inline-flex; align-items:center; gap:5px; background:rgba(31,158,118,.1); border:1px solid rgba(31,158,118,.32); color:var(--good); border-radius:6px; padding:1px 8px; font-size:12.5px; font-weight:600; }
+  .atmenu{ margin-top:8px; border:1px solid var(--line2); border-radius:9px; overflow:hidden; display:none; }
+  .atmenu.on{ display:block; }
+  .atmenu .ai{ display:flex; align-items:center; gap:9px; padding:10px 13px; font-size:13px; cursor:pointer; border-bottom:1px solid var(--line); }
+  .atmenu .ai:last-child{ border-bottom:none; } .atmenu .ai:hover{ background:var(--row); }
+  .atmenu .afile{ font-family:ui-monospace,Menlo,monospace; color:var(--ink); } .atmenu .akind{ margin-left:auto; font-size:11px; color:var(--faint); }
+  .keys{ display:flex; flex-wrap:wrap; gap:8px; margin:4px 0 12px; }
+  .keycap{ font-family:inherit; font-size:13px; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--line2); border-bottom-width:2.5px; border-radius:8px; padding:8px 13px; cursor:pointer; transition:transform .1s,border-color .2s,opacity .2s; }
+  .keycap:hover{ border-color:var(--accent); } .keycap:active,.keycap.hit{ transform:translateY(1.5px); border-bottom-width:1px; }
+  .keycap:disabled{ opacity:.4; cursor:default; }
+  .kterm{ font-family:ui-monospace,Menlo,monospace; font-size:13px; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:15px 16px; min-height:118px; white-space:pre-wrap; line-height:1.75; color:var(--ink); }
+  .modebadge{ display:inline-block; font-size:12px; font-weight:600; border-radius:6px; padding:2px 10px; border:1px solid var(--line2); color:var(--muted); }
+  .modebadge.m1{ border-color:rgba(31,158,118,.4); color:var(--good); background:rgba(31,158,118,.08); }
+  .modebadge.m2{ border-color:rgba(214,158,46,.55); color:#b9821a; background:rgba(214,158,46,.1); }
+  .runbar{ height:8px; border-radius:6px; background:var(--line); overflow:hidden; margin:8px 0; }
+  .runbar > i{ display:block; height:100%; width:0; background:var(--accent); transition:width .25s linear; }
+  .runbar.bad > i{ background:var(--over); }
   .cwapprove{ margin-top:11px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .cwmode{ font-size:11.5px; color:var(--faint); }
   .cwvm{ border:1px dashed var(--line2); border-radius:11px; padding:11px 14px 7px; background:var(--panel); position:relative; }
@@ -412,6 +441,11 @@
     <button class="navitem" data-page="cowork"><span class="no">02</span>COWORK란?</button>
     <button class="navitem" data-page="usecases"><span class="no">03</span>이렇게 써요</button>
     <button class="navitem" data-page="where"><span class="no">04</span>어디서 쓰나</button>
+    <div class="navsec">기본 사용법 (직접 해보기)</div>
+    <button class="navitem" data-page="ask"><span class="no">05</span>요청 잘 쓰기</button>
+    <button class="navitem" data-page="mention"><span class="no">06</span>파일 가리키기 @</button>
+    <button class="navitem" data-page="keys"><span class="no">07</span>단축키 &amp; 모드</button>
+    <button class="navitem" data-page="steer"><span class="no">08</span>멈추고 방향 바꾸기</button>
     <div class="navsec">기초 개념</div>
     <button class="navitem" data-page="context"><span class="no">05</span>컨텍스트 창</button>
     <button class="navitem" data-page="manage"><span class="no">06</span>맥락 관리 (왜?)</button>
@@ -573,6 +607,132 @@ irm https://claude.ai/install.ps1 | iex</div>
         <li><b>첫 시작</b><span>프로젝트 폴더에서 <code>claude</code> → 로그인 → “이 프로젝트 뭐 하는 거야?” 같이 그냥 말 걸기.</span></li>
       </ul>
       <p class="note">정확한 설치 방법·요구사항은 버전에 따라 바뀌니 <code>code.claude.com/docs</code> 에서 최신 안내를 확인하세요.</p>
+    </section>
+
+    <!-- ASK: writing good requests -->
+    <section class="page" id="ask">
+      <h1>요청 잘 쓰기</h1>
+      <p class="lead">클로드 코드는 <b>말로 시키는 도구</b>예요. 같은 일도 <b>어떻게 부탁하느냐</b>에 따라 한 번에 끝나기도, 세 번 헤매기도 해요.</p>
+      <p class="defs">두 가지 부탁을 눌러 결과를 비교하고, 마지막엔 <b>직접 요청을 써서</b> 점수를 받아보세요. (실제 클로드 없이 동작만 체험)</p>
+      <div class="grp">
+        <h3>같은 일, 다른 부탁 — 결과를 비교해요</h3>
+        <div class="exrow">
+          <button class="chip" data-k="vague">두루뭉술하게: “예약 기능 만들어줘”</button>
+          <button class="chip" data-k="clear">구체적으로: “예약 화면에 날짜·시간 칸 추가, 빈 칸이면 경고, 되면 테스트도”</button>
+        </div>
+        <div class="chatdemo">
+          <div class="chatcol"><h4>부탁 <span class="badge no" id="ask-tag">—</span></h4>
+            <div class="bubble u" id="ask-u">위 버튼을 눌러보세요.</div>
+            <div class="bubble a" id="ask-a"></div>
+          </div>
+          <div class="chatcol"><h4>클로드가 하는 일</h4>
+            <div id="ask-steps"></div>
+          </div>
+        </div>
+        <p class="status" id="ask-status">버튼을 누르면 클로드가 어떻게 반응하는지 보여드려요.</p>
+        <p class="simtake"><span class="stk">결론</span><span><b>무엇을·어떻게·다 되면 무엇으로 확인</b>까지 적으면 — 클로드가 되묻지 않고 <b>한 번에</b> 끝내요.</span></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>직접 써보기 — 내 요청은 몇 점?</h3>
+        <p class="label">요청을 입력하기 <span class="hint">실제로 쳐보세요</span></p>
+        <div class="field"><input id="ask-inp" type="text" placeholder="예: 회원가입 화면에 비밀번호 확인 칸 추가하고, 안 맞으면 빨갛게 표시해줘" maxlength="120"><button class="send" id="ask-go">점수 보기</button></div>
+        <div class="scorebox" id="ask-score"></div>
+        <p class="note">좋은 요청의 4가지: ① <b>무엇</b>을(대상) ② <b>어떻게</b>(원하는 동작) ③ <b>어디</b>서(화면·파일) ④ <b>완료 기준</b>(어떻게 확인). 출처: code.claude.com/docs (Best practices).</p>
+      </div>
+    </section>
+
+    <!-- MENTION: @ file reference -->
+    <section class="page" id="mention">
+      <h1>파일 가리키기 <span style="color:var(--accent);">@</span></h1>
+      <p class="lead">고치고 싶은 파일이 정해져 있으면 — <b><code>@</code> 뒤에 파일 이름</b>으로 콕 집어줄 수 있어요. 클로드가 그 파일을 먼저 열어봐요.</p>
+      <p class="defs">아래에서 <code>@</code> 를 눌러 파일 목록을 띄우고, 하나 골라보세요. (실제로는 드래그&amp;드롭으로도 붙일 수 있어요)</p>
+      <div class="grp">
+        <h3>직접 해보기 — @ 로 파일 붙이기</h3>
+        <div class="mline" id="mline"><span>예약 화면 고쳐줘 </span><span id="m-typed"></span><span class="mcaret">&nbsp;&nbsp;</span></div>
+        <div class="atmenu" id="atmenu"></div>
+        <div class="keys" style="margin-top:10px;">
+          <button class="keycap" id="m-at">@ 입력</button>
+          <button class="keycap" id="m-drop">파일 드래그&amp;드롭</button>
+          <button class="keycap" id="m-send">보내기</button>
+          <button class="keycap" id="m-reset">처음으로</button>
+        </div>
+        <p class="status" id="m-status">‘@ 입력’을 눌러보세요.</p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>꼭 @ 로 집어야 하나요?</h3>
+        <div class="chatdemo">
+          <div class="chatcol"><h4>안 집을 때 <span class="badge no">알아서 찾음</span></h4>
+            <div class="bubble u">예약 화면 고쳐줘</div>
+            <div class="bubble a">관련 파일을 <b>스스로 뒤져서</b> 찾아요. 보통 잘 찾지만, 비슷한 파일이 많으면 <b>엉뚱한 걸</b> 열기도 해요.</div>
+          </div>
+          <div class="chatcol"><h4>@ 로 집을 때 <span class="badge yes">정확·빠름</span></h4>
+            <div class="bubble u">예약 화면 고쳐줘 <span class="fchip">@예약화면.html</span></div>
+            <div class="bubble a"><b>바로 그 파일</b>을 열어 작업해요. 찾는 시간이 없고 헷갈리지 않아요.</div>
+          </div>
+        </div>
+        <p class="simtake"><span class="stk">결론</span><span>안 집어도 <b>클로드가 알아서 찾아요</b>. 하지만 <b>딱 그 파일</b>을 안다면 <code>@</code>로 집어주는 게 <b>더 빠르고 정확</b>해요.</span></p>
+      </div>
+    </section>
+
+    <!-- KEYS: shortcuts & modes -->
+    <section class="page" id="keys">
+      <h1>단축키 &amp; 모드</h1>
+      <p class="lead">클로드 코드는 <b>키 몇 개</b>로 멈추고, 되돌리고, 모드를 바꿔요. 마우스로 눌러보며 익혀요.</p>
+      <p class="defs">아래 키를 누르면 — 화면에서 <b>무슨 일이 일어나는지</b> 그대로 보여드려요. (실제 클로드 없이 동작만)</p>
+      <div class="grp">
+        <h3>키를 눌러보세요</h3>
+        <div class="keys" id="keyrow">
+          <button class="keycap" data-k="esc">Esc</button>
+          <button class="keycap" data-k="escesc">Esc Esc</button>
+          <button class="keycap" data-k="shifttab">Shift + Tab</button>
+          <button class="keycap" data-k="up">↑</button>
+          <button class="keycap" data-k="tab">Tab</button>
+          <button class="keycap" data-k="bang">!</button>
+          <button class="keycap" data-k="hash">#</button>
+        </div>
+        <p style="margin:2px 0 12px; font-size:13.5px; color:var(--muted);">지금 모드: <span class="modebadge" id="key-mode">기본 · 물어보고 실행</span></p>
+        <div class="kterm" id="kterm">위의 키를 누르면 여기에 동작이 나타나요.</div>
+        <p class="status" id="key-status"></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>한눈에 보기</h3>
+        <table>
+          <thead><tr><th>키</th><th>하는 일</th><th>언제 쓰나</th></tr></thead>
+          <tbody>
+            <tr><td><b>Esc</b></td><td>하던 일 멈춤</td><td>방향이 틀렸을 때 바로 끊기</td></tr>
+            <tr><td><b>Esc Esc</b></td><td>이전 시점으로 되돌리기</td><td>“그거 전으로 돌려줘”</td></tr>
+            <tr><td><b>Shift+Tab</b></td><td>모드 바꾸기</td><td>기본 → 자동수락 → 계획</td></tr>
+            <tr><td><b>↑</b></td><td>이전에 보낸 말 불러오기</td><td>비슷한 요청 다시 보낼 때</td></tr>
+            <tr><td><b>Tab</b></td><td>파일 이름 자동완성</td><td>긴 이름 다 안 쳐도 됨</td></tr>
+            <tr><td><b>!</b></td><td>셸 명령 바로 실행</td><td><code>!npm test</code> 처럼</td></tr>
+            <tr><td><b>#</b></td><td>기억에 메모 저장</td><td>“항상 한국어로 답해” 같은 규칙</td></tr>
+          </tbody>
+        </table>
+        <p class="simtake"><span class="stk">결론</span><span>제일 중요한 둘만 기억해요 — <b>Esc</b>(멈춤)와 <b>Esc Esc</b>(되돌리기). 이게 초보의 <b>안전벨트</b>예요.</span></p>
+      </div>
+    </section>
+
+    <!-- STEER: interrupt & redirect -->
+    <section class="page" id="steer">
+      <h1>멈추고 방향 바꾸기</h1>
+      <p class="lead">클로드가 <b>엉뚱한 방향</b>으로 갈 때 — 끝까지 기다릴 필요 없어요. <b>Esc로 끊고</b> 바로잡으면 돼요. 운전대는 나에게.</p>
+      <p class="defs">클로드에게 “로그인 화면 <b>글자를 키워줘</b>” 라고 시켜요. 그런데 클로드가 <b>색을 바꾸기</b> 시작하면? 두 가지 대응을 비교해요.</p>
+      <div class="grp">
+        <div class="exrow"><button class="btn solid" id="st-run">▶ 클로드에게 시키기</button></div>
+        <div class="chatdemo">
+          <div class="chatcol"><h4>그냥 둔다 <span class="badge no">두 배 일</span></h4>
+            <div class="runbar bad"><i id="st-bar-a"></i></div>
+            <div id="st-a" style="font-size:13px; color:var(--muted);"></div>
+          </div>
+          <div class="chatcol"><h4>Esc로 바로잡는다 <span class="badge yes">한 번에</span></h4>
+            <div class="runbar"><i id="st-bar-b"></i></div>
+            <div id="st-b" style="font-size:13px; color:var(--muted);"></div>
+            <div class="keys" style="margin-top:8px;"><button class="keycap" id="st-esc" disabled>Esc · 지금 멈추기</button></div>
+          </div>
+        </div>
+        <p class="status" id="st-status">‘시키기’를 누르면 양쪽에서 똑같이 시작해요.</p>
+        <p class="simtake"><span class="stk">결론</span><span>잘못 가는 걸 <b>끝까지 기다렸다 다시</b> 하면 두 배 일 — <b>Esc로 즉시 끊고</b> 바로잡으면 한 번에 맞아요. 헤맬 땐 <code>/clear</code> 로 새로 시작하는 것도 방법.</span></p>
+      </div>
     </section>
 
     <!-- 03 CONTEXT -->
@@ -1391,7 +1551,7 @@ description: 주간 보고서를 회사 양식으로 작성
   (function(){ var s=null; try{ s=localStorage.getItem('cc_present'); }catch(e){} if(s==='1') setPresent(true); })();
 
   /* LNB icons (monoline) */
-  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', manage:'<path d="M4 20h16"/><rect x="5" y="13" width="3" height="6.5" rx="1"/><rect x="10.5" y="9" width="3" height="10.5" rx="1"/><rect x="16" y="5" width="3" height="14.5" rx="1"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', ask:'<path d="M4 5.5h16v10H10l-4 3.5V15.5H4z"/><path d="M8.5 9h7M8.5 12h4"/>', mention:'<circle cx="12" cy="12" r="3.4"/><path d="M15.4 12v1.6a2.6 2.6 0 0 0 5.1 0V12a8.5 8.5 0 1 0-3.3 6.7"/>', keys:'<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><path d="M6 10h.01M9 10h.01M12 10h.01M15 10h.01M18 10h.01M8 13.5h8"/>', steer:'<path d="M4 7v4.5a4 4 0 0 0 4 4h8"/><path d="M13 12.5l3.5 3-3.5 3"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', manage:'<path d="M4 20h16"/><rect x="5" y="13" width="3" height="6.5" rx="1"/><rect x="10.5" y="9" width="3" height="10.5" rx="1"/><rect x="16" y="5" width="3" height="14.5" rx="1"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
   function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
 
   /* router */
@@ -1399,7 +1559,7 @@ description: 주간 보고서를 회사 양식으로 작성
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'챗은 ‘답’을 주고, 클로드 코드는 내 프로젝트에서 <b>직접 만들어 작동까지</b> 시켜요.', cowork:'코드 말고 <b>사무 업무를 대신</b>하는 클로드 — 목표만 주면 <b>내 파일로 결과물까지</b> 만들어요 (비개발자·데스크톱 앱).', usecases:'직업별로 <b>늘 하던 일이 어떻게 바뀌는지</b> 전→후로 보여줘요.', where:'터미널·VS Code·데스크톱·웹 — <b>어디서나 같은 클로드 코드</b>, 설정도 공유돼요.', context:'여기 올라온 것만 클로드가 기억해요. 꽉 차면 <b>‘압축’으로 정리</b>해요.', manage:'맥락을 <b>방치하면 느려지고·비싸지고·헷갈려요</b> — 그래서 제때 정리해요.', sessions:'<b>한 세션엔 한 가지 일</b> — 섞이면 헷갈려요. 작업 폴더는 좁게.', tokens:'토큰 = AI가 글을 읽는 단위. <b>길수록 공간·비용이 늘고</b>, 한글이 더 무거워요.', models:'똑똑함 ↔ 속도 ↔ 비용은 맞바꾸기. <b>헷갈리면 Sonnet</b>으로 시작.', claudemd:'<b>내가 적어두는 규칙 메모</b> — 매 대화 시작에 자동으로 적용돼요.', memory:'<b>클로드가 스스로 배워 기억</b>하는 메모. 세션을 넘어 이어져요.', skills:'자주 쓰는 작업 절차를 <b>한 번 만들어 계속 재사용</b>해요.', mcp:'<b>외부 도구(지라·피그마 등)에 연결</b>해 클로드가 직접 쓰게 해줘요.', plugins:'스킬·도구·명령 등을 <b>묶어 한 번에 설치</b>하는 꾸러미예요.', agents:'큰 일을 <b>전문 도우미에게 나눠 맡기고</b> 결과만 받아요.', images:'<b>스크린샷을 붙이면</b> 클로드가 보고 이해해요 — 말보다 빠르고 정확.', hooks:'특정 순간에 <b>정해진 동작이 매번 자동</b>으로 실행되는 규칙이에요.', planmode:'고치기 전에 <b>계획부터 보여주고 승인</b>받아요 — 큰 변경에 안전.', permissions:'클로드가 <b>얼마나 자주 물어볼지</b> 정하는 설정. 처음엔 안전하게.', rewind:'요청마다 <b>자동 저장</b> — 마음에 안 들면 이전으로 되돌려요.', privacy:'<b>업무용(Team·Enterprise·API)은 기본적으로 학습에 안 쓰여요.</b> 개인용은 설정에서 선택.', commands:'<code class="inlinecode">/</code> 로 시작하는 단축 명령. 제일 자주 쓰는 건 <b>/clear · /compact</b>.', plans:'<b>무료 플랜엔 없어요.</b> 유료(Pro·Max·Team) 또는 API(종량제)로 사용.', limits:'<b>다 쓰면 리셋될 때까지 기다려야</b> 해요 — 그래서 관리가 중요해요.', compact:'길게 쌓인 대화가 <b>짧은 요약 한 칸</b>으로 줄어들어요.', effort:'답하기 전에 <b>얼마나 깊이 생각할지</b> — 깊을수록 정확하지만 느리고 비싸요.', goal:'<b>‘완료 조건’만 주면 될 때까지</b> 클로드가 알아서 반복해요.', loop:'<b>정해진 간격마다</b> 같은 작업을 자동으로 다시 실행해요.', workflows:'큰 일을 <b>여러 도우미가 동시에</b> 처리하도록 조율해요 (고급).', config:'<b>언어·테마·모델·권한</b> 같은 설정을 한 곳에서 바꿔요.', doctor:'안 될 때 <b>설치·연결·설정을 한 번에 점검</b>해 줘요.', glossary:'헷갈리는 용어를 <b>한 줄로</b> 빠르게 찾는 곳이에요.' };
+  var TLDR={ intro:'챗은 ‘답’을 주고, 클로드 코드는 내 프로젝트에서 <b>직접 만들어 작동까지</b> 시켜요.', cowork:'코드 말고 <b>사무 업무를 대신</b>하는 클로드 — 목표만 주면 <b>내 파일로 결과물까지</b> 만들어요 (비개발자·데스크톱 앱).', usecases:'직업별로 <b>늘 하던 일이 어떻게 바뀌는지</b> 전→후로 보여줘요.', where:'터미널·VS Code·데스크톱·웹 — <b>어디서나 같은 클로드 코드</b>, 설정도 공유돼요.', ask:'같은 일도 <b>구체적으로 부탁</b>하면 한 번에 — 직접 써서 점수도 받아봐요.', mention:'<code class="inlinecode">@</code> 로 <b>딱 그 파일</b>을 콕 집어주면 더 빠르고 정확해요.', keys:'<b>Esc</b>(멈춤)·<b>Esc Esc</b>(되돌리기) 등 키 몇 개로 다 돼요 — 눌러보며 익혀요.', steer:'잘못 가면 <b>Esc로 끊고</b> 바로잡기 — 끝까지 기다리지 않아요.', context:'여기 올라온 것만 클로드가 기억해요. 꽉 차면 <b>‘압축’으로 정리</b>해요.', manage:'맥락을 <b>방치하면 느려지고·비싸지고·헷갈려요</b> — 그래서 제때 정리해요.', sessions:'<b>한 세션엔 한 가지 일</b> — 섞이면 헷갈려요. 작업 폴더는 좁게.', tokens:'토큰 = AI가 글을 읽는 단위. <b>길수록 공간·비용이 늘고</b>, 한글이 더 무거워요.', models:'똑똑함 ↔ 속도 ↔ 비용은 맞바꾸기. <b>헷갈리면 Sonnet</b>으로 시작.', claudemd:'<b>내가 적어두는 규칙 메모</b> — 매 대화 시작에 자동으로 적용돼요.', memory:'<b>클로드가 스스로 배워 기억</b>하는 메모. 세션을 넘어 이어져요.', skills:'자주 쓰는 작업 절차를 <b>한 번 만들어 계속 재사용</b>해요.', mcp:'<b>외부 도구(지라·피그마 등)에 연결</b>해 클로드가 직접 쓰게 해줘요.', plugins:'스킬·도구·명령 등을 <b>묶어 한 번에 설치</b>하는 꾸러미예요.', agents:'큰 일을 <b>전문 도우미에게 나눠 맡기고</b> 결과만 받아요.', images:'<b>스크린샷을 붙이면</b> 클로드가 보고 이해해요 — 말보다 빠르고 정확.', hooks:'특정 순간에 <b>정해진 동작이 매번 자동</b>으로 실행되는 규칙이에요.', planmode:'고치기 전에 <b>계획부터 보여주고 승인</b>받아요 — 큰 변경에 안전.', permissions:'클로드가 <b>얼마나 자주 물어볼지</b> 정하는 설정. 처음엔 안전하게.', rewind:'요청마다 <b>자동 저장</b> — 마음에 안 들면 이전으로 되돌려요.', privacy:'<b>업무용(Team·Enterprise·API)은 기본적으로 학습에 안 쓰여요.</b> 개인용은 설정에서 선택.', commands:'<code class="inlinecode">/</code> 로 시작하는 단축 명령. 제일 자주 쓰는 건 <b>/clear · /compact</b>.', plans:'<b>무료 플랜엔 없어요.</b> 유료(Pro·Max·Team) 또는 API(종량제)로 사용.', limits:'<b>다 쓰면 리셋될 때까지 기다려야</b> 해요 — 그래서 관리가 중요해요.', compact:'길게 쌓인 대화가 <b>짧은 요약 한 칸</b>으로 줄어들어요.', effort:'답하기 전에 <b>얼마나 깊이 생각할지</b> — 깊을수록 정확하지만 느리고 비싸요.', goal:'<b>‘완료 조건’만 주면 될 때까지</b> 클로드가 알아서 반복해요.', loop:'<b>정해진 간격마다</b> 같은 작업을 자동으로 다시 실행해요.', workflows:'큰 일을 <b>여러 도우미가 동시에</b> 처리하도록 조율해요 (고급).', config:'<b>언어·테마·모델·권한</b> 같은 설정을 한 곳에서 바꿔요.', doctor:'안 될 때 <b>설치·연결·설정을 한 번에 점검</b>해 줘요.', glossary:'헷갈리는 용어를 <b>한 줄로</b> 빠르게 찾는 곳이에요.' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">한 줄 요약</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -1418,15 +1578,15 @@ description: 주간 보고서를 회사 양식으로 작성
   [['cc-go',5500],['cw3-go',5500],['uc-go',7000],['sess-play',9500],['lc-all',8200],['md-go',5500],['mem-go',5200],['sk-go',5200],['sa-go',5600],['pl-go',6200],['plan-go',4800],['goal-go',4200],['loop-go',4800],['wf-go',4500],['dr-go',4800],['cx-go',5500,'cx-reset'],['img-go',4800]].forEach(function(p){ autoLoop(p[0],p[1],p[2]); });
 
   /* difficulty mode — 초급/중급/고급 filter */
-  var LV={ intro:1,cowork:1,usecases:1,where:1,context:1,manage:1,sessions:1,models:1,commands:1,glossary:1,
-    tokens:2,compact:2,effort:2,claudemd:2,memory:2,skills:2,images:2,permissions:2,planmode:2,rewind:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
+  var LV={ intro:1,cowork:1,usecases:1,where:1,ask:1,mention:1,keys:1,steer:1,context:1,manage:1,compact:1,sessions:1,models:1,claudemd:1,images:1,permissions:1,rewind:1,commands:1,glossary:1,
+    tokens:2,effort:2,memory:2,skills:2,planmode:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
     mcp:3,plugins:3,agents:3,hooks:3,goal:3,loop:3,workflows:3 };
   (function(){ var chips=document.querySelectorAll('#lvlsel .lvlchip'); if(!chips.length) return; var origNo={}; navs.forEach(function(n){ var no=n.querySelector('.no'); if(no) origNo[n.dataset.page]=no.textContent; });
     function setLevel(lv){ chips.forEach(function(c){ c.classList.toggle('on',+c.dataset.lv===lv); }); var k=0;
-      navs.forEach(function(n){ var show= lv===0 || LV[n.dataset.page]===lv; n.style.display=show?'':'none'; if(show){ var no=n.querySelector('.no'); if(no) no.textContent= lv===0 ? origNo[n.dataset.page] : ('0'+(++k)).slice(-2); } });
+      navs.forEach(function(n){ var show= lv===0 || LV[n.dataset.page]===lv; n.style.display=show?'':'none'; if(show){ var no=n.querySelector('.no'); if(no) no.textContent= ('0'+(++k)).slice(-2); } });
       document.querySelectorAll('.lnb .navsec').forEach(function(s){ var any=false,el=s.nextElementSibling; while(el && !el.classList.contains('navsec')){ if(el.classList.contains('navitem') && el.style.display!=='none'){ any=true; break; } el=el.nextElementSibling; } s.style.display=any?'':'none'; });
       var cur=document.querySelector('.navitem.on'); if(cur && cur.style.display==='none'){ var first=[].filter.call(navs,function(n){return n.style.display!=='none';})[0]; if(first) first.click(); } }
-    chips.forEach(function(c){ c.addEventListener('click',function(){ setLevel(+c.dataset.lv); }); }); })();
+    chips.forEach(function(c){ c.addEventListener('click',function(){ setLevel(+c.dataset.lv); }); }); setLevel(0); })();
 
   /* glossary tooltips — hover (desktop) + tap (mobile/tablet) */
   (function(){ var gls=document.querySelectorAll('.gl'); if(!gls.length) return;
@@ -1859,6 +2019,84 @@ description: 주간 보고서를 회사 양식으로 작성
       DR.forEach(function(o,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML= o.fail ? '<span class="ck">!</span><span>'+o.t+' — <b>'+o.fail+'</b><span class="drfix">'+o.fix+'</span></span>' : '<span class="ck">'+CK+'</span><span>'+o.t+'</span>'; drList.appendChild(el);
         drT.push(setTimeout(function(){ el.classList.add(o.fail?'warn':'done'); if(i===DR.length-1) st.textContent='점검 끝 — 4개 정상, 1개 문제 발견. /doctor는 어디가 문제인지 + 고치는 법까지 알려줘요.'; },300+i*600)); }); });
     document.getElementById('dr-reset').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; document.getElementById('dr-status').textContent='“진단 실행”을 눌러보세요.'; });
+  })();
+
+  /* ask — vague vs specific request + self-score */
+  (function(){
+    var U=document.getElementById('ask-u'),A=document.getElementById('ask-a'),TAG=document.getElementById('ask-tag'),STEPS=document.getElementById('ask-steps'),ST=document.getElementById('ask-status'),T=[];
+    if(!U) return;
+    var DATA={
+      vague:{ tag:'두루뭉술', cls:'no', u:'예약 기능 만들어줘', a:'음… 어디에 넣을까요? 날짜는 어떤 형식이죠? 어떤 화면을 말하는 거예요?',
+        steps:[['?','되물어봄: 어디에 넣죠? 형식은?'],['←','대충 추측해서 만듦'],['←','‘이게 아닌데’ → 다시 설명'],['←','고쳐서 다시 만듦 (3번째)']],
+        done:'결국 세 번 오갔어요. 두루뭉술하면 클로드가 되물어요.' },
+      clear:{ tag:'구체적', cls:'yes', u:'예약 화면에 날짜·시간 칸 추가, 빈 칸이면 경고, 되면 테스트도', a:'알겠어요. 바로 만들게요.',
+        steps:[['✓','요구사항 이해'],['✓','날짜·시간 칸 추가'],['✓','빈 칸 경고 추가'],['✓','테스트 실행 → 통과']],
+        done:'한 번에 끝났어요. 구체적이면 되묻지 않아요.' }
+    };
+    function run(k){ T.forEach(clearTimeout); T=[]; var d=DATA[k]; TAG.textContent=d.tag; TAG.className='badge '+d.cls; U.textContent=d.u; A.textContent=''; STEPS.innerHTML=''; ST.textContent='';
+      T.push(setTimeout(function(){ A.textContent=d.a; },350));
+      d.steps.forEach(function(s,i){ T.push(setTimeout(function(){ var r=document.createElement('div'); r.className='chk'+(s[0]==='✓'?' y':''); r.innerHTML='<span class="cx">'+s[0]+'</span><span>'+s[1]+'</span>'; STEPS.appendChild(r); },820+i*640)); });
+      T.push(setTimeout(function(){ ST.textContent=d.done; },820+4*640)); }
+    document.querySelectorAll('#ask .exrow .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#ask .exrow .chip').forEach(function(x){x.classList.toggle('on',x===c);}); run(c.dataset.k); }); });
+    var INP=document.getElementById('ask-inp'),BOX=document.getElementById('ask-score');
+    function score(){ var t=(INP.value||'').trim(); if(!t){ BOX.className='scorebox'; return; }
+      var checks=[ ['무엇을 (대상이 분명한가)', /화면|페이지|파일|버튼|칸|폼|기능|메뉴|표|목록|글자|색|이미지|사진|메일|문서|줄|항목|@/.test(t)],
+        ['어떻게 (원하는 동작)', /추가|수정|고쳐|고치|만들|바꾸|바꿔|삭제|지우|지워|표시|보여|정렬|연결|넣|키워|줄여|올려|내려|붙여|나눠|칠|채우|채워|적용|설정|숨겨|크게|작게|굵게|정리|합쳐|복사/.test(t)],
+        ['조건·완료 기준', /면|되면|안 |없으면|빈 |경고|확인|테스트|검사|빨갛|초록|숫자|이상|이하|글자수|보다|처럼|같이/.test(t)],
+        ['너무 짧지 않게 (12자+)', t.length>=12] ];
+      var n=checks.filter(function(c){return c[1];}).length;
+      var v = n>=4?'아주 좋아요! 클로드가 한 번에 알아들어요.' : n>=2?'괜찮아요. 한두 가지만 더 적으면 완벽해요.' : '너무 두루뭉술해요. 클로드가 되물어볼 거예요.';
+      var h='<div class="schead">'+n+'/4 — '+v+'</div>';
+      checks.forEach(function(c){ h+='<div class="chk '+(c[1]?'y':'n')+'"><span class="cx">'+(c[1]?'✓':'·')+'</span><span>'+c[0]+'</span></div>'; });
+      BOX.innerHTML=h; BOX.className='scorebox on'; }
+    document.getElementById('ask-go').addEventListener('click',score); INP.addEventListener('keydown',function(e){ if(e.key==='Enter')score(); });
+  })();
+
+  /* mention — @ file picker */
+  (function(){
+    var TY=document.getElementById('m-typed'),MENU=document.getElementById('atmenu'),ST=document.getElementById('m-status'); if(!TY) return; var attached=null;
+    var FILES=[['예약화면.html','웹 페이지'],['예약목록.xlsx','엑셀'],['안내문.docx','문서'],['가격표.csv','표']];
+    function openMenu(){ if(attached) return; TY.innerHTML='<span style="color:var(--accent)">@</span>'; var h=''; FILES.forEach(function(f,i){ h+='<div class="ai" data-i="'+i+'"><span class="afile">@'+f[0]+'</span><span class="akind">'+f[1]+'</span></div>'; }); MENU.innerHTML=h; MENU.className='atmenu on'; ST.textContent='파일 목록이 떴어요. 하나 골라보세요.';
+      MENU.querySelectorAll('.ai').forEach(function(a){ a.addEventListener('click',function(){ pick(+a.dataset.i); }); }); }
+    function pick(i){ var f=FILES[i]; attached=f; TY.innerHTML='<span class="fchip">@'+f[0]+'</span> '; MENU.className='atmenu'; ST.textContent='붙였어요: @'+f[0]+' — 이제 ‘보내기’를 눌러보세요.'; }
+    document.getElementById('m-at').addEventListener('click',openMenu);
+    document.getElementById('m-drop').addEventListener('click',function(){ pick(0); ST.textContent='드래그&드롭으로 @'+FILES[0][0]+' 을(를) 붙였어요 — @ 입력과 똑같아요.'; });
+    document.getElementById('m-send').addEventListener('click',function(){ if(!attached){ ST.textContent='먼저 @로 파일을 붙여보세요.'; return; } ST.textContent='클로드가 @'+attached[0]+' 을(를) 열어보는 중… ✓ 바로 그 파일을 찾았어요.'; });
+    document.getElementById('m-reset').addEventListener('click',function(){ attached=null; TY.innerHTML=''; MENU.className='atmenu'; ST.textContent='‘@ 입력’을 눌러보세요.'; });
+  })();
+
+  /* keys — shortcuts & modes playground */
+  (function(){
+    var KT=document.getElementById('kterm'),ST=document.getElementById('key-status'),MODE=document.getElementById('key-mode'); if(!KT) return; var mi=0;
+    var MODES=[['기본 · 물어보고 실행',''],['편집 자동수락 · 안 묻고 고침','m1'],['계획 모드 · 먼저 보여주기','m2']];
+    function show(txt,status){ KT.textContent=txt; ST.textContent=status||''; }
+    var ACT={
+      esc:function(){ show('■  멈췄어요.\n\n클로드가 하던 일을 멈추고 기다려요.\n이제 다시 지시할 수 있어요.','‘방향이 틀렸다’ 싶을 때 제일 먼저 누르는 키.'); },
+      escesc:function(){ show('←  되돌리기 — 어느 시점으로?\n\n   ○ 처음\n   ○ 디자인 바꾸기 전\n   ●  지금 (여기)','이전 시점으로 코드를 한 번에 되돌려요. (‘되돌리기’ 탭에서 자세히)'); },
+      shifttab:function(){ mi=(mi+1)%3; MODE.textContent=MODES[mi][0]; MODE.className='modebadge '+MODES[mi][1]; show('모드 전환  →  '+MODES[mi][0],'Shift+Tab을 누를 때마다 모드가 바뀌어요. 위 배지를 보세요.'); },
+      up:function(){ show('↑  이전에 보낸 요청을 다시 불러왔어요:\n\n   > 예약 화면 고쳐줘','비슷한 걸 또 보낼 때 다시 안 쳐도 돼요.'); },
+      tab:function(){ show('Tab  자동완성:\n\n   @예약화…  →  @예약화면.html','파일 이름을 다 안 쳐도 Tab이 완성해줘요.'); },
+      bang:function(){ show('!  셸(명령) 모드\n\n   ! npm test\n   → 클로드를 거치지 않고 명령을 직접 실행','결과만 빠르게 보고 싶을 때.'); },
+      hash:function(){ show('#  기억에 저장\n\n   # 항상 한국어로 답해\n   → 다음부터 이 규칙을 기억해요','매번 말 안 해도 되는 규칙을 남겨요. (CLAUDE.md)'); }
+    };
+    document.querySelectorAll('#keyrow .keycap').forEach(function(c){ c.addEventListener('click',function(){ c.classList.add('hit'); setTimeout(function(){c.classList.remove('hit');},120); (ACT[c.dataset.k]||function(){})(); }); });
+  })();
+
+  /* steer — interrupt & redirect, compared */
+  (function(){
+    var RUN=document.getElementById('st-run'),BARA=document.getElementById('st-bar-a'),BARB=document.getElementById('st-bar-b'),A=document.getElementById('st-a'),B=document.getElementById('st-b'),ESC=document.getElementById('st-esc'),ST=document.getElementById('st-status'); if(!RUN) return;
+    var T=[],steered=false,wrongT=null;
+    function clearAll(){ T.forEach(clearTimeout); T=[]; if(wrongT){clearTimeout(wrongT);wrongT=null;} }
+    function start(){ clearAll(); steered=false; BARA.style.width='0'; BARB.style.width='0'; BARB.parentNode.classList.remove('bad'); A.innerHTML=''; B.innerHTML=''; ESC.disabled=true; ST.textContent='클로드가 “색을 바꾸는” 쪽으로 가고 있어요…';
+      T.push(setTimeout(function(){ BARA.style.width='35%'; BARB.style.width='35%'; A.innerHTML='색을 바꾸는 중…'; B.innerHTML='색을 바꾸는 중…'; },200));
+      T.push(setTimeout(function(){ BARA.style.width='70%'; },1400));
+      T.push(setTimeout(function(){ BARA.style.width='100%'; A.innerHTML='완성 — <b>색을 바꿨어요.</b> 그런데 원한 건 <b>글자 크기</b>였죠 → 처음부터 다시 요청해야 해요.'; },2600));
+      T.push(setTimeout(function(){ BARB.style.width='40%'; ESC.disabled=false; ST.textContent='지금이에요 — 오른쪽 ‘Esc’를 눌러 방향을 바꿔요!';
+        wrongT=setTimeout(function(){ if(!steered){ BARB.parentNode.classList.add('bad'); BARB.style.width='100%'; B.innerHTML='안 끊었더니 — <b>색만 바꾸고 끝.</b> 왼쪽과 똑같이 헛일이 됐어요.'; ESC.disabled=true; ST.textContent='Esc를 안 누르면 왼쪽과 똑같아져요. 다시 해볼까요?'; } },4200);
+      },1400)); }
+    ESC.addEventListener('click',function(){ if(ESC.disabled)return; steered=true; if(wrongT){clearTimeout(wrongT);wrongT=null;} ESC.disabled=true; BARB.parentNode.classList.remove('bad'); B.innerHTML='■ 멈춤 → “색 말고 <b>글자 크기</b>야” 라고 바로잡는 중…';
+      setTimeout(function(){ BARB.style.width='100%'; B.innerHTML='■ 멈춤 → 정정 → <b>글자 크기를 키웠어요 ✓</b> 한 번에 맞았어요.'; ST.textContent='끊고 바로잡으니 한 번에 끝났죠?'; },800); });
+    RUN.addEventListener('click',start);
   })();
 
   /* plugins — bundle install demo */
