@@ -200,6 +200,35 @@
   .cwstep.run .ck{ border-color:var(--blue); } .cwstep.run{ color:var(--ink); }
   .cwstep.done .ck{ border-color:var(--good); background:var(--good); } .cwstep.done .ck svg{ opacity:1; } .cwstep.done{ color:var(--ink); }
   .cwstep.warn{ color:var(--ink); align-items:flex-start; } .cwstep.warn .ck{ border-color:var(--over); background:var(--over); color:#fff; font-weight:700; font-size:12px; line-height:1; } .cwstep .drfix{ display:block; color:var(--good); font-weight:600; font-size:12px; margin-top:2px; }
+  /* basic-usage hands-on sims (ask / mention / keys / steer) */
+  .exrow{ display:flex; gap:8px; flex-wrap:wrap; margin:4px 0 14px; }
+  .scorebox{ margin:12px 0 0; border:1px solid var(--line2); border-radius:10px; padding:13px 15px; background:var(--row); display:none; }
+  .scorebox.on{ display:block; }
+  .scorebox .schead{ font-weight:600; font-size:14px; margin-bottom:9px; }
+  .chk{ display:flex; align-items:flex-start; gap:8px; font-size:13px; color:var(--muted); padding:3px 0; }
+  .chk .cx{ flex:0 0 auto; width:17px; height:17px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; border:1.5px solid var(--line2); }
+  .chk.y .cx{ border-color:var(--good); background:var(--good); color:#fff; } .chk.y{ color:var(--ink); }
+  .chk.n .cx{ border-color:var(--over); color:var(--over); }
+  .mline{ font-family:ui-monospace,Menlo,monospace; font-size:13.5px; background:var(--row); border:1px solid var(--line2); border-radius:9px; padding:13px 15px; min-height:48px; cursor:text; line-height:1.8; }
+  .mcaret{ display:inline-block; width:1px; background:var(--accent); animation:cblink 1s steps(1) infinite; }
+  @keyframes cblink{ 50%{opacity:0;} }
+  .fchip{ display:inline-flex; align-items:center; gap:5px; background:rgba(31,158,118,.1); border:1px solid rgba(31,158,118,.32); color:var(--good); border-radius:6px; padding:1px 8px; font-size:12.5px; font-weight:600; }
+  .atmenu{ margin-top:8px; border:1px solid var(--line2); border-radius:9px; overflow:hidden; display:none; }
+  .atmenu.on{ display:block; }
+  .atmenu .ai{ display:flex; align-items:center; gap:9px; padding:10px 13px; font-size:13px; cursor:pointer; border-bottom:1px solid var(--line); }
+  .atmenu .ai:last-child{ border-bottom:none; } .atmenu .ai:hover{ background:var(--row); }
+  .atmenu .afile{ font-family:ui-monospace,Menlo,monospace; color:var(--ink); } .atmenu .akind{ margin-left:auto; font-size:11px; color:var(--faint); }
+  .keys{ display:flex; flex-wrap:wrap; gap:8px; margin:4px 0 12px; }
+  .keycap{ font-family:inherit; font-size:13px; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--line2); border-bottom-width:2.5px; border-radius:8px; padding:8px 13px; cursor:pointer; transition:transform .1s,border-color .2s,opacity .2s; }
+  .keycap:hover{ border-color:var(--accent); } .keycap:active,.keycap.hit{ transform:translateY(1.5px); border-bottom-width:1px; }
+  .keycap:disabled{ opacity:.4; cursor:default; }
+  .kterm{ font-family:ui-monospace,Menlo,monospace; font-size:13px; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:15px 16px; min-height:118px; white-space:pre-wrap; line-height:1.75; color:var(--ink); }
+  .modebadge{ display:inline-block; font-size:12px; font-weight:600; border-radius:6px; padding:2px 10px; border:1px solid var(--line2); color:var(--muted); }
+  .modebadge.m1{ border-color:rgba(31,158,118,.4); color:var(--good); background:rgba(31,158,118,.08); }
+  .modebadge.m2{ border-color:rgba(214,158,46,.55); color:#b9821a; background:rgba(214,158,46,.1); }
+  .runbar{ height:8px; border-radius:6px; background:var(--line); overflow:hidden; margin:8px 0; }
+  .runbar > i{ display:block; height:100%; width:0; background:var(--accent); transition:width .25s linear; }
+  .runbar.bad > i{ background:var(--over); }
   .cwapprove{ margin-top:11px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .cwmode{ font-size:11.5px; color:var(--faint); }
   .cwvm{ border:1px dashed var(--line2); border-radius:11px; padding:11px 14px 7px; background:var(--panel); position:relative; }
@@ -412,6 +441,11 @@
     <button class="navitem" data-page="cowork"><span class="no">02</span>什么是 Cowork？</button>
     <button class="navitem" data-page="usecases"><span class="no">03</span>实际用例</button>
     <button class="navitem" data-page="where"><span class="no">04</span>在哪里用</button>
+    <div class="navsec">基础用法（动手试）</div>
+    <button class="navitem" data-page="ask"><span class="no">05</span>把需求写清楚</button>
+    <button class="navitem" data-page="mention"><span class="no">06</span>指定文件 @</button>
+    <button class="navitem" data-page="keys"><span class="no">07</span>快捷键 &amp; 模式</button>
+    <button class="navitem" data-page="steer"><span class="no">08</span>叫停并改方向</button>
     <div class="navsec">基础概念</div>
     <button class="navitem" data-page="context"><span class="no">05</span>上下文窗口</button>
     <button class="navitem" data-page="manage"><span class="no">06</span>管理上下文（为什么？）</button>
@@ -572,6 +606,132 @@ irm https://claude.ai/install.ps1 | iex</div>
         <li><b>第一次上手</b><span>在项目文件夹里输入 <code>claude</code> → 登录 → 像“这个项目是做什么的？”一样直接搭话。</span></li>
       </ul>
       <p class="note">具体的安装方法和系统要求会随版本变化，请在 <code>code.claude.com/docs</code> 查看最新说明。</p>
+    </section>
+
+    <!-- ASK: writing good requests -->
+    <section class="page" id="ask">
+      <h1>把需求写清楚</h1>
+      <p class="lead">Claude Code 是<b>用话来指挥的工具</b>。同样一件事，<b>怎么提</b>，决定了它是一次搞定，还是来回折腾三遍。</p>
+      <p class="defs">点下面两种提法对比结果，最后<b>自己写一条需求</b>来拿分。（无需真实 Claude，只体验交互）</p>
+      <div class="grp">
+        <h3>同一件事，不同提法 —— 对比结果</h3>
+        <div class="exrow">
+          <button class="chip" data-k="vague">笼统地：“做个预约功能”</button>
+          <button class="chip" data-k="clear">具体地：“在预约页面加日期·时间输入框，留空就提示，能用就顺手测一下”</button>
+        </div>
+        <div class="chatdemo">
+          <div class="chatcol"><h4>提法 <span class="badge no" id="ask-tag">—</span></h4>
+            <div class="bubble u" id="ask-u">点上面的按钮试试。</div>
+            <div class="bubble a" id="ask-a"></div>
+          </div>
+          <div class="chatcol"><h4>Claude 做的事</h4>
+            <div id="ask-steps"></div>
+          </div>
+        </div>
+        <p class="status" id="ask-status">点按钮，看 Claude 会怎么反应。</p>
+        <p class="simtake"><span class="stk">结论</span><span>把<b>做什么·怎么做·做完拿什么验收</b>都写上 —— Claude 就不用反问，<b>一次</b>搞定。</span></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>自己写写看 —— 我的需求几分？</h3>
+        <p class="label">输入需求 <span class="hint">真的动手敲一下</span></p>
+        <div class="field"><input id="ask-inp" type="text" placeholder="例：在注册页面加确认密码输入框，不一致就标红显示" maxlength="120"><button class="send" id="ask-go">看分数</button></div>
+        <div class="scorebox" id="ask-score"></div>
+        <p class="note">好需求的 4 点：① <b>做什么</b>（对象）② <b>怎么做</b>（动作）③ <b>在哪</b>（页面·文件）④ <b>完成标准</b>（怎么验收）。来源：code.claude.com/docs (Best practices)。</p>
+      </div>
+    </section>
+
+    <!-- MENTION: @ file reference -->
+    <section class="page" id="mention">
+      <h1>指定文件 <span style="color:var(--accent);">@</span></h1>
+      <p class="lead">要改的文件已经确定的话 —— 用 <b><code>@</code> 加文件名</b>就能直接点名。Claude 会先打开那个文件。</p>
+      <p class="defs">在下面点 <code>@</code> 弹出文件列表，选一个试试。（实际还能用拖放来附加）</p>
+      <div class="grp">
+        <h3>动手试 —— 用 @ 附加文件</h3>
+        <div class="mline" id="mline"><span>改一下预约页面 </span><span id="m-typed"></span><span class="mcaret">&nbsp;&nbsp;</span></div>
+        <div class="atmenu" id="atmenu"></div>
+        <div class="keys" style="margin-top:10px;">
+          <button class="keycap" id="m-at">输入 @</button>
+          <button class="keycap" id="m-drop">拖放文件</button>
+          <button class="keycap" id="m-send">发送</button>
+          <button class="keycap" id="m-reset">重来</button>
+        </div>
+        <p class="status" id="m-status">点“输入 @”试试。</p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>一定要用 @ 点名吗？</h3>
+        <div class="chatdemo">
+          <div class="chatcol"><h4>不点名时 <span class="badge no">自己找</span></h4>
+            <div class="bubble u">改一下预约页面</div>
+            <div class="bubble a"><b>自己翻找</b>相关文件。通常找得不错，但相似文件一多，也可能<b>打开错的</b>。</div>
+          </div>
+          <div class="chatcol"><h4>用 @ 点名时 <span class="badge yes">准·快</span></h4>
+            <div class="bubble u">改一下预约页面 <span class="fchip">@预约页面.html</span></div>
+            <div class="bubble a"><b>直接打开那个文件</b>来做。省去找的时间，也不会搞混。</div>
+          </div>
+        </div>
+        <p class="simtake"><span class="stk">结论</span><span>不点名 <b>Claude 也会自己找</b>。但如果你知道<b>就是那个文件</b>，用 <code>@</code> 点名会<b>更快更准</b>。</span></p>
+      </div>
+    </section>
+
+    <!-- KEYS: shortcuts & modes -->
+    <section class="page" id="keys">
+      <h1>快捷键 &amp; 模式</h1>
+      <p class="lead">Claude Code 用<b>几个键</b>就能叫停、回退、切换模式。用鼠标点点试试就会了。</p>
+      <p class="defs">按下面的键 —— 屏幕上<b>会发生什么</b>，就原样展示给你看。（无需真实 Claude，只看交互）</p>
+      <div class="grp">
+        <h3>按按这些键</h3>
+        <div class="keys" id="keyrow">
+          <button class="keycap" data-k="esc">Esc</button>
+          <button class="keycap" data-k="escesc">Esc Esc</button>
+          <button class="keycap" data-k="shifttab">Shift + Tab</button>
+          <button class="keycap" data-k="up">↑</button>
+          <button class="keycap" data-k="tab">Tab</button>
+          <button class="keycap" data-k="bang">!</button>
+          <button class="keycap" data-k="hash">#</button>
+        </div>
+        <p style="margin:2px 0 12px; font-size:13.5px; color:var(--muted);">当前模式：<span class="modebadge" id="key-mode">默认 · 先问再执行</span></p>
+        <div class="kterm" id="kterm">按上面的键，这里会显示动作。</div>
+        <p class="status" id="key-status"></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>一览</h3>
+        <table>
+          <thead><tr><th>键</th><th>作用</th><th>什么时候用</th></tr></thead>
+          <tbody>
+            <tr><td><b>Esc</b></td><td>停下正在做的事</td><td>方向不对时立刻打断</td></tr>
+            <tr><td><b>Esc Esc</b></td><td>回退到之前的状态</td><td>“退回那之前”</td></tr>
+            <tr><td><b>Shift+Tab</b></td><td>切换模式</td><td>默认 → 自动接受 → 计划</td></tr>
+            <tr><td><b>↑</b></td><td>调出上一条发过的话</td><td>再发类似需求时</td></tr>
+            <tr><td><b>Tab</b></td><td>文件名自动补全</td><td>不用敲完长名字</td></tr>
+            <tr><td><b>!</b></td><td>直接执行 shell 命令</td><td>像 <code>!npm test</code> 那样</td></tr>
+            <tr><td><b>#</b></td><td>存一条记忆备忘</td><td>“一直用中文回答”这类规则</td></tr>
+          </tbody>
+        </table>
+        <p class="simtake"><span class="stk">结论</span><span>只记最重要的两个 —— <b>Esc</b>（叫停）和 <b>Esc Esc</b>（回退）。这就是新手的<b>安全带</b>。</span></p>
+      </div>
+    </section>
+
+    <!-- STEER: interrupt & redirect -->
+    <section class="page" id="steer">
+      <h1>叫停并改方向</h1>
+      <p class="lead">Claude 走<b>偏方向</b>时 —— 不用等它跑完。<b>用 Esc 打断</b>再纠正就行。方向盘在你手里。</p>
+      <p class="defs">让 Claude “把登录页面的<b>文字放大</b>”。结果它却开始<b>改颜色</b>？对比两种应对。</p>
+      <div class="grp">
+        <div class="exrow"><button class="btn solid" id="st-run">▶ 让 Claude 去做</button></div>
+        <div class="chatdemo">
+          <div class="chatcol"><h4>放着不管 <span class="badge no">两倍活</span></h4>
+            <div class="runbar bad"><i id="st-bar-a"></i></div>
+            <div id="st-a" style="font-size:13px; color:var(--muted);"></div>
+          </div>
+          <div class="chatcol"><h4>用 Esc 纠正 <span class="badge yes">一次到位</span></h4>
+            <div class="runbar"><i id="st-bar-b"></i></div>
+            <div id="st-b" style="font-size:13px; color:var(--muted);"></div>
+            <div class="keys" style="margin-top:8px;"><button class="keycap" id="st-esc" disabled>Esc · 现在停下</button></div>
+          </div>
+        </div>
+        <p class="status" id="st-status">点“去做”，两边会同样地开始。</p>
+        <p class="simtake"><span class="stk">结论</span><span>走偏了还<b>等它跑完再重来</b>，就是两倍活 —— <b>用 Esc 立刻打断</b>再纠正，一次就对。实在乱了，也可以用 <code>/clear</code> 重新开始。</span></p>
+      </div>
     </section>
 
     <!-- 03 CONTEXT -->
@@ -1389,7 +1549,7 @@ description: 按公司格式撰写周报
   (function(){ var s=null; try{ s=localStorage.getItem('cc_present'); }catch(e){} if(s==='1') setPresent(true); })();
 
   /* LNB icons (monoline) */
-  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', manage:'<path d="M4 20h16"/><rect x="5" y="13" width="3" height="6.5" rx="1"/><rect x="10.5" y="9" width="3" height="10.5" rx="1"/><rect x="16" y="5" width="3" height="14.5" rx="1"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', ask:'<path d="M4 5.5h16v10H10l-4 3.5V15.5H4z"/><path d="M8.5 9h7M8.5 12h4"/>', mention:'<circle cx="12" cy="12" r="3.4"/><path d="M15.4 12v1.6a2.6 2.6 0 0 0 5.1 0V12a8.5 8.5 0 1 0-3.3 6.7"/>', keys:'<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><path d="M6 10h.01M9 10h.01M12 10h.01M15 10h.01M18 10h.01M8 13.5h8"/>', steer:'<path d="M4 7v4.5a4 4 0 0 0 4 4h8"/><path d="M13 12.5l3.5 3-3.5 3"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', manage:'<path d="M4 20h16"/><rect x="5" y="13" width="3" height="6.5" rx="1"/><rect x="10.5" y="9" width="3" height="10.5" rx="1"/><rect x="16" y="5" width="3" height="14.5" rx="1"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
   function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
 
   /* router */
@@ -1397,7 +1557,7 @@ description: 按公司格式撰写周报
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'聊天给你‘答案’，Claude Code 则在你的项目里<b>亲手做出来、还让它跑起来</b>。', cowork:'不写代码，而是<b>替你做办公事务</b>的 Claude —— 给个目标，就<b>用你的文件做出成品</b>（给非开发者·桌面应用）。', usecases:'按职业<b>展示平时做的事会怎样改变</b>，从之前到之后。', where:'终端·VS Code·桌面·网页 —— <b>哪里都是同一个 Claude Code</b>，设置也共享。', context:'只有放进来的东西 Claude 才记得。装满了就<b>用‘压缩’来整理</b>。', manage:'上下文<b>放着不管就会变慢·变贵·变乱</b> —— 所以要及时整理。', sessions:'<b>一个会话只做一件事</b> —— 混在一起会乱。工作文件夹要窄。', tokens:'Token = AI 读文字的单位。<b>越长越占空间、越费钱</b>，中文更重。', models:'聪明 ↔ 速度 ↔ 成本要取舍。<b>拿不定就用 Sonnet</b> 开始。', claudemd:'<b>我写下的规则备忘</b> —— 每次对话开始自动生效。', memory:'<b>Claude 自己学、自己记</b>的备忘。跨会话延续。', skills:'把常用工作步骤<b>做一次，反复使用</b>。', mcp:'<b>连接外部工具（Jira、Figma 等）</b>，让 Claude 直接使用。', plugins:'把技能·工具·命令等<b>打包一次性安装</b>的包。', agents:'把大事<b>分给专门助手</b>，只接收结果。', images:'<b>贴上截图</b>，Claude 就能看懂 —— 比说话快、还准。', hooks:'某个时刻<b>每次都自动执行固定动作</b>的规则。', planmode:'修改前<b>先展示计划、等批准</b> —— 大改动更安全。', permissions:'决定 Claude <b>要多频繁地问</b>的设置。一开始安全为上。', rewind:'每个请求<b>自动保存</b> —— 不满意就退回之前。', privacy:'<b>工作版（Team·Enterprise·API）默认不用于训练。</b> 个人版可在设置里选。', commands:'以 <code class="inlinecode">/</code> 开头的快捷命令。用得最多的是 <b>/clear · /compact</b>。', plans:'<b>免费版里没有。</b> 用付费版（Pro·Max·Team）或 API（按量计费）。', limits:'<b>用完就得等到重置</b> —— 所以管理很重要。', compact:'长长堆积的对话缩成<b>一格简短摘要</b>。', effort:'回答前<b>要想多深</b> —— 越深越准，但更慢更贵。', goal:'<b>只要给出‘完成条件’，Claude 就会反复做到满足为止</b>。', loop:'<b>每隔固定间隔</b>自动再次执行同一件工作。', workflows:'调度<b>多个助手同时</b>处理一件大事（进阶）。', config:'在一个地方修改<b>语言·主题·模型·权限</b>等设置。', doctor:'出问题时<b>一次性检查安装·连接·设置</b>。', glossary:'<b>用一句话</b>快速查找容易搞混的术语的地方。' };
+  var TLDR={ intro:'聊天给你‘答案’，Claude Code 则在你的项目里<b>亲手做出来、还让它跑起来</b>。', cowork:'不写代码，而是<b>替你做办公事务</b>的 Claude —— 给个目标，就<b>用你的文件做出成品</b>（给非开发者·桌面应用）。', usecases:'按职业<b>展示平时做的事会怎样改变</b>，从之前到之后。', where:'终端·VS Code·桌面·网页 —— <b>哪里都是同一个 Claude Code</b>，设置也共享。', ask:'同样的活，<b>说得越具体</b>越能一次到位 —— 动手写写还能拿分。', mention:'用 <code class="inlinecode">@</code> <b>把那个文件直接点名</b>，更快也更准。', keys:'<b>Esc</b>（叫停）·<b>Esc Esc</b>（回退）等几个键就够用 —— 边按边记。', steer:'走偏了就 <b>用 Esc 打断</b>再纠正 —— 不用等它跑完。', context:'只有放进来的东西 Claude 才记得。装满了就<b>用‘压缩’来整理</b>。', manage:'上下文<b>放着不管就会变慢·变贵·变乱</b> —— 所以要及时整理。', sessions:'<b>一个会话只做一件事</b> —— 混在一起会乱。工作文件夹要窄。', tokens:'Token = AI 读文字的单位。<b>越长越占空间、越费钱</b>，中文更重。', models:'聪明 ↔ 速度 ↔ 成本要取舍。<b>拿不定就用 Sonnet</b> 开始。', claudemd:'<b>我写下的规则备忘</b> —— 每次对话开始自动生效。', memory:'<b>Claude 自己学、自己记</b>的备忘。跨会话延续。', skills:'把常用工作步骤<b>做一次，反复使用</b>。', mcp:'<b>连接外部工具（Jira、Figma 等）</b>，让 Claude 直接使用。', plugins:'把技能·工具·命令等<b>打包一次性安装</b>的包。', agents:'把大事<b>分给专门助手</b>，只接收结果。', images:'<b>贴上截图</b>，Claude 就能看懂 —— 比说话快、还准。', hooks:'某个时刻<b>每次都自动执行固定动作</b>的规则。', planmode:'修改前<b>先展示计划、等批准</b> —— 大改动更安全。', permissions:'决定 Claude <b>要多频繁地问</b>的设置。一开始安全为上。', rewind:'每个请求<b>自动保存</b> —— 不满意就退回之前。', privacy:'<b>工作版（Team·Enterprise·API）默认不用于训练。</b> 个人版可在设置里选。', commands:'以 <code class="inlinecode">/</code> 开头的快捷命令。用得最多的是 <b>/clear · /compact</b>。', plans:'<b>免费版里没有。</b> 用付费版（Pro·Max·Team）或 API（按量计费）。', limits:'<b>用完就得等到重置</b> —— 所以管理很重要。', compact:'长长堆积的对话缩成<b>一格简短摘要</b>。', effort:'回答前<b>要想多深</b> —— 越深越准，但更慢更贵。', goal:'<b>只要给出‘完成条件’，Claude 就会反复做到满足为止</b>。', loop:'<b>每隔固定间隔</b>自动再次执行同一件工作。', workflows:'调度<b>多个助手同时</b>处理一件大事（进阶）。', config:'在一个地方修改<b>语言·主题·模型·权限</b>等设置。', doctor:'出问题时<b>一次性检查安装·连接·设置</b>。', glossary:'<b>用一句话</b>快速查找容易搞混的术语的地方。' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">一句话总结</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -1416,15 +1576,15 @@ description: 按公司格式撰写周报
   [['cc-go',5500],['cw3-go',5500],['uc-go',7000],['sess-play',9500],['lc-all',8200],['md-go',5500],['mem-go',5200],['sk-go',5200],['sa-go',5600],['pl-go',6200],['plan-go',4800],['goal-go',4200],['loop-go',4800],['wf-go',4500],['dr-go',4800],['cx-go',5500,'cx-reset'],['img-go',4800]].forEach(function(p){ autoLoop(p[0],p[1],p[2]); });
 
   /* difficulty mode — 초급/중급/고급 filter */
-  var LV={ intro:1,cowork:1,usecases:1,where:1,context:1,manage:1,sessions:1,models:1,commands:1,glossary:1,
-    tokens:2,compact:2,effort:2,claudemd:2,memory:2,skills:2,images:2,permissions:2,planmode:2,rewind:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
+  var LV={ intro:1,cowork:1,usecases:1,where:1,ask:1,mention:1,keys:1,steer:1,context:1,manage:1,compact:1,sessions:1,models:1,claudemd:1,images:1,permissions:1,rewind:1,commands:1,glossary:1,
+    tokens:2,effort:2,memory:2,skills:2,planmode:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
     mcp:3,plugins:3,agents:3,hooks:3,goal:3,loop:3,workflows:3 };
   (function(){ var chips=document.querySelectorAll('#lvlsel .lvlchip'); if(!chips.length) return; var origNo={}; navs.forEach(function(n){ var no=n.querySelector('.no'); if(no) origNo[n.dataset.page]=no.textContent; });
     function setLevel(lv){ chips.forEach(function(c){ c.classList.toggle('on',+c.dataset.lv===lv); }); var k=0;
-      navs.forEach(function(n){ var show= lv===0 || LV[n.dataset.page]===lv; n.style.display=show?'':'none'; if(show){ var no=n.querySelector('.no'); if(no) no.textContent= lv===0 ? origNo[n.dataset.page] : ('0'+(++k)).slice(-2); } });
+      navs.forEach(function(n){ var show= lv===0 || LV[n.dataset.page]===lv; n.style.display=show?'':'none'; if(show){ var no=n.querySelector('.no'); if(no) no.textContent= ('0'+(++k)).slice(-2); } });
       document.querySelectorAll('.lnb .navsec').forEach(function(s){ var any=false,el=s.nextElementSibling; while(el && !el.classList.contains('navsec')){ if(el.classList.contains('navitem') && el.style.display!=='none'){ any=true; break; } el=el.nextElementSibling; } s.style.display=any?'':'none'; });
       var cur=document.querySelector('.navitem.on'); if(cur && cur.style.display==='none'){ var first=[].filter.call(navs,function(n){return n.style.display!=='none';})[0]; if(first) first.click(); } }
-    chips.forEach(function(c){ c.addEventListener('click',function(){ setLevel(+c.dataset.lv); }); }); })();
+    chips.forEach(function(c){ c.addEventListener('click',function(){ setLevel(+c.dataset.lv); }); }); setLevel(0); })();
 
   /* glossary tooltips — hover (desktop) + tap (mobile/tablet) */
   (function(){ var gls=document.querySelectorAll('.gl'); if(!gls.length) return;
@@ -1857,6 +2017,84 @@ description: 按公司格式撰写周报
       DR.forEach(function(o,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML= o.fail ? '<span class="ck">!</span><span>'+o.t+' — <b>'+o.fail+'</b><span class="drfix">'+o.fix+'</span></span>' : '<span class="ck">'+CK+'</span><span>'+o.t+'</span>'; drList.appendChild(el);
         drT.push(setTimeout(function(){ el.classList.add(o.fail?'warn':'done'); if(i===DR.length-1) st.textContent='检查完成 —— 4 项正常，发现 1 个问题。/doctor 会告诉你哪里有问题 + 怎么修。'; },300+i*600)); }); });
     document.getElementById('dr-reset').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; document.getElementById('dr-status').textContent='点一下“运行诊断”。'; });
+  })();
+
+  /* ask — vague vs specific request + self-score */
+  (function(){
+    var U=document.getElementById('ask-u'),A=document.getElementById('ask-a'),TAG=document.getElementById('ask-tag'),STEPS=document.getElementById('ask-steps'),ST=document.getElementById('ask-status'),T=[];
+    if(!U) return;
+    var DATA={
+      vague:{ tag:'笼统', cls:'no', u:'做个预约功能', a:'嗯…放在哪里呢？日期用什么格式？你说的是哪个页面？',
+        steps:[['?','反问：放哪？格式呢？'],['←','大概猜着做了一版'],['←','‘不是这个’ → 重新解释'],['←','改了再做（第 3 次）']],
+        done:'结果来回了三趟。一笼统，Claude 就会反问。' },
+      clear:{ tag:'具体', cls:'yes', u:'在预约页面加日期·时间输入框，留空就提示，能用就顺手测一下', a:'明白了，这就开始做。',
+        steps:[['✓','理解需求'],['✓','加日期·时间输入框'],['✓','加留空提示'],['✓','运行测试 → 通过']],
+        done:'一次就搞定。说得具体，就不反问。' }
+    };
+    function run(k){ T.forEach(clearTimeout); T=[]; var d=DATA[k]; TAG.textContent=d.tag; TAG.className='badge '+d.cls; U.textContent=d.u; A.textContent=''; STEPS.innerHTML=''; ST.textContent='';
+      T.push(setTimeout(function(){ A.textContent=d.a; },350));
+      d.steps.forEach(function(s,i){ T.push(setTimeout(function(){ var r=document.createElement('div'); r.className='chk'+(s[0]==='✓'?' y':''); r.innerHTML='<span class="cx">'+s[0]+'</span><span>'+s[1]+'</span>'; STEPS.appendChild(r); },820+i*640)); });
+      T.push(setTimeout(function(){ ST.textContent=d.done; },820+4*640)); }
+    document.querySelectorAll('#ask .exrow .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#ask .exrow .chip').forEach(function(x){x.classList.toggle('on',x===c);}); run(c.dataset.k); }); });
+    var INP=document.getElementById('ask-inp'),BOX=document.getElementById('ask-score');
+    function score(){ var t=(INP.value||'').trim(); if(!t){ BOX.className='scorebox'; return; }
+      var checks=[ ['做什么（对象明确）', /屏幕|页面|文件|按钮|输入框|框|列|行|文字|文本|颜色|图片|照片|邮件|文档|列表|菜单|表格|单元格|@/.test(t)],
+        ['怎么做（动作）', /添加|增加|修改|改|修复|做|创建|生成|更改|替换|删除|去掉|显示|展示|排序|连接|插入|放大|缩小|填|涂|应用|设置|隐藏|高亮|加粗|移动|拆分|合并|复制/.test(t)],
+        ['条件 / 完成标准', /如果|当|为空|空|警告|提示|检查|测试|验证|红|绿|数字|超过|低于|以上|以下|比|像|这样/.test(t)],
+        ['别太短（8字+）', t.length>=8] ];
+      var n=checks.filter(function(c){return c[1];}).length;
+      var v = n>=4?'很好！Claude 一次就懂。' : n>=2?'还行。再补一两点就完美了。' : '太笼统了——Claude 会反问。';
+      var h='<div class="schead">'+n+'/4 — '+v+'</div>';
+      checks.forEach(function(c){ h+='<div class="chk '+(c[1]?'y':'n')+'"><span class="cx">'+(c[1]?'✓':'·')+'</span><span>'+c[0]+'</span></div>'; });
+      BOX.innerHTML=h; BOX.className='scorebox on'; }
+    document.getElementById('ask-go').addEventListener('click',score); INP.addEventListener('keydown',function(e){ if(e.key==='Enter')score(); });
+  })();
+
+  /* mention — @ file picker */
+  (function(){
+    var TY=document.getElementById('m-typed'),MENU=document.getElementById('atmenu'),ST=document.getElementById('m-status'); if(!TY) return; var attached=null;
+    var FILES=[['预约页面.html','网页'],['预约列表.xlsx','Excel'],['说明.docx','文档'],['价目表.csv','表格']];
+    function openMenu(){ if(attached) return; TY.innerHTML='<span style="color:var(--accent)">@</span>'; var h=''; FILES.forEach(function(f,i){ h+='<div class="ai" data-i="'+i+'"><span class="afile">@'+f[0]+'</span><span class="akind">'+f[1]+'</span></div>'; }); MENU.innerHTML=h; MENU.className='atmenu on'; ST.textContent='文件列表弹出来了，选一个试试。';
+      MENU.querySelectorAll('.ai').forEach(function(a){ a.addEventListener('click',function(){ pick(+a.dataset.i); }); }); }
+    function pick(i){ var f=FILES[i]; attached=f; TY.innerHTML='<span class="fchip">@'+f[0]+'</span> '; MENU.className='atmenu'; ST.textContent='已附加：@'+f[0]+' —— 现在点“发送”试试。'; }
+    document.getElementById('m-at').addEventListener('click',openMenu);
+    document.getElementById('m-drop').addEventListener('click',function(){ pick(0); ST.textContent='用拖放附加了 @'+FILES[0][0]+' —— 和输入 @ 一样。'; });
+    document.getElementById('m-send').addEventListener('click',function(){ if(!attached){ ST.textContent='先用 @ 附加一个文件吧。'; return; } ST.textContent='Claude 正在打开 @'+attached[0]+'… ✓ 直接找到了那个文件。'; });
+    document.getElementById('m-reset').addEventListener('click',function(){ attached=null; TY.innerHTML=''; MENU.className='atmenu'; ST.textContent='点“输入 @”试试。'; });
+  })();
+
+  /* keys — shortcuts & modes playground */
+  (function(){
+    var KT=document.getElementById('kterm'),ST=document.getElementById('key-status'),MODE=document.getElementById('key-mode'); if(!KT) return; var mi=0;
+    var MODES=[['默认 · 先问再执行',''],['编辑自动接受 · 不问直接改','m1'],['计划模式 · 先展示','m2']];
+    function show(txt,status){ KT.textContent=txt; ST.textContent=status||''; }
+    var ACT={
+      esc:function(){ show('■  停下了。\n\nClaude 停下手里的活在等你。\n现在可以重新指示。','‘方向不对’时第一个要按的键。'); },
+      escesc:function(){ show('←  回退 —— 退到哪个时点？\n\n   ○ 最初\n   ○ 改设计之前\n   ●  现在（这里）','把代码一次性回退到之前的时点。（详见‘回退’标签页）'); },
+      shifttab:function(){ mi=(mi+1)%3; MODE.textContent=MODES[mi][0]; MODE.className='modebadge '+MODES[mi][1]; show('切换模式  →  '+MODES[mi][0],'每按一次 Shift+Tab 模式就变一次。看上面的徽章。'); },
+      up:function(){ show('↑  调出了上一条发过的需求：\n\n   > 改一下预约页面','再发类似的时候不用重新敲。'); },
+      tab:function(){ show('Tab  自动补全：\n\n   @预约页…  →  @预约页面.html','文件名不用敲完，Tab 帮你补全。'); },
+      bang:function(){ show('!  shell（命令）模式\n\n   ! npm test\n   → 不经过 Claude，直接执行命令','只想快速看结果的时候。'); },
+      hash:function(){ show('#  存入记忆\n\n   # 一直用中文回答\n   → 从下次起记住这条规则','省得每次都说的规则，留在这里。（CLAUDE.md）'); }
+    };
+    document.querySelectorAll('#keyrow .keycap').forEach(function(c){ c.addEventListener('click',function(){ c.classList.add('hit'); setTimeout(function(){c.classList.remove('hit');},120); (ACT[c.dataset.k]||function(){})(); }); });
+  })();
+
+  /* steer — interrupt & redirect, compared */
+  (function(){
+    var RUN=document.getElementById('st-run'),BARA=document.getElementById('st-bar-a'),BARB=document.getElementById('st-bar-b'),A=document.getElementById('st-a'),B=document.getElementById('st-b'),ESC=document.getElementById('st-esc'),ST=document.getElementById('st-status'); if(!RUN) return;
+    var T=[],steered=false,wrongT=null;
+    function clearAll(){ T.forEach(clearTimeout); T=[]; if(wrongT){clearTimeout(wrongT);wrongT=null;} }
+    function start(){ clearAll(); steered=false; BARA.style.width='0'; BARB.style.width='0'; BARB.parentNode.classList.remove('bad'); A.innerHTML=''; B.innerHTML=''; ESC.disabled=true; ST.textContent='Claude 正往“改颜色”的方向走…';
+      T.push(setTimeout(function(){ BARA.style.width='35%'; BARB.style.width='35%'; A.innerHTML='正在改颜色…'; B.innerHTML='正在改颜色…'; },200));
+      T.push(setTimeout(function(){ BARA.style.width='70%'; },1400));
+      T.push(setTimeout(function(){ BARA.style.width='100%'; A.innerHTML='做完 —— <b>改了颜色。</b> 可你要的是<b>文字大小</b>啊 → 得从头重新提需求。'; },2600));
+      T.push(setTimeout(function(){ BARB.style.width='40%'; ESC.disabled=false; ST.textContent='就是现在 —— 点右边的‘Esc’改方向！';
+        wrongT=setTimeout(function(){ if(!steered){ BARB.parentNode.classList.add('bad'); BARB.style.width='100%'; B.innerHTML='没打断 —— <b>只改了颜色就结束。</b> 和左边一样白忙一场。'; ESC.disabled=true; ST.textContent='不按 Esc 就和左边一样了。再试一次？'; } },4200);
+      },1400)); }
+    ESC.addEventListener('click',function(){ if(ESC.disabled)return; steered=true; if(wrongT){clearTimeout(wrongT);wrongT=null;} ESC.disabled=true; BARB.parentNode.classList.remove('bad'); B.innerHTML='■ 停下 → 正在纠正“不是颜色，是<b>文字大小</b>”…';
+      setTimeout(function(){ BARB.style.width='100%'; B.innerHTML='■ 停下 → 纠正 → <b>把文字放大了 ✓</b> 一次就对。'; ST.textContent='打断再纠正，一次就搞定了吧？'; },800); });
+    RUN.addEventListener('click',start);
   })();
 
   /* plugins — bundle install demo */

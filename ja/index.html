@@ -200,6 +200,35 @@
   .cwstep.run .ck{ border-color:var(--blue); } .cwstep.run{ color:var(--ink); }
   .cwstep.done .ck{ border-color:var(--good); background:var(--good); } .cwstep.done .ck svg{ opacity:1; } .cwstep.done{ color:var(--ink); }
   .cwstep.warn{ color:var(--ink); align-items:flex-start; } .cwstep.warn .ck{ border-color:var(--over); background:var(--over); color:#fff; font-weight:700; font-size:12px; line-height:1; } .cwstep .drfix{ display:block; color:var(--good); font-weight:600; font-size:12px; margin-top:2px; }
+  /* basic-usage hands-on sims (ask / mention / keys / steer) */
+  .exrow{ display:flex; gap:8px; flex-wrap:wrap; margin:4px 0 14px; }
+  .scorebox{ margin:12px 0 0; border:1px solid var(--line2); border-radius:10px; padding:13px 15px; background:var(--row); display:none; }
+  .scorebox.on{ display:block; }
+  .scorebox .schead{ font-weight:600; font-size:14px; margin-bottom:9px; }
+  .chk{ display:flex; align-items:flex-start; gap:8px; font-size:13px; color:var(--muted); padding:3px 0; }
+  .chk .cx{ flex:0 0 auto; width:17px; height:17px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; border:1.5px solid var(--line2); }
+  .chk.y .cx{ border-color:var(--good); background:var(--good); color:#fff; } .chk.y{ color:var(--ink); }
+  .chk.n .cx{ border-color:var(--over); color:var(--over); }
+  .mline{ font-family:ui-monospace,Menlo,monospace; font-size:13.5px; background:var(--row); border:1px solid var(--line2); border-radius:9px; padding:13px 15px; min-height:48px; cursor:text; line-height:1.8; }
+  .mcaret{ display:inline-block; width:1px; background:var(--accent); animation:cblink 1s steps(1) infinite; }
+  @keyframes cblink{ 50%{opacity:0;} }
+  .fchip{ display:inline-flex; align-items:center; gap:5px; background:rgba(31,158,118,.1); border:1px solid rgba(31,158,118,.32); color:var(--good); border-radius:6px; padding:1px 8px; font-size:12.5px; font-weight:600; }
+  .atmenu{ margin-top:8px; border:1px solid var(--line2); border-radius:9px; overflow:hidden; display:none; }
+  .atmenu.on{ display:block; }
+  .atmenu .ai{ display:flex; align-items:center; gap:9px; padding:10px 13px; font-size:13px; cursor:pointer; border-bottom:1px solid var(--line); }
+  .atmenu .ai:last-child{ border-bottom:none; } .atmenu .ai:hover{ background:var(--row); }
+  .atmenu .afile{ font-family:ui-monospace,Menlo,monospace; color:var(--ink); } .atmenu .akind{ margin-left:auto; font-size:11px; color:var(--faint); }
+  .keys{ display:flex; flex-wrap:wrap; gap:8px; margin:4px 0 12px; }
+  .keycap{ font-family:inherit; font-size:13px; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--line2); border-bottom-width:2.5px; border-radius:8px; padding:8px 13px; cursor:pointer; transition:transform .1s,border-color .2s,opacity .2s; }
+  .keycap:hover{ border-color:var(--accent); } .keycap:active,.keycap.hit{ transform:translateY(1.5px); border-bottom-width:1px; }
+  .keycap:disabled{ opacity:.4; cursor:default; }
+  .kterm{ font-family:ui-monospace,Menlo,monospace; font-size:13px; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:15px 16px; min-height:118px; white-space:pre-wrap; line-height:1.75; color:var(--ink); }
+  .modebadge{ display:inline-block; font-size:12px; font-weight:600; border-radius:6px; padding:2px 10px; border:1px solid var(--line2); color:var(--muted); }
+  .modebadge.m1{ border-color:rgba(31,158,118,.4); color:var(--good); background:rgba(31,158,118,.08); }
+  .modebadge.m2{ border-color:rgba(214,158,46,.55); color:#b9821a; background:rgba(214,158,46,.1); }
+  .runbar{ height:8px; border-radius:6px; background:var(--line); overflow:hidden; margin:8px 0; }
+  .runbar > i{ display:block; height:100%; width:0; background:var(--accent); transition:width .25s linear; }
+  .runbar.bad > i{ background:var(--over); }
   .cwapprove{ margin-top:11px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .cwmode{ font-size:11.5px; color:var(--faint); }
   .cwvm{ border:1px dashed var(--line2); border-radius:11px; padding:11px 14px 7px; background:var(--panel); position:relative; }
@@ -412,6 +441,11 @@
     <button class="navitem" data-page="cowork"><span class="no">02</span>Cowork とは？</button>
     <button class="navitem" data-page="usecases"><span class="no">03</span>こう使う</button>
     <button class="navitem" data-page="where"><span class="no">04</span>どこで使う</button>
+    <div class="navsec">基本の使い方（やってみる）</div>
+    <button class="navitem" data-page="ask"><span class="no">05</span>頼み方のコツ</button>
+    <button class="navitem" data-page="mention"><span class="no">06</span>ファイル指定 @</button>
+    <button class="navitem" data-page="keys"><span class="no">07</span>ショートカット & モード</button>
+    <button class="navitem" data-page="steer"><span class="no">08</span>止めて方向転換</button>
     <div class="navsec">基本の概念</div>
     <button class="navitem" data-page="context"><span class="no">05</span>コンテキストウィンドウ</button>
     <button class="navitem" data-page="manage"><span class="no">06</span>コンテキスト管理（なぜ？）</button>
@@ -573,6 +607,132 @@ irm https://claude.ai/install.ps1 | iex</div>
         <li><b>最初の一歩</b><span>プロジェクトフォルダで <code>claude</code> → ログイン → 「このプロジェクトは何をするもの?」のように、まずは話しかけてみる。</span></li>
       </ul>
       <p class="note">正確なインストール方法・必要条件はバージョンによって変わるので、<code>code.claude.com/docs</code> で最新の案内を確認してください。</p>
+    </section>
+
+    <!-- ASK: writing good requests -->
+    <section class="page" id="ask">
+      <h1>頼み方のコツ</h1>
+      <p class="lead">Claude Code は<b>言葉で指示する道具</b>です。同じ作業でも、<b>どう頼むか</b>で一度で終わることも、三度も迷うこともあります。</p>
+      <p class="defs">二つの頼み方を押して結果を比べ、最後は<b>自分でリクエストを書いて</b>点数をもらってみてください。（実際の Claude なしで動きだけ体験）</p>
+      <div class="grp">
+        <h3>同じ作業、違う頼み方 — 結果を比べます</h3>
+        <div class="exrow">
+          <button class="chip" data-k="vague">ざっくり：「予約機能つくって」</button>
+          <button class="chip" data-k="clear">具体的に：「予約画面に日付・時間欄を追加、空欄なら警告、できたらテストも」</button>
+        </div>
+        <div class="chatdemo">
+          <div class="chatcol"><h4>頼み <span class="badge no" id="ask-tag">—</span></h4>
+            <div class="bubble u" id="ask-u">上のボタンを押してみてください。</div>
+            <div class="bubble a" id="ask-a"></div>
+          </div>
+          <div class="chatcol"><h4>Claude がすること</h4>
+            <div id="ask-steps"></div>
+          </div>
+        </div>
+        <p class="status" id="ask-status">ボタンを押すと、Claude がどう反応するか見せます。</p>
+        <p class="simtake"><span class="stk">結論</span><span><b>何を・どう・できたら何で確認するか</b>まで書けば — Claude は聞き返さず<b>一度で</b>終えます。</span></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>やってみる — 私のリクエストは何点?</h3>
+        <p class="label">リクエストを入力する <span class="hint">実際に打ってみて</span></p>
+        <div class="field"><input id="ask-inp" type="text" placeholder="例: 会員登録画面にパスワード確認欄を追加して、合わなければ赤く表示して" maxlength="120"><button class="send" id="ask-go">点数を見る</button></div>
+        <div class="scorebox" id="ask-score"></div>
+        <p class="note">良いリクエストの4つ：① <b>何</b>を(対象) ② <b>どう</b>(したい動作) ③ <b>どこ</b>で(画面・ファイル) ④ <b>完了の基準</b>(どう確認)。出典：code.claude.com/docs (Best practices)。</p>
+      </div>
+    </section>
+
+    <!-- MENTION: @ file reference -->
+    <section class="page" id="mention">
+      <h1>ファイル指定 <span style="color:var(--accent);">@</span></h1>
+      <p class="lead">直したいファイルが決まっているなら — <b><code>@</code> のあとにファイル名</b>でピンポイントに指定できます。Claude はそのファイルを先に開きます。</p>
+      <p class="defs">下で <code>@</code> を押してファイル一覧を出し、一つ選んでみてください。（実際はドラッグ&amp;ドロップでも添付できます）</p>
+      <div class="grp">
+        <h3>やってみる — @ でファイルを添付</h3>
+        <div class="mline" id="mline"><span>予約画面を直して </span><span id="m-typed"></span><span class="mcaret">&nbsp;&nbsp;</span></div>
+        <div class="atmenu" id="atmenu"></div>
+        <div class="keys" style="margin-top:10px;">
+          <button class="keycap" id="m-at">@ 入力</button>
+          <button class="keycap" id="m-drop">ファイルをドラッグ&amp;ドロップ</button>
+          <button class="keycap" id="m-send">送信</button>
+          <button class="keycap" id="m-reset">最初に戻す</button>
+        </div>
+        <p class="status" id="m-status">「@ 入力」を押してみてください。</p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>必ず @ で指定しないとダメ?</h3>
+        <div class="chatdemo">
+          <div class="chatcol"><h4>指定しないとき <span class="badge no">自分で探す</span></h4>
+            <div class="bubble u">予約画面を直して</div>
+            <div class="bubble a">関連ファイルを<b>自分で探し回って</b>見つけます。たいていうまく見つけますが、似たファイルが多いと<b>見当違いのもの</b>を開くこともあります。</div>
+          </div>
+          <div class="chatcol"><h4>@ で指定するとき <span class="badge yes">正確・速い</span></h4>
+            <div class="bubble u">予約画面を直して <span class="fchip">@予約画面.html</span></div>
+            <div class="bubble a"><b>まさにそのファイル</b>を開いて作業します。探す時間がなく、迷いません。</div>
+          </div>
+        </div>
+        <p class="simtake"><span class="stk">結論</span><span>指定しなくても<b>Claude が自分で探します</b>。でも<b>まさにそのファイル</b>が分かっているなら <code>@</code> で指定するほうが<b>速く正確</b>です。</span></p>
+      </div>
+    </section>
+
+    <!-- KEYS: shortcuts & modes -->
+    <section class="page" id="keys">
+      <h1>ショートカット &amp; モード</h1>
+      <p class="lead">Claude Code は<b>キーいくつか</b>で止めたり、巻き戻したり、モードを変えたりします。マウスで押して覚えましょう。</p>
+      <p class="defs">下のキーを押すと — 画面で<b>何が起こるか</b>そのまま見せます。（実際の Claude なしで動きだけ）</p>
+      <div class="grp">
+        <h3>キーを押してみてください</h3>
+        <div class="keys" id="keyrow">
+          <button class="keycap" data-k="esc">Esc</button>
+          <button class="keycap" data-k="escesc">Esc Esc</button>
+          <button class="keycap" data-k="shifttab">Shift + Tab</button>
+          <button class="keycap" data-k="up">↑</button>
+          <button class="keycap" data-k="tab">Tab</button>
+          <button class="keycap" data-k="bang">!</button>
+          <button class="keycap" data-k="hash">#</button>
+        </div>
+        <p style="margin:2px 0 12px; font-size:13.5px; color:var(--muted);">いまのモード: <span class="modebadge" id="key-mode">基本 · 確認してから実行</span></p>
+        <div class="kterm" id="kterm">上のキーを押すと、ここに動作が表示されます。</div>
+        <p class="status" id="key-status"></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>ひと目で見る</h3>
+        <table>
+          <thead><tr><th>キー</th><th>すること</th><th>いつ使う</th></tr></thead>
+          <tbody>
+            <tr><td><b>Esc</b></td><td>やっていることを止める</td><td>方向が違うときすぐ切る</td></tr>
+            <tr><td><b>Esc Esc</b></td><td>前の時点へ巻き戻す</td><td>「それの前に戻して」</td></tr>
+            <tr><td><b>Shift+Tab</b></td><td>モードを変える</td><td>基本 → 自動承認 → 計画</td></tr>
+            <tr><td><b>↑</b></td><td>前に送った言葉を呼び出す</td><td>似たリクエストをまた送るとき</td></tr>
+            <tr><td><b>Tab</b></td><td>ファイル名を自動補完</td><td>長い名前を全部打たなくていい</td></tr>
+            <tr><td><b>!</b></td><td>シェルコマンドをすぐ実行</td><td><code>!npm test</code> のように</td></tr>
+            <tr><td><b>#</b></td><td>記憶にメモを保存</td><td>「いつも日本語で答えて」のようなルール</td></tr>
+          </tbody>
+        </table>
+        <p class="simtake"><span class="stk">結論</span><span>いちばん大事な二つだけ覚えましょう — <b>Esc</b>(止める)と <b>Esc Esc</b>(巻き戻し)。これが初心者の<b>シートベルト</b>です。</span></p>
+      </div>
+    </section>
+
+    <!-- STEER: interrupt & redirect -->
+    <section class="page" id="steer">
+      <h1>止めて方向転換</h1>
+      <p class="lead">Claude が<b>見当違いの方向</b>へ行くとき — 最後まで待つ必要はありません。<b>Esc で切って</b>直せばいいのです。ハンドルは自分に。</p>
+      <p class="defs">Claude に「ログイン画面の<b>文字を大きくして</b>」と頼みます。ところが Claude が<b>色を変え</b>はじめたら? 二つの対応を比べます。</p>
+      <div class="grp">
+        <div class="exrow"><button class="btn solid" id="st-run">▶ Claude に頼む</button></div>
+        <div class="chatdemo">
+          <div class="chatcol"><h4>そのままにする <span class="badge no">二倍の手間</span></h4>
+            <div class="runbar bad"><i id="st-bar-a"></i></div>
+            <div id="st-a" style="font-size:13px; color:var(--muted);"></div>
+          </div>
+          <div class="chatcol"><h4>Esc で直す <span class="badge yes">一度で</span></h4>
+            <div class="runbar"><i id="st-bar-b"></i></div>
+            <div id="st-b" style="font-size:13px; color:var(--muted);"></div>
+            <div class="keys" style="margin-top:8px;"><button class="keycap" id="st-esc" disabled>Esc · いま止める</button></div>
+          </div>
+        </div>
+        <p class="status" id="st-status">「頼む」を押すと、両方で同じように始まります。</p>
+        <p class="simtake"><span class="stk">結論</span><span>間違った方向を<b>最後まで待ってからやり直す</b>と二倍の手間 — <b>Esc で即切って</b>直せば一度で合います。迷ったら <code>/clear</code> で新しく始めるのも手。</span></p>
+      </div>
     </section>
 
     <!-- 03 CONTEXT -->
@@ -1389,7 +1549,7 @@ description: 週次レポートを会社の様式で作成
   (function(){ var s=null; try{ s=localStorage.getItem('cc_present'); }catch(e){} if(s==='1') setPresent(true); })();
 
   /* LNB icons (monoline) */
-  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', manage:'<path d="M4 20h16"/><rect x="5" y="13" width="3" height="6.5" rx="1"/><rect x="10.5" y="9" width="3" height="10.5" rx="1"/><rect x="16" y="5" width="3" height="14.5" rx="1"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', ask:'<path d="M4 5.5h16v10H10l-4 3.5V15.5H4z"/><path d="M8.5 9h7M8.5 12h4"/>', mention:'<circle cx="12" cy="12" r="3.4"/><path d="M15.4 12v1.6a2.6 2.6 0 0 0 5.1 0V12a8.5 8.5 0 1 0-3.3 6.7"/>', keys:'<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><path d="M6 10h.01M9 10h.01M12 10h.01M15 10h.01M18 10h.01M8 13.5h8"/>', steer:'<path d="M4 7v4.5a4 4 0 0 0 4 4h8"/><path d="M13 12.5l3.5 3-3.5 3"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', manage:'<path d="M4 20h16"/><rect x="5" y="13" width="3" height="6.5" rx="1"/><rect x="10.5" y="9" width="3" height="10.5" rx="1"/><rect x="16" y="5" width="3" height="14.5" rx="1"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
   function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
 
   /* router */
@@ -1397,7 +1557,7 @@ description: 週次レポートを会社の様式で作成
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'チャットは「答え」をくれて、Claude Code は自分のプロジェクトで<b>直接作って動くところまで</b>やってくれます。', cowork:'コードではなく<b>オフィス業務を代わりに</b>こなす Claude — 目標を伝えるだけで<b>自分のファイルで成果物まで</b>作ります（非エンジニア・デスクトップアプリ）。', usecases:'職業ごとに<b>いつもの仕事がどう変わるか</b>をビフォー→アフターで見せます。', where:'ターミナル・VS Code・デスクトップ・Web — <b>どこでも同じ Claude Code</b>、設定も共有されます。', context:'ここに乗ったものだけを Claude が覚えています。満杯になったら<b>「圧縮」で整理</b>します。', manage:'コンテキストを<b>放置すると遅く・高く・混乱します</b> — だからこまめに片づけます。', sessions:'<b>一つのセッションに一つの仕事</b> — 混ぜると混乱します。作業フォルダは狭く。', tokens:'トークン = AI が文章を読む単位。<b>長いほど空間・コストが増え</b>、日本語のほうが重い。', models:'賢さ ↔ 速さ ↔ コストはトレードオフ。<b>迷ったら Sonnet</b> で始めましょう。', claudemd:'<b>自分で書いておくルールのメモ</b> — 毎回の会話の始めに自動で適用されます。', memory:'<b>Claude が自分で学んで覚える</b>メモ。セッションをまたいで引き継がれます。', skills:'よく使う作業の手順を<b>一度作ってずっと再利用</b>します。', mcp:'<b>外部ツール(Jira・Figma など)につないで</b> Claude が直接使えるようにします。', plugins:'スキル・ツール・コマンドなどを<b>まとめて一度にインストール</b>する一式です。', agents:'大きな仕事を<b>専門のお手伝いに分けて任せ</b>、結果だけ受け取ります。', images:'<b>スクリーンショットを貼れば</b> Claude が見て理解します — 言葉より速く正確。', hooks:'特定の瞬間に<b>決まった動作が毎回自動</b>で実行されるルールです。', planmode:'直す前に<b>計画を先に見せて承認</b>を受けます — 大きな変更に安全。', permissions:'Claude が<b>どのくらい頻繁に聞くか</b>を決める設定。最初は安全に。', rewind:'リクエストごとに<b>自動保存</b> — 気に入らなければ以前へ巻き戻します。', privacy:'<b>業務用(Team·Enterprise·API)は基本的に学習に使われません。</b> 個人用は設定で選択。', commands:'<code class="inlinecode">/</code> で始まるショートカットコマンド。いちばんよく使うのは <b>/clear · /compact</b>。', plans:'<b>無料プランにはありません。</b> 有料(Pro·Max·Team)または API(従量制)で使用。', limits:'<b>使い切るとリセットまで待つ</b>必要があります — だから管理が大切です。', compact:'長く積み上がった会話が<b>短い要約 1 マス</b>に縮みます。', effort:'答える前に<b>どれだけ深く考えるか</b> — 深いほど正確ですが、遅く高くつきます。', goal:'<b>「完了条件」だけ与えれば、できるまで</b> Claude が自分で繰り返します。', loop:'<b>決めた間隔ごとに</b>同じ作業を自動でもう一度実行します。', workflows:'大きな仕事を<b>複数のお手伝いが同時に</b>処理するよう調整します（上級）。', config:'<b>言語・テーマ・モデル・権限</b>のような設定を一か所で変えます。', doctor:'うまくいかないとき<b>インストール・連携・設定を一度に点検</b>してくれます。', glossary:'迷う用語を<b>一行で</b>素早く探す場所です。' };
+  var TLDR={ intro:'チャットは「答え」をくれて、Claude Code は自分のプロジェクトで<b>直接作って動くところまで</b>やってくれます。', cowork:'コードではなく<b>オフィス業務を代わりに</b>こなす Claude — 目標を伝えるだけで<b>自分のファイルで成果物まで</b>作ります（非エンジニア・デスクトップアプリ）。', usecases:'職業ごとに<b>いつもの仕事がどう変わるか</b>をビフォー→アフターで見せます。', where:'ターミナル・VS Code・デスクトップ・Web — <b>どこでも同じ Claude Code</b>、設定も共有されます。', ask:'同じ作業でも<b>具体的に頼めば</b>一度で — 自分で書いて点数ももらえます。', mention:'<code class="inlinecode">@</code> で<b>まさにそのファイル</b>をピンポイント指定すると速く正確。', keys:'<b>Esc</b>(止める)・<b>Esc Esc</b>(巻き戻し)など、キーいくつかで全部できます — 押して覚えましょう。', steer:'間違ったら<b>Esc で切って</b>直す — 最後まで待ちません。', context:'ここに乗ったものだけを Claude が覚えています。満杯になったら<b>「圧縮」で整理</b>します。', manage:'コンテキストを<b>放置すると遅く・高く・混乱します</b> — だからこまめに片づけます。', sessions:'<b>一つのセッションに一つの仕事</b> — 混ぜると混乱します。作業フォルダは狭く。', tokens:'トークン = AI が文章を読む単位。<b>長いほど空間・コストが増え</b>、日本語のほうが重い。', models:'賢さ ↔ 速さ ↔ コストはトレードオフ。<b>迷ったら Sonnet</b> で始めましょう。', claudemd:'<b>自分で書いておくルールのメモ</b> — 毎回の会話の始めに自動で適用されます。', memory:'<b>Claude が自分で学んで覚える</b>メモ。セッションをまたいで引き継がれます。', skills:'よく使う作業の手順を<b>一度作ってずっと再利用</b>します。', mcp:'<b>外部ツール(Jira・Figma など)につないで</b> Claude が直接使えるようにします。', plugins:'スキル・ツール・コマンドなどを<b>まとめて一度にインストール</b>する一式です。', agents:'大きな仕事を<b>専門のお手伝いに分けて任せ</b>、結果だけ受け取ります。', images:'<b>スクリーンショットを貼れば</b> Claude が見て理解します — 言葉より速く正確。', hooks:'特定の瞬間に<b>決まった動作が毎回自動</b>で実行されるルールです。', planmode:'直す前に<b>計画を先に見せて承認</b>を受けます — 大きな変更に安全。', permissions:'Claude が<b>どのくらい頻繁に聞くか</b>を決める設定。最初は安全に。', rewind:'リクエストごとに<b>自動保存</b> — 気に入らなければ以前へ巻き戻します。', privacy:'<b>業務用(Team·Enterprise·API)は基本的に学習に使われません。</b> 個人用は設定で選択。', commands:'<code class="inlinecode">/</code> で始まるショートカットコマンド。いちばんよく使うのは <b>/clear · /compact</b>。', plans:'<b>無料プランにはありません。</b> 有料(Pro·Max·Team)または API(従量制)で使用。', limits:'<b>使い切るとリセットまで待つ</b>必要があります — だから管理が大切です。', compact:'長く積み上がった会話が<b>短い要約 1 マス</b>に縮みます。', effort:'答える前に<b>どれだけ深く考えるか</b> — 深いほど正確ですが、遅く高くつきます。', goal:'<b>「完了条件」だけ与えれば、できるまで</b> Claude が自分で繰り返します。', loop:'<b>決めた間隔ごとに</b>同じ作業を自動でもう一度実行します。', workflows:'大きな仕事を<b>複数のお手伝いが同時に</b>処理するよう調整します（上級）。', config:'<b>言語・テーマ・モデル・権限</b>のような設定を一か所で変えます。', doctor:'うまくいかないとき<b>インストール・連携・設定を一度に点検</b>してくれます。', glossary:'迷う用語を<b>一行で</b>素早く探す場所です。' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">一行まとめ</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -1416,15 +1576,15 @@ description: 週次レポートを会社の様式で作成
   [['cc-go',5500],['cw3-go',5500],['uc-go',7000],['sess-play',9500],['lc-all',8200],['md-go',5500],['mem-go',5200],['sk-go',5200],['sa-go',5600],['pl-go',6200],['plan-go',4800],['goal-go',4200],['loop-go',4800],['wf-go',4500],['dr-go',4800],['cx-go',5500,'cx-reset'],['img-go',4800]].forEach(function(p){ autoLoop(p[0],p[1],p[2]); });
 
   /* difficulty mode — 초급/중급/고급 filter */
-  var LV={ intro:1,cowork:1,usecases:1,where:1,context:1,manage:1,sessions:1,models:1,commands:1,glossary:1,
-    tokens:2,compact:2,effort:2,claudemd:2,memory:2,skills:2,images:2,permissions:2,planmode:2,rewind:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
+  var LV={ intro:1,cowork:1,usecases:1,where:1,ask:1,mention:1,keys:1,steer:1,context:1,manage:1,compact:1,sessions:1,models:1,claudemd:1,images:1,permissions:1,rewind:1,commands:1,glossary:1,
+    tokens:2,effort:2,memory:2,skills:2,planmode:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
     mcp:3,plugins:3,agents:3,hooks:3,goal:3,loop:3,workflows:3 };
   (function(){ var chips=document.querySelectorAll('#lvlsel .lvlchip'); if(!chips.length) return; var origNo={}; navs.forEach(function(n){ var no=n.querySelector('.no'); if(no) origNo[n.dataset.page]=no.textContent; });
     function setLevel(lv){ chips.forEach(function(c){ c.classList.toggle('on',+c.dataset.lv===lv); }); var k=0;
-      navs.forEach(function(n){ var show= lv===0 || LV[n.dataset.page]===lv; n.style.display=show?'':'none'; if(show){ var no=n.querySelector('.no'); if(no) no.textContent= lv===0 ? origNo[n.dataset.page] : ('0'+(++k)).slice(-2); } });
+      navs.forEach(function(n){ var show= lv===0 || LV[n.dataset.page]===lv; n.style.display=show?'':'none'; if(show){ var no=n.querySelector('.no'); if(no) no.textContent= ('0'+(++k)).slice(-2); } });
       document.querySelectorAll('.lnb .navsec').forEach(function(s){ var any=false,el=s.nextElementSibling; while(el && !el.classList.contains('navsec')){ if(el.classList.contains('navitem') && el.style.display!=='none'){ any=true; break; } el=el.nextElementSibling; } s.style.display=any?'':'none'; });
       var cur=document.querySelector('.navitem.on'); if(cur && cur.style.display==='none'){ var first=[].filter.call(navs,function(n){return n.style.display!=='none';})[0]; if(first) first.click(); } }
-    chips.forEach(function(c){ c.addEventListener('click',function(){ setLevel(+c.dataset.lv); }); }); })();
+    chips.forEach(function(c){ c.addEventListener('click',function(){ setLevel(+c.dataset.lv); }); }); setLevel(0); })();
 
   /* glossary tooltips — hover (desktop) + tap (mobile/tablet) */
   (function(){ var gls=document.querySelectorAll('.gl'); if(!gls.length) return;
@@ -1857,6 +2017,84 @@ description: 週次レポートを会社の様式で作成
       DR.forEach(function(o,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML= o.fail ? '<span class="ck">!</span><span>'+o.t+' — <b>'+o.fail+'</b><span class="drfix">'+o.fix+'</span></span>' : '<span class="ck">'+CK+'</span><span>'+o.t+'</span>'; drList.appendChild(el);
         drT.push(setTimeout(function(){ el.classList.add(o.fail?'warn':'done'); if(i===DR.length-1) st.textContent='点検完了 — 4件OK、1件 問題を発見。/doctor はどこが問題か + 直し方まで教えてくれます。'; },300+i*600)); }); });
     document.getElementById('dr-reset').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; document.getElementById('dr-status').textContent='「診断を実行」を押してみてください。'; });
+  })();
+
+  /* ask — vague vs specific request + self-score */
+  (function(){
+    var U=document.getElementById('ask-u'),A=document.getElementById('ask-a'),TAG=document.getElementById('ask-tag'),STEPS=document.getElementById('ask-steps'),ST=document.getElementById('ask-status'),T=[];
+    if(!U) return;
+    var DATA={
+      vague:{ tag:'ざっくり', cls:'no', u:'予約機能つくって', a:'うーん… どこに入れますか? 日付はどんな形式ですか? どの画面のことですか?',
+        steps:[['?','聞き返す: どこに入れる? 形式は?'],['←','適当に推測して作る'],['←','「これじゃない」 → もう一度説明'],['←','直してまた作る (3回目)']],
+        done:'結局3回もやり取り。ざっくりだと Claude が聞き返します。' },
+      clear:{ tag:'具体的', cls:'yes', u:'予約画面に日付・時間欄を追加、空欄なら警告、できたらテストも', a:'わかりました。すぐ作ります。',
+        steps:[['✓','要件を理解'],['✓','日付・時間欄を追加'],['✓','空欄の警告を追加'],['✓','テスト実行 → 合格']],
+        done:'一度で終わりました。具体的だと聞き返しません。' }
+    };
+    function run(k){ T.forEach(clearTimeout); T=[]; var d=DATA[k]; TAG.textContent=d.tag; TAG.className='badge '+d.cls; U.textContent=d.u; A.textContent=''; STEPS.innerHTML=''; ST.textContent='';
+      T.push(setTimeout(function(){ A.textContent=d.a; },350));
+      d.steps.forEach(function(s,i){ T.push(setTimeout(function(){ var r=document.createElement('div'); r.className='chk'+(s[0]==='✓'?' y':''); r.innerHTML='<span class="cx">'+s[0]+'</span><span>'+s[1]+'</span>'; STEPS.appendChild(r); },820+i*640)); });
+      T.push(setTimeout(function(){ ST.textContent=d.done; },820+4*640)); }
+    document.querySelectorAll('#ask .exrow .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#ask .exrow .chip').forEach(function(x){x.classList.toggle('on',x===c);}); run(c.dataset.k); }); });
+    var INP=document.getElementById('ask-inp'),BOX=document.getElementById('ask-score');
+    function score(){ var t=(INP.value||'').trim(); if(!t){ BOX.className='scorebox'; return; }
+      var checks=[ ['何を（対象が明確）', /画面|ページ|ファイル|ボタン|入力欄|欄|列|行|文字|テキスト|色|画像|写真|メール|文書|ドキュメント|リスト|メニュー|表|セル|@/.test(t)],
+        ['どう（動作）', /追加|修正|直|作|作成|変更|置き換|削除|消|表示|見せ|並べ|並び替え|つなぐ|接続|挿入|大きく|小さく|塗|埋め|適用|設定|隠|強調|太字|移動|分割|まとめ|コピー/.test(t)],
+        ['条件・完了の基準', /なら|たら|とき|空|警告|アラート|確認|テスト|チェック|赤|緑|数字|以上|以下|より|みたい|よう/.test(t)],
+        ['短すぎない（10字+）', t.length>=10] ];
+      var n=checks.filter(function(c){return c[1];}).length;
+      var v = n>=4?'とても良いです！Claude が一度で理解します。' : n>=2?'まずまず。あと1〜2点足せば完璧です。' : '曖昧すぎます — Claude が聞き返します。';
+      var h='<div class="schead">'+n+'/4 — '+v+'</div>';
+      checks.forEach(function(c){ h+='<div class="chk '+(c[1]?'y':'n')+'"><span class="cx">'+(c[1]?'✓':'·')+'</span><span>'+c[0]+'</span></div>'; });
+      BOX.innerHTML=h; BOX.className='scorebox on'; }
+    document.getElementById('ask-go').addEventListener('click',score); INP.addEventListener('keydown',function(e){ if(e.key==='Enter')score(); });
+  })();
+
+  /* mention — @ file picker */
+  (function(){
+    var TY=document.getElementById('m-typed'),MENU=document.getElementById('atmenu'),ST=document.getElementById('m-status'); if(!TY) return; var attached=null;
+    var FILES=[['予約画面.html','Webページ'],['予約リスト.xlsx','エクセル'],['案内文.docx','文書'],['価格表.csv','表']];
+    function openMenu(){ if(attached) return; TY.innerHTML='<span style="color:var(--accent)">@</span>'; var h=''; FILES.forEach(function(f,i){ h+='<div class="ai" data-i="'+i+'"><span class="afile">@'+f[0]+'</span><span class="akind">'+f[1]+'</span></div>'; }); MENU.innerHTML=h; MENU.className='atmenu on'; ST.textContent='ファイル一覧が出ました。一つ選んでみてください。';
+      MENU.querySelectorAll('.ai').forEach(function(a){ a.addEventListener('click',function(){ pick(+a.dataset.i); }); }); }
+    function pick(i){ var f=FILES[i]; attached=f; TY.innerHTML='<span class="fchip">@'+f[0]+'</span> '; MENU.className='atmenu'; ST.textContent='添付しました: @'+f[0]+' — では「送信」を押してみてください。'; }
+    document.getElementById('m-at').addEventListener('click',openMenu);
+    document.getElementById('m-drop').addEventListener('click',function(){ pick(0); ST.textContent='ドラッグ&ドロップで @'+FILES[0][0]+' を添付しました — @ 入力と同じです。'; });
+    document.getElementById('m-send').addEventListener('click',function(){ if(!attached){ ST.textContent='先に @ でファイルを添付してください。'; return; } ST.textContent='Claude が @'+attached[0]+' を開いています… ✓ まさにそのファイルを見つけました。'; });
+    document.getElementById('m-reset').addEventListener('click',function(){ attached=null; TY.innerHTML=''; MENU.className='atmenu'; ST.textContent='「@ 入力」を押してみてください。'; });
+  })();
+
+  /* keys — shortcuts & modes playground */
+  (function(){
+    var KT=document.getElementById('kterm'),ST=document.getElementById('key-status'),MODE=document.getElementById('key-mode'); if(!KT) return; var mi=0;
+    var MODES=[['基本 · 確認してから実行',''],['編集 自動承認 · 確認せず直す','m1'],['計画モード · 先に見せる','m2']];
+    function show(txt,status){ KT.textContent=txt; ST.textContent=status||''; }
+    var ACT={
+      esc:function(){ show('■  止めました。\n\nClaude がやっていたことを止めて待ちます。\nもう一度指示できます。','「方向が違う」と思ったら最初に押すキー。'); },
+      escesc:function(){ show('←  巻き戻し — どの時点へ?\n\n   ○ 最初\n   ○ デザインを変える前\n   ●  いま (ここ)','前の時点へコードを一度に巻き戻します。(「巻き戻し」タブで詳しく)'); },
+      shifttab:function(){ mi=(mi+1)%3; MODE.textContent=MODES[mi][0]; MODE.className='modebadge '+MODES[mi][1]; show('モード切替  →  '+MODES[mi][0],'Shift+Tab を押すたびにモードが変わります。上のバッジを見てください。'); },
+      up:function(){ show('↑  前に送ったリクエストを呼び出しました:\n\n   > 予約画面を直して','似たものをまた送るとき、打ち直さなくていい。'); },
+      tab:function(){ show('Tab  自動補完:\n\n   @予約が…  →  @予約画面.html','ファイル名を全部打たなくても Tab が補完してくれます。'); },
+      bang:function(){ show('!  シェル(コマンド)モード\n\n   ! npm test\n   → Claude を通さずコマンドを直接実行','結果だけ早く見たいとき。'); },
+      hash:function(){ show('#  記憶に保存\n\n   # いつも日本語で答えて\n   → 次からこのルールを覚えます','毎回言わなくていいルールを残せます。(CLAUDE.md)'); }
+    };
+    document.querySelectorAll('#keyrow .keycap').forEach(function(c){ c.addEventListener('click',function(){ c.classList.add('hit'); setTimeout(function(){c.classList.remove('hit');},120); (ACT[c.dataset.k]||function(){})(); }); });
+  })();
+
+  /* steer — interrupt & redirect, compared */
+  (function(){
+    var RUN=document.getElementById('st-run'),BARA=document.getElementById('st-bar-a'),BARB=document.getElementById('st-bar-b'),A=document.getElementById('st-a'),B=document.getElementById('st-b'),ESC=document.getElementById('st-esc'),ST=document.getElementById('st-status'); if(!RUN) return;
+    var T=[],steered=false,wrongT=null;
+    function clearAll(){ T.forEach(clearTimeout); T=[]; if(wrongT){clearTimeout(wrongT);wrongT=null;} }
+    function start(){ clearAll(); steered=false; BARA.style.width='0'; BARB.style.width='0'; BARB.parentNode.classList.remove('bad'); A.innerHTML=''; B.innerHTML=''; ESC.disabled=true; ST.textContent='Claude が「色を変える」方へ進んでいます…';
+      T.push(setTimeout(function(){ BARA.style.width='35%'; BARB.style.width='35%'; A.innerHTML='色を変えています…'; B.innerHTML='色を変えています…'; },200));
+      T.push(setTimeout(function(){ BARA.style.width='70%'; },1400));
+      T.push(setTimeout(function(){ BARA.style.width='100%'; A.innerHTML='完成 — <b>色を変えました。</b> でも欲しかったのは <b>文字の大きさ</b>でしたよね → 最初からやり直す必要があります。'; },2600));
+      T.push(setTimeout(function(){ BARB.style.width='40%'; ESC.disabled=false; ST.textContent='いまです — 右の「Esc」を押して方向を変えて!';
+        wrongT=setTimeout(function(){ if(!steered){ BARB.parentNode.classList.add('bad'); BARB.style.width='100%'; B.innerHTML='切らなかったら — <b>色だけ変えて終わり。</b> 左と同じく無駄になりました。'; ESC.disabled=true; ST.textContent='Esc を押さないと左と同じになります。もう一度やってみますか?'; } },4200);
+      },1400)); }
+    ESC.addEventListener('click',function(){ if(ESC.disabled)return; steered=true; if(wrongT){clearTimeout(wrongT);wrongT=null;} ESC.disabled=true; BARB.parentNode.classList.remove('bad'); B.innerHTML='■ 停止 → 「色じゃなくて <b>文字の大きさ</b>だよ」と直しています…';
+      setTimeout(function(){ BARB.style.width='100%'; B.innerHTML='■ 停止 → 訂正 → <b>文字を大きくしました ✓</b> 一度で合いました。'; ST.textContent='切って直したら一度で終わりましたね?'; },800); });
+    RUN.addEventListener('click',start);
   })();
 
   /* plugins — bundle install demo */

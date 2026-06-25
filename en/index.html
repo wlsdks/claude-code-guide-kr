@@ -200,6 +200,35 @@
   .cwstep.run .ck{ border-color:var(--blue); } .cwstep.run{ color:var(--ink); }
   .cwstep.done .ck{ border-color:var(--good); background:var(--good); } .cwstep.done .ck svg{ opacity:1; } .cwstep.done{ color:var(--ink); }
   .cwstep.warn{ color:var(--ink); align-items:flex-start; } .cwstep.warn .ck{ border-color:var(--over); background:var(--over); color:#fff; font-weight:700; font-size:12px; line-height:1; } .cwstep .drfix{ display:block; color:var(--good); font-weight:600; font-size:12px; margin-top:2px; }
+  /* basic-usage hands-on sims (ask / mention / keys / steer) */
+  .exrow{ display:flex; gap:8px; flex-wrap:wrap; margin:4px 0 14px; }
+  .scorebox{ margin:12px 0 0; border:1px solid var(--line2); border-radius:10px; padding:13px 15px; background:var(--row); display:none; }
+  .scorebox.on{ display:block; }
+  .scorebox .schead{ font-weight:600; font-size:14px; margin-bottom:9px; }
+  .chk{ display:flex; align-items:flex-start; gap:8px; font-size:13px; color:var(--muted); padding:3px 0; }
+  .chk .cx{ flex:0 0 auto; width:17px; height:17px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; border:1.5px solid var(--line2); }
+  .chk.y .cx{ border-color:var(--good); background:var(--good); color:#fff; } .chk.y{ color:var(--ink); }
+  .chk.n .cx{ border-color:var(--over); color:var(--over); }
+  .mline{ font-family:ui-monospace,Menlo,monospace; font-size:13.5px; background:var(--row); border:1px solid var(--line2); border-radius:9px; padding:13px 15px; min-height:48px; cursor:text; line-height:1.8; }
+  .mcaret{ display:inline-block; width:1px; background:var(--accent); animation:cblink 1s steps(1) infinite; }
+  @keyframes cblink{ 50%{opacity:0;} }
+  .fchip{ display:inline-flex; align-items:center; gap:5px; background:rgba(31,158,118,.1); border:1px solid rgba(31,158,118,.32); color:var(--good); border-radius:6px; padding:1px 8px; font-size:12.5px; font-weight:600; }
+  .atmenu{ margin-top:8px; border:1px solid var(--line2); border-radius:9px; overflow:hidden; display:none; }
+  .atmenu.on{ display:block; }
+  .atmenu .ai{ display:flex; align-items:center; gap:9px; padding:10px 13px; font-size:13px; cursor:pointer; border-bottom:1px solid var(--line); }
+  .atmenu .ai:last-child{ border-bottom:none; } .atmenu .ai:hover{ background:var(--row); }
+  .atmenu .afile{ font-family:ui-monospace,Menlo,monospace; color:var(--ink); } .atmenu .akind{ margin-left:auto; font-size:11px; color:var(--faint); }
+  .keys{ display:flex; flex-wrap:wrap; gap:8px; margin:4px 0 12px; }
+  .keycap{ font-family:inherit; font-size:13px; font-weight:600; color:var(--ink); background:var(--bg); border:1px solid var(--line2); border-bottom-width:2.5px; border-radius:8px; padding:8px 13px; cursor:pointer; transition:transform .1s,border-color .2s,opacity .2s; }
+  .keycap:hover{ border-color:var(--accent); } .keycap:active,.keycap.hit{ transform:translateY(1.5px); border-bottom-width:1px; }
+  .keycap:disabled{ opacity:.4; cursor:default; }
+  .kterm{ font-family:ui-monospace,Menlo,monospace; font-size:13px; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:15px 16px; min-height:118px; white-space:pre-wrap; line-height:1.75; color:var(--ink); }
+  .modebadge{ display:inline-block; font-size:12px; font-weight:600; border-radius:6px; padding:2px 10px; border:1px solid var(--line2); color:var(--muted); }
+  .modebadge.m1{ border-color:rgba(31,158,118,.4); color:var(--good); background:rgba(31,158,118,.08); }
+  .modebadge.m2{ border-color:rgba(214,158,46,.55); color:#b9821a; background:rgba(214,158,46,.1); }
+  .runbar{ height:8px; border-radius:6px; background:var(--line); overflow:hidden; margin:8px 0; }
+  .runbar > i{ display:block; height:100%; width:0; background:var(--accent); transition:width .25s linear; }
+  .runbar.bad > i{ background:var(--over); }
   .cwapprove{ margin-top:11px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .cwmode{ font-size:11.5px; color:var(--faint); }
   .cwvm{ border:1px dashed var(--line2); border-radius:11px; padding:11px 14px 7px; background:var(--panel); position:relative; }
@@ -412,6 +441,11 @@
     <button class="navitem" data-page="cowork"><span class="no">02</span>What is Cowork?</button>
     <button class="navitem" data-page="usecases"><span class="no">03</span>Real examples</button>
     <button class="navitem" data-page="where"><span class="no">04</span>Where to use it</button>
+    <div class="navsec">Basic usage (try it)</div>
+    <button class="navitem" data-page="ask"><span class="no">05</span>Writing good requests</button>
+    <button class="navitem" data-page="mention"><span class="no">06</span>Pointing at files @</button>
+    <button class="navitem" data-page="keys"><span class="no">07</span>Shortcuts &amp; modes</button>
+    <button class="navitem" data-page="steer"><span class="no">08</span>Stop & redirect</button>
     <div class="navsec">Basic concepts</div>
     <button class="navitem" data-page="context"><span class="no">05</span>Context window</button>
     <button class="navitem" data-page="manage"><span class="no">06</span>Managing context (why?)</button>
@@ -572,6 +606,132 @@ irm https://claude.ai/install.ps1 | iex</div>
         <li><b>First steps</b><span>In your project folder, type <code>claude</code> → log in → just start talking, like "What does this project do?"</span></li>
       </ul>
       <p class="note">Exact install steps and requirements change by version, so check the latest guidance at <code>code.claude.com/docs</code>.</p>
+    </section>
+
+    <!-- ASK: writing good requests -->
+    <section class="page" id="ask">
+      <h1>Writing good requests</h1>
+      <p class="lead">Claude Code is a tool you <b>drive with words</b>. The same task can finish <b>in one shot</b> — or wander through three tries — depending on <b>how you ask</b>.</p>
+      <p class="defs">Press the two requests below to compare the results, then <b>write your own request</b> at the end and get a score. (Just the behavior — no real Claude involved.)</p>
+      <div class="grp">
+        <h3>Same task, different ask — compare the results</h3>
+        <div class="exrow">
+          <button class="chip" data-k="vague">Vague: "Build a booking feature"</button>
+          <button class="chip" data-k="clear">Specific: "Add date &amp; time fields to the booking screen, warn if empty, and add a test when it works"</button>
+        </div>
+        <div class="chatdemo">
+          <div class="chatcol"><h4>Request <span class="badge no" id="ask-tag">—</span></h4>
+            <div class="bubble u" id="ask-u">Press a button above.</div>
+            <div class="bubble a" id="ask-a"></div>
+          </div>
+          <div class="chatcol"><h4>What Claude does</h4>
+            <div id="ask-steps"></div>
+          </div>
+        </div>
+        <p class="status" id="ask-status">Press a button to see how Claude responds.</p>
+        <p class="simtake"><span class="stk">Takeaway</span><span>Spell out <b>what, how, and how you'll check when it's done</b> — and Claude finishes <b>in one go</b> without asking back.</span></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>Try it yourself — how good is my request?</h3>
+        <p class="label">Type a request <span class="hint">go ahead and type</span></p>
+        <div class="field"><input id="ask-inp" type="text" placeholder="e.g. Add a confirm-password field to the sign-up screen, and turn it red if they don't match" maxlength="120"><button class="send" id="ask-go">See score</button></div>
+        <div class="scorebox" id="ask-score"></div>
+        <p class="note">The 4 parts of a good request: ① <b>What</b> (the target) ② <b>How</b> (the action you want) ③ <b>Where</b> (screen/file) ④ <b>Done criteria</b> (how to check). Source: code.claude.com/docs (Best practices).</p>
+      </div>
+    </section>
+
+    <!-- MENTION: @ file reference -->
+    <section class="page" id="mention">
+      <h1>Pointing at files <span style="color:var(--accent);">@</span></h1>
+      <p class="lead">When you already know which file to fix — you can point right at it with <b><code>@</code> followed by the file name</b>. Claude opens that file first.</p>
+      <p class="defs">Below, press <code>@</code> to pop up the file list and pick one. (In real life you can also attach files by drag &amp; drop.)</p>
+      <div class="grp">
+        <h3>Try it — attach a file with @</h3>
+        <div class="mline" id="mline"><span>Fix the booking screen </span><span id="m-typed"></span><span class="mcaret">&nbsp;&nbsp;</span></div>
+        <div class="atmenu" id="atmenu"></div>
+        <div class="keys" style="margin-top:10px;">
+          <button class="keycap" id="m-at">Type @</button>
+          <button class="keycap" id="m-drop">Drag &amp; drop a file</button>
+          <button class="keycap" id="m-send">Send</button>
+          <button class="keycap" id="m-reset">Start over</button>
+        </div>
+        <p class="status" id="m-status">Press 'Type @' to start.</p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>Do I have to point with @?</h3>
+        <div class="chatdemo">
+          <div class="chatcol"><h4>Without it <span class="badge no">finds it itself</span></h4>
+            <div class="bubble u">Fix the booking screen</div>
+            <div class="bubble a">Claude <b>searches on its own</b> for the related file. Usually it finds it, but with many similar files it may open the <b>wrong one</b>.</div>
+          </div>
+          <div class="chatcol"><h4>With @ <span class="badge yes">exact · fast</span></h4>
+            <div class="bubble u">Fix the booking screen <span class="fchip">@booking-screen.html</span></div>
+            <div class="bubble a">Claude opens <b>exactly that file</b> and gets to work. No search time, no mix-ups.</div>
+          </div>
+        </div>
+        <p class="simtake"><span class="stk">Takeaway</span><span>Even without it, <b>Claude finds the file itself</b>. But if you know <b>the exact file</b>, pointing with <code>@</code> is <b>faster and more precise</b>.</span></p>
+      </div>
+    </section>
+
+    <!-- KEYS: shortcuts & modes -->
+    <section class="page" id="keys">
+      <h1>Shortcuts &amp; modes</h1>
+      <p class="lead">Claude Code stops, rewinds, and switches modes with <b>just a few keys</b>. Click them to get the feel.</p>
+      <p class="defs">Press a key below and we'll show you <b>exactly what happens</b> on screen. (Just the behavior — no real Claude.)</p>
+      <div class="grp">
+        <h3>Press a key</h3>
+        <div class="keys" id="keyrow">
+          <button class="keycap" data-k="esc">Esc</button>
+          <button class="keycap" data-k="escesc">Esc Esc</button>
+          <button class="keycap" data-k="shifttab">Shift + Tab</button>
+          <button class="keycap" data-k="up">↑</button>
+          <button class="keycap" data-k="tab">Tab</button>
+          <button class="keycap" data-k="bang">!</button>
+          <button class="keycap" data-k="hash">#</button>
+        </div>
+        <p style="margin:2px 0 12px; font-size:13.5px; color:var(--muted);">Current mode: <span class="modebadge" id="key-mode">Default · ask then run</span></p>
+        <div class="kterm" id="kterm">Press a key above and the action shows up here.</div>
+        <p class="status" id="key-status"></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>At a glance</h3>
+        <table>
+          <thead><tr><th>Key</th><th>What it does</th><th>When to use</th></tr></thead>
+          <tbody>
+            <tr><td><b>Esc</b></td><td>Stop what it's doing</td><td>Cut it off the moment it goes the wrong way</td></tr>
+            <tr><td><b>Esc Esc</b></td><td>Rewind to an earlier point</td><td>"Take it back to before that"</td></tr>
+            <tr><td><b>Shift+Tab</b></td><td>Switch mode</td><td>Default → auto-accept → plan</td></tr>
+            <tr><td><b>↑</b></td><td>Recall what you sent before</td><td>When resending a similar request</td></tr>
+            <tr><td><b>Tab</b></td><td>Auto-complete a file name</td><td>No need to type the whole long name</td></tr>
+            <tr><td><b>!</b></td><td>Run a shell command directly</td><td>Like <code>!npm test</code></td></tr>
+            <tr><td><b>#</b></td><td>Save a note to memory</td><td>Rules like "always answer in English"</td></tr>
+          </tbody>
+        </table>
+        <p class="simtake"><span class="stk">Takeaway</span><span>Just remember the two that matter most — <b>Esc</b> (stop) and <b>Esc Esc</b> (rewind). That's a beginner's <b>seatbelt</b>.</span></p>
+      </div>
+    </section>
+
+    <!-- STEER: interrupt & redirect -->
+    <section class="page" id="steer">
+      <h1>Stop &amp; redirect</h1>
+      <p class="lead">When Claude heads the <b>wrong way</b> — you don't have to wait it out. Just <b>cut it off with Esc</b> and correct course. You're at the wheel.</p>
+      <p class="defs">Tell Claude to "<b>make the text bigger</b> on the login screen." But what if Claude starts <b>changing the color</b> instead? Compare two responses.</p>
+      <div class="grp">
+        <div class="exrow"><button class="btn solid" id="st-run">▶ Tell Claude</button></div>
+        <div class="chatdemo">
+          <div class="chatcol"><h4>Just let it run <span class="badge no">double the work</span></h4>
+            <div class="runbar bad"><i id="st-bar-a"></i></div>
+            <div id="st-a" style="font-size:13px; color:var(--muted);"></div>
+          </div>
+          <div class="chatcol"><h4>Correct it with Esc <span class="badge yes">one shot</span></h4>
+            <div class="runbar"><i id="st-bar-b"></i></div>
+            <div id="st-b" style="font-size:13px; color:var(--muted);"></div>
+            <div class="keys" style="margin-top:8px;"><button class="keycap" id="st-esc" disabled>Esc · stop now</button></div>
+          </div>
+        </div>
+        <p class="status" id="st-status">Press 'Tell Claude' and both sides start the same way.</p>
+        <p class="simtake"><span class="stk">Takeaway</span><span>Waiting out a wrong turn <b>and redoing it</b> is double the work — <b>cut it off with Esc</b> right away and you fix it in one go. When you're stuck, starting fresh with <code>/clear</code> is also an option.</span></p>
+      </div>
     </section>
 
     <!-- 03 CONTEXT -->
@@ -1388,7 +1548,7 @@ description: Write the weekly report in the company format
   (function(){ var s=null; try{ s=localStorage.getItem('cc_present'); }catch(e){} if(s==='1') setPresent(true); })();
 
   /* LNB icons (monoline) */
-  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', manage:'<path d="M4 20h16"/><rect x="5" y="13" width="3" height="6.5" rx="1"/><rect x="10.5" y="9" width="3" height="10.5" rx="1"/><rect x="16" y="5" width="3" height="14.5" rx="1"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', ask:'<path d="M4 5.5h16v10H10l-4 3.5V15.5H4z"/><path d="M8.5 9h7M8.5 12h4"/>', mention:'<circle cx="12" cy="12" r="3.4"/><path d="M15.4 12v1.6a2.6 2.6 0 0 0 5.1 0V12a8.5 8.5 0 1 0-3.3 6.7"/>', keys:'<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><path d="M6 10h.01M9 10h.01M12 10h.01M15 10h.01M18 10h.01M8 13.5h8"/>', steer:'<path d="M4 7v4.5a4 4 0 0 0 4 4h8"/><path d="M13 12.5l3.5 3-3.5 3"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', manage:'<path d="M4 20h16"/><rect x="5" y="13" width="3" height="6.5" rx="1"/><rect x="10.5" y="9" width="3" height="10.5" rx="1"/><rect x="16" y="5" width="3" height="14.5" rx="1"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
   function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
 
   /* router */
@@ -1396,7 +1556,7 @@ description: Write the weekly report in the company format
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'Chat gives you an \'answer\'; Claude Code <b>actually builds it in your project and makes it work</b>.', cowork:'Claude that <b>does office work</b> instead of code — give it a goal and it <b>builds the finished result from your files</b> (for non-developers · desktop app).', usecases:'Shows <b>how your everyday work changes</b>, before → after, for each job.', where:'Terminal, VS Code, desktop, web — <b>the same Claude Code everywhere</b>, settings shared too.', context:'Claude only remembers what\'s loaded here. When it\'s full, it <b>tidies up with \'compaction.\'</b>', manage:'Neglect your context and it gets <b>slower, pricier, and more confusing</b> — so tidy it up in time.', sessions:'<b>One job per session</b> — mixing causes confusion. Keep the working folder narrow.', tokens:'Token = the unit an AI reads text in. <b>Longer means more space and cost</b>, and Korean is heavier.', models:'Smartness ↔ speed ↔ cost are trade-offs. <b>If unsure, start with Sonnet</b>.', claudemd:'<b>A rules note you write</b> — applied automatically at the start of every conversation.', memory:'A note <b>Claude learns and remembers on its own</b>. Carries over across sessions.', skills:'<b>Make a frequent task\'s steps once and reuse them</b> again and again.', mcp:'<b>Connects to outside tools (Jira, Figma, etc.)</b> so Claude can use them directly.', plugins:'A bundle that <b>packages skills, tools, commands and installs them in one go</b>.', agents:'<b>Hand big jobs to specialist helpers</b> and just get the results back.', images:'<b>Paste a screenshot</b> and Claude sees and understands it — faster and more accurate than words.', hooks:'A rule where <b>a set action runs automatically every time</b> at a specific moment.', planmode:'<b>Shows a plan and gets approval</b> before editing — safe for big changes.', permissions:'A setting for <b>how often Claude asks</b>. Stay safe at first.', rewind:'<b>Auto-saves at every request</b> — if you don\'t like it, roll back to an earlier point.', privacy:'<b>Business (Team, Enterprise, API) isn\'t used for training by default.</b> Personal is a choice in settings.', commands:'Shortcut commands that start with <code class="inlinecode">/</code>. The most-used are <b>/clear · /compact</b>.', plans:'<b>Not on the free plan.</b> Use a paid plan (Pro, Max, Team) or the API (pay-as-you-go).', limits:'<b>Once used up, you wait until it resets</b> — that\'s why managing it matters.', compact:'A long pile of conversation shrinks into <b>one short summary block</b>.', effort:'<b>How deeply it thinks</b> before answering — deeper is more accurate, but slower and pricier.', goal:'<b>Give only a \'completion condition\' and Claude repeats on its own until it\'s met</b>.', loop:'<b>Re-runs the same task automatically at a set interval</b>.', workflows:'Coordinates <b>several helpers working at once</b> on a big job (advanced).', config:'Change settings like <b>language, theme, model, and permissions</b> in one place.', doctor:'<b>Checks your install, connections, and settings all at once</b> when something\'s wrong.', glossary:'A place to quickly look up confusing terms <b>in one line</b>.' };
+  var TLDR={ intro:'Chat gives you an \'answer\'; Claude Code <b>actually builds it in your project and makes it work</b>.', cowork:'Claude that <b>does office work</b> instead of code — give it a goal and it <b>builds the finished result from your files</b> (for non-developers · desktop app).', usecases:'Shows <b>how your everyday work changes</b>, before → after, for each job.', where:'Terminal, VS Code, desktop, web — <b>the same Claude Code everywhere</b>, settings shared too.', ask:'The same task <b>asked specifically</b> finishes in one shot — write your own and get a score too.', mention:'Point right at <b>the exact file</b> with <code class="inlinecode">@</code> for faster, more precise work.', keys:'A few keys do it all — <b>Esc</b> (stop), <b>Esc Esc</b> (rewind) and more. Press them to learn.', steer:'When it goes wrong, <b>cut it off with Esc</b> and correct course — don\'t wait it out.', context:'Claude only remembers what\'s loaded here. When it\'s full, it <b>tidies up with \'compaction.\'</b>', manage:'Neglect your context and it gets <b>slower, pricier, and more confusing</b> — so tidy it up in time.', sessions:'<b>One job per session</b> — mixing causes confusion. Keep the working folder narrow.', tokens:'Token = the unit an AI reads text in. <b>Longer means more space and cost</b>, and Korean is heavier.', models:'Smartness ↔ speed ↔ cost are trade-offs. <b>If unsure, start with Sonnet</b>.', claudemd:'<b>A rules note you write</b> — applied automatically at the start of every conversation.', memory:'A note <b>Claude learns and remembers on its own</b>. Carries over across sessions.', skills:'<b>Make a frequent task\'s steps once and reuse them</b> again and again.', mcp:'<b>Connects to outside tools (Jira, Figma, etc.)</b> so Claude can use them directly.', plugins:'A bundle that <b>packages skills, tools, commands and installs them in one go</b>.', agents:'<b>Hand big jobs to specialist helpers</b> and just get the results back.', images:'<b>Paste a screenshot</b> and Claude sees and understands it — faster and more accurate than words.', hooks:'A rule where <b>a set action runs automatically every time</b> at a specific moment.', planmode:'<b>Shows a plan and gets approval</b> before editing — safe for big changes.', permissions:'A setting for <b>how often Claude asks</b>. Stay safe at first.', rewind:'<b>Auto-saves at every request</b> — if you don\'t like it, roll back to an earlier point.', privacy:'<b>Business (Team, Enterprise, API) isn\'t used for training by default.</b> Personal is a choice in settings.', commands:'Shortcut commands that start with <code class="inlinecode">/</code>. The most-used are <b>/clear · /compact</b>.', plans:'<b>Not on the free plan.</b> Use a paid plan (Pro, Max, Team) or the API (pay-as-you-go).', limits:'<b>Once used up, you wait until it resets</b> — that\'s why managing it matters.', compact:'A long pile of conversation shrinks into <b>one short summary block</b>.', effort:'<b>How deeply it thinks</b> before answering — deeper is more accurate, but slower and pricier.', goal:'<b>Give only a \'completion condition\' and Claude repeats on its own until it\'s met</b>.', loop:'<b>Re-runs the same task automatically at a set interval</b>.', workflows:'Coordinates <b>several helpers working at once</b> on a big job (advanced).', config:'Change settings like <b>language, theme, model, and permissions</b> in one place.', doctor:'<b>Checks your install, connections, and settings all at once</b> when something\'s wrong.', glossary:'A place to quickly look up confusing terms <b>in one line</b>.' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">In one line</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -1415,15 +1575,15 @@ description: Write the weekly report in the company format
   [['cc-go',5500],['cw3-go',5500],['uc-go',7000],['sess-play',9500],['lc-all',8200],['md-go',5500],['mem-go',5200],['sk-go',5200],['sa-go',5600],['pl-go',6200],['plan-go',4800],['goal-go',4200],['loop-go',4800],['wf-go',4500],['dr-go',4800],['cx-go',5500,'cx-reset'],['img-go',4800]].forEach(function(p){ autoLoop(p[0],p[1],p[2]); });
 
   /* difficulty mode — 초급/중급/고급 filter */
-  var LV={ intro:1,cowork:1,usecases:1,where:1,context:1,manage:1,sessions:1,models:1,commands:1,glossary:1,
-    tokens:2,compact:2,effort:2,claudemd:2,memory:2,skills:2,images:2,permissions:2,planmode:2,rewind:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
+  var LV={ intro:1,cowork:1,usecases:1,where:1,ask:1,mention:1,keys:1,steer:1,context:1,manage:1,compact:1,sessions:1,models:1,claudemd:1,images:1,permissions:1,rewind:1,commands:1,glossary:1,
+    tokens:2,effort:2,memory:2,skills:2,planmode:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
     mcp:3,plugins:3,agents:3,hooks:3,goal:3,loop:3,workflows:3 };
   (function(){ var chips=document.querySelectorAll('#lvlsel .lvlchip'); if(!chips.length) return; var origNo={}; navs.forEach(function(n){ var no=n.querySelector('.no'); if(no) origNo[n.dataset.page]=no.textContent; });
     function setLevel(lv){ chips.forEach(function(c){ c.classList.toggle('on',+c.dataset.lv===lv); }); var k=0;
-      navs.forEach(function(n){ var show= lv===0 || LV[n.dataset.page]===lv; n.style.display=show?'':'none'; if(show){ var no=n.querySelector('.no'); if(no) no.textContent= lv===0 ? origNo[n.dataset.page] : ('0'+(++k)).slice(-2); } });
+      navs.forEach(function(n){ var show= lv===0 || LV[n.dataset.page]===lv; n.style.display=show?'':'none'; if(show){ var no=n.querySelector('.no'); if(no) no.textContent= ('0'+(++k)).slice(-2); } });
       document.querySelectorAll('.lnb .navsec').forEach(function(s){ var any=false,el=s.nextElementSibling; while(el && !el.classList.contains('navsec')){ if(el.classList.contains('navitem') && el.style.display!=='none'){ any=true; break; } el=el.nextElementSibling; } s.style.display=any?'':'none'; });
       var cur=document.querySelector('.navitem.on'); if(cur && cur.style.display==='none'){ var first=[].filter.call(navs,function(n){return n.style.display!=='none';})[0]; if(first) first.click(); } }
-    chips.forEach(function(c){ c.addEventListener('click',function(){ setLevel(+c.dataset.lv); }); }); })();
+    chips.forEach(function(c){ c.addEventListener('click',function(){ setLevel(+c.dataset.lv); }); }); setLevel(0); })();
 
   /* glossary tooltips — hover (desktop) + tap (mobile/tablet) */
   (function(){ var gls=document.querySelectorAll('.gl'); if(!gls.length) return;
@@ -1856,6 +2016,84 @@ description: Write the weekly report in the company format
       DR.forEach(function(o,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML= o.fail ? '<span class="ck">!</span><span>'+o.t+' — <b>'+o.fail+'</b><span class="drfix">'+o.fix+'</span></span>' : '<span class="ck">'+CK+'</span><span>'+o.t+'</span>'; drList.appendChild(el);
         drT.push(setTimeout(function(){ el.classList.add(o.fail?'warn':'done'); if(i===DR.length-1) st.textContent='Done — 4 OK, 1 problem found. /doctor tells you what\'s wrong AND how to fix it.'; },300+i*600)); }); });
     document.getElementById('dr-reset').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; document.getElementById('dr-status').textContent='Press "Run diagnostics" to try it.'; });
+  })();
+
+  /* ask — vague vs specific request + self-score */
+  (function(){
+    var U=document.getElementById('ask-u'),A=document.getElementById('ask-a'),TAG=document.getElementById('ask-tag'),STEPS=document.getElementById('ask-steps'),ST=document.getElementById('ask-status'),T=[];
+    if(!U) return;
+    var DATA={
+      vague:{ tag:'Vague', cls:'no', u:'Build a booking feature', a:'Hmm… where should it go? What date format? Which screen do you mean?',
+        steps:[['?','Asks back: where do I put it? what format?'],['←','Guesses roughly and builds it'],['←','"That\'s not it" → explains again'],['←','Fixes and rebuilds (3rd time)']],
+        done:'It took three rounds in the end. Vague requests make Claude ask back.' },
+      clear:{ tag:'Specific', cls:'yes', u:'Add date & time fields to the booking screen, warn if empty, and add a test when it works', a:'Got it. Building it now.',
+        steps:[['✓','Understands the requirements'],['✓','Adds date & time fields'],['✓','Adds the empty-field warning'],['✓','Runs the test → passes']],
+        done:'Done in one shot. Be specific and Claude won\'t ask back.' }
+    };
+    function run(k){ T.forEach(clearTimeout); T=[]; var d=DATA[k]; TAG.textContent=d.tag; TAG.className='badge '+d.cls; U.textContent=d.u; A.textContent=''; STEPS.innerHTML=''; ST.textContent='';
+      T.push(setTimeout(function(){ A.textContent=d.a; },350));
+      d.steps.forEach(function(s,i){ T.push(setTimeout(function(){ var r=document.createElement('div'); r.className='chk'+(s[0]==='✓'?' y':''); r.innerHTML='<span class="cx">'+s[0]+'</span><span>'+s[1]+'</span>'; STEPS.appendChild(r); },820+i*640)); });
+      T.push(setTimeout(function(){ ST.textContent=d.done; },820+4*640)); }
+    document.querySelectorAll('#ask .exrow .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#ask .exrow .chip').forEach(function(x){x.classList.toggle('on',x===c);}); run(c.dataset.k); }); });
+    var INP=document.getElementById('ask-inp'),BOX=document.getElementById('ask-score');
+    function score(){ var t=(INP.value||'').trim(); if(!t){ BOX.className='scorebox'; return; }
+      var checks=[ ['What (clear target)', /screen|page|file|button|field|column|row|text|colou?r|image|photo|email|document|list|menu|table|cell|@/i.test(t)],
+        ['How (the action)', /add|edit|fix|make|create|change|replace|delete|remove|show|display|sort|connect|insert|enlarge|shrink|resize|paint|fill|apply|set|hide|highlight|bold|move|split|merge|copy/i.test(t)],
+        ['Condition / done-criteria', /if|when|empty|blank|warn|alert|check|test|verify|red|green|number|digit|over|under|above|below|than|like|so that|once/i.test(t)],
+        ['Not too short (20+ chars)', t.length>=20] ];
+      var n=checks.filter(function(c){return c[1];}).length;
+      var v = n>=4?'Great! Claude gets it in one go.' : n>=2?'Decent. Add one or two more and it\'s perfect.' : 'Too vague — Claude will ask back.';
+      var h='<div class="schead">'+n+'/4 — '+v+'</div>';
+      checks.forEach(function(c){ h+='<div class="chk '+(c[1]?'y':'n')+'"><span class="cx">'+(c[1]?'✓':'·')+'</span><span>'+c[0]+'</span></div>'; });
+      BOX.innerHTML=h; BOX.className='scorebox on'; }
+    document.getElementById('ask-go').addEventListener('click',score); INP.addEventListener('keydown',function(e){ if(e.key==='Enter')score(); });
+  })();
+
+  /* mention — @ file picker */
+  (function(){
+    var TY=document.getElementById('m-typed'),MENU=document.getElementById('atmenu'),ST=document.getElementById('m-status'); if(!TY) return; var attached=null;
+    var FILES=[['booking-screen.html','web page'],['booking-list.xlsx','Excel'],['notice.docx','document'],['pricing.csv','table']];
+    function openMenu(){ if(attached) return; TY.innerHTML='<span style="color:var(--accent)">@</span>'; var h=''; FILES.forEach(function(f,i){ h+='<div class="ai" data-i="'+i+'"><span class="afile">@'+f[0]+'</span><span class="akind">'+f[1]+'</span></div>'; }); MENU.innerHTML=h; MENU.className='atmenu on'; ST.textContent='The file list popped up. Pick one.';
+      MENU.querySelectorAll('.ai').forEach(function(a){ a.addEventListener('click',function(){ pick(+a.dataset.i); }); }); }
+    function pick(i){ var f=FILES[i]; attached=f; TY.innerHTML='<span class="fchip">@'+f[0]+'</span> '; MENU.className='atmenu'; ST.textContent='Attached: @'+f[0]+' — now press "Send".'; }
+    document.getElementById('m-at').addEventListener('click',openMenu);
+    document.getElementById('m-drop').addEventListener('click',function(){ pick(0); ST.textContent='Drag & drop attached @'+FILES[0][0]+' — same as typing @.'; });
+    document.getElementById('m-send').addEventListener('click',function(){ if(!attached){ ST.textContent='Attach a file with @ first.'; return; } ST.textContent='Claude is opening @'+attached[0]+'… ✓ Found exactly that file.'; });
+    document.getElementById('m-reset').addEventListener('click',function(){ attached=null; TY.innerHTML=''; MENU.className='atmenu'; ST.textContent='Press "Type @" to start.'; });
+  })();
+
+  /* keys — shortcuts & modes playground */
+  (function(){
+    var KT=document.getElementById('kterm'),ST=document.getElementById('key-status'),MODE=document.getElementById('key-mode'); if(!KT) return; var mi=0;
+    var MODES=[['Default · ask then run',''],['Auto-accept edits · fixes without asking','m1'],['Plan mode · show first','m2']];
+    function show(txt,status){ KT.textContent=txt; ST.textContent=status||''; }
+    var ACT={
+      esc:function(){ show('■  Stopped.\n\nClaude stops what it was doing and waits.\nNow you can give a new instruction.','The first key to press when you think "wrong direction."'); },
+      escesc:function(){ show('←  Rewind — to which point?\n\n   ○ Start\n   ○ Before the design change\n   ●  Now (here)','Rewinds your code to an earlier point in one step. (More in the "Rewind" tab.)'); },
+      shifttab:function(){ mi=(mi+1)%3; MODE.textContent=MODES[mi][0]; MODE.className='modebadge '+MODES[mi][1]; show('Mode switch  →  '+MODES[mi][0],'Each Shift+Tab switches the mode. Watch the badge above.'); },
+      up:function(){ show('↑  Recalled the request you sent before:\n\n   > Fix the booking screen','When sending something similar again, no need to retype.'); },
+      tab:function(){ show('Tab  auto-complete:\n\n   @booking-scr…  →  @booking-screen.html','No need to type the whole file name — Tab finishes it.'); },
+      bang:function(){ show('!  shell (command) mode\n\n   ! npm test\n   → runs the command directly, bypassing Claude','When you just want the result, fast.'); },
+      hash:function(){ show('#  save to memory\n\n   # always answer in English\n   → remembers this rule from now on','Leave a rule so you don\'t repeat yourself. (CLAUDE.md)'); }
+    };
+    document.querySelectorAll('#keyrow .keycap').forEach(function(c){ c.addEventListener('click',function(){ c.classList.add('hit'); setTimeout(function(){c.classList.remove('hit');},120); (ACT[c.dataset.k]||function(){})(); }); });
+  })();
+
+  /* steer — interrupt & redirect, compared */
+  (function(){
+    var RUN=document.getElementById('st-run'),BARA=document.getElementById('st-bar-a'),BARB=document.getElementById('st-bar-b'),A=document.getElementById('st-a'),B=document.getElementById('st-b'),ESC=document.getElementById('st-esc'),ST=document.getElementById('st-status'); if(!RUN) return;
+    var T=[],steered=false,wrongT=null;
+    function clearAll(){ T.forEach(clearTimeout); T=[]; if(wrongT){clearTimeout(wrongT);wrongT=null;} }
+    function start(){ clearAll(); steered=false; BARA.style.width='0'; BARB.style.width='0'; BARB.parentNode.classList.remove('bad'); A.innerHTML=''; B.innerHTML=''; ESC.disabled=true; ST.textContent='Claude is heading toward "change the color"…';
+      T.push(setTimeout(function(){ BARA.style.width='35%'; BARB.style.width='35%'; A.innerHTML='Changing the color…'; B.innerHTML='Changing the color…'; },200));
+      T.push(setTimeout(function(){ BARA.style.width='70%'; },1400));
+      T.push(setTimeout(function(){ BARA.style.width='100%'; A.innerHTML='Done — <b>changed the color.</b> But you wanted <b>bigger text</b> → you have to ask all over again.'; },2600));
+      T.push(setTimeout(function(){ BARB.style.width='40%'; ESC.disabled=false; ST.textContent='Now\'s the time — press "Esc" on the right to redirect!';
+        wrongT=setTimeout(function(){ if(!steered){ BARB.parentNode.classList.add('bad'); BARB.style.width='100%'; B.innerHTML='Didn\'t cut it off — <b>just changed the color and stopped.</b> Wasted effort, same as the left.'; ESC.disabled=true; ST.textContent='If you don\'t press Esc it ends up like the left. Try again?'; } },4200);
+      },1400)); }
+    ESC.addEventListener('click',function(){ if(ESC.disabled)return; steered=true; if(wrongT){clearTimeout(wrongT);wrongT=null;} ESC.disabled=true; BARB.parentNode.classList.remove('bad'); B.innerHTML='■ Stopped → correcting: "not the color, the <b>text size</b>"…';
+      setTimeout(function(){ BARB.style.width='100%'; B.innerHTML='■ Stopped → corrected → <b>made the text bigger ✓</b> Right in one go.'; ST.textContent='Cut it off, corrected, done in one shot — see?'; },800); });
+    RUN.addEventListener('click',start);
   })();
 
   /* plugins — bundle install demo */
