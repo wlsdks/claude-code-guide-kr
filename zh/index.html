@@ -135,6 +135,8 @@
   .mg2h{ font-size:13px; font-weight:600; display:flex; align-items:center; gap:7px; margin-bottom:10px; } .mg2tag{ font-size:10.5px; font-weight:700; border-radius:5px; padding:1px 7px; } .mg2tag.bad{ color:var(--over); background:rgba(216,69,63,.13); } .mg2tag.good{ color:var(--good); background:rgba(31,158,118,.14); }
   .mg2pct{ display:flex; justify-content:space-between; font-size:11.5px; color:var(--muted); margin-bottom:4px; } .mg2pct b{ color:var(--ink); }
   .mg2chat{ margin-top:11px; display:flex; flex-direction:column; gap:8px; min-height:96px; }
+  /* sim takeaway (결론) — what you learn after watching */
+  .simtake{ margin-top:14px; display:flex; gap:9px; align-items:baseline; font-size:13px; line-height:1.55; background:rgba(31,158,118,.07); border:1px solid rgba(31,158,118,.26); border-radius:9px; padding:10px 13px; } .simtake .stk{ flex:0 0 auto; font-size:11px; font-weight:700; color:var(--good); border:1px solid rgba(31,158,118,.34); border-radius:5px; padding:1px 7px; }
   .cxbadge{ display:inline-block; font-size:12.5px; font-variant-numeric:tabular-nums; background:var(--row); border-radius:7px; padding:7px 12px; margin-bottom:12px; } .cxbadge b{ font-weight:600; } .cxbadge .ar{ color:var(--faint); margin:0 6px; }
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
@@ -863,6 +865,7 @@ description: 按公司格式撰写周报
         </div>
       </div>
       <p class="status" id="pl-status" style="margin-top:12px;">点击‘一次安装演示’，就能看到这一个包里的多个功能被一次性装好。</p>
+      <p class="simtake"><span class="stk">结论</span><span>不用一个个去找、去装技能·工具·命令 —— 插件<b>把多个功能打包，一次装好</b>。</span></p>
       <p class="label">MCP · 技能 · 插件 一目了然</p>
       <div class="fgrid">
         <div class="fcard"><div class="ft">MCP</div><div class="fd"><b>连接</b>到外部工具、服务的通道。</div></div>
@@ -921,6 +924,7 @@ description: 按公司格式撰写周报
           <div class="detsum" id="detsum">→ Claude：“这是登录界面，处于密码错误的状态。我来检查一下验证逻辑并修复。”</div>
         </div>
       </div>
+      <p class="simtake"><span class="stk">结论</span><span>与其<b>用一长串话描述画面</b> —— <b>一张截图</b>又快又准。</span></p>
       <p class="label" style="margin-top:30px;">为什么要贴截图？</p>
       <div class="fgrid">
         <div class="fcard"><div class="ft">比说话快</div><div class="fd">不用长篇描述画面，直接给它看。</div></div>
@@ -976,6 +980,7 @@ description: 按公司格式撰写周报
         <div class="step" id="plan3"><div class="sn2">4</div><div><div class="st2">批准后执行</div><div class="sd3">“好，执行吧” → 这时才一次性修改文件</div></div></div>
       </div>
       <p class="status" id="plan-msg" style="margin-top:8px;"></p>
+      <p class="simtake"><span class="stk">结论</span><span>不用<b>直接改、结果跑偏</b> —— <b>先看计划再批准</b>，大改动也安全。</span></p>
       <p class="note">计划模式是‘只读’的，所以很安全。它是权限模式（‘权限模式’标签页）的一种。（在 Windows 的部分终端里，建议用 <code>/plan</code> 代替 <code>Shift</code>+<code>Tab</code>）</p>
     </section>
 
@@ -1012,6 +1017,7 @@ description: 按公司格式撰写周报
       <div class="tllabels" id="rw-labels"></div>
       <div class="btnrow" style="margin:14px 0;"><button class="btn" id="rw-code">只恢复代码</button><button class="btn" id="rw-both">恢复代码+对话</button><button class="btn" id="rw-reset">重置</button></div>
       <p class="status" id="rw-msg" style="margin-top:0;">先点上面时间线上的圆点，再选恢复方式。</p>
+      <p class="simtake"><span class="stk">结论</span><span><b>就算不懂 git</b> —— 不满意就<b>一步退回之前的时间点</b>。（只代码／只对话／两者都）</span></p>
       <ul class="points">
         <li><b>怎么打开</b><span><code>/rewind</code>，或在输入框为空时按两次 <code>ESC</code> —— 会列出你发过的请求。（如果输入框里有文字，按两次会先清除文字。）</span></li>
         <li><b>三种恢复</b><span>代码+对话一起 / 只对话（保留代码）/ 只代码（保留对话）。</span></li>
@@ -1110,6 +1116,7 @@ description: 按公司格式撰写周报
           <p class="note" style="margin-top:8px;">读取文件、长对话、图片这类越重的工作，上限掉得越快。</p>
         </div>
       </div>
+      <p class="simtake"><span class="stk">结论</span><span>用完就<b>停到重置为止</b> —— 所以<b>用便宜的模型 + 经常整理</b>来省着用很重要。</span></p>
       <p class="label">订阅 vs API —— 有什么不同</p>
       <div class="cmp">
         <div class="cmpcard"><h4>订阅 (Pro·Max·Team)</h4><div class="who">每月固定费用</div>
@@ -1228,6 +1235,7 @@ description: 按公司格式撰写周报
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="goal-go">开始目标 ▶</button><button class="btn" id="goal-reset">重置</button></div>
       <div class="cwvm"><span class="cwvmtag">直到满足条件为止自动反复</span><div id="goal-turns"></div></div>
       <p class="status" id="goal-status" style="margin-top:12px;">点一下“开始目标”。</p>
+      <p class="simtake"><span class="stk">结论</span><span>不用每轮都<b>手动按‘再来一次’</b> —— goal<b>会一直做到满足条件为止</b>。</span></p>
       <p class="note">是否满足条件，会通过<b>单独的判定</b>在每一轮确认，满足后自动停止（也有防止无限循环的机制）。改法：<code>/goal</code>。（出处：Anthropic 官方 —— code.claude.com/docs goal）</p>
     </section>
 
@@ -1241,6 +1249,7 @@ description: 按公司格式撰写周报
       <p class="label">执行记录</p>
       <div class="usefeed" id="loop-feed"></div>
       <p class="status" id="loop-status" style="margin-top:10px;">选个间隔再点“开始重复”。</p>
+      <p class="simtake"><span class="stk">结论</span><span>本来要人<b>每 10 分钟亲自看一次</b>的事 —— loop<b>会自动重复，连你睡觉时也是</b>。（goal 是‘做到为止’，loop 是‘每隔固定时间’）</span></p>
       <p class="note">会在会话开着的时候反复执行。改法：像 <code>/loop 10m "确认新订单"</code> 这样。（出处：Anthropic 官方 —— code.claude.com/docs scheduled-tasks）</p>
     </section>
 
@@ -1274,6 +1283,7 @@ description: 按公司格式撰写周报
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="dr-go">运行诊断 ▶</button><button class="btn" id="dr-reset">重置</button></div>
       <div class="cwvm"><span class="cwvmtag">/doctor 检查中</span><div id="dr-list"></div></div>
       <p class="status" id="dr-status" style="margin-top:12px;">点一下“运行诊断”。</p>
+      <p class="simtake"><span class="stk">结论</span><span>不用自己<b>苦想‘为什么不行’</b> —— /doctor<b>一次就指出哪里有问题</b>。</span></p>
       <p class="note">打开方式：<code>/doctor</code>（或 <code>claude doctor</code>）。如果有问题，还会告诉你该怎么修。（出处：Anthropic 官方 —— code.claude.com/docs CLI 参考）</p>
     </section>
 

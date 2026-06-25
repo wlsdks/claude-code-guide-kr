@@ -135,6 +135,8 @@
   .mg2h{ font-size:13px; font-weight:600; display:flex; align-items:center; gap:7px; margin-bottom:10px; } .mg2tag{ font-size:10.5px; font-weight:700; border-radius:5px; padding:1px 7px; } .mg2tag.bad{ color:var(--over); background:rgba(216,69,63,.13); } .mg2tag.good{ color:var(--good); background:rgba(31,158,118,.14); }
   .mg2pct{ display:flex; justify-content:space-between; font-size:11.5px; color:var(--muted); margin-bottom:4px; } .mg2pct b{ color:var(--ink); }
   .mg2chat{ margin-top:11px; display:flex; flex-direction:column; gap:8px; min-height:96px; }
+  /* sim takeaway (결론) — what you learn after watching */
+  .simtake{ margin-top:14px; display:flex; gap:9px; align-items:baseline; font-size:13px; line-height:1.55; background:rgba(31,158,118,.07); border:1px solid rgba(31,158,118,.26); border-radius:9px; padding:10px 13px; } .simtake .stk{ flex:0 0 auto; font-size:11px; font-weight:700; color:var(--good); border:1px solid rgba(31,158,118,.34); border-radius:5px; padding:1px 7px; }
   .cxbadge{ display:inline-block; font-size:12.5px; font-variant-numeric:tabular-nums; background:var(--row); border-radius:7px; padding:7px 12px; margin-bottom:12px; } .cxbadge b{ font-weight:600; } .cxbadge .ar{ color:var(--faint); margin:0 6px; }
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
@@ -864,6 +866,7 @@ description: 週次レポートを会社の様式で作成
         </div>
       </div>
       <p class="status" id="pl-status" style="margin-top:12px;">「まとめてインストール デモ」を押すと、この一つの束でいくつもの機能が一度にインストールされる様子をお見せします。</p>
+      <p class="simtake"><span class="stk">結論</span><span>スキル・ツール・コマンドを<b>一つずつ探して入れる代わりに</b> — プラグインは<b>ひとまとめで一度に</b>入れます。</span></p>
       <p class="label">MCP · スキル · プラグインをひと目で</p>
       <div class="fgrid">
         <div class="fcard"><div class="ft">MCP</div><div class="fd">外部ツール・サービスに<b>つなぐ</b>通り道。</div></div>
@@ -922,6 +925,7 @@ description: 週次レポートを会社の様式で作成
           <div class="detsum" id="detsum">→ Claude: 「ログイン画面で、パスワードのエラー状態ですね。検証ロジックを確認して直してみます。」</div>
         </div>
       </div>
+      <p class="simtake"><span class="stk">結論</span><span>画面を<b>長々と言葉で説明する代わりに</b> — <b>スクショ1枚</b>のほうが速くて正確です。</span></p>
       <p class="label" style="margin-top:30px;">なぜキャプチャを貼るの?</p>
       <div class="fgrid">
         <div class="fcard"><div class="ft">言葉より速い</div><div class="fd">画面を長々と説明しなくても、そのまま。</div></div>
@@ -977,6 +981,7 @@ description: 週次レポートを会社の様式で作成
         <div class="step" id="plan3"><div class="sn2">4</div><div><div class="st2">承認したら実行</div><div class="sd3">「OK、実行して」 → そのとき一気にファイルを直します</div></div></div>
       </div>
       <p class="status" id="plan-msg" style="margin-top:8px;"></p>
+      <p class="simtake"><span class="stk">結論</span><span><b>すぐ直して的外れになる代わりに</b> — <b>先に計画を見て承認</b>すれば大きな変更も安全です。</span></p>
       <p class="note">プランモードは「読み取り専用」なので安全です。権限モード（「権限モード」タブ）の一種です。（Windows の一部のターミナルでは <code>Shift</code>+<code>Tab</code> の代わりに <code>/plan</code> をおすすめ）</p>
     </section>
 
@@ -1013,6 +1018,7 @@ description: 週次レポートを会社の様式で作成
       <div class="tllabels" id="rw-labels"></div>
       <div class="btnrow" style="margin:14px 0;"><button class="btn" id="rw-code">コードだけ復元</button><button class="btn" id="rw-both">コード+会話を復元</button><button class="btn" id="rw-reset">リセット</button></div>
       <p class="status" id="rw-msg" style="margin-top:0;">上のタイムラインの点を押したあと、復元の方法を選んでください。</p>
+      <p class="simtake"><span class="stk">結論</span><span><b>git を知らなくても</b> — 気に入らなければ<b>前の時点に一度で戻せます</b>。（コードだけ／会話だけ／両方）</span></p>
       <ul class="points">
         <li><b>開き方</b><span><code>/rewind</code>、または入力欄が空のときに <code>ESC</code> を2回 — これまで送ったリクエストの一覧が出ます。（入力欄に文字があると、2回押すと先に文字が消えます。）</span></li>
         <li><b>3 種類の復元</b><span>コード+会話を一緒に / 会話だけ(コードは維持) / コードだけ(会話は維持)。</span></li>
@@ -1111,6 +1117,7 @@ description: 週次レポートを会社の様式で作成
           <p class="note" style="margin-top:8px;">ファイル読み込み・長い会話・画像のような重い作業ほど、上限が早く減ります。</p>
         </div>
       </div>
+      <p class="simtake"><span class="stk">結論</span><span>使い切ると<b>リセットまで止まります</b> — だから<b>安いモデル・こまめな片づけ</b>で節約する管理が大切です。</span></p>
       <p class="label">サブスク vs API — 何が違う</p>
       <div class="cmp">
         <div class="cmpcard"><h4>サブスク (Pro·Max·Team)</h4><div class="who">月額</div>
@@ -1229,6 +1236,7 @@ description: 週次レポートを会社の様式で作成
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="goal-go">目標スタート ▶</button><button class="btn" id="goal-reset">リセット</button></div>
       <div class="cwvm"><span class="cwvmtag">条件になるまで自動で繰り返す</span><div id="goal-turns"></div></div>
       <p class="status" id="goal-status" style="margin-top:12px;">「目標スタート」を押してみてください。</p>
+      <p class="simtake"><span class="stk">結論</span><span>毎ターン<b>「もう一回」を押す代わりに</b> — goal は<b>条件を満たすまで自分で繰り返します</b>。</span></p>
       <p class="note">条件の充足は<b>別の判定</b>で毎ターン確認し、満たされたら自動で止まります（無限ループ防止の仕組みもあります）。変え方: <code>/goal</code>。（出典: Anthropic 公式 — code.claude.com/docs goal）</p>
     </section>
 
@@ -1242,6 +1250,7 @@ description: 週次レポートを会社の様式で作成
       <p class="label">実行ログ</p>
       <div class="usefeed" id="loop-feed"></div>
       <p class="status" id="loop-status" style="margin-top:10px;">間隔を選んで「繰り返しスタート」を押してみてください。</p>
+      <p class="simtake"><span class="stk">結論</span><span>人が<b>10分ごとに自分で確認する作業を</b> — loop は<b>寝ている間も自動で繰り返します</b>。（goal は「できるまで」、loop は「決めた間隔ごと」）</span></p>
       <p class="note">セッションが開いている間、繰り返されます。変え方: <code>/loop 10m "新しい注文を確認"</code> のように。（出典: Anthropic 公式 — code.claude.com/docs scheduled-tasks）</p>
     </section>
 
@@ -1275,6 +1284,7 @@ description: 週次レポートを会社の様式で作成
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="dr-go">診断を実行 ▶</button><button class="btn" id="dr-reset">リセット</button></div>
       <div class="cwvm"><span class="cwvmtag">/doctor 点検中</span><div id="dr-list"></div></div>
       <p class="status" id="dr-status" style="margin-top:12px;">「診断を実行」を押してみてください。</p>
+      <p class="simtake"><span class="stk">結論</span><span>一人で<b>「なぜ動かない?」と悩む代わりに</b> — /doctor が<b>どこが問題か一度で指摘します</b>。</span></p>
       <p class="note">開き方: <code>/doctor</code>（または <code>claude doctor</code>）。問題があれば、どう直すかも教えてくれます。（出典: Anthropic 公式 — code.claude.com/docs CLI 参考）</p>
     </section>
 

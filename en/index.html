@@ -135,6 +135,8 @@
   .mg2h{ font-size:13px; font-weight:600; display:flex; align-items:center; gap:7px; margin-bottom:10px; } .mg2tag{ font-size:10.5px; font-weight:700; border-radius:5px; padding:1px 7px; } .mg2tag.bad{ color:var(--over); background:rgba(216,69,63,.13); } .mg2tag.good{ color:var(--good); background:rgba(31,158,118,.14); }
   .mg2pct{ display:flex; justify-content:space-between; font-size:11.5px; color:var(--muted); margin-bottom:4px; } .mg2pct b{ color:var(--ink); }
   .mg2chat{ margin-top:11px; display:flex; flex-direction:column; gap:8px; min-height:96px; }
+  /* sim takeaway (결론) — what you learn after watching */
+  .simtake{ margin-top:14px; display:flex; gap:9px; align-items:baseline; font-size:13px; line-height:1.55; background:rgba(31,158,118,.07); border:1px solid rgba(31,158,118,.26); border-radius:9px; padding:10px 13px; } .simtake .stk{ flex:0 0 auto; font-size:11px; font-weight:700; color:var(--good); border:1px solid rgba(31,158,118,.34); border-radius:5px; padding:1px 7px; }
   .cxbadge{ display:inline-block; font-size:12.5px; font-variant-numeric:tabular-nums; background:var(--row); border-radius:7px; padding:7px 12px; margin-bottom:12px; } .cxbadge b{ font-weight:600; } .cxbadge .ar{ color:var(--faint); margin:0 6px; }
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
@@ -863,6 +865,7 @@ description: Write the weekly report in the company format
         </div>
       </div>
       <p class="status" id="pl-status" style="margin-top:12px;">Press 'Install bundle demo' to see how this one bundle installs several features at once.</p>
+      <p class="simtake"><span class="stk">Takeaway</span><span>Instead of finding and installing skills/tools/commands one by one — a plugin installs <b>many features at once in one bundle</b>.</span></p>
       <p class="label">MCP · Skills · Plugins at a glance</p>
       <div class="fgrid">
         <div class="fcard"><div class="ft">MCP</div><div class="fd">A pathway that <b>connects</b> to outside tools and services.</div></div>
@@ -921,6 +924,7 @@ description: Write the weekly report in the company format
           <div class="detsum" id="detsum">→ Claude: "This is a login screen, in a wrong-password state. I'll check the validation logic and fix it."</div>
         </div>
       </div>
+      <p class="simtake"><span class="stk">Takeaway</span><span>Instead of <b>describing the screen in many words</b> — <b>one screenshot</b> is faster and more accurate.</span></p>
       <p class="label" style="margin-top:30px;">Why paste a screenshot?</p>
       <div class="fgrid">
         <div class="fcard"><div class="ft">Faster than words</div><div class="fd">No need to describe the screen at length — just show it.</div></div>
@@ -976,6 +980,7 @@ description: Write the weekly report in the company format
         <div class="step" id="plan3"><div class="sn2">4</div><div><div class="st2">Approve, then it runs</div><div class="sd3">"Okay, go" → then it edits the files all at once</div></div></div>
       </div>
       <p class="status" id="plan-msg" style="margin-top:8px;"></p>
+      <p class="simtake"><span class="stk">Takeaway</span><span>Instead of <b>fixing right away and going off-track</b> — <b>review and approve a plan first</b> for safe big changes.</span></p>
       <p class="note">Plan mode is 'read-only,' so it's safe. It's one of the permission modes (the 'Permission modes' tab). (On some Windows terminals, <code>/plan</code> is recommended instead of <code>Shift</code>+<code>Tab</code>.)</p>
     </section>
 
@@ -1012,6 +1017,7 @@ description: Write the weekly report in the company format
       <div class="tllabels" id="rw-labels"></div>
       <div class="btnrow" style="margin:14px 0;"><button class="btn" id="rw-code">Restore code only</button><button class="btn" id="rw-both">Restore code + conversation</button><button class="btn" id="rw-reset">Reset</button></div>
       <p class="status" id="rw-msg" style="margin-top:0;">Click a dot on the timeline above, then choose how to restore.</p>
+      <p class="simtake"><span class="stk">Takeaway</span><span><b>Even if you don't know git</b> — if you don't like it, <b>roll back to an earlier point in one step</b>. (code only / chat only / both)</span></p>
       <ul class="points">
         <li><b>How to open it</b><span><code>/rewind</code>, or press <code>ESC</code> twice when the input box is empty — the list of your requests appears. (If there's text in the input, double-ESC clears the text first.)</span></li>
         <li><b>Three kinds of restore</b><span>Code + conversation together / conversation only (keep code) / code only (keep conversation).</span></li>
@@ -1110,6 +1116,7 @@ description: Write the weekly report in the company format
           <p class="note" style="margin-top:8px;">The heavier the task — reading files, long conversations, images — the faster the limit drops.</p>
         </div>
       </div>
+      <p class="simtake"><span class="stk">Takeaway</span><span>When it runs out, it <b>stops until reset</b> — so <b>cheaper models + frequent tidying</b> matter to make it last.</span></p>
       <p class="label">Subscription vs API — what's different</p>
       <div class="cmp">
         <div class="cmpcard"><h4>Subscription (Pro, Max, Team)</h4><div class="who">Monthly fee</div>
@@ -1227,6 +1234,7 @@ description: Write the weekly report in the company format
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="goal-go">Start goal ▶</button><button class="btn" id="goal-reset">Reset</button></div>
       <div class="cwvm"><span class="cwvmtag">Repeats automatically until the condition is met</span><div id="goal-turns"></div></div>
       <p class="status" id="goal-status" style="margin-top:12px;">Press "Start goal" to try it.</p>
+      <p class="simtake"><span class="stk">Takeaway</span><span>Instead of <b>pressing 'do it again' every turn</b> — goal <b>keeps going until the condition is met</b>.</span></p>
       <p class="note">It checks the condition with a <b>separate judgment</b> every turn, and stops automatically once it's met (there's also a safeguard against infinite repetition). How to change it: <code>/goal</code>. (Source: Anthropic official — code.claude.com/docs goal)</p>
     </section>
 
@@ -1240,6 +1248,7 @@ description: Write the weekly report in the company format
       <p class="label">Run history</p>
       <div class="usefeed" id="loop-feed"></div>
       <p class="status" id="loop-status" style="margin-top:10px;">Pick an interval and press "Start repeat".</p>
+      <p class="simtake"><span class="stk">Takeaway</span><span>What a person would <b>check every 10 min</b> — loop <b>repeats on its own, even while you sleep</b>. (goal = 'until done', loop = 'every set interval')</span></p>
       <p class="note">It repeats while the session stays open. How to change it: something like <code>/loop 10m "check new orders"</code>. (Source: Anthropic official — code.claude.com/docs scheduled-tasks)</p>
     </section>
 
@@ -1273,6 +1282,7 @@ description: Write the weekly report in the company format
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="dr-go">Run diagnostics ▶</button><button class="btn" id="dr-reset">Reset</button></div>
       <div class="cwvm"><span class="cwvmtag">Running /doctor checks</span><div id="dr-list"></div></div>
       <p class="status" id="dr-status" style="margin-top:12px;">Press "Run diagnostics" to try it.</p>
+      <p class="simtake"><span class="stk">Takeaway</span><span>Instead of <b>wondering 'why isn't this working?'</b> alone — /doctor <b>pinpoints what's wrong in one go</b>.</span></p>
       <p class="note">How to open it: <code>/doctor</code> (or <code>claude doctor</code>). If there's a problem, it also tells you how to fix it. (Source: Anthropic official — code.claude.com/docs CLI reference)</p>
     </section>
 
