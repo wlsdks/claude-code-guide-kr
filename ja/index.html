@@ -98,6 +98,7 @@
   button{ font-family:inherit; cursor:pointer; }
   .btn{ background:var(--bg); border:1px solid var(--line2); color:var(--ink); font-size:13.5px; font-weight:500; padding:9px 15px; border-radius:8px; transition:border-color .2s,opacity .2s; } .btn:hover{ border-color:var(--accent); } .btn:disabled{ opacity:.45; cursor:default; } .btn.solid{ background:var(--accent); color:var(--bg); border-color:var(--accent); }
   .loopt{ display:inline-flex; align-items:center; gap:5px; } .loopt svg{ transform-origin:center; } .loopt.on{ background:#0c6f4d; border-color:#0c6f4d; color:#fff; } .loopt.on svg{ animation:loopspin 2.4s linear infinite; } @keyframes loopspin{ to{ transform:rotate(360deg); } }
+  .pagenav{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin:34px 0 4px; padding-top:20px; border-top:1px solid var(--line); } .pgbtn{ background:var(--bg); border:1px solid var(--line2); color:var(--ink); font-size:13px; font-weight:500; padding:9px 15px; border-radius:9px; cursor:pointer; transition:border-color .15s,opacity .15s; white-space:nowrap; } .pgbtn:hover{ border-color:var(--accent); } .pgbtn:disabled{ opacity:.38; cursor:default; } .pgmid{ display:flex; flex-direction:column; align-items:center; gap:2px; min-width:0; text-align:center; } #pg-count{ font-size:11.5px; color:var(--faint); font-weight:600; } .pgttl{ font-size:12.5px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:46vw; }
   .lvlsel{ display:flex; gap:4px; margin:4px 0 16px; } .lvlchip{ flex:1; font-size:12px; font-weight:500; padding:6px 4px; border-radius:7px; border:1px solid var(--line2); background:var(--bg); color:var(--muted); cursor:pointer; transition:background .15s,color .15s,border-color .15s; } .lvlchip:hover{ border-color:var(--accent); } .lvlchip.on{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
   .btnrow{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
 
@@ -110,7 +111,9 @@
   /* compact detail page */
   .cxrow{ border:1px solid var(--line); border-radius:9px; background:var(--panel); padding:10px 13px; margin-bottom:8px; font-size:13px; line-height:1.55; transition:opacity .5s; }
   .cxrow .cxt{ font-size:10.5px; color:var(--faint); border:1px solid var(--line2); border-radius:4px; padding:1px 6px; margin-right:8px; white-space:nowrap; }
-  .cxrow.drop{ opacity:.25; }
+  .cxrow.drop{ opacity:.28; }
+  .cxrow.cxkeep{ opacity:1; border-color:rgba(31,158,118,.42); background:rgba(31,158,118,.07); }
+  .cxmark{ float:right; font-size:10.5px; font-weight:700; border-radius:4px; padding:1px 7px; margin-left:8px; } .cxmark.keep{ color:var(--good); background:rgba(31,158,118,.15); } .cxmark.drop{ color:var(--over); background:rgba(216,69,63,.13); }
   .cxbadge{ display:inline-block; font-size:12.5px; font-variant-numeric:tabular-nums; background:var(--row); border-radius:7px; padding:7px 12px; margin-bottom:12px; } .cxbadge b{ font-weight:600; } .cxbadge .ar{ color:var(--faint); margin:0 6px; }
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
@@ -118,7 +121,10 @@
   .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; }
   .tldr{ display:flex; gap:10px; align-items:flex-start; background:var(--row); border-radius:12px; padding:12px 15px; margin:0 0 26px; font-size:14px; line-height:1.6; } .tldr .tlb{ font-size:11px; font-weight:600; color:var(--accent); background:var(--bg); border:1px solid var(--line2); border-radius:6px; padding:2px 8px; white-space:nowrap; flex:0 0 auto; margin-top:1px; } .tldr .tlx{ flex:1; } .tldr b{ font-weight:600; }
   .exb{ display:inline-block; font-size:11px; font-weight:500; color:var(--warn); background:rgba(216,148,63,.14); border-radius:5px; padding:1px 7px; vertical-align:middle; }
-  .gl{ border-bottom:1px dotted var(--line2); cursor:help; }
+  .gl{ position:relative; border-bottom:1px dotted var(--line2); cursor:help; }
+  .gl::after{ content:attr(data-tip); position:absolute; left:50%; bottom:calc(100% + 9px); transform:translateX(-50%) translateY(4px); width:max-content; max-width:240px; white-space:normal; text-align:left; background:var(--ink); color:var(--bg); font-size:12px; font-weight:400; line-height:1.5; padding:8px 11px; border-radius:8px; box-shadow:0 6px 22px rgba(0,0,0,.2); opacity:0; pointer-events:none; transition:opacity .16s,transform .16s; z-index:60; }
+  .gl::before{ content:''; position:absolute; left:50%; bottom:calc(100% + 3px); transform:translateX(-50%); border:5px solid transparent; border-top-color:var(--ink); opacity:0; transition:opacity .16s; z-index:60; }
+  .gl[data-tip]:hover::after, .gl.show::after{ opacity:1; transform:translateX(-50%) translateY(0); } .gl[data-tip]:hover::before, .gl.show::before{ opacity:1; }
   .gsearch{ width:100%; max-width:380px; font-family:inherit; font-size:14px; padding:10px 13px; border-radius:8px; border:1px solid var(--line2); background:var(--bg); color:var(--ink); outline:none; margin-bottom:14px; } .gsearch:focus{ border-color:var(--accent); } .gsearch::placeholder{ color:var(--faint); }
   .gterm.hide{ display:none; }
   .prow .psafe{ width:9px; height:9px; border-radius:3px; flex:0 0 auto; }
@@ -333,7 +339,7 @@
 
   /* responsive nav */
   @media (max-width:860px){
-    .app{ flex-direction:column; } .lnb{ width:auto; flex:none; height:auto; position:sticky; top:0; z-index:5; border-right:none; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:4px; padding:12px 14px; overflow-x:auto; background:var(--bg); -webkit-overflow-scrolling:touch; } .brand{ padding:0; margin:0 8px 0 0; white-space:nowrap; } .brand .sub{ display:none; } .navsec{ display:none; } .navitem{ width:auto; white-space:nowrap; padding:7px 11px; } .navitem .no{ display:none; } .present-btn{ width:auto; flex:0 0 auto; white-space:nowrap; margin:0; padding:7px 11px; } .topctl{ flex:0 0 auto; margin:0 8px 0 0; gap:6px; } .langsel{ width:auto; min-width:88px; margin:0 8px 0 0; flex:0 0 auto; padding:7px 26px 7px 10px; } .navitem .nic{ display:none; } .navitem .no{ display:none; } .navitem .lbl{ flex:0 0 auto; } .main{ padding:28px 16px 60px; }
+    .app{ flex-direction:column; } .lnb{ width:auto; flex:none; height:auto; position:sticky; top:0; z-index:5; border-right:none; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:4px; padding:12px 14px; overflow-x:auto; background:var(--bg); -webkit-overflow-scrolling:touch; } .brand{ padding:0; margin:0 8px 0 0; white-space:nowrap; } .brand .sub{ display:none; } .navsec{ display:inline-block; flex:0 0 auto; width:1px; height:18px; padding:0; margin:0 3px; background:var(--line2); font-size:0; overflow:hidden; } .lvlsel{ flex:0 0 auto; margin:0 8px 0 0; gap:3px; } .lvlchip{ flex:0 0 auto; padding:6px 9px; } .navitem{ width:auto; white-space:nowrap; padding:7px 11px; } .navitem .no{ display:none; } .present-btn{ width:auto; flex:0 0 auto; white-space:nowrap; margin:0; padding:7px 11px; } .topctl{ flex:0 0 auto; margin:0 8px 0 0; gap:6px; } .langsel{ width:auto; min-width:88px; margin:0 8px 0 0; flex:0 0 auto; padding:7px 26px 7px 10px; } .navitem .nic{ display:none; } .navitem .no{ display:none; } .navitem .lbl{ flex:0 0 auto; } .main{ padding:28px 16px 60px; }
   }
 </style>
 </style>
@@ -437,7 +443,7 @@
         </div>
       </div>
       <div class="bignote"><span class="bx">参考</span><span>このガイドは<b>概念を学ぶ場所</b>です — インストールや始め方は扱いません（それは公式ドキュメントで案内しています）。そして<b>非公式の学習資料</b>なので Anthropic とは無関係です。</span></div>
-      <p class="note">左のメニュー（狭い画面では上のタブ）から 31 個のトピックを押して移動してください。すべて<b>自分で触らなくても</b>ボタンや入力で理解できるように作りました。本文に<span class="gl" title="このように点線が引かれた単語は、マウスを乗せると意味が表示されます。スマホではカッコの説明を参考にしてください。">点線の付いた単語</span>は、乗せると意味が表示されます。</p>
+      <p class="note">左のメニュー（狭い画面では上のタブ）から 31 個のトピックを押して移動してください。すべて<b>自分で触らなくても</b>ボタンや入力で理解できるように作りました。本文に<span class="gl" title="このように点線が引かれた言葉は、マウスを乗せる（PC）か一度タップする（スマホ・タブレット）と意味が出ます。">点線の言葉は、乗せるかタップすると意味が出ます。</span></p>
     </section>
 
     <!-- 02 COWORK -->
@@ -1227,6 +1233,12 @@ description: 週次レポートを会社の様式で作成
       <p class="note" id="gloss-empty" style="display:none;">検索結果がありません。別の単語で探してください。</p>
     </section>
 
+    <div class="pagenav" id="pagenav">
+      <button class="pgbtn" id="pg-prev" type="button">← 前へ</button>
+      <span class="pgmid"><span id="pg-count"></span><span class="pgttl" id="pg-title"></span></span>
+      <button class="pgbtn" id="pg-next" type="button">次へ →</button>
+    </div>
+
     <footer class="sitefoot">
       <div class="ft-main">制作者 · <b>최진안 (stark)</b></div>
       <div class="ft-links">
@@ -1310,6 +1322,26 @@ description: 週次レポートを会社の様式で作成
       document.querySelectorAll('.lnb .navsec').forEach(function(s){ var any=false,el=s.nextElementSibling; while(el && !el.classList.contains('navsec')){ if(el.classList.contains('navitem') && el.style.display!=='none'){ any=true; break; } el=el.nextElementSibling; } s.style.display=any?'':'none'; });
       var cur=document.querySelector('.navitem.on'); if(cur && cur.style.display==='none'){ var first=[].filter.call(navs,function(n){return n.style.display!=='none';})[0]; if(first) first.click(); } }
     chips.forEach(function(c){ c.addEventListener('click',function(){ setLevel(+c.dataset.lv); }); }); })();
+
+  /* glossary tooltips — hover (desktop) + tap (mobile/tablet) */
+  (function(){ var gls=document.querySelectorAll('.gl'); if(!gls.length) return;
+    gls.forEach(function(g){ if(g.hasAttribute('title')){ g.setAttribute('data-tip', g.getAttribute('title')); g.removeAttribute('title'); } g.setAttribute('tabindex','0'); g.setAttribute('role','button');
+      g.addEventListener('click',function(e){ e.stopPropagation(); var was=g.classList.contains('show'); gls.forEach(function(x){ x.classList.remove('show'); }); if(!was) g.classList.add('show'); });
+      g.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); g.click(); } }); });
+    document.addEventListener('click',function(){ gls.forEach(function(x){ x.classList.remove('show'); }); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') gls.forEach(function(x){ x.classList.remove('show'); }); }); })();
+
+  /* page progress + prev/next + keyboard arrows + mobile active scroll */
+  (function(){ var prev=document.getElementById('pg-prev'),next=document.getElementById('pg-next'),cnt=document.getElementById('pg-count'),ttl=document.getElementById('pg-title'); if(!prev) return;
+    function vis(){ return [].filter.call(navs,function(n){ return n.style.display!=='none'; }); }
+    function update(){ var v=vis(),cur=document.querySelector('.navitem.on'),i=v.indexOf(cur); if(i<0){ cnt.textContent=''; ttl.textContent=''; prev.disabled=next.disabled=true; return; } cnt.textContent=(i+1)+' / '+v.length; var lbl=cur.querySelector('.lbl'); ttl.textContent=lbl?lbl.textContent:''; prev.disabled=(i<=0); next.disabled=(i>=v.length-1);
+      if(window.innerWidth<=860 && cur && cur.scrollIntoView){ cur.scrollIntoView({block:'nearest',inline:'center'}); } }
+    function move(d){ var v=vis(),i=v.indexOf(document.querySelector('.navitem.on')),j=i+d; if(j>=0 && j<v.length) v[j].click(); }
+    prev.addEventListener('click',function(){ move(-1); }); next.addEventListener('click',function(){ move(1); });
+    navs.forEach(function(n){ n.addEventListener('click', update); });
+    document.querySelectorAll('#lvlsel .lvlchip').forEach(function(c){ c.addEventListener('click',function(){ setTimeout(update,0); }); });
+    document.addEventListener('keydown',function(e){ if(e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return; if(e.metaKey||e.ctrlKey||e.altKey) return; if(e.key==='ArrowRight') move(1); else if(e.key==='ArrowLeft') move(-1); });
+    update(); })();
 
   /* intro: chat vs code */
   var ccT=[]; function ccStep(box,text){ var d=document.createElement('div'); d.className='cstep'; d.innerHTML='<span class="ck">✓</span><span>'+text+'</span>'; box.appendChild(d); requestAnimationFrame(function(){ d.classList.add('on'); }); }
@@ -1521,12 +1553,13 @@ description: 週次レポートを会社の様式で作成
   gset();
 
   /* compact detail page */
-  var cxT=[];
+  var cxT=[], cxKeep={0:1,1:1,5:1};
   document.getElementById('cx-go').addEventListener('click',function(){ cxT.forEach(clearTimeout); cxT=[]; var before=document.getElementById('cx-before'),after=document.getElementById('cx-after'),rows=before.querySelectorAll('.cxrow');
-    document.getElementById('cx-label').textContent='圧縮中 — 長く積み上がった内容を整理する途中…';
-    rows.forEach(function(r,i){ cxT.push(setTimeout(function(){ r.classList.add('drop'); },250*i)); });
-    cxT.push(setTimeout(function(){ before.style.display='none'; after.style.display='block'; after.style.opacity='0'; after.style.transition='opacity .5s'; requestAnimationFrame(function(){ after.style.opacity='1'; }); document.getElementById('cx-label').textContent='圧縮後 — 要約 1 マスに'; },250*rows.length+500)); });
-  document.getElementById('cx-reset').addEventListener('click',function(){ cxT.forEach(clearTimeout); cxT=[]; var before=document.getElementById('cx-before'),after=document.getElementById('cx-after'); after.style.display='none'; before.style.display='block'; before.querySelectorAll('.cxrow').forEach(function(r){ r.classList.remove('drop'); }); document.getElementById('cx-label').textContent='圧縮前 — 会話の記録 (長く積み上がる)'; });
+    before.querySelectorAll('.cxmark').forEach(function(m){ m.remove(); }); rows.forEach(function(r){ r.classList.remove('drop','cxkeep'); });
+    document.getElementById('cx-label').textContent='圧縮中 — 大事なものは残し、余分は捨てます…';
+    rows.forEach(function(r,i){ cxT.push(setTimeout(function(){ var m=document.createElement('span'); if(cxKeep[i]){ r.classList.add('cxkeep'); m.className='cxmark keep'; m.textContent='残す'; } else { r.classList.add('drop'); m.className='cxmark drop'; m.textContent='捨てる'; } r.appendChild(m); },380*i)); });
+    cxT.push(setTimeout(function(){ before.style.display='none'; after.style.display='block'; after.style.opacity='0'; after.style.transition='opacity .5s'; requestAnimationFrame(function(){ after.style.opacity='1'; }); document.getElementById('cx-label').textContent='圧縮後 — 残した要点が1つの要約に'; },380*rows.length+700)); });
+  document.getElementById('cx-reset').addEventListener('click',function(){ cxT.forEach(clearTimeout); cxT=[]; var before=document.getElementById('cx-before'),after=document.getElementById('cx-after'); after.style.display='none'; before.style.display='block'; before.querySelectorAll('.cxmark').forEach(function(m){ m.remove(); }); before.querySelectorAll('.cxrow').forEach(function(r){ r.classList.remove('drop','cxkeep'); }); document.getElementById('cx-label').textContent='圧縮前 — 会話の記録 (長く積み上がる)'; });
 
   /* commands terminal */
   var term=document.getElementById('term'),tT=[];
