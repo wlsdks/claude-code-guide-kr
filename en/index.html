@@ -339,15 +339,39 @@
   @media (prefers-reduced-motion: reduce){ *{ animation-duration:.01ms !important; transition-duration:.01ms !important; } }
 
   /* responsive nav */
+  /* mobile top bar + drawer scrim (hidden on desktop) */
+  .mbar{ display:none; align-items:center; gap:11px; position:sticky; top:0; z-index:30; background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:saturate(1.4) blur(8px); -webkit-backdrop-filter:saturate(1.4) blur(8px); border-bottom:1px solid var(--line); padding:9px 14px; }
+  .mbar-burger{ width:40px; height:40px; flex:0 0 auto; border:1px solid var(--line2); border-radius:10px; background:var(--bg); display:inline-flex; flex-direction:column; align-items:center; justify-content:center; gap:4.5px; cursor:pointer; padding:0; }
+  .mbar-burger span{ display:block; width:18px; height:2px; background:var(--ink); border-radius:2px; transition:transform .26s ease, opacity .2s ease; }
+  .mbar-burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+  .mbar-burger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+  .mbar-burger[aria-expanded="true"] span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+  .mbar-title{ font-size:14.5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
+  .mbar-tag{ flex:0 0 auto; margin-left:auto; font-size:11px; color:var(--faint); }
+  .scrim{ position:fixed; inset:0; background:rgba(0,0,0,.44); z-index:55; opacity:0; visibility:hidden; transition:opacity .26s ease, visibility .26s ease; }
   @media (max-width:860px){
-    .app{ flex-direction:column; } .lnb{ width:auto; flex:none; height:auto; position:sticky; top:0; z-index:5; border-right:none; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:4px; padding:12px 14px; overflow-x:auto; background:var(--bg); -webkit-overflow-scrolling:touch; } .brand{ padding:0; margin:0 8px 0 0; white-space:nowrap; } .brand .sub{ display:none; } .navsec{ display:inline-block; flex:0 0 auto; width:1px; height:18px; padding:0; margin:0 3px; background:var(--line2); font-size:0; overflow:hidden; } .lvlsel{ flex:0 0 auto; margin:0 8px 0 0; gap:3px; } .lvlchip{ flex:0 0 auto; padding:6px 9px; } .navitem{ width:auto; white-space:nowrap; padding:7px 11px; } .navitem .no{ display:none; } .present-btn{ width:auto; flex:0 0 auto; white-space:nowrap; margin:0; padding:7px 11px; } .topctl{ flex:0 0 auto; margin:0 8px 0 0; gap:6px; } .langsel{ width:auto; min-width:88px; margin:0 8px 0 0; flex:0 0 auto; padding:7px 26px 7px 10px; } .navitem .nic{ display:none; } .navitem .no{ display:none; } .navitem .lbl{ flex:0 0 auto; } .main{ padding:28px 16px 60px; }
+    .app{ flex-direction:column; }
+    .mbar{ display:flex; }
+    .lnb{ position:fixed; left:0; top:0; height:100dvh; width:288px; max-width:86vw; flex:none; transform:translateX(-101%); transition:transform .3s cubic-bezier(.4,0,.2,1); z-index:60; border-right:1px solid var(--line); border-bottom:none; overflow-y:auto; -webkit-overflow-scrolling:touch; background:var(--bg); padding:18px 14px 44px; box-shadow:8px 0 40px rgba(0,0,0,.2); }
+    .lnb.open{ transform:translateX(0); }
+    .scrim.on{ opacity:1; visibility:visible; }
+    .brand{ margin-bottom:12px; } .lvlsel{ margin:6px 0 14px; }
+    .main{ padding:22px 16px 64px; }
+    .pagenav .pgttl{ max-width:42vw; }
   }
 </style>
 </head>
 <body>
 <div class="app">
 
-  <nav class="lnb">
+  <header class="mbar">
+    <button class="mbar-burger" id="mbar-burger" aria-label="Open menu" aria-expanded="false" aria-controls="lnb"><span></span><span></span><span></span></button>
+    <div class="mbar-title" id="mbar-title">What is Claude Code?</div>
+    <span class="mbar-tag" id="mbar-tag">1 / 31</span>
+  </header>
+  <div class="scrim" id="scrim"></div>
+
+  <nav class="lnb" id="lnb">
     <div class="topctl">
       <button class="present-btn theme-ic" id="theme-toggle" aria-label="Switch light/dark"></button>
       <button class="present-btn" id="present-toggle" title="Zooms the whole screen up bigger — great for projectors, large screens, or just seeing details up close (the simulations grow too). Press again to go back."><span class="pdot"></span><span id="present-label">Expand mode</span></button>
@@ -1333,14 +1357,26 @@ description: Write the weekly report in the company format
   /* page progress + prev/next + keyboard arrows + mobile active scroll */
   (function(){ var prev=document.getElementById('pg-prev'),next=document.getElementById('pg-next'),cnt=document.getElementById('pg-count'),ttl=document.getElementById('pg-title'); if(!prev) return;
     function vis(){ return [].filter.call(navs,function(n){ return n.style.display!=='none'; }); }
-    function update(){ var v=vis(),cur=document.querySelector('.navitem.on'),i=v.indexOf(cur); if(i<0){ cnt.textContent=''; ttl.textContent=''; prev.disabled=next.disabled=true; return; } cnt.textContent=(i+1)+' / '+v.length; var lbl=cur.querySelector('.lbl'); ttl.textContent=lbl?lbl.textContent:''; prev.disabled=(i<=0); next.disabled=(i>=v.length-1);
-      if(window.innerWidth<=860 && cur && cur.scrollIntoView){ cur.scrollIntoView({block:'nearest',inline:'center'}); } }
+    var mTitle=document.getElementById('mbar-title'),mTag=document.getElementById('mbar-tag');
+    function update(){ var v=vis(),cur=document.querySelector('.navitem.on'),i=v.indexOf(cur); if(i<0){ cnt.textContent=''; ttl.textContent=''; prev.disabled=next.disabled=true; return; } var counter=(i+1)+' / '+v.length, label=(cur.querySelector('.lbl')?cur.querySelector('.lbl').textContent:''); cnt.textContent=counter; ttl.textContent=label; prev.disabled=(i<=0); next.disabled=(i>=v.length-1);
+      if(mTitle) mTitle.textContent=label; if(mTag) mTag.textContent=counter; }
     function move(d){ var v=vis(),i=v.indexOf(document.querySelector('.navitem.on')),j=i+d; if(j>=0 && j<v.length) v[j].click(); }
     prev.addEventListener('click',function(){ move(-1); }); next.addEventListener('click',function(){ move(1); });
     navs.forEach(function(n){ n.addEventListener('click', update); });
     document.querySelectorAll('#lvlsel .lvlchip').forEach(function(c){ c.addEventListener('click',function(){ setTimeout(update,0); }); });
     document.addEventListener('keydown',function(e){ if(e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return; if(e.metaKey||e.ctrlKey||e.altKey) return; if(e.key==='ArrowRight') move(1); else if(e.key==='ArrowLeft') move(-1); });
     update(); })();
+
+  /* mobile drawer (hamburger menu) */
+  (function(){ var burger=document.getElementById('mbar-burger'),lnb=document.getElementById('lnb'),scrim=document.getElementById('scrim'); if(!burger||!lnb||!scrim) return;
+    function isMobile(){ return window.innerWidth<=860; }
+    function openDrawer(){ lnb.classList.add('open'); scrim.classList.add('on'); burger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; var a=lnb.querySelector('.navitem.on'); if(a) a.scrollIntoView({block:'nearest'}); }
+    function closeDrawer(){ lnb.classList.remove('open'); scrim.classList.remove('on'); burger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+    burger.addEventListener('click',function(){ lnb.classList.contains('open')?closeDrawer():openDrawer(); });
+    scrim.addEventListener('click',closeDrawer);
+    navs.forEach(function(n){ n.addEventListener('click',function(){ if(isMobile()) closeDrawer(); }); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeDrawer(); });
+    window.addEventListener('resize',function(){ if(!isMobile()) closeDrawer(); }); })();
 
   /* intro: chat vs code */
   var ccT=[]; function ccStep(box,text){ var d=document.createElement('div'); d.className='cstep'; d.innerHTML='<span class="ck">✓</span><span>'+text+'</span>'; box.appendChild(d); requestAnimationFrame(function(){ d.classList.add('on'); }); }
