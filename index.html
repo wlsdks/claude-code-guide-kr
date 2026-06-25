@@ -137,6 +137,8 @@
   .mg2chat{ margin-top:11px; display:flex; flex-direction:column; gap:8px; min-height:96px; }
   /* sim takeaway (결론) — what you learn after watching */
   .simtake{ margin-top:14px; display:flex; gap:9px; align-items:baseline; font-size:13px; line-height:1.55; background:rgba(31,158,118,.07); border:1px solid rgba(31,158,118,.26); border-radius:9px; padding:10px 13px; } .simtake .stk{ flex:0 0 auto; font-size:11px; font-weight:700; color:var(--good); border:1px solid rgba(31,158,118,.34); border-radius:5px; padding:1px 7px; }
+  /* real-world analogy callout (비유) */
+  .anlg{ display:flex; gap:9px; align-items:baseline; font-size:13.5px; line-height:1.6; background:var(--row); border:1px solid var(--line2); border-radius:9px; padding:11px 14px; margin:0 0 18px; } .anlg .ak{ flex:0 0 auto; font-size:11px; font-weight:700; color:var(--muted); border:1px solid var(--line2); border-radius:5px; padding:1px 7px; }
   .cxbadge{ display:inline-block; font-size:12.5px; font-variant-numeric:tabular-nums; background:var(--row); border-radius:7px; padding:7px 12px; margin-bottom:12px; } .cxbadge b{ font-weight:600; } .cxbadge .ar{ color:var(--faint); margin:0 6px; }
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
@@ -812,6 +814,7 @@ irm https://claude.ai/install.ps1 | iex</div>
     <section class="page" id="sessions">
       <h1>세션 & 폴더</h1>
       <p class="lead"><b>세션</b>은 한 번의 연속된 대화예요. 그 세션의 컨텍스트 창에 모든 게 쌓여요.</p>
+      <p class="anlg"><span class="ak">비유</span><span>한 세션은 <b>“한 끼 요리”</b> 같아요 — 김치찌개를 다 끓였으면 냄비를 헹구고(<code>/clear</code>) 다음 요리를 시작해야 맛이 안 섞여요.</span></p>
       <p class="defs">컴퓨터를 잘 몰라도 괜찮아요. 순서대로 — <b>먼저 폴더를 정하고, 그 안에서 세션을 시작</b>해요.</p>
 
       <p class="label">1단계 — 작업 폴더부터 정하기 <span class="hint">세션은 폴더 안에서 시작돼요</span></p>
@@ -1138,6 +1141,7 @@ description: 주간 보고서를 회사 양식으로 작성
     <section class="page" id="hooks">
       <h1>자동화 (훅 · Hooks)</h1>
       <p class="lead"><b>훅</b>은 한마디로 <b>‘자동 규칙’</b>이에요 — 특정 순간에 정해진 동작이 매번 자동으로 실행돼요.</p>
+      <p class="anlg"><span class="ak">비유</span><span>문 열면 자동으로 울리는 <b>가게 종</b>, 밤 11시 자동 방해금지처럼 — “○○가 생기면 → 자동으로 △△”를 미리 걸어둬요. (CLAUDE.md가 ‘부탁’이면 훅은 ‘규칙’)</span></p>
       <p class="defs">‘자동응답 메일’처럼, 어떤 일이 생기면 알아서 작동해요.</p>
       <div class="bignote"><span class="bx">안심</span><span><b>직접 만들 필요 없어요.</b> 설정 방법은 조금 기술적이지만, 비개발자는 만드는 법을 몰라도 돼요 — 클로드에게 <b>“파일 고칠 때마다 자동으로 정리하는 훅 만들어줘”</b>처럼 말로 부탁하면 클로드가 대신 만들어 줘요. 이 페이지는 ‘이런 게 있다’만 알면 충분해요.</span></div>
       <p class="label">작동 방식 <span class="hint">언제 → 무엇을 → 어떻게</span></p>
@@ -1183,6 +1187,7 @@ description: 주간 보고서를 회사 양식으로 작성
     <section class="page" id="permissions">
       <h1>권한 모드</h1>
       <p class="lead">클로드가 <b>어디까지 알아서 할지</b> 내가 정해요.</p>
+      <p class="anlg"><span class="ak">비유</span><span>보조에게 얼마나 맡길지 정하는 것 — <b>“뭐든 먼저 물어봐”</b> ↔ <b>“늘 하던 건 알아서 해”</b>. 처음엔 물어보게, 익숙해지면 풀어줘요.</span></p>
       <div class="callout" style="margin:0 0 8px;"><b>쉽게 말하면</b> · 클로드가 내 컴퓨터에서 뭔가(파일 고치기·명령 실행)를 할 때, <b>“이거 해도 될까요?”라고 얼마나 자주 물어볼지</b> 정하는 설정이에요. 처음엔 매번 물어보는 게 안전하고, 익숙해지면 자주 하는 일은 알아서 하게 풀어줄 수 있어요. 자동차의 ‘수동 ↔ 자동’ 같은 거예요.</div>
       <p class="defs">클로드 코드에서 <code class="inlinecode">Shift</code>+<code class="inlinecode">Tab</code> 으로 기본 모드(권한 요청·편집 수락·계획)를 순환해요. ‘자동·건너뛰기’ 같은 자율 모드는 별도 옵션이 필요할 수 있어요. 모드를 누르고 “동작 보기”로 차이를 확인하세요.</p>
       <div class="cols">
@@ -1385,6 +1390,7 @@ description: 주간 보고서를 회사 양식으로 작성
     <section class="page" id="compact">
       <h1>압축 (compact)</h1>
       <p class="lead">대화가 길어지면 ‘압축’이 일어나요. <b>길게 쌓인 내용이 짧은 요약 하나로</b> 바뀌죠 — 책상 위 서류를 핵심만 한 장으로 정리하는 것과 비슷해요.</p>
+      <p class="anlg"><span class="ak">비유</span><span>하루치 영수증을 밤에 “오늘 매출 OO원” <b>한 줄로 정리해 서랍을 비우듯</b> — 길게 쌓인 대화를 핵심 요약으로 줄여 자리를 내요.</span></p>
       <p class="defs">아래는 한 작업의 대화 기록이에요. ‘압축하기’를 누르면 내용이 실제로 어떻게 줄어드는지 보세요.</p>
       <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="cx-go">압축하기 (/compact) ▶</button><button class="btn" id="cx-reset">다시 보기</button></div>
 
@@ -1413,6 +1419,7 @@ description: 주간 보고서를 회사 양식으로 작성
     <section class="page" id="effort">
       <h1>생각의 깊이 (effort)</h1>
       <p class="lead"><b>생각의 깊이(effort)</b>는 클로드가 <b>답하기 전에 얼마나 깊이 고민할지</b> 정하는 설정이에요. 깊게 생각할수록 어려운 문제에 더 정확하지만, 더 느리고 비싸요.</p>
+      <p class="anlg"><span class="ak">비유</span><span><b>국물 우리기</b>와 같아요 — 급하면 살짝(저), 제대로 맛 내려면 푹(고·최고). 깊이 생각할수록 정확하지만 시간·비용이 더 들어요.</span></p>
       <p class="defs"><b>저 · 중 · 고 · 초고 · 최고</b> 단계가 있어요(기본은 ‘고’). 깊이 생각하는 만큼 ‘생각(thinking) 토큰’을 더 써요(‘토큰’ 탭). 골라서 차이를 보세요.</p>
       <div class="efbtns" id="ef-btns"></div>
       <div class="bars">
@@ -1431,6 +1438,7 @@ description: 주간 보고서를 회사 양식으로 작성
     <section class="page" id="goal">
       <h1>목표 달성 (goal)</h1>
       <p class="lead"><b>목표(goal)</b>는 <b>‘완료 조건’만 주면 그 조건이 될 때까지 클로드가 알아서 반복</b>하는 기능이에요. 매번 다시 시킬 필요가 없어요.</p>
+      <p class="anlg"><span class="ak">비유</span><span><b>“김치가 익을 때까지 매일 맛보기”</b>처럼 — 조건이 될 때까지 알아서 반복해요. (loop는 ‘정해진 시각마다’)</span></p>
       <p class="defs">한 번 하고 끝이 아니라, <b>매 턴 뒤에 ‘조건을 만족했는지’ 스스로 판정</b>하고, 안 됐으면 또 해요. 아래에서 보세요.</p>
       <div class="bignote"><span class="bx">예시 목표</span><span>“이 안내문의 <b>오타가 0개가 될 때까지</b> 고쳐줘”</span></div>
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="goal-go">목표 시작 ▶</button><button class="btn" id="goal-reset">초기화</button></div>
@@ -1444,6 +1452,7 @@ description: 주간 보고서를 회사 양식으로 작성
     <section class="page" id="loop">
       <h1>반복 실행 (loop)</h1>
       <p class="lead"><b>반복(loop)</b>은 <b>정해진 간격마다 같은 작업을 자동으로 다시 실행</b>하는 기능이에요. 예: 10분마다 ‘새 주문 들어왔는지 확인하고 알림’.</p>
+      <p class="anlg"><span class="ak">비유</span><span><b>“아침 7시마다 화분에 물 주기”</b>처럼 — 정해진 간격마다 자동으로 다시 해요. (goal은 ‘조건이 될 때까지’)</span></p>
       <p class="defs">목표(goal)가 ‘조건이 될 때까지’라면, 반복(loop)은 ‘<b>정해진 시간 간격으로</b>’예요. 간격을 고르고 시작해 보세요. (시뮬은 시간을 빠르게 돌려 보여줘요.)</p>
       <div class="chips" id="loop-chips" style="margin-bottom:12px;"></div>
       <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="loop-go">반복 시작 ▶</button><button class="btn" id="loop-reset">멈춤·초기화</button></div>
@@ -1494,7 +1503,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <h1>용어 사전</h1>
       <p class="lead">이 가이드에서 나온 말들을 한 줄로 정리했어요.</p>
       <p class="defs">헷갈릴 때 여기서 빠르게 찾아보세요. 검색창에 단어를 치면 바로 걸러져요.</p>
-      <div class="bignote"><span class="bx">헷갈리면</span><span>비슷해 보이는 네 가지 — <b>스킬</b>=나만의 레시피 · <b>플러그인</b>=기능 세트 상자 · <b>서브에이전트</b>=따로 일 시키는 직원 · <b>훅</b>=자동 규칙. 이름은 비슷해도 역할이 달라요.</span></div>
+      <div class="bignote"><span class="bx">헷갈리면</span><span>비슷해 보이는 다섯 가지 — <b>스킬</b>=나만의 레시피 · <b>플러그인</b>=기능 세트 상자 · <b>MCP</b>=도구 연결(외부 앱 잇기) · <b>서브에이전트</b>=일 나눠 맡기기 · <b>훅</b>=자동 규칙. 이름은 비슷해도 역할이 달라요.</span></div>
       <input class="gsearch" id="gloss-search" type="text" placeholder="용어 검색… (예: 터미널, API, 토큰)">
       <div class="gloss" id="gloss-list">
         <div class="gterm"><div class="gt">컨텍스트 창</div><div class="gd">클로드가 한 번에 들고 있는 ‘작업 공간’. 여기 있는 것만 알아요. (‘컨텍스트 창’ 탭)</div></div>
@@ -2073,7 +2082,7 @@ description: 주간 보고서를 회사 양식으로 작성
         ['조건·완료 기준', /면|되면|안 |없으면|빈 |경고|확인|테스트|검사|빨갛|초록|숫자|이상|이하|글자수|보다|처럼|같이/.test(t)],
         ['너무 짧지 않게 (12자+)', t.length>=12] ];
       var n=checks.filter(function(c){return c[1];}).length;
-      var v = n>=4?'아주 좋아요! 클로드가 한 번에 알아들어요.' : n>=2?'괜찮아요. 한두 가지만 더 적으면 완벽해요.' : '너무 두루뭉술해요. 클로드가 되물어볼 거예요.';
+      var v = n>=4?'아주 좋아요! 클로드가 한 번에 알아들어요.' : n>=2?'괜찮아요. 한두 가지만 더 적으면 완벽해요.' : '너무 두루뭉술해요. 클로드가 추측하다 빗나갈 수 있어요.';
       var h='<div class="schead">'+n+'/4 — '+v+'</div>';
       checks.forEach(function(c){ h+='<div class="chk '+(c[1]?'y':'n')+'"><span class="cx">'+(c[1]?'✓':'·')+'</span><span>'+c[0]+'</span></div>'; });
       BOX.innerHTML=h; BOX.className='scorebox on'; }
