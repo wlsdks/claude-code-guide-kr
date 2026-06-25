@@ -1130,7 +1130,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <h1>맥락은 왜 관리해야 할까?</h1>
       <p class="lead">컨텍스트(맥락)는 클로드의 <b>‘책상’</b>이에요. 책상이 지저분해지면 일이 <b>느려지고, 비싸지고, 실수가 늘어요</b>. 그래서 제때 정리하는 게 중요해요.</p>
       <p class="defs">‘대화 계속 쌓기’로 방치하면 어떻게 나빠지는지, ‘정리하기’를 누르면 어떻게 좋아지는지 직접 보세요.</p>
-      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="mg-stack">대화 계속 쌓기 ▶</button><button class="btn" id="mg-clean">정리하기 (/clear·/compact)</button></div>
+      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="mg-stack">대화 계속 쌓기 ▶</button><button class="btn" id="mg-clean">정리하기 ↺</button></div>
       <div class="mgwrap">
         <div class="mgfill"><div class="mgfl-h"><span>맥락이 차오른 정도</span><b id="mg-pct">12%</b></div><div class="mgfl-track"><i id="mg-fill"></i></div></div>
         <div class="mgbars">
@@ -1630,10 +1630,10 @@ description: 주간 보고서를 회사 양식으로 작성
   /* manage — why manage context */
   (function(){ var stack=document.getElementById('mg-stack'); if(!stack) return; var fill=10;
     var E={ pct:document.getElementById('mg-pct'), fl:document.getElementById('mg-fill'), slow:document.getElementById('mg-slow'), cost:document.getElementById('mg-cost'), conf:document.getElementById('mg-conf'), vslow:document.getElementById('mg-v-slow'), vcost:document.getElementById('mg-v-cost'), vconf:document.getElementById('mg-v-conf'), st:document.getElementById('mg-status') };
-    function color(v){ return v<35?'var(--good)':(v<70?'#d8943f':'#d8453f'); }
-    function rate(v){ return v<25?'낮음':(v<50?'보통':(v<78?'높음':'매우 높음')); }
-    function render(){ var f=Math.min(100,fill); E.pct.textContent=Math.round(f)+'%'; E.fl.style.width=f+'%'; E.fl.style.background= f<60?'var(--good)':(f<85?'#d8943f':'#d8453f');
-      var slow=Math.min(100,8+f*0.92), cost=Math.min(100,10+f*0.9), conf=Math.min(100,6+f*0.85);
+    function color(v){ return v<40?'var(--good)':(v<72?'#d8943f':'#d8453f'); }
+    function rate(v){ return v<30?'낮음':(v<58?'보통':(v<80?'높음':'매우 높음')); }
+    function render(){ var f=Math.min(100,fill); E.pct.textContent=Math.round(f)+'%'; E.fl.style.width=f+'%'; E.fl.style.background=color(f);
+      var slow=Math.min(100,f), cost=Math.min(100,f*0.95+4), conf=Math.min(100,f*0.88);
       E.slow.style.width=slow+'%'; E.slow.style.background=color(slow); E.vslow.textContent=rate(slow);
       E.cost.style.width=cost+'%'; E.cost.style.background=color(cost); E.vcost.textContent=rate(cost);
       E.conf.style.width=conf+'%'; E.conf.style.background=color(conf); E.vconf.textContent=rate(conf); }
