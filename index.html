@@ -482,7 +482,7 @@
       </div>
       <div class="ucsave" id="uc-save"></div>
       <p class="status" id="uc-status" style="margin-top:10px;">직업을 고르고 “전 → 후 비교 보기”를 눌러보세요.</p>
-      <p class="note">이런 사무 작업은 <b>Cowork(데스크톱 앱)</b>나 클로드 코드로 해요(‘COWORK란?’ 탭). 시간은 이해를 돕는 <span class="exb">예시</span>예요(실제는 일·환경마다 달라요).</p>
+      <p class="note">비개발자라면 <b>Cowork 데스크톱 앱</b>으로 하는 게 가장 쉬워요 — 설치 없이 보통 프로그램처럼 열어 파일을 끌어다 놓고 말로 시키면 돼요(‘COWORK란?’ 탭). 시간은 이해를 돕는 <span class="exb">예시</span>예요(실제는 일·환경마다 달라요).</p>
     </section>
 
     <!-- 04 WHERE -->
@@ -1573,13 +1573,13 @@ description: 주간 보고서를 회사 양식으로 작성
     var cur=0,ucT=[],taskEl=document.getElementById('uc-task'),bEl=document.getElementById('uc-before'),aEl=document.getElementById('uc-after'),saveEl=document.getElementById('uc-save'),ust=document.getElementById('uc-status');
     function pick(i){ cur=i; var u=UC[i]; [].forEach.call(chips.children,function(c,j){c.classList.toggle('on',j===i);}); taskEl.textContent=u.task; bEl.innerHTML=''; aEl.innerHTML=''; saveEl.classList.remove('show'); ust.textContent='“전 → 후 비교 보기”를 누르면 어떻게 달라지는지 보여드려요.'; }
     function line(box,text,cls){ var d=document.createElement('div'); d.className='ucline'+(cls?(' '+cls):''); d.textContent=text; box.appendChild(d); return d; }
-    UC.forEach(function(u,i){ var b=document.createElement('button'); b.className='cwchip'+(i===0?' on':''); b.textContent=u.job; b.addEventListener('click',function(){ ucT.forEach(clearTimeout); ucT=[]; pick(i); }); chips.appendChild(b); });
-    pick(0);
-    document.getElementById('uc-go').addEventListener('click',function(){ ucT.forEach(clearTimeout); ucT=[]; var u=UC[cur]; bEl.innerHTML=''; aEl.innerHTML=''; saveEl.classList.remove('show'); ust.textContent='전(지금)과 후(클로드와)를 비교하는 중…';
+    function run(){ ucT.forEach(clearTimeout); ucT=[]; var u=UC[cur]; bEl.innerHTML=''; aEl.innerHTML=''; saveEl.classList.remove('show'); ust.textContent='전(지금)과 후(클로드와)를 비교하는 중…';
       u.before.forEach(function(t){ line(bEl,t); }); u.after.forEach(function(o){ line(aEl,o.t,o.cls); });
       var seq=[].concat([].map.call(bEl.children,function(e){return e;}),[].map.call(aEl.children,function(e){return e;}));
-      seq.forEach(function(el,k){ ucT.push(setTimeout(function(){ el.classList.add('on'); if(k===seq.length-1){ saveEl.innerHTML='전 '+u.t1+' &nbsp;→&nbsp; 후 '+u.t2+' — 거의 자동으로 끝나요'; saveEl.classList.add('show'); ust.textContent='같은 일인데, 클로드와 하면 '+u.t1+'짜리가 '+u.t2+'으로 줄어요.'; } },300+k*600)); });
-    });
+      seq.forEach(function(el,k){ ucT.push(setTimeout(function(){ el.classList.add('on'); if(k===seq.length-1){ saveEl.innerHTML='전 '+u.t1+' &nbsp;→&nbsp; 후 '+u.t2+' — 거의 자동으로 끝나요'; saveEl.classList.add('show'); ust.textContent='같은 일인데, 클로드와 하면 '+u.t1+'짜리가 '+u.t2+'으로 줄어요.'; } },300+k*600)); }); }
+    UC.forEach(function(u,i){ var b=document.createElement('button'); b.className='cwchip'+(i===0?' on':''); b.textContent=u.job; b.addEventListener('click',function(){ pick(i); run(); }); chips.appendChild(b); });
+    pick(0);
+    document.getElementById('uc-go').addEventListener('click',run);
     document.getElementById('uc-reset').addEventListener('click',function(){ ucT.forEach(clearTimeout); ucT=[]; pick(cur); });
   })();
 
