@@ -639,7 +639,7 @@ irm https://claude.ai/install.ps1 | iex</div>
       <p class="defs">더 똑똑하면 보통 더 느리고 비싸요. 일에 맞게 고르면 됩니다. 아래에서 골라보세요.</p>
       <div class="mtabs" id="mtabs">
         <button class="mtab" data-m="opus"><div class="mn">Opus 4.8</div><div class="mt">가장 똑똑함</div></button>
-        <button class="mtab on" data-m="sonnet"><div class="mn">Sonnet 4.6</div><div class="mt">균형 · 기본 추천</div></button>
+        <button class="mtab on" data-m="sonnet"><div class="mn">Sonnet 4.6</div><div class="mt">균형 · 무난한 선택</div></button>
         <button class="mtab" data-m="haiku"><div class="mn">Haiku 4.5</div><div class="mt">가장 빠르고 저렴</div></button>
         <button class="mtab" data-m="fable"><div class="mn">Fable 5</div><div class="mt">최신 최강 · 기본값 아님</div></button>
       </div>
@@ -658,12 +658,13 @@ irm https://claude.ai/install.ps1 | iex</div>
       <p class="label">모델별 컨텍스트 창 (2026년 6월 기준)</p>
       <div class="tablewrap"><table class="t"><thead><tr><th>모델</th><th>컨텍스트 창</th><th>한마디</th></tr></thead><tbody>
         <tr><td class="cmd">Opus 4.8</td><td>최대 1M (100만)</td><td>가장 똑똑함</td></tr>
-        <tr><td class="cmd">Sonnet 4.6</td><td>최대 1M (100만)</td><td>균형 · 기본 추천</td></tr>
+        <tr><td class="cmd">Sonnet 4.6</td><td>최대 1M (100만)</td><td>균형 · 무난한 선택</td></tr>
         <tr><td class="cmd">Haiku 4.5</td><td>200K (20만)</td><td>가장 빠르고 저렴</td></tr>
         <tr><td class="cmd">Fable 5</td><td>최대 1M (100만)</td><td>최신 최강 · 직접 선택</td></tr>
       </tbody></table></div>
       <ul class="points">
-        <li><b>유료 플랜에서 최신 Opus·Sonnet을 고르면 1M 컨텍스트까지 쓸 수 있어요.</b><span>단, 1M 사용 가능 여부는 플랜·설정에 따라 달라요(자동은 아니에요). Haiku 같은 기본 모델은 200K예요.</span></li>
+        <li><b>기본 모델은 플랜에 따라 달라요.</b><span>Pro는 Sonnet 4.6, Max·API는 Opus 4.8이 기본이에요. 헷갈리면 균형 잡힌 Sonnet으로 시작하면 무난해요.</span></li>
+        <li><b>1M 컨텍스트는 Fable 5·Opus 4.6 이상·Sonnet 4.6에서 쓸 수 있어요.</b><span>사용 가능 여부는 플랜·설정에 따라 달라요(자동은 아니에요). Haiku는 200K예요.</span></li>
         <li><b>일상 업무엔 200K로도 충분해요.</b><span>1M은 큰 프로젝트·아주 긴 작업에서 빛나요.</span></li>
         <li><b>창이 클수록 더 많이 기억하지만, 약간 느리고 정확도가 떨어질 수 있어요.</b><span>필요한 것만 올리는 게 가장 좋은 품질을 내요.</span></li>
       </ul>
@@ -814,7 +815,7 @@ description: 주간 보고서를 회사 양식으로 작성
         <div class="fcard"><div class="ft">스킬</div><div class="fd">반복 작업의 <b>요령·절차</b> 묶음.</div></div>
         <div class="fcard"><div class="ft">플러그인</div><div class="fd">위의 것들을 <b>묶어 배포</b>하는 패키지.</div></div>
       </div>
-      <p class="note">설치: <code>/plugin install 이름@마켓플레이스</code>. 공식 마켓플레이스(claude-plugins-official)와 커뮤니티 마켓플레이스(claude-community)가 있어요. 신뢰할 수 있는 출처만 설치하세요. (출처: 공식 문서 code.claude.com/docs/plugins)</p>
+      <p class="note">설치: <code>/plugin install 이름@마켓플레이스</code>. 공식·커뮤니티 마켓플레이스가 있어요(예: 커뮤니티는 <code>@claude-community</code>). 신뢰할 수 있는 출처만 설치하세요. (출처: 공식 문서 code.claude.com/docs/plugins)</p>
     </section>
 
     <!-- 12 SUBAGENTS -->
@@ -944,7 +945,7 @@ description: 주간 보고서를 회사 양식으로 작성
         </div>
         <div><div class="pdetail" id="pdetail"></div><div class="btnrow" style="margin-top:12px;"><button class="btn solid" id="pm-sim">이 모드 동작 보기 ▶</button></div><div class="simbox" id="pm-simbox"></div></div>
       </div>
-      <p class="note">이 5가지는 메뉴에 보이는 모드예요. 자동화 전용으로 ‘사전 승인한 도구만 허용(dontAsk)’ 모드도 따로 있어요. 어떤 모드든 <b>시스템 전체 삭제(rm -rf / · rm -rf ~) 같은 극단적 파괴</b>는 안전장치로 막혀요. 마음에 안 들면 ‘되돌리기’(‘되돌리기’ 탭)로 복구할 수 있어요.</p>
+      <p class="note">이 5가지는 메뉴에 보이는 모드예요. 자동화 전용으로 ‘사전 승인한 도구만 허용(dontAsk)’ 모드도 따로 있어요. 어떤 모드든 <b>시스템 전체 삭제(rm -rf / · rm -rf ~) 같은 극단적 파괴</b>는 한 번 더 확인을 받아요(‘회로 차단기’ — 자동 실행되지 않아요). 마음에 안 들면 ‘되돌리기’(‘되돌리기’ 탭)로 복구할 수 있어요.</p>
     </section>
 
     <!-- 17 REWIND -->
@@ -958,7 +959,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <div class="btnrow" style="margin:14px 0;"><button class="btn" id="rw-code">코드만 복구</button><button class="btn" id="rw-both">코드+대화 복구</button><button class="btn" id="rw-reset">초기화</button></div>
       <p class="status" id="rw-msg" style="margin-top:0;">위 타임라인의 점을 누른 뒤, 복구 방식을 골라보세요.</p>
       <ul class="points">
-        <li><b>여는 법</b><span><code>ESC</code> 를 두 번 누르거나 <code>/rewind</code> — 지금까지 보낸 요청 목록이 떠요.</span></li>
+        <li><b>여는 법</b><span><code>/rewind</code> 또는 입력창이 <b>비어 있을 때</b> <code>ESC</code> 를 두 번 — 지금까지 보낸 요청 목록이 떠요. (입력창에 글이 있으면 두 번 누르면 글부터 지워져요.)</span></li>
         <li><b>세 가지 복구</b><span>코드+대화 함께 / 대화만(코드 유지) / 코드만(대화 유지).</span></li>
         <li><b>한계</b><span><code>rm·mv</code> 같은 터미널 명령으로 바뀐 것, 설치(<code>npm install</code>)·외부 변경은 되돌릴 수 없어요.</span></li>
       </ul>
@@ -976,7 +977,7 @@ description: 주간 보고서를 회사 양식으로 작성
           <div class="cmprow"><b>설정 위치</b>claude.ai/settings/data-privacy-controls</div></div>
         <div class="cmpcard"><h4>업무용 (Team·Enterprise·API)</h4><div class="who">회사·개발자 계정</div>
           <div class="cmprow"><b>학습 사용</b>기본적으로 <b>학습에 사용되지 않음</b></div>
-          <div class="cmprow"><b>API</b>입출력이 기본 7일 후 삭제, 학습 미사용</div></div>
+          <div class="cmprow"><b>API</b>기본적으로 대화 내용을 저장하지 않음, 학습 미사용 (일부 최신 모델은 30일 보관 필요)</div></div>
       </div>
       <ul class="points">
         <li><b>클로드 코드는 내 컴퓨터에서 실행돼요.</b><span>필요한 내용만 암호화(TLS)해서 API로 보내요 — 전체 폴더를 클라우드에 올리는 게 아니에요.</span></li>
@@ -1023,7 +1024,7 @@ description: 주간 보고서를 회사 양식으로 작성
         <div class="fgrid">
           <div class="fcard"><div class="ft">Free (무료)</div><div class="fd">클로드 코드 <b>미포함</b>. 유료가 있어야 써요.</div></div>
           <div class="fcard"><div class="ft">Pro</div><div class="fd">개인용. 일상 사용에 적당.</div><div class="fe"><b>대략</b> 월 $20 <span class="exb">변동</span></div></div>
-          <div class="fcard"><div class="ft">Max</div><div class="fd">개인용. 사용량이 가장 넉넉.</div><div class="fe"><b>대략</b> 월 $100~200 <span class="exb">변동</span></div></div>
+          <div class="fcard"><div class="ft">Max</div><div class="fd">개인용. 사용량이 가장 넉넉.</div><div class="fe">월 <b>$100</b>(5x)·<b>$200</b>(20x) <span class="exb">변동</span></div></div>
           <div class="fcard"><div class="ft">Team · Enterprise</div><div class="fd">팀·회사용. 사람(좌석) 수만큼.</div></div>
           <div class="fcard"><div class="ft">API (종량제)</div><div class="fd">쓴 만큼 토큰 기준 과금. 자동화·연동용.</div></div>
         </div>
@@ -1046,7 +1047,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <div class="cols">
         <div>
           <div class="gauge"><div class="gl"><span>5시간 한도 (최근 5시간)</span><b id="g5n">0%</b></div><div class="gtrack"><i id="g5"></i></div></div>
-          <div class="gauge"><div class="gl"><span>주간 한도 (최근 7일)</span><b id="gwn">18%</b></div><div class="gtrack"><i id="gw"></i></div></div>
+          <div class="gauge"><div class="gl"><span>주간 한도 (주 단위)</span><b id="gwn">18%</b></div><div class="gtrack"><i id="gw"></i></div></div>
           <div class="lockmsg" id="lock-msg"></div>
         </div>
         <div>
@@ -1069,7 +1070,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <p class="label">두 가지 한도가 동시에 있어요</p>
       <ul class="points">
         <li><b>5시간 한도</b><span>‘지난 5시간’ 동안 쓴 양을 봐요. 시간이 지나면 자동으로 다시 채워져요(롤링 방식).</span></li>
-        <li><b>주간(7일) 한도</b><span>‘지난 7일’ 기준의 더 큰 한도. 5시간 한도만 피한다고 무한정 쓸 수 있는 건 아니에요.</span></li>
+        <li><b>주간 한도</b><span>한 주 단위의 더 큰 한도로, <b>정해진 요일·시각에 리셋</b>돼요(매번 5시간처럼 흘러가는 게 아니에요). 5시간 한도만 피한다고 무한정 쓸 순 없어요. (Max는 ‘전체’ + ‘Sonnet 전용’ 두 개)</span></li>
         <li><b>둘 중 하나라도 다 차면 멈춰요.</b><span>5시간·주간 두 한도가 같이 걸려 있어서, 먼저 꽉 차는 쪽에서 막혀요. 그 한도가 리셋되면 다시 풀려요.</span></li>
         <li><b>한도에 걸려도 작업은 안 사라져요.</b><span>하던 내용이 날아가는 게 아니라 ‘잠깐 멈춤’이에요 — 리셋되면 이어서 하면 돼요. (급하면 상위 플랜으로 업그레이드하거나 추가 사용량을 구매)</span></li>
         <li><b>한 곳에서 같이 차감돼요.</b><span>claude.ai·클로드 코드·데스크톱 앱이 같은 사용량을 나눠 써요.</span></li>
@@ -1125,6 +1126,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <p class="label">고른 만큼 ‘생각 과정’이 깊어져요 <span class="hint">눌러보면 길이가 달라요</span></p>
       <div class="efthink" id="ef-think"></div>
       <p class="note">간단한 일은 ‘저’로(빠르고 저렴), 까다로운 분석·추론은 ‘고/최고’로. 바꾸는 법: <code>/effort</code> 또는 설정(‘설정’ 탭). <span class="exb">예시</span> 막대는 상대 비교예요. (출처: Anthropic 공식 — support.claude.com 모델·effort 설정)</p>
+      <p class="note"><b>고급 · ultracode</b> — <code>/effort</code> 메뉴엔 <b>ultracode</b>도 있어요. 최고 수준(초고) 추론에 더해, 어려운 일은 <b>여러 도우미를 자동으로 동원(워크플로)</b>해 처리하는 <b>세션 전용</b> 모드예요. 토큰을 많이 써서 평소엔 필요 없고, 아주 어려운 작업에만 골라 써요(Fable 5·Opus 4.8 등에서).</p>
     </section>
 
     <!-- GOAL -->
@@ -1465,7 +1467,7 @@ description: 주간 보고서를 회사 양식으로 작성
     {name:'편집 수락',safe:'대체로 안전',col:'#5aa56a',auto:'파일 편집, 안전한 파일 명령(폴더 만들기·이동·복사)',ask:'git 커밋 등 되돌리기 어려운 작업',use:'결과를 보며 빠르게 반복 수정할 때',sim:['auto','auto','ask','ask']},
     {name:'계획 모드',safe:'읽기 전용',col:'#b9792a',auto:'읽기·탐색만 (직접 고치지 않음)',ask:'계획을 승인하면 한꺼번에 실행',use:'큰 변경 전에 계획을 먼저 확인할 때',sim:['plan','plan','plan','plan']},
     {name:'자동 모드',safe:'주의',col:'#d8943f',auto:'대부분의 작업 (백그라운드 안전 검사)',ask:'위험한 작업만 확인·차단',use:'장시간 자동 작업으로 확인을 줄이고 싶을 때',note:'최신 버전·모델(Opus 4.6/Sonnet 4.6 이상) 필요',sim:['auto','auto','auto','ask']},
-    {name:'권한 건너뛰기',safe:'위험',col:'#d8453f',auto:'전부 — 확인 없이 진행',ask:'시스템 전체 삭제(rm -rf / · rm -rf ~) 같은 극단만 차단',use:'인터넷 차단된 격리 환경(컨테이너·VM)에서만',note:'프롬프트 인젝션에 취약 — 일반 PC에서 쓰지 마세요',sim:['auto','auto','auto','auto']} ];
+    {name:'권한 건너뛰기',safe:'위험',col:'#d8453f',auto:'전부 — 확인 없이 진행',ask:'시스템 전체 삭제(rm -rf / · rm -rf ~) 같은 극단은 한 번 더 확인',use:'인터넷 차단된 격리 환경(컨테이너·VM)에서만',note:'프롬프트 인젝션에 취약 — 일반 PC에서 쓰지 마세요',sim:['auto','auto','auto','auto']} ];
   var SIM_ACT=['파일 수정','폴더 만들기','git 커밋','파일 삭제 (rm)'],SIM_TXT={auto:'자동 실행',ask:'확인 요청',plan:'실행 안 함 (계획만)',block:'차단'},curPm=0;
   function pmShow(i){ curPm=i; var d=PM[i]; document.querySelectorAll('#pmenu .prow').forEach(function(r){ r.classList.toggle('on',+r.dataset.i===i); }); var badge='<span class="pbadge" style="background:'+rgba(d.col,.16)+';color:'+d.col+'">'+d.safe+'</span>'; document.getElementById('pdetail').innerHTML='<div class="pt">'+d.name+' '+badge+'</div><div class="pdrow"><b>알아서 하는 것</b>'+d.auto+'</div><div class="pdrow"><b>그래도 묻는 것</b>'+d.ask+'</div><div class="pdrow"><b>언제 쓰나</b>'+d.use+'</div>'+(d.note?'<div class="pdrow"><b>참고</b>'+d.note+'</div>':''); document.getElementById('pmark').style.left=((i+0.5)/PM.length*100)+'%'; document.getElementById('pm-simbox').innerHTML='<div class="simrow on" style="color:var(--faint);font-size:12.5px;">“이 모드 동작 보기”를 눌러보세요.</div>'; }
   var pmT=[]; document.getElementById('pm-sim').addEventListener('click',function(){ pmT.forEach(clearTimeout); pmT=[]; var d=PM[curPm],box=document.getElementById('pm-simbox'); box.innerHTML=''; SIM_ACT.forEach(function(a,idx){ var s=d.sim[idx],row=document.createElement('div'); row.className='simrow'; var cls=s==='auto'?'auto':(s==='ask'?'ask':(s==='plan'?'plan':'block')); row.innerHTML='<span class="sa">'+a+'</span><span class="sp '+cls+'">'+SIM_TXT[s]+'</span>'; box.appendChild(row); pmT.push(setTimeout(function(){ row.classList.add('on'); },220*idx)); }); });
