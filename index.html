@@ -518,7 +518,7 @@ irm https://claude.ai/install.ps1 | iex</div>
     <section class="page" id="context">
       <h1>컨텍스트 창</h1>
       <p class="lead">클로드는 <b>한 작업 공간(컨텍스트 창)</b>에 올라온 것만 알아요 — 클로드의 ‘<b>책상</b>’이라고 보면 돼요. 책상에 없는 건 클로드도 몰라요.</p>
-      <p class="defs">칸의 높이 = 그게 차지하는 양. 직접 입력하고 버튼을 눌러 채워보세요.</p>
+      <p class="defs">칸의 높이 = 그게 차지하는 양. 직접 입력하고 버튼을 눌러 채워보세요. (칸의 토큰 수는 개념 이해용 <span class="exb">예시</span>예요.)</p>
       <div class="cols">
         <div>
           <div class="head"><span class="l">사용량</span><span class="n" id="num"><span id="tok">0</span><span class="max"> / 40,000</span></span></div>
@@ -839,7 +839,7 @@ description: 주간 보고서를 회사 양식으로 작성
         <li><b>할 수 있는 일을 제한할 수 있어요.</b><span>예: ‘코드 검토’ 도우미는 읽기만 하고 못 고치게 — 더 안전.</span></li>
         <li><b>기본 제공 도우미가 있어요: Explore(탐색)·Plan(계획)·General-purpose(범용) 등.</b><span>그 외엔 직접 만들 수도 있어요(<code>.claude/agents/</code>).</span></li>
       </ul>
-      <p class="note">여러 세션을 동시에 돌리며 협업하는 ‘에이전트 팀(agent teams)’은 별도의 실험 기능이에요. (출처: 공식 문서)</p>
+      <p class="note">막대·토큰 수치는 개념 이해용 <span class="exb">예시</span>예요(실제 값은 작업마다 달라요). 여러 세션을 동시에 돌리며 협업하는 ‘에이전트 팀(agent teams)’은 별도의 실험 기능이에요. (출처: 공식 문서)</p>
     </section>
 
     <!-- 13 IMAGES -->
@@ -1374,7 +1374,7 @@ description: 주간 보고서를 회사 양식으로 작성
   function countTo(k,target,dur,done){ var start=counts[k],steps=Math.max(1,Math.round(dur/40)),i=0; (function st(){ i++; counts[k]=Math.round(start+(target-start)*(i/steps)); meter(); if(i<steps)lcT.push(setTimeout(st,40)); else if(done)done(); })(); }
   function lcVisual(stage){ document.querySelectorAll('.stage').forEach(function(s){ s.classList.toggle('on',s.dataset.st===stage); });
     if(stage==='input'){ sv.innerHTML='<div class="sv-title">입력 — 읽기</div><div class="sv-bar"><div class="sv-fill" style="background:var(--blue)"></div></div><div class="sv-desc">내 질문 + 컨텍스트 창 전체를 한꺼번에 읽어요. 오른쪽에서 입력 토큰이 올라가요.</div>'; lcT.push(setTimeout(function(){ var f=sv.querySelector('.sv-fill'); if(f)f.style.width='100%'; },60)); }
-    else if(stage==='think'){ sv.innerHTML='<div class="sv-title">생각 — 내부 추론 <span style="font-weight:300;color:var(--faint);font-size:12px;">(선택 기능)</span></div><div class="think-dots"><i></i><i></i><i></i> &nbsp;<span id="lc-think">생각 중…</span></div><div class="sv-desc">답하기 전 단계별로 따져봐요. 보통 숨겨지지만 <b>출력과 같은 가격</b>이라 오른쪽 ‘생각’ 토큰이 가장 많이 올라가요.</div>'; var t='프랑스… 유럽의 나라… 수도는… 파리…',el=document.getElementById('lc-think'),i=0; (function ty(){ if(!el)return; el.textContent=t.slice(0,i)||'생각 중…'; if(i++<=t.length)lcT.push(setTimeout(ty,55)); })(); }
+    else if(stage==='think'){ sv.innerHTML='<div class="sv-title">생각 — 내부 추론 <span style="font-weight:300;color:var(--faint);font-size:12px;">(선택 기능)</span></div><div class="think-dots"><i></i><i></i><i></i> &nbsp;<span id="lc-think">생각 중…</span></div><div class="sv-desc">답하기 전 단계별로 따져봐요. 보통 숨겨지고 <b>출력과 같은 가격</b>이에요. 어려운 문제일수록 ‘생각’ 토큰이 크게 늘 수 있어요(숫자는 <b>예시</b>).</div>'; var t='프랑스… 유럽의 나라… 수도는… 파리…',el=document.getElementById('lc-think'),i=0; (function ty(){ if(!el)return; el.textContent=t.slice(0,i)||'생각 중…'; if(i++<=t.length)lcT.push(setTimeout(ty,55)); })(); }
     else { sv.innerHTML='<div class="sv-title">출력 — 답변 쓰기</div><div class="sv-type" id="lc-type"></div><div class="sv-desc">실제로 보이는 답변이에요. 오른쪽에서 출력 토큰이 올라가요.</div>'; var msg='파리예요. 프랑스의 수도이자 가장 큰 도시랍니다.',e2=document.getElementById('lc-type'),j=0; (function ty2(){ if(!e2)return; e2.textContent=msg.slice(0,j); if(j++<=msg.length)lcT.push(setTimeout(ty2,32)); })(); } }
   var lcMap={input:'in',think:'th',output:'out'},lcTg={input:500,think:2000,output:50};
   function lcSet(stage){ lcClear(); mreset(); lcVisual(stage); countTo(lcMap[stage],lcTg[stage],800); }
@@ -1617,7 +1617,7 @@ description: 주간 보고서를 회사 양식으로 작성
       var set=function(k,v,col){ document.getElementById('ef-f-'+k).style.width=(v*20)+'%'; document.getElementById('ef-f-'+k).style.background=col; document.getElementById('ef-v-'+k).textContent=RATE[v]; };
       set('acc',d.acc,'#1f9e76'); set('sp',d.sp,'#3b7dd8'); set('cost',d.cost,'#d8662f');
       efT.forEach(clearTimeout); efT=[]; efThink.innerHTML='';
-      d.steps.forEach(function(s,k){ var el=document.createElement('div'); el.className='efline'; el.textContent=(k+1)+'. '+s; efThink.appendChild(el); efT.push(setTimeout(function(){ el.classList.add('on'); },120+k*200)); });
+      d.steps.forEach(function(s,k){ var el=document.createElement('div'); el.className='efline'; el.textContent=(k+1)+'. '+s; efThink.appendChild(el); efT.push(setTimeout(function(){ el.classList.add('on'); },140+k*280)); });
     }
     EF.forEach(function(d,i){ var b=document.createElement('button'); b.className='efbtn'+(i===2?' on':''); b.innerHTML=d.n+'<span class="efd">'+d.d+'</span>'; b.addEventListener('click',function(){ efShow(i); }); efBtns.appendChild(b); });
     efShow(2);
