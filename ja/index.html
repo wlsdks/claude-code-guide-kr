@@ -642,7 +642,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <button class="mtab" data-m="opus"><div class="mn">Opus 4.8</div><div class="mt">いちばん賢い</div></button>
         <button class="mtab on" data-m="sonnet"><div class="mn">Sonnet 4.6</div><div class="mt">バランス · おすすめの基本</div></button>
         <button class="mtab" data-m="haiku"><div class="mn">Haiku 4.5</div><div class="mt">いちばん速くて安い</div></button>
-        <button class="mtab locked" data-m="fable"><div class="mn">Fable 5 <span class="lockpill">ロック中</span></div><div class="mt">最上位 · 特殊作業</div></button>
+        <button class="mtab" data-m="fable"><div class="mn">Fable 5</div><div class="mt">最新最強 · デフォルトではない</div></button>
       </div>
       <div class="bars">
         <div class="bar"><div class="bl"><span>知能 (難しい問題を解く)</span><b id="v-iq"></b></div><div class="track2"><div class="fill2" id="f-iq"></div></div></div>
@@ -661,6 +661,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <tr><td class="cmd">Opus 4.8</td><td>最大 1M (100万)</td><td>いちばん賢い</td></tr>
         <tr><td class="cmd">Sonnet 4.6</td><td>最大 1M (100万)</td><td>バランス · おすすめの基本</td></tr>
         <tr><td class="cmd">Haiku 4.5</td><td>200K (20万)</td><td>いちばん速くて安い</td></tr>
+        <tr><td class="cmd">Fable 5</td><td>最大 1M (100万)</td><td>最新最強 · 自分で選択</td></tr>
       </tbody></table></div>
       <ul class="points">
         <li><b>有料プランで最新の Opus・Sonnet を選ぶと最大 1M コンテキストまで使えます。</b><span>ただし 1M が使えるかはプランや設定によります（自動ではありません）。Haiku のような基本モデルは 200K です。</span></li>
@@ -1113,7 +1114,7 @@ description: 週次レポートを会社の様式で作成
     <section class="page" id="effort">
       <h1>考える深さ (effort)</h1>
       <p class="lead"><b>考える深さ（effort）</b>は、Claude が<b>答える前にどれだけ深く考えるか</b>を決める設定です。深く考えるほど難しい問題により正確になりますが、より遅く高くつきます。</p>
-      <p class="defs"><b>低・中・高・最高</b>の段階があります。深く考えるほど「思考（thinking）トークン」を多く使います（「トークン」タブ）。選んで違いを見てみましょう。</p>
+      <p class="defs"><b>低 · 中 · 高 · 超高 · 最高</b>の段階があります（デフォルトは「高」）。深く考えるほど「思考（thinking）トークン」を多く使います（「トークン」タブ）。選んで違いを見てみましょう。</p>
       <div class="efbtns" id="ef-btns"></div>
       <div class="bars">
         <div class="bar"><div class="bl"><span>難しい問題の正確さ</span><b id="ef-v-acc"></b></div><div class="track2"><div class="fill2" id="ef-f-acc"></div></div></div>
@@ -1383,7 +1384,7 @@ description: 週次レポートを会社の様式で作成
   var MODELS={ opus:{iq:5,sp:2,cost:1,ctx:'最大 1M (約 100万トークン)',tag:'いちばん賢いが、いちばん遅くて高い。',when:'精度が何より大事なとき。',ex:['複雑なコードの分析・設計','解くのが難しいバグ','長い推論が必要な作業']},
     sonnet:{iq:4,sp:4,cost:3,ctx:'最大 1M (約 100万トークン)',tag:'賢さと速さのバランス。ほとんどの作業に無難。',when:'何を選ぶか迷ったらここから始める。',ex:['一般的なコーディング・修正','文書作成・要約','ほとんどの作業']},
     haiku:{iq:3,sp:5,cost:5,ctx:'200K (約 20万トークン)',tag:'いちばん速くて、いちばん安い。',when:'速さ・コストが大事で作業が単純なとき。',ex:['簡単・くり返しの作業','速い応答','大量を軽く処理']},
-    fable:{iq:5,sp:1,cost:1,locked:true,ctx:'最大 1M (約 100万トークン)',lock:'今は一般利用がロックされている最上位の特殊モデルです。(選択不可 — 参考用)',tag:'いちばん強力だが、いちばん遅くて高い特殊モデル。',when:'とても難しく長くかかる自律作業用。',ex:['大規模なコードのマイグレーション','長時間の自律作業','最高難度の問題']} };
+    fable:{iq:5,sp:1,cost:1,ctx:'最大 1M (約 100万トークン)',tag:'いちばん強力な最新モデル — いちばん遅くて高価です。デフォルトではなく、自分で選ぶ必要があります。',when:'とても難しく長くかかる作業に最高性能が必要なとき。(プラン・環境によって選択できるかどうかが変わります)',ex:['大規模なコードのマイグレーション','長時間の自律作業','最高難度の問題']} };
   var barColor={iq:'#6d5fd0',sp:'#1f9e76',cost:'#3b7dd8'},rateTxt=['','とても低い','低い','普通','高い','とても高い'];
   function showModel(m){ var d=MODELS[m]; ['iq','sp','cost'].forEach(function(k){ document.getElementById('f-'+k).style.width=(d[k]*20)+'%'; document.getElementById('f-'+k).style.background=d.locked?'var(--line2)':barColor[k]; document.getElementById('v-'+k).textContent=rateTxt[d[k]]; });
     var lb=document.getElementById('m-lock'); if(d.locked){ lb.style.display='block'; lb.textContent='🔒 '+d.lock; document.getElementById('muse').classList.add('lock'); } else { lb.style.display='none'; document.getElementById('muse').classList.remove('lock'); }
@@ -1606,7 +1607,8 @@ description: 週次レポートを会社の様式で作成
     /* effort */
     var EF=[{n:'低',d:'簡単・速く',acc:2,sp:5,cost:1,steps:['すぐに答えます']},
       {n:'中',d:'普通',acc:3,sp:4,cost:2,steps:['要点を一度点検','答えを整理']},
-      {n:'高',d:'深く',acc:4,sp:2,cost:4,steps:['いくつかの方法を比較','根拠を吟味','抜けを確認','答えを整理']},
+      {n:'高',d:'深く (デフォルト)',acc:4,sp:3,cost:3,steps:['いくつかの方法を比較','根拠を吟味','抜けを確認','答えを整理']},
+      {n:'超高',d:'もっと深く',acc:5,sp:2,cost:4,steps:['場合の数を広げる','それぞれ検証','反例を探す','根拠を整理','答えを整理']},
       {n:'最高',d:'とても深く',acc:5,sp:1,cost:5,steps:['場合の数を広げる','それぞれ検証','反例を探す','もう一度点検','根拠を整理','最終の答え']}];
     var efBtns=document.getElementById('ef-btns'),efThink=document.getElementById('ef-think'),efT=[];
     function efShow(i){ var d=EF[i]; [].forEach.call(efBtns.children,function(c,j){ c.classList.toggle('on',j===i); });
@@ -1615,8 +1617,8 @@ description: 週次レポートを会社の様式で作成
       efT.forEach(clearTimeout); efT=[]; efThink.innerHTML='';
       d.steps.forEach(function(s,k){ var el=document.createElement('div'); el.className='efline'; el.textContent=(k+1)+'. '+s; efThink.appendChild(el); efT.push(setTimeout(function(){ el.classList.add('on'); },120+k*200)); });
     }
-    EF.forEach(function(d,i){ var b=document.createElement('button'); b.className='efbtn'+(i===1?' on':''); b.innerHTML=d.n+'<span class="efd">'+d.d+'</span>'; b.addEventListener('click',function(){ efShow(i); }); efBtns.appendChild(b); });
-    efShow(1);
+    EF.forEach(function(d,i){ var b=document.createElement('button'); b.className='efbtn'+(i===2?' on':''); b.innerHTML=d.n+'<span class="efd">'+d.d+'</span>'; b.addEventListener('click',function(){ efShow(i); }); efBtns.appendChild(b); });
+    efShow(2);
     /* goal */
     var GTURNS=[{t:'1 ターン — 誤字 5 個のうち 3 個を修正 (残り誤字 2 個)',ok:false},{t:'2 ターン — 残り 2 個を修正 (残り誤字 0 個)',ok:true,last:true}];
     var goalBox=document.getElementById('goal-turns'),goalT=[];
@@ -1643,7 +1645,7 @@ description: 週次レポートを会社の様式で作成
     var CFG=[{k:'言語',sub:'画面に表示される言語',vals:['한국어','English','中文','日本語'],i:0},
       {k:'テーマ',sub:'明るく / 暗く',vals:['ライト','ダーク','システム'],i:1},
       {k:'モデル',sub:'どの Claude にするか',vals:['Haiku','Sonnet','Opus'],i:1},
-      {k:'考える深さ',sub:'effort',vals:['低','中','高','最高'],i:1},
+      {k:'考える深さ',sub:'effort',vals:['低','中','高','超高','最高'],i:2},
       {k:'権限',sub:'どのくらい聞くか',vals:['権限リクエスト','編集を許可','自動'],i:0}];
     var cfgPanel=document.getElementById('cfg-panel');
     CFG.forEach(function(o){ var row=document.createElement('div'); row.className='cfgrow'; row.innerHTML='<div class="cfk">'+o.k+'<small>'+o.sub+'</small></div>'; var v=document.createElement('button'); v.className='cfgval'; v.textContent=o.vals[o.i]; v.addEventListener('click',function(){ o.i=(o.i+1)%o.vals.length; v.textContent=o.vals[o.i]; document.getElementById('cfg-status').textContent='「'+o.k+'」を「'+o.vals[o.i]+'」に変えました。'; }); row.appendChild(v); cfgPanel.appendChild(row); });

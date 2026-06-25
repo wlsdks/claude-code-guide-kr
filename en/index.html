@@ -640,7 +640,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <button class="mtab" data-m="opus"><div class="mn">Opus 4.8</div><div class="mt">Smartest</div></button>
         <button class="mtab on" data-m="sonnet"><div class="mn">Sonnet 4.6</div><div class="mt">Balanced · default pick</div></button>
         <button class="mtab" data-m="haiku"><div class="mn">Haiku 4.5</div><div class="mt">Fastest and cheapest</div></button>
-        <button class="mtab locked" data-m="fable"><div class="mn">Fable 5 <span class="lockpill">Locked</span></div><div class="mt">Top tier · special tasks</div></button>
+        <button class="mtab" data-m="fable"><div class="mn">Fable 5</div><div class="mt">Newest &amp; strongest · not default</div></button>
       </div>
       <div class="bars">
         <div class="bar"><div class="bl"><span>Intelligence (solving hard problems)</span><b id="v-iq"></b></div><div class="track2"><div class="fill2" id="f-iq"></div></div></div>
@@ -659,6 +659,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <tr><td class="cmd">Opus 4.8</td><td>up to 1M (one million)</td><td>Smartest</td></tr>
         <tr><td class="cmd">Sonnet 4.6</td><td>up to 1M (one million)</td><td>Balanced · default pick</td></tr>
         <tr><td class="cmd">Haiku 4.5</td><td>200K (two hundred thousand)</td><td>Fastest and cheapest</td></tr>
+        <tr><td class="cmd">Fable 5</td><td>up to 1M (1,000,000)</td><td>Newest &amp; strongest · pick manually</td></tr>
       </tbody></table></div>
       <ul class="points">
         <li><b>On a paid plan, the latest Opus or Sonnet can go up to a 1M context.</b><span>But whether 1M is actually available depends on your plan and settings (it's not automatic). Basic models like Haiku are 200K.</span></li>
@@ -1110,7 +1111,7 @@ description: Write the weekly report in the company format
     <section class="page" id="effort">
       <h1>Thinking depth (effort)</h1>
       <p class="lead"><b>Thinking depth (effort)</b> is the setting that decides <b>how deeply Claude thinks before answering</b>. The deeper it thinks, the more accurate it is on hard problems — but it's also slower and more expensive.</p>
-      <p class="defs">There are <b>low · medium · high · max</b> levels. The deeper it thinks, the more 'thinking tokens' it uses (see the 'Tokens' tab). Pick one and see the difference.</p>
+      <p class="defs">There are <b>low · medium · high · x-high · max</b> levels (the default is 'high'). The deeper it thinks, the more 'thinking tokens' it uses (see the 'Tokens' tab). Pick one and see the difference.</p>
       <div class="efbtns" id="ef-btns"></div>
       <div class="bars">
         <div class="bar"><div class="bl"><span>Accuracy on hard problems</span><b id="ef-v-acc"></b></div><div class="track2"><div class="fill2" id="ef-f-acc"></div></div></div>
@@ -1381,7 +1382,7 @@ description: Write the weekly report in the company format
   var MODELS={ opus:{iq:5,sp:2,cost:1,ctx:'up to 1M (about one million tokens)',tag:'Smartest, but slowest and priciest.',when:'When accuracy matters above all.',ex:['Complex code analysis & design','Hard-to-solve bugs','Tasks needing long reasoning']},
     sonnet:{iq:4,sp:4,cost:3,ctx:'up to 1M (about one million tokens)',tag:'A balance of smartness and speed. Fine for most tasks.',when:'If you don\'t know what to pick, start here.',ex:['General coding & edits','Writing & summarizing documents','Most tasks']},
     haiku:{iq:3,sp:5,cost:5,ctx:'200K (about two hundred thousand tokens)',tag:'Fastest and cheapest.',when:'When speed and cost matter and the task is simple.',ex:['Simple, repetitive tasks','Quick responses','Lots of light processing']},
-    fable:{iq:5,sp:1,cost:1,locked:true,ctx:'up to 1M (about one million tokens)',lock:'A top-tier special model currently blocked for general use. (Not selectable — for reference.)',tag:'The most powerful, but slowest and priciest special model.',when:'For very hard, long-running autonomous tasks.',ex:['Large-scale code migrations','Long autonomous tasks','The hardest problems']} };
+    fable:{iq:5,sp:1,cost:1,ctx:'up to 1M (about one million tokens)',tag:'The most powerful, latest model — slowest and priciest. It\'s not the default, so you have to pick it yourself.',when:'When you need top performance for very hard or long-running tasks. (Whether you can pick it depends on your plan and environment.)',ex:['Large-scale code migrations','Long autonomous tasks','The hardest problems']} };
   var barColor={iq:'#6d5fd0',sp:'#1f9e76',cost:'#3b7dd8'},rateTxt=['','Very low','Low','Medium','High','Very high'];
   function showModel(m){ var d=MODELS[m]; ['iq','sp','cost'].forEach(function(k){ document.getElementById('f-'+k).style.width=(d[k]*20)+'%'; document.getElementById('f-'+k).style.background=d.locked?'var(--line2)':barColor[k]; document.getElementById('v-'+k).textContent=rateTxt[d[k]]; });
     var lb=document.getElementById('m-lock'); if(d.locked){ lb.style.display='block'; lb.textContent='🔒 '+d.lock; document.getElementById('muse').classList.add('lock'); } else { lb.style.display='none'; document.getElementById('muse').classList.remove('lock'); }
@@ -1604,7 +1605,8 @@ description: Write the weekly report in the company format
     /* effort */
     var EF=[{n:'Low',d:'Simple & fast',acc:2,sp:5,cost:1,steps:['Answers right away']},
       {n:'Medium',d:'Balanced',acc:3,sp:4,cost:2,steps:['Check the key point once','Write up the answer']},
-      {n:'High',d:'Deeply',acc:4,sp:2,cost:4,steps:['Compare several approaches','Weigh the evidence','Check for anything missing','Write up the answer']},
+      {n:'High',d:'Deeply (default)',acc:4,sp:3,cost:3,steps:['Compare several approaches','Weigh the evidence','Check for anything missing','Write up the answer']},
+      {n:'X-High',d:'More deeply',acc:5,sp:2,cost:4,steps:['Lay out the possibilities','Verify each one','Look for counterexamples','Organize the evidence','Write up the answer']},
       {n:'Max',d:'Very deeply',acc:5,sp:1,cost:5,steps:['Lay out the possibilities','Verify each one','Look for counterexamples','Recheck','Organize the evidence','Final answer']}];
     var efBtns=document.getElementById('ef-btns'),efThink=document.getElementById('ef-think'),efT=[];
     function efShow(i){ var d=EF[i]; [].forEach.call(efBtns.children,function(c,j){ c.classList.toggle('on',j===i); });
@@ -1613,8 +1615,8 @@ description: Write the weekly report in the company format
       efT.forEach(clearTimeout); efT=[]; efThink.innerHTML='';
       d.steps.forEach(function(s,k){ var el=document.createElement('div'); el.className='efline'; el.textContent=(k+1)+'. '+s; efThink.appendChild(el); efT.push(setTimeout(function(){ el.classList.add('on'); },120+k*200)); });
     }
-    EF.forEach(function(d,i){ var b=document.createElement('button'); b.className='efbtn'+(i===1?' on':''); b.innerHTML=d.n+'<span class="efd">'+d.d+'</span>'; b.addEventListener('click',function(){ efShow(i); }); efBtns.appendChild(b); });
-    efShow(1);
+    EF.forEach(function(d,i){ var b=document.createElement('button'); b.className='efbtn'+(i===2?' on':''); b.innerHTML=d.n+'<span class="efd">'+d.d+'</span>'; b.addEventListener('click',function(){ efShow(i); }); efBtns.appendChild(b); });
+    efShow(2);
     /* goal */
     var GTURNS=[{t:'Turn 1 — fixed 3 of 5 typos (2 typos left)',ok:false},{t:'Turn 2 — fixed the remaining 2 (0 typos left)',ok:true,last:true}];
     var goalBox=document.getElementById('goal-turns'),goalT=[];
@@ -1641,7 +1643,7 @@ description: Write the weekly report in the company format
     var CFG=[{k:'Language',sub:'The language shown on screen',vals:['한국어','English','中文','日本語'],i:0},
       {k:'Theme',sub:'Light / dark',vals:['Light','Dark','System'],i:1},
       {k:'Model',sub:'Which Claude',vals:['Haiku','Sonnet','Opus'],i:1},
-      {k:'Thinking depth',sub:'effort',vals:['Low','Medium','High','Max'],i:1},
+      {k:'Thinking depth',sub:'effort',vals:['Low','Medium','High','X-High','Max'],i:2},
       {k:'Permissions',sub:'How much it asks',vals:['Ask permission','Accept edits','Automatic'],i:0}];
     var cfgPanel=document.getElementById('cfg-panel');
     CFG.forEach(function(o){ var row=document.createElement('div'); row.className='cfgrow'; row.innerHTML='<div class="cfk">'+o.k+'<small>'+o.sub+'</small></div>'; var v=document.createElement('button'); v.className='cfgval'; v.textContent=o.vals[o.i]; v.addEventListener('click',function(){ o.i=(o.i+1)%o.vals.length; v.textContent=o.vals[o.i]; document.getElementById('cfg-status').textContent='Changed \''+o.k+'\' to \''+o.vals[o.i]+'\'.'; }); row.appendChild(v); cfgPanel.appendChild(row); });

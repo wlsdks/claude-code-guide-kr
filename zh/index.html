@@ -640,7 +640,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <button class="mtab" data-m="opus"><div class="mn">Opus 4.8</div><div class="mt">最聪明</div></button>
         <button class="mtab on" data-m="sonnet"><div class="mn">Sonnet 4.6</div><div class="mt">均衡 · 默认推荐</div></button>
         <button class="mtab" data-m="haiku"><div class="mn">Haiku 4.5</div><div class="mt">最快最便宜</div></button>
-        <button class="mtab locked" data-m="fable"><div class="mn">Fable 5 <span class="lockpill">锁定</span></div><div class="mt">顶级 · 特殊任务</div></button>
+        <button class="mtab" data-m="fable"><div class="mn">Fable 5</div><div class="mt">最新最强 · 非默认</div></button>
       </div>
       <div class="bars">
         <div class="bar"><div class="bl"><span>智能（解决难题）</span><b id="v-iq"></b></div><div class="track2"><div class="fill2" id="f-iq"></div></div></div>
@@ -659,6 +659,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <tr><td class="cmd">Opus 4.8</td><td>最大 1M (100 万)</td><td>最聪明</td></tr>
         <tr><td class="cmd">Sonnet 4.6</td><td>最大 1M (100 万)</td><td>均衡 · 默认推荐</td></tr>
         <tr><td class="cmd">Haiku 4.5</td><td>200K (20 万)</td><td>最快最便宜</td></tr>
+        <tr><td class="cmd">Fable 5</td><td>最大 1M (100 万)</td><td>最新最强 · 直接选择</td></tr>
       </tbody></table></div>
       <ul class="points">
         <li><b>付费版里选最新的 Opus、Sonnet，最高可用 1M 上下文。</b><span>不过能否用 1M 取决于套餐和设置（并非自动开启）。像 Haiku 这样的基础模型是 200K。</span></li>
@@ -1111,7 +1112,7 @@ description: 按公司格式撰写周报
     <section class="page" id="effort">
       <h1>思考深度 (effort)</h1>
       <p class="lead"><b>思考深度（effort）</b>是用来设定 Claude <b>在回答之前要思考多深</b>的选项。想得越深，遇到难题越准确，但也更慢、更贵。</p>
-      <p class="defs">有<b>低 · 中 · 高 · 最高</b>几档。想得越深，用的‘思考（thinking）token’就越多（见‘Token’标签页）。选一选看看差别。</p>
+      <p class="defs">有<b>低 · 中 · 高 · 超高 · 最高</b>几档（默认是‘高’）。想得越深，用的‘思考（thinking）token’就越多（见‘Token’标签页）。选一选看看差别。</p>
       <div class="efbtns" id="ef-btns"></div>
       <div class="bars">
         <div class="bar"><div class="bl"><span>难题准确度</span><b id="ef-v-acc"></b></div><div class="track2"><div class="fill2" id="ef-f-acc"></div></div></div>
@@ -1382,7 +1383,7 @@ description: 按公司格式撰写周报
   var MODELS={ opus:{iq:5,sp:2,cost:1,ctx:'最大 1M (约 100 万 token)',tag:'最聪明，但最慢、最贵。',when:'当准确度比什么都重要时。',ex:['复杂的代码分析·设计','难解的 bug','需要长推理的任务']},
     sonnet:{iq:4,sp:4,cost:3,ctx:'最大 1M (约 100 万 token)',tag:'聪明与速度的均衡。大多数任务都合适。',when:'不知道选哪个，就从这里开始。',ex:['一般的编码·修改','文档撰写·总结','大多数任务']},
     haiku:{iq:3,sp:5,cost:5,ctx:'200K (约 20 万 token)',tag:'最快、最便宜。',when:'当速度·成本重要、任务又简单时。',ex:['简单·重复的工作','快速响应','大量轻量处理']},
-    fable:{iq:5,sp:1,cost:1,locked:true,ctx:'最大 1M (约 100 万 token)',lock:'目前禁止普通使用的顶级特殊模型。（不可选 —— 仅供参考）',tag:'最强大，但最慢、最贵的特殊模型。',when:'用于非常难、耗时很长的自主任务。',ex:['大规模代码迁移','长时间自主工作','最高难度的问题']} };
+    fable:{iq:5,sp:1,cost:1,ctx:'最大 1M (约 100 万 token)',tag:'最强大的最新模型 —— 最慢、最贵。它不是默认值，需要你自己选择。',when:'当非常难或耗时很长的任务需要最高性能时。（能否选择取决于套餐和环境）',ex:['大规模代码迁移','长时间自主工作','最高难度的问题']} };
   var barColor={iq:'#6d5fd0',sp:'#1f9e76',cost:'#3b7dd8'},rateTxt=['','很低','低','一般','高','很高'];
   function showModel(m){ var d=MODELS[m]; ['iq','sp','cost'].forEach(function(k){ document.getElementById('f-'+k).style.width=(d[k]*20)+'%'; document.getElementById('f-'+k).style.background=d.locked?'var(--line2)':barColor[k]; document.getElementById('v-'+k).textContent=rateTxt[d[k]]; });
     var lb=document.getElementById('m-lock'); if(d.locked){ lb.style.display='block'; lb.textContent='🔒 '+d.lock; document.getElementById('muse').classList.add('lock'); } else { lb.style.display='none'; document.getElementById('muse').classList.remove('lock'); }
@@ -1605,7 +1606,8 @@ description: 按公司格式撰写周报
     /* effort */
     var EF=[{n:'低',d:'简单·快速',acc:2,sp:5,cost:1,steps:['直接回答']},
       {n:'中',d:'一般',acc:3,sp:4,cost:2,steps:['核对一遍要点','整理答案']},
-      {n:'高',d:'深入',acc:4,sp:2,cost:4,steps:['比较多种方法','推敲依据','检查遗漏','整理答案']},
+      {n:'高',d:'深入（默认）',acc:4,sp:3,cost:3,steps:['比较多种方法','推敲依据','检查遗漏','整理答案']},
+      {n:'超高',d:'更深入',acc:5,sp:2,cost:4,steps:['列出各种情况','逐一验证','寻找反例','整理依据','整理答案']},
       {n:'最高',d:'非常深入',acc:5,sp:1,cost:5,steps:['列出各种情况','逐一验证','寻找反例','再次核对','整理依据','给出最终答案']}];
     var efBtns=document.getElementById('ef-btns'),efThink=document.getElementById('ef-think'),efT=[];
     function efShow(i){ var d=EF[i]; [].forEach.call(efBtns.children,function(c,j){ c.classList.toggle('on',j===i); });
@@ -1614,8 +1616,8 @@ description: 按公司格式撰写周报
       efT.forEach(clearTimeout); efT=[]; efThink.innerHTML='';
       d.steps.forEach(function(s,k){ var el=document.createElement('div'); el.className='efline'; el.textContent=(k+1)+'. '+s; efThink.appendChild(el); efT.push(setTimeout(function(){ el.classList.add('on'); },120+k*200)); });
     }
-    EF.forEach(function(d,i){ var b=document.createElement('button'); b.className='efbtn'+(i===1?' on':''); b.innerHTML=d.n+'<span class="efd">'+d.d+'</span>'; b.addEventListener('click',function(){ efShow(i); }); efBtns.appendChild(b); });
-    efShow(1);
+    EF.forEach(function(d,i){ var b=document.createElement('button'); b.className='efbtn'+(i===2?' on':''); b.innerHTML=d.n+'<span class="efd">'+d.d+'</span>'; b.addEventListener('click',function(){ efShow(i); }); efBtns.appendChild(b); });
+    efShow(2);
     /* goal */
     var GTURNS=[{t:'第 1 轮 —— 5 个错别字改好 3 个（还剩 2 个）',ok:false},{t:'第 2 轮 —— 剩下的 2 个改好（还剩 0 个）',ok:true,last:true}];
     var goalBox=document.getElementById('goal-turns'),goalT=[];
@@ -1642,7 +1644,7 @@ description: 按公司格式撰写周报
     var CFG=[{k:'语言',sub:'界面显示的语言',vals:['한국어','English','中文','日本語'],i:2},
       {k:'主题',sub:'亮 / 暗',vals:['浅色','深色','跟随系统'],i:1},
       {k:'模型',sub:'用哪个 Claude',vals:['Haiku','Sonnet','Opus'],i:1},
-      {k:'思考深度',sub:'effort',vals:['低','中','高','最高'],i:1},
+      {k:'思考深度',sub:'effort',vals:['低','中','高','超高','最高'],i:2},
       {k:'权限',sub:'问得多不多',vals:['请求权限','接受编辑','自动'],i:0}];
     var cfgPanel=document.getElementById('cfg-panel');
     CFG.forEach(function(o){ var row=document.createElement('div'); row.className='cfgrow'; row.innerHTML='<div class="cfk">'+o.k+'<small>'+o.sub+'</small></div>'; var v=document.createElement('button'); v.className='cfgval'; v.textContent=o.vals[o.i]; v.addEventListener('click',function(){ o.i=(o.i+1)%o.vals.length; v.textContent=o.vals[o.i]; document.getElementById('cfg-status').textContent='把‘'+o.k+'’改成了‘'+o.vals[o.i]+'’。'; }); row.appendChild(v); cfgPanel.appendChild(row); });
