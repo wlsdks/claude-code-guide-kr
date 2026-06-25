@@ -640,7 +640,7 @@ irm https://claude.ai/install.ps1 | iex</div>
       <p class="defs">賢いほど、たいてい遅くて高価です。仕事に合わせて選べば大丈夫。下で選んでみてください。</p>
       <div class="mtabs" id="mtabs">
         <button class="mtab" data-m="opus"><div class="mn">Opus 4.8</div><div class="mt">いちばん賢い</div></button>
-        <button class="mtab on" data-m="sonnet"><div class="mn">Sonnet 4.6</div><div class="mt">バランス · おすすめの基本</div></button>
+        <button class="mtab on" data-m="sonnet"><div class="mn">Sonnet 4.6</div><div class="mt">バランス · 無難な選択</div></button>
         <button class="mtab" data-m="haiku"><div class="mn">Haiku 4.5</div><div class="mt">いちばん速くて安い</div></button>
         <button class="mtab" data-m="fable"><div class="mn">Fable 5</div><div class="mt">最新最強 · デフォルトではない</div></button>
       </div>
@@ -659,12 +659,13 @@ irm https://claude.ai/install.ps1 | iex</div>
       <p class="label">モデル別のコンテキストウィンドウ (2026年6月時点)</p>
       <div class="tablewrap"><table class="t"><thead><tr><th>モデル</th><th>コンテキストウィンドウ</th><th>ひとこと</th></tr></thead><tbody>
         <tr><td class="cmd">Opus 4.8</td><td>最大 1M (100万)</td><td>いちばん賢い</td></tr>
-        <tr><td class="cmd">Sonnet 4.6</td><td>最大 1M (100万)</td><td>バランス · おすすめの基本</td></tr>
+        <tr><td class="cmd">Sonnet 4.6</td><td>最大 1M (100万)</td><td>バランス · 無難な選択</td></tr>
         <tr><td class="cmd">Haiku 4.5</td><td>200K (20万)</td><td>いちばん速くて安い</td></tr>
         <tr><td class="cmd">Fable 5</td><td>最大 1M (100万)</td><td>最新最強 · 自分で選択</td></tr>
       </tbody></table></div>
       <ul class="points">
-        <li><b>有料プランで最新の Opus・Sonnet を選ぶと最大 1M コンテキストまで使えます。</b><span>ただし 1M が使えるかはプランや設定によります（自動ではありません）。Haiku のような基本モデルは 200K です。</span></li>
+        <li><b>デフォルトのモデルはプランによって変わります。</b><span>Pro は Sonnet 4.6、Max・API は Opus 4.8 がデフォルトです。迷ったらバランスの良い Sonnet から始めると無難です。</span></li>
+        <li><b>1M コンテキストは Fable 5・Opus 4.6 以降・Sonnet 4.6 で使えます。</b><span>使えるかどうかはプラン・設定によります（自動ではありません）。Haiku は 200K です。</span></li>
         <li><b>日常の業務なら 200K でも十分です。</b><span>1M は大きなプロジェクトや、とても長い作業で力を発揮します。</span></li>
         <li><b>ウィンドウが大きいほど多く覚えますが、少し遅く、精度が落ちることがあります。</b><span>必要なものだけ乗せるのが、いちばん良い品質を出します。</span></li>
       </ul>
@@ -815,7 +816,7 @@ description: 週次レポートを会社の様式で作成
         <div class="fcard"><div class="ft">スキル</div><div class="fd">くり返す作業の<b>コツ・手順</b>の束。</div></div>
         <div class="fcard"><div class="ft">プラグイン</div><div class="fd">上のものを<b>まとめて配布</b>するパッケージ。</div></div>
       </div>
-      <p class="note">インストール: <code>/plugin install 名前@マーケットプレイス</code>。公式マーケットプレイス (claude-plugins-official) とコミュニティマーケットプレイス (claude-community) があります。信頼できる出所からだけインストールしてください。（出典: 公式ドキュメント code.claude.com/docs/plugins）</p>
+      <p class="note">インストール: <code>/plugin install 名前@マーケットプレイス</code>。公式・コミュニティのマーケットプレイスがあります（例: コミュニティは <code>@claude-community</code>）。信頼できる出所からだけインストールしてください。（出典: code.claude.com/docs/plugins）</p>
     </section>
 
     <!-- 12 SUBAGENTS -->
@@ -945,7 +946,7 @@ description: 週次レポートを会社の様式で作成
         </div>
         <div><div class="pdetail" id="pdetail"></div><div class="btnrow" style="margin-top:12px;"><button class="btn solid" id="pm-sim">このモードの動作を見る ▶</button></div><div class="simbox" id="pm-simbox"></div></div>
       </div>
-      <p class="note">この 5 つはメニューに見えるモードです。自動化専用に「事前承認したツールだけ許可 (dontAsk)」モードも別にあります。どのモードでも<b>システム全体の削除 (rm -rf / · rm -rf ~) のような極端な破壊</b>は安全装置で防がれます。気に入らなければ「巻き戻し」（「巻き戻し」タブ）で復元できます。</p>
+      <p class="note">この 5 つはメニューに見えるモードです。自動化専用に「事前承認したツールだけ許可 (dontAsk)」モードも別にあります。どのモードでも<b>システム全体の削除 (rm -rf / · rm -rf ~) のような極端な破壊</b>は、もう一度確認を取ります（「サーキットブレーカー」 — 自動では実行されません）。気に入らなければ「巻き戻し」（「巻き戻し」タブ）で復元できます。</p>
     </section>
 
     <!-- 17 REWIND -->
@@ -959,7 +960,7 @@ description: 週次レポートを会社の様式で作成
       <div class="btnrow" style="margin:14px 0;"><button class="btn" id="rw-code">コードだけ復元</button><button class="btn" id="rw-both">コード+会話を復元</button><button class="btn" id="rw-reset">リセット</button></div>
       <p class="status" id="rw-msg" style="margin-top:0;">上のタイムラインの点を押したあと、復元の方法を選んでください。</p>
       <ul class="points">
-        <li><b>開き方</b><span><code>ESC</code> を 2 回押すか <code>/rewind</code> — これまで送ったリクエストの一覧が表示されます。</span></li>
+        <li><b>開き方</b><span><code>/rewind</code>、または入力欄が空のときに <code>ESC</code> を2回 — これまで送ったリクエストの一覧が出ます。（入力欄に文字があると、2回押すと先に文字が消えます。）</span></li>
         <li><b>3 種類の復元</b><span>コード+会話を一緒に / 会話だけ(コードは維持) / コードだけ(会話は維持)。</span></li>
         <li><b>限界</b><span><code>rm·mv</code> のようなターミナルコマンドで変わったもの、インストール(<code>npm install</code>)・外部の変更は巻き戻せません。</span></li>
       </ul>
@@ -977,7 +978,7 @@ description: 週次レポートを会社の様式で作成
           <div class="cmprow"><b>設定の場所</b>claude.ai/settings/data-privacy-controls</div></div>
         <div class="cmpcard"><h4>業務用 (Team·Enterprise·API)</h4><div class="who">会社・開発者アカウント</div>
           <div class="cmprow"><b>学習への利用</b>基本的に<b>学習には使われない</b></div>
-          <div class="cmprow"><b>API</b>入出力は基本 7 日後に削除、学習には未使用</div></div>
+          <div class="cmprow"><b>API</b>基本的に会話内容を保存しません、学習には未使用（一部の新しいモデルは30日保持が必要）</div></div>
       </div>
       <ul class="points">
         <li><b>Claude Code は自分のコンピュータで実行されます。</b><span>必要な内容だけ暗号化(TLS)して API に送ります — フォルダ全体をクラウドに上げるわけではありません。</span></li>
@@ -1024,7 +1025,7 @@ description: 週次レポートを会社の様式で作成
         <div class="fgrid">
           <div class="fcard"><div class="ft">Free (無料)</div><div class="fd">Claude Code は<b>含まれません</b>。有料があって初めて使えます。</div></div>
           <div class="fcard"><div class="ft">Pro</div><div class="fd">個人用。日常の利用に手ごろ。</div><div class="fe"><b>だいたい</b> 月 $20 <span class="exb">変動</span></div></div>
-          <div class="fcard"><div class="ft">Max</div><div class="fd">個人用。使用量がいちばんたっぷり。</div><div class="fe"><b>だいたい</b> 月 $100~200 <span class="exb">変動</span></div></div>
+          <div class="fcard"><div class="ft">Max</div><div class="fd">個人用。使用量がいちばんたっぷり。</div><div class="fe">月 <b>$100</b>(5x)·<b>$200</b>(20x) <span class="exb">変動</span></div></div>
           <div class="fcard"><div class="ft">Team · Enterprise</div><div class="fd">チーム・会社用。人数（シート）分。</div></div>
           <div class="fcard"><div class="ft">API (従量制)</div><div class="fd">使った分だけトークン基準で課金。自動化・連携用。</div></div>
         </div>
@@ -1047,7 +1048,7 @@ description: 週次レポートを会社の様式で作成
       <div class="cols">
         <div>
           <div class="gauge"><div class="gl"><span>5時間の上限 (直近5時間)</span><b id="g5n">0%</b></div><div class="gtrack"><i id="g5"></i></div></div>
-          <div class="gauge"><div class="gl"><span>週間の上限 (直近7日)</span><b id="gwn">18%</b></div><div class="gtrack"><i id="gw"></i></div></div>
+          <div class="gauge"><div class="gl"><span>週の上限（週ごと）</span><b id="gwn">18%</b></div><div class="gtrack"><i id="gw"></i></div></div>
           <div class="lockmsg" id="lock-msg"></div>
         </div>
         <div>
@@ -1070,7 +1071,7 @@ description: 週次レポートを会社の様式で作成
       <p class="label">2 つの上限が同時にあります</p>
       <ul class="points">
         <li><b>5時間の上限</b><span>「直近5時間」に使った量を見ます。時間が過ぎると自動で再び満ちます(ローリング方式)。</span></li>
-        <li><b>週間(7日)の上限</b><span>「直近7日」基準の、より大きい上限。5時間の上限さえ避ければ無限に使える、というわけではありません。</span></li>
+        <li><b>週間の上限</b><span>1週間単位のより大きな上限で、毎週決まった曜日・時刻にリセットされます（5時間のように流れていくのではありません）。5時間の上限を避けるだけでは無制限には使えません。（Max は「全モデル」＋「Sonnet 専用」の 2 つ）</span></li>
         <li><b>どちらか一方でも満杯になると止まります。</b><span>5時間・週間の 2 つの上限が一緒にかかっているので、先に満杯になるほうで止まります。その上限がリセットされれば再び使えます。</span></li>
         <li><b>上限にかかっても作業は消えません。</b><span>やっていた内容が消えるのではなく「一時停止」です — リセットされたら続きをやれば OK。（急ぐなら上位プランへアップグレード、または追加の使用量を購入）</span></li>
         <li><b>一か所でまとめて差し引かれます。</b><span>claude.ai・Claude Code・デスクトップアプリが同じ使用量を分け合います。</span></li>
@@ -1126,6 +1127,7 @@ description: 週次レポートを会社の様式で作成
       <p class="label">選んだぶんだけ「考える過程」が深まります <span class="hint">押すと長さが変わります</span></p>
       <div class="efthink" id="ef-think"></div>
       <p class="note">簡単な仕事は「低」で（速くて安い）、込み入った分析・推論は「高/最高」で。変え方: <code>/effort</code> または設定（「設定」タブ）。<span class="exb">例</span> のバーは相対的な比較です。（出典: Anthropic 公式 — support.claude.com モデル・effort 設定）</p>
+      <p class="note"><b>上級 · ultracode</b> — <code>/effort</code> メニューには <b>ultracode</b> もあります。最高（xhigh）の推論に加えて、難しい作業では Claude が<b>複数のヘルパーを自動的に動員（ワークフロー）</b>して処理します。<b>そのセッション限定</b>のモードで、トークンを多く使うので普段は不要、とても難しい作業のときだけ選びます（Fable 5・Opus 4.8 など）。</p>
     </section>
 
     <!-- GOAL -->
@@ -1465,7 +1467,7 @@ description: 週次レポートを会社の様式で作成
     {name:'編集を承認',safe:'おおむね安全',col:'#5aa56a',auto:'ファイル編集、安全なファイル操作(フォルダ作成・移動・コピー)',ask:'git コミットなど巻き戻しにくい作業',use:'結果を見ながら素早くくり返し修正するとき',sim:['auto','auto','ask','ask']},
     {name:'プランモード',safe:'読み取り専用',col:'#b9792a',auto:'読み・探索だけ (直接は直さない)',ask:'計画を承認すると一気に実行',use:'大きな変更の前に計画を先に確認するとき',sim:['plan','plan','plan','plan']},
     {name:'自動モード',safe:'注意',col:'#d8943f',auto:'ほとんどの作業 (バックグラウンドで安全チェック)',ask:'危険な作業だけ確認・ブロック',use:'長時間の自動作業で確認を減らしたいとき',note:'最新バージョン・モデル(Opus 4.6/Sonnet 4.6 以上)が必要',sim:['auto','auto','auto','ask']},
-    {name:'権限をスキップ',safe:'危険',col:'#d8453f',auto:'すべて — 確認なしで進める',ask:'システム全体の削除(rm -rf / · rm -rf ~)のような極端だけブロック',use:'インターネット遮断された隔離環境(コンテナ・VM)でだけ',note:'プロンプトインジェクションに弱い — ふつうの PC では使わないで',sim:['auto','auto','auto','auto']} ];
+    {name:'権限をスキップ',safe:'危険',col:'#d8453f',auto:'すべて — 確認なしで進める',ask:'システム全体の削除(rm -rf / · rm -rf ~)のような極端な操作はもう一度確認',use:'インターネット遮断された隔離環境(コンテナ・VM)でだけ',note:'プロンプトインジェクションに弱い — ふつうの PC では使わないで',sim:['auto','auto','auto','auto']} ];
   var SIM_ACT=['ファイル修正','フォルダ作成','git コミット','ファイル削除 (rm)'],SIM_TXT={auto:'自動で実行',ask:'確認を要求',plan:'実行しない (計画だけ)',block:'ブロック'},curPm=0;
   function pmShow(i){ curPm=i; var d=PM[i]; document.querySelectorAll('#pmenu .prow').forEach(function(r){ r.classList.toggle('on',+r.dataset.i===i); }); var badge='<span class="pbadge" style="background:'+rgba(d.col,.16)+';color:'+d.col+'">'+d.safe+'</span>'; document.getElementById('pdetail').innerHTML='<div class="pt">'+d.name+' '+badge+'</div><div class="pdrow"><b>自動でやること</b>'+d.auto+'</div><div class="pdrow"><b>それでも聞くこと</b>'+d.ask+'</div><div class="pdrow"><b>いつ使う</b>'+d.use+'</div>'+(d.note?'<div class="pdrow"><b>参考</b>'+d.note+'</div>':''); document.getElementById('pmark').style.left=((i+0.5)/PM.length*100)+'%'; document.getElementById('pm-simbox').innerHTML='<div class="simrow on" style="color:var(--faint);font-size:12.5px;">「このモードの動作を見る」を押してみてください。</div>'; }
   var pmT=[]; document.getElementById('pm-sim').addEventListener('click',function(){ pmT.forEach(clearTimeout); pmT=[]; var d=PM[curPm],box=document.getElementById('pm-simbox'); box.innerHTML=''; SIM_ACT.forEach(function(a,idx){ var s=d.sim[idx],row=document.createElement('div'); row.className='simrow'; var cls=s==='auto'?'auto':(s==='ask'?'ask':(s==='plan'?'plan':'block')); row.innerHTML='<span class="sa">'+a+'</span><span class="sp '+cls+'">'+SIM_TXT[s]+'</span>'; box.appendChild(row); pmT.push(setTimeout(function(){ row.classList.add('on'); },220*idx)); }); });

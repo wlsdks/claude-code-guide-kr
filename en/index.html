@@ -638,7 +638,7 @@ irm https://claude.ai/install.ps1 | iex</div>
       <p class="defs">Smarter usually means slower and pricier. Just pick what fits the job. Try choosing below.</p>
       <div class="mtabs" id="mtabs">
         <button class="mtab" data-m="opus"><div class="mn">Opus 4.8</div><div class="mt">Smartest</div></button>
-        <button class="mtab on" data-m="sonnet"><div class="mn">Sonnet 4.6</div><div class="mt">Balanced · default pick</div></button>
+        <button class="mtab on" data-m="sonnet"><div class="mn">Sonnet 4.6</div><div class="mt">Balanced · safe pick</div></button>
         <button class="mtab" data-m="haiku"><div class="mn">Haiku 4.5</div><div class="mt">Fastest and cheapest</div></button>
         <button class="mtab" data-m="fable"><div class="mn">Fable 5</div><div class="mt">Newest &amp; strongest · not default</div></button>
       </div>
@@ -657,12 +657,13 @@ irm https://claude.ai/install.ps1 | iex</div>
       <p class="label">Context window by model (as of June 2026)</p>
       <div class="tablewrap"><table class="t"><thead><tr><th>Model</th><th>Context window</th><th>In a word</th></tr></thead><tbody>
         <tr><td class="cmd">Opus 4.8</td><td>up to 1M (one million)</td><td>Smartest</td></tr>
-        <tr><td class="cmd">Sonnet 4.6</td><td>up to 1M (one million)</td><td>Balanced · default pick</td></tr>
+        <tr><td class="cmd">Sonnet 4.6</td><td>up to 1M (one million)</td><td>Balanced · safe pick</td></tr>
         <tr><td class="cmd">Haiku 4.5</td><td>200K (two hundred thousand)</td><td>Fastest and cheapest</td></tr>
         <tr><td class="cmd">Fable 5</td><td>up to 1M (1,000,000)</td><td>Newest &amp; strongest · pick manually</td></tr>
       </tbody></table></div>
       <ul class="points">
-        <li><b>On a paid plan, the latest Opus or Sonnet can go up to a 1M context.</b><span>But whether 1M is actually available depends on your plan and settings (it's not automatic). Basic models like Haiku are 200K.</span></li>
+        <li><b>The default model depends on your plan.</b><span>Pro defaults to Sonnet 4.6; Max and the API default to Opus 4.8. If unsure, starting with the balanced Sonnet is a safe bet.</span></li>
+        <li><b>The 1M context window is available on Fable 5, Opus 4.6 and later, and Sonnet 4.6.</b><span>Availability depends on your plan/settings (not automatic). Haiku is 200K.</span></li>
         <li><b>For everyday work, 200K is plenty.</b><span>1M shines on big projects and very long tasks.</span></li>
         <li><b>A bigger window remembers more, but can be a touch slower and less accurate.</b><span>Loading only what's needed gives the best quality.</span></li>
       </ul>
@@ -813,7 +814,7 @@ description: Write the weekly report in the company format
         <div class="fcard"><div class="ft">Skills</div><div class="fd">Bundles of <b>know-how and steps</b> for repeated tasks.</div></div>
         <div class="fcard"><div class="ft">Plugins</div><div class="fd">A package that <b>bundles and distributes</b> the above.</div></div>
       </div>
-      <p class="note">Install: <code>/plugin install name@marketplace</code>. There's an official marketplace (claude-plugins-official) and a community marketplace (claude-community). Only install from sources you trust. (Source: official docs, code.claude.com/docs/plugins)</p>
+      <p class="note">Install: <code>/plugin install name@marketplace</code>. There are official and community marketplaces (e.g. community is <code>@claude-community</code>). Only install from sources you trust. (Source: code.claude.com/docs/plugins)</p>
     </section>
 
     <!-- 12 SUBAGENTS -->
@@ -943,7 +944,7 @@ description: Write the weekly report in the company format
         </div>
         <div><div class="pdetail" id="pdetail"></div><div class="btnrow" style="margin-top:12px;"><button class="btn solid" id="pm-sim">See this mode work ▶</button></div><div class="simbox" id="pm-simbox"></div></div>
       </div>
-      <p class="note">These 5 are the modes shown in the menu. There's also a separate automation-only mode that 'only allows pre-approved tools (dontAsk).' In any mode, <b>extreme destruction like wiping the whole system (rm -rf / · rm -rf ~)</b> is blocked by a safeguard. If you don't like a result, you can recover it with 'rewind' (the 'Rewind' tab).</p>
+      <p class="note">These 5 are the modes shown in the menu. There's also a separate automation-only mode that 'only allows pre-approved tools (dontAsk).' In any mode, <b>extreme destruction like wiping the whole system (rm -rf / · rm -rf ~)</b> still asks for one more confirmation (a 'circuit breaker' — they don't run automatically). If you don't like a result, you can recover it with 'rewind' (the 'Rewind' tab).</p>
     </section>
 
     <!-- 17 REWIND -->
@@ -957,7 +958,7 @@ description: Write the weekly report in the company format
       <div class="btnrow" style="margin:14px 0;"><button class="btn" id="rw-code">Restore code only</button><button class="btn" id="rw-both">Restore code + conversation</button><button class="btn" id="rw-reset">Reset</button></div>
       <p class="status" id="rw-msg" style="margin-top:0;">Click a dot on the timeline above, then choose how to restore.</p>
       <ul class="points">
-        <li><b>How to open it</b><span>Press <code>ESC</code> twice or <code>/rewind</code> — a list of the requests you've sent so far appears.</span></li>
+        <li><b>How to open it</b><span><code>/rewind</code>, or press <code>ESC</code> twice when the input box is empty — the list of your requests appears. (If there's text in the input, double-ESC clears the text first.)</span></li>
         <li><b>Three kinds of restore</b><span>Code + conversation together / conversation only (keep code) / code only (keep conversation).</span></li>
         <li><b>Limits</b><span>Things changed by terminal commands like <code>rm·mv</code>, installs (<code>npm install</code>), and outside changes can't be rolled back.</span></li>
       </ul>
@@ -975,7 +976,7 @@ description: Write the weekly report in the company format
           <div class="cmprow"><b>Setting location</b>claude.ai/settings/data-privacy-controls</div></div>
         <div class="cmpcard"><h4>Business (Team, Enterprise, API)</h4><div class="who">Company / developer account</div>
           <div class="cmprow"><b>Training use</b>By default, <b>not used for training</b></div>
-          <div class="cmprow"><b>API</b>Inputs and outputs are deleted after 7 days by default, not used for training</div></div>
+          <div class="cmprow"><b>API</b>Doesn't store your conversation content by default; not used for training (some newer models require 30-day retention)</div></div>
       </div>
       <ul class="points">
         <li><b>Claude Code runs on your computer.</b><span>It encrypts (TLS) and sends only what's needed to the API — it doesn't upload your whole folder to the cloud.</span></li>
@@ -1022,7 +1023,7 @@ description: Write the weekly report in the company format
         <div class="fgrid">
           <div class="fcard"><div class="ft">Free</div><div class="fd">Claude Code <b>not included</b>. You need a paid plan.</div></div>
           <div class="fcard"><div class="ft">Pro</div><div class="fd">Personal. Good for everyday use.</div><div class="fe"><b>roughly</b> $20/month <span class="exb">varies</span></div></div>
-          <div class="fcard"><div class="ft">Max</div><div class="fd">Personal. The most generous usage.</div><div class="fe"><b>roughly</b> $100–200/month <span class="exb">varies</span></div></div>
+          <div class="fcard"><div class="ft">Max</div><div class="fd">Personal. The most generous usage.</div><div class="fe"><b>$100</b> (5x) · <b>$200</b> (20x) / mo <span class="exb">varies</span></div></div>
           <div class="fcard"><div class="ft">Team · Enterprise</div><div class="fd">For teams and companies. Per person (seat).</div></div>
           <div class="fcard"><div class="ft">API (pay-as-you-go)</div><div class="fd">Billed by token, for what you use. For automation and integrations.</div></div>
         </div>
@@ -1045,7 +1046,7 @@ description: Write the weekly report in the company format
       <div class="cols">
         <div>
           <div class="gauge"><div class="gl"><span>5-hour limit (last 5 hours)</span><b id="g5n">0%</b></div><div class="gtrack"><i id="g5"></i></div></div>
-          <div class="gauge"><div class="gl"><span>Weekly limit (last 7 days)</span><b id="gwn">18%</b></div><div class="gtrack"><i id="gw"></i></div></div>
+          <div class="gauge"><div class="gl"><span>Weekly limit (per week)</span><b id="gwn">18%</b></div><div class="gtrack"><i id="gw"></i></div></div>
           <div class="lockmsg" id="lock-msg"></div>
         </div>
         <div>
@@ -1068,7 +1069,7 @@ description: Write the weekly report in the company format
       <p class="label">There are two limits at the same time</p>
       <ul class="points">
         <li><b>5-hour limit</b><span>Looks at how much you've used in 'the last 5 hours.' It refills automatically over time (rolling).</span></li>
-        <li><b>Weekly (7-day) limit</b><span>A larger limit based on 'the last 7 days.' Dodging only the 5-hour limit doesn't mean unlimited use.</span></li>
+        <li><b>Weekly limit</b><span>A larger weekly cap that resets at a fixed day/time each week (it doesn't roll like the 5-hour one). Avoiding the 5-hour cap alone won't let you use it forever. (Max has two: an all-models one + a Sonnet-only one.)</span></li>
         <li><b>If either one fills up, it stops.</b><span>Both the 5-hour and weekly limits apply, so whichever fills first blocks you. When that limit resets, it frees up again.</span></li>
         <li><b>Hitting a limit doesn't lose your work.</b><span>What you were doing isn't wiped — it's just a 'brief pause.' When it resets, pick up where you left off. (In a hurry? Upgrade to a higher plan, or buy extra usage.)</span></li>
         <li><b>It's deducted from one shared place.</b><span>claude.ai, Claude Code, and the desktop app share the same usage.</span></li>
@@ -1123,6 +1124,7 @@ description: Write the weekly report in the company format
       <p class="label">The deeper you go, the longer the 'thinking process' <span class="hint">try it — the length changes</span></p>
       <div class="efthink" id="ef-think"></div>
       <p class="note">Use 'low' for simple tasks (fast and cheap), and 'high/max' for tricky analysis and reasoning. How to change it: <code>/effort</code> or settings (the 'Settings' tab). <span class="exb">example</span> The bars are a relative comparison. (Source: Anthropic official — support.claude.com model & effort settings)</p>
+      <p class="note"><b>Advanced · ultracode</b> — The <code>/effort</code> menu also has <b>ultracode</b>. On top of maximum (xhigh) reasoning, it has Claude <b>automatically marshal multiple helpers (a workflow)</b> for hard tasks. It's <b>session-only</b>, uses a lot of tokens, so you don't need it day-to-day — pick it only for very hard tasks (on Fable 5, Opus 4.8, etc.).</p>
     </section>
 
     <!-- GOAL -->
@@ -1463,7 +1465,7 @@ description: Write the weekly report in the company format
     {name:'Accept edits',safe:'Mostly safe',col:'#5aa56a',auto:'File edits, safe file commands (creating folders, moving, copying)',ask:'Hard-to-undo work like git commits',use:'When iterating quickly while watching the results',sim:['auto','auto','ask','ask']},
     {name:'Plan mode',safe:'Read-only',col:'#b9792a',auto:'Reading and exploring only (no direct edits)',ask:'Once you approve the plan, it runs all at once',use:'When checking a plan first, before big changes',sim:['plan','plan','plan','plan']},
     {name:'Auto mode',safe:'Caution',col:'#d8943f',auto:'Most tasks (with background safety checks)',ask:'Only confirms or blocks dangerous tasks',use:'When you want fewer prompts for long automated work',note:'Requires the latest version and model (Opus 4.6 / Sonnet 4.6 or later)',sim:['auto','auto','auto','ask']},
-    {name:'Skip permissions',safe:'Dangerous',col:'#d8453f',auto:'Everything — proceeds without asking',ask:'Blocks only extremes like wiping the whole system (rm -rf / · rm -rf ~)',use:'Only in an internet-isolated environment (container, VM)',note:'Vulnerable to prompt injection — don\'t use it on a normal PC',sim:['auto','auto','auto','auto']} ];
+    {name:'Skip permissions',safe:'Dangerous',col:'#d8453f',auto:'Everything — proceeds without asking',ask:'Extreme deletes like rm -rf / · rm -rf ~ still ask once more',use:'Only in an internet-isolated environment (container, VM)',note:'Vulnerable to prompt injection — don\'t use it on a normal PC',sim:['auto','auto','auto','auto']} ];
   var SIM_ACT=['Edit a file','Create a folder','git commit','Delete a file (rm)'],SIM_TXT={auto:'Runs automatically',ask:'Asks for confirmation',plan:'Doesn\'t run (plan only)',block:'Blocked'},curPm=0;
   function pmShow(i){ curPm=i; var d=PM[i]; document.querySelectorAll('#pmenu .prow').forEach(function(r){ r.classList.toggle('on',+r.dataset.i===i); }); var badge='<span class="pbadge" style="background:'+rgba(d.col,.16)+';color:'+d.col+'">'+d.safe+'</span>'; document.getElementById('pdetail').innerHTML='<div class="pt">'+d.name+' '+badge+'</div><div class="pdrow"><b>Does on its own</b>'+d.auto+'</div><div class="pdrow"><b>Still asks about</b>'+d.ask+'</div><div class="pdrow"><b>When to use</b>'+d.use+'</div>'+(d.note?'<div class="pdrow"><b>Note</b>'+d.note+'</div>':''); document.getElementById('pmark').style.left=((i+0.5)/PM.length*100)+'%'; document.getElementById('pm-simbox').innerHTML='<div class="simrow on" style="color:var(--faint);font-size:12.5px;">Press "See this mode work."</div>'; }
   var pmT=[]; document.getElementById('pm-sim').addEventListener('click',function(){ pmT.forEach(clearTimeout); pmT=[]; var d=PM[curPm],box=document.getElementById('pm-simbox'); box.innerHTML=''; SIM_ACT.forEach(function(a,idx){ var s=d.sim[idx],row=document.createElement('div'); row.className='simrow'; var cls=s==='auto'?'auto':(s==='ask'?'ask':(s==='plan'?'plan':'block')); row.innerHTML='<span class="sa">'+a+'</span><span class="sp '+cls+'">'+SIM_TXT[s]+'</span>'; box.appendChild(row); pmT.push(setTimeout(function(){ row.classList.add('on'); },220*idx)); }); });

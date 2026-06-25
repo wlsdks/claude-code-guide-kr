@@ -638,7 +638,7 @@ irm https://claude.ai/install.ps1 | iex</div>
       <p class="defs">越聪明通常越慢、越贵。按需要的工作来选就行。在下面挑一个试试。</p>
       <div class="mtabs" id="mtabs">
         <button class="mtab" data-m="opus"><div class="mn">Opus 4.8</div><div class="mt">最聪明</div></button>
-        <button class="mtab on" data-m="sonnet"><div class="mn">Sonnet 4.6</div><div class="mt">均衡 · 默认推荐</div></button>
+        <button class="mtab on" data-m="sonnet"><div class="mn">Sonnet 4.6</div><div class="mt">均衡 · 稳妥之选</div></button>
         <button class="mtab" data-m="haiku"><div class="mn">Haiku 4.5</div><div class="mt">最快最便宜</div></button>
         <button class="mtab" data-m="fable"><div class="mn">Fable 5</div><div class="mt">最新最强 · 非默认</div></button>
       </div>
@@ -657,12 +657,13 @@ irm https://claude.ai/install.ps1 | iex</div>
       <p class="label">各模型的上下文窗口 (截至 2026 年 6 月)</p>
       <div class="tablewrap"><table class="t"><thead><tr><th>模型</th><th>上下文窗口</th><th>一句话</th></tr></thead><tbody>
         <tr><td class="cmd">Opus 4.8</td><td>最大 1M (100 万)</td><td>最聪明</td></tr>
-        <tr><td class="cmd">Sonnet 4.6</td><td>最大 1M (100 万)</td><td>均衡 · 默认推荐</td></tr>
+        <tr><td class="cmd">Sonnet 4.6</td><td>最大 1M (100 万)</td><td>均衡 · 稳妥之选</td></tr>
         <tr><td class="cmd">Haiku 4.5</td><td>200K (20 万)</td><td>最快最便宜</td></tr>
         <tr><td class="cmd">Fable 5</td><td>最大 1M (100 万)</td><td>最新最强 · 直接选择</td></tr>
       </tbody></table></div>
       <ul class="points">
-        <li><b>付费版里选最新的 Opus、Sonnet，最高可用 1M 上下文。</b><span>不过能否用 1M 取决于套餐和设置（并非自动开启）。像 Haiku 这样的基础模型是 200K。</span></li>
+        <li><b>默认模型取决于你的套餐。</b><span>Pro 默认 Sonnet 4.6；Max 和 API 默认 Opus 4.8。拿不准时，从均衡的 Sonnet 开始比较稳妥。</span></li>
+        <li><b>1M 上下文可用于 Fable 5、Opus 4.6 及以上、Sonnet 4.6。</b><span>能否使用取决于套餐/设置（不是自动）。Haiku 是 200K。</span></li>
         <li><b>日常工作 200K 就足够了。</b><span>1M 在大项目、超长任务里才能大放异彩。</span></li>
         <li><b>窗口越大记得越多，但可能稍慢、准确度也会下降。</b><span>只放进需要的内容，质量才最好。</span></li>
       </ul>
@@ -813,7 +814,7 @@ description: 按公司格式撰写周报
         <div class="fcard"><div class="ft">技能</div><div class="fd">重复工作的<b>窍门·步骤</b>集合。</div></div>
         <div class="fcard"><div class="ft">插件</div><div class="fd">把上面这些<b>打包发布</b>的软件包。</div></div>
       </div>
-      <p class="note">安装：<code>/plugin install 名称@市场</code>。有官方市场（claude-plugins-official）和社区市场（claude-community）。只安装可信来源的插件。（来源：官方文档 code.claude.com/docs/plugins）</p>
+      <p class="note">安装：<code>/plugin install 名称@市场</code>。有官方和社区市场（例如社区是 <code>@claude-community</code>）。只从可信来源安装。（来源：code.claude.com/docs/plugins）</p>
     </section>
 
     <!-- 12 SUBAGENTS -->
@@ -943,7 +944,7 @@ description: 按公司格式撰写周报
         </div>
         <div><div class="pdetail" id="pdetail"></div><div class="btnrow" style="margin-top:12px;"><button class="btn solid" id="pm-sim">查看此模式运行 ▶</button></div><div class="simbox" id="pm-simbox"></div></div>
       </div>
-      <p class="note">这 5 种是菜单里能看到的模式。另外还有一个专供自动化的‘只允许预先批准的工具（dontAsk）’模式。无论哪种模式，<b>像删除整个系统（rm -rf / · rm -rf ~）这种极端破坏</b>都有安全机制拦着。不满意的话可以用‘回退’（‘回退’标签页）恢复。</p>
+      <p class="note">这 5 种是菜单里能看到的模式。另外还有一个专供自动化的‘只允许预先批准的工具（dontAsk）’模式。无论哪种模式，<b>像删除整个系统（rm -rf / · rm -rf ~）这种极端破坏</b>都会再确认一次（‘断路器’——不会自动执行）。不满意的话可以用‘回退’（‘回退’标签页）恢复。</p>
     </section>
 
     <!-- 17 REWIND -->
@@ -957,7 +958,7 @@ description: 按公司格式撰写周报
       <div class="btnrow" style="margin:14px 0;"><button class="btn" id="rw-code">只恢复代码</button><button class="btn" id="rw-both">恢复代码+对话</button><button class="btn" id="rw-reset">重置</button></div>
       <p class="status" id="rw-msg" style="margin-top:0;">先点上面时间线上的圆点，再选恢复方式。</p>
       <ul class="points">
-        <li><b>怎么打开</b><span>按两下 <code>ESC</code> 或输入 <code>/rewind</code> —— 会弹出至今发过的请求列表。</span></li>
+        <li><b>怎么打开</b><span><code>/rewind</code>，或在输入框为空时按两次 <code>ESC</code> —— 会列出你发过的请求。（如果输入框里有文字，按两次会先清除文字。）</span></li>
         <li><b>三种恢复</b><span>代码+对话一起 / 只对话（保留代码）/ 只代码（保留对话）。</span></li>
         <li><b>限制</b><span>用 <code>rm·mv</code> 这类终端命令改动的东西、安装（<code>npm install</code>）以及外部变更，无法回退。</span></li>
       </ul>
@@ -975,7 +976,7 @@ description: 按公司格式撰写周报
           <div class="cmprow"><b>设置位置</b>claude.ai/settings/data-privacy-controls</div></div>
         <div class="cmpcard"><h4>工作版 (Team·Enterprise·API)</h4><div class="who">公司、开发者账户</div>
           <div class="cmprow"><b>是否用于训练</b>默认<b>不用于训练</b></div>
-          <div class="cmprow"><b>API</b>输入输出默认 7 天后删除，不用于训练</div></div>
+          <div class="cmprow"><b>API</b>默认不存储对话内容，不用于训练（部分较新模型需保留 30 天）</div></div>
       </div>
       <ul class="points">
         <li><b>Claude Code 在我的电脑上运行。</b><span>只把需要的内容加密（TLS）后发给 API —— 不是把整个文件夹上传到云端。</span></li>
@@ -1022,7 +1023,7 @@ description: 按公司格式撰写周报
         <div class="fgrid">
           <div class="fcard"><div class="ft">Free (免费)</div><div class="fd"><b>不含</b> Claude Code。要有付费版才能用。</div></div>
           <div class="fcard"><div class="ft">Pro</div><div class="fd">个人用。适合日常使用。</div><div class="fe"><b>大约</b> 每月 $20 <span class="exb">浮动</span></div></div>
-          <div class="fcard"><div class="ft">Max</div><div class="fd">个人用。用量最充裕。</div><div class="fe"><b>大约</b> 每月 $100~200 <span class="exb">浮动</span></div></div>
+          <div class="fcard"><div class="ft">Max</div><div class="fd">个人用。用量最充裕。</div><div class="fe">每月 $100(5x)·$200(20x) <span class="exb">浮动</span></div></div>
           <div class="fcard"><div class="ft">Team · Enterprise</div><div class="fd">团队、公司用。按人（席位）数计。</div></div>
           <div class="fcard"><div class="ft">API (按量计费)</div><div class="fd">按 token 用多少算多少。用于自动化、联动。</div></div>
         </div>
@@ -1045,7 +1046,7 @@ description: 按公司格式撰写周报
       <div class="cols">
         <div>
           <div class="gauge"><div class="gl"><span>5 小时上限（最近 5 小时）</span><b id="g5n">0%</b></div><div class="gtrack"><i id="g5"></i></div></div>
-          <div class="gauge"><div class="gl"><span>每周上限（最近 7 天）</span><b id="gwn">18%</b></div><div class="gtrack"><i id="gw"></i></div></div>
+          <div class="gauge"><div class="gl"><span>每周限额（每周）</span><b id="gwn">18%</b></div><div class="gtrack"><i id="gw"></i></div></div>
           <div class="lockmsg" id="lock-msg"></div>
         </div>
         <div>
@@ -1068,7 +1069,7 @@ description: 按公司格式撰写周报
       <p class="label">同时有两种上限</p>
       <ul class="points">
         <li><b>5 小时上限</b><span>看‘过去 5 小时’里用的量。过一段时间会自动补满（滚动方式）。</span></li>
-        <li><b>每周（7 天）上限</b><span>以‘过去 7 天’为准的更大上限。光躲开 5 小时上限，并不代表能无限用。</span></li>
+        <li><b>每周限额</b><span>以一周为单位的更大限额，在每周固定的星期/时间重置（不像 5 小时那样滚动）。只避开 5 小时限额并不能无限使用。（Max 有两个：‘全部模型’ + ‘仅 Sonnet’）</span></li>
         <li><b>两个中只要有一个满了就停。</b><span>5 小时和每周两个上限同时管着，先满的那个先卡住。那个上限重置后又会放开。</span></li>
         <li><b>就算卡到上限，工作也不会消失。</b><span>正在做的内容不会丢，只是‘暂停一下’ —— 重置后接着做就行。（急的话升级到更高方案，或购买额外用量）</span></li>
         <li><b>在一处一起扣减。</b><span>claude.ai、Claude Code、桌面应用共用同一份用量。</span></li>
@@ -1124,6 +1125,7 @@ description: 按公司格式撰写周报
       <p class="label">选得越深，‘思考过程’就越长 <span class="hint">点一点，长度会不一样</span></p>
       <div class="efthink" id="ef-think"></div>
       <p class="note">简单的事用‘低’（又快又便宜），棘手的分析·推理用‘高/最高’。改法：<code>/effort</code> 或在设置里（见‘设置’标签页）。<span class="exb">示例</span> 这些条形是相对比较。（出处：Anthropic 官方 —— support.claude.com 模型·effort 设置）</p>
+      <p class="note"><b>进阶 · ultracode</b> —— <code>/effort</code> 菜单里还有 <b>ultracode</b>。它在最高（xhigh）推理之上，让 Claude 为困难任务<b>自动调动多个助手（工作流）</b>处理。这是<b>仅当前会话</b>的模式，很费 token，平时用不到，只在非常难的任务时选用（Fable 5、Opus 4.8 等）。</p>
     </section>
 
     <!-- GOAL -->
@@ -1464,7 +1466,7 @@ description: 按公司格式撰写周报
     {name:'接受编辑',safe:'大体安全',col:'#5aa56a',auto:'文件编辑、安全的文件命令（创建文件夹·移动·复制）',ask:'git 提交等难以撤销的操作',use:'一边看结果一边快速反复修改时',sim:['auto','auto','ask','ask']},
     {name:'计划模式',safe:'只读',col:'#b9792a',auto:'只读取·探索（不直接修改）',ask:'批准计划后一次性执行',use:'大改动前想先确认计划时',sim:['plan','plan','plan','plan']},
     {name:'自动模式',safe:'注意',col:'#d8943f',auto:'大多数操作（后台做安全检查）',ask:'仅对危险操作确认·拦截',use:'想用长时间自动操作、减少确认时',note:'需要最新版本·模型（Opus 4.6 / Sonnet 4.6 及以上）',sim:['auto','auto','auto','ask']},
-    {name:'跳过权限',safe:'危险',col:'#d8453f',auto:'全部 —— 不确认直接进行',ask:'仅拦截删除整个系统（rm -rf / · rm -rf ~）这类极端操作',use:'仅在断网的隔离环境（容器·虚拟机）中使用',note:'易受提示注入攻击 —— 不要在普通电脑上用',sim:['auto','auto','auto','auto']} ];
+    {name:'跳过权限',safe:'危险',col:'#d8453f',auto:'全部 —— 不确认直接进行',ask:'像清空整个系统(rm -rf / · rm -rf ~)这类极端操作会再确认一次',use:'仅在断网的隔离环境（容器·虚拟机）中使用',note:'易受提示注入攻击 —— 不要在普通电脑上用',sim:['auto','auto','auto','auto']} ];
   var SIM_ACT=['修改文件','创建文件夹','git 提交','删除文件 (rm)'],SIM_TXT={auto:'自动执行',ask:'请求确认',plan:'不执行（仅计划）',block:'拦截'},curPm=0;
   function pmShow(i){ curPm=i; var d=PM[i]; document.querySelectorAll('#pmenu .prow').forEach(function(r){ r.classList.toggle('on',+r.dataset.i===i); }); var badge='<span class="pbadge" style="background:'+rgba(d.col,.16)+';color:'+d.col+'">'+d.safe+'</span>'; document.getElementById('pdetail').innerHTML='<div class="pt">'+d.name+' '+badge+'</div><div class="pdrow"><b>自作主张做的</b>'+d.auto+'</div><div class="pdrow"><b>仍会询问的</b>'+d.ask+'</div><div class="pdrow"><b>何时用</b>'+d.use+'</div>'+(d.note?'<div class="pdrow"><b>提示</b>'+d.note+'</div>':''); document.getElementById('pmark').style.left=((i+0.5)/PM.length*100)+'%'; document.getElementById('pm-simbox').innerHTML='<div class="simrow on" style="color:var(--faint);font-size:12.5px;">点一下“查看此模式运行”。</div>'; }
   var pmT=[]; document.getElementById('pm-sim').addEventListener('click',function(){ pmT.forEach(clearTimeout); pmT=[]; var d=PM[curPm],box=document.getElementById('pm-simbox'); box.innerHTML=''; SIM_ACT.forEach(function(a,idx){ var s=d.sim[idx],row=document.createElement('div'); row.className='simrow'; var cls=s==='auto'?'auto':(s==='ask'?'ask':(s==='plan'?'plan':'block')); row.innerHTML='<span class="sa">'+a+'</span><span class="sp '+cls+'">'+SIM_TXT[s]+'</span>'; box.appendChild(row); pmT.push(setTimeout(function(){ row.classList.add('on'); },220*idx)); }); });
