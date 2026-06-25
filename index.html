@@ -121,6 +121,15 @@
   .mgbars{ display:flex; flex-direction:column; gap:12px; }
   .mgbar .mgb-l{ display:flex; justify-content:space-between; gap:10px; font-size:12.5px; color:var(--muted); margin-bottom:4px; } .mgbar .mgb-l b{ flex:0 0 auto; font-weight:600; }
   .mgb-track{ height:9px; border-radius:6px; background:var(--bg); border:1px solid var(--line); overflow:hidden; } .mgb-track i{ display:block; height:100%; width:12%; border-radius:6px; background:var(--good); transition:width .5s cubic-bezier(.4,0,.2,1), background .5s; }
+  .mgchat{ margin-top:12px; display:flex; flex-direction:column; gap:10px; min-height:118px; }
+  .mgturn{ opacity:0; transform:translateY(-5px); transition:opacity .35s, transform .35s; } .mgturn.on{ opacity:1; transform:none; }
+  .mgu{ font-size:12.5px; color:var(--muted); margin-bottom:4px; } .mgu b{ color:var(--ink); }
+  .mgc{ font-size:13px; line-height:1.5; padding:9px 12px; border-radius:9px; border:1px solid var(--line); background:var(--bg); display:flex; gap:9px; align-items:baseline; }
+  .mgc .mgc-t{ font-size:11px; font-weight:700; border-radius:5px; padding:2px 7px; flex:0 0 auto; white-space:nowrap; }
+  .mgc.ok{ border-color:rgba(31,158,118,.4); background:rgba(31,158,118,.07); } .mgc.ok .mgc-t{ color:var(--good); background:rgba(31,158,118,.15); }
+  .mgc.slow{ border-color:rgba(216,148,63,.45); background:rgba(216,148,63,.08); } .mgc.slow .mgc-t{ color:#b9792a; background:rgba(216,148,63,.16); }
+  .mgc.conf{ border-color:rgba(216,69,63,.4); background:rgba(216,69,63,.07); } .mgc.conf .mgc-t{ color:var(--over); background:rgba(216,69,63,.13); }
+  .mgc.compact{ border-color:rgba(109,95,208,.42); background:rgba(109,95,208,.08); } .mgc.compact .mgc-t{ color:var(--purple); background:rgba(109,95,208,.15); }
   .cxbadge{ display:inline-block; font-size:12.5px; font-variant-numeric:tabular-nums; background:var(--row); border-radius:7px; padding:7px 12px; margin-bottom:12px; } .cxbadge b{ font-weight:600; } .cxbadge .ar{ color:var(--faint); margin:0 6px; }
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
@@ -1129,17 +1138,14 @@ description: 주간 보고서를 회사 양식으로 작성
     <section class="page" id="manage">
       <h1>맥락은 왜 관리해야 할까?</h1>
       <p class="lead">컨텍스트(맥락)는 클로드의 <b>‘책상’</b>이에요. 책상이 지저분해지면 일이 <b>느려지고, 비싸지고, 실수가 늘어요</b>. 그래서 제때 정리하는 게 중요해요.</p>
-      <p class="defs">‘대화 계속 쌓기’로 방치하면 어떻게 나빠지는지, ‘정리하기’를 누르면 어떻게 좋아지는지 직접 보세요.</p>
-      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="mg-stack">대화 계속 쌓기 ▶</button><button class="btn" id="mg-clean">정리하기 ↺</button></div>
+      <p class="defs">‘대화 한 턴 더’를 누를 때마다 맥락이 쌓여요. <b>같은 종류의 부탁인데도 클로드의 응답이 어떻게 달라지는지</b> 보세요.</p>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="mg-stack">대화 한 턴 더 ▶</button><button class="btn" id="mg-clean">정리하기 ↺</button></div>
       <div class="mgwrap">
-        <div class="mgfill"><div class="mgfl-h"><span>맥락이 차오른 정도</span><b id="mg-pct">12%</b></div><div class="mgfl-track"><i id="mg-fill"></i></div></div>
-        <div class="mgbars">
-          <div class="mgbar"><div class="mgb-l"><span>느려짐 — 매번 전체를 다시 읽어요</span><b id="mg-v-slow">낮음</b></div><div class="mgb-track"><i id="mg-slow"></i></div></div>
-          <div class="mgbar"><div class="mgb-l"><span>토큰 비용 — 많을수록 더 비싸요</span><b id="mg-v-cost">낮음</b></div><div class="mgb-track"><i id="mg-cost"></i></div></div>
-          <div class="mgbar"><div class="mgb-l"><span>헷갈림 — 잡동사니에 중요한 걸 놓쳐요</span><b id="mg-v-conf">낮음</b></div><div class="mgb-track"><i id="mg-conf"></i></div></div>
-        </div>
+        <div class="mgfl-h"><span>책상(맥락)이 차오른 정도</span><b id="mg-pct">12%</b></div>
+        <div class="mgfl-track" style="margin-bottom:6px;"><i id="mg-fill"></i></div>
+        <div class="mgchat" id="mg-chat"></div>
       </div>
-      <p class="status" id="mg-status" style="margin-top:12px;">지금은 책상이 깔끔해요 — 빠르고, 싸고, 정확해요.</p>
+      <p class="status" id="mg-status" style="margin-top:12px;">‘대화 한 턴 더’를 누르며 맥락이 쌓일수록, 클로드에게 무슨 일이 생기는지 보세요.</p>
 
       <p class="label">정리하는 법 — 이렇게 관리해요</p>
       <div class="fgrid">
@@ -1627,22 +1633,27 @@ description: 주간 보고서를 회사 양식으로 작성
   document.getElementById('lim-reset').addEventListener('click',function(){ luT.forEach(clearTimeout); luT=[]; l5=0; gset(); document.getElementById('lim-use').disabled=false; document.getElementById('lock-msg').textContent='5시간이 지나 한도가 리셋됐어요! 다시 쓸 수 있어요. (단, 주간 한도는 그대로 남아있는 점 주의)'; });
   gset();
 
-  /* manage — why manage context */
-  (function(){ var stack=document.getElementById('mg-stack'); if(!stack) return; var fill=10;
-    var E={ pct:document.getElementById('mg-pct'), fl:document.getElementById('mg-fill'), slow:document.getElementById('mg-slow'), cost:document.getElementById('mg-cost'), conf:document.getElementById('mg-conf'), vslow:document.getElementById('mg-v-slow'), vcost:document.getElementById('mg-v-cost'), vconf:document.getElementById('mg-v-conf'), st:document.getElementById('mg-status') };
-    function color(v){ return v<40?'var(--good)':(v<72?'#d8943f':'#d8453f'); }
-    function rate(v){ return v<30?'낮음':(v<58?'보통':(v<80?'높음':'매우 높음')); }
-    function render(){ var f=Math.min(100,fill); E.pct.textContent=Math.round(f)+'%'; E.fl.style.width=f+'%'; E.fl.style.background=color(f);
-      var slow=Math.min(100,f), cost=Math.min(100,f*0.95+4), conf=Math.min(100,f*0.88);
-      E.slow.style.width=slow+'%'; E.slow.style.background=color(slow); E.vslow.textContent=rate(slow);
-      E.cost.style.width=cost+'%'; E.cost.style.background=color(cost); E.vcost.textContent=rate(cost);
-      E.conf.style.width=conf+'%'; E.conf.style.background=color(conf); E.vconf.textContent=rate(conf); }
-    stack.addEventListener('click',function(){ fill=Math.min(100,fill+19);
-      if(fill>=100) E.st.textContent='책상이 꽉 찼어요 — 느리고·비싸고·헷갈려요. 곧 자동 압축이 와서 디테일이 사라질 수 있어요. ‘정리하기’를 눌러보세요.';
-      else if(fill>60) E.st.textContent='점점 무거워져요 — 매번 전체를 다시 읽느라 느리고 비싸지고, 중요한 걸 놓치기 쉬워요.';
-      else E.st.textContent='조금씩 쌓이는 중… 계속 방치하면 느려지고 비싸지고 헷갈려요.'; render(); });
-    document.getElementById('mg-clean').addEventListener('click',function(){ fill=10; E.st.textContent='정리 완료! 책상이 깔끔해졌어요 — 다시 빠르고, 싸고, 정확해요. (작업이 바뀔 땐 /clear, 길어지면 /compact)'; render(); });
-    render(); })();
+  /* manage — why manage context (concrete conversation) */
+  (function(){ var stack=document.getElementById('mg-stack'); if(!stack) return;
+    var chat=document.getElementById('mg-chat'), pctEl=document.getElementById('mg-pct'), flEl=document.getElementById('mg-fill'), stEl=document.getElementById('mg-status'), mgT=[], fill=12, turn=0;
+    var TASKS=['로고 색 바꿔줘','제목 글자 키워줘','버튼 모서리 둥글게','여백 조금 줄여줘','아까 그 색으로 다시','메뉴 위치 옮겨줘','폰트 바꿔줘','간격 정리해줘'];
+    function fillColor(f){ return f<40?'var(--good)':(f<72?'#d8943f':'#d8453f'); }
+    function setFill(){ pctEl.textContent=Math.round(fill)+'%'; flEl.style.width=fill+'%'; flEl.style.background=fillColor(fill); }
+    function reply(f){ if(f>=92) return {cls:'compact',tag:'자동 압축',txt:'책상이 꽉 차서 옛 대화를 요약했어요 — “아까 그 색”의 상세가 사라졌어요. 파일을 다시 봐야 해요.'};
+      if(f>=70) return {cls:'conf',tag:'헷갈림',txt:'음… “아까 그거”가 어떤 거였죠? 맥락이 너무 많아 중요한 걸 놓쳤어요.'};
+      if(f>=44) return {cls:'slow',tag:'응답 7초',txt:'처리했어요 — 그런데 맥락 전체를 매번 다시 읽느라 점점 느리고 비싸져요.'};
+      return {cls:'ok',tag:'응답 2초',txt:'바로, 정확히 처리했어요. 책상이 깔끔하니까요.'}; }
+    function add(html){ var row=document.createElement('div'); row.className='mgturn'; row.innerHTML=html; chat.appendChild(row); while(chat.children.length>4) chat.removeChild(chat.firstChild); mgT.push(setTimeout(function(){ row.classList.add('on'); },20)); }
+    function reset(){ mgT.forEach(clearTimeout); mgT=[]; fill=12; turn=0; chat.innerHTML=''; setFill(); stEl.textContent='‘대화 한 턴 더’를 누르며 맥락이 쌓일수록, 클로드에게 무슨 일이 생기는지 보세요.'; }
+    stack.addEventListener('click',function(){ if(fill>=100) return; fill=Math.min(100,fill+14); setFill(); turn++;
+      var task=TASKS[(turn-1)%TASKS.length], r=reply(fill);
+      add('<div class="mgu"><b>나:</b> “'+task+'”</div><div class="mgc '+r.cls+'"><span class="mgc-t">'+r.tag+'</span><span>'+r.txt+'</span></div>');
+      stEl.textContent= r.cls==='compact'?'꽉 차서 자동 압축이 일어났어요 — 미리 ‘정리하기’를 했으면 디테일을 안 잃었을 거예요.'
+        : r.cls==='conf'?'맥락이 많아 클로드가 헷갈리기 시작했어요. 이쯤에서 정리하면 좋아요.'
+        : r.cls==='slow'?'쌓일수록 느리고 비싸져요 — 매번 책상 전체를 다시 읽거든요.'
+        : '아직 깔끔해요 — 빠르고 정확해요.'; });
+    document.getElementById('mg-clean').addEventListener('click',function(){ reset(); add('<div class="mgc ok"><span class="mgc-t">정리 완료</span><span>책상을 비웠어요 — 다시 2초, 정확, 저렴해요. (작업 바뀔 땐 <code>/clear</code>, 길어지면 <code>/compact</code>)</span></div>'); });
+    reset(); })();
 
   /* compact detail page */
   var cxT=[], cxKeep={0:1,1:1,5:1};
