@@ -829,7 +829,7 @@ irm https://claude.ai/install.ps1 | iex</div>
             <button class="act" data-k="toolout" data-t="3100"><span class="dot" style="background:#129a8e"></span><span class="meta"><div class="t">运行工具</div><div class="d">搜索·运行的结果</div></span><span class="add">+3,100</span></button>
             <button class="act" data-k="reply" data-t="1800"><span class="dot" style="background:#cf5184"></span><span class="meta"><div class="t">Claude 回复</div><div class="d">写出说明和代码</div></span><span class="add">+1,800</span></button>
           </div>
-          <div class="botrow"><button class="btn solid" id="autocompact">查看自动压缩 ▶</button><button class="ghost" id="compact">手动压缩</button><span class="sep">·</span><button class="ghost" id="reset">重置</button></div>
+          <div class="botrow"><button class="btn solid" id="autocompact">查看自动压缩 ▶</button><button class="ghost" id="cx-compact">手动压缩</button><span class="sep">·</span><button class="ghost" id="reset">重置</button></div>
           <p class="status" id="status">下面这三格在对话还没开始时就一直在里面。这是 Claude 的‘基本随身物’。</p>
         </div>
       </div>
@@ -1794,7 +1794,7 @@ description: 按公司格式撰写周报
   document.querySelectorAll('#context .act').forEach(function(b){ b.addEventListener('click',function(){ ctxAdd(b.dataset.k,parseInt(b.dataset.t,10)); var total=items.reduce(function(a,b){return a+b.t;},0); if(total>MAX)status.textContent='超过上限了 —— 现在需要自动压缩。'; }); });
   function doCompact(){ var pre=items.reduce(function(a,b){return a+b.t;},0); ctxBase(); items.push({k:'summary',t:Math.round(MAX*0.10),txt:'到此为止的对话摘要'}); ctxRender(true); var post=items.reduce(function(a,b){return a+b.t;},0); showBA(pre,post); }
   function showBA(pre,post){ var el=document.getElementById('cwba'); if(!el)return; document.getElementById('cwba-pre').textContent='约 '+fmt(pre)+' token'; document.getElementById('cwba-post').textContent='约 '+fmt(post)+' token'; var saved=pre>0?Math.max(0,Math.round((1-post/pre)*100)):0; document.getElementById('cwba-note').textContent='堆积的对话缩成了绿色的‘压缩后浓缩的信息’一格 —— 约省 '+saved+'%。需求、文件清单、决定这些核心都原样保留，腾出的空间又能继续工作了。（内容实际怎么变，请看‘压缩 (compact)’标签页）'; el.style.display='block'; }
-  document.getElementById('compact').addEventListener('click',function(){ if(items.reduce(function(a,b){return a+b.t;},0)<=base.reduce(function(a,b){return a+b.t;},0)+1000){ status.textContent='还没堆到能压缩的程度。'; return; } doCompact(); status.textContent='手动压缩（/compact）完成 —— 堆积的消息、文件、结果缩成了一格摘要。'; });
+  document.getElementById('cx-compact').addEventListener('click',function(){ if(items.reduce(function(a,b){return a+b.t;},0)<=base.reduce(function(a,b){return a+b.t;},0)+1000){ status.textContent='还没堆到能压缩的程度。'; return; } doCompact(); status.textContent='手动压缩（/compact）完成 —— 堆积的消息、文件、结果缩成了一格摘要。'; });
   document.getElementById('reset').addEventListener('click',function(){ acStop(); ctxBase(); var ba=document.getElementById('cwba'); if(ba)ba.style.display='none'; status.textContent='下面这三格在对话还没开始时就一直在里面。'; });
   var acT=[]; function acStop(){ acT.forEach(clearTimeout); acT=[]; document.getElementById('tank').classList.remove('flash'); stack.classList.remove('summarizing'); var ov=document.getElementById('acoverlay'); if(ov)ov.classList.remove('on'); }
   document.getElementById('autocompact').addEventListener('click',function(){ acStop(); ctxBase(); var ba=document.getElementById('cwba'); if(ba)ba.style.display='none';
