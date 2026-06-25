@@ -251,7 +251,7 @@
   .mdfile{ font-family:ui-monospace,Menlo,monospace; font-size:12px; background:var(--row); border:1px solid var(--line); border-radius:8px; padding:12px 14px; white-space:pre-wrap; line-height:1.6; min-height:80px; color:var(--ink); } .mdfile .c{ color:var(--faint); }
 
   /* plugin box */
-  .plugbox{ border:2px solid var(--accent); border-radius:12px; padding:16px; background:var(--panel); margin:0 0 8px; } .plugbox .ph{ font-size:14px; font-weight:600; } .plugbox .psub{ font-size:12px; color:var(--faint); margin:2px 0 14px; font-weight:300; } .pluggrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; } .plugchip{ border:1px solid var(--line2); border-radius:8px; background:var(--bg); padding:11px 12px; } .plugchip .pc-t{ font-size:13px; font-weight:500; } .plugchip .pc-d{ font-size:11.5px; color:var(--faint); font-weight:300; margin-top:2px; }
+  .plugbox{ border:2px solid var(--accent); border-radius:12px; padding:16px; background:var(--panel); margin:0 0 8px; } .plugbox .ph{ font-size:14px; font-weight:600; } .plugbox .psub{ font-size:12px; color:var(--faint); margin:2px 0 14px; font-weight:300; } .pluggrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; } .plugchip{ position:relative; border:1px solid var(--line2); border-radius:8px; background:var(--bg); padding:11px 12px; transition:opacity .35s, border-color .35s, background .35s, transform .35s; } .plugchip.dim{ opacity:.4; } .plugchip.on{ opacity:1; border-color:rgba(31,158,118,.42); background:rgba(31,158,118,.08); } .plugchip .pc-t{ font-size:13px; font-weight:500; } .plugchip .pc-d{ font-size:11.5px; color:var(--faint); font-weight:300; margin-top:2px; } .plugchip .pc-ck{ position:absolute; top:9px; right:10px; color:var(--good); font-weight:700; opacity:0; transform:scale(.6); transition:opacity .3s, transform .3s; } .plugchip.on .pc-ck{ opacity:1; transform:none; }
 
   /* mcp connect svg */
   .svgwrap{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:8px; margin:0 0 14px; }
@@ -793,18 +793,20 @@ description: 按公司格式撰写周报
       <p class="lead"><b>插件</b>一句话就是<b>‘功能套装盒’</b> —— 把多个功能一次性装好的打包（就像手机上的‘App’）。</p>
       <p class="defs">不用一个个单独去张罗技能、工具连接（MCP）、自动化（Hook），而是把别人做好的整包拿来直接用。</p>
       <div class="bignote"><span class="bx">通俗讲</span><span>手机上装一个‘修图 App’，滤镜、工具就一并跟着来了吧？<b>插件也一样。</b> 把前面讲过的技能、MCP、子代理、Hook <b>打成一个包安装</b>。（每一个具体是什么不全懂也没关系 —— 这里只要知道它是‘一个打包’就够了。）</span></div>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="pl-go">一次安装演示 ▶</button><button class="btn" id="pl-reset">重置</button></div>
       <div class="plugbox">
         <div class="ph">插件 (可发布的软件包)</div>
         <div class="psub">把下面这些功能按需装进来，一次性安装、共享</div>
         <div class="pluggrid">
-          <div class="plugchip"><div class="pc-t">技能</div><div class="pc-d">操作窍门集合</div></div>
-          <div class="plugchip"><div class="pc-t">斜杠命令</div><div class="pc-d">快捷命令</div></div>
-          <div class="plugchip"><div class="pc-t">子代理</div><div class="pc-d">专门的助手</div></div>
-          <div class="plugchip"><div class="pc-t">MCP 服务器</div><div class="pc-d">连接外部工具</div></div>
-          <div class="plugchip"><div class="pc-t">Hook</div><div class="pc-d">自动执行规则</div></div>
-          <div class="plugchip"><div class="pc-t">其他</div><div class="pc-d">代码智能、监控等</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">技能</div><div class="pc-d">操作窍门集合</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">斜杠命令</div><div class="pc-d">快捷命令</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">子代理</div><div class="pc-d">专门的助手</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">MCP 服务器</div><div class="pc-d">连接外部工具</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">Hook</div><div class="pc-d">自动执行规则</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">其他</div><div class="pc-d">代码智能、监控等</div></div>
         </div>
       </div>
+      <p class="status" id="pl-status" style="margin-top:12px;">点击‘一次安装演示’，就能看到这一个包里的多个功能被一次性装好。</p>
       <p class="label">MCP · 技能 · 插件 一目了然</p>
       <div class="fgrid">
         <div class="fcard"><div class="ft">MCP</div><div class="fd"><b>连接</b>到外部工具、服务的通道。</div></div>
@@ -900,7 +902,7 @@ description: 按公司格式撰写周报
       <ul class="points">
         <li><b>写在配置文件（settings.json）里。</b><span>可以分多个层级：所有项目通用、本项目专用、个人专用等。</span></li>
         <li><b>每次都有保证。</b><span>如果说 CLAUDE.md 是‘请求’，那 Hook 就是‘规则’ —— 不会忘、每次都执行。</span></li>
-        <li><b>支持超过 26 种时机。</b><span>文件变更、工具执行前后、会话开始等。用 <code>/hooks</code> 查看。</span></li>
+        <li><b>支持数十种时机。</b><span>文件变更、工具执行前后、会话开始、压缩前后等多种时刻。用 <code>/hooks</code> 查看。</span></li>
       </ul>
       <p class="note">配置稍微有点技术性，所以你对 Claude 说“做一个 Hook，每次改文件就格式化”，它就会替你做。（来源：官方文档，截至 2026 年 6 月）</p>
     </section>
@@ -926,7 +928,7 @@ description: 按公司格式撰写周报
       <h1>权限模式</h1>
       <p class="lead">Claude <b>能自作主张到什么程度</b>，由我来定。</p>
       <div class="callout" style="margin:0 0 8px;"><b>简单说</b> · 当 Claude 要在我电脑上做点什么（改文件、执行命令）时，<b>它要多频繁地问“这个可以做吗？”</b> —— 这就是这项设置。一开始每次都问比较安全，熟练之后可以放开，让它自己处理常做的事。就像汽车的‘手动 ↔ 自动’。</div>
-      <p class="defs">在 Claude Code 里用 <code class="inlinecode">Shift</code>+<code class="inlinecode">Tab</code> 切换模式。点一个模式，再用“查看运行”看差异。</p>
+      <p class="defs">在 Claude Code 里用 <code class="inlinecode">Shift</code>+<code class="inlinecode">Tab</code> 循环切换基本模式（请求权限·接受编辑·计划）。‘自动·跳过’这类自主模式可能需要单独的选项。点一个模式，再用“查看动作”确认差异。</p>
       <div class="cols">
         <div>
           <div class="pmenu" id="pmenu">
@@ -1655,6 +1657,16 @@ description: 按公司格式撰写周报
       DR.forEach(function(t,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML='<span class="ck">'+CK+'</span>'+t; drList.appendChild(el);
         drT.push(setTimeout(function(){ el.classList.add('done'); if(i===DR.length-1) st.textContent='✓ 全部正常。（如果有问题，会告诉你是哪一项以及怎么修）'; },300+i*600)); }); });
     document.getElementById('dr-reset').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; document.getElementById('dr-status').textContent='点一下“运行诊断”。'; });
+  })();
+
+  /* plugins — bundle install demo */
+  (function(){
+    var go=document.getElementById('pl-go'); if(!go) return;
+    var chips=[].slice.call(document.querySelectorAll('#plugins .plugchip')),st=document.getElementById('pl-status'),plT=[];
+    function reset(){ plT.forEach(clearTimeout); plT=[]; chips.forEach(function(c){ c.classList.remove('on','dim'); }); st.textContent='点击‘一次安装演示’，就能看到这一个包里的多个功能被一次性装好。'; }
+    go.addEventListener('click',function(){ plT.forEach(clearTimeout); plT=[]; chips.forEach(function(c){ c.classList.remove('on'); c.classList.add('dim'); }); st.textContent='正在执行 /plugin install —— 逐个安装包里的功能…';
+      chips.forEach(function(c,i){ plT.push(setTimeout(function(){ c.classList.remove('dim'); c.classList.add('on'); st.textContent= (i+1===chips.length) ? ('已安装 '+(i+1)+'/'+chips.length+' —— 仅凭这一个包，'+chips.length+'项功能就被一次性开启了。无需再一个个去张罗。') : ('已安装 '+(i+1)+'/'+chips.length+' …'); },550+i*650)); }); });
+    document.getElementById('pl-reset').addEventListener('click',reset);
   })();
 
   /* language switcher (works in /, /en/, /zh/, /ja/) */

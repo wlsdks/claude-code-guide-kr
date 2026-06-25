@@ -251,7 +251,7 @@
   .mdfile{ font-family:ui-monospace,Menlo,monospace; font-size:12px; background:var(--row); border:1px solid var(--line); border-radius:8px; padding:12px 14px; white-space:pre-wrap; line-height:1.6; min-height:80px; color:var(--ink); } .mdfile .c{ color:var(--faint); }
 
   /* plugin box */
-  .plugbox{ border:2px solid var(--accent); border-radius:12px; padding:16px; background:var(--panel); margin:0 0 8px; } .plugbox .ph{ font-size:14px; font-weight:600; } .plugbox .psub{ font-size:12px; color:var(--faint); margin:2px 0 14px; font-weight:300; } .pluggrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; } .plugchip{ border:1px solid var(--line2); border-radius:8px; background:var(--bg); padding:11px 12px; } .plugchip .pc-t{ font-size:13px; font-weight:500; } .plugchip .pc-d{ font-size:11.5px; color:var(--faint); font-weight:300; margin-top:2px; }
+  .plugbox{ border:2px solid var(--accent); border-radius:12px; padding:16px; background:var(--panel); margin:0 0 8px; } .plugbox .ph{ font-size:14px; font-weight:600; } .plugbox .psub{ font-size:12px; color:var(--faint); margin:2px 0 14px; font-weight:300; } .pluggrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; } .plugchip{ position:relative; border:1px solid var(--line2); border-radius:8px; background:var(--bg); padding:11px 12px; transition:opacity .35s, border-color .35s, background .35s, transform .35s; } .plugchip.dim{ opacity:.4; } .plugchip.on{ opacity:1; border-color:rgba(31,158,118,.42); background:rgba(31,158,118,.08); } .plugchip .pc-t{ font-size:13px; font-weight:500; } .plugchip .pc-d{ font-size:11.5px; color:var(--faint); font-weight:300; margin-top:2px; } .plugchip .pc-ck{ position:absolute; top:9px; right:10px; color:var(--good); font-weight:700; opacity:0; transform:scale(.6); transition:opacity .3s, transform .3s; } .plugchip.on .pc-ck{ opacity:1; transform:none; }
 
   /* mcp connect svg */
   .svgwrap{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:8px; margin:0 0 14px; }
@@ -793,18 +793,20 @@ description: Write the weekly report in the company format
       <p class="lead">A <b>plugin</b> is, in a word, <b>'a box of features'</b> — a bundle you install all at once (like an 'app' on your phone).</p>
       <p class="defs">Instead of gathering skills, tool connections (MCP), and automation (hooks) one by one, you grab a whole bundle someone else built well.</p>
       <div class="bignote"><span class="bx">In simple terms</span><span>Install one 'photo-editing app' on your phone and the filters and tools all come with it, right? <b>Plugins are like that.</b> They <b>install the skills, MCP, subagents, and hooks you saw earlier as one bundle.</b> (You don't have to know exactly what each one is — here, knowing it's a 'bundle' is enough.)</span></div>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="pl-go">Install bundle demo ▶</button><button class="btn" id="pl-reset">Reset</button></div>
       <div class="plugbox">
         <div class="ph">Plugin (a distributable package)</div>
         <div class="psub">Pack the features below however you like, install and share in one go</div>
         <div class="pluggrid">
-          <div class="plugchip"><div class="pc-t">Skills</div><div class="pc-d">Bundles of task know-how</div></div>
-          <div class="plugchip"><div class="pc-t">Slash commands</div><div class="pc-d">Shortcut commands</div></div>
-          <div class="plugchip"><div class="pc-t">Subagents</div><div class="pc-d">Specialist helpers</div></div>
-          <div class="plugchip"><div class="pc-t">MCP servers</div><div class="pc-d">Outside tool connections</div></div>
-          <div class="plugchip"><div class="pc-t">Hooks</div><div class="pc-d">Auto-run rules</div></div>
-          <div class="plugchip"><div class="pc-t">And more</div><div class="pc-d">Code intelligence, monitors, etc.</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">Skills</div><div class="pc-d">Bundles of task know-how</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">Slash commands</div><div class="pc-d">Shortcut commands</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">Subagents</div><div class="pc-d">Specialist helpers</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">MCP servers</div><div class="pc-d">Outside tool connections</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">Hooks</div><div class="pc-d">Auto-run rules</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">And more</div><div class="pc-d">Code intelligence, monitors, etc.</div></div>
         </div>
       </div>
+      <p class="status" id="pl-status" style="margin-top:12px;">Press 'Install bundle demo' to see how this one bundle installs several features at once.</p>
       <p class="label">MCP · Skills · Plugins at a glance</p>
       <div class="fgrid">
         <div class="fcard"><div class="ft">MCP</div><div class="fd">A pathway that <b>connects</b> to outside tools and services.</div></div>
@@ -900,7 +902,7 @@ description: Write the weekly report in the company format
       <ul class="points">
         <li><b>You write it in a settings file (settings.json).</b><span>You can set it at several levels: all projects, this project, or personal.</span></li>
         <li><b>It's guaranteed every time.</b><span>If CLAUDE.md is a 'request,' a hook is a 'rule' — it never forgets and always runs.</span></li>
-        <li><b>It supports over 26 moments.</b><span>File changes, before/after tool runs, session start, and more. Check with <code>/hooks</code>.</span></li>
+        <li><b>Supports dozens of lifecycle points.</b><span>file changes, before/after tool runs, session start, before/after compaction, and more · check with <code>/hooks</code>.</span></li>
       </ul>
       <p class="note">Since the setup is a bit technical, just ask Claude something like "Make a hook that formats every time I edit a file" and it builds it for you. (Source: official docs, as of June 2026.)</p>
     </section>
@@ -926,7 +928,7 @@ description: Write the weekly report in the company format
       <h1>Permission modes</h1>
       <p class="lead">You decide <b>how much Claude does on its own</b>.</p>
       <div class="callout" style="margin:0 0 8px;"><b>In plain terms</b> · It's a setting for <b>how often Claude asks "May I do this?"</b> when it does something on your computer (editing files, running commands). At first it's safer to ask every time; once you're comfortable, you can let it handle frequent tasks on its own. It's like a car's 'manual ↔ automatic.'</div>
-      <p class="defs">In Claude Code, switch modes with <code class="inlinecode">Shift</code>+<code class="inlinecode">Tab</code>. Pick a mode and use "See it work" to check the difference.</p>
+      <p class="defs">In Claude Code, <code class="inlinecode">Shift</code>+<code class="inlinecode">Tab</code> cycles through the default modes (ask permission, accept edits, plan). Autonomous modes like 'auto / skip' may need a separate option. Pick a mode and use "See it work" to check the difference.</p>
       <div class="cols">
         <div>
           <div class="pmenu" id="pmenu">
@@ -1654,6 +1656,16 @@ description: Write the weekly report in the company format
       DR.forEach(function(t,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML='<span class="ck">'+CK+'</span>'+t; drList.appendChild(el);
         drT.push(setTimeout(function(){ el.classList.add('done'); if(i===DR.length-1) st.textContent='✓ Everything\'s fine. (If there\'s a problem, it tells you which item and how to fix it.)'; },300+i*600)); }); });
     document.getElementById('dr-reset').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; document.getElementById('dr-status').textContent='Press "Run diagnostics" to try it.'; });
+  })();
+
+  /* plugins — bundle install demo */
+  (function(){
+    var go=document.getElementById('pl-go'); if(!go) return;
+    var chips=[].slice.call(document.querySelectorAll('#plugins .plugchip')),st=document.getElementById('pl-status'),plT=[];
+    function reset(){ plT.forEach(clearTimeout); plT=[]; chips.forEach(function(c){ c.classList.remove('on','dim'); }); st.textContent='Press ‘Install bundle demo’ to see how this one bundle installs several features at once.'; }
+    go.addEventListener('click',function(){ plT.forEach(clearTimeout); plT=[]; chips.forEach(function(c){ c.classList.remove('on'); c.classList.add('dim'); }); st.textContent='Running /plugin install — installing the features in the bundle one by one…';
+      chips.forEach(function(c,i){ plT.push(setTimeout(function(){ c.classList.remove('dim'); c.classList.add('on'); st.textContent= (i+1===chips.length) ? ('Installed '+(i+1)+'/'+chips.length+' — this one bundle turned on '+chips.length+' features at once. No need to gather them one by one.') : ('Installed '+(i+1)+'/'+chips.length+' …'); },550+i*650)); }); });
+    document.getElementById('pl-reset').addEventListener('click',reset);
   })();
 
   /* language switcher (works in /, /en/, /zh/, /ja/) */

@@ -251,7 +251,7 @@
   .mdfile{ font-family:ui-monospace,Menlo,monospace; font-size:12px; background:var(--row); border:1px solid var(--line); border-radius:8px; padding:12px 14px; white-space:pre-wrap; line-height:1.6; min-height:80px; color:var(--ink); } .mdfile .c{ color:var(--faint); }
 
   /* plugin box */
-  .plugbox{ border:2px solid var(--accent); border-radius:12px; padding:16px; background:var(--panel); margin:0 0 8px; } .plugbox .ph{ font-size:14px; font-weight:600; } .plugbox .psub{ font-size:12px; color:var(--faint); margin:2px 0 14px; font-weight:300; } .pluggrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; } .plugchip{ border:1px solid var(--line2); border-radius:8px; background:var(--bg); padding:11px 12px; } .plugchip .pc-t{ font-size:13px; font-weight:500; } .plugchip .pc-d{ font-size:11.5px; color:var(--faint); font-weight:300; margin-top:2px; }
+  .plugbox{ border:2px solid var(--accent); border-radius:12px; padding:16px; background:var(--panel); margin:0 0 8px; } .plugbox .ph{ font-size:14px; font-weight:600; } .plugbox .psub{ font-size:12px; color:var(--faint); margin:2px 0 14px; font-weight:300; } .pluggrid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; } .plugchip{ position:relative; border:1px solid var(--line2); border-radius:8px; background:var(--bg); padding:11px 12px; transition:opacity .35s, border-color .35s, background .35s, transform .35s; } .plugchip.dim{ opacity:.4; } .plugchip.on{ opacity:1; border-color:rgba(31,158,118,.42); background:rgba(31,158,118,.08); } .plugchip .pc-t{ font-size:13px; font-weight:500; } .plugchip .pc-d{ font-size:11.5px; color:var(--faint); font-weight:300; margin-top:2px; } .plugchip .pc-ck{ position:absolute; top:9px; right:10px; color:var(--good); font-weight:700; opacity:0; transform:scale(.6); transition:opacity .3s, transform .3s; } .plugchip.on .pc-ck{ opacity:1; transform:none; }
 
   /* mcp connect svg */
   .svgwrap{ border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:8px; margin:0 0 14px; }
@@ -795,18 +795,20 @@ description: 週次レポートを会社の様式で作成
       <p class="lead"><b>プラグイン</b>はひとことで言うと<b>「機能のセット箱」</b>です — いろいろな機能を一度にインストールする束（スマホの「アプリ」のように）。</p>
       <p class="defs">スキル・ツール連携(MCP)・自動化(フック)などをひとつひとつ別々にそろえる代わりに、誰かがうまく作っておいた束をまるごと受け取って使うわけです。</p>
       <div class="bignote"><span class="bx">かんたんに</span><span>スマホに「写真補正アプリ」を一つ入れると、フィルターやツールが一気についてきますよね? <b>プラグインもそうです。</b> これまで見たスキル・MCP・サブエージェント・フックを<b>一つの束としてインストール</b>するんです。（それぞれが何か全部わからなくても大丈夫 — ここでは「束」だということだけわかれば十分です。）</span></div>
+      <div class="btnrow" style="margin-bottom:14px;"><button class="btn solid" id="pl-go">まとめてインストール デモ ▶</button><button class="btn" id="pl-reset">リセット</button></div>
       <div class="plugbox">
         <div class="ph">プラグイン (配布できるパッケージ)</div>
         <div class="psub">下の機能を好きなように詰めて、一度にインストール・共有</div>
         <div class="pluggrid">
-          <div class="plugchip"><div class="pc-t">スキル</div><div class="pc-d">作業のコツの束</div></div>
-          <div class="plugchip"><div class="pc-t">スラッシュコマンド</div><div class="pc-d">ショートカットコマンド</div></div>
-          <div class="plugchip"><div class="pc-t">サブエージェント</div><div class="pc-d">専門のお手伝い</div></div>
-          <div class="plugchip"><div class="pc-t">MCP サーバー</div><div class="pc-d">外部ツール連携</div></div>
-          <div class="plugchip"><div class="pc-t">フック(Hooks)</div><div class="pc-d">自動実行のルール</div></div>
-          <div class="plugchip"><div class="pc-t">その他</div><div class="pc-d">コード知能・モニターなど</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">スキル</div><div class="pc-d">作業のコツの束</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">スラッシュコマンド</div><div class="pc-d">ショートカットコマンド</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">サブエージェント</div><div class="pc-d">専門のお手伝い</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">MCP サーバー</div><div class="pc-d">外部ツール連携</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">フック(Hooks)</div><div class="pc-d">自動実行のルール</div></div>
+          <div class="plugchip"><span class="pc-ck">✓</span><div class="pc-t">その他</div><div class="pc-d">コード知能・モニターなど</div></div>
         </div>
       </div>
+      <p class="status" id="pl-status" style="margin-top:12px;">「まとめてインストール デモ」を押すと、この一つの束でいくつもの機能が一度にインストールされる様子をお見せします。</p>
       <p class="label">MCP · スキル · プラグインをひと目で</p>
       <div class="fgrid">
         <div class="fcard"><div class="ft">MCP</div><div class="fd">外部ツール・サービスに<b>つなぐ</b>通り道。</div></div>
@@ -902,7 +904,7 @@ description: 週次レポートを会社の様式で作成
       <ul class="points">
         <li><b>設定ファイル(settings.json)に書きます。</b><span>全プロジェクト用・このプロジェクト用・個人用など、いくつかの段階で置けます。</span></li>
         <li><b>毎回保証されます。</b><span>CLAUDE.md が「お願い」なら、フックは「ルール」 — 忘れずにいつも実行されます。</span></li>
-        <li><b>26 種類を超える時点に対応します。</b><span>ファイル変更・ツール実行の前後・セッション開始など。<code>/hooks</code> で確認。</span></li>
+        <li><b>数十種類のタイミングに対応します。</b><span>ファイル変更・ツール実行の前後・セッション開始・圧縮の前後などさまざまな瞬間。<code>/hooks</code> で確認。</span></li>
       </ul>
       <p class="note">設定がやや技術的なので、Claude に「ファイルを直すたびに整形するフックを作って」のようにお願いすれば代わりに作ってくれます。（出典: 公式ドキュメント、2026年6月時点）</p>
     </section>
@@ -928,7 +930,7 @@ description: 週次レポートを会社の様式で作成
       <h1>権限モード</h1>
       <p class="lead">Claude が<b>どこまで自分で進めるか</b>を、自分で決めます。</p>
       <div class="callout" style="margin:0 0 8px;"><b>かんたんに言うと</b> · Claude が自分のコンピュータで何か（ファイルを直す・コマンドを実行する）をするとき、<b>「これやっていいですか?」とどのくらい頻繁に聞くか</b>を決める設定です。最初は毎回聞くのが安全で、慣れてきたらよくやる仕事は自動でやらせるように緩められます。車の「マニュアル ↔ オートマ」のようなものです。</div>
-      <p class="defs">Claude Code では <code class="inlinecode">Shift</code>+<code class="inlinecode">Tab</code> でモードを変えます。モードを押して「動作を見る」で違いを確認してください。</p>
+      <p class="defs">Claude Code では <code class="inlinecode">Shift</code>+<code class="inlinecode">Tab</code> で基本モード（権限リクエスト・編集の承認・プラン）を循環します。「自動・スキップ」のような自律モードは別のオプションが必要な場合があります。モードを押して「動作を見る」で違いを確認してください。</p>
       <div class="cols">
         <div>
           <div class="pmenu" id="pmenu">
@@ -1656,6 +1658,16 @@ description: 週次レポートを会社の様式で作成
       DR.forEach(function(t,i){ var el=document.createElement('div'); el.className='cwstep'; el.innerHTML='<span class="ck">'+CK+'</span>'+t; drList.appendChild(el);
         drT.push(setTimeout(function(){ el.classList.add('done'); if(i===DR.length-1) st.textContent='✓ すべて正常です。(問題があれば、その項目と直し方を教えます)'; },300+i*600)); }); });
     document.getElementById('dr-reset').addEventListener('click',function(){ drT.forEach(clearTimeout); drT=[]; drList.innerHTML=''; document.getElementById('dr-status').textContent='「診断を実行」を押してみてください。'; });
+  })();
+
+  /* plugins — bundle install demo */
+  (function(){
+    var go=document.getElementById('pl-go'); if(!go) return;
+    var chips=[].slice.call(document.querySelectorAll('#plugins .plugchip')),st=document.getElementById('pl-status'),plT=[];
+    function reset(){ plT.forEach(clearTimeout); plT=[]; chips.forEach(function(c){ c.classList.remove('on','dim'); }); st.textContent='「まとめてインストール デモ」を押すと、この一つの束でいくつもの機能が一度にインストールされる様子をお見せします。'; }
+    go.addEventListener('click',function(){ plT.forEach(clearTimeout); plT=[]; chips.forEach(function(c){ c.classList.remove('on'); c.classList.add('dim'); }); st.textContent='/plugin install 実行 — 束の中の機能を一つずつインストール中…';
+      chips.forEach(function(c,i){ plT.push(setTimeout(function(){ c.classList.remove('dim'); c.classList.add('on'); st.textContent= (i+1===chips.length) ? ('インストール済み '+(i+1)+'/'+chips.length+' — この束一つで '+chips.length+'種類の機能が一度にオンになりました。別々にそろえる必要はありません。') : ('インストール済み '+(i+1)+'/'+chips.length+' …'); },550+i*650)); }); });
+    document.getElementById('pl-reset').addEventListener('click',reset);
   })();
 
   /* language switcher (works in /, /en/, /zh/, /ja/) */
