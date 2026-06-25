@@ -115,6 +115,12 @@
   .cxrow.drop{ opacity:.28; }
   .cxrow.cxkeep{ opacity:1; border-color:rgba(31,158,118,.42); background:rgba(31,158,118,.07); }
   .cxmark{ float:right; font-size:10.5px; font-weight:700; border-radius:4px; padding:1px 7px; margin-left:8px; } .cxmark.keep{ color:var(--good); background:rgba(31,158,118,.15); } .cxmark.drop{ color:var(--over); background:rgba(216,69,63,.13); }
+  /* manage (why manage context) */
+  .mgwrap{ border:1px solid var(--line2); border-radius:12px; background:var(--panel); padding:16px; }
+  .mgfill{ margin-bottom:15px; } .mgfl-h{ display:flex; justify-content:space-between; font-size:12.5px; color:var(--muted); margin-bottom:5px; } .mgfl-h b{ color:var(--ink); } .mgfl-track{ height:13px; border-radius:7px; background:var(--bg); border:1px solid var(--line); overflow:hidden; } #mg-fill{ display:block; height:100%; width:12%; background:var(--good); border-radius:7px; transition:width .5s cubic-bezier(.4,0,.2,1), background .5s; }
+  .mgbars{ display:flex; flex-direction:column; gap:12px; }
+  .mgbar .mgb-l{ display:flex; justify-content:space-between; gap:10px; font-size:12.5px; color:var(--muted); margin-bottom:4px; } .mgbar .mgb-l b{ flex:0 0 auto; font-weight:600; }
+  .mgb-track{ height:9px; border-radius:6px; background:var(--bg); border:1px solid var(--line); overflow:hidden; } .mgb-track i{ display:block; height:100%; width:12%; border-radius:6px; background:var(--good); transition:width .5s cubic-bezier(.4,0,.2,1), background .5s; }
   .cxbadge{ display:inline-block; font-size:12.5px; font-variant-numeric:tabular-nums; background:var(--row); border-radius:7px; padding:7px 12px; margin-bottom:12px; } .cxbadge b{ font-weight:600; } .cxbadge .ar{ color:var(--faint); margin:0 6px; }
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
@@ -391,37 +397,38 @@
     <button class="navitem" data-page="where"><span class="no">04</span>在哪里用</button>
     <div class="navsec">基础概念</div>
     <button class="navitem" data-page="context"><span class="no">05</span>上下文窗口</button>
-    <button class="navitem" data-page="compact"><span class="no">06</span>压缩 (compact)</button>
-    <button class="navitem" data-page="sessions"><span class="no">07</span>会话 & 文件夹</button>
-    <button class="navitem" data-page="tokens"><span class="no">08</span>Token</button>
-    <button class="navitem" data-page="models"><span class="no">09</span>选择模型 (model)</button>
-    <button class="navitem" data-page="effort"><span class="no">10</span>思考深度 (effort)</button>
+    <button class="navitem" data-page="manage"><span class="no">06</span>管理上下文（为什么？）</button>
+    <button class="navitem" data-page="compact"><span class="no">07</span>压缩 (compact)</button>
+    <button class="navitem" data-page="sessions"><span class="no">08</span>会话 & 文件夹</button>
+    <button class="navitem" data-page="tokens"><span class="no">09</span>Token</button>
+    <button class="navitem" data-page="models"><span class="no">10</span>选择模型 (model)</button>
+    <button class="navitem" data-page="effort"><span class="no">11</span>思考深度 (effort)</button>
     <div class="navsec">记忆与规则</div>
-    <button class="navitem" data-page="claudemd"><span class="no">11</span>CLAUDE.md</button>
-    <button class="navitem" data-page="memory"><span class="no">12</span>记忆</button>
-    <button class="navitem" data-page="skills"><span class="no">13</span>技能</button>
+    <button class="navitem" data-page="claudemd"><span class="no">12</span>CLAUDE.md</button>
+    <button class="navitem" data-page="memory"><span class="no">13</span>记忆</button>
+    <button class="navitem" data-page="skills"><span class="no">14</span>技能</button>
     <div class="navsec">扩展能力</div>
-    <button class="navitem" data-page="mcp"><span class="no">14</span>MCP (连接工具)</button>
-    <button class="navitem" data-page="plugins"><span class="no">15</span>插件</button>
-    <button class="navitem" data-page="agents"><span class="no">16</span>子代理</button>
-    <button class="navitem" data-page="images"><span class="no">17</span>粘贴图片</button>
-    <button class="navitem" data-page="hooks"><span class="no">18</span>自动化 (Hook)</button>
+    <button class="navitem" data-page="mcp"><span class="no">15</span>MCP (连接工具)</button>
+    <button class="navitem" data-page="plugins"><span class="no">16</span>插件</button>
+    <button class="navitem" data-page="agents"><span class="no">17</span>子代理</button>
+    <button class="navitem" data-page="images"><span class="no">18</span>粘贴图片</button>
+    <button class="navitem" data-page="hooks"><span class="no">19</span>自动化 (Hook)</button>
     <div class="navsec">自动·重复</div>
-    <button class="navitem" data-page="goal"><span class="no">19</span>目标 (goal)</button>
-    <button class="navitem" data-page="loop"><span class="no">20</span>重复执行 (loop)</button>
-    <button class="navitem" data-page="workflows"><span class="no">21</span>工作流 (workflows)</button>
+    <button class="navitem" data-page="goal"><span class="no">20</span>目标 (goal)</button>
+    <button class="navitem" data-page="loop"><span class="no">21</span>重复执行 (loop)</button>
+    <button class="navitem" data-page="workflows"><span class="no">22</span>工作流 (workflows)</button>
     <div class="navsec">安全地用</div>
-    <button class="navitem" data-page="planmode"><span class="no">22</span>计划模式</button>
-    <button class="navitem" data-page="permissions"><span class="no">23</span>权限模式</button>
-    <button class="navitem" data-page="rewind"><span class="no">24</span>回退</button>
-    <button class="navitem" data-page="privacy"><span class="no">25</span>数据 & 隐私</button>
+    <button class="navitem" data-page="planmode"><span class="no">23</span>计划模式</button>
+    <button class="navitem" data-page="permissions"><span class="no">24</span>权限模式</button>
+    <button class="navitem" data-page="rewind"><span class="no">25</span>回退</button>
+    <button class="navitem" data-page="privacy"><span class="no">26</span>数据 & 隐私</button>
     <div class="navsec">实战</div>
-    <button class="navitem" data-page="commands"><span class="no">26</span>斜杠命令</button>
-    <button class="navitem" data-page="config"><span class="no">27</span>设置 (config)</button>
-    <button class="navitem" data-page="doctor"><span class="no">28</span>诊断 (doctor)</button>
-    <button class="navitem" data-page="plans"><span class="no">29</span>订阅方案</button>
-    <button class="navitem" data-page="limits"><span class="no">30</span>用量上限</button>
-    <button class="navitem" data-page="glossary"><span class="no">31</span>术语表</button>
+    <button class="navitem" data-page="commands"><span class="no">27</span>斜杠命令</button>
+    <button class="navitem" data-page="config"><span class="no">28</span>设置 (config)</button>
+    <button class="navitem" data-page="doctor"><span class="no">29</span>诊断 (doctor)</button>
+    <button class="navitem" data-page="plans"><span class="no">30</span>订阅方案</button>
+    <button class="navitem" data-page="limits"><span class="no">31</span>用量上限</button>
+    <button class="navitem" data-page="glossary"><span class="no">32</span>术语表</button>
   </nav>
 
   <main class="main"><div class="inner">
@@ -467,7 +474,7 @@
         </div>
       </div>
       <div class="bignote"><span class="bx">提示</span><span>这份指南是<b>学习概念的地方</b> — 不讲安装和上手方法（那些请看官方文档）。而且这是<b>非官方学习资料</b>，与 Anthropic 无关。</span></div>
-      <p class="note">在左侧菜单（窄屏时是上方的标签）点击 31 个主题来切换。所有内容都做到了<b>不用亲自动手</b>，靠按钮和输入框就能理解。正文中<span class="gl" title="像这样画虚线的词，鼠标悬停（电脑）或轻点一次（手机·平板）就会显示意思。">画虚线的词，悬停或轻点就会显示意思。</span></p>
+      <p class="note">在左侧菜单（窄屏时是上方的 <b>☰ 菜单</b>）点击 32 个主题来切换。所有内容都做到了<b>不用亲自动手</b>，靠按钮和输入框就能理解。正文中<span class="gl" title="像这样画虚线的词，鼠标悬停（电脑）或轻点一次（手机·平板）就会显示意思。">画虚线的词，悬停或轻点就会显示意思。</span></p>
     </section>
 
     <!-- 02 COWORK -->
@@ -1117,6 +1124,36 @@ description: 按公司格式撰写周报
       <p class="note">准确的时间、价格、上限数值会因方案、时间而变 —— 请在 <code>claude.com/pricing</code> 和 <code>support.claude.com</code> 确认。（概念以 2026 年 6 月官方文档为准）</p>
     </section>
 
+    <section class="page" id="manage">
+      <h1>为什么要管理上下文？</h1>
+      <p class="lead">上下文（脉络）就是 Claude 的 <b>“桌子”</b>。桌子乱了，工作就会 <b>更慢、更贵、更容易出错</b>。所以及时整理很重要。</p>
+      <p class="defs">放着不管、一直“继续堆对话”会怎么变糟，按下“整理”又会怎么变好，亲自看一看。</p>
+      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="mg-stack">继续堆对话 ▶</button><button class="btn" id="mg-clean">整理（/clear·/compact）</button></div>
+      <div class="mgwrap">
+        <div class="mgfill"><div class="mgfl-h"><span>上下文的填充程度</span><b id="mg-pct">12%</b></div><div class="mgfl-track"><i id="mg-fill"></i></div></div>
+        <div class="mgbars">
+          <div class="mgbar"><div class="mgb-l"><span>变慢 —— 每次都要重新读全部</span><b id="mg-v-slow">低</b></div><div class="mgb-track"><i id="mg-slow"></i></div></div>
+          <div class="mgbar"><div class="mgb-l"><span>Token 成本 —— 越多越贵</span><b id="mg-v-cost">低</b></div><div class="mgb-track"><i id="mg-cost"></i></div></div>
+          <div class="mgbar"><div class="mgb-l"><span>混乱 —— 杂物里会漏掉重要的东西</span><b id="mg-v-conf">低</b></div><div class="mgb-track"><i id="mg-conf"></i></div></div>
+        </div>
+      </div>
+      <p class="status" id="mg-status" style="margin-top:12px;">现在桌子很干净 —— 又快、又便宜、又准确。</p>
+
+      <p class="label">整理的方法 —— 这样来管理</p>
+      <div class="fgrid">
+        <div class="fcard"><div class="ft">开始新任务 = <code>/clear</code></div><div class="fd">切换到别的工作时清空桌子。（“会话 &amp; 文件夹”标签）</div></div>
+        <div class="fcard"><div class="ft">变长了就 <code>/compact</code></div><div class="fd">只把核心摘要保留，腾出空间。（“压缩”标签）</div></div>
+        <div class="fcard"><div class="ft">一个会话只做一件事</div><div class="fd">不要把多件事混在一起 —— 混了就容易乱。</div></div>
+        <div class="fcard"><div class="ft">只放需要的东西</div><div class="fd">用不到的文件、内容就别硬塞进去。</div></div>
+      </div>
+      <ul class="points">
+        <li><b>为什么会变慢、变贵？</b><span>Claude 每次回答时都会把桌上的全部重新读一遍。堆得越多，每次就越花时间，Token（=成本）也越多。</span></li>
+        <li><b>为什么准确度会下降？</b><span>上下文太长时，容易把中间的重要内容漏掉。只保留需要的，反而更准确。</span></li>
+        <li><b>放着不管，自动压缩就会来。</b><span>装满后 Claude 会自行摘要（自动压缩），那时部分细节可能会消失。提前整理，主动权就在你手里。（“上下文窗口”·“压缩”标签）</span></li>
+      </ul>
+      <p class="note">一句话 —— <b>干净的桌子 = 又快又准的工作。</b> 任务切换时用 <code>/clear</code>，变长时用 <code>/compact</code>，记住这两个就够了。</p>
+    </section>
+
     <!-- 22 COMPACT DETAIL -->
     <section class="page" id="compact">
       <h1>压缩 (compact)</h1>
@@ -1310,7 +1347,7 @@ description: 按公司格式撰写周报
   (function(){ var s=null; try{ s=localStorage.getItem('cc_present'); }catch(e){} if(s==='1') setPresent(true); })();
 
   /* LNB icons (monoline) */
-  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', manage:'<path d="M4 20h16"/><rect x="5" y="13" width="3" height="6.5" rx="1"/><rect x="10.5" y="9" width="3" height="10.5" rx="1"/><rect x="16" y="5" width="3" height="14.5" rx="1"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
   function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
 
   /* router */
@@ -1318,7 +1355,7 @@ description: 按公司格式撰写周报
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'聊天给你‘答案’，Claude Code 则在你的项目里<b>亲手做出来、还让它跑起来</b>。', cowork:'不写代码，而是<b>替你做办公事务</b>的 Claude —— 给个目标，就<b>用你的文件做出成品</b>（给非开发者·桌面应用）。', usecases:'按职业<b>展示平时做的事会怎样改变</b>，从之前到之后。', where:'终端·VS Code·桌面·网页 —— <b>哪里都是同一个 Claude Code</b>，设置也共享。', context:'只有放进来的东西 Claude 才记得。装满了就<b>用‘压缩’来整理</b>。', sessions:'<b>一个会话只做一件事</b> —— 混在一起会乱。工作文件夹要窄。', tokens:'Token = AI 读文字的单位。<b>越长越占空间、越费钱</b>，中文更重。', models:'聪明 ↔ 速度 ↔ 成本要取舍。<b>拿不定就用 Sonnet</b> 开始。', claudemd:'<b>我写下的规则备忘</b> —— 每次对话开始自动生效。', memory:'<b>Claude 自己学、自己记</b>的备忘。跨会话延续。', skills:'把常用工作步骤<b>做一次，反复使用</b>。', mcp:'<b>连接外部工具（Jira、Figma 等）</b>，让 Claude 直接使用。', plugins:'把技能·工具·命令等<b>打包一次性安装</b>的包。', agents:'把大事<b>分给专门助手</b>，只接收结果。', images:'<b>贴上截图</b>，Claude 就能看懂 —— 比说话快、还准。', hooks:'某个时刻<b>每次都自动执行固定动作</b>的规则。', planmode:'修改前<b>先展示计划、等批准</b> —— 大改动更安全。', permissions:'决定 Claude <b>要多频繁地问</b>的设置。一开始安全为上。', rewind:'每个请求<b>自动保存</b> —— 不满意就退回之前。', privacy:'<b>工作版（Team·Enterprise·API）默认不用于训练。</b> 个人版可在设置里选。', commands:'以 <code class="inlinecode">/</code> 开头的快捷命令。用得最多的是 <b>/clear · /compact</b>。', plans:'<b>免费版里没有。</b> 用付费版（Pro·Max·Team）或 API（按量计费）。', limits:'<b>用完就得等到重置</b> —— 所以管理很重要。', compact:'长长堆积的对话缩成<b>一格简短摘要</b>。', effort:'回答前<b>要想多深</b> —— 越深越准，但更慢更贵。', goal:'<b>只要给出‘完成条件’，Claude 就会反复做到满足为止</b>。', loop:'<b>每隔固定间隔</b>自动再次执行同一件工作。', workflows:'调度<b>多个助手同时</b>处理一件大事（进阶）。', config:'在一个地方修改<b>语言·主题·模型·权限</b>等设置。', doctor:'出问题时<b>一次性检查安装·连接·设置</b>。', glossary:'<b>用一句话</b>快速查找容易搞混的术语的地方。' };
+  var TLDR={ intro:'聊天给你‘答案’，Claude Code 则在你的项目里<b>亲手做出来、还让它跑起来</b>。', cowork:'不写代码，而是<b>替你做办公事务</b>的 Claude —— 给个目标，就<b>用你的文件做出成品</b>（给非开发者·桌面应用）。', usecases:'按职业<b>展示平时做的事会怎样改变</b>，从之前到之后。', where:'终端·VS Code·桌面·网页 —— <b>哪里都是同一个 Claude Code</b>，设置也共享。', context:'只有放进来的东西 Claude 才记得。装满了就<b>用‘压缩’来整理</b>。', manage:'上下文<b>放着不管就会变慢·变贵·变乱</b> —— 所以要及时整理。', sessions:'<b>一个会话只做一件事</b> —— 混在一起会乱。工作文件夹要窄。', tokens:'Token = AI 读文字的单位。<b>越长越占空间、越费钱</b>，中文更重。', models:'聪明 ↔ 速度 ↔ 成本要取舍。<b>拿不定就用 Sonnet</b> 开始。', claudemd:'<b>我写下的规则备忘</b> —— 每次对话开始自动生效。', memory:'<b>Claude 自己学、自己记</b>的备忘。跨会话延续。', skills:'把常用工作步骤<b>做一次，反复使用</b>。', mcp:'<b>连接外部工具（Jira、Figma 等）</b>，让 Claude 直接使用。', plugins:'把技能·工具·命令等<b>打包一次性安装</b>的包。', agents:'把大事<b>分给专门助手</b>，只接收结果。', images:'<b>贴上截图</b>，Claude 就能看懂 —— 比说话快、还准。', hooks:'某个时刻<b>每次都自动执行固定动作</b>的规则。', planmode:'修改前<b>先展示计划、等批准</b> —— 大改动更安全。', permissions:'决定 Claude <b>要多频繁地问</b>的设置。一开始安全为上。', rewind:'每个请求<b>自动保存</b> —— 不满意就退回之前。', privacy:'<b>工作版（Team·Enterprise·API）默认不用于训练。</b> 个人版可在设置里选。', commands:'以 <code class="inlinecode">/</code> 开头的快捷命令。用得最多的是 <b>/clear · /compact</b>。', plans:'<b>免费版里没有。</b> 用付费版（Pro·Max·Team）或 API（按量计费）。', limits:'<b>用完就得等到重置</b> —— 所以管理很重要。', compact:'长长堆积的对话缩成<b>一格简短摘要</b>。', effort:'回答前<b>要想多深</b> —— 越深越准，但更慢更贵。', goal:'<b>只要给出‘完成条件’，Claude 就会反复做到满足为止</b>。', loop:'<b>每隔固定间隔</b>自动再次执行同一件工作。', workflows:'调度<b>多个助手同时</b>处理一件大事（进阶）。', config:'在一个地方修改<b>语言·主题·模型·权限</b>等设置。', doctor:'出问题时<b>一次性检查安装·连接·设置</b>。', glossary:'<b>用一句话</b>快速查找容易搞混的术语的地方。' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">一句话总结</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -1337,7 +1374,7 @@ description: 按公司格式撰写周报
   [['cc-go',5500],['cw3-go',5500],['uc-go',7000],['sess-play',9500],['lc-all',8200],['md-go',5500],['mem-go',5200],['sk-go',5200],['sa-go',5600],['pl-go',6200],['plan-go',4800],['goal-go',4200],['loop-go',4800],['wf-go',4500],['dr-go',4800],['cx-go',5500,'cx-reset'],['img-go',4800]].forEach(function(p){ autoLoop(p[0],p[1],p[2]); });
 
   /* difficulty mode — 초급/중급/고급 filter */
-  var LV={ intro:1,cowork:1,usecases:1,where:1,context:1,sessions:1,models:1,commands:1,glossary:1,
+  var LV={ intro:1,cowork:1,usecases:1,where:1,context:1,manage:1,sessions:1,models:1,commands:1,glossary:1,
     tokens:2,compact:2,effort:2,claudemd:2,memory:2,skills:2,images:2,permissions:2,planmode:2,rewind:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
     mcp:3,plugins:3,agents:3,hooks:3,goal:3,loop:3,workflows:3 };
   (function(){ var chips=document.querySelectorAll('#lvlsel .lvlchip'); if(!chips.length) return; var origNo={}; navs.forEach(function(n){ var no=n.querySelector('.no'); if(no) origNo[n.dataset.page]=no.textContent; });
@@ -1587,6 +1624,23 @@ description: 按公司格式撰写周报
     (function go(){ if(l5>=100){ document.getElementById('lock-msg').textContent='🔒 已到 5 小时上限 —— 重置前发不了新任务。要稍等一会，或升级到更高方案。'; btn.disabled=true; return; } l5=Math.min(100,l5+18); lw=Math.min(100,lw+6); gset(); luFeed(USES[step%USES.length]); step++; luT.push(setTimeout(go,750)); })(); });
   document.getElementById('lim-reset').addEventListener('click',function(){ luT.forEach(clearTimeout); luT=[]; l5=0; gset(); document.getElementById('lim-use').disabled=false; document.getElementById('lock-msg').textContent='过了 5 小时，上限重置了！又能用了。（不过要注意，每周上限还原样留着）'; });
   gset();
+
+  /* manage — why manage context */
+  (function(){ var stack=document.getElementById('mg-stack'); if(!stack) return; var fill=10;
+    var E={ pct:document.getElementById('mg-pct'), fl:document.getElementById('mg-fill'), slow:document.getElementById('mg-slow'), cost:document.getElementById('mg-cost'), conf:document.getElementById('mg-conf'), vslow:document.getElementById('mg-v-slow'), vcost:document.getElementById('mg-v-cost'), vconf:document.getElementById('mg-v-conf'), st:document.getElementById('mg-status') };
+    function color(v){ return v<35?'var(--good)':(v<70?'#d8943f':'#d8453f'); }
+    function rate(v){ return v<25?'低':(v<50?'中':(v<78?'高':'很高')); }
+    function render(){ var f=Math.min(100,fill); E.pct.textContent=Math.round(f)+'%'; E.fl.style.width=f+'%'; E.fl.style.background= f<60?'var(--good)':(f<85?'#d8943f':'#d8453f');
+      var slow=Math.min(100,8+f*0.92), cost=Math.min(100,10+f*0.9), conf=Math.min(100,6+f*0.85);
+      E.slow.style.width=slow+'%'; E.slow.style.background=color(slow); E.vslow.textContent=rate(slow);
+      E.cost.style.width=cost+'%'; E.cost.style.background=color(cost); E.vcost.textContent=rate(cost);
+      E.conf.style.width=conf+'%'; E.conf.style.background=color(conf); E.vconf.textContent=rate(conf); }
+    stack.addEventListener('click',function(){ fill=Math.min(100,fill+19);
+      if(fill>=100) E.st.textContent='桌子已经满了 —— 又慢、又贵、又乱。马上就会触发自动压缩，细节可能会消失。试着按一下“整理”。';
+      else if(fill>60) E.st.textContent='越来越沉重了 —— 每次都要重新读全部，又慢又贵，重要的东西也容易漏掉。';
+      else E.st.textContent='正在一点点堆积…… 一直放着不管就会变慢、变贵、变乱。'; render(); });
+    document.getElementById('mg-clean').addEventListener('click',function(){ fill=10; E.st.textContent='整理完成！桌子干净了 —— 又快、又便宜、又准确。（任务切换时用 /clear，变长时用 /compact）'; render(); });
+    render(); })();
 
   /* compact detail page */
   var cxT=[], cxKeep={0:1,1:1,5:1};
