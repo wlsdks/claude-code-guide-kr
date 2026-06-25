@@ -1128,7 +1128,7 @@ description: 按公司格式撰写周报
       <h1>为什么要管理上下文？</h1>
       <p class="lead">上下文（脉络）就是 Claude 的 <b>“桌子”</b>。桌子乱了，工作就会 <b>更慢、更贵、更容易出错</b>。所以及时整理很重要。</p>
       <p class="defs">放着不管、一直“继续堆对话”会怎么变糟，按下“整理”又会怎么变好，亲自看一看。</p>
-      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="mg-stack">继续堆对话 ▶</button><button class="btn" id="mg-clean">整理（/clear·/compact）</button></div>
+      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="mg-stack">继续堆对话 ▶</button><button class="btn" id="mg-clean">整理 ↺</button></div>
       <div class="mgwrap">
         <div class="mgfill"><div class="mgfl-h"><span>上下文的填充程度</span><b id="mg-pct">12%</b></div><div class="mgfl-track"><i id="mg-fill"></i></div></div>
         <div class="mgbars">
@@ -1628,10 +1628,10 @@ description: 按公司格式撰写周报
   /* manage — why manage context */
   (function(){ var stack=document.getElementById('mg-stack'); if(!stack) return; var fill=10;
     var E={ pct:document.getElementById('mg-pct'), fl:document.getElementById('mg-fill'), slow:document.getElementById('mg-slow'), cost:document.getElementById('mg-cost'), conf:document.getElementById('mg-conf'), vslow:document.getElementById('mg-v-slow'), vcost:document.getElementById('mg-v-cost'), vconf:document.getElementById('mg-v-conf'), st:document.getElementById('mg-status') };
-    function color(v){ return v<35?'var(--good)':(v<70?'#d8943f':'#d8453f'); }
-    function rate(v){ return v<25?'低':(v<50?'中':(v<78?'高':'很高')); }
-    function render(){ var f=Math.min(100,fill); E.pct.textContent=Math.round(f)+'%'; E.fl.style.width=f+'%'; E.fl.style.background= f<60?'var(--good)':(f<85?'#d8943f':'#d8453f');
-      var slow=Math.min(100,8+f*0.92), cost=Math.min(100,10+f*0.9), conf=Math.min(100,6+f*0.85);
+    function color(v){ return v<40?'var(--good)':(v<72?'#d8943f':'#d8453f'); }
+    function rate(v){ return v<30?'低':(v<58?'中':(v<80?'高':'很高')); }
+    function render(){ var f=Math.min(100,fill); E.pct.textContent=Math.round(f)+'%'; E.fl.style.width=f+'%'; E.fl.style.background= color(f);
+      var slow=Math.min(100,f), cost=Math.min(100,f*0.95+4), conf=Math.min(100,f*0.88);
       E.slow.style.width=slow+'%'; E.slow.style.background=color(slow); E.vslow.textContent=rate(slow);
       E.cost.style.width=cost+'%'; E.cost.style.background=color(cost); E.vcost.textContent=rate(cost);
       E.conf.style.width=conf+'%'; E.conf.style.background=color(conf); E.vconf.textContent=rate(conf); }

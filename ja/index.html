@@ -1129,7 +1129,7 @@ description: 週次レポートを会社の様式で作成
       <h1>コンテキストはなぜ管理が必要？</h1>
       <p class="lead">コンテキスト（文脈）は Claude の <b>「机」</b>です。机が散らかると、仕事が <b>遅くなり、高くつき、ミスが増えます</b>。だからこそ、こまめに片づけることが大切です。</p>
       <p class="defs">「会話をどんどん積む」で放置するとどう悪くなるか、「片づける」を押すとどう良くなるかを、自分で見てみてください。</p>
-      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="mg-stack">会話をどんどん積む ▶</button><button class="btn" id="mg-clean">片づける（/clear·/compact）</button></div>
+      <div class="btnrow" style="margin-bottom:16px;"><button class="btn solid" id="mg-stack">会話をどんどん積む ▶</button><button class="btn" id="mg-clean">片づける ↺</button></div>
       <div class="mgwrap">
         <div class="mgfill"><div class="mgfl-h"><span>コンテキストが埋まった度合い</span><b id="mg-pct">12%</b></div><div class="mgfl-track"><i id="mg-fill"></i></div></div>
         <div class="mgbars">
@@ -1628,10 +1628,10 @@ description: 週次レポートを会社の様式で作成
   /* manage — why manage context */
   (function(){ var stack=document.getElementById('mg-stack'); if(!stack) return; var fill=10;
     var E={ pct:document.getElementById('mg-pct'), fl:document.getElementById('mg-fill'), slow:document.getElementById('mg-slow'), cost:document.getElementById('mg-cost'), conf:document.getElementById('mg-conf'), vslow:document.getElementById('mg-v-slow'), vcost:document.getElementById('mg-v-cost'), vconf:document.getElementById('mg-v-conf'), st:document.getElementById('mg-status') };
-    function color(v){ return v<35?'var(--good)':(v<70?'#d8943f':'#d8453f'); }
-    function rate(v){ return v<25?'低い':(v<50?'普通':(v<78?'高い':'とても高い')); }
-    function render(){ var f=Math.min(100,fill); E.pct.textContent=Math.round(f)+'%'; E.fl.style.width=f+'%'; E.fl.style.background= f<60?'var(--good)':(f<85?'#d8943f':'#d8453f');
-      var slow=Math.min(100,8+f*0.92), cost=Math.min(100,10+f*0.9), conf=Math.min(100,6+f*0.85);
+    function color(v){ return v<40?'var(--good)':(v<72?'#d8943f':'#d8453f'); }
+    function rate(v){ return v<30?'低い':(v<58?'普通':(v<80?'高い':'とても高い')); }
+    function render(){ var f=Math.min(100,fill); E.pct.textContent=Math.round(f)+'%'; E.fl.style.width=f+'%'; E.fl.style.background= color(f);
+      var slow=Math.min(100,f), cost=Math.min(100,f*0.95+4), conf=Math.min(100,f*0.88);
       E.slow.style.width=slow+'%'; E.slow.style.background=color(slow); E.vslow.textContent=rate(slow);
       E.cost.style.width=cost+'%'; E.cost.style.background=color(cost); E.vcost.textContent=rate(cost);
       E.conf.style.width=conf+'%'; E.conf.style.background=color(conf); E.vconf.textContent=rate(conf); }
