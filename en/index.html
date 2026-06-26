@@ -1923,6 +1923,10 @@ description: Write the weekly report in the company format
     lb.addEventListener('click',function(){ if(lb.classList.contains('on')){ stopLoop(); return; } stopLoop(); currentLoop=lb; lb.classList.add('on'); lb.setAttribute('aria-pressed','true'); fire(); lb._t=setInterval(fire, period); });
     (btn.parentNode||btn).appendChild(lb); }
   [['cc-go',5500],['cw3-go',5500],['uc-go',7000],['sess-play',9500],['lc-all',8200],['md-go',5500],['mem-go',5200],['sk-go',5200],['sa-go',5600],['pl-go',6200],['plan-go',4800],['goal-go',4200],['loop-go',4800],['wf-go',4500],['dr-go',4800],['cx-go',5500,'cx-reset'],['img-go',4800]].forEach(function(p){ autoLoop(p[0],p[1],p[2]); });
+  /* no-shrink ratchet: keep sim output containers from collapsing on replay (grow downward only) */
+  function noShrink(el){ if(!el||el._ns) return; el._ns=1; var mx=0, raf=0; try{ var ro=new ResizeObserver(function(){ if(raf) return; raf=requestAnimationFrame(function(){ raf=0; var h=el.scrollHeight; if(h>mx+1){ mx=h; el.style.minHeight=mx+'px'; } }); }); ro.observe(el); }catch(e){} }
+  document.querySelectorAll('.chatdemo').forEach(noShrink);
+  ['cw-stage','sess-body','goal-turns','loop-feed','dr-list','hw-flow','m-typed','ef-think','mcp-detail','sa-self','pm-simbox','rm-flow','rt-box','su-box','sc-box','ss-box'].forEach(function(id){ noShrink(document.getElementById(id)); });
 
   /* difficulty mode — 초급/중급/고급 filter */
   var LV={ intro:1,cowork:1,usecases:1,where:1,ask:1,mention:1,keys:1,steer:1,howworks:1,context:1,manage:1,compact:1,sessions:1,models:1,claudemd:1,images:1,permissions:1,rewind:1,commands:1,glossary:1,
