@@ -759,7 +759,7 @@ irm https://claude.ai/install.ps1 | iex</div>
     <section class="page" id="keys">
       <h1>ショートカット &amp; モード</h1>
       <p class="lead">Claude Code は<b>キーいくつか</b>で止めたり、巻き戻したり、モードを変えたりします。マウスで押して覚えましょう。</p>
-      <p class="defs">下のキーを押すと — 画面で<b>何が起こるか</b>そのまま見せます。（実際の Claude なしで動きだけ）</p>
+      <p class="defs">下の<b>キーボタンをクリック</b>するか、<b>実際のキーボードで押して</b>みてください — 画面で<b>何が起こるか</b>そのまま見せます。（実際の Claude なしで動きだけ）</p>
       <div class="grp">
         <h3>キーを押してみてください</h3>
         <div class="keys" id="keyrow">
@@ -2434,6 +2434,16 @@ description: 週次レポートを会社の様式で作成
       slash:function(){ show('/  コマンドメニューを開く\n\n   /help   /clear   /compact   /model …\n   → さらに入力すると絞り込めます','コマンドを覚えなくてOK — / を押せば全部出ます。'); }
     };
     document.querySelectorAll('#keyrow .keycap').forEach(function(c){ c.addEventListener('click',function(){ c.classList.add('hit'); setTimeout(function(){c.classList.remove('hit');},120); (ACT[c.dataset.k]||function(){})(); }); });
+    document.addEventListener('keydown',function(e){
+      var kp=document.getElementById('keys'); if(!kp||!kp.classList.contains('on')) return;
+      var t=e.target; if(t&&/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+      var present=!!document.querySelector('.present2'), k=null, nav=false;
+      if(e.key==='!') k='bang'; else if(e.key==='/') k='slash';
+      else if(e.key==='Escape'){ k='esc'; nav=true; } else if(e.key==='Tab'){ k=e.shiftKey?'shifttab':'tab'; nav=true; } else if(e.key==='ArrowUp'){ k='up'; nav=true; }
+      if(!k||(present&&nav)) return;
+      if(k==='slash'||k==='bang'||k==='up') e.preventDefault();
+      var b=document.querySelector('#keyrow .keycap[data-k="'+k+'"]'); if(b){ b.focus(); b.click(); }
+    });
   })();
 
   /* steer — interrupt & redirect, compared */

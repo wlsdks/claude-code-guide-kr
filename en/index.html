@@ -758,7 +758,7 @@ irm https://claude.ai/install.ps1 | iex</div>
     <section class="page" id="keys">
       <h1>Shortcuts &amp; modes</h1>
       <p class="lead">Claude Code stops, rewinds, and switches modes with <b>just a few keys</b>. Click them to get the feel.</p>
-      <p class="defs">Press a key below and we'll show you <b>exactly what happens</b> on screen. (Just the behavior — no real Claude.)</p>
+      <p class="defs"><b>Click a key button</b> below or <b>press the actual key</b> on your keyboard — and we'll show you <b>exactly what happens</b> on screen. (Just the behavior — no real Claude.)</p>
       <div class="grp">
         <h3>Press a key</h3>
         <div class="keys" id="keyrow">
@@ -2428,6 +2428,16 @@ description: Write the weekly report in the company format
       slash:function(){ show('/  Open command menu\n\n   /help   /clear   /compact   /model …\n   → type more to narrow it down','No need to memorize commands — just press / and they all show up.'); }
     };
     document.querySelectorAll('#keyrow .keycap').forEach(function(c){ c.addEventListener('click',function(){ c.classList.add('hit'); setTimeout(function(){c.classList.remove('hit');},120); (ACT[c.dataset.k]||function(){})(); }); });
+    document.addEventListener('keydown',function(e){
+      var kp=document.getElementById('keys'); if(!kp||!kp.classList.contains('on')) return;
+      var t=e.target; if(t&&/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+      var present=!!document.querySelector('.present2'), k=null, nav=false;
+      if(e.key==='!') k='bang'; else if(e.key==='/') k='slash';
+      else if(e.key==='Escape'){ k='esc'; nav=true; } else if(e.key==='Tab'){ k=e.shiftKey?'shifttab':'tab'; nav=true; } else if(e.key==='ArrowUp'){ k='up'; nav=true; }
+      if(!k||(present&&nav)) return;
+      if(k==='slash'||k==='bang'||k==='up') e.preventDefault();
+      var b=document.querySelector('#keyrow .keycap[data-k="'+k+'"]'); if(b){ b.focus(); b.click(); }
+    });
   })();
 
   /* steer — interrupt & redirect, compared */

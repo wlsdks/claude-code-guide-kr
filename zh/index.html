@@ -758,7 +758,7 @@ irm https://claude.ai/install.ps1 | iex</div>
     <section class="page" id="keys">
       <h1>快捷键 &amp; 模式</h1>
       <p class="lead">Claude Code 用<b>几个键</b>就能叫停、回退、切换模式。用鼠标点点试试就会了。</p>
-      <p class="defs">按下面的键 —— 屏幕上<b>会发生什么</b>，就原样展示给你看。（无需真实 Claude，只看交互）</p>
+      <p class="defs"><b>点击下面的按键</b>，或<b>直接按键盘上对应的键</b> —— 屏幕上<b>会发生什么</b>，就原样展示给你看。（无需真实 Claude，只看交互）</p>
       <div class="grp">
         <h3>按按这些键</h3>
         <div class="keys" id="keyrow">
@@ -2434,6 +2434,16 @@ description: 按公司格式撰写周报
       slash:function(){ show('/  打开命令菜单\n\n   /help   /clear   /compact   /model …\n   → 多打几个字就会缩小范围','不用记命令——按 / 就全列出来。'); }
     };
     document.querySelectorAll('#keyrow .keycap').forEach(function(c){ c.addEventListener('click',function(){ c.classList.add('hit'); setTimeout(function(){c.classList.remove('hit');},120); (ACT[c.dataset.k]||function(){})(); }); });
+    document.addEventListener('keydown',function(e){
+      var kp=document.getElementById('keys'); if(!kp||!kp.classList.contains('on')) return;
+      var t=e.target; if(t&&/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+      var present=!!document.querySelector('.present2'), k=null, nav=false;
+      if(e.key==='!') k='bang'; else if(e.key==='/') k='slash';
+      else if(e.key==='Escape'){ k='esc'; nav=true; } else if(e.key==='Tab'){ k=e.shiftKey?'shifttab':'tab'; nav=true; } else if(e.key==='ArrowUp'){ k='up'; nav=true; }
+      if(!k||(present&&nav)) return;
+      if(k==='slash'||k==='bang'||k==='up') e.preventDefault();
+      var b=document.querySelector('#keyrow .keycap[data-k="'+k+'"]'); if(b){ b.focus(); b.click(); }
+    });
   })();
 
   /* steer — interrupt & redirect, compared */

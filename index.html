@@ -759,7 +759,7 @@ irm https://claude.ai/install.ps1 | iex</div>
     <section class="page" id="keys">
       <h1>단축키 &amp; 모드</h1>
       <p class="lead">클로드 코드는 <b>키 몇 개</b>로 멈추고, 되돌리고, 모드를 바꿔요. 마우스로 눌러보며 익혀요.</p>
-      <p class="defs">아래 키를 누르면 — 화면에서 <b>무슨 일이 일어나는지</b> 그대로 보여드려요. (실제 클로드 없이 동작만)</p>
+      <p class="defs">아래 <b>키 버튼을 클릭</b>하거나 <b>실제 키보드로 직접 눌러</b> 보세요 — 화면에서 <b>무슨 일이 일어나는지</b> 그대로 보여드려요. (실제 클로드 없이 동작만)</p>
       <div class="grp">
         <h3>키를 눌러보세요</h3>
         <div class="keys" id="keyrow">
@@ -2436,6 +2436,16 @@ description: 주간 보고서를 회사 양식으로 작성
       slash:function(){ show('/  명령 메뉴 열기\n\n   /help   /clear   /compact   /model …\n   → 글자를 더 치면 좁혀져요','무슨 명령이 있는지 외울 필요 없이 / 만 누르면 다 나와요.'); }
     };
     document.querySelectorAll('#keyrow .keycap').forEach(function(c){ c.addEventListener('click',function(){ c.classList.add('hit'); setTimeout(function(){c.classList.remove('hit');},120); (ACT[c.dataset.k]||function(){})(); }); });
+    document.addEventListener('keydown',function(e){
+      var kp=document.getElementById('keys'); if(!kp||!kp.classList.contains('on')) return;
+      var t=e.target; if(t&&/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+      var present=!!document.querySelector('.present2'), k=null, nav=false;
+      if(e.key==='!') k='bang'; else if(e.key==='/') k='slash';
+      else if(e.key==='Escape'){ k='esc'; nav=true; } else if(e.key==='Tab'){ k=e.shiftKey?'shifttab':'tab'; nav=true; } else if(e.key==='ArrowUp'){ k='up'; nav=true; }
+      if(!k||(present&&nav)) return;
+      if(k==='slash'||k==='bang'||k==='up') e.preventDefault();
+      var b=document.querySelector('#keyrow .keycap[data-k="'+k+'"]'); if(b){ b.focus(); b.click(); }
+    });
   })();
 
   /* steer — interrupt & redirect, compared */
