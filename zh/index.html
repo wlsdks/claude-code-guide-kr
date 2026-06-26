@@ -177,6 +177,18 @@
   .cwba-d{ font-size:12px; color:var(--muted); margin-top:3px; }
   .cwba-arrow{ align-self:center; color:var(--faint); font-size:18px; flex:0 0 auto; }
   .cwba-note{ font-size:12.5px; color:var(--muted); margin-top:9px; line-height:1.6; }
+  .cwba-kd{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; }
+  .cwba-kdc{ border:1px solid var(--line2); border-radius:11px; padding:12px 14px; }
+  .cwba-kdc.keep{ border-color:rgba(31,158,118,.34); background:rgba(31,158,118,.06); }
+  .cwba-kdc.drop{ background:var(--row); }
+  .cwba-kdh{ font-size:13px; font-weight:600; margin-bottom:9px; display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+  .cwba-kdc.keep .cwba-kdh{ color:var(--good); } .cwba-kdc.drop .cwba-kdh{ color:var(--muted); }
+  .cwba-kdh span{ font-size:10px; font-weight:600; color:var(--faint); text-transform:uppercase; letter-spacing:.4px; }
+  .cwba-kdi{ font-size:12.5px; color:var(--ink); padding:6px 0; border-top:1px solid var(--line); line-height:1.5; }
+  .cwba-kdi:first-of-type{ border-top:none; padding-top:0; }
+  .cwba-kdex{ color:var(--faint); font-size:11.5px; }
+  .cwba-kdnote{ font-size:12.5px; color:var(--muted); margin:11px 0 0; line-height:1.6; }
+  @media(max-width:680px){ .cwba-kd{ grid-template-columns:1fr; } }
   @media (max-width:560px){ .cwba-row{ flex-direction:column; } .cwba-arrow{ transform:rotate(90deg); } }
   /* cowork */
   .cwapp{ border:1px solid var(--line2); border-radius:14px; background:var(--panel); overflow:hidden; box-shadow:var(--shadow); }
@@ -244,6 +256,11 @@
   .fstep .fperm{ display:inline-block; margin-top:5px; font-size:12px; color:#b9821a; border:1px solid rgba(214,158,46,.5); background:rgba(214,158,46,.1); border-radius:6px; padding:1px 9px; }
   .floop{ align-self:center; font-size:12.5px; font-weight:600; color:var(--accent); border:1px dashed var(--accent); border-radius:20px; padding:6px 15px; opacity:0; transform:translateY(5px); transition:opacity .35s,transform .35s; text-align:center; }
   .floop.on{ opacity:1; transform:none; }
+  /* RPA vs AI steps */
+  .rpastep{ display:flex; gap:8px; align-items:flex-start; padding:6px 0; font-size:13px; color:var(--ink); line-height:1.45; }
+  .rpastep .rk{ flex:0 0 auto; width:15px; text-align:center; color:var(--faint); font-weight:700; }
+  .rpastep.ok .rk{ color:var(--good); } .rpastep.ok{ color:var(--ink); }
+  .rpastep.bad .rk{ color:var(--over); } .rpastep.bad{ color:var(--over); }
   /* page presentation (slide) mode */
   .p2open{ position:fixed; top:16px; right:22px; z-index:60; font-size:13px; font-weight:500; color:var(--ink); background:var(--bg); border:1px solid var(--line2); border-radius:8px; padding:8px 14px; cursor:pointer; box-shadow:0 1px 5px rgba(0,0,0,.06); transition:border-color .2s; }
   .p2open:hover{ border-color:var(--accent); }
@@ -255,6 +272,7 @@
   .present2 .p2sp{ flex:1; }
   .present2 .p2nav{ font-size:13px; font-weight:500; color:var(--ink); background:var(--bg); border:1px solid var(--line2); border-radius:8px; padding:7px 14px; cursor:pointer; transition:border-color .2s; }
   .present2 .p2nav:hover{ border-color:var(--accent); } .present2 .p2nav:disabled{ opacity:.4; cursor:default; }
+  .present2 .p2nav.on{ background:var(--ink); color:var(--bg); border-color:var(--ink); font-weight:600; }
   .present2 .p2x{ border:none; background:none; font-size:18px; color:var(--muted); cursor:pointer; line-height:1; padding:4px 8px; }
   .present2 .p2stage{ flex:1; overflow:auto; display:flex; flex-direction:column; align-items:center; justify-content:safe center; padding:48px 32px; box-sizing:border-box; }
   .present2 .p2inner{ width:100%; max-width:860px; transition:opacity .22s; }
@@ -504,6 +522,7 @@
     <button class="navitem" data-page="steer"><span class="no">08</span>叫停并改方向</button>
     <div class="navsec">基础概念</div>
     <button class="navitem" data-page="howworks"><span class="no">09</span>工作原理（它怎么干活）</button>
+    <button class="navitem" data-page="setup"><span class="no">10</span>AI 的工作环境（配置）</button>
     <button class="navitem" data-page="context"><span class="no">05</span>上下文窗口</button>
     <button class="navitem" data-page="manage"><span class="no">06</span>管理上下文（为什么？）</button>
     <button class="navitem" data-page="compact"><span class="no">07</span>压缩 (compact)</button>
@@ -515,16 +534,21 @@
     <button class="navitem" data-page="claudemd"><span class="no">12</span>CLAUDE.md</button>
     <button class="navitem" data-page="memory"><span class="no">13</span>记忆</button>
     <button class="navitem" data-page="skills"><span class="no">14</span>技能</button>
+    <button class="navitem" data-page="skillshare"><span class="no">15</span>技能，为何共享</button>
+    <button class="navitem" data-page="skillsec"><span class="no">16</span>安全使用技能</button>
     <div class="navsec">扩展能力</div>
     <button class="navitem" data-page="mcp"><span class="no">15</span>MCP (连接工具)</button>
     <button class="navitem" data-page="plugins"><span class="no">16</span>插件</button>
     <button class="navitem" data-page="agents"><span class="no">17</span>子代理</button>
-    <button class="navitem" data-page="images"><span class="no">18</span>粘贴图片</button>
+    <button class="navitem" data-page="rpa"><span class="no">18</span>和 RPA 有何不同？</button>
+    <button class="navitem" data-page="images"><span class="no">19</span>粘贴图片</button>
+    <button class="navitem" data-page="remote"><span class="no">20</span>远程操控（remote）</button>
     <button class="navitem" data-page="hooks"><span class="no">19</span>自动化 (Hook)</button>
     <div class="navsec">自动·重复</div>
     <button class="navitem" data-page="goal"><span class="no">20</span>目标 (goal)</button>
     <button class="navitem" data-page="loop"><span class="no">21</span>重复执行 (loop)</button>
     <button class="navitem" data-page="workflows"><span class="no">22</span>工作流 (workflows)</button>
+    <button class="navitem" data-page="routines"><span class="no">23</span>例程（自动运行）</button>
     <div class="navsec">安全地用</div>
     <button class="navitem" data-page="planmode"><span class="no">23</span>计划模式</button>
     <button class="navitem" data-page="permissions"><span class="no">24</span>权限模式</button>
@@ -806,6 +830,27 @@ irm https://claude.ai/install.ps1 | iex</div>
       <p class="note">这套‘查看 → 行动 → 检查 → 反复’的流程叫<b>智能体循环</b>。中途要修改文件或执行命令时，通常会<b>先问你</b>（权限）。（出处：code.claude.com/docs —— How Claude Code works）</p>
     </section>
 
+    <!-- SETUP -->
+    <section class="page" id="setup">
+      <h1>AI 的工作环境 —— 你递给它什么</h1>
+      <p class="lead">同样是 Claude，结果会因为<b>你递给它什么</b>而大不相同。<b>工具·指示·权限·上下文</b> —— 把这个‘工作环境’配置得越好，它就越能自己干好。</p>
+      <p class="defs">专家们常把它叫做 <b>‘harness（框架）’</b> 或 <b>‘上下文工程’</b>。听着唬人，说到底就是<b>把环境配置好，让 AI 干得好</b>。点点下面这五样。</p>
+      <p class="anlg"><span class="ak">比喻</span><span>就像<b>请维修师傅上门时</b> —— 备好要用的工具、写明家里的特点和你的喜好、定好能动到哪儿、再把上次的便条递过去 —— 师傅就办得妥妥的。AI 也一样。</span></p>
+      <div class="grp">
+        <h3>递给 AI 的 5 样东西 —— 点点看</h3>
+        <div class="chips" id="su-chips" style="margin:4px 0 14px;">
+          <button class="chip on" data-k="tool">工具</button>
+          <button class="chip" data-k="inst">指示</button>
+          <button class="chip" data-k="perm">权限</button>
+          <button class="chip" data-k="ctx">上下文</button>
+          <button class="chip" data-k="ext">扩展</button>
+        </div>
+        <div class="cxsummary" id="su-box"></div>
+        <p class="simtake"><span class="stk">结论</span><span>决定结果的不只是模型 —— <b>把工具·指示·权限·上下文配齐</b>，同一个 AI 就会干得好得多。（这就是把‘harness’搭好的意思）</span></p>
+      </div>
+      <p class="note">大多数情况下 Claude Code 会<b>自动配好</b> —— 我们只需知道‘多给点什么会更好’（例如：在 <code>CLAUDE.md</code> 里写规则、用 <code>@</code> 点出文件）。（来源：code.claude.com/docs — how-claude-code-works · context-window · memory，截至 2026 年 6 月）</p>
+    </section>
+
     <!-- 03 CONTEXT -->
     <section class="page" id="context">
       <h1>上下文窗口</h1>
@@ -843,10 +888,19 @@ irm https://claude.ai/install.ps1 | iex</div>
           <div class="cwba-card hl"><div class="cwba-k">压缩后</div><div class="cwba-v" id="cwba-post">—</div><div class="cwba-d">只把核心收进‘一格摘要’</div></div>
         </div>
         <div class="cwba-note" id="cwba-note"></div>
-      </div>
-      <div class="cmp">
-        <div class="cmpcard"><h4>留下的</h4><div class="who">在总结里保留</div><div class="cmprow">我的需求和意图</div><div class="cmprow">读过或改过的文件清单和核心代码</div><div class="cmprow">出错和解决过程、剩下要做的事</div></div>
-        <div class="cmpcard"><h4>消失的</h4><div class="who">为了省空间</div><div class="cmprow">冗长的命令执行输出（终端结果）</div><div class="cmprow">中间步骤里啰嗦的说明</div><div class="cmprow">重复的内容</div></div>
+        <div class="cwba-kd">
+          <div class="cwba-kdc keep"><div class="cwba-kdh">留下的 <span>核心·始终需要</span></div>
+            <div class="cwba-kdi">系统说明 · 工具列表 · 记忆（CLAUDE.md）</div>
+            <div class="cwba-kdi">我最近的需求 · 定下的规则 · 文件名清单</div>
+            <div class="cwba-kdi">到目前为止做了什么的‘一格摘要’<br><span class="cwba-kdex">例：“活动名单 800 人中清理重复 32 条·已按日期排序完成”</span></div>
+          </div>
+          <div class="cwba-kdc drop"><div class="cwba-kdh">消失的 <span>节省空间</span></div>
+            <div class="cwba-kdi">旧的对话消息（过时的提问·回答）</div>
+            <div class="cwba-kdi">长长的工具结果（搜索·文件全文、表格预览）</div>
+            <div class="cwba-kdi">中间过程里啰嗦的说明<br><span class="cwba-kdex">例：重复名字 800 行的完整清单</span></div>
+          </div>
+        </div>
+        <p class="cwba-kdnote">→ 所以压缩之后，<b>‘做了什么·怎么做的’依然延续。</b> 被丢掉的细节（例如名字全清单）如果再需要，Claude 会<b>重新读那个文件。</b></p>
       </div>
       <p class="note"><b>什么时候开始？</b> 当上下文窗口<b>快要装满（接近上限）</b>时自动开始。具体的触发百分比官方没有公开（只说“接近上限时”）。压缩后，系统指令、CLAUDE.md、记忆、MCP 工具都会自动重新加载，但最初显示过的<b>技能列表</b>不会再次填充，只保留‘已经用过的技能’。手动的 <code>/compact</code> 原理也一样。（来源：官方文档，截至 2026 年 6 月）</p>
     </section>
@@ -1051,6 +1105,59 @@ description: 按公司格式撰写周报
       <p class="note">调用：像 <code>/周报</code> 一样直接调用，或者遇到相关任务时 Claude 自动套用。现成的技能也可以通过<b>插件</b>来安装（‘插件’标签页）。</p>
     </section>
 
+    <!-- SKILLSHARE -->
+    <section class="page" id="skillshare">
+      <h1>技能，为何共享</h1>
+      <p class="lead">技能是<b>做一次就能一直复用</b>的‘工作说明书’。而且<b>分享出去更好</b> —— 团队用同一套方式干活，诀窍也一点点积累起来。</p>
+      <p class="defs">例如：把<b>测试 → 构建 → 部署 → 检查</b>的流程装进‘部署’技能里，不用每次都解释，谁来都照着做一样。点点下面的好处。</p>
+      <p class="anlg"><span class="ak">比喻</span><span><b>团队共用清单</b> —— 不用每次翻文档还漏步骤，做好一次，新成员也照着来。</span></p>
+      <div class="grp">
+        <h3>技能的好处 —— 点点看</h3>
+        <div class="chips" id="ss-chips" style="margin:4px 0 14px;">
+          <button class="chip on" data-k="reuse">复用</button>
+          <button class="chip" data-k="team">团队一致</button>
+          <button class="chip" data-k="know">沉淀诀窍</button>
+          <button class="chip" data-k="auto">自动识别</button>
+          <button class="chip" data-k="space">节省空间</button>
+        </div>
+        <div class="cxsummary" id="ss-box"></div>
+        <p class="simtake"><span class="stk">结论</span><span>共享技能 —— <b>我的诀窍就变成整个团队的基本功</b>。大家用同一套方式，不漏步骤。</span></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>能共享到什么范围</h3>
+        <table>
+          <thead><tr><th>范围</th><th>放在哪</th><th>谁来用</th></tr></thead>
+          <tbody>
+            <tr><td><b>个人</b></td><td><code>~/.claude/skills/</code></td><td>我所有的项目</td></tr>
+            <tr><td><b>项目</b></td><td><code>.claude/skills/</code>（git 共享）</td><td>这个项目的团队成员</td></tr>
+            <tr><td><b>组织</b></td><td>管理设置</td><td>整个公司</td></tr>
+            <tr><td><b>插件</b></td><td>插件包</td><td>装了的任何人</td></tr>
+          </tbody>
+        </table>
+        <p class="note">如果觉得创建起来麻烦，可以让 Claude <b>“把这个任务做成技能”</b>，它会替你做好。（来源：code.claude.com/docs — skills，截至 2026 年 6 月）</p>
+      </div>
+    </section>
+
+    <!-- SKILLSEC -->
+    <section class="page" id="skillsec">
+      <h1>安全使用技能</h1>
+      <p class="lead">技能·插件·MCP 也<b>可以拿别人做的来用</b>。方便，但 —— 一定要确认<b>来源是否可信</b>。</p>
+      <p class="defs">技能里可能带着 <b>‘这个工具不用问就能用’</b>（allowed-tools）这类权限，还可能附带脚本被<b>执行</b>。所以信任很重要。</p>
+      <p class="anlg"><span class="ak">比喻</span><span><b>把活交给顾问之前</b> —— 你会问“需要什么权限？靠谱吗？能先看看流程吗？”。如果对方说“需要全部无限制访问”，那就是<b>红灯</b>。</span></p>
+      <div class="grp">
+        <h3>安装前要确认的 —— 点点看</h3>
+        <div class="chips" id="sc-chips" style="margin:4px 0 14px;">
+          <button class="chip on" data-k="src">来源可信</button>
+          <button class="chip" data-k="perm">权限范围</button>
+          <button class="chip" data-k="read">查看内容</button>
+          <button class="chip" data-k="inj">异常指示</button>
+        </div>
+        <div class="cxsummary" id="sc-box"></div>
+        <p class="simtake"><span class="stk">结论</span><span>安全 = <b>只用可信来源</b> · <b>权限要窄</b> · <b>内容先看一遍</b>。（Anthropic 不会逐一审核外部技能·MCP·插件 —— 信任要靠自己把关。）</span></p>
+      </div>
+      <p class="note">最安全的办法是<b>自己（或让 Claude 帮忙）做来用</b>。用外部的就只用可信提供方的。环境敏感时，还可以用 <code>/sandbox</code> 把执行范围圈起来。（来源：code.claude.com/docs — security · skills，截至 2026 年 6 月）</p>
+    </section>
+
     <!-- 10 MCP -->
     <section class="page" id="mcp">
       <h1>MCP (连接工具)</h1>
@@ -1139,6 +1246,33 @@ description: 按公司格式撰写周报
       <p class="note">图条和 token 数字是帮助理解的<span class="exb">示例</span>（实际值因任务而异）。同时运行多个会话来协作的‘代理团队（agent teams）’是另外的实验功能。（来源：官方文档）</p>
     </section>
 
+    <!-- RPA -->
+    <section class="page" id="rpa">
+      <h1>和 RPA 有何不同？</h1>
+      <p class="lead">自动化办公事务的工具，常用的是 <b>RPA</b>。但 <b>AI 智能体（Claude）</b>的<b>干活方式不一样</b> —— 用同一件活来对比一下，看看差在哪。</p>
+      <p class="defs">示例任务：<b>“从 100 张发票里提取金额和日期，填进 Excel”</b>。先照常跑一遍，再点点看<b>‘格式变了’</b>会怎样。</p>
+      <p class="anlg"><span class="ak">比喻</span><span><b>RPA</b> 是<b>‘录制·回放’机器</b> —— 照着固定位置的点击一遍遍重复。<b>AI 智能体</b>是<b>‘理解含义的员工’</b> —— 情况变了也会自己应对。</span></p>
+      <div class="grp">
+        <h3>同一件活，干法不同</h3>
+        <div class="exrow">
+          <button class="btn solid" id="rpa-run">▶ 照常运行</button>
+          <button class="btn" id="rpa-change">格式变了！</button>
+          <button class="btn" id="rpa-reset">重来</button>
+        </div>
+        <div class="chatdemo">
+          <div class="chatcol"><h4>传统 RPA <span class="badge no">录制·重复</span></h4>
+            <div id="rpa-a" style="font-size:13px;"></div>
+          </div>
+          <div class="chatcol"><h4>AI 智能体 + 技能 <span class="badge yes">理解·适应</span></h4>
+            <div id="rpa-b" style="font-size:13px;"></div>
+          </div>
+        </div>
+        <p class="status" id="rpa-status">点按钮，让两边都做同一件活看看。</p>
+        <p class="simtake"><span class="stk">结论</span><span>RPA <b>照着固定动作一遍遍重复</b>（快，但画面·格式一变就容易崩），AI 智能体<b>理解目标、随情况适应</b>。<b>技能</b>就是递给 AI 的<b>‘工作说明书’</b>。</span></p>
+      </div>
+      <p class="note"><b>别误会</b> · RPA 不是 Claude 的功能，而是<b>用来对比的概念</b>。不是“AI 智能体 + RPA = 技能”，<b>技能只是给 AI 派活的说明书</b>而已。两者与其说是替代品，不如说<b>用途不同</b> —— 简单又不变的大批量作业用 RPA 快，需要<b>变化·判断·处理例外</b>的活则 AI 智能体更强。（如今也常把两者混着用。）</p>
+    </section>
+
     <!-- 13 IMAGES -->
     <section class="page" id="images">
       <h1>把图片粘给 Claude</h1>
@@ -1177,6 +1311,32 @@ description: 按公司格式撰写周报
         <li><b>动态 GIF 只看第一帧。</b><span>建议用 JPG、PNG 等普通图片。</span></li>
       </ul>
       <p class="note">怎么贴：把截图拖进输入框，或粘贴（<code>Cmd/Ctrl</code>+<code>V</code>），又或者写上图片文件的路径即可。</p>
+    </section>
+
+    <!-- REMOTE -->
+    <section class="page" id="remote">
+      <h1>远程操控（remote）</h1>
+      <p class="lead">在我电脑上运行的 Claude 会话 —— <b>用手机或别的浏览器直接操控</b>。<b>代码还原封不动在我电脑上</b>，只是远程看着画面。<span class="exb">预览</span></p>
+      <p class="defs">例如：让公司电脑去干活，自己在咖啡馆用手机看进度，<b>“不对，得这么来”</b>地把方向。点点下面看看连接的过程。</p>
+      <p class="anlg"><span class="ak">比喻</span><span><b>和桌前的同事视频通话</b> —— 同事（我的电脑）真正在干活，我用手机看着画面下指示。是我的电脑在干活。</span></p>
+      <div class="grp">
+        <h3>怎么连接 —— 点点看</h3>
+        <div class="exrow"><button class="btn solid" id="rm-go">▶ 看连接过程</button><button class="btn" id="rm-reset">重来</button></div>
+        <div id="rm-flow"></div>
+        <p class="status" id="rm-status">点按钮，给你演示用手机连接的过程。</p>
+        <p class="simtake"><span class="stk">结论</span><span>远程操控 = <b>我的电脑干活，用手机看着操控</b>（代码留在我电脑上）。长任务结束或需要做决定时，还能用手机收到<b>通知</b>。</span></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>‘远程操控’ vs ‘网页’ —— 别搞混</h3>
+        <table>
+          <thead><tr><th></th><th>在哪干活</th><th>我的文件</th><th>适合什么时候</th></tr></thead>
+          <tbody>
+            <tr><td><b>远程操控</b></td><td>我的电脑</td><td>就在我电脑上</td><td>在外面接着指挥手头的活</td></tr>
+            <tr><td><b>网页 (claude.ai/code)</b></td><td>云端</td><td>云端环境</td><td>没我电脑时从头开始</td></tr>
+          </tbody>
+        </table>
+        <p class="note">这是<b>预览功能</b>。开启方法：在我电脑的 Claude 里输入 <code>/remote-control</code>（或 <code>claude remote-control</code>）→ 会出现链接和二维码。手机上装好 Claude 应用并开启通知，就能收到任务完成·确认请求。（来源：code.claude.com/docs — remote control，截至 2026 年 6 月）</p>
+      </div>
     </section>
 
     <!-- 14 HOOKS -->
@@ -1516,6 +1676,36 @@ description: 按公司格式撰写周报
       <p class="note">对非开发者来说算是比较进阶的功能 —— 知道‘还能这样’就足够了。一次用很多助手会消耗很多 token，所以只适合大型工作。（出处：Anthropic 官方 —— claude.com 动态工作流介绍）</p>
     </section>
 
+    <!-- ROUTINES -->
+    <section class="page" id="routines">
+      <h1>例程（自动运行）</h1>
+      <p class="lead">设定好的工作 —— Claude 会<b>在云端自动运行</b>。<b>就算我的电脑关着</b>，也会按定好的时刻·信号跑起来。<span class="exb">预览</span></p>
+      <p class="defs">例如：<b>“每天早上 9 点整理新 bug 并报到 Slack”</b>。做好一次就会自动重复。在下面选选看<b>是什么触发了例程</b>。</p>
+      <p class="anlg"><span class="ak">比喻</span><span><b>24 小时工作的助理</b> —— 我没上班、电脑关着，只要到了定好的时刻或信号来了，它就自己把活干好。</span></p>
+      <div class="grp">
+        <h3>是什么触发的 —— 点点看</h3>
+        <div class="chips" id="rt-chips" style="margin:4px 0 14px;">
+          <button class="chip on" data-t="time">日程（按时刻）</button>
+          <button class="chip" data-t="git">GitHub 事件</button>
+          <button class="chip" data-t="api">API 信号</button>
+        </div>
+        <div class="cxsummary" id="rt-box"></div>
+        <p class="simtake"><span class="stk">结论</span><span>例程 = <b>云端自动</b> —— 关机也照跑。（重复（loop）得开着终端，桌面定时得开着电脑。）</span></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>相似的自动化，差在哪</h3>
+        <table>
+          <thead><tr><th></th><th>在哪运行</th><th>关机也行？</th><th>靠什么触发</th></tr></thead>
+          <tbody>
+            <tr><td><b>重复 (/loop)</b></td><td>我的终端</td><td>不行（得开着）</td><td>固定间隔</td></tr>
+            <tr><td><b>桌面定时</b></td><td>我的电脑</td><td>不行（得开着）</td><td>日程</td></tr>
+            <tr><td><b>例程</b></td><td>云端</td><td><b>行</b></td><td>日程·GitHub·API</td></tr>
+          </tbody>
+        </table>
+        <p class="note">这是<b>预览功能</b> —— 行为·上限可能会变。创建方法：对 Claude 说 <code>/schedule</code>，或在 claude.ai/code 的‘例程’里设置。例程会预先取得权限<b>自行运行</b>，所以定好做什么·做到哪儿的范围才安全。（来源：code.claude.com/docs — routines，截至 2026 年 6 月）</p>
+      </div>
+    </section>
+
     <!-- CONFIG -->
     <section class="page" id="config">
       <h1>设置 (config)</h1>
@@ -1631,26 +1821,42 @@ description: 按公司格式撰写周报
   /* page presentation (slide) mode — non-destructive: moves blocks into a fullscreen stage, restores on exit (sims keep working) */
   (function(){
     var openBtn=document.getElementById('p2-open'); if(!openBtn) return;
-    var overlay=null,slides=[],idx=0,staged=[],fadeT=null;
+    var overlay=null,slides=[],idx=0,staged=[],fadeT=null,simOnly=false;
+    var P2STATIC={where:1,hooks:1,privacy:1,plans:1,glossary:1};
+    function isSim(id){ return !P2STATIC[id]; }
+    function curId(){ var c=document.querySelector('.page.on'); return c?c.id:''; }
+    function simList(){ return [].filter.call(document.querySelectorAll('.lnb .navitem'),function(n){ return isSim(n.dataset.page); }).map(function(n){ return n.dataset.page; }); }
     var ch=null; try{ ch=new BroadcastChannel('cc-p2'); }catch(e){} var audWin=null,mo=null,bcT=null,timer=null,t0=0,presenting=false;
     if(ch) ch.onmessage=function(e){ if(e.data&&e.data.t==='hello'&&overlay&&presenting) bcast(); };
     function boundary(el,i){ if(i===0) return false; if(el.tagName==='H1'||el.tagName==='H3') return true; var c=el.classList; return c.contains('grp')||c.contains('label')||c.contains('simtake')||c.contains('bignote')||c.contains('callout'); }
-    function build(page){ var kids=[].slice.call(page.children),out=[],cur=[]; kids.forEach(function(el,i){ if(boundary(el,i)&&cur.length){ out.push(cur); cur=[]; } cur.push(el); }); if(cur.length) out.push(cur); return out; }
+    var SIMSEL='button,input,textarea,select,.keycap,.tlpt,.prow,.timeline';
+    function hasSim(slide){ return slide.some(function(el){ return (el.matches&&el.matches(SIMSEL))||(el.querySelector&&!!el.querySelector(SIMSEL)); }); }
+    function build(page){ var kids=[].slice.call(page.children),out=[],cur=[]; kids.forEach(function(el,i){ if(boundary(el,i)&&cur.length){ out.push(cur); cur=[]; } cur.push(el); }); if(cur.length) out.push(cur);
+      if(simOnly){ var f=out.filter(hasSim); if(f.length) return f; } return out; }
     function restore(){ staged.forEach(function(p){ if(p.ph.parentNode) p.ph.parentNode.replaceChild(p.el,p.ph); }); staged=[]; }
     function show(i){ if(!overlay) return; restore(); idx=Math.max(0,Math.min(slides.length-1,i)); var inner=overlay.querySelector('.p2inner');
       slides[idx].forEach(function(el){ var ph=document.createComment('p2'); el.parentNode.insertBefore(ph,el); inner.appendChild(el); staged.push({el:el,ph:ph}); });
       overlay.querySelector('.p2count').textContent=(idx+1)+' / '+slides.length;
-      overlay.querySelector('.p2prev').disabled=(idx<=0); overlay.querySelector('.p2next').disabled=(idx>=slides.length-1);
+      var fS=idx<=0, lS=idx>=slides.length-1;
+      if(simOnly){ var L=simList(),i=L.indexOf(curId()); overlay.querySelector('.p2prev').disabled=(fS&&i<=0); overlay.querySelector('.p2next').disabled=(lS&&i>=L.length-1); }
+      else { overlay.querySelector('.p2prev').disabled=fS; overlay.querySelector('.p2next').disabled=lS; }
       inner.style.opacity='0'; if(fadeT)clearTimeout(fadeT); fadeT=setTimeout(function(){ inner.style.opacity='1'; },20); inner.scrollTop=0; overlay.querySelector('.p2stage').scrollTop=0; fitZoom(); bcast(); updateNext(); }
-    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'); inner.style.zoom=1; var w=inner.offsetWidth||860, h=inner.offsetHeight||400; var avW=window.innerWidth*0.94, avH=(window.innerHeight-58)*0.96; var z=Math.min(avW/w, avH/h, 2.6); inner.style.zoom=Math.max(0.78, z); }
+    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'); inner.style.zoom=1; var w=inner.offsetWidth||860, h=inner.offsetHeight||400; var avW=Math.min(window.innerWidth*0.92, 1180), avH=(window.innerHeight-60)*0.95; var z=Math.min(avW/w, avH/h, 2.2); inner.style.zoom=Math.max(0.8, z); }
     function loadPage(page){ slides=build(page); if(!slides.length) return; overlay.querySelector('.p2title').textContent = page.querySelector('h1')?page.querySelector('h1').textContent:''; show(0); }
     function tocEl(){ return overlay.querySelector('.p2toc'); }
-    function buildToc(){ var list=overlay.querySelector('.p2toclist .in'); list.innerHTML=''; var cur=document.querySelector('.page.on'),curId=cur?cur.id:'';
+    function buildToc(){ var list=overlay.querySelector('.p2toclist .in'); list.innerHTML=''; var curIdv=curId(),pendingSec=null;
       [].forEach.call(document.querySelectorAll('.lnb .navsec, .lnb .navitem'),function(el){ if(el.style.display==='none') return;
-        if(el.classList.contains('navsec')){ var h=document.createElement('div'); h.className='p2tocsec'; h.textContent=el.textContent; list.appendChild(h); }
-        else { var pid=el.dataset.page,b=document.createElement('button'); b.className='p2tocitem'+(pid===curId?' cur':''); b.textContent=el.textContent.replace(/^\s*\d+\s*/,''); b.addEventListener('click',function(){ goToPage(pid); }); list.appendChild(b); } }); }
+        if(el.classList.contains('navsec')){ pendingSec=el.textContent; }
+        else { var pid=el.dataset.page; if(simOnly && !isSim(pid)) return;
+          if(pendingSec){ var h=document.createElement('div'); h.className='p2tocsec'; h.textContent=pendingSec; list.appendChild(h); pendingSec=null; }
+          var b=document.createElement('button'); b.className='p2tocitem'+(pid===curIdv?' cur':''); b.textContent=el.textContent.replace(/^\s*\d+\s*/,''); b.addEventListener('click',function(){ goToPage(pid); }); list.appendChild(b); } }); }
     function toggleToc(){ var t=tocEl(); if(t.classList.contains('on')){ t.classList.remove('on'); } else { buildToc(); t.classList.add('on'); } }
-    function goToPage(id){ tocEl().classList.remove('on'); restore(); var nav=document.querySelector('.navitem[data-page="'+id+'"]'); if(nav) nav.click(); var page=document.getElementById(id); if(page) loadPage(page); }
+    function goToPage(id,toLast){ tocEl().classList.remove('on'); restore(); var nav=document.querySelector('.navitem[data-page="'+id+'"]'); if(nav) nav.click(); var page=document.getElementById(id); if(page){ loadPage(page); if(toLast) show(slides.length-1); } }
+    function goNext(){ if(idx<slides.length-1){ show(idx+1); return; } if(simOnly){ var L=simList(),i=L.indexOf(curId()); if(i>=0&&i<L.length-1) goToPage(L[i+1]); } }
+    function goPrev(){ if(idx>0){ show(idx-1); return; } if(simOnly){ var L=simList(),i=L.indexOf(curId()); if(i>0) goToPage(L[i-1],true); } }
+    function toggleSim(){ simOnly=!simOnly; overlay.querySelector('.p2simbtn').classList.toggle('on',simOnly); tocEl().classList.remove('on'); restore();
+      if(simOnly && !isSim(curId())){ var L=simList(); if(L.length){ goToPage(L[0]); return; } }
+      var page=document.querySelector('.page.on'); if(page) loadPage(page); }
     function bcast(){ if(!presenting||!overlay) return; var inner=overlay.querySelector('.p2inner'); var frame={t:'frame',html:inner.innerHTML,title:overlay.querySelector('.p2title').textContent,count:overlay.querySelector('.p2count').textContent}; if(ch){ try{ ch.postMessage(frame); }catch(e){} } try{ localStorage.setItem('cc-p2-frame',JSON.stringify(frame)); }catch(e){} }
     function bcastSoon(){ if(bcT) return; bcT=setTimeout(function(){ bcT=null; bcast(); },120); }
     function updateNext(){ if(!presenting||!overlay) return; var box=overlay.querySelector('.p2npin'); if(idx<slides.length-1){ box.innerHTML=slides[idx+1].map(function(el){return el.outerHTML;}).join(''); } else { box.innerHTML='<div style="color:var(--faint);font-size:14px;padding:10px 4px;">— 最后一页 —</div>'; } }
@@ -1663,10 +1869,11 @@ description: 按公司格式撰写周报
     function stopPresenter(){ if(mo){ mo.disconnect(); mo=null; } if(timer){ clearInterval(timer); timer=null; } if(bcT){ clearTimeout(bcT); bcT=null; } if(presenting&&ch){ try{ ch.postMessage({t:'bye'}); }catch(e){} } presenting=false; try{ if(audWin&&!audWin.closed) audWin.close(); }catch(e){} audWin=null; }
     function open(){ var page=document.querySelector('.page.on'); if(!page) return; if(!build(page).length) return;
       overlay=document.createElement('div'); overlay.className='present2';
-      overlay.innerHTML='<div class="p2bar"><span class="p2title"></span><span class="p2count"></span><span class="p2timer"></span><span class="p2live">● 观众画面已连接</span><span class="p2sp"></span><button class="p2nav p2present" title="打开观众窗口，拖到第二台显示器（镜像此画面）">演讲者视图</button><button class="p2nav p2tocbtn">目录</button><button class="p2nav p2prev">← 上一页</button><button class="p2nav p2next">下一页 →</button><button class="p2x" title="退出 (Esc)">✕</button></div><div class="p2stage"><div class="p2inner"></div></div><div class="p2np"><div class="p2nphead">下一页 ▸</div><div class="p2npin"></div></div><div class="p2toc"><div class="p2tochead"><b>目录 — 快速跳转</b><span class="p2sp"></span><button class="p2nav p2tocclose">关闭</button></div><div class="p2toclist"><div class="in"></div></div></div>';
+      overlay.innerHTML='<div class="p2bar"><span class="p2title"></span><span class="p2count"></span><span class="p2timer"></span><span class="p2live">● 观众画面已连接</span><span class="p2sp"></span><button class="p2nav p2present" title="打开观众窗口，拖到第二台显示器（镜像此画面）">演讲者视图</button><button class="p2nav p2simbtn" title="只看带模拟的页面（←/→ 切换）">仅模拟页</button><button class="p2nav p2tocbtn">目录</button><button class="p2nav p2prev">← 上一页</button><button class="p2nav p2next">下一页 →</button><button class="p2x" title="退出 (Esc)">✕</button></div><div class="p2stage"><div class="p2inner"></div></div><div class="p2np"><div class="p2nphead">下一页 ▸</div><div class="p2npin"></div></div><div class="p2toc"><div class="p2tochead"><b>目录 — 快速跳转</b><span class="p2sp"></span><button class="p2nav p2tocclose">关闭</button></div><div class="p2toclist"><div class="in"></div></div></div>';
       document.body.appendChild(overlay); document.documentElement.classList.add('p2-lock');
-      overlay.querySelector('.p2prev').addEventListener('click',function(){ show(idx-1); });
-      overlay.querySelector('.p2next').addEventListener('click',function(){ show(idx+1); });
+      overlay.querySelector('.p2prev').addEventListener('click',goPrev);
+      overlay.querySelector('.p2next').addEventListener('click',goNext);
+      overlay.querySelector('.p2simbtn').addEventListener('click',toggleSim);
       overlay.querySelector('.p2tocbtn').addEventListener('click',toggleToc);
       overlay.querySelector('.p2tocclose').addEventListener('click',toggleToc);
       overlay.querySelector('.p2present').addEventListener('click',startPresenter);
@@ -1676,7 +1883,7 @@ description: 按公司格式撰写周报
     openBtn.addEventListener('click',open);
     document.addEventListener('keydown',function(e){ if(!overlay) return; var tocOpen=tocEl().classList.contains('on');
       if(e.key==='Escape'){ if(tocOpen) tocEl().classList.remove('on'); else close(); }
-      else if(e.key==='ArrowRight'&&!tocOpen){ show(idx+1); } else if(e.key==='ArrowLeft'&&!tocOpen){ show(idx-1); } });
+      else if(e.key==='ArrowRight'&&!tocOpen){ goNext(); } else if(e.key==='ArrowLeft'&&!tocOpen){ goPrev(); } });
     var rzT=null; window.addEventListener('resize',function(){ if(!overlay) return; if(rzT)clearTimeout(rzT); rzT=setTimeout(fitZoom,120); });
   })();
 
@@ -1688,7 +1895,7 @@ description: 按公司格式撰写周报
     aud.innerHTML='<div class="p2audin"><div class="wait">正在等待演讲者画面…<br><span style="font-size:13px;color:var(--faint)">请把此窗口移到第二台显示器并全屏（F11）。</span></div></div>';
     document.body.appendChild(aud);
     var inner=aud.querySelector('.p2audin');
-    function fitAud(){ inner.style.zoom=1; var w=inner.offsetWidth||900, h=inner.offsetHeight||500; var z=Math.min(window.innerWidth*0.94/w, window.innerHeight*0.92/h, 3); inner.style.zoom=Math.max(0.85, z); }
+    function fitAud(){ inner.style.zoom=1; var w=inner.offsetWidth||900, h=inner.offsetHeight||500; var z=Math.min(Math.min(window.innerWidth*0.92,1320)/w, window.innerHeight*0.9/h, 2.6); inner.style.zoom=Math.max(0.85, z); }
     function render(m){ if(m&&typeof m.html==='string'){ inner.innerHTML=m.html; fitAud(); } }
     var arzT=null; window.addEventListener('resize',function(){ if(arzT)clearTimeout(arzT); arzT=setTimeout(fitAud,120); });
     var ch=null; try{ ch=new BroadcastChannel('cc-p2'); }catch(e){}
@@ -1697,7 +1904,7 @@ description: 按公司格式撰写周报
   })();
 
   /* LNB icons (monoline) */
-  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', ask:'<path d="M4 5.5h16v10H10l-4 3.5V15.5H4z"/><path d="M8.5 9h7M8.5 12h4"/>', mention:'<circle cx="12" cy="12" r="3.4"/><path d="M15.4 12v1.6a2.6 2.6 0 0 0 5.1 0V12a8.5 8.5 0 1 0-3.3 6.7"/>', keys:'<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><path d="M6 10h.01M9 10h.01M12 10h.01M15 10h.01M18 10h.01M8 13.5h8"/>', steer:'<path d="M4 7v4.5a4 4 0 0 0 4 4h8"/><path d="M13 12.5l3.5 3-3.5 3"/>', howworks:'<circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v2.6M12 18.9v2.6M21.5 12h-2.6M5.1 12H2.5M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8M18.7 18.7l-1.8-1.8M7.1 7.1L5.3 5.3"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', manage:'<path d="M4 20h16"/><rect x="5" y="13" width="3" height="6.5" rx="1"/><rect x="10.5" y="9" width="3" height="10.5" rx="1"/><rect x="16" y="5" width="3" height="14.5" rx="1"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', ask:'<path d="M4 5.5h16v10H10l-4 3.5V15.5H4z"/><path d="M8.5 9h7M8.5 12h4"/>', mention:'<circle cx="12" cy="12" r="3.4"/><path d="M15.4 12v1.6a2.6 2.6 0 0 0 5.1 0V12a8.5 8.5 0 1 0-3.3 6.7"/>', keys:'<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><path d="M6 10h.01M9 10h.01M12 10h.01M15 10h.01M18 10h.01M8 13.5h8"/>', steer:'<path d="M4 7v4.5a4 4 0 0 0 4 4h8"/><path d="M13 12.5l3.5 3-3.5 3"/>', howworks:'<circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v2.6M12 18.9v2.6M21.5 12h-2.6M5.1 12H2.5M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8M18.7 18.7l-1.8-1.8M7.1 7.1L5.3 5.3"/>', setup:'<path d="M4 7h7M15 7h5M4 12h11M19 12h1M4 17h4M12 17h8"/><circle cx="13" cy="7" r="2"/><circle cx="17" cy="12" r="2"/><circle cx="10" cy="17" r="2"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', manage:'<path d="M4 20h16"/><rect x="5" y="13" width="3" height="6.5" rx="1"/><rect x="10.5" y="9" width="3" height="10.5" rx="1"/><rect x="16" y="5" width="3" height="14.5" rx="1"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', skillshare:'<circle cx="6" cy="12" r="2.5"/><circle cx="17" cy="6" r="2.5"/><circle cx="17" cy="18" r="2.5"/><path d="M8.3 10.8 14.7 7.2M8.3 13.2l6.4 3.6"/>', skillsec:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/><path d="M9.5 12l1.8 1.8 3.5-3.6"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', rpa:'<rect x="4.5" y="8" width="15" height="11" rx="2"/><path d="M9 8V5.5h6V8M8.5 13h.01M15.5 13h.01M2 13h2.5M19.5 13H22M9 16h6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', remote:'<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M10.5 18.5h3"/><path d="M3 8.5a6 6 0 0 1 4-1.8M3.2 5.3a9 9 0 0 1 3.8-1.4"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', routines:'<rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 9.5h16M8.5 3v4M15.5 3v4M12 13v3l2 1.2"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
   function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
 
   /* router */
@@ -1705,7 +1912,7 @@ description: 按公司格式撰写周报
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'聊天给你‘答案’，Claude Code 则在你的项目里<b>亲手做出来、还让它跑起来</b>。', cowork:'不写代码，而是<b>替你做办公事务</b>的 Claude —— 给个目标，就<b>用你的文件做出成品</b>（给非开发者·桌面应用）。', usecases:'按职业<b>展示平时做的事会怎样改变</b>，从之前到之后。', where:'终端·VS Code·桌面·网页 —— <b>哪里都是同一个 Claude Code</b>，设置也共享。', ask:'同样的活，<b>说得越具体</b>越能一次到位 —— 动手写写还能拿分。', mention:'用 <code class="inlinecode">@</code> <b>把那个文件直接点名</b>，更快也更准。', keys:'<b>Esc</b>（叫停）·<b>Esc Esc</b>（回退）等几个键就够用 —— 边按边记。', steer:'走偏了就 <b>用 Esc 打断</b>再纠正 —— 不用等它跑完。', howworks:'Claude 不只是给答案 —— 它用工具去查看、修改、检查，反复进行（智能体循环）。', context:'只有放进来的东西 Claude 才记得。装满了就<b>用‘压缩’来整理</b>。', manage:'上下文<b>放着不管就会变慢·变贵·变乱</b> —— 所以要及时整理。', sessions:'<b>一个会话只做一件事</b> —— 混在一起会乱。工作文件夹要窄。', tokens:'Token = AI 读文字的单位。<b>越长越占空间、越费钱</b>，中文更重。', models:'聪明 ↔ 速度 ↔ 成本要取舍。<b>拿不定就用 Sonnet</b> 开始。', claudemd:'<b>我写下的规则备忘</b> —— 每次对话开始自动生效。', memory:'<b>Claude 自己学、自己记</b>的备忘。跨会话延续。', skills:'把常用工作步骤<b>做一次，反复使用</b>。', mcp:'<b>连接外部工具（Jira、Figma 等）</b>，让 Claude 直接使用。', plugins:'把技能·工具·命令等<b>打包一次性安装</b>的包。', agents:'把大事<b>分给专门助手</b>，只接收结果。', images:'<b>贴上截图</b>，Claude 就能看懂 —— 比说话快、还准。', hooks:'某个时刻<b>每次都自动执行固定动作</b>的规则。', planmode:'修改前<b>先展示计划、等批准</b> —— 大改动更安全。', permissions:'决定 Claude <b>要多频繁地问</b>的设置。一开始安全为上。', rewind:'每个请求<b>自动保存</b> —— 不满意就退回之前。', privacy:'<b>工作版（Team·Enterprise·API）默认不用于训练。</b> 个人版可在设置里选。', commands:'以 <code class="inlinecode">/</code> 开头的快捷命令。用得最多的是 <b>/clear · /compact</b>。', plans:'<b>免费版里没有。</b> 用付费版（Pro·Max·Team）或 API（按量计费）。', limits:'<b>用完就得等到重置</b> —— 所以管理很重要。', compact:'长长堆积的对话缩成<b>一格简短摘要</b>。', effort:'回答前<b>要想多深</b> —— 越深越准，但更慢更贵。', goal:'<b>只要给出‘完成条件’，Claude 就会反复做到满足为止</b>。', loop:'<b>每隔固定间隔</b>自动再次执行同一件工作。', workflows:'调度<b>多个助手同时</b>处理一件大事（进阶）。', config:'在一个地方修改<b>语言·主题·模型·权限</b>等设置。', doctor:'出问题时<b>检查安装·设置并指出该改哪里</b>。', glossary:'<b>用一句话</b>快速查找容易搞混的术语的地方。' };
+  var TLDR={ intro:'聊天给你‘答案’，Claude Code 则在你的项目里<b>亲手做出来、还让它跑起来</b>。', cowork:'不写代码，而是<b>替你做办公事务</b>的 Claude —— 给个目标，就<b>用你的文件做出成品</b>（给非开发者·桌面应用）。', usecases:'按职业<b>展示平时做的事会怎样改变</b>，从之前到之后。', where:'终端·VS Code·桌面·网页 —— <b>哪里都是同一个 Claude Code</b>，设置也共享。', ask:'同样的活，<b>说得越具体</b>越能一次到位 —— 动手写写还能拿分。', mention:'用 <code class="inlinecode">@</code> <b>把那个文件直接点名</b>，更快也更准。', keys:'<b>Esc</b>（叫停）·<b>Esc Esc</b>（回退）等几个键就够用 —— 边按边记。', steer:'走偏了就 <b>用 Esc 打断</b>再纠正 —— 不用等它跑完。', howworks:'Claude 不只是给答案 —— 它用工具去查看、修改、检查，反复进行（智能体循环）。', setup:'工具·指示·权限·上下文 —— <b>把‘工作环境’配置得越好</b>，AI 干得越好（harness）。', context:'只有放进来的东西 Claude 才记得。装满了就<b>用‘压缩’来整理</b>。', manage:'上下文<b>放着不管就会变慢·变贵·变乱</b> —— 所以要及时整理。', sessions:'<b>一个会话只做一件事</b> —— 混在一起会乱。工作文件夹要窄。', tokens:'Token = AI 读文字的单位。<b>越长越占空间、越费钱</b>，中文更重。', models:'聪明 ↔ 速度 ↔ 成本要取舍。<b>拿不定就用 Sonnet</b> 开始。', claudemd:'<b>我写下的规则备忘</b> —— 每次对话开始自动生效。', memory:'<b>Claude 自己学、自己记</b>的备忘。跨会话延续。', skills:'把常用工作步骤<b>做一次，反复使用</b>。', skillshare:'共享技能，<b>把我的诀窍变成团队的基本功</b>（复用·一致性）。', skillsec:'技能·插件<b>只在来源可信时才用</b> · 权限要窄 · 内容要看过。', mcp:'<b>连接外部工具（Jira、Figma 等）</b>，让 Claude 直接使用。', plugins:'把技能·工具·命令等<b>打包一次性安装</b>的包。', agents:'把大事<b>分给专门助手</b>，只接收结果。', rpa:'RPA 重复固定点击（易出错），AI 智能体<b>理解意图并随机应变</b>。', images:'<b>贴上截图</b>，Claude 就能看懂 —— 比说话快、还准。', remote:'把我电脑上的会话<b>用手机·浏览器直接操控</b> —— 代码还在我电脑上（预览）。', hooks:'某个时刻<b>每次都自动执行固定动作</b>的规则。', planmode:'修改前<b>先展示计划、等批准</b> —— 大改动更安全。', permissions:'决定 Claude <b>要多频繁地问</b>的设置。一开始安全为上。', rewind:'每个请求<b>自动保存</b> —— 不满意就退回之前。', privacy:'<b>工作版（Team·Enterprise·API）默认不用于训练。</b> 个人版可在设置里选。', commands:'以 <code class="inlinecode">/</code> 开头的快捷命令。用得最多的是 <b>/clear · /compact</b>。', plans:'<b>免费版里没有。</b> 用付费版（Pro·Max·Team）或 API（按量计费）。', limits:'<b>用完就得等到重置</b> —— 所以管理很重要。', compact:'长长堆积的对话缩成<b>一格简短摘要</b>。', effort:'回答前<b>要想多深</b> —— 越深越准，但更慢更贵。', goal:'<b>只要给出‘完成条件’，Claude 就会反复做到满足为止</b>。', loop:'<b>每隔固定间隔</b>自动再次执行同一件工作。', workflows:'调度<b>多个助手同时</b>处理一件大事（进阶）。', routines:'把设定好的工作<b>放在云端自动运行</b> —— 电脑关着也行，靠日程·GitHub·API 信号触发（预览）。', config:'在一个地方修改<b>语言·主题·模型·权限</b>等设置。', doctor:'出问题时<b>检查安装·设置并指出该改哪里</b>。', glossary:'<b>用一句话</b>快速查找容易搞混的术语的地方。' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">一句话总结</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -1725,8 +1932,8 @@ description: 按公司格式撰写周报
 
   /* difficulty mode — 초급/중급/고급 filter */
   var LV={ intro:1,cowork:1,usecases:1,where:1,ask:1,mention:1,keys:1,steer:1,howworks:1,context:1,manage:1,compact:1,sessions:1,models:1,claudemd:1,images:1,permissions:1,rewind:1,commands:1,glossary:1,
-    tokens:2,effort:2,memory:2,skills:2,planmode:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
-    mcp:3,plugins:3,agents:3,hooks:3,goal:3,loop:3,workflows:3 };
+    tokens:2,effort:2,setup:2,memory:2,skills:2,skillshare:2,skillsec:2,rpa:2,remote:2,planmode:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
+    mcp:3,plugins:3,agents:3,hooks:3,goal:3,loop:3,workflows:3,routines:3 };
   (function(){ var chips=document.querySelectorAll('#lvlsel .lvlchip'); if(!chips.length) return; var origNo={}; navs.forEach(function(n){ var no=n.querySelector('.no'); if(no) origNo[n.dataset.page]=no.textContent; });
     function setLevel(lv){ chips.forEach(function(c){ c.classList.toggle('on',+c.dataset.lv===lv); }); var k=0;
       navs.forEach(function(n){ var show= lv===0 || LV[n.dataset.page]===lv; n.style.display=show?'':'none'; if(show){ var no=n.querySelector('.no'); if(no) no.textContent= ('0'+(++k)).slice(-2); } });
@@ -2267,6 +2474,74 @@ description: 按公司格式撰写周报
     document.getElementById('hw-go').addEventListener('click',play);
     document.getElementById('hw-reset').addEventListener('click',function(){ T.forEach(clearTimeout); T=[]; render(); ST.textContent='点按钮就一步步进行。'; });
     render();
+  })();
+
+  /* rpa vs ai agent */
+  (function(){
+    var A=document.getElementById('rpa-a'),B=document.getElementById('rpa-b'),ST=document.getElementById('rpa-status'); if(!A) return; var T=[];
+    var RUN={ a:[['·','点记住的位置：金额栏（第 3 个）'],['·','在日期栏（第 5 个）里填入'],['✓','重复 100 张 → 完成']],
+      b:[['·','理解发票里“金额·日期”的含义'],['·','在每张上自己找到并填入'],['✓','100 张 → 完成']],
+      s:'两边都做得好 —— 照常（格式不变）时看不出差别。' };
+    var CHG={ a:[['·','点记住的位置（第 3 个）…'],['✗','那里没有金额（栏位挪走了）'],['✗','停下来叫人 —— 得重新录制']],
+      b:[['·','在画面里找“金额”跑哪去了'],['·','在挪动后的位置自己读取并填入'],['✓','100 张 → 完成（不用叫人）']],
+      s:'格式一变，RPA 就停了，AI 却自己适应了。' };
+    function render(d){ T.forEach(clearTimeout); T=[]; A.innerHTML=''; B.innerHTML=''; ST.textContent='';
+      function fill(box,steps){ steps.forEach(function(s,i){ T.push(setTimeout(function(){ var r=document.createElement('div'); r.className='rpastep'+(s[0]==='✓'?' ok':(s[0]==='✗'?' bad':'')); r.innerHTML='<span class="rk">'+s[0]+'</span><span>'+s[1]+'</span>'; box.appendChild(r); },300+i*640)); }); }
+      fill(A,d.a); fill(B,d.b); T.push(setTimeout(function(){ ST.textContent=d.s; },300+3*640)); }
+    document.getElementById('rpa-run').addEventListener('click',function(){ render(RUN); });
+    document.getElementById('rpa-change').addEventListener('click',function(){ render(CHG); });
+    document.getElementById('rpa-reset').addEventListener('click',function(){ T.forEach(clearTimeout); T=[]; A.innerHTML=''; B.innerHTML=''; ST.textContent='点按钮，让两边做同一件活看看。'; });
+  })();
+
+  /* skill share + skill security selectors */
+  (function(){
+    function sel(chipsId,boxId,D,first){ var box=document.getElementById(boxId); if(!box) return; function show(k){ var d=D[k]; box.innerHTML='<div class="cxh">'+d.t+'</div>'+d.d; } document.querySelectorAll('#'+chipsId+' .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#'+chipsId+' .chip').forEach(function(x){x.classList.toggle('on',x===c);}); show(c.dataset.k); }); }); show(first); }
+    sel('ss-chips','ss-box',{ reuse:{t:'复用',d:'同样的指示不用每次复制粘贴 —— <b>做一次就长期用</b>。一句 <code>/部署</code> 就搞定。'},
+      team:{t:'团队一致',d:'大家用<b>同一套流程</b>干活 —— 部署·检查·测试的方式不会因人而异。'},
+      know:{t:'沉淀诀窍',d:'把团队的<b>专业能力封装进技能</b> —— 新来的人也从一开始就照着 best practice 来。'},
+      auto:{t:'自动识别',d:'遇到相关情况时 Claude 会<b>自己提议“要用这个技能吗？”</b>。不用记命令。'},
+      space:{t:'节省空间',d:'说明一直挂着，但<b>正文只在用时才展开</b> —— 长长的参考资料不会提前占掉上下文。'} },'reuse');
+    sel('sc-chips','sc-box',{ src:{t:'来源可信',d:'谁做的？是<b>可信的提供方</b>吗？Anthropic 不会替你审核 —— 来路不明的要慎重。'},
+      perm:{t:'权限范围',d:'如果技能要 <code>allowed-tools: Bash(*)</code>（自动允许所有命令）这类<b>宽泛权限</b>，那是红灯。像 <code>Bash(npm test)</code> 这样窄的才安全。'},
+      read:{t:'查看内容',d:'安装前<b>先把技能内容读一遍</b> —— 它要做什么、用哪些工具。项目技能要在信任批准后才加载。'},
+      inj:{t:'异常指示（提示注入）',d:'错误日志·网页内容这类<b>外部文本里可能藏着“照这么做”之类的指示</b>，想操控 Claude。Claude Code 有防护，但来源可信优先。'} },'src');
+  })();
+
+  /* setup components selector */
+  (function(){
+    var box=document.getElementById('su-box'); if(!box) return;
+    var D={ tool:{t:'工具',d:'AI <b>能做的事</b> —— 读·改文件、运行命令、搜索、调用外部服务。没工具只能动嘴，有工具就能亲手做。'},
+      inst:{t:'指示',d:'给 AI 的<b>规则·说明</b> —— 在 <code>CLAUDE.md</code> 里写上“始终用中文”“先写测试”之类，不用每次都说它也照办。'},
+      perm:{t:'权限',d:'AI <b>能自己做到哪一步</b> —— 每次都问（安全）↔ 常做的就自己来（快）。可以选中间档。'},
+      ctx:{t:'上下文',d:'AI <b>现在看着的东西</b> —— 我的代码、对话内容、记忆（备忘）。空间有限（上下文窗口），所以只给核心才好。'},
+      ext:{t:'扩展',d:'<b>给它加能力</b> —— 技能（工作说明书）·MCP（连接外部工具）·Hook（自动规则）·子代理（分活）。'} };
+    function show(k){ var d=D[k]; box.innerHTML='<div class="cxh">'+d.t+'</div>'+d.d; }
+    document.querySelectorAll('#su-chips .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#su-chips .chip').forEach(function(x){x.classList.toggle('on',x===c);}); show(c.dataset.k); }); });
+    show('tool');
+  })();
+
+  /* remote control connect flow */
+  (function(){
+    var box=document.getElementById('rm-flow'),ST=document.getElementById('rm-status'); if(!box) return; var T=[];
+    var STEPS=[['1','在我电脑的 Claude 里输入 <code>/remote-control</code> → 出现链接和二维码'],
+      ['2','用手机扫二维码或打开链接'],
+      ['3','手机画面上<b>原样显示我电脑的 Claude</b>'],
+      ['4','发消息·批准、把握方向 —— <b>干活的是我的电脑</b>']];
+    function run(){ T.forEach(clearTimeout); T=[]; box.innerHTML=''; ST.textContent='正在用手机连接…';
+      STEPS.forEach(function(p,i){ T.push(setTimeout(function(){ var r=document.createElement('div'); r.className='chk y'; r.innerHTML='<span class="cx">'+p[0]+'</span><span>'+p[1]+'</span>'; box.appendChild(r); if(i===STEPS.length-1) ST.textContent='连上了 —— 现在随时随地都能用手机操控我电脑的 Claude。'; },300+i*760)); }); }
+    document.getElementById('rm-go').addEventListener('click',run);
+    document.getElementById('rm-reset').addEventListener('click',function(){ T.forEach(clearTimeout); T=[]; box.innerHTML=''; ST.textContent='点按钮，给你演示用手机连接的过程。'; });
+  })();
+
+  /* routines trigger selector */
+  (function(){
+    var box=document.getElementById('rt-box'); if(!box) return;
+    var D={ time:{when:'每天早上 9 点 · 每周一 · 特定时刻（最少间隔 1 小时）',ex:'把夜里攒下的新 bug 分类·打标签，早上用 Slack 发来一目了然的摘要。'},
+      git:{when:'有 PR 打开或发布版本时（GitHub 事件）',ex:'新 PR 一打开就自动写代码评审评论、过一遍检查清单。'},
+      api:{when:'外部系统发来信号（HTTP）时',ex:'服务器告警一来，就找到相关提交、起草一份临时修复 PR。'} };
+    function show(t){ var d=D[t]; box.innerHTML='<div class="cxh">什么时候运行</div>'+d.when+'<div class="cxh" style="margin-top:11px;">会做这样的事</div>'+d.ex; }
+    document.querySelectorAll('#rt-chips .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#rt-chips .chip').forEach(function(x){x.classList.toggle('on',x===c);}); show(c.dataset.t); }); });
+    show('time');
   })();
 
   /* plugins — bundle install demo */

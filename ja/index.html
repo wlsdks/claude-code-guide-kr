@@ -177,6 +177,18 @@
   .cwba-d{ font-size:12px; color:var(--muted); margin-top:3px; }
   .cwba-arrow{ align-self:center; color:var(--faint); font-size:18px; flex:0 0 auto; }
   .cwba-note{ font-size:12.5px; color:var(--muted); margin-top:9px; line-height:1.6; }
+  .cwba-kd{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; }
+  .cwba-kdc{ border:1px solid var(--line2); border-radius:11px; padding:12px 14px; }
+  .cwba-kdc.keep{ border-color:rgba(31,158,118,.34); background:rgba(31,158,118,.06); }
+  .cwba-kdc.drop{ background:var(--row); }
+  .cwba-kdh{ font-size:13px; font-weight:600; margin-bottom:9px; display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+  .cwba-kdc.keep .cwba-kdh{ color:var(--good); } .cwba-kdc.drop .cwba-kdh{ color:var(--muted); }
+  .cwba-kdh span{ font-size:10px; font-weight:600; color:var(--faint); text-transform:uppercase; letter-spacing:.4px; }
+  .cwba-kdi{ font-size:12.5px; color:var(--ink); padding:6px 0; border-top:1px solid var(--line); line-height:1.5; }
+  .cwba-kdi:first-of-type{ border-top:none; padding-top:0; }
+  .cwba-kdex{ color:var(--faint); font-size:11.5px; }
+  .cwba-kdnote{ font-size:12.5px; color:var(--muted); margin:11px 0 0; line-height:1.6; }
+  @media(max-width:680px){ .cwba-kd{ grid-template-columns:1fr; } }
   @media (max-width:560px){ .cwba-row{ flex-direction:column; } .cwba-arrow{ transform:rotate(90deg); } }
   /* cowork */
   .cwapp{ border:1px solid var(--line2); border-radius:14px; background:var(--panel); overflow:hidden; box-shadow:var(--shadow); }
@@ -244,6 +256,11 @@
   .fstep .fperm{ display:inline-block; margin-top:5px; font-size:12px; color:#b9821a; border:1px solid rgba(214,158,46,.5); background:rgba(214,158,46,.1); border-radius:6px; padding:1px 9px; }
   .floop{ align-self:center; font-size:12.5px; font-weight:600; color:var(--accent); border:1px dashed var(--accent); border-radius:20px; padding:6px 15px; opacity:0; transform:translateY(5px); transition:opacity .35s,transform .35s; text-align:center; }
   .floop.on{ opacity:1; transform:none; }
+  /* RPA vs AI steps */
+  .rpastep{ display:flex; gap:8px; align-items:flex-start; padding:6px 0; font-size:13px; color:var(--ink); line-height:1.45; }
+  .rpastep .rk{ flex:0 0 auto; width:15px; text-align:center; color:var(--faint); font-weight:700; }
+  .rpastep.ok .rk{ color:var(--good); } .rpastep.ok{ color:var(--ink); }
+  .rpastep.bad .rk{ color:var(--over); } .rpastep.bad{ color:var(--over); }
   /* page presentation (slide) mode */
   .p2open{ position:fixed; top:16px; right:22px; z-index:60; font-size:13px; font-weight:500; color:var(--ink); background:var(--bg); border:1px solid var(--line2); border-radius:8px; padding:8px 14px; cursor:pointer; box-shadow:0 1px 5px rgba(0,0,0,.06); transition:border-color .2s; }
   .p2open:hover{ border-color:var(--accent); }
@@ -255,6 +272,7 @@
   .present2 .p2sp{ flex:1; }
   .present2 .p2nav{ font-size:13px; font-weight:500; color:var(--ink); background:var(--bg); border:1px solid var(--line2); border-radius:8px; padding:7px 14px; cursor:pointer; transition:border-color .2s; }
   .present2 .p2nav:hover{ border-color:var(--accent); } .present2 .p2nav:disabled{ opacity:.4; cursor:default; }
+  .present2 .p2nav.on{ background:var(--ink); color:var(--bg); border-color:var(--ink); font-weight:600; }
   .present2 .p2x{ border:none; background:none; font-size:18px; color:var(--muted); cursor:pointer; line-height:1; padding:4px 8px; }
   .present2 .p2stage{ flex:1; overflow:auto; display:flex; flex-direction:column; align-items:center; justify-content:safe center; padding:48px 32px; box-sizing:border-box; }
   .present2 .p2inner{ width:100%; max-width:860px; transition:opacity .22s; }
@@ -504,6 +522,7 @@
     <button class="navitem" data-page="steer"><span class="no">08</span>止めて方向転換</button>
     <div class="navsec">基本の概念</div>
     <button class="navitem" data-page="howworks"><span class="no">09</span>しくみ（どう動くか）</button>
+    <button class="navitem" data-page="setup"><span class="no">10</span>AI の作業環境（セットアップ）</button>
     <button class="navitem" data-page="context"><span class="no">05</span>コンテキストウィンドウ</button>
     <button class="navitem" data-page="manage"><span class="no">06</span>コンテキスト管理（なぜ？）</button>
     <button class="navitem" data-page="compact"><span class="no">07</span>圧縮 (compact)</button>
@@ -515,16 +534,21 @@
     <button class="navitem" data-page="claudemd"><span class="no">12</span>CLAUDE.md</button>
     <button class="navitem" data-page="memory"><span class="no">13</span>メモリ</button>
     <button class="navitem" data-page="skills"><span class="no">14</span>スキル</button>
+    <button class="navitem" data-page="skillshare"><span class="no">15</span>スキルを共有する理由</button>
+    <button class="navitem" data-page="skillsec"><span class="no">16</span>スキルを安全に</button>
     <div class="navsec">機能を広げる</div>
     <button class="navitem" data-page="mcp"><span class="no">15</span>MCP (ツール連携)</button>
     <button class="navitem" data-page="plugins"><span class="no">16</span>プラグイン</button>
     <button class="navitem" data-page="agents"><span class="no">17</span>サブエージェント</button>
-    <button class="navitem" data-page="images"><span class="no">18</span>画像を貼り付け</button>
+    <button class="navitem" data-page="rpa"><span class="no">18</span>RPA と何が違う？</button>
+    <button class="navitem" data-page="images"><span class="no">19</span>画像を貼り付け</button>
+    <button class="navitem" data-page="remote"><span class="no">20</span>リモート操作（remote）</button>
     <button class="navitem" data-page="hooks"><span class="no">19</span>自動化 (フック)</button>
     <div class="navsec">自動・繰り返し</div>
     <button class="navitem" data-page="goal"><span class="no">20</span>目標達成 (goal)</button>
     <button class="navitem" data-page="loop"><span class="no">21</span>繰り返し実行 (loop)</button>
     <button class="navitem" data-page="workflows"><span class="no">22</span>ワークフロー (workflows)</button>
+    <button class="navitem" data-page="routines"><span class="no">23</span>ルーティン（自動実行）</button>
     <div class="navsec">安全に使う</div>
     <button class="navitem" data-page="planmode"><span class="no">23</span>プランモード</button>
     <button class="navitem" data-page="permissions"><span class="no">24</span>権限モード</button>
@@ -807,6 +831,27 @@ irm https://claude.ai/install.ps1 | iex</div>
       <p class="note">この「見る → 行動 → 確認 → 繰り返し」の流れを<b>エージェントループ</b>と呼びます。途中でファイルを直したりコマンドを実行するときは、たいてい<b>先に確認します</b>(権限)。(出典: code.claude.com/docs — How Claude Code works)</p>
     </section>
 
+    <!-- SETUP -->
+    <section class="page" id="setup">
+      <h1>AI の作業環境 — 何を手渡すか</h1>
+      <p class="lead">同じクロードでも、<b>何を手渡すか</b>で結果が大きく変わります。<b>ツール・指示・権限・文脈</b> — この「作業環境」をしっかり整えるほど、うまくやってくれます。</p>
+      <p class="defs">専門家はよく <b>「ハーネス（harness）」</b>や <b>「コンテキストエンジニアリング」</b>と呼びます。難しく聞こえますが、要は <b>AI が仕事をしやすいように環境をセットアップする</b>ことです。下の5つを押してみてください。</p>
+      <p class="anlg"><span class="ak">たとえ</span><span>家に <b>修理業者を呼ぶとき</b> — 使う工具を用意し、家の特徴・好みを書き添え、どこまで触っていいか決めておき、前回のメモを渡すと — 業者がてきぱき仕上げますよね。AI も同じです。</span></p>
+      <div class="grp">
+        <h3>AI に手渡す5つ — 押してみてください</h3>
+        <div class="chips" id="su-chips" style="margin:4px 0 14px;">
+          <button class="chip on" data-k="tool">ツール</button>
+          <button class="chip" data-k="inst">指示</button>
+          <button class="chip" data-k="perm">権限</button>
+          <button class="chip" data-k="ctx">文脈</button>
+          <button class="chip" data-k="ext">拡張</button>
+        </div>
+        <div class="cxsummary" id="su-box"></div>
+        <p class="simtake"><span class="stk">結論</span><span>結果を左右するのはモデルだけではありません — <b>ツール・指示・権限・文脈をしっかり整えれば</b>、同じ AI がずっとうまくやります。（これが「ハーネス」をうまく組むということ）</span></p>
+      </div>
+      <p class="note">ほとんどはクロードコードが <b>自動で整えてくれます</b> — 私たちは「何を足せばもっとうまくいくか」だけ知っていれば十分です（例：<code>CLAUDE.md</code> にルールを書く、<code>@</code> でファイルを指定する）。（出典：code.claude.com/docs — how-claude-code-works · context-window · memory、2026年6月時点）</p>
+    </section>
+
     <!-- 03 CONTEXT -->
     <section class="page" id="context">
       <h1>コンテキストウィンドウ</h1>
@@ -844,10 +889,19 @@ irm https://claude.ai/install.ps1 | iex</div>
           <div class="cwba-card hl"><div class="cwba-k">圧縮の後</div><div class="cwba-v" id="cwba-post">—</div><div class="cwba-d">要点だけを「要約 1 マス」に</div></div>
         </div>
         <div class="cwba-note" id="cwba-note"></div>
-      </div>
-      <div class="cmp">
-        <div class="cmpcard"><h4>残るもの</h4><div class="who">要約に保存</div><div class="cmprow">自分の依頼と意図</div><div class="cmprow">読んだ・直したファイルの一覧と核心のコード</div><div class="cmprow">エラーと解決の過程、残りのやること</div></div>
-        <div class="cmpcard"><h4>消えるもの</h4><div class="who">空間の節約</div><div class="cmprow">長いコマンド実行の出力（ターミナルの結果）</div><div class="cmprow">途中段階の冗長な説明</div><div class="cmprow">重複した内容</div></div>
+        <div class="cwba-kd">
+          <div class="cwba-kdc keep"><div class="cwba-kdh">残るもの <span>核心・常に必要</span></div>
+            <div class="cwba-kdi">システム指示 · ツール一覧 · 記憶（CLAUDE.md）</div>
+            <div class="cwba-kdi">自分の最近の依頼 · 決めたルール · ファイル名の一覧</div>
+            <div class="cwba-kdi">これまでにやったことの「要約 1 マス」<br><span class="cwba-kdex">例：「イベント名簿 800人中、重複 32件を整理・日付順に並べ替え完了」</span></div>
+          </div>
+          <div class="cwba-kdc drop"><div class="cwba-kdh">消えるもの <span>空間の節約</span></div>
+            <div class="cwba-kdi">古い会話のメッセージ（昔の質問・回答）</div>
+            <div class="cwba-kdi">長いツールの結果（検索・ファイル内容の全文、表のプレビュー）</div>
+            <div class="cwba-kdi">途中段階の冗長な説明<br><span class="cwba-kdex">例：重複した名前 800行の全リスト</span></div>
+          </div>
+        </div>
+        <p class="cwba-kdnote">→ だから圧縮の後も<b>「どんな仕事をどうやったか」は引き継がれます。</b>捨てられた詳細（例：名前の全リスト）が再び必要になれば、Claude が<b>そのファイルをもう一度読みます。</b></p>
       </div>
       <p class="note"><b>いつ始まる?</b> コンテキストウィンドウが<b>ほぼ満杯になったとき（上限の近く）</b>に自動で始まります。正確な基準の % は公式には公開されていません（「上限に近づくと」とだけ案内）。圧縮の後もシステム指示・CLAUDE.md・メモリ・MCP ツールは自動で読み込み直されますが、最初に表示されていた<b>スキルの一覧</b>は補充されず、「すでに使ったスキル」だけが残ります。手動の <code>/compact</code> も同じ仕組みです。（出典: 公式ドキュメント、2026年6月時点）</p>
     </section>
@@ -1052,6 +1106,59 @@ description: 週次レポートを会社の様式で作成
       <p class="note">呼び出し: <code>/週報</code> のように直接呼ぶか、関連する作業なら Claude が自動で適用。あらかじめ作られたスキルは<b>プラグイン</b>としてインストールすることもできます（「プラグイン」タブ）。</p>
     </section>
 
+    <!-- SKILLSHARE -->
+    <section class="page" id="skillshare">
+      <h1>スキルを共有する理由</h1>
+      <p class="lead">スキルは <b>一度作れば繰り返し再利用</b>できる「作業指示書」です。さらに <b>共有するともっと良い</b> — チームが同じやり方で働き、ノウハウが着実に積み重なります。</p>
+      <p class="defs">例：「デプロイ」スキルに <b>テスト → ビルド → デプロイ → 確認</b> の手順を入れておけば、毎回説明しなくても誰でも同じようにできます。下の利点を押してみてください。</p>
+      <p class="anlg"><span class="ak">たとえ</span><span><b>チーム共通のチェックリスト</b> — 毎回ドキュメントを見返して手順を抜かす代わりに、一度作っておけば新しいメンバーもそのまま従えます。</span></p>
+      <div class="grp">
+        <h3>スキルの利点 — 押してみてください</h3>
+        <div class="chips" id="ss-chips" style="margin:4px 0 14px;">
+          <button class="chip on" data-k="reuse">再利用</button>
+          <button class="chip" data-k="team">チームの一貫性</button>
+          <button class="chip" data-k="know">ノウハウを込める</button>
+          <button class="chip" data-k="auto">自動認識</button>
+          <button class="chip" data-k="space">スペース効率</button>
+        </div>
+        <div class="cxsummary" id="ss-box"></div>
+        <p class="simtake"><span class="stk">結論</span><span>スキルを共有すると — <b>自分だけのノウハウがチーム全体の基礎</b>になります。みんなが同じやり方で、抜け漏れなく。</span></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>どこまで共有されるか</h3>
+        <table>
+          <thead><tr><th>範囲</th><th>どこに</th><th>誰が使う</th></tr></thead>
+          <tbody>
+            <tr><td><b>個人</b></td><td><code>~/.claude/skills/</code></td><td>自分のすべてのプロジェクト</td></tr>
+            <tr><td><b>プロジェクト</b></td><td><code>.claude/skills/</code>（Git で共有）</td><td>このプロジェクトのメンバー</td></tr>
+            <tr><td><b>組織</b></td><td>管理設定</td><td>会社全体</td></tr>
+            <tr><td><b>プラグイン</b></td><td>プラグインの束</td><td>インストールした誰でも</td></tr>
+          </tbody>
+        </table>
+        <p class="note">作り方が難しければ、クロードに <b>「この作業をスキルにして」</b>と頼めば代わりに作ってくれます。（出典：code.claude.com/docs — skills、2026年6月時点）</p>
+      </div>
+    </section>
+
+    <!-- SKILLSEC -->
+    <section class="page" id="skillsec">
+      <h1>スキルを安全に使う</h1>
+      <p class="lead">スキル・プラグイン・MCP は <b>他人が作ったものを受け取って使う</b>こともできます。便利ですが — <b>出所が信頼できるか</b>を必ず確認しましょう。</p>
+      <p class="defs">スキルには <b>「このツールは確認なしで使っていい」</b>（allowed-tools）といった権限が含まれることがあり、スクリプトが付いて <b>実行されることもあります</b>。だからこそ信頼が重要です。</p>
+      <p class="anlg"><span class="ak">たとえ</span><span><b>コンサルタントに仕事を任せる前</b> — 「どんな権限が必要ですか？ 信頼できる方ですか？ 手順を先に見てもいいですか？」と尋ねますよね。「すべて無制限のアクセスが必要だ」と言われたら <b>赤信号</b>です。</span></p>
+      <div class="grp">
+        <h3>インストール前に確認すること — 押してみてください</h3>
+        <div class="chips" id="sc-chips" style="margin:4px 0 14px;">
+          <button class="chip on" data-k="src">出所の信頼</button>
+          <button class="chip" data-k="perm">権限の範囲</button>
+          <button class="chip" data-k="read">内容の確認</button>
+          <button class="chip" data-k="inj">おかしな指示</button>
+        </div>
+        <div class="cxsummary" id="sc-box"></div>
+        <p class="simtake"><span class="stk">結論</span><span>安全 = <b>信頼できる出所からのみ</b>・<b>権限は狭く</b>・<b>内容は一度確認</b>。（Anthropic は外部のスキル・MCP・プラグインを一つひとつ審査しません — 信頼の判断は自分の役目。）</span></p>
+      </div>
+      <p class="note">いちばん安全なのは <b>自分で（またはクロードに頼んで）作って使うこと</b>です。外部のものを使うときは信頼できる提供者のものだけを。機密性の高い環境なら <code>/sandbox</code> で実行範囲を限定することもできます。（出典：code.claude.com/docs — security · skills、2026年6月時点）</p>
+    </section>
+
     <!-- 10 MCP -->
     <section class="page" id="mcp">
       <h1>MCP (ツール連携)</h1>
@@ -1140,6 +1247,33 @@ description: 週次レポートを会社の様式で作成
       <p class="note">バー・トークンの数値は理解を助ける<span class="exb">例</span>です（実際の値は作業ごとに変わります）。複数のセッションを同時に動かして協力する「エージェントチーム (agent teams)」は、別の実験的機能です。（出典: 公式ドキュメント）</p>
     </section>
 
+    <!-- RPA vs AI agent -->
+    <section class="page" id="rpa">
+      <h1>RPA と何が違う？</h1>
+      <p class="lead">事務作業を自動化するツールとしてよく <b>RPA</b> が使われます。でも <b>AI エージェント（クロード）</b>は <b>働き方が違います</b> — 何が違うのか、同じ業務で比べてみましょう。</p>
+      <p class="defs">例の業務：<b>「請求書（インボイス）100枚から金額・日付を抜き出してエクセルに入力」</b>。いつも通り実行してみて、<b>「様式が変わったら」</b>どう変わるかを押して確かめてみてください。</p>
+      <p class="anlg"><span class="ak">たとえ</span><span><b>RPA</b> は <b>「録画・再生」マシン</b> — 決まった位置のクリックをそのまま繰り返します。<b>AI エージェント</b>は <b>「意味を理解する社員」</b> — 状況が変わっても自分で合わせます。</span></p>
+      <div class="grp">
+        <h3>同じ業務でも、働き方が違う</h3>
+        <div class="exrow">
+          <button class="btn solid" id="rpa-run">▶ いつも通り実行</button>
+          <button class="btn" id="rpa-change">様式が変わりました！</button>
+          <button class="btn" id="rpa-reset">最初に戻す</button>
+        </div>
+        <div class="chatdemo">
+          <div class="chatcol"><h4>従来の RPA <span class="badge no">録画・反復</span></h4>
+            <div id="rpa-a" style="font-size:13px;"></div>
+          </div>
+          <div class="chatcol"><h4>AI エージェント + スキル <span class="badge yes">理解・適応</span></h4>
+            <div id="rpa-b" style="font-size:13px;"></div>
+          </div>
+        </div>
+        <p class="status" id="rpa-status">ボタンを押して、同じ業務を両方にやらせてみてください。</p>
+        <p class="simtake"><span class="stk">結論</span><span>RPA は <b>決まった動作をそのまま反復</b>（速いが画面・様式が変わると壊れやすい）、AI エージェントは <b>目標を理解して状況に合わせて適応</b>します。<b>スキル</b>は AI に渡す <b>「作業指示書」</b>です。</span></p>
+      </div>
+      <p class="note"><b>誤解注意</b> · RPA はクロードの機能ではなく <b>比較のための概念</b>です。「AI エージェント + RPA = スキル」ではなく、<b>スキルは AI に仕事を頼む指示書</b>にすぎません。両者は代替というより <b>用途が違います</b> — 単純で変わらない大量作業には RPA が速く、<b>変化・判断・例外処理</b>が必要な仕事には AI エージェントが強いです。（最近は両方を組み合わせて使うこともあります。）</p>
+    </section>
+
     <!-- 13 IMAGES -->
     <section class="page" id="images">
       <h1>Claude に画像を貼り付け</h1>
@@ -1178,6 +1312,32 @@ description: 週次レポートを会社の様式で作成
         <li><b>動く GIF は最初の場面だけ見ます。</b><span>JPG・PNG などのふつうの画像をおすすめします。</span></li>
       </ul>
       <p class="note">貼り方: キャプチャを入力欄にドラッグして置くか貼り付け (<code>Cmd/Ctrl</code>+<code>V</code>)、または画像ファイルのパスを書けば OK です。</p>
+    </section>
+
+    <!-- REMOTE -->
+    <section class="page" id="remote">
+      <h1>リモート操作（remote）</h1>
+      <p class="lead">自分のコンピューターで動いているクロードのセッションを — <b>スマホや別のブラウザからそのまま操作</b>します。<b>コードは自分のコンピューターにそのまま</b>あり、画面だけリモートで見ます。<span class="exb">プレビュー</span></p>
+      <p class="defs">例：会社のコンピューターに仕事をさせておいて、カフェからスマホで進み具合を見ながら <b>「それは違う、こうして」</b>と方向を示します。下で接続される過程を押してみてください。</p>
+      <p class="anlg"><span class="ak">たとえ</span><span><b>机にいる同僚とビデオ通話</b> — 同僚（自分の PC）が実際に仕事をして、自分はスマホで画面を見ながら指示します。自分のコンピューターが働いているのです。</span></p>
+      <div class="grp">
+        <h3>どうやって接続されるか — 押してみてください</h3>
+        <div class="exrow"><button class="btn solid" id="rm-go">▶ 接続の過程を見る</button><button class="btn" id="rm-reset">最初に戻す</button></div>
+        <div id="rm-flow"></div>
+        <p class="status" id="rm-status">ボタンを押すと、スマホに接続される過程をお見せします。</p>
+        <p class="simtake"><span class="stk">結論</span><span>リモート操作 = <b>自分の PC が働き、スマホで見ながら操作</b>（コードは自分のコンピューターに）。長い作業が終わったり判断が必要になると、スマホに <b>通知</b>も届きます。</span></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>「リモート操作」vs「ウェブ」 — 混同しないように</h3>
+        <table>
+          <thead><tr><th></th><th>仕事はどこで</th><th>自分のファイル</th><th>向いている場面</th></tr></thead>
+          <tbody>
+            <tr><td><b>リモート操作</b></td><td>自分のコンピューター</td><td>自分のコンピューターのまま</td><td>進行中の作業を外から続けて指示</td></tr>
+            <tr><td><b>ウェブ（claude.ai/code）</b></td><td>クラウド</td><td>クラウド環境</td><td>自分の PC なしで新しく始める</td></tr>
+          </tbody>
+        </table>
+        <p class="note"><b>プレビュー機能</b>です。使い方：自分の PC のクロードで <code>/remote-control</code>（または <code>claude remote-control</code>）→ リンク・QR が表示されます。スマホにクロードアプリを入れて通知をオンにしておくと、作業完了・確認依頼を受け取れます。（出典：code.claude.com/docs — remote control、2026年6月時点）</p>
+      </div>
     </section>
 
     <!-- 14 HOOKS -->
@@ -1517,6 +1677,36 @@ description: 週次レポートを会社の様式で作成
       <p class="note">非エンジニアにはやや上級の機能です — 「こんなこともできる」とだけ知っておけば十分です。一度に多くのお手伝いを使うのでトークンを多く消費し、大きな仕事にだけ向いています。（出典: Anthropic 公式 — claude.com 動的ワークフロー紹介）</p>
     </section>
 
+    <!-- ROUTINES -->
+    <section class="page" id="routines">
+      <h1>ルーティン（自動実行）</h1>
+      <p class="lead">決めておいた仕事を — クロードが <b>クラウドで自動的に実行</b>します。<b>自分のコンピューターが消えていても</b>、決めた時刻・合図に合わせて動きます。<span class="exb">プレビュー</span></p>
+      <p class="defs">例：<b>「毎朝9時に新しいバグをまとめてスラックに報告」</b>。一度作っておけば自動で繰り返します。下で <b>何がルーティンを実行させるか</b>を選んでみてください。</p>
+      <p class="anlg"><span class="ak">たとえ</span><span><b>24時間働く秘書</b> — 自分が出社しなくても、コンピューターが消えていても、決めた時刻や合図が来れば自分で仕事を済ませておいてくれます。</span></p>
+      <div class="grp">
+        <h3>何が実行させるか — 押してみてください</h3>
+        <div class="chips" id="rt-chips" style="margin:4px 0 14px;">
+          <button class="chip on" data-t="time">スケジュール（時刻ごと）</button>
+          <button class="chip" data-t="git">GitHub イベント</button>
+          <button class="chip" data-t="api">API 信号</button>
+        </div>
+        <div class="cxsummary" id="rt-box"></div>
+        <p class="simtake"><span class="stk">結論</span><span>ルーティン = <b>クラウドで自動</b> — PC を消しておいても動きます。（繰り返し（loop）はターミナルを開けておく必要があり、デスクトップ予約は PC を起動しておく必要があります。）</span></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>似た自動化、どこが違うか</h3>
+        <table>
+          <thead><tr><th></th><th>どこで動くか</th><th>PC が消えても？</th><th>何で始まる</th></tr></thead>
+          <tbody>
+            <tr><td><b>繰り返し（/loop）</b></td><td>自分のターミナル</td><td>不可（起動が必要）</td><td>決めた間隔</td></tr>
+            <tr><td><b>デスクトップ予約</b></td><td>自分のコンピューター</td><td>不可（起動が必要）</td><td>スケジュール</td></tr>
+            <tr><td><b>ルーティン</b></td><td>クラウド</td><td><b>可</b></td><td>スケジュール・GitHub・API</td></tr>
+          </tbody>
+        </table>
+        <p class="note"><b>プレビュー機能</b>です — 動作・上限が変わることがあります。作り方：クロードに <code>/schedule</code> で伝えるか、claude.ai/code のルーティンで設定。ルーティンは権限を事前に受け取って <b>自動で実行</b>されるので、何を・どこまでやるか範囲を決めておくと安全です。（出典：code.claude.com/docs — routines、2026年6月時点）</p>
+      </div>
+    </section>
+
     <!-- CONFIG -->
     <section class="page" id="config">
       <h1>設定 (config)</h1>
@@ -1631,26 +1821,42 @@ description: 週次レポートを会社の様式で作成
   /* page presentation (slide) mode — non-destructive: moves blocks into a fullscreen stage, restores on exit (sims keep working) */
   (function(){
     var openBtn=document.getElementById('p2-open'); if(!openBtn) return;
-    var overlay=null,slides=[],idx=0,staged=[],fadeT=null;
+    var overlay=null,slides=[],idx=0,staged=[],fadeT=null,simOnly=false;
+    var P2STATIC={where:1,hooks:1,privacy:1,plans:1,glossary:1};
+    function isSim(id){ return !P2STATIC[id]; }
+    function curId(){ var c=document.querySelector('.page.on'); return c?c.id:''; }
+    function simList(){ return [].filter.call(document.querySelectorAll('.lnb .navitem'),function(n){ return isSim(n.dataset.page); }).map(function(n){ return n.dataset.page; }); }
     var ch=null; try{ ch=new BroadcastChannel('cc-p2'); }catch(e){} var audWin=null,mo=null,bcT=null,timer=null,t0=0,presenting=false;
     if(ch) ch.onmessage=function(e){ if(e.data&&e.data.t==='hello'&&overlay&&presenting) bcast(); };
     function boundary(el,i){ if(i===0) return false; if(el.tagName==='H1'||el.tagName==='H3') return true; var c=el.classList; return c.contains('grp')||c.contains('label')||c.contains('simtake')||c.contains('bignote')||c.contains('callout'); }
-    function build(page){ var kids=[].slice.call(page.children),out=[],cur=[]; kids.forEach(function(el,i){ if(boundary(el,i)&&cur.length){ out.push(cur); cur=[]; } cur.push(el); }); if(cur.length) out.push(cur); return out; }
+    var SIMSEL='button,input,textarea,select,.keycap,.tlpt,.prow,.timeline';
+    function hasSim(slide){ return slide.some(function(el){ return (el.matches&&el.matches(SIMSEL))||(el.querySelector&&!!el.querySelector(SIMSEL)); }); }
+    function build(page){ var kids=[].slice.call(page.children),out=[],cur=[]; kids.forEach(function(el,i){ if(boundary(el,i)&&cur.length){ out.push(cur); cur=[]; } cur.push(el); }); if(cur.length) out.push(cur);
+      if(simOnly){ var f=out.filter(hasSim); if(f.length) return f; } return out; }
     function restore(){ staged.forEach(function(p){ if(p.ph.parentNode) p.ph.parentNode.replaceChild(p.el,p.ph); }); staged=[]; }
     function show(i){ if(!overlay) return; restore(); idx=Math.max(0,Math.min(slides.length-1,i)); var inner=overlay.querySelector('.p2inner');
       slides[idx].forEach(function(el){ var ph=document.createComment('p2'); el.parentNode.insertBefore(ph,el); inner.appendChild(el); staged.push({el:el,ph:ph}); });
       overlay.querySelector('.p2count').textContent=(idx+1)+' / '+slides.length;
-      overlay.querySelector('.p2prev').disabled=(idx<=0); overlay.querySelector('.p2next').disabled=(idx>=slides.length-1);
+      var fS=idx<=0, lS=idx>=slides.length-1;
+      if(simOnly){ var L=simList(),i=L.indexOf(curId()); overlay.querySelector('.p2prev').disabled=(fS&&i<=0); overlay.querySelector('.p2next').disabled=(lS&&i>=L.length-1); }
+      else { overlay.querySelector('.p2prev').disabled=fS; overlay.querySelector('.p2next').disabled=lS; }
       inner.style.opacity='0'; if(fadeT)clearTimeout(fadeT); fadeT=setTimeout(function(){ inner.style.opacity='1'; },20); inner.scrollTop=0; overlay.querySelector('.p2stage').scrollTop=0; fitZoom(); bcast(); updateNext(); }
-    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'); inner.style.zoom=1; var w=inner.offsetWidth||860, h=inner.offsetHeight||400; var avW=window.innerWidth*0.94, avH=(window.innerHeight-58)*0.96; var z=Math.min(avW/w, avH/h, 2.6); inner.style.zoom=Math.max(0.78, z); }
+    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'); inner.style.zoom=1; var w=inner.offsetWidth||860, h=inner.offsetHeight||400; var avW=Math.min(window.innerWidth*0.92, 1180), avH=(window.innerHeight-60)*0.95; var z=Math.min(avW/w, avH/h, 2.2); inner.style.zoom=Math.max(0.8, z); }
     function loadPage(page){ slides=build(page); if(!slides.length) return; overlay.querySelector('.p2title').textContent = page.querySelector('h1')?page.querySelector('h1').textContent:''; show(0); }
     function tocEl(){ return overlay.querySelector('.p2toc'); }
-    function buildToc(){ var list=overlay.querySelector('.p2toclist .in'); list.innerHTML=''; var cur=document.querySelector('.page.on'),curId=cur?cur.id:'';
+    function buildToc(){ var list=overlay.querySelector('.p2toclist .in'); list.innerHTML=''; var curIdv=curId(),pendingSec=null;
       [].forEach.call(document.querySelectorAll('.lnb .navsec, .lnb .navitem'),function(el){ if(el.style.display==='none') return;
-        if(el.classList.contains('navsec')){ var h=document.createElement('div'); h.className='p2tocsec'; h.textContent=el.textContent; list.appendChild(h); }
-        else { var pid=el.dataset.page,b=document.createElement('button'); b.className='p2tocitem'+(pid===curId?' cur':''); b.textContent=el.textContent.replace(/^\s*\d+\s*/,''); b.addEventListener('click',function(){ goToPage(pid); }); list.appendChild(b); } }); }
+        if(el.classList.contains('navsec')){ pendingSec=el.textContent; }
+        else { var pid=el.dataset.page; if(simOnly && !isSim(pid)) return;
+          if(pendingSec){ var h=document.createElement('div'); h.className='p2tocsec'; h.textContent=pendingSec; list.appendChild(h); pendingSec=null; }
+          var b=document.createElement('button'); b.className='p2tocitem'+(pid===curIdv?' cur':''); b.textContent=el.textContent.replace(/^\s*\d+\s*/,''); b.addEventListener('click',function(){ goToPage(pid); }); list.appendChild(b); } }); }
     function toggleToc(){ var t=tocEl(); if(t.classList.contains('on')){ t.classList.remove('on'); } else { buildToc(); t.classList.add('on'); } }
-    function goToPage(id){ tocEl().classList.remove('on'); restore(); var nav=document.querySelector('.navitem[data-page="'+id+'"]'); if(nav) nav.click(); var page=document.getElementById(id); if(page) loadPage(page); }
+    function goToPage(id,toLast){ tocEl().classList.remove('on'); restore(); var nav=document.querySelector('.navitem[data-page="'+id+'"]'); if(nav) nav.click(); var page=document.getElementById(id); if(page){ loadPage(page); if(toLast) show(slides.length-1); } }
+    function goNext(){ if(idx<slides.length-1){ show(idx+1); return; } if(simOnly){ var L=simList(),i=L.indexOf(curId()); if(i>=0&&i<L.length-1) goToPage(L[i+1]); } }
+    function goPrev(){ if(idx>0){ show(idx-1); return; } if(simOnly){ var L=simList(),i=L.indexOf(curId()); if(i>0) goToPage(L[i-1],true); } }
+    function toggleSim(){ simOnly=!simOnly; overlay.querySelector('.p2simbtn').classList.toggle('on',simOnly); tocEl().classList.remove('on'); restore();
+      if(simOnly && !isSim(curId())){ var L=simList(); if(L.length){ goToPage(L[0]); return; } }
+      var page=document.querySelector('.page.on'); if(page) loadPage(page); }
     function bcast(){ if(!presenting||!overlay) return; var inner=overlay.querySelector('.p2inner'); var frame={t:'frame',html:inner.innerHTML,title:overlay.querySelector('.p2title').textContent,count:overlay.querySelector('.p2count').textContent}; if(ch){ try{ ch.postMessage(frame); }catch(e){} } try{ localStorage.setItem('cc-p2-frame',JSON.stringify(frame)); }catch(e){} }
     function bcastSoon(){ if(bcT) return; bcT=setTimeout(function(){ bcT=null; bcast(); },120); }
     function updateNext(){ if(!presenting||!overlay) return; var box=overlay.querySelector('.p2npin'); if(idx<slides.length-1){ box.innerHTML=slides[idx+1].map(function(el){return el.outerHTML;}).join(''); } else { box.innerHTML='<div style="color:var(--faint);font-size:14px;padding:10px 4px;">— 最後のスライド —</div>'; } }
@@ -1663,10 +1869,11 @@ description: 週次レポートを会社の様式で作成
     function stopPresenter(){ if(mo){ mo.disconnect(); mo=null; } if(timer){ clearInterval(timer); timer=null; } if(bcT){ clearTimeout(bcT); bcT=null; } if(presenting&&ch){ try{ ch.postMessage({t:'bye'}); }catch(e){} } presenting=false; try{ if(audWin&&!audWin.closed) audWin.close(); }catch(e){} audWin=null; }
     function open(){ var page=document.querySelector('.page.on'); if(!page) return; if(!build(page).length) return;
       overlay=document.createElement('div'); overlay.className='present2';
-      overlay.innerHTML='<div class="p2bar"><span class="p2title"></span><span class="p2count"></span><span class="p2timer"></span><span class="p2live">● 観客画面 接続中</span><span class="p2sp"></span><button class="p2nav p2present" title="観客用ウィンドウを開いて2台目のモニターへ（この画面をミラー）">発表者画面</button><button class="p2nav p2tocbtn">目次</button><button class="p2nav p2prev">← 前へ</button><button class="p2nav p2next">次へ →</button><button class="p2x" title="終了 (Esc)">✕</button></div><div class="p2stage"><div class="p2inner"></div></div><div class="p2np"><div class="p2nphead">次へ ▸</div><div class="p2npin"></div></div><div class="p2toc"><div class="p2tochead"><b>目次 — ジャンプ</b><span class="p2sp"></span><button class="p2nav p2tocclose">閉じる</button></div><div class="p2toclist"><div class="in"></div></div></div>';
+      overlay.innerHTML='<div class="p2bar"><span class="p2title"></span><span class="p2count"></span><span class="p2timer"></span><span class="p2live">● 観客画面 接続中</span><span class="p2sp"></span><button class="p2nav p2present" title="観客用ウィンドウを開いて2台目のモニターへ（この画面をミラー）">発表者画面</button><button class="p2nav p2simbtn" title="シミュレーションのあるページだけ表示（←/→で移動）">シミュレーションのみ</button><button class="p2nav p2tocbtn">目次</button><button class="p2nav p2prev">← 前へ</button><button class="p2nav p2next">次へ →</button><button class="p2x" title="終了 (Esc)">✕</button></div><div class="p2stage"><div class="p2inner"></div></div><div class="p2np"><div class="p2nphead">次へ ▸</div><div class="p2npin"></div></div><div class="p2toc"><div class="p2tochead"><b>目次 — ジャンプ</b><span class="p2sp"></span><button class="p2nav p2tocclose">閉じる</button></div><div class="p2toclist"><div class="in"></div></div></div>';
       document.body.appendChild(overlay); document.documentElement.classList.add('p2-lock');
-      overlay.querySelector('.p2prev').addEventListener('click',function(){ show(idx-1); });
-      overlay.querySelector('.p2next').addEventListener('click',function(){ show(idx+1); });
+      overlay.querySelector('.p2prev').addEventListener('click',goPrev);
+      overlay.querySelector('.p2next').addEventListener('click',goNext);
+      overlay.querySelector('.p2simbtn').addEventListener('click',toggleSim);
       overlay.querySelector('.p2tocbtn').addEventListener('click',toggleToc);
       overlay.querySelector('.p2tocclose').addEventListener('click',toggleToc);
       overlay.querySelector('.p2present').addEventListener('click',startPresenter);
@@ -1676,7 +1883,7 @@ description: 週次レポートを会社の様式で作成
     openBtn.addEventListener('click',open);
     document.addEventListener('keydown',function(e){ if(!overlay) return; var tocOpen=tocEl().classList.contains('on');
       if(e.key==='Escape'){ if(tocOpen) tocEl().classList.remove('on'); else close(); }
-      else if(e.key==='ArrowRight'&&!tocOpen){ show(idx+1); } else if(e.key==='ArrowLeft'&&!tocOpen){ show(idx-1); } });
+      else if(e.key==='ArrowRight'&&!tocOpen){ goNext(); } else if(e.key==='ArrowLeft'&&!tocOpen){ goPrev(); } });
     var rzT=null; window.addEventListener('resize',function(){ if(!overlay) return; if(rzT)clearTimeout(rzT); rzT=setTimeout(fitZoom,120); });
   })();
 
@@ -1688,7 +1895,7 @@ description: 週次レポートを会社の様式で作成
     aud.innerHTML='<div class="p2audin"><div class="wait">発表者画面を待っています…<br><span style="font-size:13px;color:var(--faint)">このウィンドウを2台目のモニターに移し、全画面（F11）にしてください。</span></div></div>';
     document.body.appendChild(aud);
     var inner=aud.querySelector('.p2audin');
-    function fitAud(){ inner.style.zoom=1; var w=inner.offsetWidth||900, h=inner.offsetHeight||500; var z=Math.min(window.innerWidth*0.94/w, window.innerHeight*0.92/h, 3); inner.style.zoom=Math.max(0.85, z); }
+    function fitAud(){ inner.style.zoom=1; var w=inner.offsetWidth||900, h=inner.offsetHeight||500; var z=Math.min(Math.min(window.innerWidth*0.92,1320)/w, window.innerHeight*0.9/h, 2.6); inner.style.zoom=Math.max(0.85, z); }
     function render(m){ if(m&&typeof m.html==='string'){ inner.innerHTML=m.html; fitAud(); } }
     var arzT=null; window.addEventListener('resize',function(){ if(arzT)clearTimeout(arzT); arzT=setTimeout(fitAud,120); });
     var ch=null; try{ ch=new BroadcastChannel('cc-p2'); }catch(e){}
@@ -1697,7 +1904,7 @@ description: 週次レポートを会社の様式で作成
   })();
 
   /* LNB icons (monoline) */
-  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', ask:'<path d="M4 5.5h16v10H10l-4 3.5V15.5H4z"/><path d="M8.5 9h7M8.5 12h4"/>', mention:'<circle cx="12" cy="12" r="3.4"/><path d="M15.4 12v1.6a2.6 2.6 0 0 0 5.1 0V12a8.5 8.5 0 1 0-3.3 6.7"/>', keys:'<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><path d="M6 10h.01M9 10h.01M12 10h.01M15 10h.01M18 10h.01M8 13.5h8"/>', steer:'<path d="M4 7v4.5a4 4 0 0 0 4 4h8"/><path d="M13 12.5l3.5 3-3.5 3"/>', howworks:'<circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v2.6M12 18.9v2.6M21.5 12h-2.6M5.1 12H2.5M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8M18.7 18.7l-1.8-1.8M7.1 7.1L5.3 5.3"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', manage:'<path d="M4 20h16"/><rect x="5" y="13" width="3" height="6.5" rx="1"/><rect x="10.5" y="9" width="3" height="10.5" rx="1"/><rect x="16" y="5" width="3" height="14.5" rx="1"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', ask:'<path d="M4 5.5h16v10H10l-4 3.5V15.5H4z"/><path d="M8.5 9h7M8.5 12h4"/>', mention:'<circle cx="12" cy="12" r="3.4"/><path d="M15.4 12v1.6a2.6 2.6 0 0 0 5.1 0V12a8.5 8.5 0 1 0-3.3 6.7"/>', keys:'<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><path d="M6 10h.01M9 10h.01M12 10h.01M15 10h.01M18 10h.01M8 13.5h8"/>', steer:'<path d="M4 7v4.5a4 4 0 0 0 4 4h8"/><path d="M13 12.5l3.5 3-3.5 3"/>', howworks:'<circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v2.6M12 18.9v2.6M21.5 12h-2.6M5.1 12H2.5M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8M18.7 18.7l-1.8-1.8M7.1 7.1L5.3 5.3"/>', setup:'<path d="M4 7h7M15 7h5M4 12h11M19 12h1M4 17h4M12 17h8"/><circle cx="13" cy="7" r="2"/><circle cx="17" cy="12" r="2"/><circle cx="10" cy="17" r="2"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', manage:'<path d="M4 20h16"/><rect x="5" y="13" width="3" height="6.5" rx="1"/><rect x="10.5" y="9" width="3" height="10.5" rx="1"/><rect x="16" y="5" width="3" height="14.5" rx="1"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', skillshare:'<circle cx="6" cy="12" r="2.5"/><circle cx="17" cy="6" r="2.5"/><circle cx="17" cy="18" r="2.5"/><path d="M8.3 10.8 14.7 7.2M8.3 13.2l6.4 3.6"/>', skillsec:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/><path d="M9.5 12l1.8 1.8 3.5-3.6"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', rpa:'<rect x="4.5" y="8" width="15" height="11" rx="2"/><path d="M9 8V5.5h6V8M8.5 13h.01M15.5 13h.01M2 13h2.5M19.5 13H22M9 16h6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', remote:'<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M10.5 18.5h3"/><path d="M3 8.5a6 6 0 0 1 4-1.8M3.2 5.3a9 9 0 0 1 3.8-1.4"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', routines:'<rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 9.5h16M8.5 3v4M15.5 3v4M12 13v3l2 1.2"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
   function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
 
   /* router */
@@ -1705,7 +1912,7 @@ description: 週次レポートを会社の様式で作成
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'チャットは「答え」をくれて、Claude Code は自分のプロジェクトで<b>直接作って動くところまで</b>やってくれます。', cowork:'コードではなく<b>オフィス業務を代わりに</b>こなす Claude — 目標を伝えるだけで<b>自分のファイルで成果物まで</b>作ります（非エンジニア・デスクトップアプリ）。', usecases:'職業ごとに<b>いつもの仕事がどう変わるか</b>をビフォー→アフターで見せます。', where:'ターミナル・VS Code・デスクトップ・Web — <b>どこでも同じ Claude Code</b>、設定も共有されます。', ask:'同じ作業でも<b>具体的に頼めば</b>一度で — 自分で書いて点数ももらえます。', mention:'<code class="inlinecode">@</code> で<b>まさにそのファイル</b>をピンポイント指定すると速く正確。', keys:'<b>Esc</b>(止める)・<b>Esc Esc</b>(巻き戻し)など、キーいくつかで全部できます — 押して覚えましょう。', steer:'間違ったら<b>Esc で切って</b>直す — 最後まで待ちません。', howworks:'Claude はただ答えるのではなく — <b>ツールで見て・直して・確認を繰り返します</b>（エージェントループ）。', context:'ここに乗ったものだけを Claude が覚えています。満杯になったら<b>「圧縮」で整理</b>します。', manage:'コンテキストを<b>放置すると遅く・高く・混乱します</b> — だからこまめに片づけます。', sessions:'<b>一つのセッションに一つの仕事</b> — 混ぜると混乱します。作業フォルダは狭く。', tokens:'トークン = AI が文章を読む単位。<b>長いほど空間・コストが増え</b>、日本語のほうが重い。', models:'賢さ ↔ 速さ ↔ コストはトレードオフ。<b>迷ったら Sonnet</b> で始めましょう。', claudemd:'<b>自分で書いておくルールのメモ</b> — 毎回の会話の始めに自動で適用されます。', memory:'<b>Claude が自分で学んで覚える</b>メモ。セッションをまたいで引き継がれます。', skills:'よく使う作業の手順を<b>一度作ってずっと再利用</b>します。', mcp:'<b>外部ツール(Jira・Figma など)につないで</b> Claude が直接使えるようにします。', plugins:'スキル・ツール・コマンドなどを<b>まとめて一度にインストール</b>する一式です。', agents:'大きな仕事を<b>専門のお手伝いに分けて任せ</b>、結果だけ受け取ります。', images:'<b>スクリーンショットを貼れば</b> Claude が見て理解します — 言葉より速く正確。', hooks:'特定の瞬間に<b>決まった動作が毎回自動</b>で実行されるルールです。', planmode:'直す前に<b>計画を先に見せて承認</b>を受けます — 大きな変更に安全。', permissions:'Claude が<b>どのくらい頻繁に聞くか</b>を決める設定。最初は安全に。', rewind:'リクエストごとに<b>自動保存</b> — 気に入らなければ以前へ巻き戻します。', privacy:'<b>業務用(Team·Enterprise·API)は基本的に学習に使われません。</b> 個人用は設定で選択。', commands:'<code class="inlinecode">/</code> で始まるショートカットコマンド。いちばんよく使うのは <b>/clear · /compact</b>。', plans:'<b>無料プランにはありません。</b> 有料(Pro·Max·Team)または API(従量制)で使用。', limits:'<b>使い切るとリセットまで待つ</b>必要があります — だから管理が大切です。', compact:'長く積み上がった会話が<b>短い要約 1 マス</b>に縮みます。', effort:'答える前に<b>どれだけ深く考えるか</b> — 深いほど正確ですが、遅く高くつきます。', goal:'<b>「完了条件」だけ与えれば、できるまで</b> Claude が自分で繰り返します。', loop:'<b>決めた間隔ごとに</b>同じ作業を自動でもう一度実行します。', workflows:'大きな仕事を<b>複数のお手伝いが同時に</b>処理するよう調整します（上級）。', config:'<b>言語・テーマ・モデル・権限</b>のような設定を一か所で変えます。', doctor:'うまくいかないとき<b>インストール・設定を点検</b>して直す場所を教えてくれます。', glossary:'迷う用語を<b>一行で</b>素早く探す場所です。' };
+  var TLDR={ intro:'チャットは「答え」をくれて、Claude Code は自分のプロジェクトで<b>直接作って動くところまで</b>やってくれます。', cowork:'コードではなく<b>オフィス業務を代わりに</b>こなす Claude — 目標を伝えるだけで<b>自分のファイルで成果物まで</b>作ります（非エンジニア・デスクトップアプリ）。', usecases:'職業ごとに<b>いつもの仕事がどう変わるか</b>をビフォー→アフターで見せます。', where:'ターミナル・VS Code・デスクトップ・Web — <b>どこでも同じ Claude Code</b>、設定も共有されます。', ask:'同じ作業でも<b>具体的に頼めば</b>一度で — 自分で書いて点数ももらえます。', mention:'<code class="inlinecode">@</code> で<b>まさにそのファイル</b>をピンポイント指定すると速く正確。', keys:'<b>Esc</b>(止める)・<b>Esc Esc</b>(巻き戻し)など、キーいくつかで全部できます — 押して覚えましょう。', steer:'間違ったら<b>Esc で切って</b>直す — 最後まで待ちません。', howworks:'Claude はただ答えるのではなく — <b>ツールで見て・直して・確認を繰り返します</b>（エージェントループ）。', setup:'ツール・指示・権限・文脈 — <b>「作業環境」をしっかり整えるほど</b> AI はうまくやります（ハーネス）。', context:'ここに乗ったものだけを Claude が覚えています。満杯になったら<b>「圧縮」で整理</b>します。', manage:'コンテキストを<b>放置すると遅く・高く・混乱します</b> — だからこまめに片づけます。', sessions:'<b>一つのセッションに一つの仕事</b> — 混ぜると混乱します。作業フォルダは狭く。', tokens:'トークン = AI が文章を読む単位。<b>長いほど空間・コストが増え</b>、日本語のほうが重い。', models:'賢さ ↔ 速さ ↔ コストはトレードオフ。<b>迷ったら Sonnet</b> で始めましょう。', claudemd:'<b>自分で書いておくルールのメモ</b> — 毎回の会話の始めに自動で適用されます。', memory:'<b>Claude が自分で学んで覚える</b>メモ。セッションをまたいで引き継がれます。', skills:'よく使う作業の手順を<b>一度作ってずっと再利用</b>します。', skillshare:'スキルを共有すると<b>自分だけのノウハウがチームの基礎</b>になります（再利用・一貫性）。', skillsec:'スキル・プラグインは<b>出所が信頼できるときだけ</b>・権限は狭く・内容は確認。', mcp:'<b>外部ツール(Jira・Figma など)につないで</b> Claude が直接使えるようにします。', plugins:'スキル・ツール・コマンドなどを<b>まとめて一度にインストール</b>する一式です。', agents:'大きな仕事を<b>専門のお手伝いに分けて任せ</b>、結果だけ受け取ります。', rpa:'RPA は決まったクリックを反復（壊れやすい）、AI エージェントは<b>意味を理解して適応</b>します。', images:'<b>スクリーンショットを貼れば</b> Claude が見て理解します — 言葉より速く正確。', remote:'自分の PC のセッションを<b>スマホ・ブラウザからそのまま操作</b> — コードは自分のコンピューターに（プレビュー）。', hooks:'特定の瞬間に<b>決まった動作が毎回自動</b>で実行されるルールです。', planmode:'直す前に<b>計画を先に見せて承認</b>を受けます — 大きな変更に安全。', permissions:'Claude が<b>どのくらい頻繁に聞くか</b>を決める設定。最初は安全に。', rewind:'リクエストごとに<b>自動保存</b> — 気に入らなければ以前へ巻き戻します。', privacy:'<b>業務用(Team·Enterprise·API)は基本的に学習に使われません。</b> 個人用は設定で選択。', commands:'<code class="inlinecode">/</code> で始まるショートカットコマンド。いちばんよく使うのは <b>/clear · /compact</b>。', plans:'<b>無料プランにはありません。</b> 有料(Pro·Max·Team)または API(従量制)で使用。', limits:'<b>使い切るとリセットまで待つ</b>必要があります — だから管理が大切です。', compact:'長く積み上がった会話が<b>短い要約 1 マス</b>に縮みます。', effort:'答える前に<b>どれだけ深く考えるか</b> — 深いほど正確ですが、遅く高くつきます。', goal:'<b>「完了条件」だけ与えれば、できるまで</b> Claude が自分で繰り返します。', loop:'<b>決めた間隔ごとに</b>同じ作業を自動でもう一度実行します。', workflows:'大きな仕事を<b>複数のお手伝いが同時に</b>処理するよう調整します（上級）。', routines:'決めておいた仕事を<b>クラウドで自動実行</b> — PC を消しても、スケジュール・GitHub・API 信号で（プレビュー）。', config:'<b>言語・テーマ・モデル・権限</b>のような設定を一か所で変えます。', doctor:'うまくいかないとき<b>インストール・設定を点検</b>して直す場所を教えてくれます。', glossary:'迷う用語を<b>一行で</b>素早く探す場所です。' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">一行まとめ</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -1725,8 +1932,8 @@ description: 週次レポートを会社の様式で作成
 
   /* difficulty mode — 초급/중급/고급 filter */
   var LV={ intro:1,cowork:1,usecases:1,where:1,ask:1,mention:1,keys:1,steer:1,howworks:1,context:1,manage:1,compact:1,sessions:1,models:1,claudemd:1,images:1,permissions:1,rewind:1,commands:1,glossary:1,
-    tokens:2,effort:2,memory:2,skills:2,planmode:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
-    mcp:3,plugins:3,agents:3,hooks:3,goal:3,loop:3,workflows:3 };
+    tokens:2,effort:2,setup:2,memory:2,skills:2,skillshare:2,skillsec:2,rpa:2,remote:2,planmode:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
+    mcp:3,plugins:3,agents:3,hooks:3,goal:3,loop:3,workflows:3,routines:3 };
   (function(){ var chips=document.querySelectorAll('#lvlsel .lvlchip'); if(!chips.length) return; var origNo={}; navs.forEach(function(n){ var no=n.querySelector('.no'); if(no) origNo[n.dataset.page]=no.textContent; });
     function setLevel(lv){ chips.forEach(function(c){ c.classList.toggle('on',+c.dataset.lv===lv); }); var k=0;
       navs.forEach(function(n){ var show= lv===0 || LV[n.dataset.page]===lv; n.style.display=show?'':'none'; if(show){ var no=n.querySelector('.no'); if(no) no.textContent= ('0'+(++k)).slice(-2); } });
@@ -2267,6 +2474,74 @@ description: 週次レポートを会社の様式で作成
     document.getElementById('hw-go').addEventListener('click',play);
     document.getElementById('hw-reset').addEventListener('click',function(){ T.forEach(clearTimeout); T=[]; render(); ST.textContent='ボタンを押すと一段階ずつ進みます。'; });
     render();
+  })();
+
+  /* rpa vs ai agent */
+  (function(){
+    var A=document.getElementById('rpa-a'),B=document.getElementById('rpa-b'),ST=document.getElementById('rpa-status'); if(!A) return; var T=[];
+    var RUN={ a:[['·','覚えた位置をクリック：金額欄（3番目）'],['·','日付欄（5番目）に入力'],['✓','100枚 反復 → 完了']],
+      b:[['·','請求書から「金額・日付」の意味を理解'],['·','各枚で自分で見つけて入力'],['✓','100枚 → 完了']],
+      s:'どちらもうまくいきます — 普段（様式そのまま）では違いが見えにくいです。' };
+    var CHG={ a:[['·','覚えた位置（3番目）をクリック…'],['✗','そこには金額がありません（欄がずれた）'],['✗','止まって人を呼びます — 録画し直しが必要']],
+      b:[['·','「金額」がどこへ行ったか画面で探す'],['·','変わった位置から自分で読んで入力'],['✓','100枚 → 完了（人を呼ばなくて済む）']],
+      s:'様式が変わると RPA は止まりましたが、AI は自分で適応しました。' };
+    function render(d){ T.forEach(clearTimeout); T=[]; A.innerHTML=''; B.innerHTML=''; ST.textContent='';
+      function fill(box,steps){ steps.forEach(function(s,i){ T.push(setTimeout(function(){ var r=document.createElement('div'); r.className='rpastep'+(s[0]==='✓'?' ok':(s[0]==='✗'?' bad':'')); r.innerHTML='<span class="rk">'+s[0]+'</span><span>'+s[1]+'</span>'; box.appendChild(r); },300+i*640)); }); }
+      fill(A,d.a); fill(B,d.b); T.push(setTimeout(function(){ ST.textContent=d.s; },300+3*640)); }
+    document.getElementById('rpa-run').addEventListener('click',function(){ render(RUN); });
+    document.getElementById('rpa-change').addEventListener('click',function(){ render(CHG); });
+    document.getElementById('rpa-reset').addEventListener('click',function(){ T.forEach(clearTimeout); T=[]; A.innerHTML=''; B.innerHTML=''; ST.textContent='ボタンを押して、同じ業務を両方にやらせてみてください。'; });
+  })();
+
+  /* skill share + skill security selectors */
+  (function(){
+    function sel(chipsId,boxId,D,first){ var box=document.getElementById(boxId); if(!box) return; function show(k){ var d=D[k]; box.innerHTML='<div class="cxh">'+d.t+'</div>'+d.d; } document.querySelectorAll('#'+chipsId+' .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#'+chipsId+' .chip').forEach(function(x){x.classList.toggle('on',x===c);}); show(c.dataset.k); }); }); show(first); }
+    sel('ss-chips','ss-box',{ reuse:{t:'再利用',d:'同じ指示を毎回コピペする必要なく — <b>一度作って何度も</b>使えます。<code>/デプロイ</code> の一言で完了。'},
+      team:{t:'チームの一貫性',d:'全員が <b>同じ手順</b>で働きます — デプロイ・レビュー・テストのやり方が人によって変わりません。'},
+      know:{t:'ノウハウを込める',d:'チームの <b>専門性をスキルにカプセル化</b> — 新しく来た人も最初から best practice に従えます。'},
+      auto:{t:'自動認識',d:'関連する状況になると、クロードが <b>自分から「このスキルを使いますか？」</b>と提案します。コマンドを覚える必要がありません。'},
+      space:{t:'スペース効率',d:'説明は常に表示されますが <b>本文は使うときだけ</b>展開されます — 長い参考資料がコンテキストを先に消費しません。'} },'reuse');
+    sel('sc-chips','sc-box',{ src:{t:'出所の信頼',d:'誰が作ったか？ <b>信頼できる提供者</b>か？ Anthropic が審査してくれるわけではありません — 知らないところのものは慎重に。'},
+      perm:{t:'権限の範囲',d:'スキルが <code>allowed-tools: Bash(*)</code>（すべてのコマンドを自動許可）のように <b>広い権限</b>を求めたら赤信号。<code>Bash(npm test)</code> のように狭いほうが安全。'},
+      read:{t:'内容の確認',d:'インストール前に <b>スキルの内容を一度読んでみてください</b> — 何を、どんなツールでやろうとしているか。プロジェクトスキルは信頼の承認後に読み込まれます。'},
+      inj:{t:'おかしな指示（プロンプトインジェクション）',d:'エラーログ・ウェブの内容のような <b>外部のテキストに「こうして」といった指示が隠れて</b>、クロードを操ろうとすることがあります。クロードコードには防御の仕組みがありますが、出所の信頼が優先です。'} },'src');
+  })();
+
+  /* setup components selector */
+  (function(){
+    var box=document.getElementById('su-box'); if(!box) return;
+    var D={ tool:{t:'ツール',d:'AI が <b>できること</b> — ファイルの読み書き・修正、コマンド実行、検索、外部サービスの呼び出し。ツールがなければ言葉だけ、ツールがあれば自分でやり遂げます。'},
+      inst:{t:'指示',d:'AI に与える <b>ルール・案内</b> — <code>CLAUDE.md</code> に「常に日本語で」「テスト優先」などを書いておけば、毎回言わなくても従います。'},
+      perm:{t:'権限',d:'AI が <b>どこまで自分で</b>やるか — 毎回確認させる（安全）↔ よくやることは自分で（速い）。中間を選べます。'},
+      ctx:{t:'文脈',d:'AI が <b>今見ているもの</b> — 自分のコード、会話の内容、記憶（メモ）。限られたスペース（コンテキストウィンドウ）なので、要点だけ渡すのが良いです。'},
+      ext:{t:'拡張',d:'<b>能力を足すもの</b> — スキル（作業指示書）・MCP（外部ツール連携）・フック（自動ルール）・サブエージェント（仕事を分けて任せる）。'} };
+    function show(k){ var d=D[k]; box.innerHTML='<div class="cxh">'+d.t+'</div>'+d.d; }
+    document.querySelectorAll('#su-chips .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#su-chips .chip').forEach(function(x){x.classList.toggle('on',x===c);}); show(c.dataset.k); }); });
+    show('tool');
+  })();
+
+  /* remote control connect flow */
+  (function(){
+    var box=document.getElementById('rm-flow'),ST=document.getElementById('rm-status'); if(!box) return; var T=[];
+    var STEPS=[['1','自分の PC のクロードで <code>/remote-control</code> を入力 → リンク・QR コードが表示されます'],
+      ['2','スマホで QR を読み取るかリンクを開きます'],
+      ['3','スマホの画面に <b>自分の PC のクロードがそのまま</b>表示されます'],
+      ['4','メッセージを送り・承認して方向を示します — <b>仕事は自分の PC が</b>します']];
+    function run(){ T.forEach(clearTimeout); T=[]; box.innerHTML=''; ST.textContent='スマホに接続中…';
+      STEPS.forEach(function(p,i){ T.push(setTimeout(function(){ var r=document.createElement('div'); r.className='chk y'; r.innerHTML='<span class="cx">'+p[0]+'</span><span>'+p[1]+'</span>'; box.appendChild(r); if(i===STEPS.length-1) ST.textContent='接続できました — これでどこからでもスマホで自分の PC のクロードを操作できます。'; },300+i*760)); }); }
+    document.getElementById('rm-go').addEventListener('click',run);
+    document.getElementById('rm-reset').addEventListener('click',function(){ T.forEach(clearTimeout); T=[]; box.innerHTML=''; ST.textContent='ボタンを押すと、スマホに接続される過程をお見せします。'; });
+  })();
+
+  /* routines trigger selector */
+  (function(){
+    var box=document.getElementById('rt-box'); if(!box) return;
+    var D={ time:{when:'毎朝9時 · 毎週月曜 · 特定の時刻（最低1時間間隔）',ex:'夜間にたまった新しいバグを分類・ラベル付けして、朝にスラックで一目でわかる要約を送ります。'},
+      git:{when:'PR が開かれたりリリースが出るとき（GitHub イベント）',ex:'新しい PR が開かれると自動でコードレビューのコメントを付け、チェックリストを確認します。'},
+      api:{when:'外部システムが信号（HTTP）を送るとき',ex:'サーバーの警報が来たら関連するコミットを探し、仮の修正 PR の下書きを作っておきます。'} };
+    function show(t){ var d=D[t]; box.innerHTML='<div class="cxh">いつ実行されるか</div>'+d.when+'<div class="cxh" style="margin-top:11px;">こんな仕事をしておきます</div>'+d.ex; }
+    document.querySelectorAll('#rt-chips .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#rt-chips .chip').forEach(function(x){x.classList.toggle('on',x===c);}); show(c.dataset.t); }); });
+    show('time');
   })();
 
   /* plugins — bundle install demo */

@@ -1,0 +1,282 @@
+- generic [ref=e2]:
+  - navigation [ref=e3]:
+    - generic [ref=e4]:
+      - button "라이트/다크 전환" [ref=e5] [cursor=pointer]:
+        - img [ref=e6]
+      - button "확장 모드" [ref=e9] [cursor=pointer]:
+        - generic [ref=e11]: 확장 모드
+    - combobox "언어 선택 / Language" [ref=e12] [cursor=pointer]:
+      - option "한국어" [selected]
+      - option "English"
+      - option "中文"
+      - option "日本語"
+    - generic [ref=e13]:
+      - text: 클로드 코드 기초
+      - generic [ref=e14]: 비개발자를 위한 안내
+    - group "난이도 선택" [ref=e15]:
+      - button "전체" [ref=e16] [cursor=pointer]
+      - button "초급" [ref=e17] [cursor=pointer]
+      - button "중급" [ref=e18] [cursor=pointer]
+      - button "고급" [ref=e19] [cursor=pointer]
+    - generic [ref=e20]: 시작하기
+    - button "01 클로드 코드란?" [ref=e21] [cursor=pointer]:
+      - img [ref=e22]
+      - generic [ref=e24]: "01"
+      - generic [ref=e25]: 클로드 코드란?
+    - button "02 COWORK란?" [ref=e26] [cursor=pointer]:
+      - img [ref=e27]
+      - generic [ref=e30]: "02"
+      - generic [ref=e31]: COWORK란?
+    - button "03 이렇게 써요" [ref=e32] [cursor=pointer]:
+      - img [ref=e33]
+      - generic [ref=e36]: "03"
+      - generic [ref=e37]: 이렇게 써요
+    - button "04 어디서 쓰나" [ref=e38] [cursor=pointer]:
+      - img [ref=e39]
+      - generic [ref=e42]: "04"
+      - generic [ref=e43]: 어디서 쓰나
+    - generic [ref=e44]: 기본 사용법 (직접 해보기)
+    - button "05 요청 잘 쓰기" [ref=e45] [cursor=pointer]:
+      - img [ref=e46]
+      - generic [ref=e49]: "05"
+      - generic [ref=e50]: 요청 잘 쓰기
+    - button "06 파일 가리키기 @" [ref=e51] [cursor=pointer]:
+      - img [ref=e52]
+      - generic [ref=e55]: "06"
+      - generic [ref=e56]: 파일 가리키기 @
+    - button "07 단축키 & 모드" [ref=e57] [cursor=pointer]:
+      - img [ref=e58]
+      - generic [ref=e61]: "07"
+      - generic [ref=e62]: 단축키 & 모드
+    - button "08 멈추고 방향 바꾸기" [ref=e63] [cursor=pointer]:
+      - img [ref=e64]
+      - generic [ref=e67]: "08"
+      - generic [ref=e68]: 멈추고 방향 바꾸기
+    - generic [ref=e69]: 기초 개념
+    - button "09 작동 원리 (어떻게 일하나)" [ref=e70] [cursor=pointer]:
+      - img [ref=e71]
+      - generic [ref=e74]: "09"
+      - generic [ref=e75]: 작동 원리 (어떻게 일하나)
+    - button "10 컨텍스트 창" [ref=e76] [cursor=pointer]:
+      - img [ref=e77]
+      - generic [ref=e81]: "10"
+      - generic [ref=e82]: 컨텍스트 창
+    - button "11 맥락 관리 (왜?)" [ref=e83] [cursor=pointer]:
+      - img [ref=e84]
+      - generic [ref=e88]: "11"
+      - generic [ref=e89]: 맥락 관리 (왜?)
+    - button "12 압축 (compact)" [ref=e90] [cursor=pointer]:
+      - img [ref=e91]
+      - generic [ref=e93]: "12"
+      - generic [ref=e94]: 압축 (compact)
+    - button "13 세션 & 폴더" [ref=e95] [cursor=pointer]:
+      - img [ref=e96]
+      - generic [ref=e98]: "13"
+      - generic [ref=e99]: 세션 & 폴더
+    - button "14 토큰" [ref=e100] [cursor=pointer]:
+      - img [ref=e101]
+      - generic [ref=e106]: "14"
+      - generic [ref=e107]: 토큰
+    - button "15 모델 고르기 (model)" [ref=e108] [cursor=pointer]:
+      - img [ref=e109]
+      - generic [ref=e114]: "15"
+      - generic [ref=e115]: 모델 고르기 (model)
+    - button "16 생각의 깊이 (effort)" [ref=e116] [cursor=pointer]:
+      - img [ref=e117]
+      - generic [ref=e121]: "16"
+      - generic [ref=e122]: 생각의 깊이 (effort)
+    - generic [ref=e123]: 기억과 규칙
+    - button "17 CLAUDE.md" [ref=e124] [cursor=pointer]:
+      - img [ref=e125]
+      - generic [ref=e128]: "17"
+      - generic [ref=e129]: CLAUDE.md
+    - button "18 메모리" [ref=e130] [cursor=pointer]:
+      - img [ref=e131]
+      - generic [ref=e135]: "18"
+      - generic [ref=e136]: 메모리
+    - button "19 스킬" [ref=e137] [cursor=pointer]:
+      - img [ref=e138]
+      - generic [ref=e140]: "19"
+      - generic [ref=e141]: 스킬
+    - generic [ref=e142]: 능력 확장
+    - button "20 MCP (도구 연결)" [ref=e143] [cursor=pointer]:
+      - img [ref=e144]
+      - generic [ref=e149]: "20"
+      - generic [ref=e150]: MCP (도구 연결)
+    - button "21 플러그인" [ref=e151] [cursor=pointer]:
+      - img [ref=e152]
+      - generic [ref=e155]: "21"
+      - generic [ref=e156]: 플러그인
+    - button "22 서브에이전트" [ref=e157] [cursor=pointer]:
+      - img [ref=e158]
+      - generic [ref=e162]: "22"
+      - generic [ref=e163]: 서브에이전트
+    - button "23 이미지 붙여넣기" [ref=e164] [cursor=pointer]:
+      - img [ref=e165]
+      - generic [ref=e169]: "23"
+      - generic [ref=e170]: 이미지 붙여넣기
+    - button "24 자동화 (훅)" [ref=e171] [cursor=pointer]:
+      - img [ref=e172]
+      - generic [ref=e174]: "24"
+      - generic [ref=e175]: 자동화 (훅)
+    - generic [ref=e176]: 자동·반복
+    - button "25 목표 달성 (goal)" [ref=e177] [cursor=pointer]:
+      - img [ref=e178]
+      - generic [ref=e182]: "25"
+      - generic [ref=e183]: 목표 달성 (goal)
+    - button "26 반복 실행 (loop)" [ref=e184] [cursor=pointer]:
+      - img [ref=e185]
+      - generic [ref=e189]: "26"
+      - generic [ref=e190]: 반복 실행 (loop)
+    - button "27 워크플로 (workflows)" [ref=e191] [cursor=pointer]:
+      - img [ref=e192]
+      - generic [ref=e197]: "27"
+      - generic [ref=e198]: 워크플로 (workflows)
+    - generic [ref=e199]: 안전하게
+    - button "28 계획 모드" [ref=e200] [cursor=pointer]:
+      - img [ref=e201]
+      - generic [ref=e205]: "28"
+      - generic [ref=e206]: 계획 모드
+    - button "29 권한 모드" [ref=e207] [cursor=pointer]:
+      - img [ref=e208]
+      - generic [ref=e210]: "29"
+      - generic [ref=e211]: 권한 모드
+    - button "30 되돌리기" [ref=e212] [cursor=pointer]:
+      - img [ref=e213]
+      - generic [ref=e216]: "30"
+      - generic [ref=e217]: 되돌리기
+    - button "31 데이터 & 프라이버시" [ref=e218] [cursor=pointer]:
+      - img [ref=e219]
+      - generic [ref=e222]: "31"
+      - generic [ref=e223]: 데이터 & 프라이버시
+    - generic [ref=e224]: 실전
+    - button "32 슬래시 명령" [ref=e225] [cursor=pointer]:
+      - img [ref=e226]
+      - generic [ref=e229]: "32"
+      - generic [ref=e230]: 슬래시 명령
+    - button "33 설정 (config)" [ref=e231] [cursor=pointer]:
+      - img [ref=e232]
+      - generic [ref=e236]: "33"
+      - generic [ref=e237]: 설정 (config)
+    - button "34 진단 (doctor)" [ref=e238] [cursor=pointer]:
+      - img [ref=e239]
+      - generic [ref=e242]: "34"
+      - generic [ref=e243]: 진단 (doctor)
+    - button "35 요금제" [ref=e244] [cursor=pointer]:
+      - img [ref=e245]
+      - generic [ref=e247]: "35"
+      - generic [ref=e248]: 요금제
+    - button "36 사용 한도" [ref=e249] [cursor=pointer]:
+      - img [ref=e250]
+      - generic [ref=e252]: "36"
+      - generic [ref=e253]: 사용 한도
+    - button "37 용어 사전" [ref=e254] [cursor=pointer]:
+      - img [ref=e255]
+      - generic [ref=e258]: "37"
+      - generic [ref=e259]: 용어 사전
+  - main [ref=e260]:
+    - generic [ref=e261]:
+      - button "발표 모드" [ref=e262] [cursor=pointer]
+      - generic [ref=e263]:
+        - heading "클로드 코드란?" [level=1] [ref=e264]
+        - paragraph [ref=e265]: 코드를 직접 쓰지 않아도, 평소 말로 부탁하면 파일을 읽고 고치고 실행해 주는 AI 도구예요.
+        - paragraph [ref=e266]: 평소 쓰던 챗(ChatGPT·클로드 챗)과 뭐가 다른지부터 눈으로 비교해 볼게요.
+        - generic [ref=e267]:
+          - generic [ref=e268]: 한 줄 요약
+          - generic [ref=e269]: 챗은 ‘답’을 주고, 클로드 코드는 내 프로젝트에서 직접 만들어 작동까지 시켜요.
+        - paragraph [ref=e270]: 챗 vs 클로드 코드 같은 부탁 — 눌러보세요
+        - generic [ref=e271]:
+          - button "차이 보기 ▶" [ref=e272] [cursor=pointer]
+          - button "반복" [ref=e273] [cursor=pointer]:
+            - img [ref=e274]
+            - generic [ref=e279]: 반복
+        - generic [ref=e280]:
+          - generic [ref=e281]:
+            - heading "클로드 챗 조언·코드 조각" [level=4] [ref=e282]:
+              - text: 클로드 챗
+              - generic [ref=e283]: 조언·코드 조각
+            - generic [ref=e284]: 우리 홈페이지에 예약 기능 추가해줘
+            - generic [ref=e285]: 버튼을 누르면 답이 나와요.
+          - generic [ref=e286]:
+            - heading "클로드 코드 작동하는 결과물" [level=4] [ref=e287]:
+              - text: 클로드 코드
+              - generic [ref=e288]: 작동하는 결과물
+            - generic [ref=e289]: 우리 홈페이지에 예약 기능 추가해줘
+            - generic [ref=e292]: 버튼을 누르면 만드는 과정이 나와요.
+        - paragraph [ref=e293]:
+          - generic [ref=e294]: 결론
+          - generic [ref=e295]: 챗은 방법·코드 조각을 보여주고 — 클로드 코드는 작동하는 결과물까지 직접 만들어요.
+        - paragraph [ref=e296]: 핵심은 ‘답을 해주느냐’가 아니라 내 프로젝트에서 실제로 만들어 작동까지 시키느냐예요. 요즘 챗도 글·코드를 고쳐주지만 그건 ‘채팅 안에서 보여주는 것’ — 여러 파일을 직접 만들고, 연결하고, 실행해서 ‘작동하는 결과물’을 완성하는 게 클로드 코드예요. (둘 다 같은 클로드 모델을 써요.)
+        - generic [ref=e297]:
+          - heading "클로드 코드가 할 수 있는 것" [level=3] [ref=e298]
+          - generic [ref=e299]:
+            - generic [ref=e300]:
+              - generic [ref=e301]: 말로 시키기
+              - generic [ref=e302]: 코드를 몰라도 평소 말로 부탁.
+              - generic [ref=e303]: 예 “이 버튼 색 파란색으로”
+            - generic [ref=e304]:
+              - generic [ref=e305]: 파일 읽고 고치기
+              - generic [ref=e306]: 직접 파일을 열어 수정·저장.
+              - generic [ref=e307]: 예 “소개 페이지 오타 고쳐줘”
+            - generic [ref=e308]:
+              - generic [ref=e309]: 명령 대신 실행
+              - generic [ref=e310]: 설치·테스트·실행을 대신.
+              - generic [ref=e311]: 예 “테스트 돌려서 알려줘”
+            - generic [ref=e312]:
+              - generic [ref=e313]: 외부 도구 연결
+              - generic [ref=e314]: 지라·피그마 등과 연동 (MCP).
+              - generic [ref=e315]: 예 “이 피그마대로 만들어”
+        - generic [ref=e316]:
+          - heading "꼭 개발자만 쓰는 게 아니에요 — 이런 일에도" [level=3] [ref=e317]
+          - generic [ref=e318]:
+            - generic [ref=e319]:
+              - generic [ref=e320]: 엑셀·표 정리
+              - generic [ref=e321]: 뒤죽박죽인 표를 보기 좋게 정리·합치기.
+              - generic [ref=e322]: 예 “이 엑셀 날짜순으로 정리해줘”
+            - generic [ref=e323]:
+              - generic [ref=e324]: 명단에서 찾기
+              - generic [ref=e325]: 조건에 맞는 사람·항목만 뽑기.
+              - generic [ref=e326]: 예 “고객 명단에서 이번 달 만기인 분만”
+            - generic [ref=e327]:
+              - generic [ref=e328]: 문서 다듬기
+              - generic [ref=e329]: 오타·문구·번역을 한 번에.
+              - generic [ref=e330]: 예 “이 안내문 오타 찾아 고쳐줘”
+            - generic [ref=e331]:
+              - generic [ref=e332]: 파일 정리
+              - generic [ref=e333]: 파일 이름·폴더를 규칙대로 정돈.
+              - generic [ref=e334]: 예 “영상 파일 날짜_제목으로 이름 바꿔줘”
+        - generic [ref=e335]:
+          - generic [ref=e336]: 참고
+          - generic [ref=e337]: 이 가이드는 개념을 배우는 곳이에요 — 설치·시작 방법은 다루지 않아요(그건 공식 문서에서 안내해요). 그리고 비공식 학습 자료라 Anthropic과는 무관해요.
+        - paragraph [ref=e338]:
+          - text: 왼쪽 메뉴(좁은 화면에선 위쪽 ☰ 메뉴)에서 32개 주제를 눌러 이동하세요. 전부 직접 안 써봐도 버튼·입력으로 이해되게 만들었어요. 본문에
+          - button "점선 친 단어 이렇게 점선이 그어진 단어는 마우스를 올리거나(PC) 한 번 탭하면(폰·태블릿) 뜻이 떠요." [ref=e339]
+          - text: 는 올리거나 탭하면 뜻이 떠요.
+      - text: 컴퓨터에 글자(명령어)로 지시하는 까만 입력 창. ‘명령줄’이라고도 해요. › › › Model Context Protocol — 클로드가 외부 도구·데이터와 주고받는 공통 규칙(표준) ›
+      - generic [ref=e340]:
+        - button "← 이전" [disabled] [ref=e341]
+        - generic [ref=e342]:
+          - generic [ref=e343]: 1 / 37
+          - generic [ref=e344]: 클로드 코드란?
+        - button "다음 →" [ref=e345] [cursor=pointer]
+      - generic [ref=e346]:
+        - generic [ref=e347]: 만든이 · 최진안 (stark)
+        - generic [ref=e348]:
+          - link "GitHub" [ref=e349] [cursor=pointer]:
+            - /url: https://github.com/wlsdks
+          - text: ·
+          - link "LinkedIn" [ref=e350] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/WriteDev
+          - text: ·
+          - link "Blog" [ref=e351] [cursor=pointer]:
+            - /url: https://curiousjinan.tistory.com/
+          - text: ·
+          - link "Email" [ref=e352] [cursor=pointer]:
+            - /url: mailto:dig04059@gmail.com
+          - text: — 문의는 이메일이나 LinkedIn DM으로 주세요
+        - generic [ref=e353]: 비공식 학습 자료예요 — Anthropic과 무관하며, “Claude·Claude Code·Anthropic”은 Anthropic Inc.의 상표입니다.
+        - generic [ref=e354]:
+          - text: 가장 정확한 정보는
+          - link "공식 문서" [ref=e355] [cursor=pointer]:
+            - /url: https://code.claude.com/docs
+          - text: 를 확인하세요.

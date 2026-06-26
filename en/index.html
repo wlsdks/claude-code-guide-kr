@@ -177,6 +177,18 @@
   .cwba-d{ font-size:12px; color:var(--muted); margin-top:3px; }
   .cwba-arrow{ align-self:center; color:var(--faint); font-size:18px; flex:0 0 auto; }
   .cwba-note{ font-size:12.5px; color:var(--muted); margin-top:9px; line-height:1.6; }
+  .cwba-kd{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; }
+  .cwba-kdc{ border:1px solid var(--line2); border-radius:11px; padding:12px 14px; }
+  .cwba-kdc.keep{ border-color:rgba(31,158,118,.34); background:rgba(31,158,118,.06); }
+  .cwba-kdc.drop{ background:var(--row); }
+  .cwba-kdh{ font-size:13px; font-weight:600; margin-bottom:9px; display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+  .cwba-kdc.keep .cwba-kdh{ color:var(--good); } .cwba-kdc.drop .cwba-kdh{ color:var(--muted); }
+  .cwba-kdh span{ font-size:10px; font-weight:600; color:var(--faint); text-transform:uppercase; letter-spacing:.4px; }
+  .cwba-kdi{ font-size:12.5px; color:var(--ink); padding:6px 0; border-top:1px solid var(--line); line-height:1.5; }
+  .cwba-kdi:first-of-type{ border-top:none; padding-top:0; }
+  .cwba-kdex{ color:var(--faint); font-size:11.5px; }
+  .cwba-kdnote{ font-size:12.5px; color:var(--muted); margin:11px 0 0; line-height:1.6; }
+  @media(max-width:680px){ .cwba-kd{ grid-template-columns:1fr; } }
   @media (max-width:560px){ .cwba-row{ flex-direction:column; } .cwba-arrow{ transform:rotate(90deg); } }
   /* cowork */
   .cwapp{ border:1px solid var(--line2); border-radius:14px; background:var(--panel); overflow:hidden; box-shadow:var(--shadow); }
@@ -244,6 +256,11 @@
   .fstep .fperm{ display:inline-block; margin-top:5px; font-size:12px; color:#b9821a; border:1px solid rgba(214,158,46,.5); background:rgba(214,158,46,.1); border-radius:6px; padding:1px 9px; }
   .floop{ align-self:center; font-size:12.5px; font-weight:600; color:var(--accent); border:1px dashed var(--accent); border-radius:20px; padding:6px 15px; opacity:0; transform:translateY(5px); transition:opacity .35s,transform .35s; text-align:center; }
   .floop.on{ opacity:1; transform:none; }
+  /* RPA vs AI steps */
+  .rpastep{ display:flex; gap:8px; align-items:flex-start; padding:6px 0; font-size:13px; color:var(--ink); line-height:1.45; }
+  .rpastep .rk{ flex:0 0 auto; width:15px; text-align:center; color:var(--faint); font-weight:700; }
+  .rpastep.ok .rk{ color:var(--good); } .rpastep.ok{ color:var(--ink); }
+  .rpastep.bad .rk{ color:var(--over); } .rpastep.bad{ color:var(--over); }
   /* page presentation (slide) mode */
   .p2open{ position:fixed; top:16px; right:22px; z-index:60; font-size:13px; font-weight:500; color:var(--ink); background:var(--bg); border:1px solid var(--line2); border-radius:8px; padding:8px 14px; cursor:pointer; box-shadow:0 1px 5px rgba(0,0,0,.06); transition:border-color .2s; }
   .p2open:hover{ border-color:var(--accent); }
@@ -255,6 +272,7 @@
   .present2 .p2sp{ flex:1; }
   .present2 .p2nav{ font-size:13px; font-weight:500; color:var(--ink); background:var(--bg); border:1px solid var(--line2); border-radius:8px; padding:7px 14px; cursor:pointer; transition:border-color .2s; }
   .present2 .p2nav:hover{ border-color:var(--accent); } .present2 .p2nav:disabled{ opacity:.4; cursor:default; }
+  .present2 .p2nav.on{ background:var(--ink); color:var(--bg); border-color:var(--ink); font-weight:600; }
   .present2 .p2x{ border:none; background:none; font-size:18px; color:var(--muted); cursor:pointer; line-height:1; padding:4px 8px; }
   .present2 .p2stage{ flex:1; overflow:auto; display:flex; flex-direction:column; align-items:center; justify-content:safe center; padding:48px 32px; box-sizing:border-box; }
   .present2 .p2inner{ width:100%; max-width:860px; transition:opacity .22s; }
@@ -504,6 +522,7 @@
     <button class="navitem" data-page="steer"><span class="no">08</span>Stop & redirect</button>
     <div class="navsec">Basic concepts</div>
     <button class="navitem" data-page="howworks"><span class="no">09</span>How it works (the loop)</button>
+    <button class="navitem" data-page="setup"><span class="no">10</span>AI's work setup</button>
     <button class="navitem" data-page="context"><span class="no">05</span>Context window</button>
     <button class="navitem" data-page="manage"><span class="no">06</span>Managing context (why?)</button>
     <button class="navitem" data-page="compact"><span class="no">07</span>Compacting</button>
@@ -515,16 +534,21 @@
     <button class="navitem" data-page="claudemd"><span class="no">12</span>CLAUDE.md</button>
     <button class="navitem" data-page="memory"><span class="no">13</span>Memory</button>
     <button class="navitem" data-page="skills"><span class="no">14</span>Skills</button>
+    <button class="navitem" data-page="skillshare"><span class="no">15</span>Why share skills</button>
+    <button class="navitem" data-page="skillsec"><span class="no">16</span>Using skills safely</button>
     <div class="navsec">Expanding abilities</div>
     <button class="navitem" data-page="mcp"><span class="no">15</span>MCP (tool connections)</button>
     <button class="navitem" data-page="plugins"><span class="no">16</span>Plugins</button>
     <button class="navitem" data-page="agents"><span class="no">17</span>Subagents</button>
-    <button class="navitem" data-page="images"><span class="no">18</span>Pasting images</button>
+    <button class="navitem" data-page="rpa"><span class="no">18</span>RPA vs AI agents</button>
+    <button class="navitem" data-page="images"><span class="no">19</span>Pasting images</button>
+    <button class="navitem" data-page="remote"><span class="no">20</span>Remote control</button>
     <button class="navitem" data-page="hooks"><span class="no">19</span>Automation (hooks)</button>
     <div class="navsec">Automate & repeat</div>
     <button class="navitem" data-page="goal"><span class="no">20</span>Goals (goal)</button>
     <button class="navitem" data-page="loop"><span class="no">21</span>Repeat (loop)</button>
     <button class="navitem" data-page="workflows"><span class="no">22</span>Workflows</button>
+    <button class="navitem" data-page="routines"><span class="no">23</span>Routines (auto-run)</button>
     <div class="navsec">Staying safe</div>
     <button class="navitem" data-page="planmode"><span class="no">23</span>Plan mode</button>
     <button class="navitem" data-page="permissions"><span class="no">24</span>Permission modes</button>
@@ -805,6 +829,26 @@ irm https://claude.ai/install.ps1 | iex</div>
       <p class="note">This 'look around → act → check → repeat' flow is called the <b>agentic loop</b>. When it edits a file or runs a command along the way, it usually <b>asks first</b> (permissions). (Source: code.claude.com/docs — How Claude Code works)</p>
     </section>
 
+    <section class="page" id="setup">
+      <h1>AI's work environment — what you hand it</h1>
+      <p class="lead">Even the same Claude gives very different results depending on <b>what you hand it</b>. <b>Tools, instructions, permissions, context</b> — the better you set up this 'work environment,' the better it does on its own.</p>
+      <p class="defs">Experts often call this <b>'the harness'</b> or <b>'context engineering.'</b> It sounds hard, but it really just means <b>setting up the environment so the AI works well</b>. Press the five items below.</p>
+      <p class="anlg"><span class="ak">Analogy</span><span>Like <b>calling a repair technician to your home</b> — you hand over the tools they'll need, jot down the house's quirks and your preferences, decide how far they may go, and pass along earlier notes — and they get it done with ease. The AI is the same.</span></p>
+      <div class="grp">
+        <h3>The 5 things you hand the AI — press one</h3>
+        <div class="chips" id="su-chips" style="margin:4px 0 14px;">
+          <button class="chip on" data-k="tool">Tools</button>
+          <button class="chip" data-k="inst">Instructions</button>
+          <button class="chip" data-k="perm">Permissions</button>
+          <button class="chip" data-k="ctx">Context</button>
+          <button class="chip" data-k="ext">Extensions</button>
+        </div>
+        <div class="cxsummary" id="su-box"></div>
+        <p class="simtake"><span class="stk">Takeaway</span><span>It's not just the model that decides the result — <b>set up tools, instructions, permissions, and context well</b> and the same AI does far better. (That's what it means to build a good 'harness.')</span></p>
+      </div>
+      <p class="note">Most of this <b>Claude Code sets up for you</b> — we just need to know 'what extra to give it to make it better' (e.g. write rules in <code>CLAUDE.md</code>, point at files with <code>@</code>). (Source: code.claude.com/docs — how-claude-code-works · context-window · memory, as of June 2026)</p>
+    </section>
+
     <!-- 03 CONTEXT -->
     <section class="page" id="context">
       <h1>Context window</h1>
@@ -842,10 +886,19 @@ irm https://claude.ai/install.ps1 | iex</div>
           <div class="cwba-card hl"><div class="cwba-k">After compaction</div><div class="cwba-v" id="cwba-post">—</div><div class="cwba-d">Just the essentials in 'one summary block'</div></div>
         </div>
         <div class="cwba-note" id="cwba-note"></div>
-      </div>
-      <div class="cmp">
-        <div class="cmpcard"><h4>What stays</h4><div class="who">Kept in the summary</div><div class="cmprow">Your request and intent</div><div class="cmprow">The list of files read or edited, and the key code</div><div class="cmprow">Errors, how they were solved, and remaining to-dos</div></div>
-        <div class="cmpcard"><h4>What goes away</h4><div class="who">To save room</div><div class="cmprow">Long command output (terminal results)</div><div class="cmprow">Wordy explanations of intermediate steps</div><div class="cmprow">Repeated content</div></div>
+        <div class="cwba-kd">
+          <div class="cwba-kdc keep"><div class="cwba-kdh">What stays <span>essential · always needed</span></div>
+            <div class="cwba-kdi">System guidance · tool list · memory (CLAUDE.md)</div>
+            <div class="cwba-kdi">Your recent request · the rules you set · the list of file names</div>
+            <div class="cwba-kdi">A 'one summary block' of what's been done so far<br><span class="cwba-kdex">e.g. "Tidied 32 duplicates out of 800 names on the event list and sorted by date."</span></div>
+          </div>
+          <div class="cwba-kdc drop"><div class="cwba-kdh">What goes away <span>to save room</span></div>
+            <div class="cwba-kdi">Old conversation messages (stale questions and answers)</div>
+            <div class="cwba-kdi">Long tool results (full search and file contents, table previews)</div>
+            <div class="cwba-kdi">Wordy explanations of intermediate steps<br><span class="cwba-kdex">e.g. the full 800-line list of duplicate names</span></div>
+          </div>
+        </div>
+        <p class="cwba-kdnote">→ So even after compaction, <b>'what was done and how' carries on.</b> If a discarded detail (e.g. the full list of names) is needed again, Claude <b>reads that file again.</b></p>
       </div>
       <p class="note"><b>When does it start?</b> It kicks in automatically when the context window is <b>nearly full (close to the limit)</b>. The exact % threshold isn't officially published (it just says "as it nears the limit"). After compacting, system instructions, CLAUDE.md, memory, and MCP tools are reloaded automatically, but the <b>skill list</b> shown at first isn't refilled — only the 'skills already used' remain. Manual <code>/compact</code> works the same way. (Source: official docs, as of June 2026.)</p>
     </section>
@@ -1050,6 +1103,58 @@ description: Write the weekly report in the company format
       <p class="note">Invoke it: call it directly like <code>/weekly-report</code>, or for related tasks Claude applies it on its own. Pre-made skills can also be installed as <b>plugins</b> (the 'Plugins' tab).</p>
     </section>
 
+    <section class="page" id="skillshare">
+      <h1>Why share skills</h1>
+      <p class="lead">A skill is a 'work brief' you <b>make once and keep reusing</b>. And <b>sharing makes it even better</b> — the team works the same way, and know-how piles up steadily.</p>
+      <p class="defs">e.g. put the <b>test → build → deploy → verify</b> steps into a 'deploy' skill, and anyone can do it the same way without being told each time. Press an advantage below.</p>
+      <p class="anlg"><span class="ak">Analogy</span><span><b>A shared team checklist</b> — instead of passing a doc around and missing steps every time, make it once and a new teammate follows it exactly.</span></p>
+      <div class="grp">
+        <h3>Advantages of skills — press one</h3>
+        <div class="chips" id="ss-chips" style="margin:4px 0 14px;">
+          <button class="chip on" data-k="reuse">Reuse</button>
+          <button class="chip" data-k="team">Team consistency</button>
+          <button class="chip" data-k="know">Capture know-how</button>
+          <button class="chip" data-k="auto">Auto-recognition</button>
+          <button class="chip" data-k="space">Space efficiency</button>
+        </div>
+        <div class="cxsummary" id="ss-box"></div>
+        <p class="simtake"><span class="stk">Takeaway</span><span>Share a skill and <b>your own know-how becomes the whole team's baseline</b> — everyone the same way, nothing missed.</span></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>How far it's shared</h3>
+        <table>
+          <thead><tr><th>Scope</th><th>Where</th><th>Who uses it</th></tr></thead>
+          <tbody>
+            <tr><td><b>Personal</b></td><td><code>~/.claude/skills/</code></td><td>All my projects</td></tr>
+            <tr><td><b>Project</b></td><td><code>.claude/skills/</code> (shared via git)</td><td>This project's team</td></tr>
+            <tr><td><b>Organization</b></td><td>Managed settings</td><td>The whole company</td></tr>
+            <tr><td><b>Plugin</b></td><td>A plugin bundle</td><td>Anyone who installs it</td></tr>
+          </tbody>
+        </table>
+        <p class="note">If making one feels hard, just ask Claude <b>"Turn this task into a skill"</b> and it'll make it for you. (Source: code.claude.com/docs — skills, as of June 2026)</p>
+      </div>
+    </section>
+
+    <!-- SKILLSEC -->
+    <section class="page" id="skillsec">
+      <h1>Using skills safely</h1>
+      <p class="lead">Skills, plugins, and MCP can also be <b>things others made that you take and use</b>. Convenient — but you must check <b>whether you can trust the source</b>.</p>
+      <p class="defs">A skill may carry permissions like <b>'use this tool without asking'</b> (allowed-tools), and it may come with scripts that <b>can run</b>. That's why trust matters.</p>
+      <p class="anlg"><span class="ak">Analogy</span><span><b>Before hiring a consultant</b> — you ask "What permissions do you need? Are you trustworthy? May I see your process first?" If the answer is "I need full, unlimited access to everything," that's a <b>red flag</b>.</span></p>
+      <div class="grp">
+        <h3>What to check before installing — press one</h3>
+        <div class="chips" id="sc-chips" style="margin:4px 0 14px;">
+          <button class="chip on" data-k="src">Trust the source</button>
+          <button class="chip" data-k="perm">Permission scope</button>
+          <button class="chip" data-k="read">Review the contents</button>
+          <button class="chip" data-k="inj">Hidden instructions</button>
+        </div>
+        <div class="cxsummary" id="sc-box"></div>
+        <p class="simtake"><span class="stk">Takeaway</span><span>Safe = <b>only from sources you trust</b> · <b>keep permissions narrow</b> · <b>read the contents once</b>. (Anthropic doesn't individually vet external skills, MCP, or plugins — trust is on you.)</span></p>
+      </div>
+      <p class="note">The safest path is <b>making your own (or asking Claude to make one)</b>. When using external ones, only from trustworthy providers. In sensitive environments you can also confine the run scope with <code>/sandbox</code>. (Source: code.claude.com/docs — security · skills, as of June 2026)</p>
+    </section>
+
     <!-- 10 MCP -->
     <section class="page" id="mcp">
       <h1>MCP (tool connections)</h1>
@@ -1138,6 +1243,32 @@ description: Write the weekly report in the company format
       <p class="note">The bars and token numbers are an <span class="exb">example</span> to aid understanding (real values vary by task). 'Agent teams' — running multiple sessions at once to collaborate — is a separate experimental feature. (Source: official docs.)</p>
     </section>
 
+    <section class="page" id="rpa">
+      <h1>RPA vs AI agents</h1>
+      <p class="lead">A common tool for automating office work is <b>RPA</b>. But an <b>AI agent (Claude)</b> <b>works in a different way</b> — let's compare them on the same task to see how.</p>
+      <p class="defs">Example task: <b>"Pull the amounts and dates from 100 invoices and enter them into Excel."</b> Run it the usual way, then press to see what happens <b>'when the format changes.'</b></p>
+      <p class="anlg"><span class="ak">Analogy</span><span><b>RPA</b> is a <b>'record-and-replay' machine</b> — it repeats fixed-position clicks exactly. An <b>AI agent</b> is <b>'an employee who understands the intent'</b> — it adapts on its own even when things change.</span></p>
+      <div class="grp">
+        <h3>Same task, different ways of working</h3>
+        <div class="exrow">
+          <button class="btn solid" id="rpa-run">▶ Run as usual</button>
+          <button class="btn" id="rpa-change">The format changed!</button>
+          <button class="btn" id="rpa-reset">Reset</button>
+        </div>
+        <div class="chatdemo">
+          <div class="chatcol"><h4>Traditional RPA <span class="badge no">record &amp; repeat</span></h4>
+            <div id="rpa-a" style="font-size:13px;"></div>
+          </div>
+          <div class="chatcol"><h4>AI agent + skill <span class="badge yes">understand &amp; adapt</span></h4>
+            <div id="rpa-b" style="font-size:13px;"></div>
+          </div>
+        </div>
+        <p class="status" id="rpa-status">Press a button to give the same task to both sides.</p>
+        <p class="simtake"><span class="stk">Takeaway</span><span>RPA <b>repeats fixed actions exactly</b> (fast, but breaks easily when the screen or format changes), while an AI agent <b>understands the goal and adapts to the situation</b>. A <b>skill</b> is the <b>'work brief'</b> you give the AI.</span></p>
+      </div>
+      <p class="note"><b>Watch out for a misconception</b> · RPA isn't a Claude feature — it's <b>a concept here for comparison</b>. It's not that "AI agent + RPA = skill"; <b>a skill is just a brief that tells the AI what to do</b>. The two aren't really substitutes — <b>they're used differently</b>: for simple, unchanging bulk work RPA is fast, while for work that needs <b>change, judgment, and exception-handling</b> the AI agent is strong. (These days people often mix the two.)</p>
+    </section>
+
     <!-- 13 IMAGES -->
     <section class="page" id="images">
       <h1>Pasting images to Claude</h1>
@@ -1176,6 +1307,32 @@ description: Write the weekly report in the company format
         <li><b>For animated GIFs, it sees only the first frame.</b><span>Plain images like JPG and PNG are recommended.</span></li>
       </ul>
       <p class="note">How to paste: drag a screenshot into the input box or paste it (<code>Cmd/Ctrl</code>+<code>V</code>), or write out the image file's path.</p>
+    </section>
+
+    <!-- REMOTE -->
+    <section class="page" id="remote">
+      <h1>Remote control</h1>
+      <p class="lead">Drive a Claude session running on your own computer — <b>straight from your phone or another browser</b>. <b>Your code stays on your computer</b>; you just see the screen remotely. <span class="exb">preview</span></p>
+      <p class="defs">e.g. set your work computer on a job, then from a café watch the progress on your phone and steer it with <b>"No, not like that — do it this way."</b> Press through the connection steps below.</p>
+      <p class="anlg"><span class="ak">Analogy</span><span><b>A video call with a colleague at their desk</b> — your colleague (your PC) actually does the work, and you watch the screen on your phone and give directions. It's your computer doing the work.</span></p>
+      <div class="grp">
+        <h3>How it connects — press it</h3>
+        <div class="exrow"><button class="btn solid" id="rm-go">▶ Watch it connect</button><button class="btn" id="rm-reset">Reset</button></div>
+        <div id="rm-flow"></div>
+        <p class="status" id="rm-status">Press the button to see how it connects to your phone.</p>
+        <p class="simtake"><span class="stk">Takeaway</span><span>Remote control = <b>your PC does the work, and you watch and steer from your phone</b> (the code stays on your computer). When a long job finishes or a decision is needed, you also get a <b>notification</b> on your phone.</span></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>'Remote control' vs 'web' — don't mix them up</h3>
+        <table>
+          <thead><tr><th></th><th>Where the work runs</th><th>Your files</th><th>Good for</th></tr></thead>
+          <tbody>
+            <tr><td><b>Remote control</b></td><td>Your computer</td><td>Your computer, as-is</td><td>Keep steering an ongoing job from outside</td></tr>
+            <tr><td><b>Web (claude.ai/code)</b></td><td>The cloud</td><td>A cloud environment</td><td>Start fresh without your PC</td></tr>
+          </tbody>
+        </table>
+        <p class="note">This is a <b>preview feature</b>. How to turn it on: in Claude on your PC run <code>/remote-control</code> (or <code>claude remote-control</code>) → a link and QR appear. Install the Claude app on your phone and turn on notifications to get job-done and confirmation requests. (Source: code.claude.com/docs — remote control, as of June 2026)</p>
+      </div>
     </section>
 
     <!-- 14 HOOKS -->
@@ -1514,6 +1671,35 @@ description: Write the weekly report in the company format
       <p class="note">For non-developers this is a somewhat advanced feature — just knowing 'this is possible too' is plenty. Since it uses many helpers at once, it uses a lot of tokens, so it's only suited to big jobs. (Source: Anthropic official — claude.com dynamic workflows intro)</p>
     </section>
 
+    <section class="page" id="routines">
+      <h1>Routines (auto-run)</h1>
+      <p class="lead">Claude <b>runs jobs you've set up automatically in the cloud</b>. <b>Even with your computer off</b>, they run at the time or signal you chose. <span class="exb">preview</span></p>
+      <p class="defs">e.g. <b>"Every morning at 9, tidy up the new bugs and report to Slack."</b> Build it once and it repeats on its own. Below, pick <b>what triggers a routine</b>.</p>
+      <p class="anlg"><span class="ak">Analogy</span><span><b>An assistant who works 24/7</b> — even if you don't come in, even with your computer off, it does the work on its own when the set time or signal arrives.</span></p>
+      <div class="grp">
+        <h3>What triggers it — press one</h3>
+        <div class="chips" id="rt-chips" style="margin:4px 0 14px;">
+          <button class="chip on" data-t="time">Schedule (by time)</button>
+          <button class="chip" data-t="git">GitHub event</button>
+          <button class="chip" data-t="api">API signal</button>
+        </div>
+        <div class="cxsummary" id="rt-box"></div>
+        <p class="simtake"><span class="stk">Takeaway</span><span>Routines = <b>automatic in the cloud</b> — they run even with your PC off. (Repeat (loop) needs your terminal open; a desktop schedule needs your PC on.)</span></p>
+      </div>
+      <div class="grp" style="margin-top:30px;">
+        <h3>Similar automations — where they differ</h3>
+        <table>
+          <thead><tr><th></th><th>Where it runs</th><th>PC off?</th><th>What starts it</th></tr></thead>
+          <tbody>
+            <tr><td><b>Repeat (/loop)</b></td><td>Your terminal</td><td>No (must stay on)</td><td>A fixed interval</td></tr>
+            <tr><td><b>Desktop schedule</b></td><td>Your computer</td><td>No (must stay on)</td><td>A schedule</td></tr>
+            <tr><td><b>Routines</b></td><td>The cloud</td><td><b>Yes</b></td><td>Schedule · GitHub · API</td></tr>
+          </tbody>
+        </table>
+        <p class="note">This is a <b>preview feature</b> — behavior and limits may change. How to make one: tell Claude with <code>/schedule</code>, or set it up under routines at claude.ai/code. A routine takes permissions up front and <b>runs on its own</b>, so it's safest to set a scope for what it may do and how far. (Source: code.claude.com/docs — routines, as of June 2026)</p>
+      </div>
+    </section>
+
     <!-- CONFIG -->
     <section class="page" id="config">
       <h1>Settings (config)</h1>
@@ -1629,26 +1815,42 @@ description: Write the weekly report in the company format
   /* page presentation (slide) mode — non-destructive: moves blocks into a fullscreen stage, restores on exit (sims keep working) */
   (function(){
     var openBtn=document.getElementById('p2-open'); if(!openBtn) return;
-    var overlay=null,slides=[],idx=0,staged=[],fadeT=null;
+    var overlay=null,slides=[],idx=0,staged=[],fadeT=null,simOnly=false;
+    var P2STATIC={where:1,hooks:1,privacy:1,plans:1,glossary:1};
+    function isSim(id){ return !P2STATIC[id]; }
+    function curId(){ var c=document.querySelector('.page.on'); return c?c.id:''; }
+    function simList(){ return [].filter.call(document.querySelectorAll('.lnb .navitem'),function(n){ return isSim(n.dataset.page); }).map(function(n){ return n.dataset.page; }); }
     var ch=null; try{ ch=new BroadcastChannel('cc-p2'); }catch(e){} var audWin=null,mo=null,bcT=null,timer=null,t0=0,presenting=false;
     if(ch) ch.onmessage=function(e){ if(e.data&&e.data.t==='hello'&&overlay&&presenting) bcast(); };
     function boundary(el,i){ if(i===0) return false; if(el.tagName==='H1'||el.tagName==='H3') return true; var c=el.classList; return c.contains('grp')||c.contains('label')||c.contains('simtake')||c.contains('bignote')||c.contains('callout'); }
-    function build(page){ var kids=[].slice.call(page.children),out=[],cur=[]; kids.forEach(function(el,i){ if(boundary(el,i)&&cur.length){ out.push(cur); cur=[]; } cur.push(el); }); if(cur.length) out.push(cur); return out; }
+    var SIMSEL='button,input,textarea,select,.keycap,.tlpt,.prow,.timeline';
+    function hasSim(slide){ return slide.some(function(el){ return (el.matches&&el.matches(SIMSEL))||(el.querySelector&&!!el.querySelector(SIMSEL)); }); }
+    function build(page){ var kids=[].slice.call(page.children),out=[],cur=[]; kids.forEach(function(el,i){ if(boundary(el,i)&&cur.length){ out.push(cur); cur=[]; } cur.push(el); }); if(cur.length) out.push(cur);
+      if(simOnly){ var f=out.filter(hasSim); if(f.length) return f; } return out; }
     function restore(){ staged.forEach(function(p){ if(p.ph.parentNode) p.ph.parentNode.replaceChild(p.el,p.ph); }); staged=[]; }
     function show(i){ if(!overlay) return; restore(); idx=Math.max(0,Math.min(slides.length-1,i)); var inner=overlay.querySelector('.p2inner');
       slides[idx].forEach(function(el){ var ph=document.createComment('p2'); el.parentNode.insertBefore(ph,el); inner.appendChild(el); staged.push({el:el,ph:ph}); });
       overlay.querySelector('.p2count').textContent=(idx+1)+' / '+slides.length;
-      overlay.querySelector('.p2prev').disabled=(idx<=0); overlay.querySelector('.p2next').disabled=(idx>=slides.length-1);
+      var fS=idx<=0, lS=idx>=slides.length-1;
+      if(simOnly){ var L=simList(),i=L.indexOf(curId()); overlay.querySelector('.p2prev').disabled=(fS&&i<=0); overlay.querySelector('.p2next').disabled=(lS&&i>=L.length-1); }
+      else { overlay.querySelector('.p2prev').disabled=fS; overlay.querySelector('.p2next').disabled=lS; }
       inner.style.opacity='0'; if(fadeT)clearTimeout(fadeT); fadeT=setTimeout(function(){ inner.style.opacity='1'; },20); inner.scrollTop=0; overlay.querySelector('.p2stage').scrollTop=0; fitZoom(); bcast(); updateNext(); }
-    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'); inner.style.zoom=1; var w=inner.offsetWidth||860, h=inner.offsetHeight||400; var avW=window.innerWidth*0.94, avH=(window.innerHeight-58)*0.96; var z=Math.min(avW/w, avH/h, 2.6); inner.style.zoom=Math.max(0.78, z); }
+    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'); inner.style.zoom=1; var w=inner.offsetWidth||860, h=inner.offsetHeight||400; var avW=Math.min(window.innerWidth*0.92, 1180), avH=(window.innerHeight-60)*0.95; var z=Math.min(avW/w, avH/h, 2.2); inner.style.zoom=Math.max(0.8, z); }
     function loadPage(page){ slides=build(page); if(!slides.length) return; overlay.querySelector('.p2title').textContent = page.querySelector('h1')?page.querySelector('h1').textContent:''; show(0); }
     function tocEl(){ return overlay.querySelector('.p2toc'); }
-    function buildToc(){ var list=overlay.querySelector('.p2toclist .in'); list.innerHTML=''; var cur=document.querySelector('.page.on'),curId=cur?cur.id:'';
+    function buildToc(){ var list=overlay.querySelector('.p2toclist .in'); list.innerHTML=''; var curIdv=curId(),pendingSec=null;
       [].forEach.call(document.querySelectorAll('.lnb .navsec, .lnb .navitem'),function(el){ if(el.style.display==='none') return;
-        if(el.classList.contains('navsec')){ var h=document.createElement('div'); h.className='p2tocsec'; h.textContent=el.textContent; list.appendChild(h); }
-        else { var pid=el.dataset.page,b=document.createElement('button'); b.className='p2tocitem'+(pid===curId?' cur':''); b.textContent=el.textContent.replace(/^\s*\d+\s*/,''); b.addEventListener('click',function(){ goToPage(pid); }); list.appendChild(b); } }); }
+        if(el.classList.contains('navsec')){ pendingSec=el.textContent; }
+        else { var pid=el.dataset.page; if(simOnly && !isSim(pid)) return;
+          if(pendingSec){ var h=document.createElement('div'); h.className='p2tocsec'; h.textContent=pendingSec; list.appendChild(h); pendingSec=null; }
+          var b=document.createElement('button'); b.className='p2tocitem'+(pid===curIdv?' cur':''); b.textContent=el.textContent.replace(/^\s*\d+\s*/,''); b.addEventListener('click',function(){ goToPage(pid); }); list.appendChild(b); } }); }
     function toggleToc(){ var t=tocEl(); if(t.classList.contains('on')){ t.classList.remove('on'); } else { buildToc(); t.classList.add('on'); } }
-    function goToPage(id){ tocEl().classList.remove('on'); restore(); var nav=document.querySelector('.navitem[data-page="'+id+'"]'); if(nav) nav.click(); var page=document.getElementById(id); if(page) loadPage(page); }
+    function goToPage(id,toLast){ tocEl().classList.remove('on'); restore(); var nav=document.querySelector('.navitem[data-page="'+id+'"]'); if(nav) nav.click(); var page=document.getElementById(id); if(page){ loadPage(page); if(toLast) show(slides.length-1); } }
+    function goNext(){ if(idx<slides.length-1){ show(idx+1); return; } if(simOnly){ var L=simList(),i=L.indexOf(curId()); if(i>=0&&i<L.length-1) goToPage(L[i+1]); } }
+    function goPrev(){ if(idx>0){ show(idx-1); return; } if(simOnly){ var L=simList(),i=L.indexOf(curId()); if(i>0) goToPage(L[i-1],true); } }
+    function toggleSim(){ simOnly=!simOnly; overlay.querySelector('.p2simbtn').classList.toggle('on',simOnly); tocEl().classList.remove('on'); restore();
+      if(simOnly && !isSim(curId())){ var L=simList(); if(L.length){ goToPage(L[0]); return; } }
+      var page=document.querySelector('.page.on'); if(page) loadPage(page); }
     function bcast(){ if(!presenting||!overlay) return; var inner=overlay.querySelector('.p2inner'); var frame={t:'frame',html:inner.innerHTML,title:overlay.querySelector('.p2title').textContent,count:overlay.querySelector('.p2count').textContent}; if(ch){ try{ ch.postMessage(frame); }catch(e){} } try{ localStorage.setItem('cc-p2-frame',JSON.stringify(frame)); }catch(e){} }
     function bcastSoon(){ if(bcT) return; bcT=setTimeout(function(){ bcT=null; bcast(); },120); }
     function updateNext(){ if(!presenting||!overlay) return; var box=overlay.querySelector('.p2npin'); if(idx<slides.length-1){ box.innerHTML=slides[idx+1].map(function(el){return el.outerHTML;}).join(''); } else { box.innerHTML='<div style="color:var(--faint);font-size:14px;padding:10px 4px;">— last slide —</div>'; } }
@@ -1661,10 +1863,11 @@ description: Write the weekly report in the company format
     function stopPresenter(){ if(mo){ mo.disconnect(); mo=null; } if(timer){ clearInterval(timer); timer=null; } if(bcT){ clearTimeout(bcT); bcT=null; } if(presenting&&ch){ try{ ch.postMessage({t:'bye'}); }catch(e){} } presenting=false; try{ if(audWin&&!audWin.closed) audWin.close(); }catch(e){} audWin=null; }
     function open(){ var page=document.querySelector('.page.on'); if(!page) return; if(!build(page).length) return;
       overlay=document.createElement('div'); overlay.className='present2';
-      overlay.innerHTML='<div class="p2bar"><span class="p2title"></span><span class="p2count"></span><span class="p2timer"></span><span class="p2live">● Audience connected</span><span class="p2sp"></span><button class="p2nav p2present" title="Opens an audience window to drag onto a 2nd monitor (mirrors this screen)">Presenter view</button><button class="p2nav p2tocbtn">Contents</button><button class="p2nav p2prev">← Prev</button><button class="p2nav p2next">Next →</button><button class="p2x" title="Exit (Esc)">✕</button></div><div class="p2stage"><div class="p2inner"></div></div><div class="p2np"><div class="p2nphead">Next ▸</div><div class="p2npin"></div></div><div class="p2toc"><div class="p2tochead"><b>Contents — jump to</b><span class="p2sp"></span><button class="p2nav p2tocclose">Close</button></div><div class="p2toclist"><div class="in"></div></div></div>';
+      overlay.innerHTML='<div class="p2bar"><span class="p2title"></span><span class="p2count"></span><span class="p2timer"></span><span class="p2live">● Audience connected</span><span class="p2sp"></span><button class="p2nav p2present" title="Opens an audience window to drag onto a 2nd monitor (mirrors this screen)">Presenter view</button><button class="p2nav p2simbtn" title="Show only pages with simulations (←/→ to flow)">Simulations only</button><button class="p2nav p2tocbtn">Contents</button><button class="p2nav p2prev">← Prev</button><button class="p2nav p2next">Next →</button><button class="p2x" title="Exit (Esc)">✕</button></div><div class="p2stage"><div class="p2inner"></div></div><div class="p2np"><div class="p2nphead">Next ▸</div><div class="p2npin"></div></div><div class="p2toc"><div class="p2tochead"><b>Contents — jump to</b><span class="p2sp"></span><button class="p2nav p2tocclose">Close</button></div><div class="p2toclist"><div class="in"></div></div></div>';
       document.body.appendChild(overlay); document.documentElement.classList.add('p2-lock');
-      overlay.querySelector('.p2prev').addEventListener('click',function(){ show(idx-1); });
-      overlay.querySelector('.p2next').addEventListener('click',function(){ show(idx+1); });
+      overlay.querySelector('.p2prev').addEventListener('click',goPrev);
+      overlay.querySelector('.p2next').addEventListener('click',goNext);
+      overlay.querySelector('.p2simbtn').addEventListener('click',toggleSim);
       overlay.querySelector('.p2tocbtn').addEventListener('click',toggleToc);
       overlay.querySelector('.p2tocclose').addEventListener('click',toggleToc);
       overlay.querySelector('.p2present').addEventListener('click',startPresenter);
@@ -1674,7 +1877,7 @@ description: Write the weekly report in the company format
     openBtn.addEventListener('click',open);
     document.addEventListener('keydown',function(e){ if(!overlay) return; var tocOpen=tocEl().classList.contains('on');
       if(e.key==='Escape'){ if(tocOpen) tocEl().classList.remove('on'); else close(); }
-      else if(e.key==='ArrowRight'&&!tocOpen){ show(idx+1); } else if(e.key==='ArrowLeft'&&!tocOpen){ show(idx-1); } });
+      else if(e.key==='ArrowRight'&&!tocOpen){ goNext(); } else if(e.key==='ArrowLeft'&&!tocOpen){ goPrev(); } });
     var rzT=null; window.addEventListener('resize',function(){ if(!overlay) return; if(rzT)clearTimeout(rzT); rzT=setTimeout(fitZoom,120); });
   })();
 
@@ -1686,7 +1889,7 @@ description: Write the weekly report in the company format
     aud.innerHTML='<div class="p2audin"><div class="wait">Waiting for the presenter…<br><span style="font-size:13px;color:var(--faint)">Move this window to your 2nd monitor and go fullscreen (F11).</span></div></div>';
     document.body.appendChild(aud);
     var inner=aud.querySelector('.p2audin');
-    function fitAud(){ inner.style.zoom=1; var w=inner.offsetWidth||900, h=inner.offsetHeight||500; var z=Math.min(window.innerWidth*0.94/w, window.innerHeight*0.92/h, 3); inner.style.zoom=Math.max(0.85, z); }
+    function fitAud(){ inner.style.zoom=1; var w=inner.offsetWidth||900, h=inner.offsetHeight||500; var z=Math.min(Math.min(window.innerWidth*0.92,1320)/w, window.innerHeight*0.9/h, 2.6); inner.style.zoom=Math.max(0.85, z); }
     function render(m){ if(m&&typeof m.html==='string'){ inner.innerHTML=m.html; fitAud(); } }
     var arzT=null; window.addEventListener('resize',function(){ if(arzT)clearTimeout(arzT); arzT=setTimeout(fitAud,120); });
     var ch=null; try{ ch=new BroadcastChannel('cc-p2'); }catch(e){}
@@ -1695,7 +1898,7 @@ description: Write the weekly report in the company format
   })();
 
   /* LNB icons (monoline) */
-  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', ask:'<path d="M4 5.5h16v10H10l-4 3.5V15.5H4z"/><path d="M8.5 9h7M8.5 12h4"/>', mention:'<circle cx="12" cy="12" r="3.4"/><path d="M15.4 12v1.6a2.6 2.6 0 0 0 5.1 0V12a8.5 8.5 0 1 0-3.3 6.7"/>', keys:'<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><path d="M6 10h.01M9 10h.01M12 10h.01M15 10h.01M18 10h.01M8 13.5h8"/>', steer:'<path d="M4 7v4.5a4 4 0 0 0 4 4h8"/><path d="M13 12.5l3.5 3-3.5 3"/>', howworks:'<circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v2.6M12 18.9v2.6M21.5 12h-2.6M5.1 12H2.5M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8M18.7 18.7l-1.8-1.8M7.1 7.1L5.3 5.3"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', manage:'<path d="M4 20h16"/><rect x="5" y="13" width="3" height="6.5" rx="1"/><rect x="10.5" y="9" width="3" height="10.5" rx="1"/><rect x="16" y="5" width="3" height="14.5" rx="1"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
+  var ICN={ intro:'<path d="M12 3l1.6 4.8L18.4 9.4l-4.8 1.6L12 15.8l-1.6-4.8L5.6 9.4l4.8-1.6z"/>', cowork:'<rect x="3" y="7.5" width="18" height="12" rx="2"/><path d="M8.5 7.5V6a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 6v1.5"/><path d="M3 12.5h18"/>', usecases:'<path d="M4 6h10M4 12h10M4 18h6"/><path d="M18 13l1 2.4 2.4.3-1.8 1.7.5 2.5-2.1-1.2-2.1 1.2.5-2.5-1.8-1.7 2.4-.3z"/>', where:'<rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8.5 20.5h7M12 16.5v4"/>', ask:'<path d="M4 5.5h16v10H10l-4 3.5V15.5H4z"/><path d="M8.5 9h7M8.5 12h4"/>', mention:'<circle cx="12" cy="12" r="3.4"/><path d="M15.4 12v1.6a2.6 2.6 0 0 0 5.1 0V12a8.5 8.5 0 1 0-3.3 6.7"/>', keys:'<rect x="2.5" y="6.5" width="19" height="11" rx="2"/><path d="M6 10h.01M9 10h.01M12 10h.01M15 10h.01M18 10h.01M8 13.5h8"/>', steer:'<path d="M4 7v4.5a4 4 0 0 0 4 4h8"/><path d="M13 12.5l3.5 3-3.5 3"/>', howworks:'<circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v2.6M12 18.9v2.6M21.5 12h-2.6M5.1 12H2.5M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8M18.7 18.7l-1.8-1.8M7.1 7.1L5.3 5.3"/>', setup:'<path d="M4 7h7M15 7h5M4 12h11M19 12h1M4 17h4M12 17h8"/><circle cx="13" cy="7" r="2"/><circle cx="17" cy="12" r="2"/><circle cx="10" cy="17" r="2"/>', context:'<path d="M12 3 3 7.5 12 12l9-4.5z"/><path d="M3 16.5 12 21l9-4.5"/><path d="M3 12 12 16.5 21 12"/>', manage:'<path d="M4 20h16"/><rect x="5" y="13" width="3" height="6.5" rx="1"/><rect x="10.5" y="9" width="3" height="10.5" rx="1"/><rect x="16" y="5" width="3" height="14.5" rx="1"/>', sessions:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/>', tokens:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/>', models:'<path d="M4 6h10M18 6h2M4 12h2M10 12h10M4 18h8M16 18h4"/><circle cx="16" cy="6" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="18" r="2"/>', claudemd:'<path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5"/>', memory:'<ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/><path d="M4.5 11.5v6c0 1.55 3.36 2.8 7.5 2.8s7.5-1.25 7.5-2.8v-6"/>', skills:'<path d="M12 3.5l2.6 5.3 5.9.9-4.25 4.15 1 5.85L12 17.1l-5.25 2.75 1-5.85L3.5 9.7l5.9-.9z"/>', skillshare:'<circle cx="6" cy="12" r="2.5"/><circle cx="17" cy="6" r="2.5"/><circle cx="17" cy="18" r="2.5"/><path d="M8.3 10.8 14.7 7.2M8.3 13.2l6.4 3.6"/>', skillsec:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/><path d="M9.5 12l1.8 1.8 3.5-3.6"/>', mcp:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8 15.8 7.2M8.2 13.2l7.6 3.6"/>', plugins:'<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="M4 7l8 4 8-4M12 21V11"/>', agents:'<circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 5.6a3 3 0 0 1 0 5.6M15.5 14.4a5.5 5.5 0 0 1 5 5.6"/>', rpa:'<rect x="4.5" y="8" width="15" height="11" rx="2"/><path d="M9 8V5.5h6V8M8.5 13h.01M15.5 13h.01M2 13h2.5M19.5 13H22M9 16h6"/>', images:'<rect x="3" y="3.5" width="18" height="17" rx="2"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 16l-5-5-8 8"/>', remote:'<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M10.5 18.5h3"/><path d="M3 8.5a6 6 0 0 1 4-1.8M3.2 5.3a9 9 0 0 1 3.8-1.4"/>', hooks:'<path d="M13 2 4 14h7l-1 8 10-12h-7z"/>', planmode:'<rect x="5" y="4.5" width="14" height="16" rx="2"/><path d="M9 4.5V3.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 13l2 2 4-4"/>', permissions:'<path d="M12 3 5 5.7v5.3c0 4.5 3.2 7.6 7 9 3.8-1.4 7-4.5 7-9V5.7z"/>', rewind:'<path d="M4 4v5h5"/><path d="M4.5 13.5a8 8 0 1 0 1.9-8.3L4 9"/>', privacy:'<rect x="5" y="11" width="14" height="9.5" rx="2"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/>', commands:'<rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>', plans:'<path d="M11.6 3H4v7.6l9.7 9.7a1.5 1.5 0 0 0 2.1 0l5.3-5.3a1.5 1.5 0 0 0 0-2.1z"/><path d="M7.5 7.5h.01"/>', limits:'<path d="M3 12h4l2.5 7L14 4l2.5 8H21"/>', compact:'<path d="M9 4v4a1 1 0 0 1-1 1H4M20 9h-4a1 1 0 0 1-1-1V4M15 20v-4a1 1 0 0 1 1-1h4M4 15h4a1 1 0 0 1 1 1v4"/>', effort:'<path d="M5.5 18a8 8 0 1 1 13 0"/><path d="M12 12l3.5-3"/><circle cx="12" cy="12" r="1.3"/>', goal:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/>', loop:'<path d="M4 5v5h5"/><path d="M20 19v-5h-5"/><path d="M19 9a8 8 0 0 0-14-2.5M5 15a8 8 0 0 0 14 2.5"/>', workflows:'<circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M8.3 7 15.6 11M8.3 17 15.6 13"/>', routines:'<rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 9.5h16M8.5 3v4M15.5 3v4M12 13v3l2 1.2"/>', config:'<path d="M4 7h9M17 7h3"/><circle cx="15" cy="7" r="2"/><path d="M4 12h3M11 12h9"/><circle cx="9" cy="12" r="2"/><path d="M4 17h9M17 17h3"/><circle cx="15" cy="17" r="2"/>', doctor:'<circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/>', glossary:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19"/>' };
   function svgIcon(p){ return '<svg class="nic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICN[p]||'')+'</svg>'; }
 
   /* router */
@@ -1703,7 +1906,7 @@ description: Write the weekly report in the company format
   navs.forEach(function(b){ var page=b.dataset.page; var no=b.querySelector('.no'); var noHtml=no?no.outerHTML:''; var txt=b.textContent.replace(/^\s*\d+\s*/,'').trim(); b.innerHTML=svgIcon(page)+noHtml+'<span class="lbl">'+txt+'</span>'; });
 
   /* per-page one-line summaries */
-  var TLDR={ intro:'Chat gives you an \'answer\'; Claude Code <b>actually builds it in your project and makes it work</b>.', cowork:'Claude that <b>does office work</b> instead of code — give it a goal and it <b>builds the finished result from your files</b> (for non-developers · desktop app).', usecases:'Shows <b>how your everyday work changes</b>, before → after, for each job.', where:'Terminal, VS Code, desktop, web — <b>the same Claude Code everywhere</b>, settings shared too.', ask:'The same task <b>asked specifically</b> finishes in one shot — write your own and get a score too.', mention:'Point right at <b>the exact file</b> with <code class="inlinecode">@</code> for faster, more precise work.', keys:'A few keys do it all — <b>Esc</b> (stop), <b>Esc Esc</b> (rewind) and more. Press them to learn.', steer:'When it goes wrong, <b>cut it off with Esc</b> and correct course — don\'t wait it out.', howworks:'Claude doesn\'t just answer — it uses tools to look around, fix, and check, repeatedly (the agentic loop).', context:'Claude only remembers what\'s loaded here. When it\'s full, it <b>tidies up with \'compaction.\'</b>', manage:'Neglect your context and it gets <b>slower, pricier, and more confusing</b> — so tidy it up in time.', sessions:'<b>One job per session</b> — mixing causes confusion. Keep the working folder narrow.', tokens:'Token = the unit an AI reads text in. <b>Longer means more space and cost</b>, and Korean is heavier.', models:'Smartness ↔ speed ↔ cost are trade-offs. <b>If unsure, start with Sonnet</b>.', claudemd:'<b>A rules note you write</b> — applied automatically at the start of every conversation.', memory:'A note <b>Claude learns and remembers on its own</b>. Carries over across sessions.', skills:'<b>Make a frequent task\'s steps once and reuse them</b> again and again.', mcp:'<b>Connects to outside tools (Jira, Figma, etc.)</b> so Claude can use them directly.', plugins:'A bundle that <b>packages skills, tools, commands and installs them in one go</b>.', agents:'<b>Hand big jobs to specialist helpers</b> and just get the results back.', images:'<b>Paste a screenshot</b> and Claude sees and understands it — faster and more accurate than words.', hooks:'A rule where <b>a set action runs automatically every time</b> at a specific moment.', planmode:'<b>Shows a plan and gets approval</b> before editing — safe for big changes.', permissions:'A setting for <b>how often Claude asks</b>. Stay safe at first.', rewind:'<b>Auto-saves at every request</b> — if you don\'t like it, roll back to an earlier point.', privacy:'<b>Business (Team, Enterprise, API) isn\'t used for training by default.</b> Personal is a choice in settings.', commands:'Shortcut commands that start with <code class="inlinecode">/</code>. The most-used are <b>/clear · /compact</b>.', plans:'<b>Not on the free plan.</b> Use a paid plan (Pro, Max, Team) or the API (pay-as-you-go).', limits:'<b>Once used up, you wait until it resets</b> — that\'s why managing it matters.', compact:'A long pile of conversation shrinks into <b>one short summary block</b>.', effort:'<b>How deeply it thinks</b> before answering — deeper is more accurate, but slower and pricier.', goal:'<b>Give only a \'completion condition\' and Claude repeats on its own until it\'s met</b>.', loop:'<b>Re-runs the same task automatically at a set interval</b>.', workflows:'Coordinates <b>several helpers working at once</b> on a big job (advanced).', config:'Change settings like <b>language, theme, model, and permissions</b> in one place.', doctor:'<b>Checks your install and settings all at once</b> and points to what to fix when something\'s wrong.', glossary:'A place to quickly look up confusing terms <b>in one line</b>.' };
+  var TLDR={ intro:'Chat gives you an \'answer\'; Claude Code <b>actually builds it in your project and makes it work</b>.', cowork:'Claude that <b>does office work</b> instead of code — give it a goal and it <b>builds the finished result from your files</b> (for non-developers · desktop app).', usecases:'Shows <b>how your everyday work changes</b>, before → after, for each job.', where:'Terminal, VS Code, desktop, web — <b>the same Claude Code everywhere</b>, settings shared too.', ask:'The same task <b>asked specifically</b> finishes in one shot — write your own and get a score too.', mention:'Point right at <b>the exact file</b> with <code class="inlinecode">@</code> for faster, more precise work.', keys:'A few keys do it all — <b>Esc</b> (stop), <b>Esc Esc</b> (rewind) and more. Press them to learn.', steer:'When it goes wrong, <b>cut it off with Esc</b> and correct course — don\'t wait it out.', howworks:'Claude doesn\'t just answer — it uses tools to look around, fix, and check, repeatedly (the agentic loop).', setup:'Tools, instructions, permissions, context — <b>the better you set up the \'work environment,\'</b> the better the AI does (the harness).', context:'Claude only remembers what\'s loaded here. When it\'s full, it <b>tidies up with \'compaction.\'</b>', manage:'Neglect your context and it gets <b>slower, pricier, and more confusing</b> — so tidy it up in time.', sessions:'<b>One job per session</b> — mixing causes confusion. Keep the working folder narrow.', tokens:'Token = the unit an AI reads text in. <b>Longer means more space and cost</b>, and Korean is heavier.', models:'Smartness ↔ speed ↔ cost are trade-offs. <b>If unsure, start with Sonnet</b>.', claudemd:'<b>A rules note you write</b> — applied automatically at the start of every conversation.', memory:'A note <b>Claude learns and remembers on its own</b>. Carries over across sessions.', skills:'<b>Make a frequent task\'s steps once and reuse them</b> again and again.', skillshare:'Share a skill and <b>your know-how becomes the team\'s baseline</b> (reuse, consistency).', skillsec:'Use skills and plugins <b>only when you trust the source</b> · keep permissions narrow · review the contents.', mcp:'<b>Connects to outside tools (Jira, Figma, etc.)</b> so Claude can use them directly.', plugins:'A bundle that <b>packages skills, tools, commands and installs them in one go</b>.', agents:'<b>Hand big jobs to specialist helpers</b> and just get the results back.', rpa:'RPA repeats fixed clicks (breaks easily); an AI agent <b>understands the intent and adapts</b>.', images:'<b>Paste a screenshot</b> and Claude sees and understands it — faster and more accurate than words.', remote:'<b>Drive your PC\'s session from your phone or browser</b> — the code stays on your computer (preview).', hooks:'A rule where <b>a set action runs automatically every time</b> at a specific moment.', planmode:'<b>Shows a plan and gets approval</b> before editing — safe for big changes.', permissions:'A setting for <b>how often Claude asks</b>. Stay safe at first.', rewind:'<b>Auto-saves at every request</b> — if you don\'t like it, roll back to an earlier point.', privacy:'<b>Business (Team, Enterprise, API) isn\'t used for training by default.</b> Personal is a choice in settings.', commands:'Shortcut commands that start with <code class="inlinecode">/</code>. The most-used are <b>/clear · /compact</b>.', plans:'<b>Not on the free plan.</b> Use a paid plan (Pro, Max, Team) or the API (pay-as-you-go).', limits:'<b>Once used up, you wait until it resets</b> — that\'s why managing it matters.', compact:'A long pile of conversation shrinks into <b>one short summary block</b>.', effort:'<b>How deeply it thinks</b> before answering — deeper is more accurate, but slower and pricier.', goal:'<b>Give only a \'completion condition\' and Claude repeats on its own until it\'s met</b>.', loop:'<b>Re-runs the same task automatically at a set interval</b>.', workflows:'Coordinates <b>several helpers working at once</b> on a big job (advanced).', routines:'<b>Runs scheduled jobs automatically in the cloud</b> — even with your PC off, triggered by schedule, GitHub, or API (preview).', config:'Change settings like <b>language, theme, model, and permissions</b> in one place.', doctor:'<b>Checks your install and settings all at once</b> and points to what to fix when something\'s wrong.', glossary:'A place to quickly look up confusing terms <b>in one line</b>.' };
   pages.forEach(function(p){ var t=TLDR[p.id]; if(!t)return; var anchor=p.querySelector('.defs')||p.querySelector('.lead'); if(!anchor)return; var d=document.createElement('div'); d.className='tldr'; d.innerHTML='<span class="tlb">In one line</span><span class="tlx">'+t+'</span>'; anchor.parentNode.insertBefore(d, anchor.nextSibling); });
 
   /* collapse code blocks by default */
@@ -1723,8 +1926,8 @@ description: Write the weekly report in the company format
 
   /* difficulty mode — 초급/중급/고급 filter */
   var LV={ intro:1,cowork:1,usecases:1,where:1,ask:1,mention:1,keys:1,steer:1,howworks:1,context:1,manage:1,compact:1,sessions:1,models:1,claudemd:1,images:1,permissions:1,rewind:1,commands:1,glossary:1,
-    tokens:2,effort:2,memory:2,skills:2,planmode:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
-    mcp:3,plugins:3,agents:3,hooks:3,goal:3,loop:3,workflows:3 };
+    tokens:2,effort:2,setup:2,memory:2,skills:2,skillshare:2,skillsec:2,rpa:2,remote:2,planmode:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
+    mcp:3,plugins:3,agents:3,hooks:3,goal:3,loop:3,workflows:3,routines:3 };
   (function(){ var chips=document.querySelectorAll('#lvlsel .lvlchip'); if(!chips.length) return; var origNo={}; navs.forEach(function(n){ var no=n.querySelector('.no'); if(no) origNo[n.dataset.page]=no.textContent; });
     function setLevel(lv){ chips.forEach(function(c){ c.classList.toggle('on',+c.dataset.lv===lv); }); var k=0;
       navs.forEach(function(n){ var show= lv===0 || LV[n.dataset.page]===lv; n.style.display=show?'':'none'; if(show){ var no=n.querySelector('.no'); if(no) no.textContent= ('0'+(++k)).slice(-2); } });
@@ -2275,6 +2478,74 @@ description: Write the weekly report in the company format
     go.addEventListener('click',function(){ plT.forEach(clearTimeout); plT=[]; chips.forEach(function(c){ c.classList.remove('on'); c.classList.add('dim'); }); st.textContent='Running /plugin install — installing the features in the bundle one by one…';
       chips.forEach(function(c,i){ plT.push(setTimeout(function(){ c.classList.remove('dim'); c.classList.add('on'); st.textContent= (i+1===chips.length) ? ('Installed '+(i+1)+'/'+chips.length+' — this one bundle turned on '+chips.length+' features at once. No need to gather them one by one.') : ('Installed '+(i+1)+'/'+chips.length+' …'); },550+i*650)); }); });
     document.getElementById('pl-reset').addEventListener('click',reset);
+  })();
+
+  /* rpa vs ai agent */
+  (function(){
+    var A=document.getElementById('rpa-a'),B=document.getElementById('rpa-b'),ST=document.getElementById('rpa-status'); if(!A) return; var T=[];
+    var RUN={ a:[['·','Click the memorized spot: amount cell (3rd)'],['·','Enter into the date cell (5th)'],['✓','Repeat across 100 → done']],
+      b:[['·','Understand what "amount · date" mean on the invoice'],['·','Find and enter them on each page on its own'],['✓','100 pages → done']],
+      s:'Both work fine — with the usual (unchanged) format, the difference barely shows.' };
+    var CHG={ a:[['·','Click the memorized spot (3rd)…'],['✗','No amount there (the cell moved)'],['✗','It stops and calls a human — needs re-recording']],
+      b:[['·','Find where "amount" went on the screen'],['·','Read and enter it from the new spot on its own'],['✓','100 pages → done (no human needed)']],
+      s:'When the format changed, RPA stopped — but the AI adapted on its own.' };
+    function render(d){ T.forEach(clearTimeout); T=[]; A.innerHTML=''; B.innerHTML=''; ST.textContent='';
+      function fill(box,steps){ steps.forEach(function(s,i){ T.push(setTimeout(function(){ var r=document.createElement('div'); r.className='rpastep'+(s[0]==='✓'?' ok':(s[0]==='✗'?' bad':'')); r.innerHTML='<span class="rk">'+s[0]+'</span><span>'+s[1]+'</span>'; box.appendChild(r); },300+i*640)); }); }
+      fill(A,d.a); fill(B,d.b); T.push(setTimeout(function(){ ST.textContent=d.s; },300+3*640)); }
+    document.getElementById('rpa-run').addEventListener('click',function(){ render(RUN); });
+    document.getElementById('rpa-change').addEventListener('click',function(){ render(CHG); });
+    document.getElementById('rpa-reset').addEventListener('click',function(){ T.forEach(clearTimeout); T=[]; A.innerHTML=''; B.innerHTML=''; ST.textContent='Press a button to give the same task to both sides.'; });
+  })();
+
+  /* skill share + skill security selectors */
+  (function(){
+    function sel(chipsId,boxId,D,first){ var box=document.getElementById(boxId); if(!box) return; function show(k){ var d=D[k]; box.innerHTML='<div class="cxh">'+d.t+'</div>'+d.d; } document.querySelectorAll('#'+chipsId+' .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#'+chipsId+' .chip').forEach(function(x){x.classList.toggle('on',x===c);}); show(c.dataset.k); }); }); show(first); }
+    sel('ss-chips','ss-box',{ reuse:{t:'Reuse',d:'No need to copy-paste the same instruction every time — <b>make it once and use it forever</b>. A single <code>/deploy</code> does it.'},
+      team:{t:'Team consistency',d:'Everyone works by <b>the same process</b> — deploy, review, and test don\'t vary from person to person.'},
+      know:{t:'Capture know-how',d:'<b>Encapsulate the team\'s expertise in a skill</b> — even a new hire follows best practice from day one.'},
+      auto:{t:'Auto-recognition',d:'When relevant, Claude <b>suggests "Use this skill?" on its own</b>. No need to memorize commands.'},
+      space:{t:'Space efficiency',d:'The description is always present, but <b>the body unfolds only when used</b> — long references don\'t eat your context up front.'} },'reuse');
+    sel('sc-chips','sc-box',{ src:{t:'Trust the source',d:'Who made it? Is it a <b>provider you can trust</b>? Anthropic doesn\'t vet it for you — be careful with anything from an unknown source.'},
+      perm:{t:'Permission scope',d:'If a skill demands <b>broad permissions</b> like <code>allowed-tools: Bash(*)</code> (auto-allow every command), red flag. Narrow ones like <code>Bash(npm test)</code> are safer.'},
+      read:{t:'Review the contents',d:'<b>Read the skill\'s contents once before installing</b> — what it does, with which tools. Project skills load after you approve trust.'},
+      inj:{t:'Hidden instructions (prompt injection)',d:'<b>Instructions like "do this" can hide in outside text</b> such as error logs or web content, trying to steer Claude. Claude Code has defenses, but trusting the source comes first.'} },'src');
+  })();
+
+  /* setup components selector */
+  (function(){
+    var box=document.getElementById('su-box'); if(!box) return;
+    var D={ tool:{t:'Tools',d:'<b>What the AI can do</b> — read and edit files, run commands, search, call external services. Without tools it just talks; with tools it gets things done.'},
+      inst:{t:'Instructions',d:'<b>The rules and guidance</b> you give the AI — write things like "always in Korean" or "tests first" in <code>CLAUDE.md</code> and it follows them without being told each time.'},
+      perm:{t:'Permissions',d:'<b>How far the AI acts on its own</b> — ask every time (safe) ↔ handle routine things itself (fast). You can pick the middle.'},
+      ctx:{t:'Context',d:'<b>What the AI is looking at right now</b> — your code, the conversation, memory (notes). It\'s a limited space (the context window), so give it just the essentials.'},
+      ext:{t:'Extensions',d:'<b>What adds abilities</b> — skills (work briefs), MCP (connect external tools), hooks (automatic rules), subagents (split and hand off work).'} };
+    function show(k){ var d=D[k]; box.innerHTML='<div class="cxh">'+d.t+'</div>'+d.d; }
+    document.querySelectorAll('#su-chips .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#su-chips .chip').forEach(function(x){x.classList.toggle('on',x===c);}); show(c.dataset.k); }); });
+    show('tool');
+  })();
+
+  /* remote control connect flow */
+  (function(){
+    var box=document.getElementById('rm-flow'),ST=document.getElementById('rm-status'); if(!box) return; var T=[];
+    var STEPS=[['1','In Claude on your PC, type <code>/remote-control</code> → a link and QR code appear'],
+      ['2','Scan the QR or open the link on your phone'],
+      ['3','Your phone shows <b>your PC\'s Claude, exactly as-is</b>'],
+      ['4','You send messages, approve, and steer — <b>your PC does the work</b>']];
+    function run(){ T.forEach(clearTimeout); T=[]; box.innerHTML=''; ST.textContent='Connecting to your phone…';
+      STEPS.forEach(function(p,i){ T.push(setTimeout(function(){ var r=document.createElement('div'); r.className='chk y'; r.innerHTML='<span class="cx">'+p[0]+'</span><span>'+p[1]+'</span>'; box.appendChild(r); if(i===STEPS.length-1) ST.textContent='Connected — now drive your PC\'s Claude from your phone, anywhere.'; },300+i*760)); }); }
+    document.getElementById('rm-go').addEventListener('click',run);
+    document.getElementById('rm-reset').addEventListener('click',function(){ T.forEach(clearTimeout); T=[]; box.innerHTML=''; ST.textContent='Press the button to see how it connects to your phone.'; });
+  })();
+
+  /* routines trigger selector */
+  (function(){
+    var box=document.getElementById('rt-box'); if(!box) return;
+    var D={ time:{when:'Every morning at 9 · every Monday · a specific time (at least 1 hour apart)',ex:'Sort and label the new bugs that piled up overnight, and send a one-glance summary to Slack in the morning.'},
+      git:{when:'When a PR opens or a release ships (GitHub events)',ex:'When a new PR opens, automatically add code-review comments and run through a checklist.'},
+      api:{when:'When an external system sends a signal (HTTP)',ex:'When a server alert comes in, find the related commit and draft a quick-fix PR.'} };
+    function show(t){ var d=D[t]; box.innerHTML='<div class="cxh">When it runs</div>'+d.when+'<div class="cxh" style="margin-top:11px;">What it does for you</div>'+d.ex; }
+    document.querySelectorAll('#rt-chips .chip').forEach(function(c){ c.addEventListener('click',function(){ document.querySelectorAll('#rt-chips .chip').forEach(function(x){x.classList.toggle('on',x===c);}); show(c.dataset.t); }); });
+    show('time');
   })();
 
   /* language switcher (works in /, /en/, /zh/, /ja/) */
