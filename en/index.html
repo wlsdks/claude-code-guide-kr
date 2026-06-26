@@ -275,7 +275,7 @@
   .present2 .p2nav.on{ background:var(--ink); color:var(--bg); border-color:var(--ink); font-weight:600; }
   .present2 .p2x{ border:none; background:none; font-size:18px; color:var(--muted); cursor:pointer; line-height:1; padding:4px 8px; }
   .present2 .p2stage{ flex:1; overflow:auto; display:flex; flex-direction:column; align-items:center; justify-content:safe center; padding:48px 32px; box-sizing:border-box; }
-  .present2 .p2inner{ width:100%; max-width:860px; transition:opacity .22s; }
+  .present2 .p2inner{ width:100%; max-width:640px; transition:opacity .22s; }
   .present2 .p2inner > *{ margin-left:auto; margin-right:auto; }
   .present2 .p2inner > h1{ margin-top:0; }
   .present2 .p2inner > *:last-child{ margin-bottom:0; }
@@ -301,7 +301,7 @@
   .present2 .p2npin{ max-height:240px; overflow:hidden; zoom:.46; pointer-events:none; }
   /* audience (mirror) window */
   .p2aud{ position:fixed; inset:0; z-index:300; background:var(--bg); display:flex; align-items:center; justify-content:safe center; padding:4vh 5vw; box-sizing:border-box; overflow:auto; }
-  .p2aud .p2audin{ width:100%; max-width:1300px; }
+  .p2aud .p2audin{ width:100%; max-width:640px; }
   .p2aud .wait{ color:var(--muted); font-size:17px; text-align:center; line-height:1.8; }
   .cwapprove{ margin-top:11px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .cwmode{ font-size:11.5px; color:var(--faint); }
@@ -1835,7 +1835,7 @@ description: Write the weekly report in the company format
       if(simOnly){ var L=simList(),i=L.indexOf(curId()); overlay.querySelector('.p2prev').disabled=(fS&&i<=0); overlay.querySelector('.p2next').disabled=(lS&&i>=L.length-1); }
       else { overlay.querySelector('.p2prev').disabled=fS; overlay.querySelector('.p2next').disabled=lS; }
       inner.style.opacity='0'; if(fadeT)clearTimeout(fadeT); fadeT=setTimeout(function(){ inner.style.opacity='1'; },20); inner.scrollTop=0; overlay.querySelector('.p2stage').scrollTop=0; fitZoom(); bcast(); updateNext(); }
-    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'); inner.style.zoom=1; var w=inner.offsetWidth||860, h=inner.offsetHeight||400; var avW=Math.min(window.innerWidth*0.92, 1180), avH=(window.innerHeight-60)*0.95; var z=Math.min(avW/w, avH/h, 2.2); inner.style.zoom=Math.max(0.8, z); }
+    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'); inner.style.zoom=1; var w=inner.offsetWidth||640, h=inner.offsetHeight||400; var avW=window.innerWidth*0.94, avH=(window.innerHeight-58)*0.93; var z=Math.min(avW/w, avH/h, 4.5); inner.style.zoom=Math.max(1, z); }
     function loadPage(page){ slides=build(page); if(!slides.length) return; overlay.querySelector('.p2title').textContent = page.querySelector('h1')?page.querySelector('h1').textContent:''; show(0); }
     function tocEl(){ return overlay.querySelector('.p2toc'); }
     function buildToc(){ var list=overlay.querySelector('.p2toclist .in'); list.innerHTML=''; var curIdv=curId(),pendingSec=null;
@@ -1889,7 +1889,7 @@ description: Write the weekly report in the company format
     aud.innerHTML='<div class="p2audin"><div class="wait">Waiting for the presenter…<br><span style="font-size:13px;color:var(--faint)">Move this window to your 2nd monitor and go fullscreen (F11).</span></div></div>';
     document.body.appendChild(aud);
     var inner=aud.querySelector('.p2audin');
-    function fitAud(){ inner.style.zoom=1; var w=inner.offsetWidth||900, h=inner.offsetHeight||500; var z=Math.min(Math.min(window.innerWidth*0.92,1320)/w, window.innerHeight*0.9/h, 2.6); inner.style.zoom=Math.max(0.85, z); }
+    function fitAud(){ inner.style.zoom=1; var w=inner.offsetWidth||640, h=inner.offsetHeight||500; var z=Math.min(window.innerWidth*0.95/w, window.innerHeight*0.94/h, 4.5); inner.style.zoom=Math.max(1, z); }
     function render(m){ if(m&&typeof m.html==='string'){ inner.innerHTML=m.html; fitAud(); } }
     var arzT=null; window.addEventListener('resize',function(){ if(arzT)clearTimeout(arzT); arzT=setTimeout(fitAud,120); });
     var ch=null; try{ ch=new BroadcastChannel('cc-p2'); }catch(e){}
