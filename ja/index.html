@@ -852,7 +852,8 @@ irm https://claude.ai/install.ps1 | iex</div>
           <path class="ar" d="M168 48 H221" marker-end="url(#lah)"/>
           <path class="ar" d="M379 48 H432" marker-end="url(#lah)"/>
           <path class="ar" d="M511 80 C 511 126, 89 126, 89 82" marker-end="url(#lah)"/>
-          <text class="lr" x="300" y="116" text-anchor="middle">↻ 終わるまで繰り返す</text>
+          <rect x="198" y="104" width="204" height="26" rx="6" style="fill:var(--bg)"/>
+          <text class="lr" x="300" y="120" text-anchor="middle">↻ 終わるまで繰り返す</text>
         </svg>
        </div>
        <div class="grp">
@@ -1979,7 +1980,12 @@ description: 週次レポートを会社の様式で作成
   /* collapse code blocks by default */
   document.querySelectorAll('.pre').forEach(function(pre){ var det=document.createElement('details'); det.className='codedet'; var sum=document.createElement('summary'); sum.textContent='コード例を見る (開発者向け · 見なくても OK)'; pre.parentNode.insertBefore(det,pre); det.appendChild(sum); det.appendChild(pre); });
   document.querySelectorAll('.note').forEach(function(nt){ if(nt.closest('.notedet')||nt.textContent.trim().length<100) return; var det=document.createElement('details'); det.className='notedet'; var sum=document.createElement('summary'); sum.textContent='補足'; nt.parentNode.insertBefore(det,nt); det.appendChild(sum); det.appendChild(nt); });
-  navs.forEach(function(b){ b.addEventListener('click',function(){ var id=b.dataset.page; navs.forEach(function(n){n.classList.toggle('on',n===b);}); pages.forEach(function(p){p.classList.toggle('on',p.id===id);}); window.scrollTo(0,0); stopLoop(); }); });
+  function showById(id){ var b=document.querySelector('.navitem[data-page="'+id+'"]'); if(!b) return false; navs.forEach(function(n){n.classList.toggle('on',n===b);}); pages.forEach(function(p){p.classList.toggle('on',p.id===id);}); window.scrollTo(0,0); stopLoop(); return true; }
+  function hashId(){ try{ return decodeURIComponent((location.hash||'').replace(/^#/,'')); }catch(e){ return (location.hash||'').replace(/^#/,''); } }
+  navs.forEach(function(b){ b.addEventListener('click',function(){ var id=b.dataset.page; showById(id); if(('#'+id)!==location.hash){ try{ history.pushState(null,'','#'+id); }catch(e){ location.hash=id; } } }); });
+  window.addEventListener('popstate',function(){ var id=hashId(); if(id&&document.getElementById(id)) showById(id); });
+  window.addEventListener('hashchange',function(){ var id=hashId(); if(id&&document.getElementById(id)) showById(id); });
+  (function(){ var id=hashId(); if(id&&document.getElementById(id)) showById(id); })();
 
   /* auto-repeat (loop) toggle for simulations — lecture-friendly */
   var LOOP_LABEL='繰り返し';
