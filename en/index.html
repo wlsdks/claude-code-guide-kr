@@ -798,7 +798,7 @@ irm https://claude.ai/install.ps1 | iex</div>
       </div>
       <div class="grp" style="margin-top:30px;">
         <h3>At a glance</h3>
-        <table>
+        <div class="tablewrap"><table class="t">
           <thead><tr><th>Key</th><th>What it does</th><th>When to use</th></tr></thead>
           <tbody>
             <tr><td><b>Esc</b></td><td>Stop what it's doing</td><td>Cut it off the moment it goes the wrong way</td></tr>
@@ -809,7 +809,7 @@ irm https://claude.ai/install.ps1 | iex</div>
             <tr><td><b>!</b></td><td>Run a shell command directly</td><td>Like <code>!npm test</code></td></tr>
             <tr><td><b>/</b></td><td>Open command menu</td><td>Shows every command you have</td></tr>
           </tbody>
-        </table>
+        </table></div>
         <p class="simtake"><span class="stk">Takeaway</span><span>Just remember the two that matter most — <b>Esc</b> (stop) and <b>Esc Esc</b> (rewind). That's a beginner's <b>seatbelt</b>.</span></p>
       </div>
     </section>
@@ -1188,7 +1188,7 @@ description: Write the weekly report in the company format
       </div>
       <div class="grp" style="margin-top:30px;">
         <h3>How far it's shared</h3>
-        <table>
+        <div class="tablewrap"><table class="t">
           <thead><tr><th>Scope</th><th>Where</th><th>Who uses it</th></tr></thead>
           <tbody>
             <tr><td><b>Personal</b></td><td><code>~/.claude/skills/</code></td><td>All my projects</td></tr>
@@ -1196,7 +1196,7 @@ description: Write the weekly report in the company format
             <tr><td><b>Organization</b></td><td>Managed settings</td><td>The whole company</td></tr>
             <tr><td><b>Plugin</b></td><td>A plugin bundle</td><td>Anyone who installs it</td></tr>
           </tbody>
-        </table>
+        </table></div>
         <p class="note">If making one feels hard, just ask Claude <b>"Turn this task into a skill"</b> and it'll make it for you. (Source: code.claude.com/docs — skills, as of June 2026)</p>
       </div>
     </section>
@@ -1395,13 +1395,13 @@ description: Write the weekly report in the company format
       </div>
       <div class="grp" style="margin-top:30px;">
         <h3>'Remote control' vs 'web' — don't mix them up</h3>
-        <table>
+        <div class="tablewrap"><table class="t">
           <thead><tr><th></th><th>Where the work runs</th><th>Your files</th><th>Good for</th></tr></thead>
           <tbody>
             <tr><td><b>Remote control</b></td><td>Your computer</td><td>Your computer, as-is</td><td>Keep steering an ongoing job from outside</td></tr>
             <tr><td><b>Web (claude.ai/code)</b></td><td>The cloud</td><td>A cloud environment</td><td>Start fresh without your PC</td></tr>
           </tbody>
-        </table>
+        </table></div>
         <p class="note">Officially called <b>Remote Control</b>, in <b>research preview</b> — available on all plans, but behavior and limits may change. How to turn it on: in Claude on your PC run <code>/remote-control</code> (or <code>claude remote-control</code>) → a link and QR appear. Install the Claude app on your phone and turn on notifications to get job-done and confirmation requests. (Source: code.claude.com/docs — remote control, as of June 2026)</p>
       </div>
     </section>
@@ -1778,14 +1778,14 @@ description: Write the weekly report in the company format
       </div>
       <div class="grp" style="margin-top:30px;">
         <h3>Similar automations — where they differ</h3>
-        <table>
+        <div class="tablewrap"><table class="t">
           <thead><tr><th></th><th>Where it runs</th><th>PC off?</th><th>What starts it</th></tr></thead>
           <tbody>
             <tr><td><b>Repeat (/loop)</b></td><td>Your terminal</td><td>No (must stay on)</td><td>A fixed interval</td></tr>
             <tr><td><b>Desktop schedule</b></td><td>Your computer</td><td>No (must stay on)</td><td>A schedule</td></tr>
             <tr><td><b>Routines</b></td><td>The cloud</td><td><b>Yes</b></td><td>Schedule · GitHub · API</td></tr>
           </tbody>
-        </table>
+        </table></div>
         <p class="note">This is in <b>research preview</b> — behavior and limits may change. How to make one: tell Claude with <code>/schedule</code>, or set it up under routines at claude.ai/code. A routine takes permissions up front and <b>runs on its own</b>, so it's safest to set a scope for what it may do and how far. (Source: code.claude.com/docs — routines, as of June 2026)</p>
       </div>
     </section>
@@ -1990,7 +1990,7 @@ description: Write the weekly report in the company format
   /* collapse code blocks by default */
   document.querySelectorAll('.pre').forEach(function(pre){ var det=document.createElement('details'); det.className='codedet'; var sum=document.createElement('summary'); sum.textContent='Show code example (for developers · you can skip it)'; pre.parentNode.insertBefore(det,pre); det.appendChild(sum); det.appendChild(pre); });
   document.querySelectorAll('.note').forEach(function(nt){ if(nt.closest('.notedet')||nt.textContent.trim().length<100) return; var det=document.createElement('details'); det.className='notedet'; var sum=document.createElement('summary'); sum.textContent=nt.getAttribute('data-sum')||'More'; nt.parentNode.insertBefore(det,nt); det.appendChild(sum); det.appendChild(nt); });
-  function showById(id){ var b=document.querySelector('.navitem[data-page="'+id+'"]'); if(!b) return false; navs.forEach(function(n){n.classList.toggle('on',n===b);}); pages.forEach(function(p){p.classList.toggle('on',p.id===id);}); window.scrollTo(0,0); stopLoop(); return true; }
+  function showById(id){ var b=document.querySelector('.navitem[data-page="'+id+'"]'); if(!b) return false; navs.forEach(function(n){n.classList.toggle('on',n===b);}); pages.forEach(function(p){p.classList.toggle('on',p.id===id);}); window.scrollTo(0,0); stopLoop(); if(window.__navsync) window.__navsync(); return true; }
   function hashId(){ try{ return decodeURIComponent((location.hash||'').replace(/^#/,'')); }catch(e){ return (location.hash||'').replace(/^#/,''); } }
   navs.forEach(function(b){ b.addEventListener('click',function(){ var id=b.dataset.page; showById(id); if(('#'+id)!==location.hash){ try{ history.pushState(null,'','#'+id); }catch(e){ location.hash=id; } } }); });
   window.addEventListener('popstate',function(){ var id=hashId(); if(id&&document.getElementById(id)) showById(id); });
@@ -2046,7 +2046,7 @@ description: Write the weekly report in the company format
     navs.forEach(function(n){ n.addEventListener('click', update); });
     document.querySelectorAll('#lvlsel .lvlchip').forEach(function(c){ c.addEventListener('click',function(){ setTimeout(update,0); }); });
     document.addEventListener('keydown',function(e){ if(e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return; if(e.metaKey||e.ctrlKey||e.altKey) return; if(e.key==='ArrowRight') move(1); else if(e.key==='ArrowLeft') move(-1); });
-    update(); })();
+    window.__navsync=update; update(); })();
 
   /* mobile drawer (hamburger menu) */
   (function(){ var burger=document.getElementById('mbar-burger'),lnb=document.getElementById('lnb'),scrim=document.getElementById('scrim'); if(!burger||!lnb||!scrim) return;

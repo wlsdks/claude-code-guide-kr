@@ -799,7 +799,7 @@ irm https://claude.ai/install.ps1 | iex</div>
       </div>
       <div class="grp" style="margin-top:30px;">
         <h3>한눈에 보기</h3>
-        <table>
+        <div class="tablewrap"><table class="t">
           <thead><tr><th>키</th><th>하는 일</th><th>언제 쓰나</th></tr></thead>
           <tbody>
             <tr><td><b>Esc</b></td><td>하던 일 멈춤</td><td>방향이 틀렸을 때 바로 끊기</td></tr>
@@ -810,7 +810,7 @@ irm https://claude.ai/install.ps1 | iex</div>
             <tr><td><b>!</b></td><td>셸 명령 바로 실행</td><td><code>!npm test</code> 처럼</td></tr>
             <tr><td><b>/</b></td><td>명령 메뉴 열기</td><td>무슨 명령 있는지 다 보여줌</td></tr>
           </tbody>
-        </table>
+        </table></div>
         <p class="simtake"><span class="stk">결론</span><span>제일 중요한 둘만 기억해요 — <b>Esc</b>(멈춤)와 <b>Esc Esc</b>(되돌리기). 이게 초보의 <b>안전벨트</b>예요.</span></p>
       </div>
     </section>
@@ -1192,7 +1192,7 @@ description: 주간 보고서를 회사 양식으로 작성
       </div>
       <div class="grp" style="margin-top:30px;">
         <h3>어디까지 공유되나</h3>
-        <table>
+        <div class="tablewrap"><table class="t">
           <thead><tr><th>범위</th><th>어디에</th><th>누가 쓰나</th></tr></thead>
           <tbody>
             <tr><td><b>개인</b></td><td><code>~/.claude/skills/</code></td><td>내 모든 프로젝트</td></tr>
@@ -1200,7 +1200,7 @@ description: 주간 보고서를 회사 양식으로 작성
             <tr><td><b>조직</b></td><td>관리 설정</td><td>회사 전체</td></tr>
             <tr><td><b>플러그인</b></td><td>플러그인 묶음</td><td>설치한 누구나</td></tr>
           </tbody>
-        </table>
+        </table></div>
         <p class="note">만드는 법이 어려우면 클로드에게 <b>“이 작업을 스킬로 만들어줘”</b>라고 부탁하면 대신 만들어줘요. (출처: code.claude.com/docs — skills, 2026년 6월 기준)</p>
       </div>
     </section>
@@ -1400,13 +1400,13 @@ description: 주간 보고서를 회사 양식으로 작성
       </div>
       <div class="grp" style="margin-top:30px;">
         <h3>‘원격 조종’ vs ‘웹’ — 헷갈리지 않게</h3>
-        <table>
+        <div class="tablewrap"><table class="t">
           <thead><tr><th></th><th>일은 어디서</th><th>내 파일</th><th>좋은 때</th></tr></thead>
           <tbody>
             <tr><td><b>원격 조종</b></td><td>내 컴퓨터</td><td>내 컴퓨터 그대로</td><td>하던 작업을 밖에서 이어 지시</td></tr>
             <tr><td><b>웹 (claude.ai/code)</b></td><td>클라우드</td><td>클라우드 환경</td><td>내 PC 없이 새로 시작</td></tr>
           </tbody>
-        </table>
+        </table></div>
         <p class="note">공식 이름은 <b>Remote Control</b>, <b>리서치 프리뷰(미리보기)</b> 단계예요 — 모든 플랜에서 쓸 수 있지만 동작·한도가 바뀔 수 있어요. 켜는 법: 내 PC의 클로드에서 <code>/remote-control</code> (또는 <code>claude remote-control</code>) → 링크·QR이 떠요. 폰에 클로드 앱을 깔고 알림을 켜두면 작업 완료·확인 요청을 받을 수 있어요. (출처: code.claude.com/docs — remote control, 2026년 6월 기준)</p>
       </div>
     </section>
@@ -1786,14 +1786,14 @@ description: 주간 보고서를 회사 양식으로 작성
       </div>
       <div class="grp" style="margin-top:30px;">
         <h3>비슷한 자동화, 어디서 다를까</h3>
-        <table>
+        <div class="tablewrap"><table class="t">
           <thead><tr><th></th><th>어디서 도나</th><th>PC 꺼져도?</th><th>무엇으로 시작</th></tr></thead>
           <tbody>
             <tr><td><b>반복 (/loop)</b></td><td>내 터미널</td><td>안 됨 (켜둬야)</td><td>정해진 간격</td></tr>
             <tr><td><b>데스크톱 예약</b></td><td>내 컴퓨터</td><td>안 됨 (켜둬야)</td><td>일정</td></tr>
             <tr><td><b>루틴</b></td><td>클라우드</td><td><b>됨</b></td><td>일정·깃헙·API</td></tr>
           </tbody>
-        </table>
+        </table></div>
         <p class="note"><b>리서치 프리뷰(미리보기)</b> 단계예요 — 동작·한도가 바뀔 수 있어요. 만드는 법: 클로드에게 <code>/schedule</code> 로 말하거나 claude.ai/code 의 루틴에서 설정. 루틴은 권한을 미리 받아 <b>혼자 실행</b>되니, 무엇을·어디까지 할지 범위를 정해두는 게 안전해요. (출처: code.claude.com/docs — routines, 2026년 6월 기준)</p>
       </div>
     </section>
@@ -1999,7 +1999,7 @@ description: 주간 보고서를 회사 양식으로 작성
   /* collapse code blocks by default */
   document.querySelectorAll('.pre').forEach(function(pre){ var det=document.createElement('details'); det.className='codedet'; var sum=document.createElement('summary'); sum.textContent='코드 예시 보기 (개발자용 · 안 봐도 돼요)'; pre.parentNode.insertBefore(det,pre); det.appendChild(sum); det.appendChild(pre); });
   document.querySelectorAll('.note').forEach(function(nt){ if(nt.closest('.notedet')||nt.textContent.trim().length<100) return; var det=document.createElement('details'); det.className='notedet'; var sum=document.createElement('summary'); sum.textContent=nt.getAttribute('data-sum')||'참고'; nt.parentNode.insertBefore(det,nt); det.appendChild(sum); det.appendChild(nt); });
-  function showById(id){ var b=document.querySelector('.navitem[data-page="'+id+'"]'); if(!b) return false; navs.forEach(function(n){n.classList.toggle('on',n===b);}); pages.forEach(function(p){p.classList.toggle('on',p.id===id);}); window.scrollTo(0,0); stopLoop(); return true; }
+  function showById(id){ var b=document.querySelector('.navitem[data-page="'+id+'"]'); if(!b) return false; navs.forEach(function(n){n.classList.toggle('on',n===b);}); pages.forEach(function(p){p.classList.toggle('on',p.id===id);}); window.scrollTo(0,0); stopLoop(); if(window.__navsync) window.__navsync(); return true; }
   function hashId(){ try{ return decodeURIComponent((location.hash||'').replace(/^#/,'')); }catch(e){ return (location.hash||'').replace(/^#/,''); } }
   navs.forEach(function(b){ b.addEventListener('click',function(){ var id=b.dataset.page; showById(id); if(('#'+id)!==location.hash){ try{ history.pushState(null,'','#'+id); }catch(e){ location.hash=id; } } }); });
   window.addEventListener('popstate',function(){ var id=hashId(); if(id&&document.getElementById(id)) showById(id); });
@@ -2055,7 +2055,7 @@ description: 주간 보고서를 회사 양식으로 작성
     navs.forEach(function(n){ n.addEventListener('click', update); });
     document.querySelectorAll('#lvlsel .lvlchip').forEach(function(c){ c.addEventListener('click',function(){ setTimeout(update,0); }); });
     document.addEventListener('keydown',function(e){ if(e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return; if(e.metaKey||e.ctrlKey||e.altKey) return; if(e.key==='ArrowRight') move(1); else if(e.key==='ArrowLeft') move(-1); });
-    update(); })();
+    window.__navsync=update; update(); })();
 
   /* mobile drawer (hamburger menu) */
   (function(){ var burger=document.getElementById('mbar-burger'),lnb=document.getElementById('lnb'),scrim=document.getElementById('scrim'); if(!burger||!lnb||!scrim) return;

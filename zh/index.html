@@ -798,7 +798,7 @@ irm https://claude.ai/install.ps1 | iex</div>
       </div>
       <div class="grp" style="margin-top:30px;">
         <h3>一览</h3>
-        <table>
+        <div class="tablewrap"><table class="t">
           <thead><tr><th>键</th><th>作用</th><th>什么时候用</th></tr></thead>
           <tbody>
             <tr><td><b>Esc</b></td><td>停下正在做的事</td><td>方向不对时立刻打断</td></tr>
@@ -809,7 +809,7 @@ irm https://claude.ai/install.ps1 | iex</div>
             <tr><td><b>!</b></td><td>直接执行 shell 命令</td><td>像 <code>!npm test</code> 那样</td></tr>
             <tr><td><b>/</b></td><td>打开命令菜单</td><td>列出你能用的所有命令</td></tr>
           </tbody>
-        </table>
+        </table></div>
         <p class="simtake"><span class="stk">结论</span><span>只记最重要的两个 —— <b>Esc</b>（叫停）和 <b>Esc Esc</b>（回退）。这就是新手的<b>安全带</b>。</span></p>
       </div>
     </section>
@@ -1191,7 +1191,7 @@ description: 按公司格式撰写周报
       </div>
       <div class="grp" style="margin-top:30px;">
         <h3>能共享到什么范围</h3>
-        <table>
+        <div class="tablewrap"><table class="t">
           <thead><tr><th>范围</th><th>放在哪</th><th>谁来用</th></tr></thead>
           <tbody>
             <tr><td><b>个人</b></td><td><code>~/.claude/skills/</code></td><td>我所有的项目</td></tr>
@@ -1199,7 +1199,7 @@ description: 按公司格式撰写周报
             <tr><td><b>组织</b></td><td>管理设置</td><td>整个公司</td></tr>
             <tr><td><b>插件</b></td><td>插件包</td><td>装了的任何人</td></tr>
           </tbody>
-        </table>
+        </table></div>
         <p class="note">如果觉得创建起来麻烦，可以让 Claude <b>“把这个任务做成技能”</b>，它会替你做好。（来源：code.claude.com/docs — skills，截至 2026 年 6 月）</p>
       </div>
     </section>
@@ -1399,13 +1399,13 @@ description: 按公司格式撰写周报
       </div>
       <div class="grp" style="margin-top:30px;">
         <h3>‘远程操控’ vs ‘网页’ —— 别搞混</h3>
-        <table>
+        <div class="tablewrap"><table class="t">
           <thead><tr><th></th><th>在哪干活</th><th>我的文件</th><th>适合什么时候</th></tr></thead>
           <tbody>
             <tr><td><b>远程操控</b></td><td>我的电脑</td><td>就在我电脑上</td><td>在外面接着指挥手头的活</td></tr>
             <tr><td><b>网页 (claude.ai/code)</b></td><td>云端</td><td>云端环境</td><td>没我电脑时从头开始</td></tr>
           </tbody>
-        </table>
+        </table></div>
         <p class="note">官方名称是 <b>Remote Control</b>，处于<b>研究预览（research preview）</b>阶段 —— 所有套餐都可用，但行为·上限可能会变。开启方法：在我电脑的 Claude 里输入 <code>/remote-control</code>（或 <code>claude remote-control</code>）→ 会出现链接和二维码。手机上装好 Claude 应用并开启通知，就能收到任务完成·确认请求。（来源：code.claude.com/docs — remote control，截至 2026 年 6 月）</p>
       </div>
     </section>
@@ -1784,14 +1784,14 @@ description: 按公司格式撰写周报
       </div>
       <div class="grp" style="margin-top:30px;">
         <h3>相似的自动化，差在哪</h3>
-        <table>
+        <div class="tablewrap"><table class="t">
           <thead><tr><th></th><th>在哪运行</th><th>关机也行？</th><th>靠什么触发</th></tr></thead>
           <tbody>
             <tr><td><b>重复 (/loop)</b></td><td>我的终端</td><td>不行（得开着）</td><td>固定间隔</td></tr>
             <tr><td><b>桌面定时</b></td><td>我的电脑</td><td>不行（得开着）</td><td>日程</td></tr>
             <tr><td><b>例程</b></td><td>云端</td><td><b>行</b></td><td>日程·GitHub·API</td></tr>
           </tbody>
-        </table>
+        </table></div>
         <p class="note">处于<b>研究预览（research preview）</b>阶段 —— 行为·上限可能会变。创建方法：对 Claude 说 <code>/schedule</code>，或在 claude.ai/code 的‘例程’里设置。例程会预先取得权限<b>自行运行</b>，所以定好做什么·做到哪儿的范围才安全。（来源：code.claude.com/docs — routines，截至 2026 年 6 月）</p>
       </div>
     </section>
@@ -1996,7 +1996,7 @@ description: 按公司格式撰写周报
   /* collapse code blocks by default */
   document.querySelectorAll('.pre').forEach(function(pre){ var det=document.createElement('details'); det.className='codedet'; var sum=document.createElement('summary'); sum.textContent='查看代码示例（开发者向 · 不看也行）'; pre.parentNode.insertBefore(det,pre); det.appendChild(sum); det.appendChild(pre); });
   document.querySelectorAll('.note').forEach(function(nt){ if(nt.closest('.notedet')||nt.textContent.trim().length<100) return; var det=document.createElement('details'); det.className='notedet'; var sum=document.createElement('summary'); sum.textContent=nt.getAttribute('data-sum')||'备注'; nt.parentNode.insertBefore(det,nt); det.appendChild(sum); det.appendChild(nt); });
-  function showById(id){ var b=document.querySelector('.navitem[data-page="'+id+'"]'); if(!b) return false; navs.forEach(function(n){n.classList.toggle('on',n===b);}); pages.forEach(function(p){p.classList.toggle('on',p.id===id);}); window.scrollTo(0,0); stopLoop(); return true; }
+  function showById(id){ var b=document.querySelector('.navitem[data-page="'+id+'"]'); if(!b) return false; navs.forEach(function(n){n.classList.toggle('on',n===b);}); pages.forEach(function(p){p.classList.toggle('on',p.id===id);}); window.scrollTo(0,0); stopLoop(); if(window.__navsync) window.__navsync(); return true; }
   function hashId(){ try{ return decodeURIComponent((location.hash||'').replace(/^#/,'')); }catch(e){ return (location.hash||'').replace(/^#/,''); } }
   navs.forEach(function(b){ b.addEventListener('click',function(){ var id=b.dataset.page; showById(id); if(('#'+id)!==location.hash){ try{ history.pushState(null,'','#'+id); }catch(e){ location.hash=id; } } }); });
   window.addEventListener('popstate',function(){ var id=hashId(); if(id&&document.getElementById(id)) showById(id); });
@@ -2052,7 +2052,7 @@ description: 按公司格式撰写周报
     navs.forEach(function(n){ n.addEventListener('click', update); });
     document.querySelectorAll('#lvlsel .lvlchip').forEach(function(c){ c.addEventListener('click',function(){ setTimeout(update,0); }); });
     document.addEventListener('keydown',function(e){ if(e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return; if(e.metaKey||e.ctrlKey||e.altKey) return; if(e.key==='ArrowRight') move(1); else if(e.key==='ArrowLeft') move(-1); });
-    update(); })();
+    window.__navsync=update; update(); })();
 
   /* mobile drawer (hamburger menu) */
   (function(){ var burger=document.getElementById('mbar-burger'),lnb=document.getElementById('lnb'),scrim=document.getElementById('scrim'); if(!burger||!lnb||!scrim) return;
