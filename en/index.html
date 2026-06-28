@@ -1717,7 +1717,7 @@ description: Write the weekly report in the company format
       <div class="efthink" id="ef-think"></div>
       <p class="simtake"><span class="stk">Takeaway</span><span><b>Simple tasks = 'low'</b> (fast, cheap); <b>hard reasoning = 'high/max'</b> (accurate but slower & pricier).</span></p>
       <p class="note">Use 'low' for simple tasks (fast and cheap), and 'high/max' for tricky analysis and reasoning. How to change it: <code>/effort</code> or settings (the 'Settings' tab). <span class="exb">example</span> The bars are a relative comparison. (Source: Anthropic official — support.claude.com model & effort settings)</p>
-      <p class="note"><b>Advanced · ultracode</b> — The <code>/effort</code> menu also has <b>ultracode</b>. On top of extra-high (xhigh) reasoning, it has Claude <b>automatically marshal multiple helpers (a workflow)</b> for hard tasks. It's <b>session-only</b>, uses a lot of tokens, so you don't need it day-to-day — pick it only for very hard tasks (on Fable 5, Opus 4.8, etc.).</p>
+      <p class="note" data-sum="Advanced · ultracode"><b>Advanced · ultracode</b> — The <code>/effort</code> menu also has <b>ultracode</b>. On top of extra-high (xhigh) reasoning, it has Claude <b>automatically marshal multiple helpers (a workflow)</b> for hard tasks. It's <b>session-only</b>, uses a lot of tokens, so you don't need it day-to-day — pick it only for very hard tasks (on Fable 5, Opus 4.8, etc.).</p>
     </section>
 
     <!-- GOAL -->
@@ -1989,7 +1989,7 @@ description: Write the weekly report in the company format
 
   /* collapse code blocks by default */
   document.querySelectorAll('.pre').forEach(function(pre){ var det=document.createElement('details'); det.className='codedet'; var sum=document.createElement('summary'); sum.textContent='Show code example (for developers · you can skip it)'; pre.parentNode.insertBefore(det,pre); det.appendChild(sum); det.appendChild(pre); });
-  document.querySelectorAll('.note').forEach(function(nt){ if(nt.closest('.notedet')||nt.textContent.trim().length<100) return; var det=document.createElement('details'); det.className='notedet'; var sum=document.createElement('summary'); sum.textContent='More'; nt.parentNode.insertBefore(det,nt); det.appendChild(sum); det.appendChild(nt); });
+  document.querySelectorAll('.note').forEach(function(nt){ if(nt.closest('.notedet')||nt.textContent.trim().length<100) return; var det=document.createElement('details'); det.className='notedet'; var sum=document.createElement('summary'); sum.textContent=nt.getAttribute('data-sum')||'More'; nt.parentNode.insertBefore(det,nt); det.appendChild(sum); det.appendChild(nt); });
   function showById(id){ var b=document.querySelector('.navitem[data-page="'+id+'"]'); if(!b) return false; navs.forEach(function(n){n.classList.toggle('on',n===b);}); pages.forEach(function(p){p.classList.toggle('on',p.id===id);}); window.scrollTo(0,0); stopLoop(); return true; }
   function hashId(){ try{ return decodeURIComponent((location.hash||'').replace(/^#/,'')); }catch(e){ return (location.hash||'').replace(/^#/,''); } }
   navs.forEach(function(b){ b.addEventListener('click',function(){ var id=b.dataset.page; showById(id); if(('#'+id)!==location.hash){ try{ history.pushState(null,'','#'+id); }catch(e){ location.hash=id; } } }); });

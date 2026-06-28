@@ -1722,7 +1722,7 @@ description: 按公司格式撰写周报
       <div class="efthink" id="ef-think"></div>
       <p class="simtake"><span class="stk">结论</span><span><b>简单的事用‘低’</b>（快又省）；<b>难的推理用‘高/最高’</b>（更准但更慢更贵）。</span></p>
       <p class="note">简单的事用‘低’（又快又便宜），棘手的分析·推理用‘高/最高’。改法：<code>/effort</code> 或在设置里（见‘设置’标签页）。<span class="exb">示例</span> 这些条形是相对比较。（出处：Anthropic 官方 —— support.claude.com 模型·effort 设置）</p>
-      <p class="note"><b>进阶 · ultracode</b> —— <code>/effort</code> 菜单里还有 <b>ultracode</b>。它在超高（xhigh）推理之上，让 Claude 为困难任务<b>自动调动多个助手（工作流）</b>处理。这是<b>仅当前会话</b>的模式，很费 token，平时用不到，只在非常难的任务时选用（Fable 5、Opus 4.8 等）。</p>
+      <p class="note" data-sum="进阶 · ultracode"><b>进阶 · ultracode</b> —— <code>/effort</code> 菜单里还有 <b>ultracode</b>。它在超高（xhigh）推理之上，让 Claude 为困难任务<b>自动调动多个助手（工作流）</b>处理。这是<b>仅当前会话</b>的模式，很费 token，平时用不到，只在非常难的任务时选用（Fable 5、Opus 4.8 等）。</p>
     </section>
 
     <!-- GOAL -->
@@ -1995,7 +1995,7 @@ description: 按公司格式撰写周报
 
   /* collapse code blocks by default */
   document.querySelectorAll('.pre').forEach(function(pre){ var det=document.createElement('details'); det.className='codedet'; var sum=document.createElement('summary'); sum.textContent='查看代码示例（开发者向 · 不看也行）'; pre.parentNode.insertBefore(det,pre); det.appendChild(sum); det.appendChild(pre); });
-  document.querySelectorAll('.note').forEach(function(nt){ if(nt.closest('.notedet')||nt.textContent.trim().length<100) return; var det=document.createElement('details'); det.className='notedet'; var sum=document.createElement('summary'); sum.textContent='备注'; nt.parentNode.insertBefore(det,nt); det.appendChild(sum); det.appendChild(nt); });
+  document.querySelectorAll('.note').forEach(function(nt){ if(nt.closest('.notedet')||nt.textContent.trim().length<100) return; var det=document.createElement('details'); det.className='notedet'; var sum=document.createElement('summary'); sum.textContent=nt.getAttribute('data-sum')||'备注'; nt.parentNode.insertBefore(det,nt); det.appendChild(sum); det.appendChild(nt); });
   function showById(id){ var b=document.querySelector('.navitem[data-page="'+id+'"]'); if(!b) return false; navs.forEach(function(n){n.classList.toggle('on',n===b);}); pages.forEach(function(p){p.classList.toggle('on',p.id===id);}); window.scrollTo(0,0); stopLoop(); return true; }
   function hashId(){ try{ return decodeURIComponent((location.hash||'').replace(/^#/,'')); }catch(e){ return (location.hash||'').replace(/^#/,''); } }
   navs.forEach(function(b){ b.addEventListener('click',function(){ var id=b.dataset.page; showById(id); if(('#'+id)!==location.hash){ try{ history.pushState(null,'','#'+id); }catch(e){ location.hash=id; } } }); });

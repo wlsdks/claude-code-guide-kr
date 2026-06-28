@@ -1723,7 +1723,7 @@ description: 週次レポートを会社の様式で作成
       <div class="efthink" id="ef-think"></div>
       <p class="simtake"><span class="stk">結論</span><span><b>簡単な作業は『低』</b>（速くて安い）、<b>難しい推論は『高/最高』</b>（正確だが遅くて高い）。</span></p>
       <p class="note">簡単な仕事は「低」で（速くて安い）、込み入った分析・推論は「高/最高」で。変え方: <code>/effort</code> または設定（「設定」タブ）。<span class="exb">例</span> のバーは相対的な比較です。（出典: Anthropic 公式 — support.claude.com モデル・effort 設定）</p>
-      <p class="note"><b>上級 · ultracode</b> — <code>/effort</code> メニューには <b>ultracode</b> もあります。超高（xhigh）の推論に加えて、難しい作業では Claude が<b>複数のヘルパーを自動的に動員（ワークフロー）</b>して処理します。<b>そのセッション限定</b>のモードで、トークンを多く使うので普段は不要、とても難しい作業のときだけ選びます（Fable 5・Opus 4.8 など）。</p>
+      <p class="note" data-sum="上級 · ultracode"><b>上級 · ultracode</b> — <code>/effort</code> メニューには <b>ultracode</b> もあります。超高（xhigh）の推論に加えて、難しい作業では Claude が<b>複数のヘルパーを自動的に動員（ワークフロー）</b>して処理します。<b>そのセッション限定</b>のモードで、トークンを多く使うので普段は不要、とても難しい作業のときだけ選びます（Fable 5・Opus 4.8 など）。</p>
     </section>
 
     <!-- GOAL -->
@@ -1995,7 +1995,7 @@ description: 週次レポートを会社の様式で作成
 
   /* collapse code blocks by default */
   document.querySelectorAll('.pre').forEach(function(pre){ var det=document.createElement('details'); det.className='codedet'; var sum=document.createElement('summary'); sum.textContent='コード例を見る (開発者向け · 見なくても OK)'; pre.parentNode.insertBefore(det,pre); det.appendChild(sum); det.appendChild(pre); });
-  document.querySelectorAll('.note').forEach(function(nt){ if(nt.closest('.notedet')||nt.textContent.trim().length<100) return; var det=document.createElement('details'); det.className='notedet'; var sum=document.createElement('summary'); sum.textContent='補足'; nt.parentNode.insertBefore(det,nt); det.appendChild(sum); det.appendChild(nt); });
+  document.querySelectorAll('.note').forEach(function(nt){ if(nt.closest('.notedet')||nt.textContent.trim().length<100) return; var det=document.createElement('details'); det.className='notedet'; var sum=document.createElement('summary'); sum.textContent=nt.getAttribute('data-sum')||'補足'; nt.parentNode.insertBefore(det,nt); det.appendChild(sum); det.appendChild(nt); });
   function showById(id){ var b=document.querySelector('.navitem[data-page="'+id+'"]'); if(!b) return false; navs.forEach(function(n){n.classList.toggle('on',n===b);}); pages.forEach(function(p){p.classList.toggle('on',p.id===id);}); window.scrollTo(0,0); stopLoop(); return true; }
   function hashId(){ try{ return decodeURIComponent((location.hash||'').replace(/^#/,'')); }catch(e){ return (location.hash||'').replace(/^#/,''); } }
   navs.forEach(function(b){ b.addEventListener('click',function(){ var id=b.dataset.page; showById(id); if(('#'+id)!==location.hash){ try{ history.pushState(null,'','#'+id); }catch(e){ location.hash=id; } } }); });
