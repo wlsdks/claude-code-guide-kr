@@ -310,6 +310,10 @@
   .quiz .qfb{ display:none; margin-top:11px; font-size:13.5px; line-height:1.55; }
   .quiz .qfb.on{ display:block; }
   .quiz .qfb.good{ color:var(--good); } .quiz .qfb.bad{ color:var(--muted); }
+  .quiz .qopt.right::after{ content:" ✓"; color:var(--good); font-weight:700; }
+  .quiz .qopt.wrong::after{ content:" ✗"; color:var(--over); font-weight:700; }
+  /* keyboard focus ring (keyboard users only — does not affect mouse clicks) */
+  a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, [tabindex]:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; border-radius:6px; }
   .cwapprove{ margin-top:11px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .cwmode{ font-size:11.5px; color:var(--faint); }
   .cwvm{ border:1px dashed var(--line2); border-radius:11px; padding:11px 14px 7px; background:var(--panel); position:relative; }
@@ -1965,7 +1969,7 @@ description: 週次レポートを会社の様式で作成
   document.querySelectorAll('.chatdemo').forEach(noShrink);
   ['cw-stage','sess-body','goal-turns','loop-feed','dr-list','hw-flow','m-typed','ef-think','mcp-detail','sa-self','pm-simbox','rm-flow','rt-box','su-box','sc-box','ss-box'].forEach(function(id){ noShrink(document.getElementById(id)); });
   /* "your turn" quiz — option select -> mark + feedback */
-  document.querySelectorAll('.quiz').forEach(function(q){ var fb=q.querySelector('.qfb'); q.querySelectorAll('.qopt').forEach(function(o){ o.addEventListener('click',function(){ var ok=o.hasAttribute('data-ok'); q.querySelectorAll('.qopt').forEach(function(x){ x.classList.remove('right','wrong'); }); o.classList.add(ok?'right':'wrong'); if(!ok){ var c=q.querySelector('.qopt[data-ok]'); if(c) c.classList.add('right'); } if(fb){ fb.textContent = ok ? (fb.getAttribute('data-ok')||'') : (fb.getAttribute('data-no')||''); fb.className='qfb on '+(ok?'good':'bad'); } }); }); });
+  document.querySelectorAll('.quiz').forEach(function(q){ var fb=q.querySelector('.qfb'); if(fb){ fb.setAttribute('aria-live','polite'); fb.setAttribute('role','status'); } q.querySelectorAll('.qopt').forEach(function(o){ o.addEventListener('click',function(){ var ok=o.hasAttribute('data-ok'); q.querySelectorAll('.qopt').forEach(function(x){ x.classList.remove('right','wrong'); }); o.classList.add(ok?'right':'wrong'); if(!ok){ var c=q.querySelector('.qopt[data-ok]'); if(c) c.classList.add('right'); } if(fb){ fb.textContent = ok ? (fb.getAttribute('data-ok')||'') : (fb.getAttribute('data-no')||''); fb.className='qfb on '+(ok?'good':'bad'); } }); }); });
 
   /* difficulty mode — 초급/중급/고급 filter */
   var LV={ intro:1,cowork:1,usecases:1,where:1,ask:1,mention:1,keys:1,steer:1,howworks:1,context:1,manage:1,compact:1,sessions:1,models:1,claudemd:1,images:1,permissions:1,rewind:1,commands:1,glossary:1,
