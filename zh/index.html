@@ -869,9 +869,25 @@ irm https://claude.ai/install.ps1 | iex</div>
     <section class="page" id="setup">
       <h1>AI 的工作环境 —— 你递给它什么</h1>
       <p class="lead">同样是 Claude，结果会因为<b>你递给它什么</b>而大不相同。<b>工具·指示·权限·上下文</b> —— 把这个‘工作环境’配置得越好，它就越能自己干好。</p>
-      <p class="defs">专家们常把它叫做 <b>‘harness（框架）’</b> 或 <b>‘上下文工程’</b>。听着唬人，说到底就是<b>把环境配置好，让 AI 干得好</b>。点点下面这五样。</p>
+      <p class="defs">说白了 —— 就是<b>把环境配置好，让 AI 干得好</b>。点点下面这五样。<span style="color:var(--faint)">（专家们叫它‘harness’或‘上下文工程’。）</span></p>
       <p class="anlg"><span class="ak">比喻</span><span>就像<b>请维修师傅上门时</b> —— 备好要用的工具、写明家里的特点和你的喜好、定好能动到哪儿、再把上次的便条递过去 —— 师傅就办得妥妥的。AI 也一样。</span></p>
-      <div class="grp">
+             <div class="loopviz" role="img" aria-label="工具·指示·权限·上下文·扩展汇入 AI">
+        <svg viewBox="0 0 600 184" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="sah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0.7,0.7 L6,3 L0.7,5.3" class="ar"/></marker></defs>
+          <path class="ar" d="M166 22 L392 84" marker-end="url(#sah)"/>
+          <path class="ar" d="M166 60 L392 90" marker-end="url(#sah)"/>
+          <path class="ar" d="M166 96 H392" marker-end="url(#sah)"/>
+          <path class="ar" d="M166 132 L392 102" marker-end="url(#sah)"/>
+          <path class="ar" d="M166 170 L392 108" marker-end="url(#sah)"/>
+          <rect class="nd" x="16" y="8" width="150" height="28" rx="9"/><text class="ln" x="91" y="27" text-anchor="middle">工具</text>
+          <rect class="nd" x="16" y="46" width="150" height="28" rx="9"/><text class="ln" x="91" y="65" text-anchor="middle">指示</text>
+          <rect class="nd" x="16" y="82" width="150" height="28" rx="9"/><text class="ln" x="91" y="101" text-anchor="middle">权限</text>
+          <rect class="nd" x="16" y="118" width="150" height="28" rx="9"/><text class="ln" x="91" y="137" text-anchor="middle">上下文</text>
+          <rect class="nd" x="16" y="156" width="150" height="28" rx="9"/><text class="ln" x="91" y="175" text-anchor="middle">扩展</text>
+          <rect class="nd" x="396" y="68" width="180" height="56" rx="14" style="fill:rgba(31,158,118,.10);stroke:var(--accent)"/><text class="ln" x="486" y="100" text-anchor="middle">AI（Claude）</text>
+        </svg>
+       </div>
+       <div class="grp">
         <h3>递给 AI 的 5 样东西 —— 点点看</h3>
         <div class="chips" id="su-chips" style="margin:4px 0 14px;">
           <button class="chip on" data-k="tool">工具</button>

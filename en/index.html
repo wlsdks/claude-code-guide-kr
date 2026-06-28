@@ -867,9 +867,25 @@ irm https://claude.ai/install.ps1 | iex</div>
     <section class="page" id="setup">
       <h1>AI's work environment — what you hand it</h1>
       <p class="lead">Even the same Claude gives very different results depending on <b>what you hand it</b>. <b>Tools, instructions, permissions, context</b> — the better you set up this 'work environment,' the better it does on its own.</p>
-      <p class="defs">Experts often call this <b>'the harness'</b> or <b>'context engineering.'</b> It sounds hard, but it really just means <b>setting up the environment so the AI works well</b>. Press the five items below.</p>
+      <p class="defs">Put simply — it's <b>setting up the environment so the AI works well</b>. Press the five items below. <span style="color:var(--faint)">(Experts call this 'the harness' or 'context engineering.')</span></p>
       <p class="anlg"><span class="ak">Analogy</span><span>Like <b>calling a repair technician to your home</b> — you hand over the tools they'll need, jot down the house's quirks and your preferences, decide how far they may go, and pass along earlier notes — and they get it done with ease. The AI is the same.</span></p>
-      <div class="grp">
+             <div class="loopviz" role="img" aria-label="Tools, instructions, permissions, context, extensions feed into the AI">
+        <svg viewBox="0 0 600 184" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="sah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0.7,0.7 L6,3 L0.7,5.3" class="ar"/></marker></defs>
+          <path class="ar" d="M166 22 L392 84" marker-end="url(#sah)"/>
+          <path class="ar" d="M166 60 L392 90" marker-end="url(#sah)"/>
+          <path class="ar" d="M166 96 H392" marker-end="url(#sah)"/>
+          <path class="ar" d="M166 132 L392 102" marker-end="url(#sah)"/>
+          <path class="ar" d="M166 170 L392 108" marker-end="url(#sah)"/>
+          <rect class="nd" x="16" y="8" width="150" height="28" rx="9"/><text class="ln" x="91" y="27" text-anchor="middle">Tools</text>
+          <rect class="nd" x="16" y="46" width="150" height="28" rx="9"/><text class="ln" x="91" y="65" text-anchor="middle">Instructions</text>
+          <rect class="nd" x="16" y="82" width="150" height="28" rx="9"/><text class="ln" x="91" y="101" text-anchor="middle">Permissions</text>
+          <rect class="nd" x="16" y="118" width="150" height="28" rx="9"/><text class="ln" x="91" y="137" text-anchor="middle">Context</text>
+          <rect class="nd" x="16" y="156" width="150" height="28" rx="9"/><text class="ln" x="91" y="175" text-anchor="middle">Extensions</text>
+          <rect class="nd" x="396" y="68" width="180" height="56" rx="14" style="fill:rgba(31,158,118,.10);stroke:var(--accent)"/><text class="ln" x="486" y="100" text-anchor="middle">AI (Claude)</text>
+        </svg>
+       </div>
+       <div class="grp">
         <h3>The 5 things you hand the AI — press one</h3>
         <div class="chips" id="su-chips" style="margin:4px 0 14px;">
           <button class="chip on" data-k="tool">Tools</button>
