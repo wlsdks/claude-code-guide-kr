@@ -298,6 +298,18 @@
   .present2 .p2nrow{ display:flex; gap:11px; font-size:14.5px; line-height:1.55; margin-bottom:7px; color:var(--ink); }
   .present2 .p2nrow:last-child{ margin-bottom:0; }
   .present2 .p2nrow .p2nk{ flex:none; min-width:46px; font-weight:600; color:var(--accent); font-size:12px; padding-top:2px; white-space:nowrap; }
+  /* "your turn" quiz component */
+  .quiz{ border:1px solid var(--line2); border-radius:14px; padding:15px 17px; margin:16px 0; background:var(--panel); }
+  .quiz .qq{ font-size:14.5px; line-height:1.55; margin-bottom:12px; color:var(--ink); }
+  .quiz .qb{ display:inline-block; font-size:11.5px; font-weight:700; color:var(--accent); background:rgba(31,158,118,.10); border-radius:6px; padding:2px 8px; margin-right:7px; }
+  .quiz .qopts{ display:flex; flex-direction:column; gap:8px; }
+  .quiz .qopt{ text-align:left; padding:11px 14px; border:1px solid var(--line2); border-radius:10px; background:var(--bg); color:var(--ink); font-size:14px; cursor:pointer; transition:border-color .15s, background .15s; }
+  .quiz .qopt:hover{ border-color:var(--accent); }
+  .quiz .qopt.right{ border-color:var(--good); background:rgba(31,158,118,.12); font-weight:600; }
+  .quiz .qopt.wrong{ border-color:var(--over); background:rgba(216,69,63,.08); }
+  .quiz .qfb{ display:none; margin-top:11px; font-size:13.5px; line-height:1.55; }
+  .quiz .qfb.on{ display:block; }
+  .quiz .qfb.good{ color:var(--good); } .quiz .qfb.bad{ color:var(--muted); }
   .cwapprove{ margin-top:11px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .cwmode{ font-size:11.5px; color:var(--faint); }
   .cwvm{ border:1px dashed var(--line2); border-radius:11px; padding:11px 14px 7px; background:var(--panel); position:relative; }
@@ -1399,7 +1411,16 @@ description: Write the weekly report in the company format
       </div>
       <p class="simtake"><span class="stk">Takeaway</span><span>Each mode changes <b>how much Claude does on its own</b> — start with 'ask permission' to be safe, loosen common actions once comfortable.</span></p>
       <p class="note">These 5 are the modes shown in the menu. There's also a separate automation-only mode that 'only allows pre-approved tools (dontAsk).' In any mode, <b>extreme destruction like wiping the whole system (rm -rf / · rm -rf ~)</b> still asks for one more confirmation (a 'circuit breaker' — they don't run automatically). If you don't like a result, you can recover it with 'rewind' (the 'Rewind' tab).</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">Your turn</span>You're new to Claude Code and worried you might accidentally change an important file. Which permission mode is safest to start with?</div>
+         <div class="qopts">
+           <button class="qopt" data-ok>Default — ask every time</button>
+           <button class="qopt">Auto-accept edits — change without asking</button>
+           <button class="qopt">Bypass — do almost everything on its own</button>
+         </div>
+         <div class="qfb" data-ok="Correct. Starting with ‘Default’ (ask every time) and confirming each step is safest — loosen it for routine tasks once you’re comfortable." data-no="‘Default — ask every time’ is safest to start. Confirm each action, then gradually loosen it as you get comfortable."></div>
+       </div>
+     </section>
 
     <!-- 17 REWIND -->
     <section class="page" id="rewind">
@@ -1907,6 +1928,8 @@ description: Write the weekly report in the company format
   function noShrink(el){ if(!el||el._ns) return; el._ns=1; var mx=0, raf=0; try{ var ro=new ResizeObserver(function(){ if(raf) return; raf=requestAnimationFrame(function(){ raf=0; var h=el.scrollHeight; if(h>mx+1){ mx=h; el.style.minHeight=mx+'px'; } }); }); ro.observe(el); }catch(e){} }
   document.querySelectorAll('.chatdemo').forEach(noShrink);
   ['cw-stage','sess-body','goal-turns','loop-feed','dr-list','hw-flow','m-typed','ef-think','mcp-detail','sa-self','pm-simbox','rm-flow','rt-box','su-box','sc-box','ss-box'].forEach(function(id){ noShrink(document.getElementById(id)); });
+  /* "your turn" quiz — option select -> mark + feedback */
+  document.querySelectorAll('.quiz').forEach(function(q){ var fb=q.querySelector('.qfb'); q.querySelectorAll('.qopt').forEach(function(o){ o.addEventListener('click',function(){ var ok=o.hasAttribute('data-ok'); q.querySelectorAll('.qopt').forEach(function(x){ x.classList.remove('right','wrong'); }); o.classList.add(ok?'right':'wrong'); if(!ok){ var c=q.querySelector('.qopt[data-ok]'); if(c) c.classList.add('right'); } if(fb){ fb.textContent = ok ? (fb.getAttribute('data-ok')||'') : (fb.getAttribute('data-no')||''); fb.className='qfb on '+(ok?'good':'bad'); } }); }); });
 
   /* difficulty mode — 초급/중급/고급 filter */
   var LV={ intro:1,cowork:1,usecases:1,where:1,ask:1,mention:1,keys:1,steer:1,howworks:1,context:1,manage:1,compact:1,sessions:1,models:1,claudemd:1,images:1,permissions:1,rewind:1,commands:1,glossary:1,

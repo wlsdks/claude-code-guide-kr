@@ -298,6 +298,18 @@
   .present2 .p2nrow{ display:flex; gap:11px; font-size:14.5px; line-height:1.55; margin-bottom:7px; color:var(--ink); }
   .present2 .p2nrow:last-child{ margin-bottom:0; }
   .present2 .p2nrow .p2nk{ flex:none; min-width:46px; font-weight:600; color:var(--accent); font-size:12px; padding-top:2px; white-space:nowrap; }
+  /* "your turn" quiz component */
+  .quiz{ border:1px solid var(--line2); border-radius:14px; padding:15px 17px; margin:16px 0; background:var(--panel); }
+  .quiz .qq{ font-size:14.5px; line-height:1.55; margin-bottom:12px; color:var(--ink); }
+  .quiz .qb{ display:inline-block; font-size:11.5px; font-weight:700; color:var(--accent); background:rgba(31,158,118,.10); border-radius:6px; padding:2px 8px; margin-right:7px; }
+  .quiz .qopts{ display:flex; flex-direction:column; gap:8px; }
+  .quiz .qopt{ text-align:left; padding:11px 14px; border:1px solid var(--line2); border-radius:10px; background:var(--bg); color:var(--ink); font-size:14px; cursor:pointer; transition:border-color .15s, background .15s; }
+  .quiz .qopt:hover{ border-color:var(--accent); }
+  .quiz .qopt.right{ border-color:var(--good); background:rgba(31,158,118,.12); font-weight:600; }
+  .quiz .qopt.wrong{ border-color:var(--over); background:rgba(216,69,63,.08); }
+  .quiz .qfb{ display:none; margin-top:11px; font-size:13.5px; line-height:1.55; }
+  .quiz .qfb.on{ display:block; }
+  .quiz .qfb.good{ color:var(--good); } .quiz .qfb.bad{ color:var(--muted); }
   .cwapprove{ margin-top:11px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .cwmode{ font-size:11.5px; color:var(--faint); }
   .cwvm{ border:1px dashed var(--line2); border-radius:11px; padding:11px 14px 7px; background:var(--panel); position:relative; }
@@ -1403,7 +1415,16 @@ description: 按公司格式撰写周报
       </div>
       <p class="simtake"><span class="stk">结论</span><span>每种模式<b>自动执行的范围不同</b> —— 先用‘请求权限’稳妥，熟练后再放开常用操作。</span></p>
       <p class="note">这 5 种是菜单里能看到的模式。另外还有一个专供自动化的‘只允许预先批准的工具（dontAsk）’模式。无论哪种模式，<b>像删除整个系统（rm -rf / · rm -rf ~）这种极端破坏</b>都会再确认一次（‘断路器’——不会自动执行）。不满意的话可以用‘回退’（‘回退’标签页）恢复。</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">你来试试</span>你刚开始用 Claude Code，担心不小心改坏重要文件。从哪个权限模式开始最安全？</div>
+         <div class="qopts">
+           <button class="qopt" data-ok>默认 — 每次都问</button>
+           <button class="qopt">自动接受编辑 — 不问直接改</button>
+           <button class="qopt">绕过 — 几乎全自动</button>
+         </div>
+         <div class="qfb" data-ok="答对了。一开始用‘默认（每次都问）’逐一确认最安全 —— 熟练后再对常做的事放开。" data-no="一开始‘默认 — 每次都问’最安全。每步都确认，熟练后再逐渐放开。"></div>
+       </div>
+     </section>
 
     <!-- 17 REWIND -->
     <section class="page" id="rewind">
@@ -1913,6 +1934,8 @@ description: 按公司格式撰写周报
   function noShrink(el){ if(!el||el._ns) return; el._ns=1; var mx=0, raf=0; try{ var ro=new ResizeObserver(function(){ if(raf) return; raf=requestAnimationFrame(function(){ raf=0; var h=el.scrollHeight; if(h>mx+1){ mx=h; el.style.minHeight=mx+'px'; } }); }); ro.observe(el); }catch(e){} }
   document.querySelectorAll('.chatdemo').forEach(noShrink);
   ['cw-stage','sess-body','goal-turns','loop-feed','dr-list','hw-flow','m-typed','ef-think','mcp-detail','sa-self','pm-simbox','rm-flow','rt-box','su-box','sc-box','ss-box'].forEach(function(id){ noShrink(document.getElementById(id)); });
+  /* "your turn" quiz — option select -> mark + feedback */
+  document.querySelectorAll('.quiz').forEach(function(q){ var fb=q.querySelector('.qfb'); q.querySelectorAll('.qopt').forEach(function(o){ o.addEventListener('click',function(){ var ok=o.hasAttribute('data-ok'); q.querySelectorAll('.qopt').forEach(function(x){ x.classList.remove('right','wrong'); }); o.classList.add(ok?'right':'wrong'); if(!ok){ var c=q.querySelector('.qopt[data-ok]'); if(c) c.classList.add('right'); } if(fb){ fb.textContent = ok ? (fb.getAttribute('data-ok')||'') : (fb.getAttribute('data-no')||''); fb.className='qfb on '+(ok?'good':'bad'); } }); }); });
 
   /* difficulty mode — 초급/중급/고급 filter */
   var LV={ intro:1,cowork:1,usecases:1,where:1,ask:1,mention:1,keys:1,steer:1,howworks:1,context:1,manage:1,compact:1,sessions:1,models:1,claudemd:1,images:1,permissions:1,rewind:1,commands:1,glossary:1,

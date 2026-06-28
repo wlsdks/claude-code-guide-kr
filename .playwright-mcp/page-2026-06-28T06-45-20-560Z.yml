@@ -1,0 +1,306 @@
+- generic [ref=e2]:
+  - navigation [ref=e3]:
+    - generic [ref=e4]:
+      - button "Switch light/dark" [ref=e5] [cursor=pointer]:
+        - img [ref=e6]
+      - button "Expand mode" [ref=e9] [cursor=pointer]:
+        - generic [ref=e11]: Expand mode
+    - combobox "Language" [ref=e12] [cursor=pointer]:
+      - option "한국어"
+      - option "English" [selected]
+      - option "中文"
+      - option "日本語"
+    - generic [ref=e13]:
+      - text: Claude Code Basics
+      - generic [ref=e14]: A guide for non-developers
+    - group "Difficulty" [ref=e15]:
+      - button "All43" [ref=e16] [cursor=pointer]
+      - button "Beginner20" [ref=e17] [cursor=pointer]
+      - button "Intermediate15" [ref=e18] [cursor=pointer]
+      - button "Advanced8" [ref=e19] [cursor=pointer]
+    - generic [ref=e20]: Getting started
+    - button "01 What is Claude Code?" [ref=e21] [cursor=pointer]:
+      - img [ref=e22]
+      - generic [ref=e24]: "01"
+      - generic [ref=e25]: What is Claude Code?
+    - button "02 What is Cowork?" [ref=e26] [cursor=pointer]:
+      - img [ref=e27]
+      - generic [ref=e30]: "02"
+      - generic [ref=e31]: What is Cowork?
+    - button "03 Real examples" [ref=e32] [cursor=pointer]:
+      - img [ref=e33]
+      - generic [ref=e36]: "03"
+      - generic [ref=e37]: Real examples
+    - button "04 Where to use it" [ref=e38] [cursor=pointer]:
+      - img [ref=e39]
+      - generic [ref=e42]: "04"
+      - generic [ref=e43]: Where to use it
+    - generic [ref=e44]: Basic usage (try it)
+    - button "05 Writing good requests" [ref=e45] [cursor=pointer]:
+      - img [ref=e46]
+      - generic [ref=e49]: "05"
+      - generic [ref=e50]: Writing good requests
+    - button "06 Pointing at files @" [ref=e51] [cursor=pointer]:
+      - img [ref=e52]
+      - generic [ref=e55]: "06"
+      - generic [ref=e56]: Pointing at files @
+    - button "07 Shortcuts & modes" [ref=e57] [cursor=pointer]:
+      - img [ref=e58]
+      - generic [ref=e61]: "07"
+      - generic [ref=e62]: Shortcuts & modes
+    - button "08 Stop & redirect" [ref=e63] [cursor=pointer]:
+      - img [ref=e64]
+      - generic [ref=e67]: "08"
+      - generic [ref=e68]: Stop & redirect
+    - generic [ref=e69]: Basic concepts
+    - button "09 How it works (the loop)" [ref=e70] [cursor=pointer]:
+      - img [ref=e71]
+      - generic [ref=e74]: "09"
+      - generic [ref=e75]: How it works (the loop)
+    - button "10 AI's work setup" [ref=e76] [cursor=pointer]:
+      - img [ref=e77]
+      - generic [ref=e82]: "10"
+      - generic [ref=e83]: AI's work setup
+    - button "11 Context window" [ref=e84] [cursor=pointer]:
+      - img [ref=e85]
+      - generic [ref=e89]: "11"
+      - generic [ref=e90]: Context window
+    - button "12 Managing context (why?)" [ref=e91] [cursor=pointer]:
+      - img [ref=e92]
+      - generic [ref=e96]: "12"
+      - generic [ref=e97]: Managing context (why?)
+    - button "13 Compacting" [ref=e98] [cursor=pointer]:
+      - img [ref=e99]
+      - generic [ref=e101]: "13"
+      - generic [ref=e102]: Compacting
+    - button "14 Sessions & folders" [ref=e103] [cursor=pointer]:
+      - img [ref=e104]
+      - generic [ref=e106]: "14"
+      - generic [ref=e107]: Sessions & folders
+    - button "15 Tokens" [ref=e108] [cursor=pointer]:
+      - img [ref=e109]
+      - generic [ref=e114]: "15"
+      - generic [ref=e115]: Tokens
+    - button "16 Choosing a model (model)" [ref=e116] [cursor=pointer]:
+      - img [ref=e117]
+      - generic [ref=e122]: "16"
+      - generic [ref=e123]: Choosing a model (model)
+    - button "17 Thinking depth (effort)" [ref=e124] [cursor=pointer]:
+      - img [ref=e125]
+      - generic [ref=e129]: "17"
+      - generic [ref=e130]: Thinking depth (effort)
+    - generic [ref=e131]: Memory & rules
+    - button "18 CLAUDE.md" [ref=e132] [cursor=pointer]:
+      - img [ref=e133]
+      - generic [ref=e136]: "18"
+      - generic [ref=e137]: CLAUDE.md
+    - button "19 Memory" [ref=e138] [cursor=pointer]:
+      - img [ref=e139]
+      - generic [ref=e143]: "19"
+      - generic [ref=e144]: Memory
+    - button "20 Skills" [ref=e145] [cursor=pointer]:
+      - img [ref=e146]
+      - generic [ref=e148]: "20"
+      - generic [ref=e149]: Skills
+    - button "21 Why share skills" [ref=e150] [cursor=pointer]:
+      - img [ref=e151]
+      - generic [ref=e156]: "21"
+      - generic [ref=e157]: Why share skills
+    - button "22 Using skills safely" [ref=e158] [cursor=pointer]:
+      - img [ref=e159]
+      - generic [ref=e162]: "22"
+      - generic [ref=e163]: Using skills safely
+    - generic [ref=e164]: Expanding abilities
+    - button "23 MCP (tool connections)" [ref=e165] [cursor=pointer]:
+      - img [ref=e166]
+      - generic [ref=e171]: "23"
+      - generic [ref=e172]: MCP (tool connections)
+    - button "24 Plugins" [ref=e173] [cursor=pointer]:
+      - img [ref=e174]
+      - generic [ref=e177]: "24"
+      - generic [ref=e178]: Plugins
+    - button "25 Subagents" [ref=e179] [cursor=pointer]:
+      - img [ref=e180]
+      - generic [ref=e184]: "25"
+      - generic [ref=e185]: Subagents
+    - button "26 RPA vs AI agents" [ref=e186] [cursor=pointer]:
+      - img [ref=e187]
+      - generic [ref=e190]: "26"
+      - generic [ref=e191]: RPA vs AI agents
+    - button "27 Pasting images" [ref=e192] [cursor=pointer]:
+      - img [ref=e193]
+      - generic [ref=e197]: "27"
+      - generic [ref=e198]: Pasting images
+    - button "28 Remote control" [ref=e199] [cursor=pointer]:
+      - img [ref=e200]
+      - generic [ref=e203]: "28"
+      - generic [ref=e204]: Remote control
+    - button "29 Automation (hooks)" [ref=e205] [cursor=pointer]:
+      - img [ref=e206]
+      - generic [ref=e208]: "29"
+      - generic [ref=e209]: Automation (hooks)
+    - generic [ref=e210]: Automate & repeat
+    - button "30 Goals (goal)" [ref=e211] [cursor=pointer]:
+      - img [ref=e212]
+      - generic [ref=e216]: "30"
+      - generic [ref=e217]: Goals (goal)
+    - button "31 Repeat (loop)" [ref=e218] [cursor=pointer]:
+      - img [ref=e219]
+      - generic [ref=e223]: "31"
+      - generic [ref=e224]: Repeat (loop)
+    - button "32 Workflows" [ref=e225] [cursor=pointer]:
+      - img [ref=e226]
+      - generic [ref=e231]: "32"
+      - generic [ref=e232]: Workflows
+    - button "33 Routines (auto-run)" [ref=e233] [cursor=pointer]:
+      - img [ref=e234]
+      - generic [ref=e237]: "33"
+      - generic [ref=e238]: Routines (auto-run)
+    - generic [ref=e239]: Staying safe
+    - button "34 Plan mode" [ref=e240] [cursor=pointer]:
+      - img [ref=e241]
+      - generic [ref=e245]: "34"
+      - generic [ref=e246]: Plan mode
+    - button "35 Permission modes" [ref=e247] [cursor=pointer]:
+      - img [ref=e248]
+      - generic [ref=e250]: "35"
+      - generic [ref=e251]: Permission modes
+    - button "36 Rewind" [ref=e252] [cursor=pointer]:
+      - img [ref=e253]
+      - generic [ref=e256]: "36"
+      - generic [ref=e257]: Rewind
+    - button "37 Data & privacy" [ref=e258] [cursor=pointer]:
+      - img [ref=e259]
+      - generic [ref=e262]: "37"
+      - generic [ref=e263]: Data & privacy
+    - generic [ref=e264]: In practice
+    - button "38 Slash commands" [ref=e265] [cursor=pointer]:
+      - img [ref=e266]
+      - generic [ref=e269]: "38"
+      - generic [ref=e270]: Slash commands
+    - button "39 Settings (config)" [ref=e271] [cursor=pointer]:
+      - img [ref=e272]
+      - generic [ref=e276]: "39"
+      - generic [ref=e277]: Settings (config)
+    - button "40 Diagnostics (doctor)" [ref=e278] [cursor=pointer]:
+      - img [ref=e279]
+      - generic [ref=e282]: "40"
+      - generic [ref=e283]: Diagnostics (doctor)
+    - button "41 Plans & pricing" [ref=e284] [cursor=pointer]:
+      - img [ref=e285]
+      - generic [ref=e287]: "41"
+      - generic [ref=e288]: Plans & pricing
+    - button "42 Usage limits" [ref=e289] [cursor=pointer]:
+      - img [ref=e290]
+      - generic [ref=e292]: "42"
+      - generic [ref=e293]: Usage limits
+    - button "43 Glossary" [ref=e294] [cursor=pointer]:
+      - img [ref=e295]
+      - generic [ref=e298]: "43"
+      - generic [ref=e299]: Glossary
+  - main [ref=e300]:
+    - generic [ref=e301]:
+      - button "Present" [ref=e302] [cursor=pointer]
+      - generic [ref=e303]:
+        - heading "What is Claude Code?" [level=1] [ref=e304]
+        - paragraph [ref=e305]: Even if you never write code yourself, just ask in plain words and it reads, edits, and runs your files for you. It's an AI tool.
+        - paragraph [ref=e306]: Let's start by seeing how it differs from the chat you're used to (ChatGPT, the Claude chat app).
+        - generic [ref=e307]:
+          - generic [ref=e308]: In one line
+          - generic [ref=e309]: Chat gives you an 'answer'; Claude Code actually builds it in your project and makes it work.
+        - paragraph [ref=e310]: Chat vs Claude Code Same request — give it a click
+        - generic [ref=e311]:
+          - button "See the difference ▶" [ref=e312] [cursor=pointer]
+          - button "Loop" [ref=e313] [cursor=pointer]:
+            - img [ref=e314]
+            - generic [ref=e319]: Loop
+        - generic [ref=e320]:
+          - generic [ref=e321]:
+            - heading "Claude chat Advice & code snippets" [level=4] [ref=e322]:
+              - text: Claude chat
+              - generic [ref=e323]: Advice & code snippets
+            - generic [ref=e324]: Add a booking feature to our website
+            - generic [ref=e325]: Press the button to see the answer.
+          - generic [ref=e326]:
+            - heading "Claude Code A working result" [level=4] [ref=e327]:
+              - text: Claude Code
+              - generic [ref=e328]: A working result
+            - generic [ref=e329]: Add a booking feature to our website
+            - generic [ref=e332]: Press the button to see the build process.
+        - paragraph [ref=e333]:
+          - generic [ref=e334]: Takeaway
+          - generic [ref=e335]: Chat shows methods / code snippets — Claude Code actually builds a working result.
+        - paragraph [ref=e336]: The point isn't just 'does it give you an answer' — it's does it actually build it in your project and make it work. Today's chat tools can edit text and code too, but that's 'shown inside the chat.' Claude Code creates several files itself, connects them, runs them, and finishes a 'working result.' (Both use the same Claude model.)
+        - generic [ref=e337]:
+          - heading "What Claude Code can do" [level=3] [ref=e338]
+          - generic [ref=e339]:
+            - generic [ref=e340]:
+              - generic [ref=e341]: Ask in plain words
+              - generic [ref=e342]: No coding needed — just ask normally.
+              - generic [ref=e343]: e.g. "Make this button blue"
+            - generic [ref=e344]:
+              - generic [ref=e345]: Read and edit files
+              - generic [ref=e346]: Opens files itself, edits and saves.
+              - generic [ref=e347]: e.g. "Fix the typos on the About page"
+            - generic [ref=e348]:
+              - generic [ref=e349]: Run commands for you
+              - generic [ref=e350]: Handles installing, testing, running.
+              - generic [ref=e351]: e.g. "Run the tests and tell me"
+            - generic [ref=e352]:
+              - generic [ref=e353]: Connect outside tools
+              - generic [ref=e354]: Works with Jira, Figma, and more (MCP).
+              - generic [ref=e355]: e.g. "Build it to match this Figma"
+        - generic [ref=e356]:
+          - heading "It's not just for developers — it helps with things like this too" [level=3] [ref=e357]
+          - generic [ref=e358]:
+            - generic [ref=e359]:
+              - generic [ref=e360]: Tidying spreadsheets
+              - generic [ref=e361]: Clean up and merge messy tables.
+              - generic [ref=e362]: e.g. "Sort this Excel sheet by date"
+            - generic [ref=e363]:
+              - generic [ref=e364]: Searching a list
+              - generic [ref=e365]: Pull out only the people or items that match.
+              - generic [ref=e366]: e.g. "From the customer list, just those whose contract ends this month"
+            - generic [ref=e367]:
+              - generic [ref=e368]: Polishing documents
+              - generic [ref=e369]: Typos, wording, translation — all at once.
+              - generic [ref=e370]: e.g. "Find and fix the typos in this notice"
+            - generic [ref=e371]:
+              - generic [ref=e372]: Organizing files
+              - generic [ref=e373]: Rename files and sort folders by a rule.
+              - generic [ref=e374]: e.g. "Rename the video files as date_title"
+        - generic [ref=e375]:
+          - generic [ref=e376]: Note
+          - generic [ref=e377]: This guide is a place to learn the concepts — it doesn't cover how to install or get started (the official docs handle that). And it's an unofficial learning resource, not affiliated with Anthropic.
+        - paragraph [ref=e378]:
+          - text: Use the left menu (the top ☰ menu on narrow screens) to jump between the 32 topics. Everything is built so you can understand it through buttons and inputs without trying it yourself. In the text,
+          - button "dotted words Dotted words like this show their meaning when you hover (PC) or tap once (phone/tablet)." [ref=e379]
+          - text: show their meaning on hover or tap.
+      - text: The black input window where you instruct a computer with text (commands). Also called the 'command line.' › › › Model Context Protocol — the common standard for how Claude exchanges with outside tools and data ›
+      - generic [ref=e380]:
+        - button "← Prev" [disabled] [ref=e381]
+        - generic [ref=e382]:
+          - generic [ref=e383]: 1 / 43
+          - generic [ref=e384]: What is Claude Code?
+        - button "Next →" [ref=e385] [cursor=pointer]
+      - generic [ref=e386]:
+        - generic [ref=e387]: Made by · 최진안 (stark)
+        - generic [ref=e388]:
+          - link "GitHub" [ref=e389] [cursor=pointer]:
+            - /url: https://github.com/wlsdks
+          - text: ·
+          - link "LinkedIn" [ref=e390] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/WriteDev
+          - text: ·
+          - link "Blog" [ref=e391] [cursor=pointer]:
+            - /url: https://curiousjinan.tistory.com/
+          - text: ·
+          - link "Email" [ref=e392] [cursor=pointer]:
+            - /url: mailto:dig04059@gmail.com
+          - text: — questions or DM via email or LinkedIn
+        - generic [ref=e393]: This is an unofficial learning resource — not affiliated with Anthropic. "Claude, Claude Code, Anthropic" are trademarks of Anthropic Inc.
+        - generic [ref=e394]:
+          - text: For the most accurate information, check the
+          - link "official docs" [ref=e395] [cursor=pointer]:
+            - /url: https://code.claude.com/docs
+          - text: .
