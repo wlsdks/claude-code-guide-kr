@@ -292,7 +292,7 @@
   @media (max-width:860px){ .p2open{ display:none; } .present2 .p2inner{ zoom:1; } }
   /* lecture-mode timer + notes panel */
   .present2 .p2timer{ font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; }
-  .present2 .p2note{ position:absolute; left:50%; transform:translateX(-50%); bottom:0; width:100%; max-width:780px; background:var(--panel); border:1px solid var(--line2); border-bottom:none; border-radius:14px 14px 0 0; box-shadow:0 -8px 26px rgba(0,0,0,.12); padding:13px 20px 18px; z-index:2; display:none; }
+  .present2 .p2note{ flex:0 0 auto; background:var(--panel); border-top:1px solid var(--line2); padding:12px 26px 15px; display:none; max-height:36vh; overflow:auto; }
   .present2 .p2note.on{ display:block; }
   .present2 .p2notehd{ font-size:10.5px; font-weight:700; color:var(--faint); text-transform:uppercase; letter-spacing:.5px; margin-bottom:9px; }
   .present2 .p2nrow{ display:flex; gap:11px; font-size:14.5px; line-height:1.55; margin-bottom:7px; color:var(--ink); }
@@ -911,7 +911,12 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="cwba-kdnote">→ 그래서 압축 뒤에도 <b>‘무슨 일을 어떻게 했는지’는 이어져요.</b> 버려진 상세(예: 이름 전체 목록)가 다시 필요하면 클로드가 <b>그 파일을 다시 읽어요.</b></p>
       </div>
       <p class="note"><b>언제 시작되나?</b> 컨텍스트 창이 <b>거의 꽉 찼을 때(한계 근처)</b> 자동으로 시작돼요. 정확한 기준 %는 공식적으로 공개돼 있지 않아요(“한계에 가까워지면”이라고만 안내). 압축 뒤에도 시스템 지침·CLAUDE.md·메모리·MCP 도구는 자동으로 다시 불러오지만, 처음 보였던 <b>스킬 목록</b>은 다시 채워지지 않고 ‘이미 사용한 스킬’만 남아요. 수동 <code>/compact</code> 도 같은 원리예요. (출처: 공식 문서, 2026년 6월 기준)</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">당신 차례</span>컨텍스트(클로드의 책상)가 꽉 차서 정리해야 해요. 다음 중 <b>비워도 가장 안전한</b> 건?</div>
+         <div class="qopts"><button class="qopt" data-ok>이미 다 끝난 옛 작업의 긴 기록</button><button class="qopt">지금 작업의 핵심 요청</button><button class="qopt">방금 정한 규칙·결정</button></div>
+         <div class="qfb" data-ok="맞아요. 이미 끝난 작업의 긴 기록은 비워도 안전해요. 지금 작업의 핵심·결정은 남겨야 하고요." data-no="비워도 안전한 건 ‘이미 끝난 옛 작업의 긴 기록’이에요. 지금 작업의 핵심 요청·결정은 남겨둬야 해요."></div>
+       </div>
+     </section>
 
     <!-- 04 SESSIONS -->
     <section class="page" id="sessions">
@@ -954,7 +959,12 @@ irm https://claude.ai/install.ps1 | iex</div>
         <tr><td class="cmd">자동 압축</td><td>꽉 차면 클로드가 알아서 요약 (/compact와 같은 원리)</td><td>내가 안 해도 자동</td></tr>
       </tbody></table></div>
       <p class="note">참고: 세션은 <code>Ctrl</code>+<code>D</code>, 또는 <code>Ctrl</code>+<code>C</code> 를 두 번 눌러 끝내요. 한 세션엔 한 가지 일이 가장 깔끔해요.</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">당신 차례</span>방금까지 ‘A 프로젝트 버그’를 고쳤어요. 이제 완전히 다른 ‘B 프로젝트 디자인’을 시작하려고 해요. 가장 좋은 방법은?</div>
+         <div class="qopts"><button class="qopt" data-ok>/clear 로 비우고 새로 시작</button><button class="qopt">그냥 이어서 물어본다</button><button class="qopt">클로드를 껐다 켠다</button></div>
+         <div class="qfb" data-ok="맞아요. 다른 일로 넘어갈 땐 /clear로 책상을 비우면 이전 작업이 안 섞여 깔끔해요." data-no="다른 일을 시작할 땐 /clear로 비우는 게 좋아요. 안 그러면 이전 작업이 섞여 느려지고 헷갈려요."></div>
+       </div>
+     </section>
 
     <!-- 05 TOKENS -->
     <section class="page" id="tokens">
@@ -1026,7 +1036,12 @@ irm https://claude.ai/install.ps1 | iex</div>
         <li><b>창이 클수록 더 많이 기억하지만, 약간 느리고 정확도가 떨어질 수 있어요.</b><span>필요한 것만 올리는 게 가장 좋은 품질을 내요.</span></li>
       </ul>
       <p class="note">정확한 요금·사용량은 플랜·시점에 따라 달라요 — claude.com/pricing 에서 확인하세요.</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">당신 차례</span>간단한 오타 몇 개만 빠르게 고치면 돼요. 비용·속도가 중요하고 작업은 단순해요. 어느 모델이 좋을까요?</div>
+         <div class="qopts"><button class="qopt" data-ok>Haiku 4.5 — 빠르고 저렴</button><button class="qopt">Opus 4.8 — 아주 똑똑</button><button class="qopt">Fable 5 — 최신 최강</button></div>
+         <div class="qfb" data-ok="맞아요. 단순하고 빠르게 끝낼 일엔 가장 빠르고 저렴한 Haiku가 제격이에요." data-no="단순·빠른 일엔 Haiku가 알맞아요 — 빠르고 저렴하거든요. Opus·Fable은 무겁고 비싸서 과해요."></div>
+       </div>
+     </section>
 
     <!-- 07 CLAUDE.md -->
     <section class="page" id="claudemd">
@@ -1227,7 +1242,12 @@ description: 주간 보고서를 회사 양식으로 작성
         <div class="fcard"><div class="ft">플러그인</div><div class="fd">위의 것들을 <b>묶어 배포</b>하는 패키지.</div></div>
       </div>
       <p class="note">설치: <code>/plugin install 이름@마켓플레이스</code>. 공식(<code>@claude-plugins-official</code>)·커뮤니티(<code>@claude-community</code>) 마켓플레이스가 있어요. 신뢰할 수 있는 출처만 설치하세요. (출처: 공식 문서 code.claude.com/docs/plugins)</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">당신 차례</span>지라·구글 드라이브 같은 <b>외부 앱에 클로드를 연결</b>해서 직접 쓰게 하는 건 무엇일까요?</div>
+         <div class="qopts"><button class="qopt" data-ok>MCP</button><button class="qopt">스킬</button><button class="qopt">서브에이전트</button></div>
+         <div class="qfb" data-ok="맞아요. 외부 도구·서비스에 연결하는 통로가 MCP예요. (스킬=작업 요령, 서브에이전트=일 나눠 맡기기)" data-no="외부 앱에 연결하는 건 MCP예요. 스킬은 ‘작업 요령 묶음’, 서브에이전트는 ‘일을 나눠 맡기는 도우미’예요."></div>
+       </div>
+     </section>
 
     <!-- 12 SUBAGENTS -->
     <section class="page" id="agents">
@@ -1857,7 +1877,7 @@ description: 주간 보고서를 회사 양식으로 작성
       if(simOnly){ var L=simList(),i=L.indexOf(curId()); overlay.querySelector('.p2prev').disabled=(fS&&i<=0); overlay.querySelector('.p2next').disabled=(lS&&i>=L.length-1); }
       else { overlay.querySelector('.p2prev').disabled=fS; overlay.querySelector('.p2next').disabled=lS; }
       inner.style.opacity='0'; if(fadeT)clearTimeout(fadeT); fadeT=setTimeout(function(){ inner.style.opacity='1'; },20); inner.scrollTop=0; overlay.querySelector('.p2stage').scrollTop=0; fitZoom(); fillNotes(); }
-    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'); inner.style.zoom=1; var w=inner.offsetWidth||640, h=inner.offsetHeight||400; var avW=window.innerWidth*0.74, avH=(window.innerHeight-58)*0.80; var z=Math.min(avW/w, avH/h, 1.5); inner.style.zoom=Math.max(1, z); }
+    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'), stage=overlay.querySelector('.p2stage'); inner.style.zoom=1; var cs=getComputedStyle(stage), padV=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom); var w=inner.offsetWidth||640, h=inner.offsetHeight||400; var avW=window.innerWidth*0.74, avH=(stage.clientHeight-padV)||400; var z=Math.min(avW/w, avH/h, 1.5); inner.style.zoom=Math.max(1, z); }
     function loadPage(page){ slides=build(page); if(!slides.length) return; overlay.querySelector('.p2title').textContent = page.querySelector('h1')?page.querySelector('h1').textContent:''; show(0); }
     function tocEl(){ return overlay.querySelector('.p2toc'); }
     function buildToc(){ var list=overlay.querySelector('.p2toclist .in'); list.innerHTML=''; var curIdv=curId(),pendingSec=null;
@@ -1883,7 +1903,7 @@ description: 주간 보고서를 회사 양식으로 작성
       if(idx<slides.length-1) h+='<div class="p2nrow"><span class="p2nk">다음</span><span>이 주제의 다음 슬라이드 ('+(idx+2)+'/'+slides.length+')</span></div>';
       else if(np) h+='<div class="p2nrow"><span class="p2nk">다음</span><span>'+np+'</span></div>';
       overlay.querySelector('.p2notebody').innerHTML = h || '<span style="color:var(--faint)">이 화면엔 따로 요약이 없어요.</span>'; }
-    function toggleNote(){ if(!overlay) return; var n=overlay.querySelector('.p2note'); n.classList.toggle('on'); overlay.querySelector('.p2notebtn').classList.toggle('on',n.classList.contains('on')); }
+    function toggleNote(){ if(!overlay) return; var n=overlay.querySelector('.p2note'); n.classList.toggle('on'); overlay.querySelector('.p2notebtn').classList.toggle('on',n.classList.contains('on')); requestAnimationFrame(fitZoom); }
     function tick(){ if(!overlay) return; var s=Math.max(0,Math.floor((Date.now()-t0)/1000)),mm=Math.floor(s/60),ss=s%60,el=overlay.querySelector('.p2timer'); if(el) el.textContent=(mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss; }
     function open(){ var page=document.querySelector('.page.on'); if(!page) return; if(!build(page).length) return;
       overlay=document.createElement('div'); overlay.className='present2';

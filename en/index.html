@@ -292,7 +292,7 @@
   @media (max-width:860px){ .p2open{ display:none; } .present2 .p2inner{ zoom:1; } }
   /* lecture-mode timer + notes panel */
   .present2 .p2timer{ font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; }
-  .present2 .p2note{ position:absolute; left:50%; transform:translateX(-50%); bottom:0; width:100%; max-width:780px; background:var(--panel); border:1px solid var(--line2); border-bottom:none; border-radius:14px 14px 0 0; box-shadow:0 -8px 26px rgba(0,0,0,.12); padding:13px 20px 18px; z-index:2; display:none; }
+  .present2 .p2note{ flex:0 0 auto; background:var(--panel); border-top:1px solid var(--line2); padding:12px 26px 15px; display:none; max-height:36vh; overflow:auto; }
   .present2 .p2note.on{ display:block; }
   .present2 .p2notehd{ font-size:10.5px; font-weight:700; color:var(--faint); text-transform:uppercase; letter-spacing:.5px; margin-bottom:9px; }
   .present2 .p2nrow{ display:flex; gap:11px; font-size:14.5px; line-height:1.55; margin-bottom:7px; color:var(--ink); }
@@ -908,7 +908,12 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="cwba-kdnote">→ So even after compaction, <b>'what was done and how' carries on.</b> If a discarded detail (e.g. the full list of names) is needed again, Claude <b>reads that file again.</b></p>
       </div>
       <p class="note"><b>When does it start?</b> It kicks in automatically when the context window is <b>nearly full (close to the limit)</b>. The exact % threshold isn't officially published (it just says "as it nears the limit"). After compacting, system instructions, CLAUDE.md, memory, and MCP tools are reloaded automatically, but the <b>skill list</b> shown at first isn't refilled — only the 'skills already used' remain. Manual <code>/compact</code> works the same way. (Source: official docs, as of June 2026.)</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">Your turn</span>Context (Claude’s desk) is full and needs tidying. Which is <b>safest to clear out</b>?</div>
+         <div class="qopts"><button class="qopt" data-ok>Long logs from an already-finished old task</button><button class="qopt">The core request of the current task</button><button class="qopt">A rule or decision you just made</button></div>
+         <div class="qfb" data-ok="Right. Long records from a finished task are safe to clear. Keep the current task’s core points and decisions." data-no="Safest to clear is ‘long records from an already-finished task’. Keep the current task’s core requests and decisions."></div>
+       </div>
+     </section>
 
     <!-- 04 SESSIONS -->
     <section class="page" id="sessions">
@@ -951,7 +956,12 @@ irm https://claude.ai/install.ps1 | iex</div>
         <tr><td class="cmd">Auto-compact</td><td>When it's full, Claude summarizes on its own (same idea as /compact)</td><td>Automatic, no action needed</td></tr>
       </tbody></table></div>
       <p class="note">Note: you end a session with <code>Ctrl</code>+<code>D</code>, or by pressing <code>Ctrl</code>+<code>C</code> twice. One job per session is the cleanest.</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">Your turn</span>You just finished fixing a bug in ‘Project A’. Now you want to start a completely different ‘Project B design’. What’s the best move?</div>
+         <div class="qopts"><button class="qopt" data-ok>Run /clear and start fresh</button><button class="qopt">Just keep asking in the same chat</button><button class="qopt">Quit and reopen Claude</button></div>
+         <div class="qfb" data-ok="Right. When you switch tasks, /clear wipes the desk so the previous work doesn’t get mixed in." data-no="When starting a different task, use /clear. Otherwise the old work mixes in, slowing things down and causing confusion."></div>
+       </div>
+     </section>
 
     <!-- 05 TOKENS -->
     <section class="page" id="tokens">
@@ -1023,7 +1033,12 @@ irm https://claude.ai/install.ps1 | iex</div>
         <li><b>A bigger window remembers more, but can be a touch slower and less accurate.</b><span>Loading only what's needed gives the best quality.</span></li>
       </ul>
       <p class="note">Exact pricing and usage vary by plan and time — check at claude.com/pricing.</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">Your turn</span>You just need to quickly fix a few typos. Cost and speed matter and the task is simple. Which model fits best?</div>
+         <div class="qopts"><button class="qopt" data-ok>Haiku 4.5 — fast &amp; cheap</button><button class="qopt">Opus 4.8 — very smart</button><button class="qopt">Fable 5 — newest, strongest</button></div>
+         <div class="qfb" data-ok="Right. For simple, quick jobs the fastest and cheapest Haiku is ideal." data-no="For simple, quick jobs Haiku fits best — it’s fast and cheap. Opus and Fable are heavy and pricey, so overkill here."></div>
+       </div>
+     </section>
 
     <!-- 07 CLAUDE.md -->
     <section class="page" id="claudemd">
@@ -1223,7 +1238,12 @@ description: Write the weekly report in the company format
         <div class="fcard"><div class="ft">Plugins</div><div class="fd">A package that <b>bundles and distributes</b> the above.</div></div>
       </div>
       <p class="note">Install: <code>/plugin install name@marketplace</code>. There are official (<code>@claude-plugins-official</code>) and community (<code>@claude-community</code>) marketplaces. Only install from sources you trust. (Source: code.claude.com/docs/plugins)</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">Your turn</span>What lets you <b>connect Claude to external apps</b> like Jira or Google Drive so it can use them directly?</div>
+         <div class="qopts"><button class="qopt" data-ok>MCP</button><button class="qopt">Skill</button><button class="qopt">Subagent</button></div>
+         <div class="qfb" data-ok="Right. MCP is the bridge to external tools and services. (A skill = a saved how-to; a subagent = handing off a task.)" data-no="Connecting to external apps is MCP. A skill is a ‘saved procedure’, and a subagent is a ‘helper you hand a task to’."></div>
+       </div>
+     </section>
 
     <!-- 12 SUBAGENTS -->
     <section class="page" id="agents">
@@ -1849,7 +1869,7 @@ description: Write the weekly report in the company format
       if(simOnly){ var L=simList(),i=L.indexOf(curId()); overlay.querySelector('.p2prev').disabled=(fS&&i<=0); overlay.querySelector('.p2next').disabled=(lS&&i>=L.length-1); }
       else { overlay.querySelector('.p2prev').disabled=fS; overlay.querySelector('.p2next').disabled=lS; }
       inner.style.opacity='0'; if(fadeT)clearTimeout(fadeT); fadeT=setTimeout(function(){ inner.style.opacity='1'; },20); inner.scrollTop=0; overlay.querySelector('.p2stage').scrollTop=0; fitZoom(); fillNotes(); }
-    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'); inner.style.zoom=1; var w=inner.offsetWidth||640, h=inner.offsetHeight||400; var avW=window.innerWidth*0.74, avH=(window.innerHeight-58)*0.80; var z=Math.min(avW/w, avH/h, 1.5); inner.style.zoom=Math.max(1, z); }
+    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'), stage=overlay.querySelector('.p2stage'); inner.style.zoom=1; var cs=getComputedStyle(stage), padV=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom); var w=inner.offsetWidth||640, h=inner.offsetHeight||400; var avW=window.innerWidth*0.74, avH=(stage.clientHeight-padV)||400; var z=Math.min(avW/w, avH/h, 1.5); inner.style.zoom=Math.max(1, z); }
     function loadPage(page){ slides=build(page); if(!slides.length) return; overlay.querySelector('.p2title').textContent = page.querySelector('h1')?page.querySelector('h1').textContent:''; show(0); }
     function tocEl(){ return overlay.querySelector('.p2toc'); }
     function buildToc(){ var list=overlay.querySelector('.p2toclist .in'); list.innerHTML=''; var curIdv=curId(),pendingSec=null;
@@ -1875,7 +1895,7 @@ description: Write the weekly report in the company format
       if(idx<slides.length-1) h+='<div class="p2nrow"><span class="p2nk">Next</span><span>Next slide of this topic ('+(idx+2)+'/'+slides.length+')</span></div>';
       else if(np) h+='<div class="p2nrow"><span class="p2nk">Next</span><span>'+np+'</span></div>';
       overlay.querySelector('.p2notebody').innerHTML = h || '<span style="color:var(--faint)">No summary for this screen.</span>'; }
-    function toggleNote(){ if(!overlay) return; var n=overlay.querySelector('.p2note'); n.classList.toggle('on'); overlay.querySelector('.p2notebtn').classList.toggle('on',n.classList.contains('on')); }
+    function toggleNote(){ if(!overlay) return; var n=overlay.querySelector('.p2note'); n.classList.toggle('on'); overlay.querySelector('.p2notebtn').classList.toggle('on',n.classList.contains('on')); requestAnimationFrame(fitZoom); }
     function tick(){ if(!overlay) return; var s=Math.max(0,Math.floor((Date.now()-t0)/1000)),mm=Math.floor(s/60),ss=s%60,el=overlay.querySelector('.p2timer'); if(el) el.textContent=(mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss; }
     function open(){ var page=document.querySelector('.page.on'); if(!page) return; if(!build(page).length) return;
       overlay=document.createElement('div'); overlay.className='present2';

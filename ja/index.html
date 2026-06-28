@@ -292,7 +292,7 @@
   @media (max-width:860px){ .p2open{ display:none; } .present2 .p2inner{ zoom:1; } }
   /* lecture-mode timer + notes panel */
   .present2 .p2timer{ font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; }
-  .present2 .p2note{ position:absolute; left:50%; transform:translateX(-50%); bottom:0; width:100%; max-width:780px; background:var(--panel); border:1px solid var(--line2); border-bottom:none; border-radius:14px 14px 0 0; box-shadow:0 -8px 26px rgba(0,0,0,.12); padding:13px 20px 18px; z-index:2; display:none; }
+  .present2 .p2note{ flex:0 0 auto; background:var(--panel); border-top:1px solid var(--line2); padding:12px 26px 15px; display:none; max-height:36vh; overflow:auto; }
   .present2 .p2note.on{ display:block; }
   .present2 .p2notehd{ font-size:10.5px; font-weight:700; color:var(--faint); text-transform:uppercase; letter-spacing:.5px; margin-bottom:9px; }
   .present2 .p2nrow{ display:flex; gap:11px; font-size:14.5px; line-height:1.55; margin-bottom:7px; color:var(--ink); }
@@ -911,7 +911,12 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="cwba-kdnote">→ だから圧縮の後も<b>「どんな仕事をどうやったか」は引き継がれます。</b>捨てられた詳細（例：名前の全リスト）が再び必要になれば、Claude が<b>そのファイルをもう一度読みます。</b></p>
       </div>
       <p class="note"><b>いつ始まる?</b> コンテキストウィンドウが<b>ほぼ満杯になったとき（上限の近く）</b>に自動で始まります。正確な基準の % は公式には公開されていません（「上限に近づくと」とだけ案内）。圧縮の後もシステム指示・CLAUDE.md・メモリ・MCP ツールは自動で読み込み直されますが、最初に表示されていた<b>スキルの一覧</b>は補充されず、「すでに使ったスキル」だけが残ります。手動の <code>/compact</code> も同じ仕組みです。（出典: 公式ドキュメント、2026年6月時点）</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">あなたの番</span>コンテキスト（クロードの机）がいっぱいで整理が必要です。<b>消して一番安全</b>なのは？</div>
+         <div class="qopts"><button class="qopt" data-ok>もう終わった古い作業の長い記録</button><button class="qopt">今の作業の核心となる依頼</button><button class="qopt">さっき決めたルール・決定</button></div>
+         <div class="qfb" data-ok="正解です。終わった作業の長い記録は消しても安全。今の作業の核心・決定は残しましょう。" data-no="消して安全なのは「もう終わった古い作業の長い記録」です。今の作業の核心の依頼・決定は残します。"></div>
+       </div>
+     </section>
 
     <!-- 04 SESSIONS -->
     <section class="page" id="sessions">
@@ -954,7 +959,12 @@ irm https://claude.ai/install.ps1 | iex</div>
         <tr><td class="cmd">自動圧縮</td><td>満杯になると Claude が自動で要約 (/compact と同じ仕組み)</td><td>自分でやらなくても自動</td></tr>
       </tbody></table></div>
       <p class="note">参考: セッションは <code>Ctrl</code>+<code>D</code>、または <code>Ctrl</code>+<code>C</code> を 2 回押して終了します。一つのセッションには一つの仕事が、いちばんすっきりします。</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">あなたの番</span>さっきまで「Aプロジェクトのバグ」を直していました。今度はまったく別の「Bプロジェクトのデザイン」を始めます。一番よい方法は？</div>
+         <div class="qopts"><button class="qopt" data-ok>/clear で空にして始める</button><button class="qopt">そのまま続けて聞く</button><button class="qopt">クロードを閉じて開き直す</button></div>
+         <div class="qfb" data-ok="正解です。別の作業に移るときは /clear で机を空にすると、前の作業が混ざらず すっきり。" data-no="別の作業を始めるときは /clear で空にしましょう。さもないと前の作業が混ざり、遅く・ややこしくなります。"></div>
+       </div>
+     </section>
 
     <!-- 05 TOKENS -->
     <section class="page" id="tokens">
@@ -1026,7 +1036,12 @@ irm https://claude.ai/install.ps1 | iex</div>
         <li><b>ウィンドウが大きいほど多く覚えますが、少し遅く、精度が落ちることがあります。</b><span>必要なものだけ乗せるのが、いちばん良い品質を出します。</span></li>
       </ul>
       <p class="note">正確な料金・使用量はプランや時期によって変わります — claude.com/pricing で確認してください。</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">あなたの番</span>誤字をいくつか素早く直すだけ。コスト・速度が大事で作業はシンプル。どのモデルが合う？</div>
+         <div class="qopts"><button class="qopt" data-ok>Haiku 4.5 — 速くて安い</button><button class="qopt">Opus 4.8 — とても賢い</button><button class="qopt">Fable 5 — 最新最強</button></div>
+         <div class="qfb" data-ok="正解です。シンプルで早く終わる作業には、いちばん速くて安い Haiku が最適。" data-no="シンプルで速い作業には Haiku が最適 — 速くて安いからです。Opus・Fable は重くて高く、ここでは過剰です。"></div>
+       </div>
+     </section>
 
     <!-- 07 CLAUDE.md -->
     <section class="page" id="claudemd">
@@ -1227,7 +1242,12 @@ description: 週次レポートを会社の様式で作成
         <div class="fcard"><div class="ft">プラグイン</div><div class="fd">上のものを<b>まとめて配布</b>するパッケージ。</div></div>
       </div>
       <p class="note">インストール: <code>/plugin install 名前@マーケットプレイス</code>。公式（<code>@claude-plugins-official</code>）・コミュニティ（<code>@claude-community</code>）のマーケットプレイスがあります。信頼できる出所からだけインストールしてください。（出典: code.claude.com/docs/plugins）</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">あなたの番</span>Jira や Google ドライブなどの <b>外部アプリにクロードをつなぎ</b>、直接使わせるのは何でしょう？</div>
+         <div class="qopts"><button class="qopt" data-ok>MCP</button><button class="qopt">スキル</button><button class="qopt">サブエージェント</button></div>
+         <div class="qfb" data-ok="正解です。外部ツール・サービスにつなぐ通り道が MCP。（スキル＝作業の手順、サブエージェント＝仕事を任せる相手）" data-no="外部アプリにつなぐのは MCP です。スキルは「作業の手順」、サブエージェントは「仕事を任せる助っ人」です。"></div>
+       </div>
+     </section>
 
     <!-- 12 SUBAGENTS -->
     <section class="page" id="agents">
@@ -1855,7 +1875,7 @@ description: 週次レポートを会社の様式で作成
       if(simOnly){ var L=simList(),i=L.indexOf(curId()); overlay.querySelector('.p2prev').disabled=(fS&&i<=0); overlay.querySelector('.p2next').disabled=(lS&&i>=L.length-1); }
       else { overlay.querySelector('.p2prev').disabled=fS; overlay.querySelector('.p2next').disabled=lS; }
       inner.style.opacity='0'; if(fadeT)clearTimeout(fadeT); fadeT=setTimeout(function(){ inner.style.opacity='1'; },20); inner.scrollTop=0; overlay.querySelector('.p2stage').scrollTop=0; fitZoom(); fillNotes(); }
-    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'); inner.style.zoom=1; var w=inner.offsetWidth||640, h=inner.offsetHeight||400; var avW=window.innerWidth*0.74, avH=(window.innerHeight-58)*0.80; var z=Math.min(avW/w, avH/h, 1.5); inner.style.zoom=Math.max(1, z); }
+    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'), stage=overlay.querySelector('.p2stage'); inner.style.zoom=1; var cs=getComputedStyle(stage), padV=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom); var w=inner.offsetWidth||640, h=inner.offsetHeight||400; var avW=window.innerWidth*0.74, avH=(stage.clientHeight-padV)||400; var z=Math.min(avW/w, avH/h, 1.5); inner.style.zoom=Math.max(1, z); }
     function loadPage(page){ slides=build(page); if(!slides.length) return; overlay.querySelector('.p2title').textContent = page.querySelector('h1')?page.querySelector('h1').textContent:''; show(0); }
     function tocEl(){ return overlay.querySelector('.p2toc'); }
     function buildToc(){ var list=overlay.querySelector('.p2toclist .in'); list.innerHTML=''; var curIdv=curId(),pendingSec=null;
@@ -1881,7 +1901,7 @@ description: 週次レポートを会社の様式で作成
       if(idx<slides.length-1) h+='<div class="p2nrow"><span class="p2nk">次</span><span>このテーマの次のスライド（'+(idx+2)+'/'+slides.length+')</span></div>';
       else if(np) h+='<div class="p2nrow"><span class="p2nk">次</span><span>'+np+'</span></div>';
       overlay.querySelector('.p2notebody').innerHTML = h || '<span style="color:var(--faint)">この画面に要約はありません。</span>'; }
-    function toggleNote(){ if(!overlay) return; var n=overlay.querySelector('.p2note'); n.classList.toggle('on'); overlay.querySelector('.p2notebtn').classList.toggle('on',n.classList.contains('on')); }
+    function toggleNote(){ if(!overlay) return; var n=overlay.querySelector('.p2note'); n.classList.toggle('on'); overlay.querySelector('.p2notebtn').classList.toggle('on',n.classList.contains('on')); requestAnimationFrame(fitZoom); }
     function tick(){ if(!overlay) return; var s=Math.max(0,Math.floor((Date.now()-t0)/1000)),mm=Math.floor(s/60),ss=s%60,el=overlay.querySelector('.p2timer'); if(el) el.textContent=(mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss; }
     function open(){ var page=document.querySelector('.page.on'); if(!page) return; if(!build(page).length) return;
       overlay=document.createElement('div'); overlay.className='present2';

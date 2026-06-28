@@ -292,7 +292,7 @@
   @media (max-width:860px){ .p2open{ display:none; } .present2 .p2inner{ zoom:1; } }
   /* lecture-mode timer + notes panel */
   .present2 .p2timer{ font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; }
-  .present2 .p2note{ position:absolute; left:50%; transform:translateX(-50%); bottom:0; width:100%; max-width:780px; background:var(--panel); border:1px solid var(--line2); border-bottom:none; border-radius:14px 14px 0 0; box-shadow:0 -8px 26px rgba(0,0,0,.12); padding:13px 20px 18px; z-index:2; display:none; }
+  .present2 .p2note{ flex:0 0 auto; background:var(--panel); border-top:1px solid var(--line2); padding:12px 26px 15px; display:none; max-height:36vh; overflow:auto; }
   .present2 .p2note.on{ display:block; }
   .present2 .p2notehd{ font-size:10.5px; font-weight:700; color:var(--faint); text-transform:uppercase; letter-spacing:.5px; margin-bottom:9px; }
   .present2 .p2nrow{ display:flex; gap:11px; font-size:14.5px; line-height:1.55; margin-bottom:7px; color:var(--ink); }
@@ -910,7 +910,12 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="cwba-kdnote">→ 所以压缩之后，<b>‘做了什么·怎么做的’依然延续。</b> 被丢掉的细节（例如名字全清单）如果再需要，Claude 会<b>重新读那个文件。</b></p>
       </div>
       <p class="note"><b>什么时候开始？</b> 当上下文窗口<b>快要装满（接近上限）</b>时自动开始。具体的触发百分比官方没有公开（只说“接近上限时”）。压缩后，系统指令、CLAUDE.md、记忆、MCP 工具都会自动重新加载，但最初显示过的<b>技能列表</b>不会再次填充，只保留‘已经用过的技能’。手动的 <code>/compact</code> 原理也一样。（来源：官方文档，截至 2026 年 6 月）</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">你来试试</span>上下文（Claude 的桌面）满了，需要整理。下面哪个<b>清掉最安全</b>？</div>
+         <div class="qopts"><button class="qopt" data-ok>早已完成的旧任务的长记录</button><button class="qopt">当前任务的核心请求</button><button class="qopt">刚定下的规则·决定</button></div>
+         <div class="qfb" data-ok="没错。已完成任务的长记录清掉很安全。当前任务的核心·决定要留着。" data-no="清掉最安全的是‘早已完成的旧任务的长记录’。当前任务的核心请求·决定要保留。"></div>
+       </div>
+     </section>
 
     <!-- 04 SESSIONS -->
     <section class="page" id="sessions">
@@ -953,7 +958,12 @@ irm https://claude.ai/install.ps1 | iex</div>
         <tr><td class="cmd">自动压缩</td><td>装满时 Claude 自动总结（和 /compact 原理一样）</td><td>不用我管，自动进行</td></tr>
       </tbody></table></div>
       <p class="note">提示：用 <code>Ctrl</code>+<code>D</code>，或按两次 <code>Ctrl</code>+<code>C</code> 结束会话。一个会话只做一件事最清爽。</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">你来试试</span>你刚修好了‘A 项目的 bug’。现在要开始完全不同的‘B 项目设计’。最好的做法是？</div>
+         <div class="qopts"><button class="qopt" data-ok>用 /clear 清空，重新开始</button><button class="qopt">直接接着问</button><button class="qopt">关掉再打开 Claude</button></div>
+         <div class="qfb" data-ok="没错。换任务时用 /clear 清空桌面，之前的工作就不会混进来。" data-no="开始另一件事时用 /clear 清空。否则旧工作会混进来，变慢又容易乱。"></div>
+       </div>
+     </section>
 
     <!-- 05 TOKENS -->
     <section class="page" id="tokens">
@@ -1025,7 +1035,12 @@ irm https://claude.ai/install.ps1 | iex</div>
         <li><b>窗口越大记得越多，但可能稍慢、准确度也会下降。</b><span>只放进需要的内容，质量才最好。</span></li>
       </ul>
       <p class="note">具体的价格和用量会因方案、时间而变 —— 请在 claude.com/pricing 查看。</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">你来试试</span>只需快速改几个错别字。看重成本·速度，任务也简单。选哪个模型最合适？</div>
+         <div class="qopts"><button class="qopt" data-ok>Haiku 4.5 — 又快又便宜</button><button class="qopt">Opus 4.8 — 非常聪明</button><button class="qopt">Fable 5 — 最新最强</button></div>
+         <div class="qfb" data-ok="没错。简单又要快的活，最快最便宜的 Haiku 最合适。" data-no="简单又快的活，Haiku 最合适 —— 又快又便宜。Opus·Fable 又重又贵，这里用就太过了。"></div>
+       </div>
+     </section>
 
     <!-- 07 CLAUDE.md -->
     <section class="page" id="claudemd">
@@ -1226,7 +1241,12 @@ description: 按公司格式撰写周报
         <div class="fcard"><div class="ft">插件</div><div class="fd">把上面这些<b>打包发布</b>的软件包。</div></div>
       </div>
       <p class="note">安装：<code>/plugin install 名称@市场</code>。有官方（<code>@claude-plugins-official</code>）和社区（<code>@claude-community</code>）市场。只从可信来源安装。（来源：code.claude.com/docs/plugins）</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">你来试试</span>把 <b>Claude 连接到 Jira、Google Drive 等外部应用</b>、让它直接使用，靠的是什么？</div>
+         <div class="qopts"><button class="qopt" data-ok>MCP</button><button class="qopt">技能</button><button class="qopt">子智能体</button></div>
+         <div class="qfb" data-ok="没错。连接外部工具·服务的通道就是 MCP。（技能=做事的套路，子智能体=把活分出去）" data-no="连接外部应用的是 MCP。技能是‘做事的套路’，子智能体是‘把任务分出去的助手’。"></div>
+       </div>
+     </section>
 
     <!-- 12 SUBAGENTS -->
     <section class="page" id="agents">
@@ -1855,7 +1875,7 @@ description: 按公司格式撰写周报
       if(simOnly){ var L=simList(),i=L.indexOf(curId()); overlay.querySelector('.p2prev').disabled=(fS&&i<=0); overlay.querySelector('.p2next').disabled=(lS&&i>=L.length-1); }
       else { overlay.querySelector('.p2prev').disabled=fS; overlay.querySelector('.p2next').disabled=lS; }
       inner.style.opacity='0'; if(fadeT)clearTimeout(fadeT); fadeT=setTimeout(function(){ inner.style.opacity='1'; },20); inner.scrollTop=0; overlay.querySelector('.p2stage').scrollTop=0; fitZoom(); fillNotes(); }
-    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'); inner.style.zoom=1; var w=inner.offsetWidth||640, h=inner.offsetHeight||400; var avW=window.innerWidth*0.74, avH=(window.innerHeight-58)*0.80; var z=Math.min(avW/w, avH/h, 1.5); inner.style.zoom=Math.max(1, z); }
+    function fitZoom(){ if(!overlay) return; var inner=overlay.querySelector('.p2inner'), stage=overlay.querySelector('.p2stage'); inner.style.zoom=1; var cs=getComputedStyle(stage), padV=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom); var w=inner.offsetWidth||640, h=inner.offsetHeight||400; var avW=window.innerWidth*0.74, avH=(stage.clientHeight-padV)||400; var z=Math.min(avW/w, avH/h, 1.5); inner.style.zoom=Math.max(1, z); }
     function loadPage(page){ slides=build(page); if(!slides.length) return; overlay.querySelector('.p2title').textContent = page.querySelector('h1')?page.querySelector('h1').textContent:''; show(0); }
     function tocEl(){ return overlay.querySelector('.p2toc'); }
     function buildToc(){ var list=overlay.querySelector('.p2toclist .in'); list.innerHTML=''; var curIdv=curId(),pendingSec=null;
@@ -1881,7 +1901,7 @@ description: 按公司格式撰写周报
       if(idx<slides.length-1) h+='<div class="p2nrow"><span class="p2nk">下个</span><span>本主题的下一张幻灯片（'+(idx+2)+'/'+slides.length+')</span></div>';
       else if(np) h+='<div class="p2nrow"><span class="p2nk">下个</span><span>'+np+'</span></div>';
       overlay.querySelector('.p2notebody').innerHTML = h || '<span style="color:var(--faint)">本页暂无摘要。</span>'; }
-    function toggleNote(){ if(!overlay) return; var n=overlay.querySelector('.p2note'); n.classList.toggle('on'); overlay.querySelector('.p2notebtn').classList.toggle('on',n.classList.contains('on')); }
+    function toggleNote(){ if(!overlay) return; var n=overlay.querySelector('.p2note'); n.classList.toggle('on'); overlay.querySelector('.p2notebtn').classList.toggle('on',n.classList.contains('on')); requestAnimationFrame(fitZoom); }
     function tick(){ if(!overlay) return; var s=Math.max(0,Math.floor((Date.now()-t0)/1000)),mm=Math.floor(s/60),ss=s%60,el=overlay.querySelector('.p2timer'); if(el) el.textContent=(mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss; }
     function open(){ var page=document.querySelector('.page.on'); if(!page) return; if(!build(page).length) return;
       overlay=document.createElement('div'); overlay.className='present2';
