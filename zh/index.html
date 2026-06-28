@@ -1463,7 +1463,12 @@ description: 按公司格式撰写周报
         <li><b>限制</b><span>用 <code>rm·mv</code> 这类终端命令改动的东西、安装（<code>npm install</code>）以及外部变更，无法回退。</span></li>
       </ul>
       <p class="note">检查点是‘会话内的快速回退’（保存约 30 天），git 是‘永久版本管理’ —— 作用不同。要长期保留就提交到 git。（来源：官方文档，截至 2026 年 6 月）</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">你来试试</span>你改了设计但不满意。想<b>把代码回退，但保留到目前为止的对话</b>。怎么做？</div>
+         <div class="qopts"><button class="qopt" data-ok>在回退里选‘只恢复代码’</button><button class="qopt">‘代码和对话一起恢复’</button><button class="qopt">必须自己用 git</button></div>
+         <div class="qfb" data-ok="没错。回退可以选‘只代码 / 只对话 / 两者’ —— 这里选‘只恢复代码’。" data-no="选‘只恢复代码’即可。回退能选只代码、只对话或两者（不懂 git 也行）。"></div>
+       </div>
+     </section>
 
     <!-- 18 PRIVACY -->
     <section class="page" id="privacy">
@@ -1650,7 +1655,12 @@ description: 按公司格式撰写周报
         </div>
       </div>
       <p class="note">因为这样只留核心、缩短内容，所以压缩后‘做了什么、怎么做的’仍能接着进行。只是当像<b>被丢弃的详细清单</b>（例如全部重复名字）又需要时，Claude 会重新读那个文件。token 数值是帮助理解的<b>示例</b>（实际值因情况而异）。上下文窗口里<b>自动</b>发生的压缩，可以在‘上下文窗口’标签页看到。</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">你来试试</span>对话变长后触发了压缩（/compact）。下面哪个在压缩后<b>会保留</b>？</div>
+         <div class="qopts"><button class="qopt" data-ok>请求·决定等核心摘要</button><button class="qopt">到目前为止逐字的全部对话</button><button class="qopt">刚读的文件全部 800 行</button></div>
+         <div class="qfb" data-ok="没错。压缩只留下‘核心摘要’，把冗长的原文缩短 —— 这样就腾出空间继续干活。" data-no="压缩后只保留‘核心摘要’。全部对话原文或整份文件这类长内容会被缩成摘要。"></div>
+       </div>
+     </section>
 
     <!-- EFFORT -->
     <section class="page" id="effort">

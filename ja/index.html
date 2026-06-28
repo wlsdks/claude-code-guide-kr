@@ -1464,7 +1464,12 @@ description: 週次レポートを会社の様式で作成
         <li><b>限界</b><span><code>rm·mv</code> のようなターミナルコマンドで変わったもの、インストール(<code>npm install</code>)・外部の変更は巻き戻せません。</span></li>
       </ul>
       <p class="note">チェックポイントは「セッション内の素早い巻き戻し」(約30日保管)、git は「永続的なバージョン管理」 — 役割が違います。長く保管したいなら git にコミットしてください。（出典: 公式ドキュメント、2026年6月時点）</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">あなたの番</span>デザインを変えたけど気に入りません。<b>コードは元に戻しつつ、これまでの会話は残したい</b>。どうする？</div>
+         <div class="qopts"><button class="qopt" data-ok>巻き戻しで「コードのみ復元」</button><button class="qopt">「コードと会話をまとめて復元」</button><button class="qopt">git を自分で操作する</button></div>
+         <div class="qfb" data-ok="正解です。巻き戻しは「コードだけ / 会話だけ / 両方」から選べます — ここは「コードのみ復元」。" data-no="「コードのみ復元」を選べば OK。巻き戻しはコードだけ・会話だけ・両方から選べます（git 不要）。"></div>
+       </div>
+     </section>
 
     <!-- 18 PRIVACY -->
     <section class="page" id="privacy">
@@ -1651,7 +1656,12 @@ description: 週次レポートを会社の様式で作成
         </div>
       </div>
       <p class="note">このように核心だけ残して縮めるので、圧縮の後も「どんな作業をどうやったか」は引き継がれます。ただし<b>捨てられた詳細な一覧</b>（例: 重複した名前の全リスト）がまた必要になれば、Claude がそのファイルをもう一度読みます。トークンの数値は理解を助ける<b>例</b>です（実際の値は状況ごとに変わります）。コンテキストウィンドウで<b>自動的に</b>起こる圧縮は「コンテキストウィンドウ」タブで見られます。</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">あなたの番</span>会話が長くなり圧縮（/compact）が起きました。圧縮後も<b>残る</b>のは？</div>
+         <div class="qopts"><button class="qopt" data-ok>依頼・決定などの核心の要約</button><button class="qopt">これまでの全会話をそのまま</button><button class="qopt">さっき読んだファイル 800 行すべて</button></div>
+         <div class="qfb" data-ok="正解です。圧縮は「核心の要約」を残し、長い原文を縮めます — だから続きの作業スペースが空きます。" data-no="圧縮後は「核心の要約」だけ残ります。全会話の原文やファイル全体など長いものは要約に縮みます。"></div>
+       </div>
+     </section>
 
     <!-- EFFORT -->
     <section class="page" id="effort">

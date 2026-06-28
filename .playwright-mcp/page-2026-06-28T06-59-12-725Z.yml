@@ -1,0 +1,305 @@
+- generic [ref=e2]:
+  - navigation [ref=e3]:
+    - generic [ref=e4]:
+      - button "切换浅色/深色" [ref=e5] [cursor=pointer]:
+        - img [ref=e6]
+      - button "放大模式" [ref=e9] [cursor=pointer]:
+        - generic [ref=e11]: 放大模式
+    - combobox "语言 / Language" [ref=e12] [cursor=pointer]:
+      - option "한국어"
+      - option "English"
+      - option "中文" [selected]
+      - option "日本語"
+    - generic [ref=e13]:
+      - text: Claude Code 入门
+      - generic [ref=e14]: 写给非开发者的指南
+    - group "难度" [ref=e15]:
+      - button "全部43" [ref=e16] [cursor=pointer]
+      - button "初级20" [ref=e17] [cursor=pointer]
+      - button "中级15" [ref=e18] [cursor=pointer]
+      - button "高级8" [ref=e19] [cursor=pointer]
+    - generic [ref=e20]: 开始
+    - button "01 什么是 Claude Code？" [ref=e21] [cursor=pointer]:
+      - img [ref=e22]
+      - generic [ref=e24]: "01"
+      - generic [ref=e25]: 什么是 Claude Code？
+    - button "02 什么是 Cowork？" [ref=e26] [cursor=pointer]:
+      - img [ref=e27]
+      - generic [ref=e30]: "02"
+      - generic [ref=e31]: 什么是 Cowork？
+    - button "03 实际用例" [ref=e32] [cursor=pointer]:
+      - img [ref=e33]
+      - generic [ref=e36]: "03"
+      - generic [ref=e37]: 实际用例
+    - button "04 在哪里用" [ref=e38] [cursor=pointer]:
+      - img [ref=e39]
+      - generic [ref=e42]: "04"
+      - generic [ref=e43]: 在哪里用
+    - generic [ref=e44]: 基础用法（动手试）
+    - button "05 把需求写清楚" [ref=e45] [cursor=pointer]:
+      - img [ref=e46]
+      - generic [ref=e49]: "05"
+      - generic [ref=e50]: 把需求写清楚
+    - button "06 指定文件 @" [ref=e51] [cursor=pointer]:
+      - img [ref=e52]
+      - generic [ref=e55]: "06"
+      - generic [ref=e56]: 指定文件 @
+    - button "07 快捷键 & 模式" [ref=e57] [cursor=pointer]:
+      - img [ref=e58]
+      - generic [ref=e61]: "07"
+      - generic [ref=e62]: 快捷键 & 模式
+    - button "08 叫停并改方向" [ref=e63] [cursor=pointer]:
+      - img [ref=e64]
+      - generic [ref=e67]: "08"
+      - generic [ref=e68]: 叫停并改方向
+    - generic [ref=e69]: 基础概念
+    - button "09 工作原理（它怎么干活）" [ref=e70] [cursor=pointer]:
+      - img [ref=e71]
+      - generic [ref=e74]: "09"
+      - generic [ref=e75]: 工作原理（它怎么干活）
+    - button "10 AI 的工作环境（配置）" [ref=e76] [cursor=pointer]:
+      - img [ref=e77]
+      - generic [ref=e82]: "10"
+      - generic [ref=e83]: AI 的工作环境（配置）
+    - button "11 上下文窗口" [ref=e84] [cursor=pointer]:
+      - img [ref=e85]
+      - generic [ref=e89]: "11"
+      - generic [ref=e90]: 上下文窗口
+    - button "12 管理上下文（为什么？）" [ref=e91] [cursor=pointer]:
+      - img [ref=e92]
+      - generic [ref=e96]: "12"
+      - generic [ref=e97]: 管理上下文（为什么？）
+    - button "13 压缩 (compact)" [ref=e98] [cursor=pointer]:
+      - img [ref=e99]
+      - generic [ref=e101]: "13"
+      - generic [ref=e102]: 压缩 (compact)
+    - button "14 会话 & 文件夹" [ref=e103] [cursor=pointer]:
+      - img [ref=e104]
+      - generic [ref=e106]: "14"
+      - generic [ref=e107]: 会话 & 文件夹
+    - button "15 Token" [ref=e108] [cursor=pointer]:
+      - img [ref=e109]
+      - generic [ref=e114]: "15"
+      - generic [ref=e115]: Token
+    - button "16 选择模型 (model)" [ref=e116] [cursor=pointer]:
+      - img [ref=e117]
+      - generic [ref=e122]: "16"
+      - generic [ref=e123]: 选择模型 (model)
+    - button "17 思考深度 (effort)" [ref=e124] [cursor=pointer]:
+      - img [ref=e125]
+      - generic [ref=e129]: "17"
+      - generic [ref=e130]: 思考深度 (effort)
+    - generic [ref=e131]: 记忆与规则
+    - button "18 CLAUDE.md" [ref=e132] [cursor=pointer]:
+      - img [ref=e133]
+      - generic [ref=e136]: "18"
+      - generic [ref=e137]: CLAUDE.md
+    - button "19 记忆" [ref=e138] [cursor=pointer]:
+      - img [ref=e139]
+      - generic [ref=e143]: "19"
+      - generic [ref=e144]: 记忆
+    - button "20 技能" [ref=e145] [cursor=pointer]:
+      - img [ref=e146]
+      - generic [ref=e148]: "20"
+      - generic [ref=e149]: 技能
+    - button "21 技能，为何共享" [ref=e150] [cursor=pointer]:
+      - img [ref=e151]
+      - generic [ref=e156]: "21"
+      - generic [ref=e157]: 技能，为何共享
+    - button "22 安全使用技能" [ref=e158] [cursor=pointer]:
+      - img [ref=e159]
+      - generic [ref=e162]: "22"
+      - generic [ref=e163]: 安全使用技能
+    - generic [ref=e164]: 扩展能力
+    - button "23 MCP (连接工具)" [ref=e165] [cursor=pointer]:
+      - img [ref=e166]
+      - generic [ref=e171]: "23"
+      - generic [ref=e172]: MCP (连接工具)
+    - button "24 插件" [ref=e173] [cursor=pointer]:
+      - img [ref=e174]
+      - generic [ref=e177]: "24"
+      - generic [ref=e178]: 插件
+    - button "25 子代理" [ref=e179] [cursor=pointer]:
+      - img [ref=e180]
+      - generic [ref=e184]: "25"
+      - generic [ref=e185]: 子代理
+    - button "26 和 RPA 有何不同？" [ref=e186] [cursor=pointer]:
+      - img [ref=e187]
+      - generic [ref=e190]: "26"
+      - generic [ref=e191]: 和 RPA 有何不同？
+    - button "27 粘贴图片" [ref=e192] [cursor=pointer]:
+      - img [ref=e193]
+      - generic [ref=e197]: "27"
+      - generic [ref=e198]: 粘贴图片
+    - button "28 远程操控（remote）" [ref=e199] [cursor=pointer]:
+      - img [ref=e200]
+      - generic [ref=e203]: "28"
+      - generic [ref=e204]: 远程操控（remote）
+    - button "29 自动化 (Hook)" [ref=e205] [cursor=pointer]:
+      - img [ref=e206]
+      - generic [ref=e208]: "29"
+      - generic [ref=e209]: 自动化 (Hook)
+    - generic [ref=e210]: 自动·重复
+    - button "30 目标 (goal)" [ref=e211] [cursor=pointer]:
+      - img [ref=e212]
+      - generic [ref=e216]: "30"
+      - generic [ref=e217]: 目标 (goal)
+    - button "31 重复执行 (loop)" [ref=e218] [cursor=pointer]:
+      - img [ref=e219]
+      - generic [ref=e223]: "31"
+      - generic [ref=e224]: 重复执行 (loop)
+    - button "32 工作流 (workflows)" [ref=e225] [cursor=pointer]:
+      - img [ref=e226]
+      - generic [ref=e231]: "32"
+      - generic [ref=e232]: 工作流 (workflows)
+    - button "33 例程（自动运行）" [ref=e233] [cursor=pointer]:
+      - img [ref=e234]
+      - generic [ref=e237]: "33"
+      - generic [ref=e238]: 例程（自动运行）
+    - generic [ref=e239]: 安全地用
+    - button "34 计划模式" [ref=e240] [cursor=pointer]:
+      - img [ref=e241]
+      - generic [ref=e245]: "34"
+      - generic [ref=e246]: 计划模式
+    - button "35 权限模式" [ref=e247] [cursor=pointer]:
+      - img [ref=e248]
+      - generic [ref=e250]: "35"
+      - generic [ref=e251]: 权限模式
+    - button "36 回退" [ref=e252] [cursor=pointer]:
+      - img [ref=e253]
+      - generic [ref=e256]: "36"
+      - generic [ref=e257]: 回退
+    - button "37 数据 & 隐私" [ref=e258] [cursor=pointer]:
+      - img [ref=e259]
+      - generic [ref=e262]: "37"
+      - generic [ref=e263]: 数据 & 隐私
+    - generic [ref=e264]: 实战
+    - button "38 斜杠命令" [ref=e265] [cursor=pointer]:
+      - img [ref=e266]
+      - generic [ref=e269]: "38"
+      - generic [ref=e270]: 斜杠命令
+    - button "39 设置 (config)" [ref=e271] [cursor=pointer]:
+      - img [ref=e272]
+      - generic [ref=e276]: "39"
+      - generic [ref=e277]: 设置 (config)
+    - button "40 诊断 (doctor)" [ref=e278] [cursor=pointer]:
+      - img [ref=e279]
+      - generic [ref=e282]: "40"
+      - generic [ref=e283]: 诊断 (doctor)
+    - button "41 订阅方案" [ref=e284] [cursor=pointer]:
+      - img [ref=e285]
+      - generic [ref=e287]: "41"
+      - generic [ref=e288]: 订阅方案
+    - button "42 用量上限" [ref=e289] [cursor=pointer]:
+      - img [ref=e290]
+      - generic [ref=e292]: "42"
+      - generic [ref=e293]: 用量上限
+    - button "43 术语表" [ref=e294] [cursor=pointer]:
+      - img [ref=e295]
+      - generic [ref=e298]: "43"
+      - generic [ref=e299]: 术语表
+  - main [ref=e300]:
+    - generic [ref=e301]:
+      - button "演示模式" [ref=e302] [cursor=pointer]
+      - generic [ref=e303]:
+        - heading "什么是 Claude Code？" [level=1] [ref=e304]
+        - paragraph [ref=e305]: 就算你不会写代码，只要用平时说话的方式提需求，它就会帮你读取、修改、运行文件，是这样一款 AI 工具。
+        - paragraph [ref=e306]: 先来直观对比一下：它和你平时用的聊天工具（ChatGPT、Claude 聊天）有什么不一样。
+        - generic [ref=e307]:
+          - generic [ref=e308]: 一句话总结
+          - generic [ref=e309]: 聊天给你‘答案’，Claude Code 则在你的项目里亲手做出来、还让它跑起来。
+        - paragraph [ref=e310]: 聊天 vs Claude Code 同样的需求 — 点一下试试
+        - generic [ref=e311]:
+          - button "查看差异 ▶" [ref=e312] [cursor=pointer]
+          - button "循环" [ref=e313] [cursor=pointer]:
+            - img [ref=e314]
+            - generic [ref=e319]: 循环
+        - generic [ref=e320]:
+          - generic [ref=e321]:
+            - heading "Claude 聊天 建议·代码片段" [level=4] [ref=e322]:
+              - text: Claude 聊天
+              - generic [ref=e323]: 建议·代码片段
+            - generic [ref=e324]: 给我们官网加一个预约功能
+            - generic [ref=e325]: 点按钮就会出现答案。
+          - generic [ref=e326]:
+            - heading "Claude Code 能运行的成品" [level=4] [ref=e327]:
+              - text: Claude Code
+              - generic [ref=e328]: 能运行的成品
+            - generic [ref=e329]: 给我们官网加一个预约功能
+            - generic [ref=e332]: 点按钮就会出现制作过程。
+        - paragraph [ref=e333]:
+          - generic [ref=e334]: 结论
+          - generic [ref=e335]: 聊天给的是方法 / 代码片段 —— Claude Code 直接做出能运行的成果。
+        - paragraph [ref=e336]: 关键不在于‘是否给你答案’，而在于能不能在你的项目里真正做出来、并让它跑起来。如今的聊天工具也能帮你改文字、改代码，但那只是‘在聊天里展示出来’ — 而 Claude Code 会亲手创建多个文件、把它们连接起来、运行起来，最终完成一个‘能运行的成品’。（两者用的是同一个 Claude 模型。）
+        - generic [ref=e337]:
+          - heading "Claude Code 能做什么" [level=3] [ref=e338]
+          - generic [ref=e339]:
+            - generic [ref=e340]:
+              - generic [ref=e341]: 用说话来指挥
+              - generic [ref=e342]: 不懂代码也能用平时的话提需求。
+              - generic [ref=e343]: 例 “把这个按钮改成蓝色”
+            - generic [ref=e344]:
+              - generic [ref=e345]: 读取并修改文件
+              - generic [ref=e346]: 直接打开文件修改、保存。
+              - generic [ref=e347]: 例 “帮我改一下介绍页的错别字”
+            - generic [ref=e348]:
+              - generic [ref=e349]: 替你执行命令
+              - generic [ref=e350]: 安装、测试、运行都帮你做。
+              - generic [ref=e351]: 例 “跑一下测试告诉我结果”
+            - generic [ref=e352]:
+              - generic [ref=e353]: 连接外部工具
+              - generic [ref=e354]: 和 Jira、Figma 等联动 (MCP)。
+              - generic [ref=e355]: 例 “照着这个 Figma 做出来”
+        - generic [ref=e356]:
+          - heading "不只是开发者才用 — 这些事它也能做" [level=3] [ref=e357]
+          - generic [ref=e358]:
+            - generic [ref=e359]:
+              - generic [ref=e360]: 整理 Excel·表格
+              - generic [ref=e361]: 把乱糟糟的表格整理、合并得清清楚楚。
+              - generic [ref=e362]: 例 “把这个 Excel 按日期排序”
+            - generic [ref=e363]:
+              - generic [ref=e364]: 从名单里筛选
+              - generic [ref=e365]: 只挑出符合条件的人或项目。
+              - generic [ref=e366]: 例 “从客户名单里挑出本月到期的人”
+            - generic [ref=e367]:
+              - generic [ref=e368]: 润色文档
+              - generic [ref=e369]: 错别字、措辞、翻译一次搞定。
+              - generic [ref=e370]: 例 “找出这份通知里的错别字并改好”
+            - generic [ref=e371]:
+              - generic [ref=e372]: 整理文件
+              - generic [ref=e373]: 按规则整理文件名和文件夹。
+              - generic [ref=e374]: 例 “把视频文件按 日期_标题 重命名”
+        - generic [ref=e375]:
+          - generic [ref=e376]: 提示
+          - generic [ref=e377]: 这份指南是学习概念的地方 — 不讲安装和上手方法（那些请看官方文档）。而且这是非官方学习资料，与 Anthropic 无关。
+        - paragraph [ref=e378]:
+          - text: 在左侧菜单（窄屏时是上方的 ☰ 菜单）点击 32 个主题来切换。所有内容都做到了不用亲自动手，靠按钮和输入框就能理解。正文中
+          - button "画虚线的词，悬停或轻点就会显示意思。 像这样画虚线的词，鼠标悬停（电脑）或轻点一次（手机·平板）就会显示意思。" [ref=e379]
+      - text: 用文字（命令）向电脑下达指令的黑色输入窗口。也叫‘命令行’。 › › › Model Context Protocol —— Claude 与外部工具、数据交互的通用规则（标准） ›
+      - generic [ref=e380]:
+        - button "← 上一个" [disabled] [ref=e381]
+        - generic [ref=e382]:
+          - generic [ref=e383]: 1 / 43
+          - generic [ref=e384]: 什么是 Claude Code？
+        - button "下一个 →" [ref=e385] [cursor=pointer]
+      - generic [ref=e386]:
+        - generic [ref=e387]: 制作者 · 최진안 (stark)
+        - generic [ref=e388]:
+          - link "GitHub" [ref=e389] [cursor=pointer]:
+            - /url: https://github.com/wlsdks
+          - text: ·
+          - link "LinkedIn" [ref=e390] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/WriteDev
+          - text: ·
+          - link "Blog" [ref=e391] [cursor=pointer]:
+            - /url: https://curiousjinan.tistory.com/
+          - text: ·
+          - link "Email" [ref=e392] [cursor=pointer]:
+            - /url: mailto:dig04059@gmail.com
+          - text: — 有问题请通过邮件或 LinkedIn 私信联系
+        - generic [ref=e393]: 这是非官方学习资料 —— 与 Anthropic 无关，“Claude·Claude Code·Anthropic”是 Anthropic Inc. 的商标。
+        - generic [ref=e394]:
+          - text: 最准确的信息请查看
+          - link "官方文档" [ref=e395] [cursor=pointer]:
+            - /url: https://code.claude.com/docs
+          - text: 。

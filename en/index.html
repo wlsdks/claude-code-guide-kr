@@ -1459,7 +1459,12 @@ description: Write the weekly report in the company format
         <li><b>Limits</b><span>Things changed by terminal commands like <code>rm·mv</code>, installs (<code>npm install</code>), and outside changes can't be rolled back.</span></li>
       </ul>
       <p class="note">Checkpoints are 'quick rollback within a session' (kept about 30 days); git is 'permanent version control' — they serve different roles. To keep something long-term, commit it to git. (Source: official docs, as of June 2026.)</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">Your turn</span>You changed the design and don’t like it. You want to <b>roll the code back, but keep the conversation so far</b>. How?</div>
+         <div class="qopts"><button class="qopt" data-ok>In rewind, choose ‘Restore code’ only</button><button class="qopt">‘Restore code and conversation’</button><button class="qopt">You must use git directly</button></div>
+         <div class="qfb" data-ok="Right. Rewind lets you pick ‘code only / conversation only / both’ — here it’s ‘Restore code’." data-no="Choose ‘Restore code’ only. Rewind lets you pick code-only, conversation-only, or both (no git needed)."></div>
+       </div>
+     </section>
 
     <!-- 18 PRIVACY -->
     <section class="page" id="privacy">
@@ -1646,7 +1651,12 @@ description: Write the weekly report in the company format
         </div>
       </div>
       <p class="note">Because it keeps only the essentials and trims the rest, after compaction it still carries 'what was done and how.' But if <b>discarded details</b> (e.g. the full list of duplicate names) are needed again, Claude simply re-reads that file. The token figures are an <b>example</b> to help you understand (real values vary by situation). The compaction that happens <b>automatically</b> in the context window can be seen on the 'Context window' tab.</p>
-    </section>
+           <div class="quiz">
+         <div class="qq"><span class="qb">Your turn</span>The chat got long, so compaction (/compact) ran. Which of these <b>stays</b> after compaction?</div>
+         <div class="qopts"><button class="qopt" data-ok>A summary of the key requests &amp; decisions</button><button class="qopt">Every word of the whole conversation</button><button class="qopt">All 800 lines of the file just read</button></div>
+         <div class="qfb" data-ok="Right. Compaction keeps the ‘key summary’ and shrinks the long originals — which frees up room to keep working." data-no="After compaction only the ‘key summary’ remains. Long things like the full transcript or whole file get shrunk into the summary."></div>
+       </div>
+     </section>
 
     <section class="page" id="effort">
       <h1>Thinking depth (effort)</h1>
