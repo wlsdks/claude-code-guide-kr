@@ -143,7 +143,7 @@
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
   /* collapsible code, one-line summary, example badge */
-  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; }
+  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; } .codeblk{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.7; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:13px 15px; white-space:pre-wrap; color:var(--ink); margin:10px 0 0; overflow-x:auto; } .codeblk .cmt{ color:var(--faint); }
   .notedet{ margin:14px 0 22px; } .notedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .notedet>summary::-webkit-details-marker{ display:none; } .notedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .notedet[open]>summary::before{ transform:rotate(90deg); } .notedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .notedet .note{ margin:8px 0 0 !important; }
   .loopviz{ margin:14px auto 18px; max-width:600px; }
   .loopviz svg{ width:100%; height:auto; display:block; }
@@ -938,6 +938,13 @@ irm https://claude.ai/install.ps1 | iex</div>
         <div class="fgrid"><div class="fcard"><div class="ft">文脈（コンテキスト）</div><div class="fd"><code>CLAUDE.md</code> にルール・<code>@</code> でその一つのファイル・無関係は <code>/clear</code> で空に。</div><div class="fe"><b>関連</b> コンテキスト窓・文脈管理・CLAUDE.md</div></div><div class="fcard"><div class="ft">指示</div><div class="fd">何を・どう・終わったら何で確認するかまで具体的に。</div><div class="fe"><b>関連</b> 良い依頼の書き方</div></div><div class="fcard"><div class="ft">ツール</div><div class="fd"><b>MCP</b> で外部接続、<b>スキル</b>で繰り返し手順を能力に。</div><div class="fe"><b>関連</b> MCP・スキル</div></div><div class="fcard"><div class="ft">検証・反復</div><div class="fd">結果を見て足りなければ — モデルではなく<b>環境</b>を補強して再挑戦。</div><div class="fe"><b>要点</b> モデルのせいにする前に環境を点検</div></div></div>
       </div>
       <p class="simtake"><span class="stk">結論</span><span>ハーネスエンジニアリング = <b>モデルではなく「環境」を調える技術</b>。結果が物足りなければ、高いモデルの前に<b>ツール・文脈・指示</b>を点検。</span></p>
+      <div class="grp">
+        <h3>設計は一発でなく「ループ」</h3>
+        <p class="defs" style="margin-top:0;">一度整えて終わりではなく — 結果を見て<b>何が足りなかったか</b>を診断し、環境を補強して素早く繰り返します。</p>
+        <div class="fgrid"><div class="fcard"><div class="ft">① 観察</div><div class="fd">結果を見る — どこでずれた？</div></div><div class="fcard"><div class="ft">② 診断</div><div class="fd">文脈がない？指示が曖昧？ツールがない？ノイズが多い？</div></div><div class="fcard"><div class="ft">③ 補強</div><div class="fd">足りないつまみを埋める — CLAUDE.md・<code>@</code>・ツール・整理。</div></div><div class="fcard"><div class="ft">④ 反復</div><div class="fd">再依頼 → また観察。調えるのは<b>環境であってモデルでない</b>。</div></div></div>
+        <p class="simtake"><span class="stk">結論</span><span>良いハーネスは「一発完成」でなく、<b>観察 → 診断 → 補強を速く回す</b>ことです。</span></p>
+      </div>
+
       <p class="note"><b>コンテキストエンジニアリング</b> · 狭く言えば<b>コンテキスト窓に何を入れ、何を出すか</b>を設計すること — 多すぎ（ノイズ）ても少なすぎ（情報不足）てもダメ、<b>「必要な分だけ」</b>が肝心です。（出典：Anthropic 公式 — code.claude.com/docs context-window·memory、2026年6月時点）</p>
     </section>
 
@@ -1904,6 +1911,16 @@ description: 週次レポートを会社の様式で作成
         <div class="fgrid"><div class="fcard"><div class="ft">信号 vs ノイズ</div><div class="fd">無関係なファイル・重複ログ・古い会話は外す。質を決めるのは量でなく<b>関連性</b>。</div><div class="fe"><b>点検</b> <code>@</code> でその一つだけ</div></div><div class="fcard"><div class="ft">コンテキスト劣化</div><div class="fd">長いほど先頭・中間がぼやける。<b>重要な指示は後で・明示的に</b>言い直す。</div><div class="fe"><b>点検</b> 要点は最後に</div></div><div class="fcard"><div class="ft">予算配分</div><div class="fd">システム・ツール定義・CLAUDE.md・履歴・読んだファイル・ツール結果が<b>1つの窓</b>を分け合う。</div><div class="fe"><b>点検</b>「トークン」タブで比率</div></div><div class="fcard"><div class="ft">回収ツール</div><div class="fd"><code>/compact</code>（圧縮）・サブエージェント（隔離）・<code>/clear</code>（整理）で予算を取り戻す。</div><div class="fe"><b>点検</b> 長くなったら圧縮・分割</div></div></div>
         <p class="simtake"><span class="stk">結論</span><span>結果が物足りない時 — <b>何を足すか</b>より<b>何を外して信号を上げるか</b>を先に。</span></p>
       </div>
+      <div class="grp">
+        <h3>何がコンテキスト予算を食うか</h3>
+        <div class="tablewrap"><table class="t"><thead><tr><th>項目</th><th style="width:120px;">およそ</th><th>減らし方</th></tr></thead><tbody><tr><td>システム+ツール定義</td><td>固定（相当）</td><td>使わない MCP・ツールを切る</td></tr><tr><td>CLAUDE.md</td><td>毎セッション常時</td><td>短く最新に</td></tr><tr><td>会話履歴</td><td>溜まるほど増</td><td><code>/compact</code>・<code>/clear</code></td></tr><tr><td>読んだファイル</td><td>大きな割合</td><td><code>@</code> で必要な部分だけ</td></tr><tr><td>ツール結果</td><td>検索・ログが大</td><td>範囲を絞る・サブエージェントで隔離</td></tr></tbody></table></div>
+      </div>
+      <div class="grp">
+        <h3>コンテキスト肥大のサイン</h3>
+        <div style="border:1px solid var(--line2);border-radius:12px;background:var(--row);padding:14px 17px;line-height:2;font-size:13.5px;"><div>· 回答が遅く高コストに（毎回全部読み直す）</div><div>· 前の指示を忘れる・無視する</div><div>· 見当違いのファイルや古い内容を引く</div><div>· 「自動圧縮」が頻発する</div></div>
+        <p class="simtake"><span class="stk">対処</span><span>その時は — 新タスクは <code>/clear</code>、続けるなら <code>/compact</code>、大きな調査はサブエージェントで隔離。</span></p>
+      </div>
+
       <p class="note"><b>出典</b> · Anthropic 公式 — code.claude.com/docs context-window·compaction（「effective context engineering」、2026年6月時点）。コンテキスト劣化・信号 vs ノイズは LLM 一般の特性です。</p>
     </section>
 
@@ -2128,7 +2145,7 @@ description: 週次レポートを会社の様式で作成
   document.querySelectorAll('.quiz').forEach(function(q){ var fb=q.querySelector('.qfb'); if(fb){ fb.setAttribute('aria-live','polite'); fb.setAttribute('role','status'); } q.querySelectorAll('.qopt').forEach(function(o){ o.addEventListener('click',function(){ var ok=o.hasAttribute('data-ok'); q.querySelectorAll('.qopt').forEach(function(x){ x.classList.remove('right','wrong'); }); o.classList.add(ok?'right':'wrong'); if(!ok){ var c=q.querySelector('.qopt[data-ok]'); if(c) c.classList.add('right'); } if(fb){ fb.textContent = ok ? (fb.getAttribute('data-ok')||'') : (fb.getAttribute('data-no')||''); fb.className='qfb on '+(ok?'good':'bad'); } }); }); });
 
   /* difficulty mode — 초급/중급/고급 filter */
-  var LV={ intro:1,subiso:4,antipat:4,ctxeng:4,ctxrules:4,harness:3,cowork:1,usecases:1,where:1,ask:1,mention:1,keys:1,steer:1,howworks:1,context:1,manage:1,compact:1,sessions:1,models:1,claudemd:1,images:1,permissions:1,rewind:1,commands:1,glossary:1,
+  var LV={ intro:1,subiso:4,antipat:4,ctxeng:4,ctxrules:4,harness:4,cowork:1,usecases:1,where:1,ask:1,mention:1,keys:1,steer:1,howworks:1,context:1,manage:1,compact:1,sessions:1,models:1,claudemd:1,images:1,permissions:1,rewind:1,commands:1,glossary:1,
     tokens:2,effort:2,setup:2,memory:2,skills:2,skillshare:2,skillsec:2,rpa:2,remote:2,planmode:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
     mcp:3,plugins:3,agents:3,hooks:3,goal:3,loop:3,workflows:3,routines:3 };
   (function(){ var chips=document.querySelectorAll('#lvlsel .lvlchip'); if(!chips.length) return; var origNo={}; navs.forEach(function(n){ var no=n.querySelector('.no'); if(no) origNo[n.dataset.page]=no.textContent; });

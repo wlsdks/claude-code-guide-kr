@@ -143,7 +143,7 @@
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
   /* collapsible code, one-line summary, example badge */
-  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; }
+  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; } .codeblk{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.7; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:13px 15px; white-space:pre-wrap; color:var(--ink); margin:10px 0 0; overflow-x:auto; } .codeblk .cmt{ color:var(--faint); }
   .notedet{ margin:14px 0 22px; } .notedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .notedet>summary::-webkit-details-marker{ display:none; } .notedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .notedet[open]>summary::before{ transform:rotate(90deg); } .notedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .notedet .note{ margin:8px 0 0 !important; }
   .loopviz{ margin:14px auto 18px; max-width:600px; }
   .loopviz svg{ width:100%; height:auto; display:block; }
@@ -937,6 +937,13 @@ irm https://claude.ai/install.ps1 | iex</div>
         <div class="fgrid"><div class="fcard"><div class="ft">上下文</div><div class="fd">在 <code>CLAUDE.md</code> 写规则 · 用 <code>@</code> 指定那个文件 · 用 <code>/clear</code> 清无关内容。</div><div class="fe"><b>相关</b> 上下文窗口·上下文管理·CLAUDE.md</div></div><div class="fcard"><div class="ft">指示</div><div class="fd">说清楚：做什么·怎么做·做完怎么验证。</div><div class="fe"><b>相关</b> 写好请求</div></div><div class="fcard"><div class="ft">工具</div><div class="fd">用 <b>MCP</b> 连外部，用<b>技能</b>把重复步骤变成能力。</div><div class="fe"><b>相关</b> MCP·技能</div></div><div class="fcard"><div class="ft">检验·重复</div><div class="fd">看结果，不够好就 —— 补<b>环境</b>而不是换模型，再来一次。</div><div class="fe"><b>要点</b> 怪模型前先查环境</div></div></div>
       </div>
       <p class="simtake"><span class="stk">结论</span><span>Harness 工程 = <b>调「环境」而不是换模型</b>。结果不理想，先查<b>工具·上下文·指示</b>，再考虑更贵的模型。</span></p>
+      <div class="grp">
+        <h3>设计是循环，不是一次性</h3>
+        <p class="defs" style="margin-top:0;">不是配一次就完 —— 看结果、<b>诊断缺了什么</b>、补强环境，然后快速重复。</p>
+        <div class="fgrid"><div class="fcard"><div class="ft">① 观察</div><div class="fd">看结果 —— 哪里出错了？</div></div><div class="fcard"><div class="ft">② 诊断</div><div class="fd">缺上下文？指示模糊？没工具？噪音太多？</div></div><div class="fcard"><div class="ft">③ 补强</div><div class="fd">补上缺的把手 —— CLAUDE.md、<code>@</code>、工具、清理。</div></div><div class="fcard"><div class="ft">④ 重复</div><div class="fd">再试 → 再观察。调的是<b>环境，不是模型</b>。</div></div></div>
+        <p class="simtake"><span class="stk">结论</span><span>好的 harness 不是「一次做成」，而是<b>快速循环 观察 → 诊断 → 补强</b>。</span></p>
+      </div>
+
       <p class="note"><b>上下文工程</b> · 狭义说，就是设计<b>上下文窗口里放什么、去掉什么</b> —— 太多（噪音）太少（信息不足）都不好，<b>「只放需要的」</b>才是关键。（来源：Anthropic 官方 —— code.claude.com/docs context-window·memory，2026年6月）</p>
     </section>
 
@@ -1903,6 +1910,16 @@ description: 按公司格式撰写周报
         <div class="fgrid"><div class="fcard"><div class="ft">信号 vs 噪音</div><div class="fd">去掉无关文件·重复日志·旧对话。决定质量的是<b>相关性</b>，不是数量。</div><div class="fe"><b>检查</b> 用 <code>@</code> 只给那个文件</div></div><div class="fcard"><div class="ft">上下文衰减</div><div class="fd">越长，开头和中间越模糊。<b>关键指示要靠后、明确地</b>再说一遍。</div><div class="fe"><b>检查</b> 把重点放最后</div></div><div class="fcard"><div class="ft">预算分配</div><div class="fd">系统提示·工具定义·CLAUDE.md·历史·读入的文件·工具结果共用<b>同一个窗口</b>。</div><div class="fe"><b>检查</b> 在「Token」页看占比</div></div><div class="fcard"><div class="ft">回收工具</div><div class="fd"><code>/compact</code>（压缩）·子代理（隔离）·<code>/clear</code>（清理）把预算赢回来。</div><div class="fe"><b>检查</b> 太长就压缩/拆分</div></div></div>
         <p class="simtake"><span class="stk">结论</span><span>结果不理想时 —— 先问<b>该去掉什么来提高信号</b>，而不是<b>该加什么</b>。</span></p>
       </div>
+      <div class="grp">
+        <h3>什么在吃上下文预算</h3>
+        <div class="tablewrap"><table class="t"><thead><tr><th>项目</th><th style="width:120px;">大致</th><th>怎么省</th></tr></thead><tbody><tr><td>系统+工具定义</td><td>固定（不小）</td><td>关掉没用的 MCP/工具</td></tr><tr><td>CLAUDE.md</td><td>每次会话常驻</td><td>保持短而新</td></tr><tr><td>对话历史</td><td>越积越多</td><td><code>/compact</code>·<code>/clear</code></td></tr><tr><td>读入的文件</td><td>占比很大</td><td><code>@</code> 只给需要的部分</td></tr><tr><td>工具结果</td><td>搜索/日志很大</td><td>缩小范围·用子代理隔离</td></tr></tbody></table></div>
+      </div>
+      <div class="grp">
+        <h3>上下文臃肿的信号</h3>
+        <div style="border:1px solid var(--line2);border-radius:12px;background:var(--row);padding:14px 17px;line-height:2;font-size:13.5px;"><div>· 回答变慢变贵（每次都重读全部）</div><div>· 忘记或无视前面给的指示</div><div>· 拉来错误文件或过时内容</div><div>· 「自动压缩」频繁出现</div></div>
+        <p class="simtake"><span class="stk">处方</span><span>这时 —— 新任务用 <code>/clear</code>，要接着做用 <code>/compact</code>，大调查用子代理隔离。</span></p>
+      </div>
+
       <p class="note"><b>来源</b> · Anthropic 官方 —— code.claude.com/docs context-window·compaction（「effective context engineering」，2026年6月）。上下文衰减、信号 vs 噪音是 LLM 的普遍特性。</p>
     </section>
 
@@ -2128,7 +2145,7 @@ description: 按公司格式撰写周报
   document.querySelectorAll('.quiz').forEach(function(q){ var fb=q.querySelector('.qfb'); if(fb){ fb.setAttribute('aria-live','polite'); fb.setAttribute('role','status'); } q.querySelectorAll('.qopt').forEach(function(o){ o.addEventListener('click',function(){ var ok=o.hasAttribute('data-ok'); q.querySelectorAll('.qopt').forEach(function(x){ x.classList.remove('right','wrong'); }); o.classList.add(ok?'right':'wrong'); if(!ok){ var c=q.querySelector('.qopt[data-ok]'); if(c) c.classList.add('right'); } if(fb){ fb.textContent = ok ? (fb.getAttribute('data-ok')||'') : (fb.getAttribute('data-no')||''); fb.className='qfb on '+(ok?'good':'bad'); } }); }); });
 
   /* difficulty mode — 초급/중급/고급 filter */
-  var LV={ intro:1,subiso:4,antipat:4,ctxeng:4,ctxrules:4,harness:3,cowork:1,usecases:1,where:1,ask:1,mention:1,keys:1,steer:1,howworks:1,context:1,manage:1,compact:1,sessions:1,models:1,claudemd:1,images:1,permissions:1,rewind:1,commands:1,glossary:1,
+  var LV={ intro:1,subiso:4,antipat:4,ctxeng:4,ctxrules:4,harness:4,cowork:1,usecases:1,where:1,ask:1,mention:1,keys:1,steer:1,howworks:1,context:1,manage:1,compact:1,sessions:1,models:1,claudemd:1,images:1,permissions:1,rewind:1,commands:1,glossary:1,
     tokens:2,effort:2,setup:2,memory:2,skills:2,skillshare:2,skillsec:2,rpa:2,remote:2,planmode:2,privacy:2,config:2,doctor:2,plans:2,limits:2,
     mcp:3,plugins:3,agents:3,hooks:3,goal:3,loop:3,workflows:3,routines:3 };
   (function(){ var chips=document.querySelectorAll('#lvlsel .lvlchip'); if(!chips.length) return; var origNo={}; navs.forEach(function(n){ var no=n.querySelector('.no'); if(no) origNo[n.dataset.page]=no.textContent; });
