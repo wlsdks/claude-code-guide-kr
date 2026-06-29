@@ -143,7 +143,7 @@
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
   /* collapsible code, one-line summary, example badge */
-  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; } .codeblk{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.7; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:13px 15px; white-space:pre-wrap; color:var(--ink); margin:10px 0 0; overflow-x:auto; } .codeblk .cmt{ color:var(--faint); } .srclink{ display:inline-flex; align-items:center; gap:3px; color:var(--accent); text-decoration:none; font-weight:600; font-size:11.5px; } .srclink:hover{ text-decoration:underline; } .srclink::after{ content:"\2197"; font-size:10px; }
+  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; } .codeblk{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.7; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:13px 15px; white-space:pre-wrap; color:var(--ink); margin:10px 0 0; overflow-x:auto; } .codeblk .cmt{ color:var(--faint); } .srclink{ color:var(--accent); text-decoration:underline; text-decoration-color:var(--line2); text-underline-offset:2px; font-weight:600; } .srclink:hover{ text-decoration-color:var(--accent); } .srclink::after{ content:"\2197"; font-size:.82em; margin-left:2px; }
   .notedet{ margin:14px 0 22px; } .notedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .notedet>summary::-webkit-details-marker{ display:none; } .notedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .notedet[open]>summary::before{ transform:rotate(90deg); } .notedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .notedet .note{ margin:8px 0 0 !important; }
   .loopviz{ margin:14px auto 18px; max-width:600px; }
   .loopviz svg{ width:100%; height:auto; display:block; }
@@ -718,7 +718,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <li><b>有料の Claude プランか API が必要です。</b><span>無料プランでは Claude Code は使えません。（「料金プラン」タブを参照）</span></li>
         <li><b>最初の一歩</b><span>プロジェクトフォルダで <code>claude</code> → ログイン → 「このプロジェクトは何をするもの?」のように、まずは話しかけてみる。</span></li>
       </ul>
-      <p class="note">正確なインストール方法・必要条件はバージョンによって変わるので、<code>code.claude.com/docs</code> で最新の案内を確認してください。</p>
+      <p class="note">正確なインストール方法・必要条件はバージョンによって変わるので、<code><a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a></code> で最新の案内を確認してください。</p>
     </section>
 
     <!-- ASK: writing good requests -->
@@ -749,7 +749,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="label">リクエストを入力する <span class="hint">実際に打ってみて</span></p>
         <div class="field"><input id="ask-inp" type="text" placeholder="例: 会員登録画面にパスワード確認欄を追加して、合わなければ赤く表示して" maxlength="120"><button class="send" id="ask-go">点数を見る</button></div>
         <div class="scorebox" id="ask-score"></div>
-        <p class="note">良いリクエストの4つ：① <b>何</b>を(対象) ② <b>どう</b>(したい動作) ③ <b>どこ</b>で(画面・ファイル) ④ <b>完了の基準</b>(どう確認)。出典：code.claude.com/docs (Best practices)。</p>
+        <p class="note">良いリクエストの4つ：① <b>何</b>を(対象) ② <b>どう</b>(したい動作) ③ <b>どこ</b>で(画面・ファイル) ④ <b>完了の基準</b>(どう確認)。出典：<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> (Best practices)。</p>
       </div>
     </section>
 
@@ -871,7 +871,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="status" id="hw-status">ボタンを押すと一段階ずつ進みます。</p>
         <p class="simtake"><span class="stk">結論</span><span>Claude は<b>答えるだけではなく</b> — 自分で<b>ツール(検索・読み取り・編集・実行)</b>を使って<b>見て → 直して → 確認を繰り返し</b>ます。だから「チャット」と違い、実際に動く成果物が出てきます。</span></p>
       </div>
-      <p class="note">この「見る → 行動 → 確認 → 繰り返し」の流れを<b>エージェントループ</b>と呼びます。途中でファイルを直したりコマンドを実行するときは、たいてい<b>先に確認します</b>(権限)。(出典: code.claude.com/docs — How Claude Code works)</p>
+      <p class="note">この「見る → 行動 → 確認 → 繰り返し」の流れを<b>エージェントループ</b>と呼びます。途中でファイルを直したりコマンドを実行するときは、たいてい<b>先に確認します</b>(権限)。(出典: <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> — How Claude Code works)</p>
     </section>
 
     <!-- SETUP -->
@@ -908,7 +908,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <div class="cxsummary" id="su-box"></div>
         <p class="simtake"><span class="stk">結論</span><span>結果を左右するのはモデルだけではありません — <b>ツール・指示・権限・文脈をしっかり整えれば</b>、同じ AI がずっとうまくやります。（これが「ハーネス」をうまく組むということ）</span></p>
       </div>
-      <p class="note">ほとんどはクロードコードが <b>自動で整えてくれます</b> — 私たちは「何を足せばもっとうまくいくか」だけ知っていれば十分です（例：<code>CLAUDE.md</code> にルールを書く、<code>@</code> でファイルを指定する）。（出典：code.claude.com/docs — how-claude-code-works · context-window · memory、2026年6月時点）</p>
+      <p class="note">ほとんどはクロードコードが <b>自動で整えてくれます</b> — 私たちは「何を足せばもっとうまくいくか」だけ知っていれば十分です（例：<code>CLAUDE.md</code> にルールを書く、<code>@</code> でファイルを指定する）。（出典：<a class="srclink" href="https://code.claude.com/docs/en/how-claude-code-works" target="_blank" rel="noopener">code.claude.com/docs — how-claude-code-works</a> · context-window · memory、2026年6月時点）</p>
     </section>
 
     <!-- 03 CONTEXT -->
@@ -953,7 +953,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="simtake"><span class="stk">結論</span><span>良いハーネスは「一発完成」でなく、<b>観察 → 診断 → 補強を速く回す</b>ことです。</span></p>
       </div>
 
-      <p class="note"><b>コンテキストエンジニアリング</b> · 狭く言えば<b>コンテキスト窓に何を入れ、何を出すか</b>を設計すること — 多すぎ（ノイズ）ても少なすぎ（情報不足）てもダメ、<b>「必要な分だけ」</b>が肝心です。（出典：Anthropic 公式 — code.claude.com/docs context-window·memory、2026年6月時点）</p>
+      <p class="note"><b>コンテキストエンジニアリング</b> · 狭く言えば<b>コンテキスト窓に何を入れ、何を出すか</b>を設計すること — 多すぎ（ノイズ）ても少なすぎ（情報不足）てもダメ、<b>「必要な分だけ」</b>が肝心です。（出典：Anthropic 公式 — <a class="srclink" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">code.claude.com/docs context-window·memory</a>、2026年6月時点）</p>
     </section>
 
     <section class="page" id="context">
@@ -1253,7 +1253,7 @@ description: 週次レポートを会社の様式で作成
             <tr><td><b>プラグイン</b></td><td>プラグインの束</td><td>インストールした誰でも</td></tr>
           </tbody>
         </table></div>
-        <p class="note">作り方が難しければ、クロードに <b>「この作業をスキルにして」</b>と頼めば代わりに作ってくれます。（出典：code.claude.com/docs — skills、2026年6月時点）</p>
+        <p class="note">作り方が難しければ、クロードに <b>「この作業をスキルにして」</b>と頼めば代わりに作ってくれます。（出典：<a class="srclink" href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">code.claude.com/docs — skills</a>、2026年6月時点）</p>
       </div>
     </section>
 
@@ -1274,7 +1274,7 @@ description: 週次レポートを会社の様式で作成
         <div class="cxsummary" id="sc-box"></div>
         <p class="simtake"><span class="stk">結論</span><span>安全 = <b>信頼できる出所からのみ</b>・<b>権限は狭く</b>・<b>内容は一度確認</b>。（Anthropic は外部のスキル・MCP・プラグインを一つひとつ審査しません — 信頼の判断は自分の役目。）</span></p>
       </div>
-      <p class="note">いちばん安全なのは <b>自分で（またはクロードに頼んで）作って使うこと</b>です。外部のものを使うときは信頼できる提供者のものだけを。機密性の高い環境なら <code>/sandbox</code> で実行範囲を限定することもできます。（出典：code.claude.com/docs — security · skills、2026年6月時点）</p>
+      <p class="note">いちばん安全なのは <b>自分で（またはクロードに頼んで）作って使うこと</b>です。外部のものを使うときは信頼できる提供者のものだけを。機密性の高い環境なら <code>/sandbox</code> で実行範囲を限定することもできます。（出典：<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs — security</a> · skills、2026年6月時点）</p>
     </section>
 
     <!-- 10 MCP -->
@@ -1337,7 +1337,7 @@ description: 週次レポートを会社の様式で作成
         <div class="fcard"><div class="ft">スキル</div><div class="fd">くり返す作業の<b>コツ・手順</b>の束。</div></div>
         <div class="fcard"><div class="ft">プラグイン</div><div class="fd">上のものを<b>まとめて配布</b>するパッケージ。</div></div>
       </div>
-      <p class="note">インストール: <code>/plugin install 名前@マーケットプレイス</code>。公式（<code>@claude-plugins-official</code>）・コミュニティ（<code>@claude-community</code>）のマーケットプレイスがあります。信頼できる出所からだけインストールしてください。（出典: code.claude.com/docs/plugins）</p>
+      <p class="note">インストール: <code>/plugin install 名前@マーケットプレイス</code>。公式（<code>@claude-plugins-official</code>）・コミュニティ（<code>@claude-community</code>）のマーケットプレイスがあります。信頼できる出所からだけインストールしてください。（出典: <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>/plugins）</p>
            <div class="quiz">
          <div class="qq"><span class="qb">あなたの番</span>Jira や Google ドライブなどの <b>外部アプリにクロードをつなぎ</b>、直接使わせるのは何でしょう？</div>
          <div class="qopts"><button class="qopt" data-ok>MCP</button><button class="qopt">スキル</button><button class="qopt">サブエージェント</button></div>
@@ -1459,7 +1459,7 @@ description: 週次レポートを会社の様式で作成
             <tr><td><b>ウェブ（claude.ai/code）</b></td><td>クラウド</td><td>クラウド環境</td><td>自分の PC なしで新しく始める</td></tr>
           </tbody>
         </table></div>
-        <p class="note">正式名称は <b>Remote Control</b>、<b>リサーチプレビュー（research preview）</b>段階です — すべてのプランで使えますが、動作・上限が変わることがあります。使い方：自分の PC のクロードで <code>/remote-control</code>（または <code>claude remote-control</code>）→ リンク・QR が表示されます。スマホにクロードアプリを入れて通知をオンにしておくと、作業完了・確認依頼を受け取れます。（出典：code.claude.com/docs — remote control、2026年6月時点）</p>
+        <p class="note">正式名称は <b>Remote Control</b>、<b>リサーチプレビュー（research preview）</b>段階です — すべてのプランで使えますが、動作・上限が変わることがあります。使い方：自分の PC のクロードで <code>/remote-control</code>（または <code>claude remote-control</code>）→ リンク・QR が表示されます。スマホにクロードアプリを入れて通知をオンにしておくと、作業完了・確認依頼を受け取れます。（出典：<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs — remote</a> control、2026年6月時点）</p>
       </div>
     </section>
 
@@ -1586,7 +1586,7 @@ description: 週次レポートを会社の様式で作成
         <li><b>ローカルの記録</b><span>セッションの記録が自分のコンピュータ(~/.claude/projects)に平文で保存されます。保管期間は設定で調整可能。</span></li>
       </ul>
       <p class="simtake"><span class="stk">結論</span><span><b>業務用（Team·Enterprise·API）は既定で学習に使われません。</b> 個人用（Free·Pro·Max）は設定でオン/オフできます。</span></p>
-      <p class="note warn" style="margin-top:14px;"><b>重要</b> · ポリシーは変わり続け、アカウントの種類ごとに違います。慎重な判断の前には公式ページを必ず確認してください — <code>privacy.claude.com</code>、<code>anthropic.com/legal</code>、<code>code.claude.com/docs</code> (この内容は 2026年6月時点)。</p>
+      <p class="note warn" style="margin-top:14px;"><b>重要</b> · ポリシーは変わり続け、アカウントの種類ごとに違います。慎重な判断の前には公式ページを必ず確認してください — <code>privacy.claude.com</code>、<code>anthropic.com/legal</code>、<code><a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a></code> (この内容は 2026年6月時点)。</p>
     </section>
 
     <!-- 19 COMMANDS -->
@@ -1789,7 +1789,7 @@ description: 週次レポートを会社の様式で作成
       <div class="cwvm"><span class="cwvmtag">条件になるまで自動で繰り返す</span><div id="goal-turns"></div></div>
       <p class="status" id="goal-status" style="margin-top:12px;">「目標スタート」を押してみてください。</p>
       <p class="simtake"><span class="stk">結論</span><span>毎ターン<b>「もう一回」を押す代わりに</b> — goal は<b>条件を満たすまで自分で繰り返します</b>。</span></p>
-      <p class="note">条件の充足は<b>別の判定</b>で毎ターン確認し、満たされたら自動で止まります（無限ループ防止の仕組みもあります）。変え方: <code>/goal</code>。（出典: Anthropic 公式 — code.claude.com/docs goal）</p>
+      <p class="note">条件の充足は<b>別の判定</b>で毎ターン確認し、満たされたら自動で止まります（無限ループ防止の仕組みもあります）。変え方: <code>/goal</code>。（出典: Anthropic 公式 — <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs goal</a>）</p>
     </section>
 
     <!-- LOOP -->
@@ -1804,7 +1804,7 @@ description: 週次レポートを会社の様式で作成
       <div class="usefeed" id="loop-feed"></div>
       <p class="status" id="loop-status" style="margin-top:10px;">間隔を選んで「繰り返しスタート」を押してみてください。</p>
       <p class="simtake"><span class="stk">結論</span><span>人が<b>10分ごとに自分で確認する作業を</b> — loop は<b>寝ている間も自動で繰り返します</b>。（goal は「できるまで」、loop は「決めた間隔ごと」）</span></p>
-      <p class="note">セッションが開いている間、繰り返されます。変え方: <code>/loop 10m "新しい注文を確認"</code> のように。（出典: Anthropic 公式 — code.claude.com/docs scheduled-tasks）</p>
+      <p class="note">セッションが開いている間、繰り返されます。変え方: <code>/loop 10m "新しい注文を確認"</code> のように。（出典: Anthropic 公式 — <a class="srclink" href="https://code.claude.com/docs/en/scheduled-tasks" target="_blank" rel="noopener">code.claude.com/docs scheduled-tasks</a>）</p>
     </section>
 
     <!-- WORKFLOWS -->
@@ -1845,7 +1845,7 @@ description: 週次レポートを会社の様式で作成
             <tr><td><b>ルーティン</b></td><td>クラウド</td><td><b>可</b></td><td>スケジュール・GitHub・API</td></tr>
           </tbody>
         </table></div>
-        <p class="note"><b>リサーチプレビュー（research preview）</b>段階です — 動作・上限が変わることがあります。作り方：クロードに <code>/schedule</code> で伝えるか、claude.ai/code のルーティンで設定。ルーティンは権限を事前に受け取って <b>自動で実行</b>されるので、何を・どこまでやるか範囲を決めておくと安全です。（出典：code.claude.com/docs — routines、2026年6月時点）</p>
+        <p class="note"><b>リサーチプレビュー（research preview）</b>段階です — 動作・上限が変わることがあります。作り方：クロードに <code>/schedule</code> で伝えるか、claude.ai/code のルーティンで設定。ルーティンは権限を事前に受け取って <b>自動で実行</b>されるので、何を・どこまでやるか範囲を決めておくと安全です。（出典：<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs — routines</a>、2026年6月時点）</p>
       </div>
     </section>
 
@@ -1857,7 +1857,7 @@ description: 週次レポートを会社の様式で作成
       <div class="cfgpanel" id="cfg-panel"></div>
       <p class="status" id="cfg-status" style="margin-top:12px;">右の値を押して変えてみてください。</p>
       <p class="simtake"><span class="stk">結論</span><span>言語・テーマ・モデル・権限を<b>一か所（コントロールパネル）で</b>変えます — あちこち探さなくてOK。</span></p>
-      <p class="note">開き方: <code>/config</code>。実際の設定項目はこれより多いです。（出典: Anthropic 公式 — code.claude.com/docs settings）</p>
+      <p class="note">開き方: <code>/config</code>。実際の設定項目はこれより多いです。（出典: Anthropic 公式 — <a class="srclink" href="https://code.claude.com/docs/en/settings" target="_blank" rel="noopener">code.claude.com/docs settings</a>）</p>
     </section>
 
     <!-- DOCTOR -->
@@ -1869,7 +1869,7 @@ description: 週次レポートを会社の様式で作成
       <div class="cwvm"><span class="cwvmtag">/doctor 点検中</span><div id="dr-list"></div></div>
       <p class="status" id="dr-status" style="margin-top:12px;">「診断を実行」を押してみてください。</p>
       <p class="simtake"><span class="stk">結論</span><span>一人で<b>「なぜ動かない?」と悩む代わりに</b> — /doctor が<b>どこが問題か一度で指摘します</b>。</span></p>
-      <p class="note">開き方: <code>/doctor</code>（または <code>claude doctor</code>）。問題があれば、<b>f</b> キーを押すと Claude がそのまま直してくれます。（出典: Anthropic 公式 — code.claude.com/docs CLI 参考）</p>
+      <p class="note">開き方: <code>/doctor</code>（または <code>claude doctor</code>）。問題があれば、<b>f</b> キーを押すと Claude がそのまま直してくれます。（出典: Anthropic 公式 — <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> CLI 参考）</p>
     </section>
 
     <!-- 30 GLOSSARY -->
@@ -1929,7 +1929,7 @@ description: 週次レポートを会社の様式で作成
         <p class="simtake"><span class="stk">対処</span><span>その時は — 新タスクは <code>/clear</code>、続けるなら <code>/compact</code>、大きな調査はサブエージェントで隔離。</span></p>
       </div>
 
-      <p class="note"><b>出典</b> · Anthropic 公式 — code.claude.com/docs context-window·compaction（「effective context engineering」、2026年6月時点）。コンテキスト劣化・信号 vs ノイズは LLM 一般の特性です。</p>
+      <p class="note"><b>出典</b> · Anthropic 公式 — <a class="srclink" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">code.claude.com/docs context-window·compaction</a>（「effective context engineering」、2026年6月時点）。コンテキスト劣化・信号 vs ノイズは LLM 一般の特性です。</p>
     </section>
 
     <!-- CTXRULES (expert: CLAUDE.md design) -->
@@ -1963,7 +1963,7 @@ description: 週次レポートを会社の様式で作成
         <p class="simtake"><span class="stk">結論</span><span>どちらも「<b>文脈</b>」にすぎず — <b>強制ではない</b>。必須は<b>フック</b>で（「フック」参照）。自動メモリは <code>/memory</code> で確認・編集。</span></p>
       </div>
 
-      <p class="note"><b>アンチパターン</b> · 200行超・矛盾するルール・古い情報 → かえって<b>守られなくなる</b>。「30秒で読める量」に収めて。（出典：code.claude.com/docs — memory·settings、2026年6月時点）</p>
+      <p class="note"><b>アンチパターン</b> · 200行超・矛盾するルール・古い情報 → かえって<b>守られなくなる</b>。「30秒で読める量」に収めて。（出典：<a class="srclink" href="https://code.claude.com/docs/en/memory" target="_blank" rel="noopener">code.claude.com/docs — memory·settings</a>、2026年6月時点）</p>
     </section>
 
     <!-- SUBISO (expert: subagent context isolation) -->
@@ -1994,7 +1994,7 @@ description: 週次レポートを会社の様式で作成
 }</div>
         <p class="simtake"><span class="stk">結論</span><span>フック = ハーネスの<b>ガードレール</b>。CLAUDE.md では保証できない「<b>毎回必ず</b>」をフックで固定（整形・テスト・遮断）。</span></p>
       </div>
-      <p class="note">終了コード <b>2</b> でその動作を止め、理由がクロードに伝わります。<code>type</code> は <code>command</code> の他に <code>http・prompt・agent</code> も。（出典：Anthropic 公式 — code.claude.com/docs hooks、2026年6月時点）</p>
+      <p class="note">終了コード <b>2</b> でその動作を止め、理由がクロードに伝わります。<code>type</code> は <code>command</code> の他に <code>http・prompt・agent</code> も。（出典：Anthropic 公式 — <a class="srclink" href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">code.claude.com/docs hooks</a>、2026年6月時点）</p>
     </section>
 
     <!-- skillcraft (expert harness mechanism) -->
@@ -2021,7 +2021,7 @@ description: リリースノート作成・タグ・デプロイ
 <span class="cmt"># まず description だけ読み、関連時のみ本文（手順）を読み込む</span></div>
         <p class="simtake"><span class="stk">結論</span><span>毎回同じ手順を貼るなら → <b>スキル</b>に。一度作れば、チームが <code>/名前</code> で再利用。</span></p>
       </div>
-      <p class="note">場所は <code>~/.claude/skills/</code>（個人）・<code>.claude/skills/</code>（プロジェクト）・プラグイン。<b>Agent Skills</b> オープン標準（agentskills.io）に準拠。（出典：Anthropic 公式 — code.claude.com/docs skills、2026年6月時点）</p>
+      <p class="note">場所は <code>~/.claude/skills/</code>（個人）・<code>.claude/skills/</code>（プロジェクト）・プラグイン。<b>Agent Skills</b> オープン標準（agentskills.io）に準拠。（出典：Anthropic 公式 — <a class="srclink" href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">code.claude.com/docs skills</a>、2026年6月時点）</p>
     </section>
 
     <section class="page" id="subiso">
@@ -2052,7 +2052,7 @@ description: リリースノート作成・タグ・デプロイ
         <p class="note" style="margin-top:12px;"><b>コスト注意</b> · 補助もそれぞれトークンを使います — <b>小さな単発</b>では委譲がかえって高い。広い・長い・並列で得。</p>
       </div>
 
-      <p class="note"><b>出典</b> · Anthropic 公式 — code.claude.com/docs subagents·Agent SDK（2026年6月時点）。「最終メッセージだけ返す」が文脈隔離の核心です。</p>
+      <p class="note"><b>出典</b> · Anthropic 公式 — <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs subagents·</a>Agent SDK（2026年6月時点）。「最終メッセージだけ返す」が文脈隔離の核心です。</p>
     </section>
 
     <!-- ANTIPAT (expert: harness anti-patterns + checklist) -->
@@ -2074,7 +2074,7 @@ description: リリースノート作成・タグ・デプロイ
         <p class="simtake"><span class="stk">順番</span><span>多くは<b>1〜3</b>で解決します。モデルを上げるのは<b>環境を点検した後の最終手段</b>。</span></p>
       </div>
 
-      <p class="note"><b>出典</b> · Anthropic 公式 — code.claude.com/docs（context-window·memory·subagents）。症状-原因は現場でよくあるパターンの整理です（2026年6月時点）。</p>
+      <p class="note"><b>出典</b> · Anthropic 公式 — <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>（context-window·memory·subagents）。症状-原因は現場でよくあるパターンの整理です（2026年6月時点）。</p>
     </section>
 
     <div class="pagenav" id="pagenav">
@@ -2093,7 +2093,7 @@ description: リリースノート作成・タグ・デプロイ
         <span class="ft-dm">— お問い合わせはメールか LinkedIn の DM でお願いします</span>
       </div>
       <div>非公式の学習資料です — Anthropic とは無関係であり、「Claude・Claude Code・Anthropic」は Anthropic Inc. の商標です。</div>
-      <div>もっとも正確な情報は<a href="https://code.claude.com/docs" target="_blank" rel="noopener">公式ドキュメント</a>を確認してください。</div>
+      <div>もっとも正確な情報は<a href="https://<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>" target="_blank" rel="noopener">公式ドキュメント</a>を確認してください。</div>
     </footer>
 
   </div></main>

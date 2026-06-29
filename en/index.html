@@ -143,7 +143,7 @@
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
   /* collapsible code, one-line summary, example badge */
-  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; } .codeblk{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.7; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:13px 15px; white-space:pre-wrap; color:var(--ink); margin:10px 0 0; overflow-x:auto; } .codeblk .cmt{ color:var(--faint); } .srclink{ display:inline-flex; align-items:center; gap:3px; color:var(--accent); text-decoration:none; font-weight:600; font-size:11.5px; } .srclink:hover{ text-decoration:underline; } .srclink::after{ content:"\2197"; font-size:10px; }
+  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; } .codeblk{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.7; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:13px 15px; white-space:pre-wrap; color:var(--ink); margin:10px 0 0; overflow-x:auto; } .codeblk .cmt{ color:var(--faint); } .srclink{ color:var(--accent); text-decoration:underline; text-decoration-color:var(--line2); text-underline-offset:2px; font-weight:600; } .srclink:hover{ text-decoration-color:var(--accent); } .srclink::after{ content:"\2197"; font-size:.82em; margin-left:2px; }
   .notedet{ margin:14px 0 22px; } .notedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .notedet>summary::-webkit-details-marker{ display:none; } .notedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .notedet[open]>summary::before{ transform:rotate(90deg); } .notedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .notedet .note{ margin:8px 0 0 !important; }
   .loopviz{ margin:14px auto 18px; max-width:600px; }
   .loopviz svg{ width:100%; height:auto; display:block; }
@@ -717,7 +717,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <li><b>You need a paid Claude plan or the API.</b><span>You can't use Claude Code on the free plan. (See the 'Plans & pricing' tab.)</span></li>
         <li><b>First steps</b><span>In your project folder, type <code>claude</code> → log in → just start talking, like "What does this project do?"</span></li>
       </ul>
-      <p class="note">Exact install steps and requirements change by version, so check the latest guidance at <code>code.claude.com/docs</code>.</p>
+      <p class="note">Exact install steps and requirements change by version, so check the latest guidance at <code><a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a></code>.</p>
     </section>
 
     <!-- ASK: writing good requests -->
@@ -748,7 +748,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="label">Type a request <span class="hint">go ahead and type</span></p>
         <div class="field"><input id="ask-inp" type="text" placeholder="e.g. Add a confirm-password field to the sign-up screen, and turn it red if they don't match" maxlength="120"><button class="send" id="ask-go">See score</button></div>
         <div class="scorebox" id="ask-score"></div>
-        <p class="note">The 4 parts of a good request: ① <b>What</b> (the target) ② <b>How</b> (the action you want) ③ <b>Where</b> (screen/file) ④ <b>Done criteria</b> (how to check). Source: code.claude.com/docs (Best practices).</p>
+        <p class="note">The 4 parts of a good request: ① <b>What</b> (the target) ② <b>How</b> (the action you want) ③ <b>Where</b> (screen/file) ④ <b>Done criteria</b> (how to check). Source: <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> (Best practices).</p>
       </div>
     </section>
 
@@ -869,7 +869,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="status" id="hw-status">Press the button to go one step at a time.</p>
         <p class="simtake"><span class="stk">Takeaway</span><span>Claude <b>doesn't just answer</b> — it uses <b>tools (search, read, edit, run)</b> itself to <b>look around → fix → check, repeatedly</b>. That's why, unlike 'chat,' you get a result that actually works.</span></p>
       </div>
-      <p class="note">This 'look around → act → check → repeat' flow is called the <b>agentic loop</b>. When it edits a file or runs a command along the way, it usually <b>asks first</b> (permissions). (Source: code.claude.com/docs — How Claude Code works)</p>
+      <p class="note">This 'look around → act → check → repeat' flow is called the <b>agentic loop</b>. When it edits a file or runs a command along the way, it usually <b>asks first</b> (permissions). (Source: <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> — How Claude Code works)</p>
     </section>
 
     <section class="page" id="setup">
@@ -905,7 +905,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <div class="cxsummary" id="su-box"></div>
         <p class="simtake"><span class="stk">Takeaway</span><span>It's not just the model that decides the result — <b>set up tools, instructions, permissions, and context well</b> and the same AI does far better. (That's what it means to build a good 'harness.')</span></p>
       </div>
-      <p class="note">Most of this <b>Claude Code sets up for you</b> — we just need to know 'what extra to give it to make it better' (e.g. write rules in <code>CLAUDE.md</code>, point at files with <code>@</code>). (Source: code.claude.com/docs — how-claude-code-works · context-window · memory, as of June 2026)</p>
+      <p class="note">Most of this <b>Claude Code sets up for you</b> — we just need to know 'what extra to give it to make it better' (e.g. write rules in <code>CLAUDE.md</code>, point at files with <code>@</code>). (Source: <a class="srclink" href="https://code.claude.com/docs/en/how-claude-code-works" target="_blank" rel="noopener">code.claude.com/docs — how-claude-code-works</a> · context-window · memory, as of June 2026)</p>
     </section>
 
     <!-- 03 CONTEXT -->
@@ -950,7 +950,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="simtake"><span class="stk">Bottom line</span><span>A good harness isn’t “done in one shot” — it’s <b>looping observe → diagnose → reinforce fast</b>.</span></p>
       </div>
 
-      <p class="note"><b>Context engineering</b> · narrowly, it’s designing <b>what goes into and out of the context window</b> — too much (noise) or too little (missing info) both hurt; <b>“just what’s needed”</b> is the point. (Source: Anthropic official — code.claude.com/docs context-window·memory, as of Jun 2026)</p>
+      <p class="note"><b>Context engineering</b> · narrowly, it’s designing <b>what goes into and out of the context window</b> — too much (noise) or too little (missing info) both hurt; <b>“just what’s needed”</b> is the point. (Source: Anthropic official — <a class="srclink" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">code.claude.com/docs context-window·memory</a>, as of Jun 2026)</p>
     </section>
 
     <section class="page" id="context">
@@ -1249,7 +1249,7 @@ description: Write the weekly report in the company format
             <tr><td><b>Plugin</b></td><td>A plugin bundle</td><td>Anyone who installs it</td></tr>
           </tbody>
         </table></div>
-        <p class="note">If making one feels hard, just ask Claude <b>"Turn this task into a skill"</b> and it'll make it for you. (Source: code.claude.com/docs — skills, as of June 2026)</p>
+        <p class="note">If making one feels hard, just ask Claude <b>"Turn this task into a skill"</b> and it'll make it for you. (Source: <a class="srclink" href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">code.claude.com/docs — skills</a>, as of June 2026)</p>
       </div>
     </section>
 
@@ -1270,7 +1270,7 @@ description: Write the weekly report in the company format
         <div class="cxsummary" id="sc-box"></div>
         <p class="simtake"><span class="stk">Takeaway</span><span>Safe = <b>only from sources you trust</b> · <b>keep permissions narrow</b> · <b>read the contents once</b>. (Anthropic doesn't individually vet external skills, MCP, or plugins — trust is on you.)</span></p>
       </div>
-      <p class="note">The safest path is <b>making your own (or asking Claude to make one)</b>. When using external ones, only from trustworthy providers. In sensitive environments you can also confine the run scope with <code>/sandbox</code>. (Source: code.claude.com/docs — security · skills, as of June 2026)</p>
+      <p class="note">The safest path is <b>making your own (or asking Claude to make one)</b>. When using external ones, only from trustworthy providers. In sensitive environments you can also confine the run scope with <code>/sandbox</code>. (Source: <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs — security</a> · skills, as of June 2026)</p>
     </section>
 
     <!-- 10 MCP -->
@@ -1333,7 +1333,7 @@ description: Write the weekly report in the company format
         <div class="fcard"><div class="ft">Skills</div><div class="fd">Bundles of <b>know-how and steps</b> for repeated tasks.</div></div>
         <div class="fcard"><div class="ft">Plugins</div><div class="fd">A package that <b>bundles and distributes</b> the above.</div></div>
       </div>
-      <p class="note">Install: <code>/plugin install name@marketplace</code>. There are official (<code>@claude-plugins-official</code>) and community (<code>@claude-community</code>) marketplaces. Only install from sources you trust. (Source: code.claude.com/docs/plugins)</p>
+      <p class="note">Install: <code>/plugin install name@marketplace</code>. There are official (<code>@claude-plugins-official</code>) and community (<code>@claude-community</code>) marketplaces. Only install from sources you trust. (Source: <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>/plugins)</p>
            <div class="quiz">
          <div class="qq"><span class="qb">Your turn</span>What lets you <b>connect Claude to external apps</b> like Jira or Google Drive so it can use them directly?</div>
          <div class="qopts"><button class="qopt" data-ok>MCP</button><button class="qopt">Skill</button><button class="qopt">Subagent</button></div>
@@ -1454,7 +1454,7 @@ description: Write the weekly report in the company format
             <tr><td><b>Web (claude.ai/code)</b></td><td>The cloud</td><td>A cloud environment</td><td>Start fresh without your PC</td></tr>
           </tbody>
         </table></div>
-        <p class="note">Officially called <b>Remote Control</b>, in <b>research preview</b> — available on all plans, but behavior and limits may change. How to turn it on: in Claude on your PC run <code>/remote-control</code> (or <code>claude remote-control</code>) → a link and QR appear. Install the Claude app on your phone and turn on notifications to get job-done and confirmation requests. (Source: code.claude.com/docs — remote control, as of June 2026)</p>
+        <p class="note">Officially called <b>Remote Control</b>, in <b>research preview</b> — available on all plans, but behavior and limits may change. How to turn it on: in Claude on your PC run <code>/remote-control</code> (or <code>claude remote-control</code>) → a link and QR appear. Install the Claude app on your phone and turn on notifications to get job-done and confirmation requests. (Source: <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs — remote</a> control, as of June 2026)</p>
       </div>
     </section>
 
@@ -1581,7 +1581,7 @@ description: Write the weekly report in the company format
         <li><b>Local records</b><span>Session history is saved in plain text on your computer (~/.claude/projects). The retention period can be adjusted in settings.</span></li>
       </ul>
       <p class="simtake"><span class="stk">Takeaway</span><span><b>Business (Team·Enterprise·API) isn't used for training by default.</b> Personal (Free·Pro·Max) lets you turn training use on/off in settings.</span></p>
-      <p class="note warn" style="margin-top:14px;"><b>Important</b> · Policies keep changing and differ by account type. Before any sensitive decision, be sure to check the official pages — <code>privacy.claude.com</code>, <code>anthropic.com/legal</code>, <code>code.claude.com/docs</code> (this content is as of June 2026).</p>
+      <p class="note warn" style="margin-top:14px;"><b>Important</b> · Policies keep changing and differ by account type. Before any sensitive decision, be sure to check the official pages — <code>privacy.claude.com</code>, <code>anthropic.com/legal</code>, <code><a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a></code> (this content is as of June 2026).</p>
     </section>
 
     <!-- 19 COMMANDS -->
@@ -1783,7 +1783,7 @@ description: Write the weekly report in the company format
       <div class="cwvm"><span class="cwvmtag">Repeats automatically until the condition is met</span><div id="goal-turns"></div></div>
       <p class="status" id="goal-status" style="margin-top:12px;">Press "Start goal" to try it.</p>
       <p class="simtake"><span class="stk">Takeaway</span><span>Instead of <b>pressing 'do it again' every turn</b> — goal <b>keeps going until the condition is met</b>.</span></p>
-      <p class="note">It checks the condition with a <b>separate judgment</b> every turn, and stops automatically once it's met (there's also a safeguard against infinite repetition). How to change it: <code>/goal</code>. (Source: Anthropic official — code.claude.com/docs goal)</p>
+      <p class="note">It checks the condition with a <b>separate judgment</b> every turn, and stops automatically once it's met (there's also a safeguard against infinite repetition). How to change it: <code>/goal</code>. (Source: Anthropic official — <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs goal</a>)</p>
     </section>
 
     <!-- LOOP -->
@@ -1798,7 +1798,7 @@ description: Write the weekly report in the company format
       <div class="usefeed" id="loop-feed"></div>
       <p class="status" id="loop-status" style="margin-top:10px;">Pick an interval and press "Start repeat".</p>
       <p class="simtake"><span class="stk">Takeaway</span><span>What a person would <b>check every 10 min</b> — loop <b>repeats on its own, even while you sleep</b>. (goal = 'until done', loop = 'every set interval')</span></p>
-      <p class="note">It repeats while the session stays open. How to change it: something like <code>/loop 10m "check new orders"</code>. (Source: Anthropic official — code.claude.com/docs scheduled-tasks)</p>
+      <p class="note">It repeats while the session stays open. How to change it: something like <code>/loop 10m "check new orders"</code>. (Source: Anthropic official — <a class="srclink" href="https://code.claude.com/docs/en/scheduled-tasks" target="_blank" rel="noopener">code.claude.com/docs scheduled-tasks</a>)</p>
     </section>
 
     <!-- WORKFLOWS -->
@@ -1838,7 +1838,7 @@ description: Write the weekly report in the company format
             <tr><td><b>Routines</b></td><td>The cloud</td><td><b>Yes</b></td><td>Schedule · GitHub · API</td></tr>
           </tbody>
         </table></div>
-        <p class="note">This is in <b>research preview</b> — behavior and limits may change. How to make one: tell Claude with <code>/schedule</code>, or set it up under routines at claude.ai/code. A routine takes permissions up front and <b>runs on its own</b>, so it's safest to set a scope for what it may do and how far. (Source: code.claude.com/docs — routines, as of June 2026)</p>
+        <p class="note">This is in <b>research preview</b> — behavior and limits may change. How to make one: tell Claude with <code>/schedule</code>, or set it up under routines at claude.ai/code. A routine takes permissions up front and <b>runs on its own</b>, so it's safest to set a scope for what it may do and how far. (Source: <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs — routines</a>, as of June 2026)</p>
       </div>
     </section>
 
@@ -1850,7 +1850,7 @@ description: Write the weekly report in the company format
       <div class="cfgpanel" id="cfg-panel"></div>
       <p class="status" id="cfg-status" style="margin-top:12px;">Press a value on the right to change it.</p>
       <p class="simtake"><span class="stk">Takeaway</span><span>Change language·theme·model·permissions <b>in one place (a control panel)</b> — no hunting around.</span></p>
-      <p class="note">How to open it: <code>/config</code>. There are actually more settings than this. (Source: Anthropic official — code.claude.com/docs settings)</p>
+      <p class="note">How to open it: <code>/config</code>. There are actually more settings than this. (Source: Anthropic official — <a class="srclink" href="https://code.claude.com/docs/en/settings" target="_blank" rel="noopener">code.claude.com/docs settings</a>)</p>
     </section>
 
     <!-- DOCTOR -->
@@ -1862,7 +1862,7 @@ description: Write the weekly report in the company format
       <div class="cwvm"><span class="cwvmtag">Running /doctor checks</span><div id="dr-list"></div></div>
       <p class="status" id="dr-status" style="margin-top:12px;">Press "Run diagnostics" to try it.</p>
       <p class="simtake"><span class="stk">Takeaway</span><span>Instead of <b>wondering 'why isn't this working?'</b> alone — /doctor <b>pinpoints what's wrong in one go</b>.</span></p>
-      <p class="note">How to open it: <code>/doctor</code> (or <code>claude doctor</code>). If there's a problem, press <b>f</b> to have Claude fix it right away. (Source: Anthropic official — code.claude.com/docs CLI reference)</p>
+      <p class="note">How to open it: <code>/doctor</code> (or <code>claude doctor</code>). If there's a problem, press <b>f</b> to have Claude fix it right away. (Source: Anthropic official — <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> CLI reference)</p>
     </section>
 
     <!-- 30 GLOSSARY -->
@@ -1922,7 +1922,7 @@ description: Write the weekly report in the company format
         <p class="simtake"><span class="stk">Fix</span><span>When that happens — <code>/clear</code> for a new task, <code>/compact</code> to continue, isolate big investigations with a subagent.</span></p>
       </div>
 
-      <p class="note"><b>Source</b> · Anthropic official — code.claude.com/docs context-window·compaction (“effective context engineering,” as of Jun 2026). Context rot and signal-vs-noise are general LLM traits.</p>
+      <p class="note"><b>Source</b> · Anthropic official — <a class="srclink" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">code.claude.com/docs context-window·compaction</a> (“effective context engineering,” as of Jun 2026). Context rot and signal-vs-noise are general LLM traits.</p>
     </section>
 
     <!-- CTXRULES (expert: CLAUDE.md design) -->
@@ -1956,7 +1956,7 @@ New APIs go under src/routes/ · auth middleware required</div>
         <p class="simtake"><span class="stk">Bottom line</span><span>Both are just <b>context</b> — <b>not enforced</b>. For must-dos, use a <b>hook</b> (see “Hooks”). View/edit auto memory with <code>/memory</code>.</span></p>
       </div>
 
-      <p class="note"><b>Anti-pattern</b> · over 200 lines, contradictory rules, or stale info → the model actually <b>follows it less</b>. Keep it to “skimmable in 30 seconds.” (Source: code.claude.com/docs — memory·settings, as of Jun 2026)</p>
+      <p class="note"><b>Anti-pattern</b> · over 200 lines, contradictory rules, or stale info → the model actually <b>follows it less</b>. Keep it to “skimmable in 30 seconds.” (Source: <a class="srclink" href="https://code.claude.com/docs/en/memory" target="_blank" rel="noopener">code.claude.com/docs — memory·settings</a>, as of Jun 2026)</p>
     </section>
 
     <!-- SUBISO (expert: subagent context isolation) -->
@@ -1987,7 +1987,7 @@ New APIs go under src/routes/ · auth middleware required</div>
 }</div>
         <p class="simtake"><span class="stk">Bottom line</span><span>Hooks = the harness’s <b>guardrails</b>. Nail down the “<b>every time, always</b>” that CLAUDE.md can’t guarantee (format, test, block).</span></p>
       </div>
-      <p class="note">Exit code <b>2</b> blocks the action and feeds the reason back to Claude. <code>type</code> can also be <code>http · prompt · agent</code>, not just <code>command</code>. (Source: Anthropic official — code.claude.com/docs hooks, as of Jun 2026)</p>
+      <p class="note">Exit code <b>2</b> blocks the action and feeds the reason back to Claude. <code>type</code> can also be <code>http · prompt · agent</code>, not just <code>command</code>. (Source: Anthropic official — <a class="srclink" href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">code.claude.com/docs hooks</a>, as of Jun 2026)</p>
     </section>
 
     <!-- skillcraft (expert harness mechanism) -->
@@ -2014,7 +2014,7 @@ description: Write release notes, tag, deploy
 <span class="cmt"># Claude reads description first, loads the body only when relevant</span></div>
         <p class="simtake"><span class="stk">Bottom line</span><span>If you keep pasting the same procedure → make it a <b>skill</b>. Build it once; the team reuses it via <code>/name</code>.</span></p>
       </div>
-      <p class="note">Lives in <code>~/.claude/skills/</code> (personal) · <code>.claude/skills/</code> (project) · plugins. Follows the <b>Agent Skills</b> open standard (agentskills.io). (Source: Anthropic official — code.claude.com/docs skills, as of Jun 2026)</p>
+      <p class="note">Lives in <code>~/.claude/skills/</code> (personal) · <code>.claude/skills/</code> (project) · plugins. Follows the <b>Agent Skills</b> open standard (<a class="srclink" href="https://agentskills.io" target="_blank" rel="noopener">agentskills.io</a>). (Source: Anthropic official — <a class="srclink" href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">code.claude.com/docs skills</a>, as of Jun 2026)</p>
     </section>
 
     <section class="page" id="subiso">
@@ -2045,7 +2045,7 @@ description: Write release notes, tag, deploy
         <p class="note" style="margin-top:12px;"><b>Cost note</b> · helpers each spend tokens too — for a <b>small single task</b>, delegating actually costs more. It pays off when broad, long, or parallel.</p>
       </div>
 
-      <p class="note"><b>Source</b> · Anthropic official — code.claude.com/docs subagents·Agent SDK (as of Jun 2026). “Returns only the final message” is the core of context isolation.</p>
+      <p class="note"><b>Source</b> · Anthropic official — <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs subagents·</a>Agent SDK (as of Jun 2026). “Returns only the final message” is the core of context isolation.</p>
     </section>
 
     <!-- ANTIPAT (expert: harness anti-patterns + checklist) -->
@@ -2067,7 +2067,7 @@ description: Write release notes, tag, deploy
         <p class="simtake"><span class="stk">Order</span><span>Usually it’s fixed at <b>steps 1–3</b>. Bumping the model is the <b>last resort, after checking the setup</b>.</span></p>
       </div>
 
-      <p class="note"><b>Source</b> · Anthropic official — code.claude.com/docs (context-window·memory·subagents). Symptom-cause pairs summarize common field patterns (as of Jun 2026).</p>
+      <p class="note"><b>Source</b> · Anthropic official — <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> (context-window·memory·subagents). Symptom-cause pairs summarize common field patterns (as of Jun 2026).</p>
     </section>
 
     <div class="pagenav" id="pagenav">
@@ -2086,7 +2086,7 @@ description: Write release notes, tag, deploy
         <span class="ft-dm">— questions or DM via email or LinkedIn</span>
       </div>
       <div>This is an unofficial learning resource — not affiliated with Anthropic. "Claude, Claude Code, Anthropic" are trademarks of Anthropic Inc.</div>
-      <div>For the most accurate information, check the <a href="https://code.claude.com/docs" target="_blank" rel="noopener">official docs</a>.</div>
+      <div>For the most accurate information, check the <a href="https://<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>" target="_blank" rel="noopener">official docs</a>.</div>
     </footer>
 
   </div></main>

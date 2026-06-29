@@ -143,7 +143,7 @@
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
   /* collapsible code, one-line summary, example badge */
-  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; } .codeblk{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.7; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:13px 15px; white-space:pre-wrap; color:var(--ink); margin:10px 0 0; overflow-x:auto; } .codeblk .cmt{ color:var(--faint); } .srclink{ display:inline-flex; align-items:center; gap:3px; color:var(--accent); text-decoration:none; font-weight:600; font-size:11.5px; } .srclink:hover{ text-decoration:underline; } .srclink::after{ content:"\2197"; font-size:10px; }
+  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; } .codeblk{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.7; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:13px 15px; white-space:pre-wrap; color:var(--ink); margin:10px 0 0; overflow-x:auto; } .codeblk .cmt{ color:var(--faint); } .srclink{ color:var(--accent); text-decoration:underline; text-decoration-color:var(--line2); text-underline-offset:2px; font-weight:600; } .srclink:hover{ text-decoration-color:var(--accent); } .srclink::after{ content:"\2197"; font-size:.82em; margin-left:2px; }
   .notedet{ margin:14px 0 22px; } .notedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .notedet>summary::-webkit-details-marker{ display:none; } .notedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .notedet[open]>summary::before{ transform:rotate(90deg); } .notedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .notedet .note{ margin:8px 0 0 !important; }
   .loopviz{ margin:14px auto 18px; max-width:600px; }
   .loopviz svg{ width:100%; height:auto; display:block; }
@@ -717,7 +717,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <li><b>需要付费的 Claude 订阅或 API。</b><span>免费版无法使用 Claude Code。（参考‘订阅方案’标签页）</span></li>
         <li><b>第一次上手</b><span>在项目文件夹里输入 <code>claude</code> → 登录 → 像“这个项目是做什么的？”一样直接搭话。</span></li>
       </ul>
-      <p class="note">具体的安装方法和系统要求会随版本变化，请在 <code>code.claude.com/docs</code> 查看最新说明。</p>
+      <p class="note">具体的安装方法和系统要求会随版本变化，请在 <code><a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a></code> 查看最新说明。</p>
     </section>
 
     <!-- ASK: writing good requests -->
@@ -748,7 +748,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="label">输入需求 <span class="hint">真的动手敲一下</span></p>
         <div class="field"><input id="ask-inp" type="text" placeholder="例：在注册页面加确认密码输入框，不一致就标红显示" maxlength="120"><button class="send" id="ask-go">看分数</button></div>
         <div class="scorebox" id="ask-score"></div>
-        <p class="note">好需求的 4 点：① <b>做什么</b>（对象）② <b>怎么做</b>（动作）③ <b>在哪</b>（页面·文件）④ <b>完成标准</b>（怎么验收）。来源：code.claude.com/docs (Best practices)。</p>
+        <p class="note">好需求的 4 点：① <b>做什么</b>（对象）② <b>怎么做</b>（动作）③ <b>在哪</b>（页面·文件）④ <b>完成标准</b>（怎么验收）。来源：<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> (Best practices)。</p>
       </div>
     </section>
 
@@ -870,7 +870,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="status" id="hw-status">点按钮就一步步进行。</p>
         <p class="simtake"><span class="stk">结论</span><span>Claude <b>不只是给答案</b> —— 而是亲自<b>用工具（搜索·读取·编辑·运行）</b>去<b>查看 → 修改 → 检查，反复进行</b>。所以和‘聊天’不同，能产出真正能跑起来的成品。</span></p>
       </div>
-      <p class="note">这套‘查看 → 行动 → 检查 → 反复’的流程叫<b>智能体循环</b>。中途要修改文件或执行命令时，通常会<b>先问你</b>（权限）。（出处：code.claude.com/docs —— How Claude Code works）</p>
+      <p class="note">这套‘查看 → 行动 → 检查 → 反复’的流程叫<b>智能体循环</b>。中途要修改文件或执行命令时，通常会<b>先问你</b>（权限）。（出处：<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> —— How Claude Code works）</p>
     </section>
 
     <!-- SETUP -->
@@ -907,7 +907,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <div class="cxsummary" id="su-box"></div>
         <p class="simtake"><span class="stk">结论</span><span>决定结果的不只是模型 —— <b>把工具·指示·权限·上下文配齐</b>，同一个 AI 就会干得好得多。（这就是把‘harness’搭好的意思）</span></p>
       </div>
-      <p class="note">大多数情况下 Claude Code 会<b>自动配好</b> —— 我们只需知道‘多给点什么会更好’（例如：在 <code>CLAUDE.md</code> 里写规则、用 <code>@</code> 点出文件）。（来源：code.claude.com/docs — how-claude-code-works · context-window · memory，截至 2026 年 6 月）</p>
+      <p class="note">大多数情况下 Claude Code 会<b>自动配好</b> —— 我们只需知道‘多给点什么会更好’（例如：在 <code>CLAUDE.md</code> 里写规则、用 <code>@</code> 点出文件）。（来源：<a class="srclink" href="https://code.claude.com/docs/en/how-claude-code-works" target="_blank" rel="noopener">code.claude.com/docs — how-claude-code-works</a> · context-window · memory，截至 2026 年 6 月）</p>
     </section>
 
     <!-- 03 CONTEXT -->
@@ -952,7 +952,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="simtake"><span class="stk">结论</span><span>好的 harness 不是「一次做成」，而是<b>快速循环 观察 → 诊断 → 补强</b>。</span></p>
       </div>
 
-      <p class="note"><b>上下文工程</b> · 狭义说，就是设计<b>上下文窗口里放什么、去掉什么</b> —— 太多（噪音）太少（信息不足）都不好，<b>「只放需要的」</b>才是关键。（来源：Anthropic 官方 —— code.claude.com/docs context-window·memory，2026年6月）</p>
+      <p class="note"><b>上下文工程</b> · 狭义说，就是设计<b>上下文窗口里放什么、去掉什么</b> —— 太多（噪音）太少（信息不足）都不好，<b>「只放需要的」</b>才是关键。（来源：Anthropic 官方 —— <a class="srclink" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">code.claude.com/docs context-window·memory</a>，2026年6月）</p>
     </section>
 
     <section class="page" id="context">
@@ -1252,7 +1252,7 @@ description: 按公司格式撰写周报
             <tr><td><b>插件</b></td><td>插件包</td><td>装了的任何人</td></tr>
           </tbody>
         </table></div>
-        <p class="note">如果觉得创建起来麻烦，可以让 Claude <b>“把这个任务做成技能”</b>，它会替你做好。（来源：code.claude.com/docs — skills，截至 2026 年 6 月）</p>
+        <p class="note">如果觉得创建起来麻烦，可以让 Claude <b>“把这个任务做成技能”</b>，它会替你做好。（来源：<a class="srclink" href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">code.claude.com/docs — skills</a>，截至 2026 年 6 月）</p>
       </div>
     </section>
 
@@ -1273,7 +1273,7 @@ description: 按公司格式撰写周报
         <div class="cxsummary" id="sc-box"></div>
         <p class="simtake"><span class="stk">结论</span><span>安全 = <b>只用可信来源</b> · <b>权限要窄</b> · <b>内容先看一遍</b>。（Anthropic 不会逐一审核外部技能·MCP·插件 —— 信任要靠自己把关。）</span></p>
       </div>
-      <p class="note">最安全的办法是<b>自己（或让 Claude 帮忙）做来用</b>。用外部的就只用可信提供方的。环境敏感时，还可以用 <code>/sandbox</code> 把执行范围圈起来。（来源：code.claude.com/docs — security · skills，截至 2026 年 6 月）</p>
+      <p class="note">最安全的办法是<b>自己（或让 Claude 帮忙）做来用</b>。用外部的就只用可信提供方的。环境敏感时，还可以用 <code>/sandbox</code> 把执行范围圈起来。（来源：<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs — security</a> · skills，截至 2026 年 6 月）</p>
     </section>
 
     <!-- 10 MCP -->
@@ -1336,7 +1336,7 @@ description: 按公司格式撰写周报
         <div class="fcard"><div class="ft">技能</div><div class="fd">重复工作的<b>窍门·步骤</b>集合。</div></div>
         <div class="fcard"><div class="ft">插件</div><div class="fd">把上面这些<b>打包发布</b>的软件包。</div></div>
       </div>
-      <p class="note">安装：<code>/plugin install 名称@市场</code>。有官方（<code>@claude-plugins-official</code>）和社区（<code>@claude-community</code>）市场。只从可信来源安装。（来源：code.claude.com/docs/plugins）</p>
+      <p class="note">安装：<code>/plugin install 名称@市场</code>。有官方（<code>@claude-plugins-official</code>）和社区（<code>@claude-community</code>）市场。只从可信来源安装。（来源：<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>/plugins）</p>
            <div class="quiz">
          <div class="qq"><span class="qb">你来试试</span>把 <b>Claude 连接到 Jira、Google Drive 等外部应用</b>、让它直接使用，靠的是什么？</div>
          <div class="qopts"><button class="qopt" data-ok>MCP</button><button class="qopt">技能</button><button class="qopt">子智能体</button></div>
@@ -1458,7 +1458,7 @@ description: 按公司格式撰写周报
             <tr><td><b>网页 (claude.ai/code)</b></td><td>云端</td><td>云端环境</td><td>没我电脑时从头开始</td></tr>
           </tbody>
         </table></div>
-        <p class="note">官方名称是 <b>Remote Control</b>，处于<b>研究预览（research preview）</b>阶段 —— 所有套餐都可用，但行为·上限可能会变。开启方法：在我电脑的 Claude 里输入 <code>/remote-control</code>（或 <code>claude remote-control</code>）→ 会出现链接和二维码。手机上装好 Claude 应用并开启通知，就能收到任务完成·确认请求。（来源：code.claude.com/docs — remote control，截至 2026 年 6 月）</p>
+        <p class="note">官方名称是 <b>Remote Control</b>，处于<b>研究预览（research preview）</b>阶段 —— 所有套餐都可用，但行为·上限可能会变。开启方法：在我电脑的 Claude 里输入 <code>/remote-control</code>（或 <code>claude remote-control</code>）→ 会出现链接和二维码。手机上装好 Claude 应用并开启通知，就能收到任务完成·确认请求。（来源：<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs — remote</a> control，截至 2026 年 6 月）</p>
       </div>
     </section>
 
@@ -1585,7 +1585,7 @@ description: 按公司格式撰写周报
         <li><b>本地记录</b><span>会话记录以明文形式保存在我电脑上（~/.claude/projects）。保留时长可通过设置调整。</span></li>
       </ul>
       <p class="simtake"><span class="stk">结论</span><span><b>企业用（Team·Enterprise·API）默认不用于训练。</b> 个人用（Free·Pro·Max）可在设置里自行开关。</span></p>
-      <p class="note warn" style="margin-top:14px;"><b>重要</b> · 政策一直在变，且因账户类型而异。做敏感决定前，请务必查看官方页面 —— <code>privacy.claude.com</code>、<code>anthropic.com/legal</code>、<code>code.claude.com/docs</code>（本内容截至 2026 年 6 月）。</p>
+      <p class="note warn" style="margin-top:14px;"><b>重要</b> · 政策一直在变，且因账户类型而异。做敏感决定前，请务必查看官方页面 —— <code>privacy.claude.com</code>、<code>anthropic.com/legal</code>、<code><a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a></code>（本内容截至 2026 年 6 月）。</p>
     </section>
 
     <!-- 19 COMMANDS -->
@@ -1788,7 +1788,7 @@ description: 按公司格式撰写周报
       <div class="cwvm"><span class="cwvmtag">直到满足条件为止自动反复</span><div id="goal-turns"></div></div>
       <p class="status" id="goal-status" style="margin-top:12px;">点一下“开始目标”。</p>
       <p class="simtake"><span class="stk">结论</span><span>不用每轮都<b>手动按‘再来一次’</b> —— goal<b>会一直做到满足条件为止</b>。</span></p>
-      <p class="note">是否满足条件，会通过<b>单独的判定</b>在每一轮确认，满足后自动停止（也有防止无限循环的机制）。改法：<code>/goal</code>。（出处：Anthropic 官方 —— code.claude.com/docs goal）</p>
+      <p class="note">是否满足条件，会通过<b>单独的判定</b>在每一轮确认，满足后自动停止（也有防止无限循环的机制）。改法：<code>/goal</code>。（出处：Anthropic 官方 —— <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs goal</a>）</p>
     </section>
 
     <!-- LOOP -->
@@ -1803,7 +1803,7 @@ description: 按公司格式撰写周报
       <div class="usefeed" id="loop-feed"></div>
       <p class="status" id="loop-status" style="margin-top:10px;">选个间隔再点“开始重复”。</p>
       <p class="simtake"><span class="stk">结论</span><span>本来要人<b>每 10 分钟亲自看一次</b>的事 —— loop<b>会自动重复，连你睡觉时也是</b>。（goal 是‘做到为止’，loop 是‘每隔固定时间’）</span></p>
-      <p class="note">会在会话开着的时候反复执行。改法：像 <code>/loop 10m "确认新订单"</code> 这样。（出处：Anthropic 官方 —— code.claude.com/docs scheduled-tasks）</p>
+      <p class="note">会在会话开着的时候反复执行。改法：像 <code>/loop 10m "确认新订单"</code> 这样。（出处：Anthropic 官方 —— <a class="srclink" href="https://code.claude.com/docs/en/scheduled-tasks" target="_blank" rel="noopener">code.claude.com/docs scheduled-tasks</a>）</p>
     </section>
 
     <!-- WORKFLOWS -->
@@ -1844,7 +1844,7 @@ description: 按公司格式撰写周报
             <tr><td><b>例程</b></td><td>云端</td><td><b>行</b></td><td>日程·GitHub·API</td></tr>
           </tbody>
         </table></div>
-        <p class="note">处于<b>研究预览（research preview）</b>阶段 —— 行为·上限可能会变。创建方法：对 Claude 说 <code>/schedule</code>，或在 claude.ai/code 的‘例程’里设置。例程会预先取得权限<b>自行运行</b>，所以定好做什么·做到哪儿的范围才安全。（来源：code.claude.com/docs — routines，截至 2026 年 6 月）</p>
+        <p class="note">处于<b>研究预览（research preview）</b>阶段 —— 行为·上限可能会变。创建方法：对 Claude 说 <code>/schedule</code>，或在 claude.ai/code 的‘例程’里设置。例程会预先取得权限<b>自行运行</b>，所以定好做什么·做到哪儿的范围才安全。（来源：<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs — routines</a>，截至 2026 年 6 月）</p>
       </div>
     </section>
 
@@ -1856,7 +1856,7 @@ description: 按公司格式撰写周报
       <div class="cfgpanel" id="cfg-panel"></div>
       <p class="status" id="cfg-status" style="margin-top:12px;">点右边的值来改改看。</p>
       <p class="simtake"><span class="stk">结论</span><span>语言·主题·模型·权限<b>在一个地方（控制台）改</b> —— 不用到处找。</span></p>
-      <p class="note">打开方式：<code>/config</code>。实际的设置项比这里多。（出处：Anthropic 官方 —— code.claude.com/docs settings）</p>
+      <p class="note">打开方式：<code>/config</code>。实际的设置项比这里多。（出处：Anthropic 官方 —— <a class="srclink" href="https://code.claude.com/docs/en/settings" target="_blank" rel="noopener">code.claude.com/docs settings</a>）</p>
     </section>
 
     <!-- DOCTOR -->
@@ -1868,7 +1868,7 @@ description: 按公司格式撰写周报
       <div class="cwvm"><span class="cwvmtag">/doctor 检查中</span><div id="dr-list"></div></div>
       <p class="status" id="dr-status" style="margin-top:12px;">点一下“运行诊断”。</p>
       <p class="simtake"><span class="stk">结论</span><span>不用自己<b>苦想‘为什么不行’</b> —— /doctor<b>一次就指出哪里有问题</b>。</span></p>
-      <p class="note">打开方式：<code>/doctor</code>（或 <code>claude doctor</code>）。如果有问题，按 <b>f</b> 键就能让 Claude 直接修复。（出处：Anthropic 官方 —— code.claude.com/docs CLI 参考）</p>
+      <p class="note">打开方式：<code>/doctor</code>（或 <code>claude doctor</code>）。如果有问题，按 <b>f</b> 键就能让 Claude 直接修复。（出处：Anthropic 官方 —— <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> CLI 参考）</p>
     </section>
 
     <!-- 30 GLOSSARY -->
@@ -1928,7 +1928,7 @@ description: 按公司格式撰写周报
         <p class="simtake"><span class="stk">处方</span><span>这时 —— 新任务用 <code>/clear</code>，要接着做用 <code>/compact</code>，大调查用子代理隔离。</span></p>
       </div>
 
-      <p class="note"><b>来源</b> · Anthropic 官方 —— code.claude.com/docs context-window·compaction（「effective context engineering」，2026年6月）。上下文衰减、信号 vs 噪音是 LLM 的普遍特性。</p>
+      <p class="note"><b>来源</b> · Anthropic 官方 —— <a class="srclink" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">code.claude.com/docs context-window·compaction</a>（「effective context engineering」，2026年6月）。上下文衰减、信号 vs 噪音是 LLM 的普遍特性。</p>
     </section>
 
     <!-- CTXRULES (expert: CLAUDE.md design) -->
@@ -1962,7 +1962,7 @@ description: 按公司格式撰写周报
         <p class="simtake"><span class="stk">结论</span><span>两者都只是「<b>上下文</b>」—— <b>不是强制</b>。必须遵守用<b>钩子</b>（见「钩子」）。自动记忆用 <code>/memory</code> 查看·编辑。</span></p>
       </div>
 
-      <p class="note"><b>反模式</b> · 超过 200 行·自相矛盾·过时信息 → 模型反而<b>更不遵守</b>。控制在「30 秒能扫完」。（来源：code.claude.com/docs —— memory·settings，2026年6月）</p>
+      <p class="note"><b>反模式</b> · 超过 200 行·自相矛盾·过时信息 → 模型反而<b>更不遵守</b>。控制在「30 秒能扫完」。（来源：<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> —— memory·settings，2026年6月）</p>
     </section>
 
     <!-- SUBISO (expert: subagent context isolation) -->
@@ -1993,7 +1993,7 @@ description: 按公司格式撰写周报
 }</div>
         <p class="simtake"><span class="stk">结论</span><span>钩子 = harness 的<b>护栏</b>。把 CLAUDE.md 保证不了的「<b>每次都必须</b>」用钩子钉死（格式化·测试·拦截）。</span></p>
       </div>
-      <p class="note">退出码 <b>2</b> 会拦截该动作并把原因回传给克劳德。<code>type</code> 除 <code>command</code> 外还有 <code>http·prompt·agent</code>。（来源：Anthropic 官方 —— code.claude.com/docs hooks，2026年6月）</p>
+      <p class="note">退出码 <b>2</b> 会拦截该动作并把原因回传给克劳德。<code>type</code> 除 <code>command</code> 外还有 <code>http·prompt·agent</code>。（来源：Anthropic 官方 —— <a class="srclink" href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">code.claude.com/docs hooks</a>，2026年6月）</p>
     </section>
 
     <!-- skillcraft (expert harness mechanism) -->
@@ -2020,7 +2020,7 @@ description: 写发布说明、打标签、部署
 <span class="cmt"># 先只读 description，相关时才加载正文（流程）</span></div>
         <p class="simtake"><span class="stk">结论</span><span>每次都复制同一套流程 → 做成<b>技能</b>。做一次，团队用 <code>/名字</code> 复用。</span></p>
       </div>
-      <p class="note">位置：<code>~/.claude/skills/</code>（个人）·<code>.claude/skills/</code>（项目）·插件。遵循 <b>Agent Skills</b> 开放标准（agentskills.io）。（来源：Anthropic 官方 —— code.claude.com/docs skills，2026年6月）</p>
+      <p class="note">位置：<code>~/.claude/skills/</code>（个人）·<code>.claude/skills/</code>（项目）·插件。遵循 <b>Agent Skills</b> 开放标准（agentskills.io）。（来源：Anthropic 官方 —— <a class="srclink" href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">code.claude.com/docs skills</a>，2026年6月）</p>
     </section>
 
     <section class="page" id="subiso">
@@ -2051,7 +2051,7 @@ description: 写发布说明、打标签、部署
         <p class="note" style="margin-top:12px;"><b>成本提示</b> · 助手也各自花 token —— <b>小的单次任务</b>委派反而更贵。广、长、并行时才划算。</p>
       </div>
 
-      <p class="note"><b>来源</b> · Anthropic 官方 —— code.claude.com/docs subagents·Agent SDK（2026年6月）。「只返回最终消息」是上下文隔离的核心。</p>
+      <p class="note"><b>来源</b> · Anthropic 官方 —— <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs subagents·</a>Agent SDK（2026年6月）。「只返回最终消息」是上下文隔离的核心。</p>
     </section>
 
     <!-- ANTIPAT (expert: harness anti-patterns + checklist) -->
@@ -2073,7 +2073,7 @@ description: 写发布说明、打标签、部署
         <p class="simtake"><span class="stk">顺序</span><span>多半在<b>第 1～3 步</b>解决。提高模型是<b>查完环境后的最后手段</b>。</span></p>
       </div>
 
-      <p class="note"><b>来源</b> · Anthropic 官方 —— code.claude.com/docs（context-window·memory·subagents）。症状-原因是对常见现场模式的归纳（2026年6月）。</p>
+      <p class="note"><b>来源</b> · Anthropic 官方 —— <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>（context-window·memory·subagents）。症状-原因是对常见现场模式的归纳（2026年6月）。</p>
     </section>
 
     <div class="pagenav" id="pagenav">
@@ -2092,7 +2092,7 @@ description: 写发布说明、打标签、部署
         <span class="ft-dm">— 有问题请通过邮件或 LinkedIn 私信联系</span>
       </div>
       <div>这是非官方学习资料 —— 与 Anthropic 无关，“Claude·Claude Code·Anthropic”是 Anthropic Inc. 的商标。</div>
-      <div>最准确的信息请查看<a href="https://code.claude.com/docs" target="_blank" rel="noopener">官方文档</a>。</div>
+      <div>最准确的信息请查看<a href="https://<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>" target="_blank" rel="noopener">官方文档</a>。</div>
     </footer>
 
   </div></main>

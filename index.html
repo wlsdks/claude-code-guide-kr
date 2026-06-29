@@ -143,7 +143,7 @@
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
   /* collapsible code, one-line summary, example badge */
-  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; } .codeblk{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.7; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:13px 15px; white-space:pre-wrap; color:var(--ink); margin:10px 0 0; overflow-x:auto; } .codeblk .cmt{ color:var(--faint); } .srclink{ display:inline-flex; align-items:center; gap:3px; color:var(--accent); text-decoration:none; font-weight:600; font-size:11.5px; } .srclink:hover{ text-decoration:underline; } .srclink::after{ content:"\2197"; font-size:10px; }
+  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; } .codeblk{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.7; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:13px 15px; white-space:pre-wrap; color:var(--ink); margin:10px 0 0; overflow-x:auto; } .codeblk .cmt{ color:var(--faint); } .srclink{ color:var(--accent); text-decoration:underline; text-decoration-color:var(--line2); text-underline-offset:2px; font-weight:600; } .srclink:hover{ text-decoration-color:var(--accent); } .srclink::after{ content:"\2197"; font-size:.82em; margin-left:2px; }
   .notedet{ margin:14px 0 22px; } .notedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .notedet>summary::-webkit-details-marker{ display:none; } .notedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .notedet[open]>summary::before{ transform:rotate(90deg); } .notedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .notedet .note{ margin:8px 0 0 !important; }
   .loopviz{ margin:14px auto 18px; max-width:600px; }
   .loopviz svg{ width:100%; height:auto; display:block; }
@@ -718,7 +718,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <li><b>유료 Claude 플랜이나 API가 필요해요.</b><span>무료 플랜으로는 클로드 코드를 쓸 수 없어요. (‘요금제’ 탭 참고)</span></li>
         <li><b>첫 시작</b><span>프로젝트 폴더에서 <code>claude</code> → 로그인 → “이 프로젝트 뭐 하는 거야?” 같이 그냥 말 걸기.</span></li>
       </ul>
-      <p class="note">정확한 설치 방법·요구사항은 버전에 따라 바뀌니 <code>code.claude.com/docs</code> 에서 최신 안내를 확인하세요.</p>
+      <p class="note">정확한 설치 방법·요구사항은 버전에 따라 바뀌니 <code><a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a></code> 에서 최신 안내를 확인하세요.</p>
     </section>
 
     <!-- ASK: writing good requests -->
@@ -749,7 +749,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="label">요청을 입력하기 <span class="hint">실제로 쳐보세요</span></p>
         <div class="field"><input id="ask-inp" type="text" placeholder="예: 회원가입 화면에 비밀번호 확인 칸 추가하고, 안 맞으면 빨갛게 표시해줘" maxlength="120"><button class="send" id="ask-go">점수 보기</button></div>
         <div class="scorebox" id="ask-score"></div>
-        <p class="note">좋은 요청의 4가지: ① <b>무엇</b>을(대상) ② <b>어떻게</b>(원하는 동작) ③ <b>어디</b>서(화면·파일) ④ <b>완료 기준</b>(어떻게 확인). 출처: code.claude.com/docs (Best practices).</p>
+        <p class="note">좋은 요청의 4가지: ① <b>무엇</b>을(대상) ② <b>어떻게</b>(원하는 동작) ③ <b>어디</b>서(화면·파일) ④ <b>완료 기준</b>(어떻게 확인). 출처: <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> (Best practices).</p>
       </div>
     </section>
 
@@ -871,7 +871,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="status" id="hw-status">버튼을 누르면 한 단계씩 진행돼요.</p>
         <p class="simtake"><span class="stk">결론</span><span>클로드는 <b>답만 주는 게 아니라</b> — 직접 <b>도구(검색·읽기·편집·실행)</b>를 써서 <b>둘러보고 → 고치고 → 확인하길 반복</b>해요. 그래서 ‘챗’과 달리 실제로 작동하는 결과물이 나와요.</span></p>
       </div>
-      <p class="note">이 ‘둘러보기 → 행동 → 확인 → 반복’ 흐름을 <b>에이전트 루프</b>라고 해요. 중간에 파일을 고치거나 명령을 실행할 땐 보통 <b>먼저 물어봐요</b>(권한). (출처: code.claude.com/docs — How Claude Code works)</p>
+      <p class="note">이 ‘둘러보기 → 행동 → 확인 → 반복’ 흐름을 <b>에이전트 루프</b>라고 해요. 중간에 파일을 고치거나 명령을 실행할 땐 보통 <b>먼저 물어봐요</b>(권한). (출처: <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> — How Claude Code works)</p>
     </section>
 
     <!-- SETUP (AI work environment / harness, beginner-friendly) -->
@@ -908,7 +908,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <div class="cxsummary" id="su-box"></div>
         <p class="simtake"><span class="stk">결론</span><span>결과를 좌우하는 건 모델만이 아니에요 — <b>도구·지시·권한·맥락을 잘 갖춰주면</b> 같은 AI가 훨씬 더 잘해요. (이게 ‘하네스’를 잘 짠다는 뜻)</span></p>
       </div>
-      <p class="note">대부분은 클로드 코드가 <b>알아서 갖춰줘요</b> — 우리는 ‘무엇을 더 주면 더 잘하는지’만 알면 돼요(예: <code>CLAUDE.md</code>에 규칙 적기, <code>@</code>로 파일 집어주기). (출처: code.claude.com/docs — how-claude-code-works · context-window · memory, 2026년 6월 기준)</p>
+      <p class="note">대부분은 클로드 코드가 <b>알아서 갖춰줘요</b> — 우리는 ‘무엇을 더 주면 더 잘하는지’만 알면 돼요(예: <code>CLAUDE.md</code>에 규칙 적기, <code>@</code>로 파일 집어주기). (출처: <a class="srclink" href="https://code.claude.com/docs/en/how-claude-code-works" target="_blank" rel="noopener">code.claude.com/docs — how-claude-code-works</a> · context-window · memory, 2026년 6월 기준)</p>
     </section>
 
     <!-- 03 CONTEXT -->
@@ -953,7 +953,7 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="simtake"><span class="stk">결론</span><span>좋은 하네스는 ‘한 번에 완성’이 아니라 <b>관찰 → 진단 → 보강을 빠르게 도는 것</b>이에요.</span></p>
       </div>
 
-      <p class="note"><b>컨텍스트 엔지니어링</b> · 좁게 보면 <b>컨텍스트 창에 무엇을 넣고 뺄지</b> 설계하는 일이에요 — 너무 많아도(잡음) 너무 적어도(정보 부족) 안 좋아, <b>‘딱 필요한 것만’</b>이 핵심이에요. (출처: Anthropic 공식 — code.claude.com/docs context-window·memory, 2026년 6월 기준)</p>
+      <p class="note"><b>컨텍스트 엔지니어링</b> · 좁게 보면 <b>컨텍스트 창에 무엇을 넣고 뺄지</b> 설계하는 일이에요 — 너무 많아도(잡음) 너무 적어도(정보 부족) 안 좋아, <b>‘딱 필요한 것만’</b>이 핵심이에요. (출처: Anthropic 공식 — <a class="srclink" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">code.claude.com/docs context-window·memory</a>, 2026년 6월 기준)</p>
     </section>
 
     <section class="page" id="context">
@@ -1253,7 +1253,7 @@ description: 주간 보고서를 회사 양식으로 작성
             <tr><td><b>플러그인</b></td><td>플러그인 묶음</td><td>설치한 누구나</td></tr>
           </tbody>
         </table></div>
-        <p class="note">만드는 법이 어려우면 클로드에게 <b>“이 작업을 스킬로 만들어줘”</b>라고 부탁하면 대신 만들어줘요. (출처: code.claude.com/docs — skills, 2026년 6월 기준)</p>
+        <p class="note">만드는 법이 어려우면 클로드에게 <b>“이 작업을 스킬로 만들어줘”</b>라고 부탁하면 대신 만들어줘요. (출처: <a class="srclink" href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">code.claude.com/docs — skills</a>, 2026년 6월 기준)</p>
       </div>
     </section>
 
@@ -1274,7 +1274,7 @@ description: 주간 보고서를 회사 양식으로 작성
         <div class="cxsummary" id="sc-box"></div>
         <p class="simtake"><span class="stk">결론</span><span>안전 = <b>믿는 출처에서만</b> · <b>권한은 좁게</b> · <b>내용은 한 번 보고</b>. (Anthropic은 외부 스킬·MCP·플러그인을 일일이 검수하지 않아요 — 신뢰는 내 몫.)</span></p>
       </div>
-      <p class="note">가장 안전한 길은 <b>직접(또는 클로드에게 부탁해) 만들어 쓰는 것</b>이에요. 외부 것을 쓸 땐 신뢰할 수 있는 제공자 것만. 민감한 환경이면 <code>/sandbox</code>로 실행 범위를 가둘 수도 있어요. (출처: code.claude.com/docs — security · skills, 2026년 6월 기준)</p>
+      <p class="note">가장 안전한 길은 <b>직접(또는 클로드에게 부탁해) 만들어 쓰는 것</b>이에요. 외부 것을 쓸 땐 신뢰할 수 있는 제공자 것만. 민감한 환경이면 <code>/sandbox</code>로 실행 범위를 가둘 수도 있어요. (출처: <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs — security</a> · skills, 2026년 6월 기준)</p>
     </section>
 
     <!-- 10 MCP -->
@@ -1337,7 +1337,7 @@ description: 주간 보고서를 회사 양식으로 작성
         <div class="fcard"><div class="ft">스킬</div><div class="fd">반복 작업의 <b>요령·절차</b> 묶음.</div></div>
         <div class="fcard"><div class="ft">플러그인</div><div class="fd">위의 것들을 <b>묶어 배포</b>하는 패키지.</div></div>
       </div>
-      <p class="note">설치: <code>/plugin install 이름@마켓플레이스</code>. 공식(<code>@claude-plugins-official</code>)·커뮤니티(<code>@claude-community</code>) 마켓플레이스가 있어요. 신뢰할 수 있는 출처만 설치하세요. (출처: 공식 문서 code.claude.com/docs/plugins)</p>
+      <p class="note">설치: <code>/plugin install 이름@마켓플레이스</code>. 공식(<code>@claude-plugins-official</code>)·커뮤니티(<code>@claude-community</code>) 마켓플레이스가 있어요. 신뢰할 수 있는 출처만 설치하세요. (출처: 공식 문서 <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>/plugins)</p>
            <div class="quiz">
          <div class="qq"><span class="qb">당신 차례</span>지라·구글 드라이브 같은 <b>외부 앱에 클로드를 연결</b>해서 직접 쓰게 하는 건 무엇일까요?</div>
          <div class="qopts"><button class="qopt" data-ok>MCP</button><button class="qopt">스킬</button><button class="qopt">서브에이전트</button></div>
@@ -1459,7 +1459,7 @@ description: 주간 보고서를 회사 양식으로 작성
             <tr><td><b>웹 (claude.ai/code)</b></td><td>클라우드</td><td>클라우드 환경</td><td>내 PC 없이 새로 시작</td></tr>
           </tbody>
         </table></div>
-        <p class="note">공식 이름은 <b>Remote Control</b>, <b>리서치 프리뷰(미리보기)</b> 단계예요 — 모든 플랜에서 쓸 수 있지만 동작·한도가 바뀔 수 있어요. 켜는 법: 내 PC의 클로드에서 <code>/remote-control</code> (또는 <code>claude remote-control</code>) → 링크·QR이 떠요. 폰에 클로드 앱을 깔고 알림을 켜두면 작업 완료·확인 요청을 받을 수 있어요. (출처: code.claude.com/docs — remote control, 2026년 6월 기준)</p>
+        <p class="note">공식 이름은 <b>Remote Control</b>, <b>리서치 프리뷰(미리보기)</b> 단계예요 — 모든 플랜에서 쓸 수 있지만 동작·한도가 바뀔 수 있어요. 켜는 법: 내 PC의 클로드에서 <code>/remote-control</code> (또는 <code>claude remote-control</code>) → 링크·QR이 떠요. 폰에 클로드 앱을 깔고 알림을 켜두면 작업 완료·확인 요청을 받을 수 있어요. (출처: <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs — remote</a> control, 2026년 6월 기준)</p>
       </div>
     </section>
 
@@ -1586,7 +1586,7 @@ description: 주간 보고서를 회사 양식으로 작성
         <li><b>로컬 기록</b><span>세션 기록이 내 컴퓨터(~/.claude/projects)에 평문으로 저장돼요. 보관 기간은 설정으로 조절 가능.</span></li>
       </ul>
       <p class="simtake"><span class="stk">결론</span><span><b>업무용(Team·Enterprise·API)</b>은 기본적으로 학습에 안 쓰여요. <b>개인용(Free·Pro·Max)</b>은 설정에서 학습 사용을 직접 켜고 끌 수 있어요.</span></p>
-      <p class="note warn" style="margin-top:14px;"><b>중요</b> · 정책은 계속 바뀌고 계정 종류마다 달라요. 민감한 결정 전엔 공식 페이지를 꼭 확인하세요 — <code>privacy.claude.com</code>, <code>anthropic.com/legal</code>, <code>code.claude.com/docs</code> (이 내용은 2026년 6월 기준).</p>
+      <p class="note warn" style="margin-top:14px;"><b>중요</b> · 정책은 계속 바뀌고 계정 종류마다 달라요. 민감한 결정 전엔 공식 페이지를 꼭 확인하세요 — <code>privacy.claude.com</code>, <code>anthropic.com/legal</code>, <code><a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a></code> (이 내용은 2026년 6월 기준).</p>
     </section>
 
     <!-- 19 COMMANDS -->
@@ -1790,7 +1790,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <div class="cwvm"><span class="cwvmtag">조건이 될 때까지 자동 반복</span><div id="goal-turns"></div></div>
       <p class="status" id="goal-status" style="margin-top:12px;">“목표 시작”을 눌러보세요.</p>
       <p class="simtake"><span class="stk">결론</span><span>매 턴 <b>‘또 해줘’를 직접 누르는 대신</b> — goal은 <b>조건이 될 때까지</b> 알아서 반복해요.</span></p>
-      <p class="note">조건 충족은 <b>별도 판정</b>으로 매 턴 확인하고, 충족되면 자동으로 멈춰요(무한 반복 방지 장치도 있어요). 바꾸는 법: <code>/goal</code>. (출처: Anthropic 공식 — code.claude.com/docs goal)</p>
+      <p class="note">조건 충족은 <b>별도 판정</b>으로 매 턴 확인하고, 충족되면 자동으로 멈춰요(무한 반복 방지 장치도 있어요). 바꾸는 법: <code>/goal</code>. (출처: Anthropic 공식 — <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs goal</a>)</p>
     </section>
 
     <!-- LOOP -->
@@ -1805,7 +1805,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <div class="usefeed" id="loop-feed"></div>
       <p class="status" id="loop-status" style="margin-top:10px;">간격을 고르고 “반복 시작”을 눌러보세요.</p>
       <p class="simtake"><span class="stk">결론</span><span>사람이 <b>10분마다 직접 들여다볼 일을</b> — loop는 <b>자는 동안에도 알아서</b> 반복해요. (goal은 ‘될 때까지’, loop는 ‘정해진 간격마다’)</span></p>
-      <p class="note">세션이 열려 있는 동안 반복돼요. 바꾸는 법: <code>/loop 10m "새 주문 확인"</code> 같은 식(간격은 10분·1시간·하루 등 자유). (출처: Anthropic 공식 — code.claude.com/docs scheduled-tasks)</p>
+      <p class="note">세션이 열려 있는 동안 반복돼요. 바꾸는 법: <code>/loop 10m "새 주문 확인"</code> 같은 식(간격은 10분·1시간·하루 등 자유). (출처: Anthropic 공식 — <a class="srclink" href="https://code.claude.com/docs/en/scheduled-tasks" target="_blank" rel="noopener">code.claude.com/docs scheduled-tasks</a>)</p>
     </section>
 
     <!-- WORKFLOWS -->
@@ -1846,7 +1846,7 @@ description: 주간 보고서를 회사 양식으로 작성
             <tr><td><b>루틴</b></td><td>클라우드</td><td><b>됨</b></td><td>일정·깃헙·API</td></tr>
           </tbody>
         </table></div>
-        <p class="note"><b>리서치 프리뷰(미리보기)</b> 단계예요 — 동작·한도가 바뀔 수 있어요. 만드는 법: 클로드에게 <code>/schedule</code> 로 말하거나 claude.ai/code 의 루틴에서 설정. 루틴은 권한을 미리 받아 <b>혼자 실행</b>되니, 무엇을·어디까지 할지 범위를 정해두는 게 안전해요. (출처: code.claude.com/docs — routines, 2026년 6월 기준)</p>
+        <p class="note"><b>리서치 프리뷰(미리보기)</b> 단계예요 — 동작·한도가 바뀔 수 있어요. 만드는 법: 클로드에게 <code>/schedule</code> 로 말하거나 claude.ai/code 의 루틴에서 설정. 루틴은 권한을 미리 받아 <b>혼자 실행</b>되니, 무엇을·어디까지 할지 범위를 정해두는 게 안전해요. (출처: <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs — routines</a>, 2026년 6월 기준)</p>
       </div>
     </section>
 
@@ -1858,7 +1858,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <div class="cfgpanel" id="cfg-panel"></div>
       <p class="status" id="cfg-status" style="margin-top:12px;">오른쪽 값을 눌러 바꿔보세요.</p>
       <p class="simtake"><span class="stk">결론</span><span>언어·테마·모델·권한 같은 설정을 <b>여기저기 찾을 필요 없이</b> — <b>한 곳(제어판)에서</b> 바꿔요.</span></p>
-      <p class="note">여는 법: <code>/config</code>. 실제 설정 항목은 이보다 많아요. (출처: Anthropic 공식 — code.claude.com/docs settings)</p>
+      <p class="note">여는 법: <code>/config</code>. 실제 설정 항목은 이보다 많아요. (출처: Anthropic 공식 — <a class="srclink" href="https://code.claude.com/docs/en/settings" target="_blank" rel="noopener">code.claude.com/docs settings</a>)</p>
     </section>
 
     <!-- DOCTOR -->
@@ -1870,7 +1870,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <div class="cwvm"><span class="cwvmtag">/doctor 점검 중</span><div id="dr-list"></div></div>
       <p class="status" id="dr-status" style="margin-top:12px;">“진단 실행”을 눌러보세요.</p>
       <p class="simtake"><span class="stk">결론</span><span>혼자 <b>‘왜 안 되지?’ 헤매는 대신</b> — /doctor가 <b>어디가 문제인지 한 번에</b> 짚어줘요.</span></p>
-      <p class="note">여는 법: <code>/doctor</code> (또는 <code>claude doctor</code>). 문제가 있으면 <b>f</b> 키를 눌러 클로드가 바로 고치게 할 수도 있어요. (출처: Anthropic 공식 — code.claude.com/docs CLI 참고)</p>
+      <p class="note">여는 법: <code>/doctor</code> (또는 <code>claude doctor</code>). 문제가 있으면 <b>f</b> 키를 눌러 클로드가 바로 고치게 할 수도 있어요. (출처: Anthropic 공식 — <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> CLI 참고)</p>
     </section>
 
     <!-- 30 GLOSSARY -->
@@ -1930,7 +1930,7 @@ description: 주간 보고서를 회사 양식으로 작성
         <p class="simtake"><span class="stk">처방</span><span>이럴 땐 — 새 작업이면 <code>/clear</code>, 이어가야 하면 <code>/compact</code>, 큰 조사는 서브에이전트로 격리해요.</span></p>
       </div>
 
-      <p class="note"><b>출처</b> · Anthropic 공식 — code.claude.com/docs context-window·compaction (‘effective context engineering’, 2026년 6월 기준). 컨텍스트 부패·신호 대 잡음은 LLM의 일반 특성이에요.</p>
+      <p class="note"><b>출처</b> · Anthropic 공식 — <a class="srclink" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">code.claude.com/docs context-window·compaction</a> (‘effective context engineering’, 2026년 6월 기준). 컨텍스트 부패·신호 대 잡음은 LLM의 일반 특성이에요.</p>
     </section>
 
     <!-- CTXRULES (expert: CLAUDE.md design) -->
@@ -1964,7 +1964,7 @@ description: 주간 보고서를 회사 양식으로 작성
         <p class="simtake"><span class="stk">결론</span><span>둘 다 ‘<b>컨텍스트</b>’일 뿐 — <b>강제는 아니에요</b>. 반드시 지켜야 하면 <b>훅</b>으로(앞 ‘훅 적용’). 자동 메모리는 <code>/memory</code>로 보고 편집해요.</span></p>
       </div>
 
-      <p class="note"><b>안티패턴</b> · 200줄 넘김·서로 모순되는 규칙·낡은 정보 → 모델이 오히려 <b>덜 지켜요</b>. ‘읽는 사람이 30초에 훑을 분량’을 넘기지 마세요. (출처: code.claude.com/docs — memory·settings, 2026년 6월 기준)</p>
+      <p class="note"><b>안티패턴</b> · 200줄 넘김·서로 모순되는 규칙·낡은 정보 → 모델이 오히려 <b>덜 지켜요</b>. ‘읽는 사람이 30초에 훑을 분량’을 넘기지 마세요. (출처: <a class="srclink" href="https://code.claude.com/docs/en/memory" target="_blank" rel="noopener">code.claude.com/docs — memory·settings</a>, 2026년 6월 기준)</p>
     </section>
 
     <!-- SUBISO (expert: subagent context isolation) -->
@@ -1995,7 +1995,7 @@ description: 주간 보고서를 회사 양식으로 작성
 }</div>
         <p class="simtake"><span class="stk">결론</span><span>훅 = 하네스의 <b>가드레일</b>. CLAUDE.md로 안 되던 ‘<b>매번 반드시</b>’를 훅으로 박아요(포맷·테스트·차단).</span></p>
       </div>
-      <p class="note">종료 코드 <b>2</b>면 그 동작을 막고 이유가 클로드에 전달돼요. <code>type</code>은 <code>command</code> 외에 <code>http·prompt·agent</code>도 가능. (출처: Anthropic 공식 — code.claude.com/docs hooks, 2026년 6월 기준)</p>
+      <p class="note">종료 코드 <b>2</b>면 그 동작을 막고 이유가 클로드에 전달돼요. <code>type</code>은 <code>command</code> 외에 <code>http·prompt·agent</code>도 가능. (출처: Anthropic 공식 — <a class="srclink" href="https://code.claude.com/docs/en/hooks" target="_blank" rel="noopener">code.claude.com/docs hooks</a>, 2026년 6월 기준)</p>
     </section>
 
     <!-- skillcraft (expert harness mechanism) -->
@@ -2022,7 +2022,7 @@ description: 릴리즈 노트 작성·태그·배포 절차
 <span class="cmt"># description만 먼저 읽고, 관련될 때만 본문(절차)을 로드해요</span></div>
         <p class="simtake"><span class="stk">결론</span><span>매번 같은 절차를 복붙한다면 → <b>스킬</b>. 한 번 만들면 팀이 <code>/이름</code>으로 재사용해요.</span></p>
       </div>
-      <p class="note">위치는 <code>~/.claude/skills/</code>(개인)·<code>.claude/skills/</code>(프로젝트)·플러그인. <b>Agent Skills</b> 공개 표준(agentskills.io)을 따라요. (출처: Anthropic 공식 — code.claude.com/docs skills, 2026년 6월 기준)</p>
+      <p class="note">위치는 <code>~/.claude/skills/</code>(개인)·<code>.claude/skills/</code>(프로젝트)·플러그인. <b>Agent Skills</b> 공개 표준(<a class="srclink" href="https://agentskills.io" target="_blank" rel="noopener">agentskills.io</a>)을 따라요. (출처: Anthropic 공식 — <a class="srclink" href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">code.claude.com/docs skills</a>, 2026년 6월 기준)</p>
     </section>
 
     <section class="page" id="subiso">
@@ -2053,7 +2053,7 @@ description: 릴리즈 노트 작성·태그·배포 절차
         <p class="note" style="margin-top:12px;"><b>비용 주의</b> · 도우미도 각자 토큰을 써요 — <b>작은 단일 작업</b>엔 위임이 오히려 손해예요. 넓거나·길거나·병렬일 때 이득.</p>
       </div>
 
-      <p class="note"><b>출처</b> · Anthropic 공식 — code.claude.com/docs subagents·Agent SDK (2026년 6월 기준). 서브에이전트의 ‘최종 메시지만 반환’은 컨텍스트 격리의 핵심이에요.</p>
+      <p class="note"><b>출처</b> · Anthropic 공식 — <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs subagents·</a>Agent SDK (2026년 6월 기준). 서브에이전트의 ‘최종 메시지만 반환’은 컨텍스트 격리의 핵심이에요.</p>
     </section>
 
     <!-- ANTIPAT (expert: harness anti-patterns + checklist) -->
@@ -2075,7 +2075,7 @@ description: 릴리즈 노트 작성·태그·배포 절차
         <p class="simtake"><span class="stk">순서</span><span>대개 <b>1~3번</b>에서 해결돼요. 모델을 올리는 건 <b>환경을 다 점검한 뒤 마지막</b> 수단.</span></p>
       </div>
 
-      <p class="note"><b>출처</b> · Anthropic 공식 — code.claude.com/docs (context-window·memory·subagents). 증상-원인은 실무에서 흔한 패턴을 정리한 거예요(2026년 6월 기준).</p>
+      <p class="note"><b>출처</b> · Anthropic 공식 — <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a> (context-window·memory·subagents). 증상-원인은 실무에서 흔한 패턴을 정리한 거예요(2026년 6월 기준).</p>
     </section>
 
     <div class="pagenav" id="pagenav">
@@ -2094,7 +2094,7 @@ description: 릴리즈 노트 작성·태그·배포 절차
         <span class="ft-dm">— 문의는 이메일이나 LinkedIn DM으로 주세요</span>
       </div>
       <div>비공식 학습 자료예요 — Anthropic과 무관하며, “Claude·Claude Code·Anthropic”은 Anthropic Inc.의 상표입니다.</div>
-      <div>가장 정확한 정보는 <a href="https://code.claude.com/docs" target="_blank" rel="noopener">공식 문서</a>를 확인하세요.</div>
+      <div>가장 정확한 정보는 <a href="https://<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>" target="_blank" rel="noopener">공식 문서</a>를 확인하세요.</div>
     </footer>
 
   </div></main>
