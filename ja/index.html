@@ -1935,6 +1935,20 @@ description: 週次レポートを会社の様式で作成
         <div class="fgrid" style="margin-top:14px;"><div class="fcard"><div class="ft">作成</div><div class="fd"><code>/init</code> — プロジェクトを分析して下書き生成。</div><div class="fe">自動</div></div><div class="fcard"><div class="ft">編集</div><div class="fd"><code>/memory</code> — 直接開いて編集。</div><div class="fe">手動</div></div><div class="fcard"><div class="ft">クイック追加</div><div class="fd"><code>#</code> — 会話中に1行メモを追加。</div><div class="fe">即時</div></div></div>
         <p class="simtake"><span class="stk">結論</span><span>CLAUDE.md は<b>「常時オンのルール」</b> — 短く新しいほど守られます。一回限りの文脈は <code>@</code> でその都度。</span></p>
       </div>
+      <div class="grp">
+        <h3>良い CLAUDE.md の例</h3>
+        <div class="codeblk"><span class="cmt"># 決済サービス</span>
+<span class="cmt">## コマンド</span>
+ビルド pnpm build · テスト pnpm test — デプロイ前に必ず通す
+<span class="cmt">## 慣例</span>
+金額は常に整数（最小単位）、浮動小数禁止
+日付は UTC 保存、表示のみローカル
+<span class="cmt">## よく間違える点</span>
+新 API は src/routes/ 配下 · 認証ミドルウェア必須</div>
+        <div class="fgrid" style="margin-top:12px;"><div class="fcard"><div class="ft">書く価値あり</div><div class="fd">ビルド/テストコマンド、プロジェクト慣例、よく踏む罠、一行アーキテクチャ。</div></div><div class="fcard"><div class="ft">書かない</div><div class="fd">一般的なコーディング常識、長い背景、頻繁に変わる一時メモ。</div></div></div>
+        <p class="defs" style="margin-top:10px;">長くなったら分割し、<code>@docs/conventions.md</code> のように<b>他ファイルを参照</b>。基準は「30秒で読める量」。</p>
+      </div>
+
       <p class="note"><b>アンチパターン</b> · 200行超・矛盾するルール・古い情報 → かえって<b>守られなくなる</b>。「30秒で読める量」に収めて。（出典：code.claude.com/docs — memory·settings、2026年6月時点）</p>
     </section>
 
@@ -1961,6 +1975,12 @@ description: 週次レポートを会社の様式で作成
         <div class="fgrid" style="margin-top:6px;"><div class="fcard"><div class="ft">委譲が向く</div><div class="fd">広い検索・複数ファイル調査・長いログ分析・並列作業。メインをきれいに保つ。</div><div class="fe"><b>例</b>「コードベース全体から X を探して」</div></div><div class="fcard"><div class="ft">委譲は不要</div><div class="fd">小さな単発の確認・既に開いたファイルの修正。オーバーヘッドが上回る時。</div><div class="fe"><b>例</b>「この一行だけ直して」</div></div></div>
         <p class="simtake"><span class="stk">結論</span><span>大きな作業は<b>補助に分け、結論だけ</b>受け取る — メイン文脈が長くならず、速く正確に。</span></p>
       </div>
+      <div class="grp">
+        <h3>どう委譲するか</h3>
+        <div class="fgrid"><div class="fcard"><div class="ft">言葉で頼む</div><div class="fd">「コードベースで X を<b>調査して結論だけ</b>」→ クロードが補助を立てて処理。</div></div><div class="fcard"><div class="ft">自動で</div><div class="fd">大きな作業ならクロードが<b>自動で</b>補助に分けます。</div></div><div class="fcard"><div class="ft">並列で（fan-out）</div><div class="fd">複数の補助を<b>同時に</b> — 広い調査を速く。</div></div></div>
+        <p class="note" style="margin-top:12px;"><b>コスト注意</b> · 補助もそれぞれトークンを使います — <b>小さな単発</b>では委譲がかえって高い。広い・長い・並列で得。</p>
+      </div>
+
       <p class="note"><b>出典</b> · Anthropic 公式 — code.claude.com/docs subagents·Agent SDK（2026年6月時点）。「最終メッセージだけ返す」が文脈隔離の核心です。</p>
     </section>
 
@@ -1977,6 +1997,12 @@ description: 週次レポートを会社の様式で作成
         <div style="border:1px solid var(--line2);border-radius:12px;background:var(--row);padding:15px 18px;line-height:2.1;font-size:13.5px;"><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> CLAUDE.md は最新・簡潔か？</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> 関連ファイルだけ <code>@</code> で渡したか？</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> 無関係な文脈は <code>/clear</code> したか？</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> 指示は具体的か（何を・どう・検証）？</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> ツール/MCP は必要なものだけか？</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> 結果を自分で検証したか？</div></div>
         <p class="simtake"><span class="stk">結論</span><span>結果が物足りなければ — 高いモデルの前に<b>この表とチェック</b>を一巡。原因はたいていハーネスです。</span></p>
       </div>
+      <div class="grp">
+        <h3>結果が悪い時 — この順で点検</h3>
+        <div style="border:1px solid var(--line2);border-radius:12px;background:var(--row);padding:15px 18px;line-height:2.1;font-size:13.5px;"><div><span style="color:var(--accent);font-weight:700">1.</span> 指示は具体的か？（最も多い原因）</div><div><span style="color:var(--accent);font-weight:700">2.</span> 関連ファイルを <code>@</code> で渡したか？</div><div><span style="color:var(--accent);font-weight:700">3.</span> 文脈は肥大していないか？→ <code>/compact</code>·<code>/clear</code></div><div><span style="color:var(--accent);font-weight:700">4.</span> CLAUDE.md は最新・簡潔か？</div><div><span style="color:var(--accent);font-weight:700">5.</span> ツール/MCP が過剰でないか？</div><div><span style="color:var(--accent);font-weight:700">6.</span> それでも — モデルや <code>effort</code> を上げる（最後）</div></div>
+        <p class="simtake"><span class="stk">順番</span><span>多くは<b>1〜3</b>で解決します。モデルを上げるのは<b>環境を点検した後の最終手段</b>。</span></p>
+      </div>
+
       <p class="note"><b>出典</b> · Anthropic 公式 — code.claude.com/docs（context-window·memory·subagents）。症状-原因は現場でよくあるパターンの整理です（2026年6月時点）。</p>
     </section>
 

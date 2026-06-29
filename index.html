@@ -1936,6 +1936,20 @@ description: 주간 보고서를 회사 양식으로 작성
         <div class="fgrid" style="margin-top:14px;"><div class="fcard"><div class="ft">만들기</div><div class="fd"><code>/init</code> — 프로젝트를 분석해 초안을 생성.</div><div class="fe">자동 생성</div></div><div class="fcard"><div class="ft">편집</div><div class="fd"><code>/memory</code> — 직접 열어 고치기.</div><div class="fe">수동</div></div><div class="fcard"><div class="ft">빠른 추가</div><div class="fd"><code>#</code> — 대화 중 한 줄 메모로 추가.</div><div class="fe">즉석</div></div></div>
         <p class="simtake"><span class="stk">결론</span><span>CLAUDE.md는 <b>‘항상 켜진 규칙’</b> — 적을수록·최신일수록 잘 지켜져요. 일회성 맥락은 <code>@</code>로 그때그때 주세요.</span></p>
       </div>
+      <div class="grp">
+        <h3>좋은 CLAUDE.md 예시</h3>
+        <div class="codeblk"><span class="cmt"># 결제 서비스</span>
+<span class="cmt">## 명령</span>
+빌드 pnpm build · 테스트 pnpm test — 배포 전 반드시 통과
+<span class="cmt">## 관례</span>
+금액은 항상 정수(원 단위), 부동소수 금지
+날짜는 UTC로 저장, 표시만 KST
+<span class="cmt">## 자주 틀리는 것</span>
+새 API는 src/routes/ 아래 · 인증 미들웨어 필수</div>
+        <div class="fgrid" style="margin-top:12px;"><div class="fcard"><div class="ft">적으면 좋은 것</div><div class="fd">빌드·테스트 명령, 프로젝트 관례, 자주 틀리는 함정, 아키텍처 한 줄.</div></div><div class="fcard"><div class="ft">적지 말 것</div><div class="fd">일반 코딩 상식, 장황한 배경, 자주 바뀌는 임시 메모.</div></div></div>
+        <p class="defs" style="margin-top:10px;">길어지면 <code>@docs/conventions.md</code>처럼 <b>다른 파일을 참조</b>해 쪼개요. 기준은 ‘읽는 사람이 30초에 훑을 분량’.</p>
+      </div>
+
       <p class="note"><b>안티패턴</b> · 200줄 넘김·서로 모순되는 규칙·낡은 정보 → 모델이 오히려 <b>덜 지켜요</b>. ‘읽는 사람이 30초에 훑을 분량’을 넘기지 마세요. (출처: code.claude.com/docs — memory·settings, 2026년 6월 기준)</p>
     </section>
 
@@ -1962,6 +1976,12 @@ description: 주간 보고서를 회사 양식으로 작성
         <div class="fgrid" style="margin-top:6px;"><div class="fcard"><div class="ft">위임하면 좋아요</div><div class="fd">광범위 검색·다중 파일 조사·긴 로그 분석·병렬 작업. 메인을 깨끗하게 유지해요.</div><div class="fe"><b>예</b> “코드베이스 전체에서 X 찾아줘”</div></div><div class="fcard"><div class="ft">위임 안 해도 돼요</div><div class="fd">작은 단일 조회·이미 연 파일 수정. <b>위임 오버헤드</b>가 더 클 때.</div><div class="fe"><b>예</b> “이 함수 한 줄 고쳐줘”</div></div></div>
         <p class="simtake"><span class="stk">결론</span><span>큰 일은 <b>도우미에 나눠 맡기고 결론만</b> 받으면 — 메인 컨텍스트가 길어지지 않아 더 빠르고 정확해요.</span></p>
       </div>
+      <div class="grp">
+        <h3>어떻게 위임하나</h3>
+        <div class="fgrid"><div class="fcard"><div class="ft">말로 시키면</div><div class="fd">“코드베이스에서 X를 <b>조사해서 결론만</b> 알려줘” → 클로드가 도우미를 띄워 처리해요.</div></div><div class="fcard"><div class="ft">자동으로</div><div class="fd">큰 작업이면 클로드가 <b>알아서</b> 도우미에 나눠 맡겨요.</div></div><div class="fcard"><div class="ft">병렬로(팬아웃)</div><div class="fd">여러 도우미를 <b>동시에</b> 돌려 — 넓은 조사를 빠르게.</div></div></div>
+        <p class="note" style="margin-top:12px;"><b>비용 주의</b> · 도우미도 각자 토큰을 써요 — <b>작은 단일 작업</b>엔 위임이 오히려 손해예요. 넓거나·길거나·병렬일 때 이득.</p>
+      </div>
+
       <p class="note"><b>출처</b> · Anthropic 공식 — code.claude.com/docs subagents·Agent SDK (2026년 6월 기준). 서브에이전트의 ‘최종 메시지만 반환’은 컨텍스트 격리의 핵심이에요.</p>
     </section>
 
@@ -1978,6 +1998,12 @@ description: 주간 보고서를 회사 양식으로 작성
         <div style="border:1px solid var(--line2);border-radius:12px;background:var(--row);padding:15px 18px;line-height:2.1;font-size:13.5px;"><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> CLAUDE.md가 최신·간결한가?</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> 관련 파일만 <code>@</code>로 줬나?</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> 무관한 맥락은 <code>/clear</code> 했나?</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> 지시가 구체적인가(무엇·어떻게·검증)?</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> 도구·MCP는 필요한 것만인가?</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> 결과를 직접 검증했나?</div></div>
         <p class="simtake"><span class="stk">결론</span><span>결과가 아쉬우면 — 더 비싼 모델 전에 <b>이 표와 체크리스트부터</b> 훑어요. 대개 원인은 하네스예요.</span></p>
       </div>
+      <div class="grp">
+        <h3>결과가 나쁠 때 — 점검 순서</h3>
+        <div style="border:1px solid var(--line2);border-radius:12px;background:var(--row);padding:15px 18px;line-height:2.1;font-size:13.5px;"><div><span style="color:var(--accent);font-weight:700">1.</span> 지시가 구체적인가? (가장 흔한 원인)</div><div><span style="color:var(--accent);font-weight:700">2.</span> 관련 파일을 <code>@</code>로 줬나?</div><div><span style="color:var(--accent);font-weight:700">3.</span> 컨텍스트가 부었나? → <code>/compact</code>·<code>/clear</code></div><div><span style="color:var(--accent);font-weight:700">4.</span> CLAUDE.md가 최신·간결한가?</div><div><span style="color:var(--accent);font-weight:700">5.</span> 도구·MCP가 과하지 않나?</div><div><span style="color:var(--accent);font-weight:700">6.</span> 그래도면 — 모델·<code>effort</code>를 올린다 (마지막)</div></div>
+        <p class="simtake"><span class="stk">순서</span><span>대개 <b>1~3번</b>에서 해결돼요. 모델을 올리는 건 <b>환경을 다 점검한 뒤 마지막</b> 수단.</span></p>
+      </div>
+
       <p class="note"><b>출처</b> · Anthropic 공식 — code.claude.com/docs (context-window·memory·subagents). 증상-원인은 실무에서 흔한 패턴을 정리한 거예요(2026년 6월 기준).</p>
     </section>
 

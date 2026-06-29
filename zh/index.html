@@ -1934,6 +1934,20 @@ description: 按公司格式撰写周报
         <div class="fgrid" style="margin-top:14px;"><div class="fcard"><div class="ft">创建</div><div class="fd"><code>/init</code> —— 分析项目生成草稿。</div><div class="fe">自动</div></div><div class="fcard"><div class="ft">编辑</div><div class="fd"><code>/memory</code> —— 直接打开修改。</div><div class="fe">手动</div></div><div class="fcard"><div class="ft">快速加</div><div class="fd"><code>#</code> —— 对话中加一行备注。</div><div class="fe">即时</div></div></div>
         <p class="simtake"><span class="stk">结论</span><span>CLAUDE.md 是<b>「常开的规则」</b> —— 越短、越新越被遵守。一次性的上下文用 <code>@</code> 现给。</span></p>
       </div>
+      <div class="grp">
+        <h3>好的 CLAUDE.md 示例</h3>
+        <div class="codeblk"><span class="cmt"># 支付服务</span>
+<span class="cmt">## 命令</span>
+构建 pnpm build · 测试 pnpm test —— 上线前必须通过
+<span class="cmt">## 惯例</span>
+金额一律整数（分），禁用浮点
+日期存 UTC，仅显示用本地时区
+<span class="cmt">## 常见错误</span>
+新 API 放 src/routes/ 下 · 必须加鉴权中间件</div>
+        <div class="fgrid" style="margin-top:12px;"><div class="fcard"><div class="ft">值得写</div><div class="fd">构建/测试命令、项目惯例、常踩的坑、一行架构。</div></div><div class="fcard"><div class="ft">不要写</div><div class="fd">通用编码常识、冗长背景、经常变的临时备注。</div></div></div>
+        <p class="defs" style="margin-top:10px;">变长就拆出去，用 <code>@docs/conventions.md</code> <b>引用其他文件</b>。基准：「30 秒能扫完」。</p>
+      </div>
+
       <p class="note"><b>反模式</b> · 超过 200 行·自相矛盾·过时信息 → 模型反而<b>更不遵守</b>。控制在「30 秒能扫完」。（来源：code.claude.com/docs —— memory·settings，2026年6月）</p>
     </section>
 
@@ -1960,6 +1974,12 @@ description: 按公司格式撰写周报
         <div class="fgrid" style="margin-top:6px;"><div class="fcard"><div class="ft">适合委派</div><div class="fd">大范围搜索·多文件调查·长日志分析·并行任务。保持主干净。</div><div class="fe"><b>例</b>「在整个代码库找 X」</div></div><div class="fcard"><div class="ft">不必委派</div><div class="fd">小的单次查询·改已打开的文件。委派开销更大时。</div><div class="fe"><b>例</b>「把这一行改一下」</div></div></div>
         <p class="simtake"><span class="stk">结论</span><span>大任务<b>拆给助手、只取结论</b> —— 主上下文不变长，更快更准。</span></p>
       </div>
+      <div class="grp">
+        <h3>怎么委派</h3>
+        <div class="fgrid"><div class="fcard"><div class="ft">直接说</div><div class="fd">「在代码库里<b>调查 X 只给结论</b>」→ 克劳德开一个助手处理。</div></div><div class="fcard"><div class="ft">自动</div><div class="fd">大任务时克劳德<b>自动</b>分给助手。</div></div><div class="fcard"><div class="ft">并行（fan-out）</div><div class="fd"><b>同时</b>开多个助手 —— 广泛调查、快。</div></div></div>
+        <p class="note" style="margin-top:12px;"><b>成本提示</b> · 助手也各自花 token —— <b>小的单次任务</b>委派反而更贵。广、长、并行时才划算。</p>
+      </div>
+
       <p class="note"><b>来源</b> · Anthropic 官方 —— code.claude.com/docs subagents·Agent SDK（2026年6月）。「只返回最终消息」是上下文隔离的核心。</p>
     </section>
 
@@ -1976,6 +1996,12 @@ description: 按公司格式撰写周报
         <div style="border:1px solid var(--line2);border-radius:12px;background:var(--row);padding:15px 18px;line-height:2.1;font-size:13.5px;"><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> CLAUDE.md 是否最新·简洁？</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> 是否只用 <code>@</code> 给了相关文件？</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> 无关上下文是否 <code>/clear</code> 了？</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> 指示是否具体（做什么·怎么做·验证）？</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> 工具/MCP 是否只留必要的？</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> 是否亲自验证了结果？</div></div>
         <p class="simtake"><span class="stk">结论</span><span>结果不理想 —— 在换更贵模型前先过一遍<b>这张表和检查表</b>。原因多半在 harness。</span></p>
       </div>
+      <div class="grp">
+        <h3>结果差时 —— 按这个顺序查</h3>
+        <div style="border:1px solid var(--line2);border-radius:12px;background:var(--row);padding:15px 18px;line-height:2.1;font-size:13.5px;"><div><span style="color:var(--accent);font-weight:700">1.</span> 指示是否具体？（最常见）</div><div><span style="color:var(--accent);font-weight:700">2.</span> 是否用 <code>@</code> 给了相关文件？</div><div><span style="color:var(--accent);font-weight:700">3.</span> 上下文是否臃肿？→ <code>/compact</code>·<code>/clear</code></div><div><span style="color:var(--accent);font-weight:700">4.</span> CLAUDE.md 是否最新·简洁？</div><div><span style="color:var(--accent);font-weight:700">5.</span> 工具/MCP 是否过多？</div><div><span style="color:var(--accent);font-weight:700">6.</span> 还不行 —— 提高模型或 <code>effort</code>（最后）</div></div>
+        <p class="simtake"><span class="stk">顺序</span><span>多半在<b>第 1～3 步</b>解决。提高模型是<b>查完环境后的最后手段</b>。</span></p>
+      </div>
+
       <p class="note"><b>来源</b> · Anthropic 官方 —— code.claude.com/docs（context-window·memory·subagents）。症状-原因是对常见现场模式的归纳（2026年6月）。</p>
     </section>
 

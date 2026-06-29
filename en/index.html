@@ -1928,6 +1928,20 @@ description: Write the weekly report in the company format
         <div class="fgrid" style="margin-top:14px;"><div class="fcard"><div class="ft">Create</div><div class="fd"><code>/init</code> — analyze the project and draft one.</div><div class="fe">auto</div></div><div class="fcard"><div class="ft">Edit</div><div class="fd"><code>/memory</code> — open and edit directly.</div><div class="fe">manual</div></div><div class="fcard"><div class="ft">Quick add</div><div class="fd"><code>#</code> — add a one-line note mid-chat.</div><div class="fe">inline</div></div></div>
         <p class="simtake"><span class="stk">Bottom line</span><span>CLAUDE.md is an <b>“always-on rule”</b> — shorter and fresher means better adherence. Give one-off context with <code>@</code> as you go.</span></p>
       </div>
+      <div class="grp">
+        <h3>A good CLAUDE.md, by example</h3>
+        <div class="codeblk"><span class="cmt"># Payments service</span>
+<span class="cmt">## Commands</span>
+build pnpm build · test pnpm test — must pass before deploy
+<span class="cmt">## Conventions</span>
+Money is always integer (cents) — no floats
+Store dates in UTC, display only in local
+<span class="cmt">## Common mistakes</span>
+New APIs go under src/routes/ · auth middleware required</div>
+        <div class="fgrid" style="margin-top:12px;"><div class="fcard"><div class="ft">Worth writing</div><div class="fd">Build/test commands, project conventions, common traps, one line of architecture.</div></div><div class="fcard"><div class="ft">Don’t write</div><div class="fd">Generic coding wisdom, long background, frequently-changing temp notes.</div></div></div>
+        <p class="defs" style="margin-top:10px;">When it grows, split it out and <b>reference other files</b> like <code>@docs/conventions.md</code>. Benchmark: “skimmable in 30 seconds.”</p>
+      </div>
+
       <p class="note"><b>Anti-pattern</b> · over 200 lines, contradictory rules, or stale info → the model actually <b>follows it less</b>. Keep it to “skimmable in 30 seconds.” (Source: code.claude.com/docs — memory·settings, as of Jun 2026)</p>
     </section>
 
@@ -1954,6 +1968,12 @@ description: Write the weekly report in the company format
         <div class="fgrid" style="margin-top:6px;"><div class="fcard"><div class="ft">Good to delegate</div><div class="fd">Broad search, multi-file investigation, long-log analysis, parallel work. Keeps main clean.</div><div class="fe"><b>e.g.</b> “Find X across the codebase”</div></div><div class="fcard"><div class="ft">No need to delegate</div><div class="fd">A small single lookup or editing an already-open file. When overhead outweighs it.</div><div class="fe"><b>e.g.</b> “Fix this one line”</div></div></div>
         <p class="simtake"><span class="stk">Bottom line</span><span>Split big work into <b>helpers and take only the conclusion</b> — main context stays short, so it’s faster and more accurate.</span></p>
       </div>
+      <div class="grp">
+        <h3>How to delegate</h3>
+        <div class="fgrid"><div class="fcard"><div class="ft">Just ask</div><div class="fd">“Investigate X across the codebase and <b>report only the conclusion</b>” → Claude spins up a helper.</div></div><div class="fcard"><div class="ft">Automatically</div><div class="fd">For big work, Claude <b>splits it across helpers</b> on its own.</div></div><div class="fcard"><div class="ft">In parallel (fan-out)</div><div class="fd">Run several helpers <b>at once</b> — broad investigation, fast.</div></div></div>
+        <p class="note" style="margin-top:12px;"><b>Cost note</b> · helpers each spend tokens too — for a <b>small single task</b>, delegating actually costs more. It pays off when broad, long, or parallel.</p>
+      </div>
+
       <p class="note"><b>Source</b> · Anthropic official — code.claude.com/docs subagents·Agent SDK (as of Jun 2026). “Returns only the final message” is the core of context isolation.</p>
     </section>
 
@@ -1970,6 +1990,12 @@ description: Write the weekly report in the company format
         <div style="border:1px solid var(--line2);border-radius:12px;background:var(--row);padding:15px 18px;line-height:2.1;font-size:13.5px;"><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> Is CLAUDE.md current and concise?</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> Did you give only the relevant files via <code>@</code>?</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> Did you <code>/clear</code> unrelated context?</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> Are instructions specific (what, how, verify)?</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> Are tools/MCP only what’s needed?</div><div style="color:var(--ink)"><span style="color:var(--accent);font-weight:700">✓</span> Did you verify the result yourself?</div></div>
         <p class="simtake"><span class="stk">Bottom line</span><span>If results disappoint — run through <b>this table and checklist</b> before a pricier model. The cause is usually the harness.</span></p>
       </div>
+      <div class="grp">
+        <h3>When results are bad — check in this order</h3>
+        <div style="border:1px solid var(--line2);border-radius:12px;background:var(--row);padding:15px 18px;line-height:2.1;font-size:13.5px;"><div><span style="color:var(--accent);font-weight:700">1.</span> Is the instruction specific? (most common cause)</div><div><span style="color:var(--accent);font-weight:700">2.</span> Did you give the relevant files via <code>@</code>?</div><div><span style="color:var(--accent);font-weight:700">3.</span> Is the context bloated? → <code>/compact</code> · <code>/clear</code></div><div><span style="color:var(--accent);font-weight:700">4.</span> Is CLAUDE.md current and concise?</div><div><span style="color:var(--accent);font-weight:700">5.</span> Are tools/MCP overdone?</div><div><span style="color:var(--accent);font-weight:700">6.</span> Still? — raise the model or <code>effort</code> (last)</div></div>
+        <p class="simtake"><span class="stk">Order</span><span>Usually it’s fixed at <b>steps 1–3</b>. Bumping the model is the <b>last resort, after checking the setup</b>.</span></p>
+      </div>
+
       <p class="note"><b>Source</b> · Anthropic official — code.claude.com/docs (context-window·memory·subagents). Symptom-cause pairs summarize common field patterns (as of Jun 2026).</p>
     </section>
 
