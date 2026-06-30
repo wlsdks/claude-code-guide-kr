@@ -1933,6 +1933,12 @@ description: 주간 보고서를 회사 양식으로 작성
         <p class="simtake"><span class="stk">처방</span><span>이럴 땐 — 새 작업이면 <code>/clear</code>, 이어가야 하면 <code>/compact</code>, 큰 조사는 서브에이전트로 격리해요.</span></p>
       </div>
 
+      <div class="grp">
+        <h3>Anthropic이 정리한 4가지 기법</h3>
+        <div class="fgrid"><div class="fcard"><div class="ft">압축 · Compaction</div><div class="fd">컨텍스트가 한계에 가까우면 <b>요약해 새 창으로</b> — 아키텍처 결정·미해결 버그는 보존, 중복 출력은 버려요. 클로드 코드의 <code>/compact</code>가 이것.</div></div><div class="fcard"><div class="ft">구조적 메모 · Note-taking</div><div class="fd">컨텍스트 <b>밖 메모리에 기록</b> — 적은 비용으로 지속 기억. 진행 파일·<code>MEMORY.md</code>가 이 방식.</div></div><div class="fcard"><div class="ft">적시 로딩 · Just-in-time</div><div class="fd">미리 다 넣지 말고 — <b>파일 경로 같은 가벼운 식별자</b>만 두고 필요할 때 도구로 불러와요. <code>@</code>가 이것.</div></div><div class="fcard"><div class="ft">서브에이전트 · Sub-agents</div><div class="fd">깨끗한 컨텍스트로 집중 작업한 뒤 — <b>요약된 결과만</b> 메인에 돌려줘요.</div></div></div>
+        <p class="defs" style="margin-top:10px;">이 네 가지는 Anthropic <a class="srclink" href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Effective context engineering</a>에서 정리한 핵심 기법 — 모두 ‘<b>딱 필요한 고신호 토큰만</b> 창에 두기’를 위한 거예요.</p>
+      </div>
+
       <p class="note"><b>출처</b> · Anthropic 공식 — <a class="srclink" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">code.claude.com/docs context-window·compaction</a> (‘effective context engineering’, 2026년 6월 기준). 컨텍스트 부패·신호 대 잡음은 LLM의 일반 특성이에요.</p>
     </section>
 

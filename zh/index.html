@@ -1931,6 +1931,12 @@ description: 按公司格式撰写周报
         <p class="simtake"><span class="stk">处方</span><span>这时 —— 新任务用 <code>/clear</code>，要接着做用 <code>/compact</code>，大调查用子代理隔离。</span></p>
       </div>
 
+      <div class="grp">
+        <h3>Anthropic 总结的四种技法</h3>
+        <div class="fgrid"><div class="fcard"><div class="ft">压缩 · Compaction</div><div class="fd">接近上限时<b>摘要后开新窗口</b> —— 保留架构决策与未解 bug，丢掉冗余输出。克劳德的 <code>/compact</code> 就是这个。</div></div><div class="fcard"><div class="ft">结构化笔记 · Note-taking</div><div class="fd">写到上下文<b>外的记忆</b> —— 低成本持久记忆。进度文件、<code>MEMORY.md</code> 即此。</div></div><div class="fcard"><div class="ft">适时加载 · Just-in-time</div><div class="fd">别一次全塞 —— 只留<b>文件路径等轻量标识</b>，需要时用工具拉取。<code>@</code> 就是这个。</div></div><div class="fcard"><div class="ft">子代理 · Sub-agents</div><div class="fd">在干净上下文里专注完成，再<b>只把提炼后的结论</b>返回主代理。</div></div></div>
+        <p class="defs" style="margin-top:10px;">这四种是 Anthropic <a class="srclink" href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Effective context engineering</a> 总结的核心技法 —— 都为了在窗口里只留<b>需要的高信号 token</b>。</p>
+      </div>
+
       <p class="note"><b>来源</b> · Anthropic 官方 —— <a class="srclink" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">code.claude.com/docs context-window·compaction</a>（「effective context engineering」，2026年6月）。上下文衰减、信号 vs 噪音是 LLM 的普遍特性。</p>
     </section>
 

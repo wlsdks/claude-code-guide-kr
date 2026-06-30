@@ -1932,6 +1932,12 @@ description: 週次レポートを会社の様式で作成
         <p class="simtake"><span class="stk">対処</span><span>その時は — 新タスクは <code>/clear</code>、続けるなら <code>/compact</code>、大きな調査はサブエージェントで隔離。</span></p>
       </div>
 
+      <div class="grp">
+        <h3>Anthropic がまとめた4技法</h3>
+        <div class="fgrid"><div class="fcard"><div class="ft">圧縮 · Compaction</div><div class="fd">上限に近づいたら<b>要約して新しい窓へ</b> — アーキテクチャ決定や未解決バグは残し、冗長な出力は捨てる。クロードの <code>/compact</code> がこれ。</div></div><div class="fcard"><div class="ft">構造的メモ · Note-taking</div><div class="fd">コンテキスト<b>外のメモリに記録</b> — 低コストで持続記憶。進捗ファイル・<code>MEMORY.md</code> がこの方式。</div></div><div class="fcard"><div class="ft">適時ロード · Just-in-time</div><div class="fd">先に全部入れず — <b>ファイルパス等の軽い識別子</b>だけ持ち、必要時にツールで取得。<code>@</code> がこれ。</div></div><div class="fcard"><div class="ft">サブエージェント · Sub-agents</div><div class="fd">きれいな文脈で集中作業し、<b>要約だけ</b>をメインに返す。</div></div></div>
+        <p class="defs" style="margin-top:10px;">この4つは Anthropic <a class="srclink" href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Effective context engineering</a> がまとめた中核技法 — すべて窓に<b>必要な高信号トークンだけ</b>を残すためのもの。</p>
+      </div>
+
       <p class="note"><b>出典</b> · Anthropic 公式 — <a class="srclink" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">code.claude.com/docs context-window·compaction</a>（「effective context engineering」、2026年6月時点）。コンテキスト劣化・信号 vs ノイズは LLM 一般の特性です。</p>
     </section>
 

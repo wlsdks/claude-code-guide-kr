@@ -1925,6 +1925,12 @@ description: Write the weekly report in the company format
         <p class="simtake"><span class="stk">Fix</span><span>When that happens — <code>/clear</code> for a new task, <code>/compact</code> to continue, isolate big investigations with a subagent.</span></p>
       </div>
 
+      <div class="grp">
+        <h3>Anthropic’s four techniques</h3>
+        <div class="fgrid"><div class="fcard"><div class="ft">Compaction</div><div class="fd">Near the limit, <b>summarize into a fresh window</b> — keep architectural decisions and open bugs, drop redundant output. Claude Code’s <code>/compact</code> does this.</div></div><div class="fcard"><div class="ft">Structured note-taking</div><div class="fd">Write to memory <b>outside the context</b> — persistent memory at low cost. Progress files and <code>MEMORY.md</code> are this.</div></div><div class="fcard"><div class="ft">Just-in-time retrieval</div><div class="fd">Don’t front-load everything — keep <b>lightweight identifiers like file paths</b> and pull data in via tools when needed. <code>@</code> is this.</div></div><div class="fcard"><div class="ft">Sub-agents</div><div class="fd">Do focused work in a clean context, then return <b>only a distilled summary</b> to the main agent.</div></div></div>
+        <p class="defs" style="margin-top:10px;">These four are the core techniques from Anthropic’s <a class="srclink" href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Effective context engineering</a> — all aimed at keeping <b>only the high-signal tokens you need</b> in the window.</p>
+      </div>
+
       <p class="note"><b>Source</b> · Anthropic official — <a class="srclink" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">code.claude.com/docs context-window·compaction</a> (“effective context engineering,” as of Jun 2026). Context rot and signal-vs-noise are general LLM traits.</p>
     </section>
 
