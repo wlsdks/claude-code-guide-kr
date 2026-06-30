@@ -143,7 +143,7 @@
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
   /* collapsible code, one-line summary, example badge */
-  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; } .codeblk{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.7; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:13px 15px; white-space:pre-wrap; color:var(--ink); margin:10px 0 0; overflow-x:auto; } .codeblk .cmt{ color:var(--faint); } .srclink{ color:var(--accent); text-decoration:underline; text-decoration-color:var(--line2); text-underline-offset:2px; font-weight:600; } .srclink:hover{ text-decoration-color:var(--accent); } .srclink::after{ content:"\2197"; font-size:.82em; margin-left:2px; } .pglink{ color:var(--accent); text-decoration:underline; text-decoration-color:var(--line2); text-underline-offset:2px; font-weight:600; } .pglink:hover{ text-decoration-color:var(--accent); }
+  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; } .codeblk{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.7; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:13px 15px; white-space:pre-wrap; color:var(--ink); margin:10px 0 0; overflow-x:auto; } .codeblk .cmt{ color:var(--faint); } .srclink{ color:var(--accent); text-decoration:underline; text-decoration-color:var(--line2); text-underline-offset:2px; font-weight:600; } .srclink:hover{ text-decoration-color:var(--accent); } .srclink::after{ content:"\2197"; font-size:.82em; margin-left:2px; } .pglink{ color:var(--accent); text-decoration:underline; text-decoration-color:var(--line2); text-underline-offset:2px; font-weight:600; } .pglink:hover{ text-decoration-color:var(--accent); } .hmeter{ height:10px; background:var(--row); border-radius:999px; overflow:hidden; margin:14px 0 0; } .hmeter>i{ display:block; height:100%; width:0; background:var(--line2); border-radius:999px; transition:width .3s ease, background .3s ease; } .hmeter>i.low{ background:var(--over); } .hmeter>i.mid{ background:#d9a13b; } .hmeter>i.good{ background:var(--good); } .hnout{ margin-top:9px; font-size:13.5px; line-height:1.6; border:1px solid var(--line2); border-radius:10px; padding:11px 14px; background:var(--row); }
   .notedet{ margin:14px 0 22px; } .notedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .notedet>summary::-webkit-details-marker{ display:none; } .notedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .notedet[open]>summary::before{ transform:rotate(90deg); } .notedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .notedet .note{ margin:8px 0 0 !important; }
   .loopviz{ margin:14px auto 18px; max-width:600px; }
   .loopviz svg{ width:100%; height:auto; display:block; }
@@ -953,6 +953,14 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="defs" style="margin-top:0;">不是配一次就完 —— 看结果、<b>诊断缺了什么</b>、补强环境，然后快速重复。</p>
         <div class="fgrid"><div class="fcard"><div class="ft">① 观察</div><div class="fd">看结果 —— 哪里出错了？</div></div><div class="fcard"><div class="ft">② 诊断</div><div class="fd">缺上下文？指示模糊？没工具？噪音太多？</div></div><div class="fcard"><div class="ft">③ 补强</div><div class="fd">补上缺的把手 —— CLAUDE.md、<code>@</code>、工具、清理。</div></div><div class="fcard"><div class="ft">④ 重复</div><div class="fd">再试 → 再观察。调的是<b>环境，不是模型</b>。</div></div></div>
         <p class="simtake"><span class="stk">结论</span><span>好的 harness 不是「一次做成」，而是<b>快速循环 观察 → 诊断 → 补强</b>。</span></p>
+      </div>
+
+      <div class="grp">
+        <h3>动手试 —— 环境仪表</h3>
+        <p class="defs" style="margin-top:0;">看同一模型的结果如何随把手开启而变好 —— 点点看。</p>
+        <div class="chips" id="hn-chips" style="margin:2px 0 0;"><button class="chip" data-k="ctx">上下文 (@·CLAUDE.md)</button><button class="chip" data-k="ins">具体指示</button><button class="chip" data-k="tool">工具 (MCP·技能)</button><button class="chip" data-k="ver">验证 (测试)</button></div>
+        <div class="hmeter"><i id="hn-bar"></i></div>
+        <div id="hn-out" class="hnout" data-m0="还是简陋环境 —— 格式乱来、数字错、「不是这个…」再解释。" data-m1="好一点 —— 方向对，但还在绕。" data-m2="相当好 —— 多半一次就对。" data-m3="又准又对 —— 同一模型，是环境的功劳。">还是简陋环境 —— 格式乱来、数字错、「不是这个…」再解释。</div>
       </div>
 
       <p class="note"><b>上下文工程</b> · 狭义说，就是设计<b>上下文窗口里放什么、去掉什么</b> —— 太多（噪音）太少（信息不足）都不好，<b>「只放需要的」</b>才是关键。（来源：Anthropic 官方 —— <a class="srclink" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">code.claude.com/docs context-window·memory</a>，2026年6月）</p>
@@ -2158,7 +2166,7 @@ description: 写发布说明、打标签、部署
         <span class="ft-dm">— 有问题请通过邮件或 LinkedIn 私信联系</span>
       </div>
       <div>这是非官方学习资料 —— 与 Anthropic 无关，“Claude·Claude Code·Anthropic”是 Anthropic Inc. 的商标。</div>
-      <div>最准确的信息请查看<a href="https://<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>" target="_blank" rel="noopener">官方文档</a>。</div>
+      <div>最准确的信息请查看<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">官方文档</a>。</div>
     </footer>
 
   </div></main>
@@ -2319,6 +2327,17 @@ description: 写发布说明、打标签、部署
       document.querySelectorAll('.lnb .navsec').forEach(function(s){ var any=false,el=s.nextElementSibling; while(el && !el.classList.contains('navsec')){ if(el.classList.contains('navitem') && el.style.display!=='none'){ any=true; break; } el=el.nextElementSibling; } s.style.display=any?'':'none'; });
       var cur=document.querySelector('.navitem.on'); if(cur && cur.style.display==='none'){ var first=[].filter.call(navs,function(n){return n.style.display!=='none';})[0]; if(first) first.click(); } }
     chips.forEach(function(c){ c.addEventListener('click',function(){ setLevel(+c.dataset.lv); }); }); setLevel(0); })();
+
+  /* harness setup-meter (interactive) */
+  (function(){ var c=document.getElementById('hn-chips'); if(!c) return;
+    var bar=document.getElementById('hn-bar'), out=document.getElementById('hn-out');
+    function upd(){ var on=c.querySelectorAll('.chip.on').length;
+      bar.style.width=(on/4*100)+'%';
+      bar.className= on>=4?'good':on>=3?'mid':on>=1?'low':'';
+      var i= on===0?0: on>=4?3: on>=3?2:1;
+      out.textContent=out.getAttribute('data-m'+i)||''; }
+    c.querySelectorAll('.chip').forEach(function(b){ b.addEventListener('click',function(){ b.classList.toggle('on'); upd(); }); });
+    upd(); })();
 
   /* glossary tooltips — hover (desktop) + tap (mobile/tablet) */
   (function(){ var gls=document.querySelectorAll('.gl'); if(!gls.length) return;

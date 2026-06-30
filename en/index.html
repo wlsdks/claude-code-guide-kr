@@ -143,7 +143,7 @@
   .cxsummary{ border:1px solid var(--good); border-radius:12px; background:rgba(31,158,118,.08); padding:14px 16px; font-size:13.5px; line-height:1.65; }
   .cxsummary .cxh{ font-size:11px; color:var(--good); text-transform:uppercase; letter-spacing:.3px; font-weight:600; margin-bottom:6px; }
   /* collapsible code, one-line summary, example badge */
-  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; } .codeblk{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.7; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:13px 15px; white-space:pre-wrap; color:var(--ink); margin:10px 0 0; overflow-x:auto; } .codeblk .cmt{ color:var(--faint); } .srclink{ color:var(--accent); text-decoration:underline; text-decoration-color:var(--line2); text-underline-offset:2px; font-weight:600; } .srclink:hover{ text-decoration-color:var(--accent); } .srclink::after{ content:"\2197"; font-size:.82em; margin-left:2px; } .pglink{ color:var(--accent); text-decoration:underline; text-decoration-color:var(--line2); text-underline-offset:2px; font-weight:600; } .pglink:hover{ text-decoration-color:var(--accent); }
+  .codedet{ margin:0 0 22px; } .codedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .codedet>summary::-webkit-details-marker{ display:none; } .codedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .codedet[open]>summary::before{ transform:rotate(90deg); } .codedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .codedet .pre{ margin:8px 0 0 !important; } .codeblk{ font-family:ui-monospace,Menlo,monospace; font-size:12.5px; line-height:1.7; background:var(--row); border:1px solid var(--line2); border-radius:10px; padding:13px 15px; white-space:pre-wrap; color:var(--ink); margin:10px 0 0; overflow-x:auto; } .codeblk .cmt{ color:var(--faint); } .srclink{ color:var(--accent); text-decoration:underline; text-decoration-color:var(--line2); text-underline-offset:2px; font-weight:600; } .srclink:hover{ text-decoration-color:var(--accent); } .srclink::after{ content:"\2197"; font-size:.82em; margin-left:2px; } .pglink{ color:var(--accent); text-decoration:underline; text-decoration-color:var(--line2); text-underline-offset:2px; font-weight:600; } .pglink:hover{ text-decoration-color:var(--accent); } .hmeter{ height:10px; background:var(--row); border-radius:999px; overflow:hidden; margin:14px 0 0; } .hmeter>i{ display:block; height:100%; width:0; background:var(--line2); border-radius:999px; transition:width .3s ease, background .3s ease; } .hmeter>i.low{ background:var(--over); } .hmeter>i.mid{ background:#d9a13b; } .hmeter>i.good{ background:var(--good); } .hnout{ margin-top:9px; font-size:13.5px; line-height:1.6; border:1px solid var(--line2); border-radius:10px; padding:11px 14px; background:var(--row); }
   .notedet{ margin:14px 0 22px; } .notedet>summary{ list-style:none; cursor:pointer; font-size:12.5px; color:var(--muted); background:var(--row); border:1px solid var(--line); border-radius:8px; padding:9px 13px; display:flex; align-items:center; gap:8px; user-select:none; transition:border-color .15s,color .15s; } .notedet>summary::-webkit-details-marker{ display:none; } .notedet>summary::before{ content:'›'; color:var(--faint); font-weight:600; transition:transform .15s; display:inline-block; } .notedet[open]>summary::before{ transform:rotate(90deg); } .notedet>summary:hover{ border-color:var(--line2); color:var(--ink); } .notedet .note{ margin:8px 0 0 !important; }
   .loopviz{ margin:14px auto 18px; max-width:600px; }
   .loopviz svg{ width:100%; height:auto; display:block; }
@@ -951,6 +951,14 @@ irm https://claude.ai/install.ps1 | iex</div>
         <p class="defs" style="margin-top:0;">You don’t set it up once and stop — look at the result, <b>diagnose what was missing</b>, reinforce the setup, and repeat quickly.</p>
         <div class="fgrid"><div class="fcard"><div class="ft">① Observe</div><div class="fd">Look at the result — where did it go wrong?</div></div><div class="fcard"><div class="ft">② Diagnose</div><div class="fd">Missing context? vague instruction? no tool? too much noise?</div></div><div class="fcard"><div class="ft">③ Reinforce</div><div class="fd">Fill the missing lever — CLAUDE.md, <code>@</code>, tools, cleanup.</div></div><div class="fcard"><div class="ft">④ Repeat</div><div class="fd">Run again → observe again. Tune the <b>setup, not the model</b>.</div></div></div>
         <p class="simtake"><span class="stk">Bottom line</span><span>A good harness isn’t “done in one shot” — it’s <b>looping observe → diagnose → reinforce fast</b>.</span></p>
+      </div>
+
+      <div class="grp">
+        <h3>Try it — the setup meter</h3>
+        <p class="defs" style="margin-top:0;">See how the same model’s result improves as you switch levers on — give it a try.</p>
+        <div class="chips" id="hn-chips" style="margin:2px 0 0;"><button class="chip" data-k="ctx">Context (@·CLAUDE.md)</button><button class="chip" data-k="ins">Specific instructions</button><button class="chip" data-k="tool">Tools (MCP·skills)</button><button class="chip" data-k="ver">Verification (tests)</button></div>
+        <div class="hmeter"><i id="hn-bar"></i></div>
+        <div id="hn-out" class="hnout" data-m0="Still a poor setup — random formatting, wrong numbers, “that’s not it…” again." data-m1="A bit better — right direction, but still wandering." data-m2="Much better — mostly right in one go." data-m3="Right and exact — same model; the setup did it.">Still a poor setup — random formatting, wrong numbers, “that’s not it…” again.</div>
       </div>
 
       <p class="note"><b>Context engineering</b> · narrowly, it’s designing <b>what goes into and out of the context window</b> — too much (noise) or too little (missing info) both hurt; <b>“just what’s needed”</b> is the point. (Source: Anthropic official — <a class="srclink" href="https://code.claude.com/docs/en/context-window" target="_blank" rel="noopener">code.claude.com/docs context-window·memory</a>, as of Jun 2026)</p>
@@ -2152,7 +2160,7 @@ description: Write release notes, tag, deploy
         <span class="ft-dm">— questions or DM via email or LinkedIn</span>
       </div>
       <div>This is an unofficial learning resource — not affiliated with Anthropic. "Claude, Claude Code, Anthropic" are trademarks of Anthropic Inc.</div>
-      <div>For the most accurate information, check the <a href="https://<a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>" target="_blank" rel="noopener">official docs</a>.</div>
+      <div>For the most accurate information, check the <a class="srclink" href="https://code.claude.com/docs" target="_blank" rel="noopener">official docs</a>.</div>
     </footer>
 
   </div></main>
@@ -2313,6 +2321,17 @@ description: Write release notes, tag, deploy
       document.querySelectorAll('.lnb .navsec').forEach(function(s){ var any=false,el=s.nextElementSibling; while(el && !el.classList.contains('navsec')){ if(el.classList.contains('navitem') && el.style.display!=='none'){ any=true; break; } el=el.nextElementSibling; } s.style.display=any?'':'none'; });
       var cur=document.querySelector('.navitem.on'); if(cur && cur.style.display==='none'){ var first=[].filter.call(navs,function(n){return n.style.display!=='none';})[0]; if(first) first.click(); } }
     chips.forEach(function(c){ c.addEventListener('click',function(){ setLevel(+c.dataset.lv); }); }); setLevel(0); })();
+
+  /* harness setup-meter (interactive) */
+  (function(){ var c=document.getElementById('hn-chips'); if(!c) return;
+    var bar=document.getElementById('hn-bar'), out=document.getElementById('hn-out');
+    function upd(){ var on=c.querySelectorAll('.chip.on').length;
+      bar.style.width=(on/4*100)+'%';
+      bar.className= on>=4?'good':on>=3?'mid':on>=1?'low':'';
+      var i= on===0?0: on>=4?3: on>=3?2:1;
+      out.textContent=out.getAttribute('data-m'+i)||''; }
+    c.querySelectorAll('.chip').forEach(function(b){ b.addEventListener('click',function(){ b.classList.toggle('on'); upd(); }); });
+    upd(); })();
 
   /* glossary tooltips — hover (desktop) + tap (mobile/tablet) */
   (function(){ var gls=document.querySelectorAll('.gl'); if(!gls.length) return;
