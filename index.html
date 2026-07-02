@@ -89,7 +89,7 @@
   .page.on > *:nth-child(1){animation-delay:0s} .page.on > *:nth-child(2){animation-delay:.04s} .page.on > *:nth-child(3){animation-delay:.08s} .page.on > *:nth-child(4){animation-delay:.12s} .page.on > *:nth-child(5){animation-delay:.16s} .page.on > *:nth-child(6){animation-delay:.2s} .page.on > *:nth-child(7){animation-delay:.24s} .page.on > *:nth-child(8){animation-delay:.28s} .page.on > *:nth-child(9){animation-delay:.32s} .page.on > *:nth-child(n+10){animation-delay:.36s}
   @keyframes pgrise{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;} }
   .tank,.sesswin,.brainwrap,.svgwrap,.mainbox,.tmeter,.stageview,.pmenu,.pdetail,.folderscan,.usefeed{ box-shadow:var(--shadow); } .usefeed:empty,.sessbody:empty,.cw3body:empty,.mg2chat:empty,.ucbody:empty,.skb:empty{ display:flex; align-items:center; justify-content:center; } .usefeed:empty::before,.sessbody:empty::before,.cw3body:empty::before,.mg2chat:empty::before,.ucbody:empty::before,.skb:empty::before{ content:"여기에 결과가 나타나요"; color:var(--faint); font-size:13px; }
-  .label{ font-size:12px; color:var(--faint); font-weight:500; letter-spacing:.4px; text-transform:uppercase; margin:30px 0 14px; } .label:first-of-type{ margin-top:0; }
+  .label{ font-size:12px; color:var(--faint); font-weight:500; letter-spacing:.4px; text-transform:uppercase; margin:30px 0 14px; } .label:first-of-type{ margin-top:0; } .label:has(.hint){ display:flex; align-items:center; flex-wrap:wrap; gap:4px 8px; text-transform:none; letter-spacing:0; font-size:12.5px; font-weight:600; color:var(--accent); background:var(--row); border:1px solid var(--line2); border-radius:8px; padding:8px 12px 8px 10px; } .label:has(.hint)::before{ content:"▶"; font-size:9px; color:var(--good); flex:0 0 auto; } .label:has(.hint) .hint{ margin-left:auto; color:var(--muted); font-weight:400; font-size:12px; }
   .label .hint{ text-transform:none; letter-spacing:0; color:var(--faint); font-weight:300; margin-left:6px; }
   .note{ font-size:12.5px; color:var(--faint); font-weight:300; margin:14px 0 0; line-height:1.6; }
   code,.inlinecode{ font-family:ui-monospace,Menlo,monospace; background:var(--row); border:1px solid var(--line); padding:1px 6px; border-radius:4px; font-size:12px; overflow-wrap:break-word; }
@@ -1502,7 +1502,7 @@ description: 주간 보고서를 회사 양식으로 작성
       <p class="anlg"><span class="ak">비유</span><span>문 열면 자동으로 울리는 <b>가게 종</b>, 밤 11시 자동 방해금지처럼 — “○○가 생기면 → 자동으로 △△”를 미리 걸어둬요. (CLAUDE.md가 ‘부탁’이면 훅은 ‘규칙’)</span></p>
       <p class="defs">‘자동응답 메일’처럼, 어떤 일이 생기면 알아서 작동해요.</p>
       <div class="bignote"><span class="bx">안심</span><span><b>직접 만들 필요 없어요.</b> 설정 방법은 조금 기술적이지만, 비개발자는 만드는 법을 몰라도 돼요 — 클로드에게 <b>“파일 고칠 때마다 자동으로 정리하는 훅 만들어줘”</b>처럼 말로 부탁하면 클로드가 대신 만들어 줘요. 이 페이지는 ‘이런 게 있다’만 알면 충분해요.</span></div>
-      <p class="label">작동 방식 <span class="hint">언제 → 무엇을 → 어떻게</span></p>
+      <p class="label">작동 방식 — 언제 → 무엇을 → 어떻게</p>
       <div class="steps">
         <div class="step on"><div class="sn2">1</div><div><div class="st2">이벤트 (언제)</div><div class="sd3">예: 파일을 저장한 직후</div></div></div>
         <div class="step on"><div class="sn2">2</div><div><div class="st2">필터 (무엇을)</div><div class="sd3">예: 그게 중요한 문서면</div></div></div>

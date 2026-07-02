@@ -89,7 +89,7 @@
   .page.on > *:nth-child(1){animation-delay:0s} .page.on > *:nth-child(2){animation-delay:.04s} .page.on > *:nth-child(3){animation-delay:.08s} .page.on > *:nth-child(4){animation-delay:.12s} .page.on > *:nth-child(5){animation-delay:.16s} .page.on > *:nth-child(6){animation-delay:.2s} .page.on > *:nth-child(7){animation-delay:.24s} .page.on > *:nth-child(8){animation-delay:.28s} .page.on > *:nth-child(9){animation-delay:.32s} .page.on > *:nth-child(n+10){animation-delay:.36s}
   @keyframes pgrise{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;} }
   .tank,.sesswin,.brainwrap,.svgwrap,.mainbox,.tmeter,.stageview,.pmenu,.pdetail,.folderscan,.usefeed{ box-shadow:var(--shadow); } .usefeed:empty,.sessbody:empty,.cw3body:empty,.mg2chat:empty,.ucbody:empty,.skb:empty{ display:flex; align-items:center; justify-content:center; } .usefeed:empty::before,.sessbody:empty::before,.cw3body:empty::before,.mg2chat:empty::before,.ucbody:empty::before,.skb:empty::before{ content:"ここに結果が表示されます"; color:var(--faint); font-size:13px; }
-  .label{ font-size:12px; color:var(--faint); font-weight:500; letter-spacing:.4px; text-transform:uppercase; margin:30px 0 14px; } .label:first-of-type{ margin-top:0; }
+  .label{ font-size:12px; color:var(--faint); font-weight:500; letter-spacing:.4px; text-transform:uppercase; margin:30px 0 14px; } .label:first-of-type{ margin-top:0; } .label:has(.hint){ display:flex; align-items:center; flex-wrap:wrap; gap:4px 8px; text-transform:none; letter-spacing:0; font-size:12.5px; font-weight:600; color:var(--accent); background:var(--row); border:1px solid var(--line2); border-radius:8px; padding:8px 12px 8px 10px; } .label:has(.hint)::before{ content:"▶"; font-size:9px; color:var(--good); flex:0 0 auto; } .label:has(.hint) .hint{ margin-left:auto; color:var(--muted); font-weight:400; font-size:12px; }
   .label .hint{ text-transform:none; letter-spacing:0; color:var(--faint); font-weight:300; margin-left:6px; }
   .note{ font-size:12.5px; color:var(--faint); font-weight:300; margin:14px 0 0; line-height:1.6; }
   code,.inlinecode{ font-family:ui-monospace,Menlo,monospace; background:var(--row); border:1px solid var(--line); padding:1px 6px; border-radius:4px; font-size:12px; overflow-wrap:break-word; }
@@ -1503,7 +1503,7 @@ description: 週次レポートを会社の様式で作成
       <p class="anlg"><span class="ak">たとえ</span><span>お店のドアの呼び鈴や、スマホの「23 時に自動でおやすみモード」のように——「○○が起きたら → 自動で△△」を設定。（CLAUDE.md が「お願い」なら、フックは「ルール」）</span></p>
       <p class="defs">「自動返信メール」のように、あることが起きると自動で動きます。</p>
       <div class="bignote"><span class="bx">ご安心を</span><span><b>自分で作る必要はありません。</b> 設定方法は少し技術的ですが、非エンジニアは作り方を知らなくても大丈夫 — Claude に <b>「ファイルを直すたびに自動で整理するフックを作って」</b>のように言葉でお願いすれば、Claude が代わりに作ってくれます。このページは「こういうものがある」とわかれば十分です。</span></div>
-      <p class="label">どう動くか <span class="hint">いつ → 何を → どうやって</span></p>
+      <p class="label">どう動くか — いつ → 何を → どうやって</p>
       <div class="steps">
         <div class="step on"><div class="sn2">1</div><div><div class="st2">イベント (いつ)</div><div class="sd3">例: ファイルを保存した直後</div></div></div>
         <div class="step on"><div class="sn2">2</div><div><div class="st2">フィルター (何を)</div><div class="sd3">例: それが大切な書類なら</div></div></div>
